@@ -169,6 +169,35 @@ diff-test: sim-build compile-tests ## Run architectural signoff / commit trace v
 	  "
 
 # ─────────────────────────────────────────────────────────────────────────────
+# COREMARK BENCHMARK
+# ─────────────────────────────────────────────────────────────────────────────
+
+ITER ?= 10
+RUN_TYPE ?= PERFORMANCE_RUN
+OPT ?= -O2
+
+.PHONY: coremark-compile
+coremark-compile: ## Cross-compile official EEMBC CoreMark (set ITER=<N>, RUN_TYPE=<PERFORMANCE_RUN|VALIDATION_RUN>)
+	$(DOCKER_RUN) $(SIM_IMAGE) -c "\
+	  bash scripts/compile_coremark.sh $(ITER) $(RUN_TYPE) $(OPT) \
+	  "
+
+.PHONY: coremark-smoke
+coremark-smoke: sim-build ## Run CoreMark smoke test (1 iteration, validation run)
+	$(DOCKER_RUN) $(SIM_IMAGE) -c "\
+	  bash scripts/compile_coremark.sh 1 VALIDATION_RUN -O2 && \
+	  ./build/sim/rv32_ooo_sim +elf=build/coremark/coremark_iter1.elf +max-cycles=2000000 \
+	  "
+
+.PHONY: coremark
+coremark: sim-build ## Run CoreMark benchmark and compute CoreMark/MHz (set ITER=<N>)
+	$(DOCKER_RUN) $(SIM_IMAGE) -c "\
+	  bash scripts/compile_coremark.sh $(ITER) PERFORMANCE_RUN $(OPT) && \
+	  ./build/sim/rv32_ooo_sim +elf=build/coremark/coremark_iter$(ITER).elf +max-cycles=10000000 \
+	  "
+
+
+# ─────────────────────────────────────────────────────────────────────────────
 # SYNTHESIS (G15)
 # ─────────────────────────────────────────────────────────────────────────────
 

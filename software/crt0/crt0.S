@@ -7,6 +7,10 @@ _start:
     /* Initialize stack pointer */
     la sp, __stack_top
 
+    /* Enable FPU in mstatus (FS = 2'b11 / Dirty) */
+    li t0, 0x00006000
+    csrs mstatus, t0
+
     /* Initialize integer registers to 0 */
     mv x1,  zero
     mv x3,  zero
@@ -61,6 +65,7 @@ bss_clear_done:
     ori a0, a0, 1
     la t1, tohost
     sw a0, 0(t1)
+    sw zero, 4(t1)
 
     /* Infinite loop if simulation continues */
 halt_loop:

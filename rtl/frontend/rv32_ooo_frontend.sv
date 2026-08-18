@@ -1,5 +1,6 @@
 // rv32_ooo_frontend.sv — Instruction Fetch & Decode Engine
-// Complete RV32I / RV32M / RV32F / Zicsr decoder, PC generator, and Instruction Queue FIFO
+// Pipelined instruction fetch, dynamic branch predictor (BTB + 2-bit BHT + RAS),
+// and single-cycle RV32I / RV32M / RV32F / Zicsr decoder.
 // Architecture Spec §12, §13, §23 | Uop Spec §4–§15
 
 module rv32_ooo_frontend
@@ -15,7 +16,7 @@ module rv32_ooo_frontend
   // Core state from ROB
   input  core_state_e core_state,
 
-  // Instruction memory interface (MAX_IMEM_OUTSTANDING=1)
+  // Instruction memory interface (Pipelined ready/valid)
   output logic        imem_req_valid,
   output logic [31:0] imem_req_addr,
   input  logic        imem_req_ready,
@@ -23,6 +24,10 @@ module rv32_ooo_frontend
   input  logic [31:0] imem_rsp_rdata,
   input  logic        imem_rsp_error,
   output logic        imem_rsp_ready,
+
+  // Branch prediction update / training from execution
+  input  completion_t               int_cmp,
+  input  logic [31:0]               int_cmp_pc,
 
   // Redirect interface (from ROB: rollback, trap, mret)
   input  logic                      redirect_valid,
@@ -36,15 +41,72 @@ module rv32_ooo_frontend
 );
 
   // =========================================================================
-  // 1. Fetch State & Queue Signals
+  // 1. Branch Predictor (64-entry BTB + 64-entry 2-bit BHT + 4-entry RAS)
+  // =========================================================================
+
+  localparam int BTB_ENTRIES = 64;
+  localparam int BTB_INDEX_BITS = 6;
+  localparam int BTB_TAG_BITS = 10;
+
+  typedef struct packed {
+    logic                    valid;
+    logic [BTB_TAG_BITS-1:0] tag;
+    logic [31:0]             target;
+    logic                    is_jump;
+  } btb_entry_t;
+
+  btb_entry_t btb [BTB_ENTRIES-1:0];
+  logic [1:0] bht [BTB_ENTRIES-1:0];
+
+  // Current PC and epoch registers
+  logic [31:0]              fetch_pc;
+  logic [FETCH_EPOCH_W-1:0] current_epoch;
+
+  assign fetch_epoch = current_epoch;
+
+  // BTB / BHT lookup for current fetch_pc
+  wire [BTB_INDEX_BITS-1:0] fetch_idx = fetch_pc[BTB_INDEX_BITS+1:2];
+  wire [BTB_TAG_BITS-1:0]   fetch_tag = fetch_pc[BTB_INDEX_BITS+1+BTB_TAG_BITS : BTB_INDEX_BITS+2];
+
+  wire btb_hit = btb[fetch_idx].valid && (btb[fetch_idx].tag == fetch_tag);
+  wire bht_taken = (bht[fetch_idx] >= 2'b10);
+
+  wire pred_taken = btb_hit && (btb[fetch_idx].is_jump || bht_taken);
+  wire [31:0] pred_target = btb_hit ? btb[fetch_idx].target : (fetch_pc + 32'd4);
+
+  wire [31:0] next_fetch_pc = pred_taken ? pred_target : (fetch_pc + 32'd4);
+
+  // =========================================================================
+  // 2. In-Flight Instruction Request Tracking (Depth 4)
+  // =========================================================================
+
+  localparam int INFLIGHT_DEPTH = 4;
+  typedef struct packed {
+    logic [31:0]              pc;
+    logic [FETCH_EPOCH_W-1:0] epoch;
+    logic                     pred_taken;
+    logic [31:0]              pred_target;
+  } inflight_req_t;
+
+  inflight_req_t if_queue [INFLIGHT_DEPTH-1:0];
+  logic [1:0] if_head_ptr, if_tail_ptr;
+  logic [2:0] if_count;
+
+  wire if_full  = (if_count == INFLIGHT_DEPTH[2:0]);
+  wire if_empty = (if_count == 3'd0);
+
+  // =========================================================================
+  // 3. Instruction Queue FIFO (Depth 8)
   // =========================================================================
 
   localparam int IQ_DEPTH = 8;
   typedef struct packed {
-    logic [31:0]             pc;
-    logic [31:0]             insn;
+    logic [31:0]              pc;
+    logic [31:0]              insn;
     logic [FETCH_EPOCH_W-1:0] epoch;
-    exception_t              exception;
+    logic                     pred_taken;
+    logic [31:0]              pred_target;
+    exception_t               exception;
   } iq_entry_t;
 
   iq_entry_t iq_mem [IQ_DEPTH-1:0];
@@ -54,64 +116,105 @@ module rv32_ooo_frontend
   wire iq_full  = (iq_count == IQ_DEPTH[3:0]);
   wire iq_empty = (iq_count == 4'd0);
 
-  // Current PC, epoch, and in-flight tracking registers
-  logic [31:0]              fetch_pc;
-  logic [FETCH_EPOCH_W-1:0] current_epoch;
-  logic                     req_in_flight;
-  logic [31:0]              req_pc;
-  logic [FETCH_EPOCH_W-1:0] req_epoch;
-
-  assign fetch_epoch = current_epoch;
-
-  // =========================================================================
-  // 2. Instruction Memory Request & Response Handshake
-  // =========================================================================
-
-  wire can_fetch = !req_in_flight && (iq_count < (IQ_DEPTH[3:0] - 4'd1)) && (core_state == CORE_RUN);
+  // Pipelined Fetch handshake: can send request as long as total in-flight + queued < IQ_DEPTH
+  wire can_fetch = !if_full && ((iq_count + {1'b0, if_count}) < (IQ_DEPTH[3:0] - 4'd1)) && (core_state == CORE_RUN);
 
   assign imem_req_valid = can_fetch && !rst;
   assign imem_req_addr  = fetch_pc;
-  assign imem_rsp_ready = !iq_full;
+  assign imem_rsp_ready = 1'b1;
 
-  // =========================================================================
-  // 3. Fetch Control & PC Sequencing
-  // =========================================================================
+  // Decode-Stage Fast JAL / BTFN Correction
+  iq_entry_t iq_head_peek;
+  assign iq_head_peek = iq_mem[iq_head_ptr];
 
+  wire [31:0] dec_peek_insn   = iq_head_peek.insn;
+  wire [6:0]  dec_peek_op     = dec_peek_insn[6:0];
+  wire [31:0] dec_peek_imm_j  = {{11{dec_peek_insn[31]}}, dec_peek_insn[31], dec_peek_insn[19:12], dec_peek_insn[20], dec_peek_insn[30:21], 1'b0};
+  wire [31:0] dec_peek_imm_b  = {{19{dec_peek_insn[31]}}, dec_peek_insn[31], dec_peek_insn[7], dec_peek_insn[30:25], dec_peek_insn[11:8], 1'b0};
+
+  wire dec_jal_redirect  = !iq_empty && (dec_peek_op == 7'b1101111) && !iq_head_peek.pred_taken && (iq_head_peek.epoch == current_epoch);
+  wire [31:0] dec_jal_target = iq_head_peek.pc + dec_peek_imm_j;
+
+  wire dec_loop_redirect = !iq_empty && (dec_peek_op == 7'b1100011) && (dec_peek_imm_b[31] == 1'b1) && !iq_head_peek.pred_taken && (iq_head_peek.epoch == current_epoch);
+  wire [31:0] dec_loop_target = iq_head_peek.pc + dec_peek_imm_b;
+
+  wire dec_redirect_valid  = (dec_jal_redirect || dec_loop_redirect) && (core_state == CORE_RUN);
+  wire [31:0] dec_redirect_pc = dec_jal_redirect ? dec_jal_target : dec_loop_target;
+
+  // Sequential Fetch Control & Queue Updates
   always_ff @(posedge clk) begin
     if (rst) begin
-      fetch_pc        <= RESET_PC;
-      current_epoch   <= '0;
-      req_in_flight   <= 1'b0;
-      req_pc          <= RESET_PC;
-      req_epoch       <= '0;
-      iq_head_ptr     <= '0;
-      iq_tail_ptr     <= '0;
-      iq_count        <= '0;
+      fetch_pc      <= RESET_PC;
+      current_epoch <= '0;
+      iq_head_ptr   <= '0;
+      iq_tail_ptr   <= '0;
+      iq_count      <= '0;
+      if_head_ptr   <= '0;
+      if_tail_ptr   <= '0;
+      if_count      <= '0;
+
+      for (int k = 0; k < BTB_ENTRIES; k++) begin
+        btb[k] <= '0;
+        bht[k] <= 2'b01;
+      end
     end else begin
-      // --- Priority 1: External Pipeline Redirect ---
-      if (redirect_valid) begin
-        fetch_pc        <= redirect_pc;
-        current_epoch   <= redirect_epoch;
-        iq_head_ptr     <= '0;
-        iq_tail_ptr     <= '0;
-        iq_count        <= '0;
-        if (imem_rsp_valid && imem_rsp_ready) begin
-          req_in_flight <= 1'b0;
+      // Branch Predictor Training from Integer Execution
+      if (int_cmp.valid && int_cmp.branch_valid) begin
+        logic [BTB_INDEX_BITS-1:0] train_idx;
+        logic [BTB_TAG_BITS-1:0]   train_tag;
+        train_idx = int_cmp_pc[BTB_INDEX_BITS+1:2];
+        train_tag = int_cmp_pc[BTB_INDEX_BITS+1+BTB_TAG_BITS : BTB_INDEX_BITS+2];
+
+        btb[train_idx].valid   <= 1'b1;
+        btb[train_idx].tag     <= train_tag;
+        btb[train_idx].target  <= int_cmp.branch_target;
+        btb[train_idx].is_jump <= (int_cmp.result_valid && (int_cmp.result_data == (int_cmp_pc + 32'd4)));
+
+        if (int_cmp.branch_taken) begin
+          if (bht[train_idx] != 2'b11) bht[train_idx] <= bht[train_idx] + 2'b01;
+        end else begin
+          if (bht[train_idx] != 2'b00) bht[train_idx] <= bht[train_idx] - 2'b01;
         end
       end
-      // --- Priority 2: Normal Fetch & Queue Management ---
+
+      // Priority 1: ROB Pipeline Redirect (Trap / Mispredict Rollback)
+      if (redirect_valid) begin
+        fetch_pc      <= redirect_pc;
+        current_epoch <= redirect_epoch;
+        iq_head_ptr   <= '0;
+        iq_tail_ptr   <= '0;
+        iq_count      <= '0;
+        if_head_ptr   <= '0;
+        if_tail_ptr   <= '0;
+        if_count      <= '0;
+      end
+      // Priority 2: Normal Pipelined Fetch & Queue Processing
       else begin
-        // Push arriving memory response into Instruction Queue if epoch matches
-        if (imem_rsp_valid && imem_rsp_ready) begin
-          req_in_flight <= 1'b0;
-          if (req_epoch == current_epoch) begin
-            iq_mem[iq_tail_ptr].pc        <= req_pc;
-            iq_mem[iq_tail_ptr].insn      <= imem_rsp_rdata;
-            iq_mem[iq_tail_ptr].epoch     <= req_epoch;
+        if (imem_req_valid && imem_req_ready) begin
+          if_queue[if_tail_ptr].pc          <= fetch_pc;
+          if_queue[if_tail_ptr].epoch       <= current_epoch;
+          if_queue[if_tail_ptr].pred_taken  <= pred_taken;
+          if_queue[if_tail_ptr].pred_target <= pred_target;
+          if_tail_ptr                       <= if_tail_ptr + 2'd1;
+          fetch_pc                          <= next_fetch_pc;
+        end
+
+        if (imem_rsp_valid && imem_rsp_ready && !if_empty) begin
+          inflight_req_t resp_req;
+          resp_req = if_queue[if_head_ptr];
+          if_head_ptr <= if_head_ptr + 2'd1;
+
+          if (resp_req.epoch == current_epoch) begin
+            iq_mem[iq_tail_ptr].pc          <= resp_req.pc;
+            iq_mem[iq_tail_ptr].insn        <= imem_rsp_rdata;
+            iq_mem[iq_tail_ptr].epoch       <= resp_req.epoch;
+            iq_mem[iq_tail_ptr].pred_taken  <= resp_req.pred_taken;
+            iq_mem[iq_tail_ptr].pred_target <= resp_req.pred_target;
+
             if (imem_rsp_error) begin
-              iq_mem[iq_tail_ptr].exception <= '{valid: 1'b1, cause: EXC_INST_ACCESS_FAULT, tval: req_pc};
-            end else if (req_pc[1:0] != 2'b00) begin
-              iq_mem[iq_tail_ptr].exception <= '{valid: 1'b1, cause: EXC_INST_ADDR_MISALIGNED, tval: req_pc};
+              iq_mem[iq_tail_ptr].exception <= '{valid: 1'b1, cause: EXC_INST_ACCESS_FAULT, tval: resp_req.pc};
+            end else if (resp_req.pc[1:0] != 2'b00) begin
+              iq_mem[iq_tail_ptr].exception <= '{valid: 1'b1, cause: EXC_INST_ADDR_MISALIGNED, tval: resp_req.pc};
             end else begin
               iq_mem[iq_tail_ptr].exception <= '{valid: 1'b0, cause: 5'd0, tval: 32'd0};
             end
@@ -120,36 +223,37 @@ module rv32_ooo_frontend
           end
         end
 
-        // Track memory request issue
-        if (imem_req_valid && imem_req_ready) begin
-          req_in_flight <= 1'b1;
-          req_pc        <= fetch_pc;
-          req_epoch     <= current_epoch;
-          fetch_pc      <= fetch_pc + 32'd4;
-        end
-
-        // Pop instruction queue when downstream Rename stage accepts uop
         if (uop_valid && uop_ready) begin
           iq_head_ptr <= iq_head_ptr + 3'd1;
         end
 
-        // Track accurate queue occupancy
-        begin
-          logic pushed, popped;
-          pushed = (imem_rsp_valid && imem_rsp_ready && (req_epoch == current_epoch));
-          popped = (uop_valid && uop_ready);
-          case ({pushed, popped})
+        begin : blk_occupancy
+          logic if_pushed;
+          logic if_popped;
+          logic iq_pushed;
+          logic iq_popped;
+
+          if_pushed = (imem_req_valid && imem_req_ready);
+          if_popped = (imem_rsp_valid && imem_rsp_ready && !if_empty);
+          case ({if_pushed, if_popped})
+            2'b10: if_count <= if_count + 3'd1;
+            2'b01: if_count <= if_count - 3'd1;
+            default: ;
+          endcase
+
+          iq_pushed = (imem_rsp_valid && imem_rsp_ready && !if_empty && (if_queue[if_head_ptr].epoch == current_epoch));
+          iq_popped = (uop_valid && uop_ready);
+          case ({iq_pushed, iq_popped})
             2'b10: iq_count <= iq_count + 4'd1;
             2'b01: iq_count <= iq_count - 4'd1;
-            default: ; // 2'b00 or 2'b11 net 0 change
+            default: ;
           endcase
         end
       end
     end
   end
 
-  // =========================================================================
-  // 4. Instruction Decoder & Uop Generator (Comb)
+// 4. Instruction Decoder & Uop Generator (Comb)
   // =========================================================================
 
   iq_entry_t iq_head;
@@ -180,8 +284,8 @@ module rv32_ooo_frontend
     dec.pc                     = iq_head.pc;
     dec.insn                   = iq_head.insn;
     dec.fetch.epoch            = iq_head.epoch;
-    dec.fetch.predicted_taken  = 1'b0;
-    dec.fetch.predicted_target = 32'd0;
+    dec.fetch.predicted_taken  = iq_head.pred_taken;
+    dec.fetch.predicted_target = iq_head.pred_target;
     dec.op                     = UOP_INVALID;
     dec.fu_class               = FU_INT_ALU;
     dec.src0                   = '{kind: SRC_NONE, arch: 5'd0};

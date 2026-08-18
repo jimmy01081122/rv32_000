@@ -21,9 +21,11 @@ module rv32_ooo_int_execute
   output logic        agu_valid,
   output exec_req_t   agu_req,
   output logic [31:0] agu_addr,
+  input  logic        lsu_ready,
 
   // Completion packet to writeback arbiter / ROB
   output completion_t int_cmp,
+  output logic [31:0] int_cmp_pc,
 
   // CSR access interface
   output logic        csr_req_valid,
@@ -35,10 +37,9 @@ module rv32_ooo_int_execute
 );
 
   wire is_lsu_op = (issue_req.uop.fu_class == FU_LSU_AGU);
-  wire dmem_busy = dmem_pending.lq_valid || dmem_pending.sq_valid;
 
-  // Issue ready logic: stalls AGU if memory access is already outstanding
-  assign issue_ready = is_lsu_op ? !dmem_busy : (core_state == CORE_RUN);
+  // Issue ready logic: stalls AGU if LSU cannot accept request
+  assign issue_ready = is_lsu_op ? lsu_ready : (core_state == CORE_RUN);
 
   wire [31:0] op0 = issue_req.operand0;
   wire [31:0] op1 = issue_req.operand1;
@@ -47,6 +48,8 @@ module rv32_ooo_int_execute
   wire [4:0]  shamt = (issue_req.uop.op == UOP_SLLI ||
                        issue_req.uop.op == UOP_SRLI ||
                        issue_req.uop.op == UOP_SRAI) ? imm[4:0] : op1[4:0];
+
+  assign int_cmp_pc = pc;
 
   // =========================================================================
   // 1. Integer ALU
@@ -112,13 +115,19 @@ module rv32_ooo_int_execute
       UOP_BGE:  branch_taken = ($signed(op0) >= $signed(op1));
       UOP_BLTU: branch_taken = (op0 < op1);
       UOP_BGEU: branch_taken = (op0 >= op1);
-
-      default: branch_taken = 1'b0;
+      default:  branch_taken = 1'b0;
     endcase
 
-    if (issue_req.uop.fu_class == FU_BRANCH && issue_req.uop.op != UOP_JAL && issue_req.uop.op != UOP_JALR) begin
-      // Baseline static branch prediction is Predict Not Taken
-      branch_mispredict = branch_taken;
+    if (issue_req.uop.fu_class == FU_BRANCH) begin
+      if (issue_req.uop.op == UOP_JAL) begin
+        branch_mispredict = (!issue_req.uop.fetch.predicted_taken) || (issue_req.uop.fetch.predicted_target != branch_target);
+      end else if (issue_req.uop.op == UOP_JALR) begin
+        branch_mispredict = (!issue_req.uop.fetch.predicted_taken) || (issue_req.uop.fetch.predicted_target != branch_target);
+      end else begin
+        // Conditional branch: compare outcome and target with prediction
+        branch_mispredict = (branch_taken != issue_req.uop.fetch.predicted_taken) ||
+                            (branch_taken && (issue_req.uop.fetch.predicted_target != branch_target));
+      end
     end
   end
 
@@ -175,7 +184,7 @@ module rv32_ooo_int_execute
   // 4. AGU Interface to LSU
   // =========================================================================
 
-  assign agu_valid = issue_valid && is_lsu_op && !dmem_busy;
+  assign agu_valid = issue_valid && is_lsu_op;
   assign agu_req   = issue_req;
   assign agu_addr  = op0 + imm;
 
@@ -207,7 +216,7 @@ module rv32_ooo_int_execute
         if (issue_req.uop.fu_class == FU_BRANCH) begin
           int_cmp.branch_valid      = 1'b1;
           int_cmp.branch_taken      = branch_taken;
-          int_cmp.branch_target     = branch_target;
+          int_cmp.branch_target     = branch_taken ? branch_target : (pc + 32'd4);
           int_cmp.branch_mispredict = branch_mispredict;
         end
 

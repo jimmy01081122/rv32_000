@@ -86,11 +86,12 @@ module rv32_ooo_core
   logic         fp_issue_ready;
 
   // PRF Read Data
-  logic [XLEN-1:0] int_rd0, int_rd1, int_rd_sq;
+  logic [XLEN-1:0] int_rd0, int_rd1, int_rd_sq, int_rd_fp;
   logic [FLEN-1:0] fp_rd0,  fp_rd1,  fp_rd2, fp_rd_sq;
 
   // Completion Busses (§24.1)
   completion_t  int_cmp;
+  logic [31:0]  int_cmp_pc;
   completion_t  fp_cmp_raw;
   completion_t  ld_cmp;
 
@@ -120,9 +121,14 @@ module rv32_ooo_core
   logic         agu_valid;
   exec_req_t    agu_req;
   logic [31:0]  agu_addr;
+  logic         lsu_ready;
 
   logic         sq_retire_valid;
-  sq_tag_t      sq_retire_tag;
+  rob_tag_t     sq_retire_rob_tag;
+  logic         sq_retire_ack;
+  logic [31:0]  retire_store_addr;
+  logic [3:0]   retire_store_mask;
+  logic [31:0]  retire_store_data;
 
   // Flush on Rollback
   logic         flush_valid;
@@ -137,16 +143,16 @@ module rv32_ooo_core
 
   assign ren_ready = rob_alloc_ready && (is_fp_op ? fp_disp_ready : int_disp_ready);
 
-  assign rob_alloc_valid = ren_valid && (is_fp_op ? fp_disp_ready : int_disp_ready);
+  assign rob_alloc_valid = ren_valid && ren_ready;
   assign rob_alloc_uop   = ren_uop;
 
-  assign int_disp_valid  = ren_valid && rob_alloc_ready && !is_fp_op;
+  assign int_disp_valid  = ren_valid && ren_ready && !is_fp_op;
   always_comb begin
     int_disp_uop         = ren_uop;
     int_disp_uop.rob_tag = rob_alloc_tag;
   end
 
-  assign fp_disp_valid   = ren_valid && rob_alloc_ready && is_fp_op;
+  assign fp_disp_valid   = ren_valid && ren_ready && is_fp_op;
   always_comb begin
     fp_disp_uop          = ren_uop;
     fp_disp_uop.rob_tag  = rob_alloc_tag;
@@ -167,8 +173,8 @@ module rv32_ooo_core
   // FP Execution Request
   always_comb begin
     fp_issue_req.uop      = fp_issue_uop;
-    fp_issue_req.operand0 = (fp_issue_uop.src0.kind == SRC_INT_REG) ? int_rd0 : fp_rd0;
-    fp_issue_req.operand1 = (fp_issue_uop.src1.kind == SRC_INT_REG) ? int_rd1 : fp_rd1;
+    fp_issue_req.operand0 = (fp_issue_uop.src0.kind == SRC_INT_REG) ? int_rd_fp : fp_rd0;
+    fp_issue_req.operand1 = fp_rd1;
     fp_issue_req.operand2 = fp_rd2;
   end
 
@@ -197,9 +203,6 @@ module rv32_ooo_core
     end
   end
 
-  assign sq_retire_valid = 1'b0;
-  assign sq_retire_tag   = '0;
-
   // =========================================================================
   // 5. Sub-Module Instantiations
   // =========================================================================
@@ -216,6 +219,8 @@ module rv32_ooo_core
     .imem_rsp_rdata   (imem_rsp_rdata),
     .imem_rsp_error   (imem_rsp_error),
     .imem_rsp_ready   (imem_rsp_ready),
+    .int_cmp          (int_cmp),
+    .int_cmp_pc       (int_cmp_pc),
     .redirect_valid   (redirect_valid),
     .redirect_pc      (redirect_pc),
     .redirect_epoch   (redirect_epoch),
@@ -258,8 +263,12 @@ module rv32_ooo_core
     .int_cmp              (int_cmp),
     .ld_cmp               (ld_cmp),
     .fp_cmp               (fp_cmp_raw),
-    .sq_rsp_done          (1'b0),
-    .sq_rsp_tag           ('0),
+    .sq_retire_valid      (sq_retire_valid),
+    .sq_retire_rob_tag    (sq_retire_rob_tag),
+    .sq_retire_ack        (sq_retire_ack),
+    .retire_store_addr    (retire_store_addr),
+    .retire_store_mask    (retire_store_mask),
+    .retire_store_data    (retire_store_data),
     .retire_valid         (retire_valid),
     .retire_entry         (retire_entry),
     .commit_trace         (commit_trace),
@@ -304,12 +313,14 @@ module rv32_ooo_core
     .lsu_bypass_en   (ld_cmp.valid && ld_cmp.result_valid && (ld_cmp.result_domain == REG_INT)),
     .lsu_bypass_addr (ld_cmp.result_phys),
     .lsu_bypass_data (ld_cmp.result_data),
-    .rd_addr_0       ((fp_issue_valid && (fp_issue_uop.src0.kind == SRC_INT_REG)) ? fp_issue_uop.src0.phys : int_issue_uop.src0.phys),
+    .rd_addr_0       (int_issue_uop.src0.phys),
     .rd_data_0       (int_rd0),
-    .rd_addr_1       ((fp_issue_valid && (fp_issue_uop.src1.kind == SRC_INT_REG)) ? fp_issue_uop.src1.phys : int_issue_uop.src1.phys),
+    .rd_addr_1       (int_issue_uop.src1.phys),
     .rd_data_1       (int_rd1),
-    .rd_addr_sq      ('0),
-    .rd_data_sq      (int_rd_sq)
+    .rd_addr_sq      (int_issue_uop.src1.phys),
+    .rd_data_sq      (int_rd_sq),
+    .rd_addr_fp      (fp_issue_uop.src0.phys),
+    .rd_data_fp      (int_rd_fp)
   );
 
   rv32_ooo_fp_iq u_fp_iq (
@@ -362,7 +373,9 @@ module rv32_ooo_core
     .agu_valid        (agu_valid),
     .agu_req          (agu_req),
     .agu_addr         (agu_addr),
+    .lsu_ready        (lsu_ready),
     .int_cmp          (int_cmp),
+    .int_cmp_pc       (int_cmp_pc),
     .csr_req_valid    (csr_req_valid),
     .csr_ctrl         (csr_ctrl),
     .csr_wdata        (csr_wdata),
@@ -382,30 +395,37 @@ module rv32_ooo_core
   );
 
   rv32_ooo_lsu u_lsu (
-    .clk              (clk),
-    .rst              (rst),
-    .core_state       (core_state),
-    .dmem_pending     (dmem_pending),
-    .agu_valid        (agu_valid),
-    .agu_req          (agu_req),
-    .agu_addr         (agu_addr),
-    .int_cmp          (int_cmp),
-    .fp_cmp           (fp_cmp_raw),
-    .ld_cmp           (ld_cmp),
-    .sq_retire_valid  (sq_retire_valid),
-    .sq_retire_tag    (sq_retire_tag),
-    .dmem_req_valid   (dmem_req_valid),
-    .dmem_req_addr    (dmem_req_addr),
-    .dmem_req_wdata   (dmem_req_wdata),
-    .dmem_req_byte_en (dmem_req_byte_en),
-    .dmem_req_wen     (dmem_req_wen),
-    .dmem_req_ready   (dmem_req_ready),
-    .dmem_rsp_valid   (dmem_rsp_valid),
-    .dmem_rsp_rdata   (dmem_rsp_rdata),
-    .dmem_rsp_error   (dmem_rsp_error),
-    .dmem_rsp_ready   (dmem_rsp_ready),
-    .flush_valid      (flush_valid),
-    .flush_rob_tag    (flush_rob_tag)
+    .clk               (clk),
+    .rst               (rst),
+    .core_state        (core_state),
+    .dmem_pending      (dmem_pending),
+    .disp_valid        (int_disp_valid),
+    .disp_uop          (int_disp_uop),
+    .agu_valid         (agu_valid),
+    .agu_req           (agu_req),
+    .agu_addr          (agu_addr),
+    .int_cmp           (int_cmp),
+    .fp_cmp            (fp_cmp_raw),
+    .ld_cmp            (ld_cmp),
+    .lsu_ready         (lsu_ready),
+    .sq_retire_valid   (sq_retire_valid),
+    .sq_retire_rob_tag (sq_retire_rob_tag),
+    .sq_retire_ack     (sq_retire_ack),
+    .retire_store_addr (retire_store_addr),
+    .retire_store_mask (retire_store_mask),
+    .retire_store_data (retire_store_data),
+    .dmem_req_valid    (dmem_req_valid),
+    .dmem_req_addr     (dmem_req_addr),
+    .dmem_req_wdata    (dmem_req_wdata),
+    .dmem_req_byte_en  (dmem_req_byte_en),
+    .dmem_req_wen      (dmem_req_wen),
+    .dmem_req_ready    (dmem_req_ready),
+    .dmem_rsp_valid    (dmem_rsp_valid),
+    .dmem_rsp_rdata    (dmem_rsp_rdata),
+    .dmem_rsp_error    (dmem_rsp_error),
+    .dmem_rsp_ready    (dmem_rsp_ready),
+    .flush_valid       (flush_valid),
+    .flush_rob_tag     (flush_rob_tag)
   );
 
   rv32_ooo_csr u_csr (

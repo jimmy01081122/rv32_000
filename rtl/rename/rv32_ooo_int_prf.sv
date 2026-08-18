@@ -34,7 +34,11 @@ module rv32_ooo_int_prf
 
   // Read port 2: SQ store-data capture
   input  phys_reg_t       rd_addr_sq,
-  output logic [XLEN-1:0] rd_data_sq
+  output logic [XLEN-1:0] rd_data_sq,
+
+  // Read port 3: FP-IQ integer operand (e.g. FMV.W.X, FCVT.S.W)
+  input  phys_reg_t       rd_addr_fp,
+  output logic [XLEN-1:0] rd_data_fp
 );
 
   logic [XLEN-1:0] storage [INT_PRF_ENTRIES-1:0];
@@ -44,6 +48,7 @@ module rv32_ooo_int_prf
   assign rd_data_0  = (rd_addr_0  == 6'd0) ? '0 : (lsu_bypass_en && (lsu_bypass_addr == rd_addr_0))  ? lsu_bypass_data : storage[rd_addr_0];
   assign rd_data_1  = (rd_addr_1  == 6'd0) ? '0 : (lsu_bypass_en && (lsu_bypass_addr == rd_addr_1))  ? lsu_bypass_data : storage[rd_addr_1];
   assign rd_data_sq = (rd_addr_sq == 6'd0) ? '0 : (lsu_bypass_en && (lsu_bypass_addr == rd_addr_sq)) ? lsu_bypass_data : storage[rd_addr_sq];
+  assign rd_data_fp = (rd_addr_fp == 6'd0) ? '0 : (lsu_bypass_en && (lsu_bypass_addr == rd_addr_fp)) ? lsu_bypass_data : storage[rd_addr_fp];
 
   // Synchronous write ports: discrete per-entry flip-flops with single driver
   for (genvar i = 1; i < INT_PRF_ENTRIES; i++) begin : gen_int_prf_storage

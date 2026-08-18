@@ -103,9 +103,9 @@ int main(int argc, char** argv) {
     }
     top->rst = 0;
 
-    // Memory pipeline state (1-cycle latency model)
-    bool imem_rsp_pending = false;
-    uint32_t imem_rsp_data = 0;
+    // Memory pipeline state (Synchronous 1-cycle latency SRAM model)
+    bool imem_pipe_valid = false;
+    uint32_t imem_pipe_data = 0;
 
     bool dmem_rsp_pending = false;
     uint32_t dmem_rsp_data = 0;
@@ -116,11 +116,13 @@ int main(int argc, char** argv) {
         // --- Falling Edge (Clock Low) ---
         top->clk = 0;
 
-        // Drive responses to core
-        top->imem_rsp_valid = imem_rsp_pending ? 1 : 0;
-        top->imem_rsp_rdata = imem_rsp_data;
+        // Drive response and ready to core
+        top->imem_req_ready = 1;
+        top->imem_rsp_valid = imem_pipe_valid ? 1 : 0;
+        top->imem_rsp_rdata = imem_pipe_data;
         top->imem_rsp_error = 0;
 
+        top->dmem_req_ready = !dmem_rsp_pending;
         top->dmem_rsp_valid = dmem_rsp_pending ? 1 : 0;
         top->dmem_rsp_rdata = dmem_rsp_data;
         top->dmem_rsp_error = 0;
@@ -129,14 +131,9 @@ int main(int argc, char** argv) {
         if (tfp) tfp->dump(sim_time++);
 
         // Sample memory requests from core
-        bool imem_accepted = (top->imem_req_valid && top->imem_req_ready && !imem_rsp_pending);
-        if (top->imem_rsp_valid && top->imem_rsp_ready) {
-            imem_rsp_pending = false;
-        }
-        if (imem_accepted) {
-            imem_rsp_pending = true;
-            imem_rsp_data = memory.read32(top->imem_req_addr);
-        }
+        bool imem_accepted = (top->imem_req_valid && top->imem_req_ready);
+        uint32_t next_imem_data = imem_accepted ? memory.read32(top->imem_req_addr) : 0;
+        bool next_imem_valid = imem_accepted;
 
         bool dmem_accepted = (top->dmem_req_valid && top->dmem_req_ready && !dmem_rsp_pending);
         if (top->dmem_rsp_valid && top->dmem_rsp_ready) {
@@ -156,6 +153,9 @@ int main(int argc, char** argv) {
         top->clk = 1;
         top->eval();
         if (tfp) tfp->dump(sim_time++);
+
+        imem_pipe_valid = next_imem_valid;
+        imem_pipe_data  = next_imem_data;
 
         cycles++;
 

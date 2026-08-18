@@ -45,10 +45,10 @@ package rv32_ooo_params;
   localparam integer FP_IQ_ENTRIES  = 4;
 
   // Load / Store queues (architecture_spec §6 / uop_spec §4.3)
-  localparam integer LQ_ENTRIES = 4;
-  localparam integer SQ_ENTRIES = 4;
-  localparam integer LQ_IDX_W   = 2;  // $clog2(4)
-  localparam integer SQ_IDX_W   = 2;  // $clog2(4)
+  localparam integer LQ_ENTRIES = 16;
+  localparam integer SQ_ENTRIES = 16;
+  localparam integer LQ_IDX_W   = 4;  // $clog2(16)
+  localparam integer SQ_IDX_W   = 4;  // $clog2(16)
   localparam integer LSQ_GEN_W  = 4;  // uop_spec §4.3
 
   // Instruction queue (frontend buffer)

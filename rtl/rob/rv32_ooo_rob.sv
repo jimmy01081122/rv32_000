@@ -1,5 +1,5 @@
 // rv32_ooo_rob.sv — Reorder Buffer (ROB)
-// Circular buffer (16 entries), in-order retirement, multi-completion snooping (Int, Load, and FP), commit trace
+// Circular buffer (16 entries), in-order retirement, safe store retirement protocol, commit trace
 // Architecture Spec §15, §23, §24, §25, §29 | Uop Spec §20
 
 module rv32_ooo_rob
@@ -24,8 +24,14 @@ module rv32_ooo_rob
   input  completion_t   int_cmp,
   input  completion_t   ld_cmp,
   input  completion_t   fp_cmp,
-  input  logic          sq_rsp_done,
-  input  sq_tag_t       sq_rsp_tag,
+
+  // Store retirement handshake with LSU
+  output logic          sq_retire_valid,
+  output rob_tag_t      sq_retire_rob_tag,
+  input  logic          sq_retire_ack,
+  input  logic [31:0]   retire_store_addr,
+  input  logic [3:0]    retire_store_mask,
+  input  logic [31:0]   retire_store_data,
 
   // Retirement outputs
   output logic          retire_valid,
@@ -72,7 +78,7 @@ module rv32_ooo_rob
   logic [63:0] event_counter;
 
   // =========================================================================
-  // 2. Head Entry Inspection
+  // 2. Head Entry Inspection & Retirement Protocol
   // =========================================================================
 
   rob_entry_t head_entry;
@@ -82,8 +88,14 @@ module rv32_ooo_rob
   wire rob_head_completed = rob_head_valid && head_entry.completed;
   wire rob_head_exception = rob_head_completed && head_entry.exception.valid;
 
+  // Store retirement handshake
+  assign sq_retire_valid   = rob_head_completed && !rob_head_exception && head_entry.is_store && (current_state == CORE_RUN);
+  assign sq_retire_rob_tag = head_entry.tag;
+
+  wire store_ready_to_retire = !head_entry.is_store || sq_retire_ack;
+
   // Retirement signals
-  wire can_retire = rob_head_completed && !rob_head_exception && (current_state == CORE_RUN);
+  wire can_retire = rob_head_completed && !rob_head_exception && store_ready_to_retire && (current_state == CORE_RUN);
 
   assign retire_valid        = can_retire;
   assign retire_entry        = head_entry;
@@ -247,7 +259,16 @@ module rv32_ooo_rob
         commit_trace.fp_dst_arch   <= head_entry.dst.arch;
         commit_trace.fp_dst_data   <= head_entry.result_data;
         commit_trace.fflags        <= head_entry.fp_flags;
-        event_counter              <= event_counter + 64'd1;
+
+        // Memory store commit trace
+        if (head_entry.is_store) begin
+          commit_trace.mem_valid     <= 1'b1;
+          commit_trace.mem_addr      <= retire_store_addr;
+          commit_trace.mem_byte_mask <= retire_store_mask;
+          commit_trace.mem_wdata     <= retire_store_data;
+        end
+
+        event_counter <= event_counter + 64'd1;
       end
 
       // --- State Transitions ---
