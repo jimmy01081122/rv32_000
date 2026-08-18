@@ -1,0 +1,62 @@
+# =============================================================================
+# rv32-ooo toolchain.lock
+# G1 Frozen — 2026-08-15
+#
+# All EDA tools are used exclusively through Docker containers.
+# Any direct host-system invocation is non-canonical and not reproducible.
+# =============================================================================
+
+# ── Simulation / Verification Container (rv32ooo-sim) ───────────────────────
+[sim]
+docker_image         = rv32ooo-sim:g1
+base_image           = ubuntu:22.04
+
+verilator_tag        = v4.038
+verilator_source     = https://github.com/verilator/verilator.git
+verilator_sha1       = 0cd4a57ad  # sha1 reported by binary, ref v4.038
+
+yosys_tag            = yosys-0.9
+yosys_source         = https://github.com/YosysHQ/yosys.git
+yosys_sha1           = 1979e0b    # reported by yosys -V
+
+spike_tag            = v1.1.0
+spike_source         = https://github.com/riscv-software-src/riscv-isa-sim.git
+
+riscv_gcc_release    = 2026.07.15
+riscv_gcc_source     = https://github.com/riscv-collab/riscv-gnu-toolchain
+riscv_gcc_artifact   = riscv32-elf-ubuntu-22.04-gcc.tar.xz
+riscv_gcc_arch       = rv32imf
+riscv_gcc_abi        = ilp32
+
+python_version       = 3.10   # ubuntu 22.04 system
+pyelftools_version   = 0.31
+pyyaml_version       = 6.0.2
+tabulate_version     = 0.9.0
+rich_version         = 13.9.4
+
+# ── Synthesis Container (rv32ooo-syn) ────────────────────────────────────────
+[syn]
+docker_image         = rv32ooo-syn:g1
+base_image           = ubuntu:22.04
+
+yosys_tag            = yosys-0.9
+yosys_source         = https://github.com/YosysHQ/yosys.git
+yosys_sha1           = 1979e0b
+
+# OpenROAD — installed via OpenROAD-flow-scripts docker_shell
+# Pinned commit for reproducibility (update with architecture_spec §D)
+openroad_flow_scripts_repo   = https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts.git
+openroad_flow_scripts_commit = TBD  # Set at G15 synthesis signoff
+openroad_version             = TBD  # Reported by 'openroad -version'
+
+# PDK versions (used at G15/G16)
+nangate45_source    = https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts/tree/master/flow/platforms/nangate45
+sky130hd_source     = https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts/tree/master/flow/platforms/sky130hd
+
+# ── Build-time record ────────────────────────────────────────────────────────
+[meta]
+lock_date        = 2026-08-15
+plan_version     = v1.2
+stage            = G1
+author           = rv32ooo-project
+build_host_os    = ubuntu (docker daemon)
