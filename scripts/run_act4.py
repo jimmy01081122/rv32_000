@@ -180,6 +180,8 @@ def main():
     summary_data = {
         "framework": "ACT4 / riscv-arch-test",
         "pinned_commit": "74efcaac81f48f437f58868771daf2ed2776d422",
+        "udb_config": "verification/act4/rv32_ooo/rv32_ooo.yaml",
+        "test_config": "verification/act4/rv32_ooo/test_config.yaml",
         "total_tests": total_count,
         "passed_tests": total_passed,
         "failed_tests": total_failed,

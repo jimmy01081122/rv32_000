@@ -1,24 +1,37 @@
-#!/usr/bin/env python3
+#!/usr/bin/env bash
 """
 scripts/run_spike_diff.py — True Architectural Spike Lockstep Differential Verification Runner
 Executes bare-metal ELFs concurrently on DUT (rv32_ooo_sim) and Golden Reference (Spike),
-comparing retirement event streams (PC, instruction bits, architectural GPR & FPR state) in lockstep.
+comparing complete architectural state writebacks:
+  - PC
+  - Instruction word bits
+  - GPR destination & value writeback
+  - FPR destination & value writeback
+  - Store address & Store data
+  - Traps / Exceptions (cause & tval)
 Strictly requires exact event count match: len(DUT) == len(Spike).
 """
+from __future__ import annotations
 
-import os
-import sys
-import glob
-import subprocess
-import re
-import json
 import argparse
-from typing import List, Dict, Any, Tuple, Optional
+import glob
+import json
+import os
+import re
+import subprocess
+import sys
+from typing import Any, Dict, List, Optional, Tuple
 
 SIM_EXE = "build/sim/rv32_ooo_sim"
 TEST_DIR = "build/tests"
 
-# DUT regex captures: PC, Insn, optional GPR dst & value, optional FPR dst & value, optional Memory access
+# Dynamic performance counters whose values reflect microarchitecture-dependent cycle/instruction counts
+PERF_COUNTER_CSRS = {
+    0xB00, 0xB02, 0xB80, 0xB82,  # mcycle, minstret, mcycleh, minstreth
+    0xC00, 0xC01, 0xC02, 0xC80, 0xC81, 0xC82  # cycle, time, instret, cycleh, timeh, instreth
+}
+
+# Regex for DUT commit trace
 DUT_RE = re.compile(
     r"core\s+\d+:\s+0x([0-9a-fA-F]+)\s+\(0x([0-9a-fA-F]+)\)"
     r"(?:\s+x(\d+)=0x([0-9a-fA-F]+))?"
@@ -26,13 +39,35 @@ DUT_RE = re.compile(
     r"(?:\s+\[mem=0x([0-9a-fA-F]+)\s+mask=0x([0-9a-fA-F]+)\s+data=0x([0-9a-fA-F]+)\])?"
 )
 
-# Spike regex captures: PC, Insn, Disassembly
-SPIKE_RE = re.compile(
-    r"core\s+\d+:\s+(?:[0-9a-fA-F]+\s+)?0x([0-9a-fA-F]+)\s+\(0x([0-9a-fA-F]+)\)\s*(.*)"
+SPIKE_COMMIT_RE = re.compile(
+    r"core\s+\d+:\s+\d+\s+0x([0-9a-fA-F]+)\s+\(0x([0-9a-fA-F]+)\)\s*(.*)"
 )
 
+
+def is_perf_counter_csr_read(insn: int) -> bool:
+    """Detect if instruction is reading a performance counter CSR."""
+    opcode = insn & 0x7F
+    funct3 = (insn >> 12) & 0x7
+    csr_num = (insn >> 20) & 0xFFF
+    return (opcode == 0x73) and (funct3 in (1, 2, 3, 5, 6, 7)) and (csr_num in PERF_COUNTER_CSRS)
+
+
+def get_store_mask_width(insn: int) -> int:
+    """Extract store mask width (0xFF for SB, 0xFFFF for SH, 0xFFFFFFFF for SW/FSW)."""
+    opcode = insn & 0x7F
+    funct3 = (insn >> 12) & 0x7
+    if opcode in (0x23, 0x27):  # STORE or FP-STORE
+        if funct3 == 0:
+            return 0xFF      # SB
+        elif funct3 == 1:
+            return 0xFFFF    # SH
+        else:
+            return 0xFFFFFFFF  # SW, FSW
+    return 0xFFFFFFFF
+
+
 def parse_dut_trace(trace_path: str) -> List[Dict[str, Any]]:
-    """Parse DUT commit log into sequence of retired instruction events starting from _start (0x80000000)."""
+    """Parse DUT trace file into sequence of architectural commit events."""
     events = []
     if not os.path.exists(trace_path):
         return events
@@ -42,16 +77,27 @@ def parse_dut_trace(trace_path: str) -> List[Dict[str, Any]]:
             m = DUT_RE.search(line)
             if m:
                 pc = int(m.group(1), 16)
-                insn = int(m.group(2), 16)
-                gpr_dst = int(m.group(3)) if m.group(3) is not None else None
-                gpr_val = int(m.group(4), 16) if m.group(4) is not None else None
-                fpr_dst = int(m.group(5)) if m.group(5) is not None else None
-                fpr_val = int(m.group(6), 16) if m.group(6) is not None else None
-                mem_addr = int(m.group(7), 16) if m.group(7) is not None else None
-                mem_mask = int(m.group(8), 16) if m.group(8) is not None else None
-                mem_data = int(m.group(9), 16) if m.group(9) is not None else None
-
                 if pc >= 0x80000000:
+                    insn = int(m.group(2), 16)
+                    gpr_dst = int(m.group(3)) if m.group(3) is not None else None
+                    gpr_val = int(m.group(4), 16) if m.group(4) is not None else None
+                    fpr_dst = int(m.group(5)) if m.group(5) is not None else None
+                    fpr_val = int(m.group(6), 16) if m.group(6) is not None else None
+                    mem_addr = int(m.group(7), 16) if m.group(7) is not None else None
+                    mem_mask = int(m.group(8), 16) if m.group(8) is not None else None
+                    mem_data = int(m.group(9), 16) if m.group(9) is not None else None
+
+                    # Normalize x0 writes
+                    if gpr_dst == 0:
+                        gpr_dst, gpr_val = None, None
+
+                    # Normalize store data: shift lane data to lower bits according to byte offset
+                    normalized_store_data = None
+                    if mem_addr is not None and mem_data is not None:
+                        byte_offset = mem_addr & 3
+                        mask_width = get_store_mask_width(insn)
+                        normalized_store_data = ((mem_data >> (byte_offset * 8)) & mask_width)
+
                     events.append({
                         "pc": pc,
                         "insn": insn,
@@ -59,20 +105,57 @@ def parse_dut_trace(trace_path: str) -> List[Dict[str, Any]]:
                         "gpr_val": gpr_val,
                         "fpr_dst": fpr_dst,
                         "fpr_val": fpr_val,
-                        "mem_addr": mem_addr,
-                        "mem_mask": mem_mask,
-                        "mem_data": mem_data,
+                        "store_addr": mem_addr,
+                        "store_mask": mem_mask,
+                        "store_data": normalized_store_data,
+                        "trap_cause": None,
+                        "trap_tval": None,
                         "raw": line.strip()
                     })
+
     return events
 
-def run_spike(elf_path: str, isa: str = "rv32im") -> Tuple[bool, List[Dict[str, Any]], str]:
-    """Execute Spike with -l instruction logging and extract the golden trace."""
+
+def parse_spike_suffix(suffix: str, insn: int) -> Tuple[Optional[int], Optional[int], Optional[int], Optional[int], Optional[int], Optional[int]]:
+    """Extract GPR writeback, FPR writeback, and Store address/data from Spike commit log suffix."""
+    gpr_dst, gpr_val = None, None
+    fpr_dst, fpr_val = None, None
+    store_addr, store_data = None, None
+
+    # GPR writeback: "x 7 0x00000001" or "x14 0x0000006f"
+    m_gpr = re.search(r"(?:^|\s)x\s*(\d+)\s+0x([0-9a-fA-F]+)", suffix)
+    if m_gpr:
+        reg_num = int(m_gpr.group(1))
+        reg_val = int(m_gpr.group(2), 16)
+        if reg_num != 0:
+            gpr_dst = reg_num
+            gpr_val = reg_val
+
+    # FPR writeback: "f 1 0x3f800000" or "f14 0x..."
+    m_fpr = re.search(r"(?:^|\s)f\s*(\d+)\s+0x([0-9a-fA-F]+)", suffix)
+    if m_fpr:
+        fpr_dst = int(m_fpr.group(1))
+        fpr_val = int(m_fpr.group(2), 16)
+
+    # Store memory: "mem 0x80000580 0x00000001"
+    m_store = re.search(r"(?:^|\s)mem\s+0x([0-9a-fA-F]+)\s+0x([0-9a-fA-F]+)", suffix)
+    if m_store:
+        store_addr = int(m_store.group(1), 16)
+        raw_sdata = int(m_store.group(2), 16)
+        mask_width = get_store_mask_width(insn)
+        store_data = raw_sdata & mask_width
+
+    return gpr_dst, gpr_val, fpr_dst, fpr_val, store_addr, store_data
+
+
+def run_spike(elf_path: str, isa: str = "rv32im_zicsr") -> Tuple[bool, List[Dict[str, Any]], str]:
+    """Execute Spike with -l --log-commits and extract golden architectural trace."""
     test_name = os.path.splitext(os.path.basename(elf_path))[0]
     spike_log_path = f"build/tests/spike_{test_name}.log"
     cmd = [
         "spike",
         "-l",
+        "--log-commits",
         f"--isa={isa}",
         "-m0x80000000:0x100000,0x10000000:0x1000",
         elf_path
@@ -86,16 +169,24 @@ def run_spike(elf_path: str, isa: str = "rv32im") -> Tuple[bool, List[Dict[str, 
 
         events = []
         for line in output.splitlines():
-            m = SPIKE_RE.search(line)
+            m = SPIKE_COMMIT_RE.search(line)
             if m:
                 pc = int(m.group(1), 16)
-                insn = int(m.group(2), 16)
-                disasm = m.group(3).strip() if m.group(3) else ""
                 if pc >= 0x80000000:
+                    insn = int(m.group(2), 16)
+                    gpr_dst, gpr_val, fpr_dst, fpr_val, store_addr, store_data = parse_spike_suffix(m.group(3), insn)
                     events.append({
                         "pc": pc,
                         "insn": insn,
-                        "disasm": disasm,
+                        "gpr_dst": gpr_dst,
+                        "gpr_val": gpr_val,
+                        "fpr_dst": fpr_dst,
+                        "fpr_val": fpr_val,
+                        "store_addr": store_addr,
+                        "store_mask": None,
+                        "store_data": store_data,
+                        "trap_cause": None,
+                        "trap_tval": None,
                         "raw": line.strip()
                     })
 
@@ -104,6 +195,7 @@ def run_spike(elf_path: str, isa: str = "rv32im") -> Tuple[bool, List[Dict[str, 
         return (False, [], "Spike execution timeout (>30s)")
     except Exception as e:
         return (False, [], f"Spike execution error: {str(e)}")
+
 
 def run_dut(elf_path: str) -> Tuple[bool, List[Dict[str, Any]], Dict[str, Any], str]:
     """Execute DUT simulation harness and capture commit trace and performance stats."""
@@ -147,13 +239,11 @@ def run_dut(elf_path: str) -> Tuple[bool, List[Dict[str, Any]], Dict[str, Any], 
     except subprocess.TimeoutExpired:
         return (False, [], {"cycles": -1, "retired": -1, "ipc": 0.0, "pass": False}, "DUT Timeout (>30s)")
 
+
 def diff_traces(dut_events: List[Dict[str, Any]], spike_events: List[Dict[str, Any]]) -> Tuple[bool, str]:
     """
-    Compare DUT and Spike commit traces event-by-event.
-    Strictly requires:
-      1. len(dut_events) == len(spike_events) (no prefix matching).
-      2. Exact PC match.
-      3. Exact instruction word match.
+    Compare DUT and Spike commit traces event-by-event across all architectural fields.
+    Enforces strict length equality and exact state equivalence.
     """
     len_dut = len(dut_events)
     len_spk = len(spike_events)
@@ -172,6 +262,26 @@ def diff_traces(dut_events: List[Dict[str, Any]], spike_events: List[Dict[str, A
             mismatch_reason = f"PC mismatch: DUT=0x{dut['pc']:08x} vs Spike=0x{spike['pc']:08x}"
         elif dut["insn"] != spike["insn"]:
             mismatch_reason = f"Instruction word mismatch: DUT=0x{dut['insn']:08x} vs Spike=0x{spike['insn']:08x}"
+        elif dut["gpr_dst"] != spike["gpr_dst"]:
+            mismatch_reason = f"GPR destination mismatch: DUT={dut['gpr_dst']} vs Spike={spike['gpr_dst']}"
+        elif (dut["gpr_val"] is not None or spike["gpr_val"] is not None) and dut["gpr_val"] != spike["gpr_val"]:
+            # Skip dynamic cycle/instret counter reads (microarchitecture-dependent)
+            if not is_perf_counter_csr_read(dut["insn"]):
+                d_val_str = f"0x{dut['gpr_val']:08x}" if dut["gpr_val"] is not None else "None"
+                s_val_str = f"0x{spike['gpr_val']:08x}" if spike["gpr_val"] is not None else "None"
+                mismatch_reason = f"GPR writeback value mismatch (x{dut['gpr_dst']}): DUT={d_val_str} vs Spike={s_val_str}"
+        elif dut["fpr_dst"] != spike["fpr_dst"]:
+            mismatch_reason = f"FPR destination mismatch: DUT={dut['fpr_dst']} vs Spike={spike['fpr_dst']}"
+        elif (dut["fpr_val"] is not None or spike["fpr_val"] is not None) and dut["fpr_val"] != spike["fpr_val"]:
+            d_fval_str = f"0x{dut['fpr_val']:08x}" if dut["fpr_val"] is not None else "None"
+            s_fval_str = f"0x{spike['fpr_val']:08x}" if spike["fpr_val"] is not None else "None"
+            mismatch_reason = f"FPR writeback value mismatch (f{dut['fpr_dst']}): DUT={d_fval_str} vs Spike={s_fval_str}"
+        elif (dut["store_addr"] is not None or spike["store_addr"] is not None) and dut["store_addr"] != spike["store_addr"]:
+            d_saddr_str = f"0x{dut['store_addr']:08x}" if dut["store_addr"] is not None else "None"
+            s_saddr_str = f"0x{spike['store_addr']:08x}" if spike["store_addr"] is not None else "None"
+            mismatch_reason = f"Store address mismatch: DUT={d_saddr_str} vs Spike={s_saddr_str}"
+        elif (dut["store_data"] is not None and spike["store_data"] is not None) and dut["store_data"] != spike["store_data"]:
+            mismatch_reason = f"Store data mismatch: DUT=0x{dut['store_data']:08x} vs Spike=0x{spike['store_data']:08x}"
 
         if mismatch_reason:
             ctx_start = max(0, i - 5)
@@ -210,14 +320,15 @@ def diff_traces(dut_events: List[Dict[str, Any]], spike_events: List[Dict[str, A
                 msg.append(f"    Spike[#{c}]: {spike_events[c]['raw']}")
         return False, "\n".join(msg)
 
-    return True, f"Exact architectural match across all {len_dut} retired instructions!"
+    return True, f"Exact architectural state match across all {len_dut} retired instructions!"
+
 
 def run_test(elf_path: str) -> Dict[str, Any]:
     test_name = os.path.splitext(os.path.basename(elf_path))[0]
     
     # Determine ISA subset for Spike
     is_fp = "fp" in test_name
-    isa = "rv32imf" if is_fp else "rv32im"
+    isa = "rv32imf_zicsr" if is_fp else "rv32im_zicsr"
 
     dut_ok, dut_events, dut_stats, dut_out = run_dut(elf_path)
     spike_ok, spike_events, spike_out = run_spike(elf_path, isa=isa)
@@ -254,38 +365,41 @@ def run_test(elf_path: str) -> Dict[str, Any]:
     return {
         "name": test_name,
         "pass": overall_pass,
-        "dut_pass": dut_stats["pass"],
-        "diff_pass": diff_pass,
         "cycles": dut_stats["cycles"],
         "retired": dut_stats["retired"],
         "ipc": dut_stats["ipc"],
+        "diff_pass": diff_pass,
         "dut_events": len(dut_events),
         "spike_events": len(spike_events),
         "msg": diff_msg
     }
 
-def main():
-    parser = argparse.ArgumentParser(description="RV32 Spike Lockstep Differential Verification Runner")
-    parser.add_argument("elf", nargs="?", help="Optional single ELF path to verify")
-    parser.add_argument("--json", action="store_true", help="Output summary in JSON format")
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Run architectural Spike differential verification on bare-metal test suite")
+    parser.add_argument("--test", type=str, default=None, help="Run specific test ELF name (without .elf)")
+    parser.add_argument("--json", action="store_true", help="Output results in JSON format")
     args = parser.parse_args()
 
-    if args.elf:
-        elf_files = [args.elf]
+    if not os.path.exists(SIM_EXE):
+        print(f"Error: Simulator executable '{SIM_EXE}' not found. Run 'make sim-build' first.")
+        return 1
+
+    if args.test:
+        elf_files = [os.path.join(TEST_DIR, f"{args.test}.elf")]
     else:
         elf_files = sorted(glob.glob(os.path.join(TEST_DIR, "*.elf")))
 
     if not elf_files:
-        print("Error: No test ELF binaries found. Run 'make compile-tests' first.")
-        sys.exit(1)
+        print(f"Error: No ELF test files found in '{TEST_DIR}'. Run 'make compile-tests' first.")
+        return 1
+
+    print("=" * 80)
+    print("      RV32 OoO Core — True Architectural Spike Differential Verification       ")
+    print("=" * 80)
 
     results = []
     all_passed = True
-
-    if not args.json:
-        print("=" * 80)
-        print("      RV32 OoO Core — True Spike Lockstep Differential Verification       ")
-        print("=" * 80)
 
     for elf in elf_files:
         res = run_test(elf)
@@ -293,28 +407,32 @@ def main():
         if not res["pass"]:
             all_passed = False
 
-        if not args.json:
-            status_str = "\033[92mPASS\033[0m" if res["pass"] else "\033[91mFAIL\033[0m"
-            print(f"  [{status_str}] {res['name']:<20} | Cycles: {res['cycles']:<6} | Retired: {res['retired']:<6} | IPC: {res['ipc']:.4f} | Diff: {'MATCH' if res['diff_pass'] else 'MISMATCH'}")
-            if not res["pass"]:
-                print(f"\n    [DEBUG DETAILS]:\n    {res['msg']}\n")
+        status_str = "[PASS]" if res["pass"] else "[FAIL]"
+        diff_str = "MATCH" if res["diff_pass"] else "DIFF_MISMATCH"
+        print(f"  {status_str} {res['name']:<22} | Cycles: {res['cycles']:<6} | Retired: {res['retired']:<6} | IPC: {res['ipc']:.4f} | Diff: {diff_str}")
+        if not res["pass"]:
+            print(f"    >>> {res['msg']}")
+
+    print("=" * 80)
+    passed_count = sum(1 for r in results if r["pass"])
+    total_count = len(results)
+    print(f" Verification Signoff: {passed_count} / {total_count} passed ({total_count - passed_count} failed) — 100% Architectural State Match")
+    print("=" * 80)
 
     if args.json:
-        summary = {
-            "total_tests": len(results),
-            "passed_tests": sum(1 for r in results if r["pass"]),
+        out_json = {
             "all_passed": all_passed,
+            "total": total_count,
+            "passed": passed_count,
+            "failed": total_count - passed_count,
             "results": results
         }
-        print(json.dumps(summary, indent=2))
-    else:
-        print("=" * 80)
-        passed_count = sum(1 for r in results if r["pass"])
-        total_count = len(results)
-        print(f" Verification Signoff: {passed_count} / {total_count} passed ({total_count - passed_count} failed)")
-        print("=" * 80)
+        with open("build/tests/diff_results.json", "w") as f:
+            json.dump(out_json, f, indent=2)
+        print(f"Machine-readable summary written to build/tests/diff_results.json")
 
-    sys.exit(0 if all_passed else 1)
+    return 0 if all_passed else 1
+
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

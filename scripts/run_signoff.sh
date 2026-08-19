@@ -21,7 +21,7 @@ mkdir -p "${OUT_DIR}/spike_diff"
 mkdir -p "${OUT_DIR}/synthesis"
 
 # 1. Environment & Tools Recording
-echo "==> Recording environment and tool versions..."
+echo "==> [1/8] Recording environment and tool versions..."
 cat << EOF > "${OUT_DIR}/environment.txt"
 Host OS: $(uname -s) $(uname -r) $(uname -v)
 Architecture: $(uname -m)
@@ -48,7 +48,7 @@ $(python3 --version)
 EOF
 
 # 2. Build Simulator Executable & Compile Tests
-echo "==> Building Verilator simulation binary..."
+echo "==> [2/8] Building Verilator simulation binary and compiling test suite..."
 mkdir -p build/sim
 verilator --cc --exe --trace \
   -Wall -Wno-UNUSED -Wno-STMTDLY \
@@ -60,51 +60,56 @@ verilator --cc --exe --trace \
   -CFLAGS '-I/workspace/sim/tb -O2' \
   --build
 
-echo "==> Compiling directed regression test suite..."
 bash scripts/compile_tests.sh
 
 # 3. Differential Lockstep Verification & Negative Tests
-echo "==> Running Spike Differential Verification & Negative Self-Tests..."
+echo "==> [3/8] Running True Architectural Spike Differential Verification & Negative Tests..."
 python3 scripts/test_spike_diff_negative.py | tee "${OUT_DIR}/spike_diff/selftest.log"
-python3 scripts/run_spike_diff.py | tee "${OUT_DIR}/spike_diff/lockstep.log"
+python3 scripts/run_spike_diff.py --json | tee "${OUT_DIR}/spike_diff/lockstep.log"
+if [ -f "build/tests/diff_results.json" ]; then
+    cp build/tests/diff_results.json "${OUT_DIR}/spike_diff/diff_results.json"
+fi
 
 # 4. RISC-V ACT4 Certification Suite
-echo "==> Running RISC-V ACT4 Certification Suite..."
+echo "==> [4/8] Running Official RISC-V ACT4 Certification Suite (53 tests)..."
 python3 scripts/run_act4.py --json | tee "${OUT_DIR}/act4/act4_run.log"
 cp verification/act4/report/act4_summary.json "${OUT_DIR}/act4/summary.json"
 
-# 5. CoreMark Multi-Run Characterization
-echo "==> Running CoreMark Benchmark (10 iterations Performance Run)..."
-bash scripts/compile_coremark.sh 10 PERFORMANCE_RUN -O2
-./build/sim/rv32_ooo_sim +elf=build/coremark/coremark_iter10.elf +max-cycles=10000000 > "${OUT_DIR}/coremark/coremark_iter10.log"
-python3 scripts/check_coremark_result.py "${OUT_DIR}/coremark/coremark_iter10.log" --json --mode development | tee "${OUT_DIR}/coremark/result_iter10.json"
+# 5. CoreMark Multi-Run Characterization & Reproducibility
+echo "==> [5/8] Running CoreMark Multi-Run Characterization..."
+echo "  -> Running 5-run cycle-accurate determinism audit..."
+python3 scripts/verify_coremark_reproducibility.py --runs 5 --iterations 10 --opt -O3 --out-dir "${OUT_DIR}/coremark"
 
-echo "==> Running CoreMark Validation Run (1 iteration)..."
-bash scripts/compile_coremark.sh 1 VALIDATION_RUN -O2
+echo "  -> Running official CoreMark run (26 iterations, >= 10.0s elapsed @ 1 MHz)..."
+bash scripts/compile_coremark.sh 26 PERFORMANCE_RUN -O3 1000000
+./build/sim/rv32_ooo_sim +elf=build/coremark/coremark_iter26.elf +max-cycles=20000000 > "${OUT_DIR}/coremark/coremark_official_26iter.log"
+python3 scripts/check_coremark_result.py "${OUT_DIR}/coremark/coremark_official_26iter.log" --json --mode official | tee "${OUT_DIR}/coremark/result_official_26iter.json"
+
+echo "  -> Running CoreMark validation run (1 iteration)..."
+bash scripts/compile_coremark.sh 1 VALIDATION_RUN -O3 1000000
 ./build/sim/rv32_ooo_sim +elf=build/coremark/coremark_iter1.elf +max-cycles=2000000 > "${OUT_DIR}/coremark/coremark_iter1.log"
 python3 scripts/check_coremark_result.py "${OUT_DIR}/coremark/coremark_iter1.log" --json --mode development | tee "${OUT_DIR}/coremark/result_iter1.json"
 
-# 6. Embench-IoT Benchmark Suite
-echo "==> Running Embench-IoT Multi-Workload Suite..."
-python3 scripts/run_embench.py --suite rv32im --opt="-O3" --json | tee "${OUT_DIR}/embench/embench_run.log"
-cp results/embench/results.json "${OUT_DIR}/embench/results.json"
-cp results/embench/summary.csv "${OUT_DIR}/embench/summary.csv"
+# 6. Embench-IoT 1.0 RV32IM Integer Subset
+echo "==> [6/8] Running Embench-IoT 1.0 RV32IM Integer Subset Benchmark Suite..."
+python3 scripts/run_embench.py --bench all --opt="-O3" --out-dir "${OUT_DIR}/embench" --json | tee "${OUT_DIR}/embench/embench_run.log"
 
-# 7. Synthesis & Area Report
-echo "==> Packaging Synthesis Signoff Artifacts..."
-if [ -f "build/syn/synth.log" ]; then
-    cp build/syn/synth.log "${OUT_DIR}/synthesis/"
-fi
-if [ -f "build/syn/rv32_ooo_core_netlist.v" ]; then
-    cp build/syn/rv32_ooo_core_netlist.v "${OUT_DIR}/synthesis/"
-fi
+# 7. Clean Yosys Synthesis Execution
+echo "==> [7/8] Running Clean Yosys Logic Synthesis..."
+rm -rf build/syn
+bash syn/scripts/synth_yosys.sh
+cp build/syn/synth.log "${OUT_DIR}/synthesis/synth.log"
+cp build/syn/rv32_ooo_core_netlist.v "${OUT_DIR}/synthesis/rv32_ooo_core_netlist.v"
+cp build/syn/synthesis_summary.json "${OUT_DIR}/synthesis/synthesis_summary.json"
 
-# 8. Checksum Generation
-echo "==> Generating SHA256SUMS for all signoff artifacts..."
-(cd "${OUT_DIR}" && find . -type f ! -name SHA256SUMS -exec sha256sum {} + | sort -k 2 > SHA256SUMS)
+# 8. Cryptographic Artifact Hashing & Acceptance Gatekeeper
+echo "==> [8/8] Generating SHA256SUMS and verifying master signoff acceptance..."
+(cd "${OUT_DIR}" && find . -type f ! -name "SHA256SUMS" | sort | xargs sha256sum > SHA256SUMS)
+echo "  [OK] SHA256SUMS generated ($(wc -l < "${OUT_DIR}/SHA256SUMS") artifacts hashed)"
+
+python3 scripts/check_signoff_acceptance.py "${OUT_DIR}"
 
 echo "================================================================================"
-echo "    MASTER SIGNOFF COMPLETED SUCCESSFULLY!                                     "
-echo "    All artifact logs, reports, and SHA256 checksums stored in:                "
-echo "    ${OUT_DIR}/                                                                "
+echo "  [SUCCESS] All Signoff Requirements Independently Generated and Verified!      "
+echo "  Artifact Directory: ${OUT_DIR}"
 echo "================================================================================"

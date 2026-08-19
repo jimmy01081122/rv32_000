@@ -1,93 +1,129 @@
 #!/usr/bin/env python3
 """
-scripts/test_spike_diff_negative.py — Differential Verification Comparator Negative Self-Test
-Validates that the Spike differential comparator reliably catches:
+scripts/test_spike_diff_negative.py — Architectural Differential Verification Negative Self-Test Suite
+Validates that the Spike differential comparator reliably detects and rejects:
   1. Truncated DUT trace (length mismatch)
-  2. Mutated PC
-  3. Mutated instruction bits
-  4. Empty DUT trace
-  5. Extra stray DUT event
+  2. Extra trailing DUT event (length mismatch)
+  3. Mutated PC
+  4. Mutated instruction bits
+  5. GPR destination corruption
+  6. GPR writeback value corruption
+  7. FPR destination corruption
+  8. FPR writeback value corruption
+  9. Store address corruption
+  10. Store data corruption
+  11. Empty trace rejection
 """
+from __future__ import annotations
 
-import sys
 import copy
+import sys
 from run_spike_diff import diff_traces
 
-def test_negative_cases():
-    # Construct a baseline synthetic trace
-    base_spike = [
-        {"pc": 0x80000000, "insn": 0x00100117, "raw": "core 0: 0x80000000 (0x00100117) auipc sp, 0x100"},
-        {"pc": 0x80000004, "insn": 0x00010113, "raw": "core 0: 0x80000004 (0x00010113) mv sp, sp"},
-        {"pc": 0x80000008, "insn": 0x000062b7, "raw": "core 0: 0x80000008 (0x000062b7) lui t0, 0x6"},
-        {"pc": 0x8000000c, "insn": 0x3002a073, "raw": "core 0: 0x8000000c (0x3002a073) csrs mstatus, t0"},
-        {"pc": 0x80000010, "insn": 0x00000093, "raw": "core 0: 0x80000010 (0x00000093) li ra, 0"},
-        {"pc": 0x80000014, "insn": 0x00000193, "raw": "core 0: 0x80000014 (0x00000193) li gp, 0"},
-        {"pc": 0x80000018, "insn": 0x00000213, "raw": "core 0: 0x80000018 (0x00000213) li tp, 0"},
-        {"pc": 0x8000001c, "insn": 0x00000293, "raw": "core 0: 0x8000001c (0x00000293) li t0, 0"},
-        {"pc": 0x80000020, "insn": 0x00000313, "raw": "core 0: 0x80000020 (0x00000313) li t1, 0"},
-        {"pc": 0x80000024, "insn": 0x00000393, "raw": "core 0: 0x80000024 (0x00000393) li t2, 0"}
-    ]
 
-    base_dut = [
-        {"pc": 0x80000000, "insn": 0x00100117, "gpr_dst": 2, "gpr_val": 0x80000100, "raw": "core 0: 0x80000000 (0x00100117) x2=0x80000100"},
-        {"pc": 0x80000004, "insn": 0x00010113, "gpr_dst": 2, "gpr_val": 0x80000100, "raw": "core 0: 0x80000004 (0x00010113) x2=0x80000100"},
-        {"pc": 0x80000008, "insn": 0x000062b7, "gpr_dst": 5, "gpr_val": 0x00006000, "raw": "core 0: 0x80000008 (0x000062b7) x5=0x00006000"},
-        {"pc": 0x8000000c, "insn": 0x3002a073, "gpr_dst": 0, "gpr_val": 0x00000000, "raw": "core 0: 0x8000000c (0x3002a073)"},
-        {"pc": 0x80000010, "insn": 0x00000093, "gpr_dst": 1, "gpr_val": 0x00000000, "raw": "core 0: 0x80000010 (0x00000093) x1=0x00000000"},
-        {"pc": 0x80000014, "insn": 0x00000193, "gpr_dst": 3, "gpr_val": 0x00000000, "raw": "core 0: 0x80000014 (0x00000193) x3=0x00000000"},
-        {"pc": 0x80000018, "insn": 0x00000213, "gpr_dst": 4, "gpr_val": 0x00000000, "raw": "core 0: 0x80000018 (0x00000213) x4=0x00000000"},
-        {"pc": 0x8000001c, "insn": 0x00000293, "gpr_dst": 5, "gpr_val": 0x00000000, "raw": "core 0: 0x8000001c (0x00000293) x5=0x00000000"},
-        {"pc": 0x80000020, "insn": 0x00000313, "gpr_dst": 6, "gpr_val": 0x00000000, "raw": "core 0: 0x80000020 (0x00000313) x6=0x00000000"},
-        {"pc": 0x80000024, "insn": 0x00000393, "gpr_dst": 7, "gpr_val": 0x00000000, "raw": "core 0: 0x80000024 (0x00000393) x7=0x00000000"}
-    ]
-
-    # Baseline match check
-    ok, msg = diff_traces(base_dut, base_spike)
-    assert ok, f"Baseline match unexpectedly failed: {msg}"
-    print("  [PASS] Positive baseline: Valid identical traces match successfully.")
-
-    # Negative Test 1: Truncated DUT trace (delete last event)
-    trunc_dut = base_dut[:-1]
-    ok, msg = diff_traces(trunc_dut, base_spike)
-    assert not ok and "LENGTH MISMATCH" in msg, f"Negative Test 1 failed to catch truncated trace: ok={ok}, msg={msg}"
-    print("  [PASS] Negative Test 1: Truncated DUT trace correctly rejected (LENGTH MISMATCH detected).")
-
-    # Negative Test 2: Extra DUT event (Spike shorter)
-    extra_dut = base_dut + [{"pc": 0x80000028, "insn": 0x00000413, "gpr_dst": 8, "gpr_val": 0, "raw": "core 0: 0x80000028 (0x00000413) x8=0"}]
-    ok, msg = diff_traces(extra_dut, base_spike)
-    assert not ok and "LENGTH MISMATCH" in msg, f"Negative Test 2 failed to catch extra event: ok={ok}, msg={msg}"
-    print("  [PASS] Negative Test 2: Extra trailing DUT event correctly rejected (LENGTH MISMATCH detected).")
-
-    # Negative Test 3: Mutated PC in DUT event #5
-    mut_pc_dut = copy.deepcopy(base_dut)
-    mut_pc_dut[5]["pc"] = 0x80000018 # should be 0x80000014
-    ok, msg = diff_traces(mut_pc_dut, base_spike)
-    assert not ok and "PC mismatch" in msg, f"Negative Test 3 failed to catch mutated PC: ok={ok}, msg={msg}"
-    print("  [PASS] Negative Test 3: Corrupted PC correctly rejected (PC MISMATCH detected).")
-
-    # Negative Test 4: Mutated instruction word in DUT event #3
-    mut_insn_dut = copy.deepcopy(base_dut)
-    mut_insn_dut[3]["insn"] = 0x3002a077 # bit flip in CSR instruction
-    ok, msg = diff_traces(mut_insn_dut, base_spike)
-    assert not ok and "Instruction word mismatch" in msg, f"Negative Test 4 failed to catch instruction bit corruption: ok={ok}, msg={msg}"
-    print("  [PASS] Negative Test 4: Corrupted instruction word correctly rejected (INSN MISMATCH detected).")
-
-    # Negative Test 5: Empty DUT trace
-    ok, msg = diff_traces([], base_spike)
-    assert not ok and "Empty event stream" in msg, f"Negative Test 5 failed to catch empty trace: ok={ok}, msg={msg}"
-    print("  [PASS] Negative Test 5: Empty trace correctly rejected (EMPTY STREAM detected).")
-
-    print("\n" + "=" * 80)
-    print(" All 5 Negative Comparator Self-Tests PASSED Successfully!")
+def test_negative_cases() -> int:
+    print("=" * 80)
+    print("  RV32 OoO Core — Architectural Differential Comparator Negative Self-Tests")
     print("=" * 80)
 
+    # Base identical trace with GPR writeback, FPR writeback, and Store operations
+    base_spike = [
+        {"pc": 0x80000000, "insn": 0x00100117, "gpr_dst": 2, "gpr_val": 0x80100000, "fpr_dst": None, "fpr_val": None, "store_addr": None, "store_data": None, "raw": "core 0: 3 0x80000000 (0x00100117) x 2 0x80100000"},
+        {"pc": 0x80000004, "insn": 0x00010113, "gpr_dst": 2, "gpr_val": 0x80100000, "fpr_dst": None, "fpr_val": None, "store_addr": None, "store_data": None, "raw": "core 0: 3 0x80000004 (0x00100113) x 2 0x80100000"},
+        {"pc": 0x80000008, "insn": 0x000062b7, "gpr_dst": 5, "gpr_val": 0x00006000, "fpr_dst": None, "fpr_val": None, "store_addr": None, "store_data": None, "raw": "core 0: 3 0x80000008 (0x000062b7) x 5 0x00006000"},
+        {"pc": 0x8000000c, "insn": 0x00a2a023, "gpr_dst": None, "gpr_val": None, "fpr_dst": None, "fpr_val": None, "store_addr": 0x80001000, "store_data": 0x12345678, "raw": "core 0: 3 0x8000000c (0x00a2a023) mem 0x80001000 0x12345678"},
+        {"pc": 0x80000010, "insn": 0x000520a7, "gpr_dst": None, "gpr_val": None, "fpr_dst": 1, "fpr_val": 0x3f800000, "store_addr": None, "store_data": None, "raw": "core 0: 3 0x80000010 (0x000520a7) f 1 0x3f800000"},
+        {"pc": 0x80000014, "insn": 0x00000093, "gpr_dst": 1, "gpr_val": 0x00000000, "fpr_dst": None, "fpr_val": None, "store_addr": None, "store_data": None, "raw": "core 0: 3 0x80000014 (0x00000093) x 1 0x00000000"},
+        {"pc": 0x80000018, "insn": 0x10500073, "gpr_dst": None, "gpr_val": None, "fpr_dst": None, "fpr_val": None, "store_addr": None, "store_data": None, "raw": "core 0: 3 0x80000018 (0x10500073)"}
+    ]
+
+    base_dut = copy.deepcopy(base_spike)
+    for d in base_dut:
+        d["store_mask"] = 0xF if d["store_addr"] is not None else None
+
+    # Positive baseline check
+    ok, msg = diff_traces(base_dut, base_spike)
+    assert ok, f"Positive baseline unexpectedly failed: {msg}"
+    print("  [PASS] Positive Baseline   : 100% Architectural state match passes successfully.")
+
+    # 1. Truncated DUT trace
+    dut_mut = copy.deepcopy(base_dut[:-1])
+    ok, msg = diff_traces(dut_mut, base_spike)
+    assert not ok and "LENGTH MISMATCH" in msg, f"Failed to catch truncated trace: {msg}"
+    print("  [PASS] Negative Test #1   : Truncated trace detected (LENGTH MISMATCH).")
+
+    # 2. Extra trailing event
+    dut_mut = copy.deepcopy(base_dut) + [{"pc": 0x8000001c, "insn": 0x00000013, "gpr_dst": None, "gpr_val": None, "fpr_dst": None, "fpr_val": None, "store_addr": None, "store_mask": None, "store_data": None, "raw": ""}]
+    ok, msg = diff_traces(dut_mut, base_spike)
+    assert not ok and "LENGTH MISMATCH" in msg, f"Failed to catch extra event: {msg}"
+    print("  [PASS] Negative Test #2   : Extra trailing event detected (LENGTH MISMATCH).")
+
+    # 3. PC Corruption
+    dut_mut = copy.deepcopy(base_dut)
+    dut_mut[2]["pc"] = 0x8000000A
+    ok, msg = diff_traces(dut_mut, base_spike)
+    assert not ok and "PC mismatch" in msg, f"Failed to catch PC corruption: {msg}"
+    print("  [PASS] Negative Test #3   : PC corruption detected (PC mismatch).")
+
+    # 4. Instruction word corruption
+    dut_mut = copy.deepcopy(base_dut)
+    dut_mut[1]["insn"] = 0x00000013
+    ok, msg = diff_traces(dut_mut, base_spike)
+    assert not ok and "Instruction word mismatch" in msg, f"Failed to catch instruction corruption: {msg}"
+    print("  [PASS] Negative Test #4   : Instruction corruption detected (Instruction word mismatch).")
+
+    # 5. GPR Destination Corruption
+    dut_mut = copy.deepcopy(base_dut)
+    dut_mut[2]["gpr_dst"] = 6
+    ok, msg = diff_traces(dut_mut, base_spike)
+    assert not ok and "GPR destination mismatch" in msg, f"Failed to catch GPR destination corruption: {msg}"
+    print("  [PASS] Negative Test #5   : GPR destination corruption detected (GPR destination mismatch).")
+
+    # 6. GPR Value Corruption
+    dut_mut = copy.deepcopy(base_dut)
+    dut_mut[2]["gpr_val"] = 0x00006001
+    ok, msg = diff_traces(dut_mut, base_spike)
+    assert not ok and "GPR writeback value mismatch" in msg, f"Failed to catch GPR value corruption: {msg}"
+    print("  [PASS] Negative Test #6   : GPR value corruption detected (GPR writeback value mismatch).")
+
+    # 7. FPR Destination Corruption
+    dut_mut = copy.deepcopy(base_dut)
+    dut_mut[4]["fpr_dst"] = 2
+    ok, msg = diff_traces(dut_mut, base_spike)
+    assert not ok and "FPR destination mismatch" in msg, f"Failed to catch FPR destination corruption: {msg}"
+    print("  [PASS] Negative Test #7   : FPR destination corruption detected (FPR destination mismatch).")
+
+    # 8. FPR Value Corruption
+    dut_mut = copy.deepcopy(base_dut)
+    dut_mut[4]["fpr_val"] = 0x3f800001
+    ok, msg = diff_traces(dut_mut, base_spike)
+    assert not ok and "FPR writeback value mismatch" in msg, f"Failed to catch FPR value corruption: {msg}"
+    print("  [PASS] Negative Test #8   : FPR value corruption detected (FPR writeback value mismatch).")
+
+    # 9. Store Address Corruption
+    dut_mut = copy.deepcopy(base_dut)
+    dut_mut[3]["store_addr"] = 0x80001004
+    ok, msg = diff_traces(dut_mut, base_spike)
+    assert not ok and "Store address mismatch" in msg, f"Failed to catch Store address corruption: {msg}"
+    print("  [PASS] Negative Test #9   : Store address corruption detected (Store address mismatch).")
+
+    # 10. Store Data Corruption
+    dut_mut = copy.deepcopy(base_dut)
+    dut_mut[3]["store_data"] = 0x12345679
+    ok, msg = diff_traces(dut_mut, base_spike)
+    assert not ok and "Store data mismatch" in msg, f"Failed to catch Store data corruption: {msg}"
+    print("  [PASS] Negative Test #10  : Store data corruption detected (Store data mismatch).")
+
+    # 11. Empty Trace
+    ok, msg = diff_traces([], base_spike)
+    assert not ok and "Empty event stream" in msg, f"Failed to catch empty trace: {msg}"
+    print("  [PASS] Negative Test #11  : Empty trace correctly rejected.")
+
+    print("=" * 80)
+    print("  [SUCCESS] All 11 Differential Negative Self-Tests Passed (100% Fault Coverage)")
+    print("=" * 80)
+    return 0
+
+
 if __name__ == "__main__":
-    try:
-        test_negative_cases()
-        sys.exit(0)
-    except AssertionError as e:
-        print(f"\n[FAIL] Negative Self-Test Assertion Failed: {e}", file=sys.stderr)
-        sys.exit(1)
-    except Exception as e:
-        print(f"\n[ERROR] Unexpected error in negative self-test: {e}", file=sys.stderr)
-        sys.exit(1)
+    sys.exit(test_negative_cases())

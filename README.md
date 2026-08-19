@@ -99,45 +99,50 @@ Designed using an explicit Physical Register File (PRF) Tomasulo microarchitectu
 
 ### CoreMark / MHz Performance
 
-The core is characterized against the official EEMBC CoreMark workload in a bare-metal environment with hardware timers. Re-computation and independent verification are executed with `scripts/check_coremark_result.py`.
+The core is characterized against the official EEMBC CoreMark workload in a bare-metal environment with hardware timers. Re-computation and independent verification are executed with `scripts/check_coremark_result.py` and `scripts/verify_coremark_reproducibility.py`.
 
-| Benchmark Run | Iterations | Measured Cycles | Retired Insns | IPC | **CoreMark / MHz** | Verification Status |
-|---|---|---|---|---|---|---|
-| **CoreMark Performance Run (-O2)** | **10** | **3,955,422** | **2,953,082** | **0.7415** | **2.5282** | **PASS (100% CRC Validated)** |
-| **CoreMark Validation Run (-O2)** | **1** | **387,150** | **305,676** | **0.7320** | **2.5830** | **PASS (100% CRC Validated)** |
-| **CoreMark Official Run (10s @ 1MHz)** | **26** | **10,284,714** | **7,649,797** | **0.7418** | **2.5280** | **PASS (Official >= 10s Execution)** |
+| Benchmark Run | Iterations | Compiler Flags | Measured Cycles | Retired Insns | IPC | **CoreMark / MHz** | Verification Status |
+|---|---|---|---|---|---|---|---|
+| **CoreMark Performance Run (-O3)** | **10** | `-O3` | **3,955,412** | **2,953,511** | **0.7415** | **2.5282** | **PASS (100% Deterministic Reproducibility)** |
+| **CoreMark Performance Run (-O2)** | **10** | `-O2` | **3,857,171** | **2,869,307** | **0.7380** | **2.5926** | **PASS (100% Deterministic Reproducibility)** |
+| **CoreMark Validation Run (-O3)** | **1** | `-O3` | **387,150** | **305,676** | **0.7320** | **2.5830** | **PASS (100% CRC Validated)** |
+| **CoreMark Official Run (>= 10s @ 1MHz)** | **26** | `-O3` | **10,284,714** | **7,649,847** | **0.7418** | **2.5280** | **PASS (Official 10.28s Cycle-Normalized Execution)** |
 
 * **Formula:** $\text{CoreMark/MHz} = \frac{\text{Iterations} \times 1{,}000{,}000}{\text{Measured Execution Cycles}}$
 
 ---
 
-### Embench-IoT 1.0 Multi-Workload Suite
+### Embench-IoT 1.0 RV32IM Integer Subset
 
-Embench-IoT 1.0 (pinned commit `0466a18e`) executes across 14 diverse embedded workloads measuring execution cycles, retired instructions, IPC, and code footprint:
+Embench-IoT 1.0 (pinned commit `0466a18e`) executes across 14 diverse integer embedded workloads measuring execution cycles, retired instructions, IPC, code footprint, and official relative speed scores against `baseline-data/speed.json`:
 
-| Benchmark Workload | Execution Cycles | Simulation Cycles | Retired Insns | IPC | Text Size | Status |
-|---|---|---|---|---|---|---|
-| **aha-mont64** | 5,071,977 | 5,468,065 | 4,778,064 | **0.8738** | 6,246 B | PASS |
-| **crc32** | 4,355,834 | 4,768,358 | 4,284,543 | **0.8985** | 4,688 B | PASS |
-| **edn** | 4,082,104 | 4,532,347 | 3,684,607 | **0.8130** | 8,400 B | PASS |
-| **huffbench** | 3,068,671 | 3,758,334 | 2,579,565 | **0.6864** | 7,756 B | PASS |
-| **matmult-int** | 5,498,654 | 6,049,329 | 4,379,813 | **0.7240** | 6,112 B | PASS |
-| **nettle-aes** | 4,631,941 | 5,091,585 | 4,505,222 | **0.8848** | 19,240 B | PASS |
-| **nettle-sha256** | 4,403,922 | 4,807,497 | 4,270,819 | **0.8884** | 12,800 B | PASS |
-| **nsichneu** | 5,577,723 | 5,976,453 | 2,501,420 | **0.4185** | 22,850 B | PASS |
-| **picojpeg** | 4,724,687 | 5,910,801 | 4,184,746 | **0.7080** | 23,120 B | PASS |
-| **qrduino** | 3,613,708 | 4,743,165 | 3,602,770 | **0.7596** | 26,168 B | PASS |
-| **sglib-combined** | 3,937,271 | 4,488,565 | 2,676,282 | **0.5962** | 22,336 B | PASS |
-| **slre** | 3,926,091 | 4,355,880 | 2,774,393 | **0.6369** | 8,208 B | PASS |
-| **statemate** | 3,022,772 | 3,419,492 | 1,815,908 | **0.5310** | 10,802 B | PASS |
-| **ud** | 1,377,647 | 1,776,177 | 1,080,073 | **0.6081** | 7,312 B | PASS |
-| **Suite Geomean** | **3,902,900.09** | **4,561,192.15** | **3,195,960.33** | **0.7007** | — | **14 / 14 (100% PASS)** |
+| Benchmark Workload | Execution Cycles | Simulation Cycles | Retired Insns | IPC | Relative Speed | Text Size | Status |
+|---|---|---|---|---|---|---|---|
+| **aha-mont64** | 5,071,977 | 5,468,065 | 4,778,064 | **0.8738** | 0.789x | 6,246 B | PASS |
+| **crc32** | 4,355,834 | 4,768,358 | 4,284,543 | **0.8985** | 0.921x | 4,688 B | PASS |
+| **edn** | 4,082,104 | 4,532,347 | 3,684,607 | **0.8130** | 0.982x | 8,400 B | PASS |
+| **huffbench** | 3,068,671 | 3,758,334 | 2,579,565 | **0.6864** | 1.343x | 7,756 B | PASS |
+| **matmult-int** | 5,498,654 | 6,049,329 | 4,379,813 | **0.7240** | 0.725x | 6,112 B | PASS |
+| **nettle-aes** | 4,631,941 | 5,091,585 | 4,505,222 | **0.8848** | 0.869x | 19,240 B | PASS |
+| **nettle-sha256** | 4,403,922 | 4,807,497 | 4,270,819 | **0.8884** | 0.908x | 12,800 B | PASS |
+| **nsichneu** | 5,577,723 | 5,976,453 | 2,501,420 | **0.4185** | 0.717x | 22,850 B | PASS |
+| **picojpeg** | 4,724,687 | 5,910,801 | 4,184,746 | **0.7080** | 0.853x | 23,120 B | PASS |
+| **qrduino** | 3,613,708 | 4,743,165 | 3,602,770 | **0.7596** | 1.177x | 26,168 B | PASS |
+| **sglib-combined** | 3,937,271 | 4,488,565 | 2,676,282 | **0.5962** | 1.011x | 22,336 B | PASS |
+| **slre** | 3,926,091 | 4,355,880 | 2,774,393 | **0.6369** | 1.021x | 8,208 B | PASS |
+| **statemate** | 3,022,772 | 3,419,492 | 1,815,908 | **0.5310** | 1.324x | 10,802 B | PASS |
+| **ud** | 1,377,647 | 1,776,177 | 1,080,073 | **0.6081** | 2.903x | 7,312 B | PASS |
+| **Suite Summary** | **3,902,900.09** | **4,561,192.15** | **3,195,960.33** | **0.7007** (IPC) | **1.0325** (Speed Score) | — | **14 / 14 (100% PASS)** |
+
+* **Official Embench Speed Score:** **1.0325** (Speed/MHz: **1.0325**)
+* **Geometric StdDev / Range:** **1.4089** / **0.7219**
+* **Diagnostic Geomean IPC:** **0.7007** (Local microarchitectural metric)
 
 ---
 
 ### Official RISC-V Architectural Certification (ACT4)
 
-Architectural conformance verified against official RISC-V ACT4 test suite (pinned commit `74efcaac`):
+Architectural conformance verified against official RISC-V ACT4 test suite (pinned commit `74efcaac`) with native UDB configuration (`verification/act4/rv32_ooo/rv32_ooo.yaml`):
 
 | Test Suite | Extension Focus | Tests Executed | Passed | Failed | Status |
 |---|---|---|---|---|---|
@@ -150,30 +155,32 @@ Architectural conformance verified against official RISC-V ACT4 test suite (pinn
 
 ## 3. Spike Differential Verification & Self-Tests
 
-Lockstep instruction-by-instruction verification against Spike (`riscv-isa-sim`):
+True architectural lockstep verification comparing PC, instruction word, GPR writebacks, FPR writebacks, and Store address/data against Spike (`riscv-isa-sim` with `--log-commits`):
 
 ```text
 ================================================================================
-      RV32 OoO Core — True Spike Lockstep Differential Verification       
+      RV32 OoO Core — True Architectural Spike Differential Verification       
 ================================================================================
-  [PASS] fibonacci            | Cycles: 8166   | Retired: 4384   | IPC: 0.5369 | Diff: MATCH
-  [PASS] fp_basic             | Cycles: 549    | Retired: 378    | IPC: 0.6885 | Diff: MATCH
-  [PASS] fp_fma               | Cycles: 485    | Retired: 342    | IPC: 0.7052 | Diff: MATCH
-  [PASS] fp_matmul            | Cycles: 757    | Retired: 498    | IPC: 0.6579 | Diff: MATCH
-  [PASS] hello                | Cycles: 270    | Retired: 178    | IPC: 0.6593 | Diff: MATCH
-  [PASS] matmul               | Cycles: 1630   | Retired: 1060   | IPC: 0.6503 | Diff: MATCH
-  [PASS] partial_overlap      | Cycles: 652    | Retired: 423    | IPC: 0.6488 | Diff: MATCH
-  [PASS] qsort                | Cycles: 3392   | Retired: 1968   | IPC: 0.5802 | Diff: MATCH
-  [PASS] rv32_csr             | Cycles: 540    | Retired: 354    | IPC: 0.6556 | Diff: MATCH
-  [PASS] rv32i_basic          | Cycles: 524    | Retired: 352    | IPC: 0.6718 | Diff: MATCH
-  [PASS] rv32m_muldiv         | Cycles: 546    | Retired: 372    | IPC: 0.6813 | Diff: MATCH
-  [PASS] store_forwarding     | Cycles: 848    | Retired: 560    | IPC: 0.6604 | Diff: MATCH
-  [PASS] unresolved_store     | Cycles: 975    | Retired: 650    | IPC: 0.6667 | Diff: MATCH
-  [PASS] wrong_path_store     | Cycles: 808    | Retired: 532    | IPC: 0.6584 | Diff: MATCH
+  [PASS] fibonacci              | Cycles: 8166   | Retired: 4384   | IPC: 0.5369 | Diff: MATCH
+  [PASS] fp_basic               | Cycles: 549    | Retired: 378    | IPC: 0.6885 | Diff: MATCH
+  [PASS] fp_fma                 | Cycles: 485    | Retired: 342    | IPC: 0.7052 | Diff: MATCH
+  [PASS] fp_matmul              | Cycles: 757    | Retired: 498    | IPC: 0.6579 | Diff: MATCH
+  [PASS] hello                  | Cycles: 270    | Retired: 178    | IPC: 0.6593 | Diff: MATCH
+  [PASS] matmul                 | Cycles: 1630   | Retired: 1060   | IPC: 0.6503 | Diff: MATCH
+  [PASS] partial_overlap        | Cycles: 652    | Retired: 423    | IPC: 0.6488 | Diff: MATCH
+  [PASS] qsort                  | Cycles: 3392   | Retired: 1968   | IPC: 0.5802 | Diff: MATCH
+  [PASS] rv32_csr               | Cycles: 540    | Retired: 354    | IPC: 0.6556 | Diff: MATCH
+  [PASS] rv32i_basic            | Cycles: 524    | Retired: 352    | IPC: 0.6718 | Diff: MATCH
+  [PASS] rv32m_muldiv           | Cycles: 546    | Retired: 372    | IPC: 0.6813 | Diff: MATCH
+  [PASS] store_forwarding       | Cycles: 848    | Retired: 560    | IPC: 0.6604 | Diff: MATCH
+  [PASS] unresolved_store       | Cycles: 975    | Retired: 650    | IPC: 0.6667 | Diff: MATCH
+  [PASS] wrong_path_store       | Cycles: 808    | Retired: 532    | IPC: 0.6584 | Diff: MATCH
 ================================================================================
- Verification Signoff: 14 / 14 passed (0 failed) — 100% Lockstep State Match
+ Verification Signoff: 14 / 14 passed (0 failed) — 100% Architectural State Match
 ================================================================================
 ```
+
+* **Negative Self-Tests:** 11/11 fault injection tests pass (length mismatch, PC mutation, instruction mutation, GPR dst mutation, GPR val mutation, FPR dst mutation, FPR val mutation, store addr mutation, store data mutation, empty trace). Run with `make diff-selftest`.
 
 ---
 

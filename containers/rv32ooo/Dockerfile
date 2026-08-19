@@ -24,10 +24,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /build/spike
+ARG CACHEBUST=commitlog_v1
 RUN git clone --depth 1 --branch ${SPIKE_TAG} \
         https://github.com/riscv-software-src/riscv-isa-sim.git . \
     && mkdir build && cd build \
-    && ../configure --prefix=/opt/spike \
+    && ../configure --prefix=/opt/spike --enable-commitlog \
     && make -j${NJOBS} \
     && make install
 
@@ -80,7 +81,11 @@ RUN pip3 install --no-cache-dir \
     pyelftools==0.31 \
     pyyaml==6.0.2 \
     tabulate==0.9.0 \
-    rich==13.9.4
+    rich==13.9.4 \
+    typer==0.23.1 \
+    pydantic==2.12.5 \
+    pyjson5==2 \
+    ruamel.yaml==0.18.16
 
 ENV PATH="/opt/spike/bin:/opt/riscv32-gcc/bin:${PATH}"
 ENV RISCV="/opt/riscv32-gcc"

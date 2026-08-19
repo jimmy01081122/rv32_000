@@ -253,6 +253,12 @@ synth: ## Run full Yosys synthesis flow (Milestone G15)
 
 .PHONY: signoff
 signoff: ## Execute complete multi-benchmark, certification, and synthesis signoff
+	@if [ -n "$$(git status --porcelain)" ]; then \
+		echo "ERROR: Working tree is dirty! 'make signoff' requires a clean git working tree."; \
+		git status --short; \
+		exit 1; \
+	fi
+	@echo "Starting master signoff from clean commit $$(git rev-parse HEAD)..."
 	$(DOCKER_RUN) $(SIM_IMAGE) -c "\
 	  bash scripts/run_signoff.sh \
 	  "

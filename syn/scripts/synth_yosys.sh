@@ -66,8 +66,11 @@ EOF
 
 yosys -s "${OUT_DIR}/synth.ys" | tee "${OUT_DIR}/synth.log"
 
+python3 scripts/parse_synth_log.py "${OUT_DIR}/synth.log" -o "${OUT_DIR}/synthesis_summary.json"
+
 echo "============================================================"
 echo "  [SUCCESS] Yosys Synthesis Signoff Completed!"
 echo "  Netlist : ${OUT_DIR}/rv32_ooo_core_netlist.v"
 echo "  Log     : ${OUT_DIR}/synth.log"
+echo "  Summary : ${OUT_DIR}/synthesis_summary.json"
 echo "============================================================"

@@ -1,14 +1,19 @@
 {
-  "suite": "Embench-IoT 1.0",
+  "suite": "Embench-IoT 1.0 RV32IM integer subset",
   "pinned_commit": "0466a18e4f6b47e19598d7c6ba72916d54b68f65",
+  "subset_description": "14 RV32IM bare-metal integer benchmarks (excluding double-precision float benchmarks)",
   "opt_flags": "-O3",
   "total_benchmarks": 14,
   "passed_benchmarks": 14,
   "failed_benchmarks": 0,
   "all_passed": true,
-  "geomean_bench_cycles": 3902900.09,
-  "geomean_ipc": 0.7007,
-  "wall_time_seconds": 491.58,
+  "embench_speed_score": 1.0325,
+  "embench_speed_per_mhz": 1.0325,
+  "embench_geosd": 1.4089,
+  "embench_georange": 0.7219,
+  "diagnostic_geomean_ipc": 0.7007,
+  "diagnostic_geomean_cycles": 3902900.09,
+  "wall_time_seconds": 512.47,
   "benchmarks": [
     {
       "benchmark": "aha-mont64",
@@ -19,6 +24,8 @@
       "total_cycles": 5468065,
       "retired": 4778064,
       "ipc": 0.8738,
+      "baseline_val": 4004,
+      "relative_speed": 0.7894,
       "error": ""
     },
     {
@@ -30,6 +37,8 @@
       "total_cycles": 4768358,
       "retired": 4284543,
       "ipc": 0.8985,
+      "baseline_val": 4010,
+      "relative_speed": 0.9206,
       "error": ""
     },
     {
@@ -41,6 +50,8 @@
       "total_cycles": 4532347,
       "retired": 3684607,
       "ipc": 0.813,
+      "baseline_val": 4010,
+      "relative_speed": 0.9823,
       "error": ""
     },
     {
@@ -52,6 +63,8 @@
       "total_cycles": 3758334,
       "retired": 2579565,
       "ipc": 0.6864,
+      "baseline_val": 4120,
+      "relative_speed": 1.3426,
       "error": ""
     },
     {
@@ -63,6 +76,8 @@
       "total_cycles": 6049329,
       "retired": 4379813,
       "ipc": 0.724,
+      "baseline_val": 3985,
+      "relative_speed": 0.7247,
       "error": ""
     },
     {
@@ -74,6 +89,8 @@
       "total_cycles": 5091585,
       "retired": 4505222,
       "ipc": 0.8848,
+      "baseline_val": 4026,
+      "relative_speed": 0.8692,
       "error": ""
     },
     {
@@ -85,6 +102,8 @@
       "total_cycles": 4807497,
       "retired": 4270819,
       "ipc": 0.8884,
+      "baseline_val": 3997,
+      "relative_speed": 0.9076,
       "error": ""
     },
     {
@@ -96,6 +115,8 @@
       "total_cycles": 5976453,
       "retired": 2501420,
       "ipc": 0.4185,
+      "baseline_val": 4001,
+      "relative_speed": 0.7173,
       "error": ""
     },
     {
@@ -107,6 +128,8 @@
       "total_cycles": 5910801,
       "retired": 4184746,
       "ipc": 0.708,
+      "baseline_val": 4030,
+      "relative_speed": 0.853,
       "error": ""
     },
     {
@@ -118,6 +141,8 @@
       "total_cycles": 4743165,
       "retired": 3602770,
       "ipc": 0.7596,
+      "baseline_val": 4253,
+      "relative_speed": 1.1769,
       "error": ""
     },
     {
@@ -129,6 +154,8 @@
       "total_cycles": 4488565,
       "retired": 2676282,
       "ipc": 0.5962,
+      "baseline_val": 3981,
+      "relative_speed": 1.0111,
       "error": ""
     },
     {
@@ -140,6 +167,8 @@
       "total_cycles": 4355880,
       "retired": 2774393,
       "ipc": 0.6369,
+      "baseline_val": 4010,
+      "relative_speed": 1.0214,
       "error": ""
     },
     {
@@ -151,6 +180,8 @@
       "total_cycles": 3419492,
       "retired": 1815908,
       "ipc": 0.531,
+      "baseline_val": 4001,
+      "relative_speed": 1.3236,
       "error": ""
     },
     {
@@ -162,6 +193,8 @@
       "total_cycles": 1776177,
       "retired": 1080073,
       "ipc": 0.6081,
+      "baseline_val": 3999,
+      "relative_speed": 2.9028,
       "error": ""
     }
   ]
