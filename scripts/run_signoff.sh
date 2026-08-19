@@ -78,7 +78,7 @@ cp verification/act4/report/act4_summary.json "${OUT_DIR}/act4/summary.json"
 # 5. CoreMark Multi-Run Characterization & Reproducibility
 echo "==> [5/8] Running CoreMark Multi-Run Characterization..."
 echo "  -> Running 5-run cycle-accurate determinism audit..."
-python3 scripts/verify_coremark_reproducibility.py --runs 5 --iterations 10 --opt -O3 --out-dir "${OUT_DIR}/coremark"
+python3 scripts/verify_coremark_reproducibility.py --runs 5 --iterations 10 --opt="-O3" --out-dir "${OUT_DIR}/coremark"
 
 echo "  -> Running official CoreMark run (26 iterations, >= 10.0s elapsed @ 1 MHz)..."
 bash scripts/compile_coremark.sh 26 PERFORMANCE_RUN -O3 1000000
