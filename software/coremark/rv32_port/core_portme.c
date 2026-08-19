@@ -59,8 +59,8 @@ CORE_TICKS get_time(void) {
 }
 
 secs_ret time_in_secs(CORE_TICKS ticks) {
-    (void)ticks;
-    return 10;
+    secs_ret retval = (secs_ret)(ticks / (CORE_TICKS)EE_TICKS_PER_SEC);
+    return retval;
 }
 
 void portable_init(core_portable *p, int *argc, char *argv[]) {
@@ -72,6 +72,7 @@ void portable_init(core_portable *p, int *argc, char *argv[]) {
     if (sizeof(ee_u32) != 4) {
         ee_printf("ERROR! Please define ee_u32 to a 32b unsigned integer!\n");
     }
+    ee_printf("Configured Target CPU Frequency: %lu MHz\n", (unsigned long)(CPU_FREQ_HZ / 1000000UL));
     p->portable_id = 1;
 }
 

@@ -110,9 +110,22 @@ int main(int argc, char** argv) {
     bool dmem_rsp_pending = false;
     uint32_t dmem_rsp_data = 0;
 
+    bool exit_pending = false;
+    int exit_drain_cycles = 0;
+
     std::cout << "[Simulator] Starting simulation run..." << std::endl;
 
-    while (!Verilated::gotFinish() && !memory.has_exited() && cycles < config.max_cycles) {
+    while (!Verilated::gotFinish() && cycles < config.max_cycles) {
+        if (memory.has_exited()) {
+            if (!exit_pending) {
+                exit_pending = true;
+                exit_drain_cycles = 50;
+            } else if (exit_drain_cycles <= 0) {
+                break;
+            }
+            exit_drain_cycles--;
+        }
+
         // --- Falling Edge (Clock Low) ---
         top->clk = 0;
 
@@ -172,6 +185,13 @@ int main(int argc, char** argv) {
             bool     int_dst_valid = (top->commit_trace[6] >> 21) & 1;
             uint32_t int_dst_arch  = (top->commit_trace[6] >> 16) & 0x1F;
             uint32_t int_dst_data  = ((top->commit_trace[6] & 0xFFFF) << 16) | ((top->commit_trace[5] >> 16) & 0xFFFF);
+            bool     fp_dst_valid  = (top->commit_trace[5] >> 15) & 1;
+            uint32_t fp_dst_arch   = (top->commit_trace[5] >> 10) & 0x1F;
+            uint32_t fp_dst_data   = ((top->commit_trace[5] & 0x3FF) << 22) | ((top->commit_trace[4] >> 10) & 0x3FFFFF);
+            bool     mem_valid     = (top->commit_trace[4] >> 9) & 1;
+            uint32_t mem_addr      = ((top->commit_trace[4] & 0x1FF) << 23) | ((top->commit_trace[3] >> 9) & 0x7FFFFF);
+            uint32_t mem_byte_mask = (top->commit_trace[3] >> 5) & 0xF;
+            uint32_t mem_wdata     = ((top->commit_trace[3] & 0x1F) << 27) | ((top->commit_trace[2] >> 5) & 0x7FFFFFF);
 
             if (config.enable_trace && trace_out.is_open()) {
                 trace_out << "core 0: 0x" << std::hex << std::setw(8) << std::setfill('0') << commit_pc
@@ -179,7 +199,17 @@ int main(int argc, char** argv) {
                 if (int_dst_valid) {
                     trace_out << " x" << std::dec << int_dst_arch << "=0x" << std::hex << int_dst_data;
                 }
+                if (fp_dst_valid) {
+                    trace_out << " f" << std::dec << fp_dst_arch << "=0x" << std::hex << fp_dst_data;
+                }
+                if (mem_valid) {
+                    trace_out << " [mem=0x" << std::hex << mem_addr << " mask=0x" << mem_byte_mask << " data=0x" << mem_wdata << "]";
+                }
                 trace_out << std::dec << std::endl;
+            }
+
+            if (exit_pending && commit_insn == 0x10500073 /* wfi */) {
+                break;
             }
         }
 

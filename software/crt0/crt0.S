@@ -56,16 +56,16 @@ bss_clear_done:
     /* Call main() */
     call main
 
-    /* Write exit code from main (in a0) to SIM_EXIT (0x10000004) */
+    /* Write exit code from main (in a0) to tohost (HTIF standard) */
+    slli t2, a0, 1
+    ori t2, t2, 1
+    la t1, tohost
+    sw t2, 0(t1)
+    sw zero, 4(t1)
+
+    /* Fallback MMIO exit */
     li t0, 0x10000004
     sw a0, 0(t0)
-
-    /* Write exit code to tohost for Spike HTIF */
-    slli a0, a0, 1
-    ori a0, a0, 1
-    la t1, tohost
-    sw a0, 0(t1)
-    sw zero, 4(t1)
 
     /* Infinite loop if simulation continues */
 halt_loop:

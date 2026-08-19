@@ -1,0 +1,19 @@
+/* rvtest_config.h — DUT Architectural Configuration for RV32 OoO Core */
+#ifndef RVTEST_CONFIG_H
+#define RVTEST_CONFIG_H
+
+#define UDB_MXLEN 32
+#define UDB_NUM_PMP_ENTRIES 0
+
+#define I_SUPPORTED 1
+#define M_SUPPORTED 1
+#define ZICSR_SUPPORTED 1
+#define ZIFENCEI_SUPPORTED 1
+
+#define M_MODE_SUPPORTED 1
+#define PRIV_M 1
+
+#define SAIL_CLINT_BASE_ADDRESS 0x02000000
+#define SAIL_SIMPLE_INTERRUPT_GENERATOR_BASE_ADDRESS 0x03000000
+
+#endif /* RVTEST_CONFIG_H */

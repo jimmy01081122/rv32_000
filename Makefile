@@ -168,6 +168,46 @@ diff-test: sim-build compile-tests ## Run architectural signoff / commit trace v
 	  python3 scripts/run_spike_diff.py \
 	  "
 
+.PHONY: diff-selftest
+diff-selftest: ## Run differential verification negative self-tests
+	$(DOCKER_RUN) $(SIM_IMAGE) -c "\
+	  python3 scripts/test_spike_diff_negative.py \
+	  "
+
+# ─────────────────────────────────────────────────────────────────────────────
+# RISC-V ARCHITECTURAL CERTIFICATION (ACT4)
+# ─────────────────────────────────────────────────────────────────────────────
+
+.PHONY: act4-build
+act4-build: sim-build ## Prepare ACT4 framework and configurations
+
+.PHONY: act4-run
+act4-run: sim-build ## Run full RISC-V ACT4 certification suite (RV32I, RV32M, Zicsr)
+	$(DOCKER_RUN) $(SIM_IMAGE) -c "\
+	  python3 scripts/run_act4.py \
+	  "
+
+.PHONY: act4-report
+act4-report: ## Display ACT4 certification summary report
+	cat verification/act4/report/act4_summary.json
+
+# ─────────────────────────────────────────────────────────────────────────────
+# EMBENCH-IOT 1.0 BENCHMARK SUITE
+# ─────────────────────────────────────────────────────────────────────────────
+
+EMBENCH_BENCH ?= all
+EMBENCH_OPT ?= -O3
+
+.PHONY: embench-run
+embench-run: sim-build ## Run Embench-IoT suite (set EMBENCH_BENCH=<name|all>, EMBENCH_OPT=<-O3|-O2>)
+	$(DOCKER_RUN) $(SIM_IMAGE) -c "\
+	  python3 scripts/run_embench.py --bench $(EMBENCH_BENCH) --opt=\"$(EMBENCH_OPT)\" \
+	  "
+
+.PHONY: embench-report
+embench-report: ## Display Embench-IoT results report
+	cat results/embench/results.json
+
 # ─────────────────────────────────────────────────────────────────────────────
 # COREMARK BENCHMARK
 # ─────────────────────────────────────────────────────────────────────────────
@@ -205,6 +245,16 @@ coremark: sim-build ## Run CoreMark benchmark and compute CoreMark/MHz (set ITER
 synth: ## Run full Yosys synthesis flow (Milestone G15)
 	$(DOCKER_RUN) $(SYN_IMAGE) -c "\
 	  bash syn/scripts/synth_yosys.sh \
+	  "
+
+# ─────────────────────────────────────────────────────────────────────────────
+# MASTER SIGNOFF
+# ─────────────────────────────────────────────────────────────────────────────
+
+.PHONY: signoff
+signoff: ## Execute complete multi-benchmark, certification, and synthesis signoff
+	$(DOCKER_RUN) $(SIM_IMAGE) -c "\
+	  bash scripts/run_signoff.sh \
 	  "
 
 # ─────────────────────────────────────────────────────────────────────────────

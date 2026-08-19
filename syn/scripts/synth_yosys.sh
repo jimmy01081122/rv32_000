@@ -51,10 +51,10 @@ proc
 check -assert
 
 # Perform generic logic synthesis
-synth -top rv32_ooo_core
+synth -top rv32_ooo_core -noabc
 
 # Clean up redundant logic
-opt -full
+opt -fast
 clean
 
 # Print cell count and area statistics

@@ -1,0 +1,20 @@
+# Architecture configuration YAML for RV32 OoO Core
+architecture:
+  isa: RV32IM_Zicsr_Zifencei
+  xlen: 32
+  extensions:
+    - I
+    - M
+    - Zicsr
+    - Zifencei
+  privilege_modes:
+    - M
+  misa:
+    value: 0x40001100
+    mask: 0xFFFFFFFF
+  mvendorid: 0x0
+  marchid: 0x0
+  mimpid: 0x00000001
+  mhartid: 0x0
+  pmp:
+    entries: 0

@@ -12,9 +12,10 @@
 #define HAS_PRINTF 0
 
 #define COMPILER_VERSION "RISC-V GCC 16.1.0"
-#ifndef COMPILER_FLAGS
-#define COMPILER_FLAGS "-march=rv32im_zicsr -mabi=ilp32 -O2"
+#ifndef FLAGS_STR
+#define FLAGS_STR "-march=rv32im_zicsr -mabi=ilp32 -O3"
 #endif
+#define COMPILER_FLAGS FLAGS_STR
 #define MEM_LOCATION "STATIC"
 
 typedef int16_t   ee_s16;
@@ -32,11 +33,15 @@ typedef size_t    ee_size_t;
 typedef ee_u32 CORETIMETYPE;
 typedef ee_u32 CORE_TICKS;
 
+#ifndef CPU_FREQ_HZ
+#define CPU_FREQ_HZ 1000000UL /* 1 MHz baseline for cycle/sec equivalence or 100 MHz target */
+#endif
+
 #define GETMYTIME(_t)              (*_t = (ee_u32)get_mcycle_lo())
 #define MYTIMEDIFF(fin, ini)       ((fin) - (ini))
 #define TIMER_RES_DIVIDER          1
 #define SAMPLE_TIME_IMPLEMENTATION 1
-#define EE_TICKS_PER_SEC           1000000
+#define EE_TICKS_PER_SEC           CPU_FREQ_HZ
 
 #define MEM_METHOD MEM_STATIC
 #define SEED_METHOD SEED_VOLATILE

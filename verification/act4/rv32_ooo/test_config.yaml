@@ -1,0 +1,8 @@
+name: rv32_ooo
+compiler_exe: riscv32-unknown-elf-gcc
+objdump_exe: riscv32-unknown-elf-objdump
+ref_model_exe: spike
+udb_config: rv32_ooo.yaml
+linker_script: link.ld
+dut_include_dir: .
+include_priv_tests: False

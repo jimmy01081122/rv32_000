@@ -29,6 +29,7 @@ public:
 
     bool has_exited() const { return exited_; }
     int exit_code() const { return exit_code_; }
+    uint32_t tohost_addr() const { return tohost_addr_; }
 
     void dump_ram(uint32_t start_addr, uint32_t bytes);
 
@@ -36,6 +37,8 @@ private:
     std::vector<uint8_t> ram_;
     bool exited_;
     int exit_code_;
+    uint32_t tohost_addr_;
+    uint32_t tohost_lo_;
 };
 
 #endif // SIM_MEM_H
