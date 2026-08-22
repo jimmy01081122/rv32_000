@@ -1,0 +1,162 @@
+{
+  "all_passed": true,
+  "total": 14,
+  "passed": 14,
+  "failed": 0,
+  "results": [
+    {
+      "name": "fibonacci",
+      "pass": true,
+      "cycles": 8166,
+      "retired": 4384,
+      "ipc": 0.5369,
+      "diff_pass": true,
+      "dut_events": 4384,
+      "spike_events": 4384,
+      "msg": "Exact architectural state match across all 4384 retired instructions!"
+    },
+    {
+      "name": "fp_basic",
+      "pass": true,
+      "cycles": 549,
+      "retired": 378,
+      "ipc": 0.6885,
+      "diff_pass": true,
+      "dut_events": 378,
+      "spike_events": 378,
+      "msg": "Exact architectural state match across all 378 retired instructions!"
+    },
+    {
+      "name": "fp_fma",
+      "pass": true,
+      "cycles": 485,
+      "retired": 342,
+      "ipc": 0.7052,
+      "diff_pass": true,
+      "dut_events": 342,
+      "spike_events": 342,
+      "msg": "Exact architectural state match across all 342 retired instructions!"
+    },
+    {
+      "name": "fp_matmul",
+      "pass": true,
+      "cycles": 757,
+      "retired": 498,
+      "ipc": 0.6579,
+      "diff_pass": true,
+      "dut_events": 498,
+      "spike_events": 498,
+      "msg": "Exact architectural state match across all 498 retired instructions!"
+    },
+    {
+      "name": "hello",
+      "pass": true,
+      "cycles": 270,
+      "retired": 178,
+      "ipc": 0.6593,
+      "diff_pass": true,
+      "dut_events": 178,
+      "spike_events": 178,
+      "msg": "Exact architectural state match across all 178 retired instructions!"
+    },
+    {
+      "name": "matmul",
+      "pass": true,
+      "cycles": 1630,
+      "retired": 1060,
+      "ipc": 0.6503,
+      "diff_pass": true,
+      "dut_events": 1060,
+      "spike_events": 1060,
+      "msg": "Exact architectural state match across all 1060 retired instructions!"
+    },
+    {
+      "name": "partial_overlap",
+      "pass": true,
+      "cycles": 652,
+      "retired": 423,
+      "ipc": 0.6488,
+      "diff_pass": true,
+      "dut_events": 423,
+      "spike_events": 423,
+      "msg": "Exact architectural state match across all 423 retired instructions!"
+    },
+    {
+      "name": "qsort",
+      "pass": true,
+      "cycles": 3392,
+      "retired": 1968,
+      "ipc": 0.5802,
+      "diff_pass": true,
+      "dut_events": 1968,
+      "spike_events": 1968,
+      "msg": "Exact architectural state match across all 1968 retired instructions!"
+    },
+    {
+      "name": "rv32_csr",
+      "pass": true,
+      "cycles": 540,
+      "retired": 354,
+      "ipc": 0.6556,
+      "diff_pass": true,
+      "dut_events": 354,
+      "spike_events": 354,
+      "msg": "Exact architectural state match across all 354 retired instructions!"
+    },
+    {
+      "name": "rv32i_basic",
+      "pass": true,
+      "cycles": 524,
+      "retired": 352,
+      "ipc": 0.6718,
+      "diff_pass": true,
+      "dut_events": 352,
+      "spike_events": 352,
+      "msg": "Exact architectural state match across all 352 retired instructions!"
+    },
+    {
+      "name": "rv32m_muldiv",
+      "pass": true,
+      "cycles": 546,
+      "retired": 372,
+      "ipc": 0.6813,
+      "diff_pass": true,
+      "dut_events": 372,
+      "spike_events": 372,
+      "msg": "Exact architectural state match across all 372 retired instructions!"
+    },
+    {
+      "name": "store_forwarding",
+      "pass": true,
+      "cycles": 848,
+      "retired": 560,
+      "ipc": 0.6604,
+      "diff_pass": true,
+      "dut_events": 560,
+      "spike_events": 560,
+      "msg": "Exact architectural state match across all 560 retired instructions!"
+    },
+    {
+      "name": "unresolved_store",
+      "pass": true,
+      "cycles": 975,
+      "retired": 650,
+      "ipc": 0.6667,
+      "diff_pass": true,
+      "dut_events": 650,
+      "spike_events": 650,
+      "msg": "Exact architectural state match across all 650 retired instructions!"
+    },
+    {
+      "name": "wrong_path_store",
+      "pass": true,
+      "cycles": 808,
+      "retired": 532,
+      "ipc": 0.6584,
+      "diff_pass": true,
+      "dut_events": 532,
+      "spike_events": 532,
+      "msg": "Exact architectural state match across all 532 retired instructions!"
+    }
+  ]
+}
