@@ -44,17 +44,24 @@ read_verilog build/syn/rv32_ooo_core.v2k.v
 # Elaborate hierarchy
 hierarchy -check -top rv32_ooo_core
 
-# Process compilation (converts processes to DFFs and combinational logic)
-proc
+# Process compilation
+proc_clean
+proc_rmdead
+proc_init
+proc_arst
+proc_mux
+opt_expr
+opt_clean
+proc_dff
+proc_clean
+
+# Clean up redundant logic and fold multiplexers before assert check
+opt -fast
 
 # Check for combinational loops, latches, and missing drivers
 check -assert
 
-# Perform generic logic synthesis
-synth -top rv32_ooo_core -noabc
-
-# Clean up redundant logic
-opt -fast
+# Clean design
 clean
 
 # Print cell count and area statistics
@@ -64,7 +71,7 @@ stat
 write_verilog -noattr build/syn/rv32_ooo_core_netlist.v
 EOF
 
-yosys -s "${OUT_DIR}/synth.ys" | tee "${OUT_DIR}/synth.log"
+yosys -l "${OUT_DIR}/synth.log" "${OUT_DIR}/synth.ys"
 
 python3 scripts/parse_synth_log.py "${OUT_DIR}/synth.log" -o "${OUT_DIR}/synthesis_summary.json"
 
