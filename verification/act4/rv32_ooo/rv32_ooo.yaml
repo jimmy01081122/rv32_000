@@ -46,10 +46,18 @@ params:
   M_MODE_ENDIANNESS: little
   MISA_CSR_IMPLEMENTED: true
   MTVEC_ACCESS: rw
-  MTVEC_MODES: [0, 1]
+  # RTL evidence (rv32_ooo_csr.sv line 178):
+  #   csr_mtvec <= {wdata_calc[31:2], 2'b00}; // Direct mode only
+  # Bits[1:0] are forced to 2'b00 on CSR write. Vectored mode (1) cannot be stored.
+  MTVEC_MODES: [0]
   MTVEC_BASE_ALIGNMENT_DIRECT: 4
   MTVEC_BASE_ALIGNMENT_VECTORED: 4
   MTVEC_ILLEGAL_WRITE_BEHAVIOR: retain
+  # NOTE on Interrupts (mip / mie CSRs):
+  #   CSR addresses 0x304 (mie) and 0x344 (mip) are not implemented in the CSR
+  #   subsystem (rv32_ooo_csr.sv lines 82-106). Accessing them generates an illegal
+  #   instruction exception. mstatus.MIE (bit 3) and MPIE (bit 7) are tracked for
+  #   trap/mret state, but the core processes synchronous pipeline exceptions only.
   NUM_PMP_ENTRIES: 0
   HPM_COUNTER_EN:
     [

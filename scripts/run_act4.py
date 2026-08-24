@@ -9,6 +9,7 @@ Collects machine-readable JSON metrics and verification report.
 import os
 import sys
 import glob
+import shutil
 import subprocess
 import json
 import argparse
@@ -19,8 +20,10 @@ from typing import List, Dict, Any, Tuple
 
 ACT4_ROOT = "verification/act4/riscv-arch-test"
 CORE_CONFIG_DIR = "verification/act4/riscv-arch-test/config/cores/rv32_ooo"
+SRC_CONFIG_DIR = "verification/act4/rv32_ooo"
 ELF_DIR = "verification/act4/riscv-arch-test/work/rv32_ooo/elfs/rv32i"
 REPORT_DIR = "verification/act4/report"
+GENERATION_LOG_PATH = "verification/act4/report/act4_generation.log"
 SIM_EXE = "build/sim/rv32_ooo_sim"
 
 def sha256_file(filepath: str) -> str:
@@ -30,22 +33,45 @@ def sha256_file(filepath: str) -> str:
             h.update(chunk)
     return h.hexdigest()
 
-def ensure_act4_elfs():
-    """Ensure ACT4 ELFs are built using the official framework and Sail reference."""
-    elfs = sorted(glob.glob(f"{ELF_DIR}/**/*.elf", recursive=True))
-    if len(elfs) >= 58:
-        return elfs
+def ensure_act4_elfs(out_dir: str = REPORT_DIR) -> List[str]:
+    """Always perform a fresh ACT4 ELF generation from scratch using Sail reference."""
+    # 1. Explicitly sync core config from verification/act4/rv32_ooo into pinned ACT tree
+    os.makedirs(CORE_CONFIG_DIR, exist_ok=True)
+    for cfg_file in ["rv32_ooo.yaml", "sail.json", "test_config.yaml", "link.ld", "rvmodel_macros.h", "rvtest_config.h"]:
+        src_path = os.path.join(SRC_CONFIG_DIR, cfg_file)
+        dst_path = os.path.join(CORE_CONFIG_DIR, cfg_file)
+        if os.path.exists(src_path):
+            shutil.copy2(src_path, dst_path)
 
-    print("==> Building ACT4 self-checking ELFs via official Sail flow...")
+    # 2. Delete work/rv32_ooo before generation — forbidden to skip generation if ELFs exist
+    work_dir = os.path.join(ACT4_ROOT, "work", "rv32_ooo")
+    if os.path.exists(work_dir):
+        print(f"==> Purging old ACT4 build work directory: {work_dir}")
+        shutil.rmtree(work_dir, ignore_errors=True)
+
+    print("==> Building fresh ACT4 self-checking ELFs via official Sail flow...")
     cmd = [
         "mise", "exec", "--",
-        "make", f"CONFIG_FILES=config/cores/rv32_ooo/test_config.yaml"
+        "make", "CONFIG_FILES=config/cores/rv32_ooo/test_config.yaml"
     ]
     env = os.environ.copy()
     env["PATH"] = f"/home/a/.local/opt/riscv32-gcc/bin:/home/a/.local/opt/spike/bin:/home/a/.local/bin:{env.get('PATH', '')}"
     env["MISE_YES"] = "1"
-    
+
     proc = subprocess.run(cmd, cwd=ACT4_ROOT, env=env, capture_output=True, text=True)
+
+    # 3. Save framework generation log
+    os.makedirs(REPORT_DIR, exist_ok=True)
+    os.makedirs(out_dir, exist_ok=True)
+    with open(GENERATION_LOG_PATH, "w", encoding="utf-8") as f:
+        f.write("=== ACT4 Framework Generation STDOUT ===\n")
+        f.write(proc.stdout)
+        f.write("\n=== ACT4 Framework Generation STDERR ===\n")
+        f.write(proc.stderr)
+
+    if out_dir != REPORT_DIR:
+        shutil.copy2(GENERATION_LOG_PATH, os.path.join(out_dir, "act4_generation.log"))
+
     if proc.returncode != 0:
         print(f"ACT4 framework build failed:\n{proc.stdout}\n{proc.stderr}")
         sys.exit(1)
@@ -110,7 +136,7 @@ def main():
     print("   RISC-V Architectural Certification Test (ACT4) Official Framework Runner ")
     print("=" * 80)
 
-    elfs = ensure_act4_elfs()
+    elfs = ensure_act4_elfs(args.out_dir)
     print(f"Discovered {len(elfs)} official framework-generated self-checking ELFs (Sail reference).")
 
     all_tests: List[Dict[str, Any]] = []
@@ -158,12 +184,20 @@ def main():
     elapsed = time.time() - start_time
     total_count = total_passed + total_failed
 
+    config_checksums = {}
+    for cfg in ["rv32_ooo.yaml", "sail.json", "test_config.yaml", "link.ld"]:
+        cfg_p = os.path.join(CORE_CONFIG_DIR, cfg)
+        if os.path.exists(cfg_p):
+            config_checksums[cfg] = sha256_file(cfg_p)
+
     summary_data = {
         "framework": "ACT4 / riscv-arch-test (Official Framework)",
         "reference_model": "sail_riscv_sim 0.13.1",
         "pinned_act_commit": "74efcaac81f48f437f58868771daf2ed2776d422",
         "udb_config": "verification/act4/riscv-arch-test/config/cores/rv32_ooo/rv32_ooo.yaml",
         "sail_config": "verification/act4/riscv-arch-test/config/cores/rv32_ooo/sail.json",
+        "generation_log": "act4_generation.log",
+        "config_checksums": config_checksums,
         "total_tests": total_count,
         "passed_tests": total_passed,
         "failed_tests": total_failed,
@@ -175,6 +209,10 @@ def main():
 
     report_json_path = os.path.join(args.out_dir, "act4_summary.json")
     with open(report_json_path, "w", encoding="utf-8") as f:
+        json.dump(summary_data, f, indent=2)
+
+    # Also save summary.json as alias
+    with open(os.path.join(args.out_dir, "summary.json"), "w", encoding="utf-8") as f:
         json.dump(summary_data, f, indent=2)
 
     hash_json_path = os.path.join(args.out_dir, "elf_hashes.json")

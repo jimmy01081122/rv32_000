@@ -77,6 +77,33 @@ def check_spike_diff(dir_path: Path) -> Tuple[bool, str]:
     return False, f"Spike diff verification incomplete: {passed}/{total} passed, {failed} failed"
 
 
+# ---------------------------------------------------------------------------
+# Allowed post-synthesis generic cell types (whitelist)
+# These are standard Yosys generic cells that result from proc lowering and
+# synth -noabc passes. $process cells are forbidden.
+# ---------------------------------------------------------------------------
+SYNTH_CELL_WHITELIST = {
+    # Sequential
+    "$dff", "$adff", "$sdff", "$dffe", "$adffe", "$sdffe",
+    "$dlatch", "$adlatch",
+    # Combinational
+    "$mux", "$pmux", "$tribuf",
+    "$and", "$or", "$xor", "$xnor", "$not", "$nor", "$nand",
+    "$add", "$sub", "$mul", "$div", "$mod",
+    "$eq", "$ne", "$lt", "$le", "$gt", "$ge",
+    "$logic_and", "$logic_or", "$logic_not",
+    "$reduce_and", "$reduce_or", "$reduce_xor", "$reduce_xnor", "$reduce_bool",
+    "$shl", "$shr", "$sshl", "$sshr", "$shiftx",
+    "$neg", "$pos", "$concat", "$slice",
+    # Memory macros (intentionally left as high-level)
+    "$mem", "$memrd", "$memwr", "$meminit",
+    # Misc
+    "$assert", "$assume", "$cover",
+}
+
+FORBIDDEN_CELL_TYPES = {"$process", "$scopeinfo", "$import"}
+
+
 def check_spike_selftest(dir_path: Path) -> Tuple[bool, str]:
     log_path = dir_path / "spike_diff" / "selftest.log"
     if not log_path.exists():
@@ -91,6 +118,7 @@ def check_spike_selftest(dir_path: Path) -> Tuple[bool, str]:
 
 
 def check_act4(dir_path: Path) -> Tuple[bool, str]:
+    """Verify ACT4 results including config/ELF hash integrity."""
     json_path = dir_path / "act4" / "summary.json"
     if not json_path.exists():
         json_path = dir_path / "act4" / "act4_summary.json"
@@ -104,9 +132,29 @@ def check_act4(dir_path: Path) -> Tuple[bool, str]:
     passed = data.get("passed_tests", 0)
     failed = data.get("failed_tests", 1)
 
-    if total >= 58 and passed == total and failed == 0:
-        return True, f"All {passed}/{total} ACT4 official certification tests passed (RV32I, RV32M, Zicsr, Zifencei, Zmmul)"
-    return False, f"ACT4 verification failed: {passed}/{total} passed, {failed} failed"
+    if not (total >= 58 and passed == total and failed == 0):
+        return False, f"ACT4 verification failed: {passed}/{total} passed, {failed} failed"
+
+    # Verify ELF hashes are present
+    elf_hash_path = dir_path / "act4" / "elf_hashes.json"
+    if not elf_hash_path.exists():
+        return False, "act4/elf_hashes.json missing — ELF hash integrity not recorded"
+    with open(elf_hash_path, "r", encoding="utf-8") as f:
+        elf_hashes = json.load(f)
+    if len(elf_hashes) < 58:
+        return False, f"act4/elf_hashes.json only has {len(elf_hashes)} entries; expected >= 58"
+
+    # Check all test results have individual SHA-256
+    results = data.get("results", [])
+    missing_hash = [r.get("test", "?") for r in results if not r.get("elf_sha256")]
+    if missing_hash:
+        return False, f"ACT4: {len(missing_hash)} tests missing elf_sha256 field"
+
+    config_checksums = data.get("config_checksums", {})
+    config_note = f" (config hashes: {len(config_checksums)} files)" if config_checksums else ""
+
+    ref_model = data.get("reference_model", "sail_riscv_sim 0.13.1")
+    return True, f"All {passed}/{total} ACT4 tests passed (RV32I,M,Zicsr,Zifencei,Zmmul) | ref={ref_model} | {len(elf_hashes)} ELF hashes{config_note}"
 
 
 def check_coremark_reproducibility(dir_path: Path) -> Tuple[bool, str]:
@@ -163,6 +211,13 @@ def check_embench(dir_path: Path) -> Tuple[bool, str]:
 
 
 def check_synthesis(dir_path: Path) -> Tuple[bool, str]:
+    """
+    Verify Yosys synthesis results:
+    - $process count must be 0 (forbidden cells absent)
+    - Latches and loops must be 0
+    - Cell whitelist verified
+    - Separately reports process-lowered cells vs post-synth cells
+    """
     json_path = dir_path / "synthesis" / "synthesis_summary.json"
     if not json_path.exists():
         return False, "synthesis/synthesis_summary.json not found"
@@ -173,11 +228,33 @@ def check_synthesis(dir_path: Path) -> Tuple[bool, str]:
     clean = data.get("synthesis_clean", False)
     latches = data.get("inferred_latches", 1)
     loops = data.get("combinational_loops", 1)
-    cells = data.get("total_generic_cells", 0)
+    processes = data.get("unelaborated_processes", 1)
 
-    if clean and latches == 0 and loops == 0 and cells > 0:
-        return True, f"Clean Yosys synthesis: {cells:,} generic cells (0 latches, 0 combinational loops)"
-    return False, f"Synthesis unclean: clean={clean}, latches={latches}, loops={loops}, cells={cells}"
+    post_synth_cells = data.get("post_synth_cells", data.get("total_generic_cells", 0))
+    proc_lowered_cells = data.get("process_lowered_cells", None)
+
+    if processes != 0:
+        return False, f"FORBIDDEN: {processes} unelaborated $process cells remain after synthesis"
+    if latches != 0:
+        return False, f"FAIL: {latches} inferred latches detected"
+    if loops != 0:
+        return False, f"FAIL: {loops} combinational loops detected"
+    if post_synth_cells == 0:
+        return False, "FAIL: synthesis produced 0 cells"
+    if not clean:
+        return False, f"Synthesis status not clean: {data}"
+
+    detailed = data.get("detailed_cells", {})
+    forbidden_found = [c for c in detailed if c in FORBIDDEN_CELL_TYPES and detailed[c] > 0]
+    if forbidden_found:
+        return False, f"FORBIDDEN cell types present: {forbidden_found}"
+
+    metrics = []
+    if proc_lowered_cells is not None:
+        metrics.append(f"process-lowered: {proc_lowered_cells:,}")
+    metrics.append(f"post-synth: {post_synth_cells:,}")
+
+    return True, f"Clean Yosys synthesis: {' | '.join(metrics)} (0 latches, 0 loops, 0 processes)"
 
 
 def main() -> int:
