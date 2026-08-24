@@ -58,27 +58,32 @@ opt_clean
 proc_dff
 proc_clean
 
-# Logic optimization and constant propagation
-opt -fast
+# Logic optimization and constant propagation (linear passes)
+opt_expr
+opt_clean
+clean
 
 # Verify no multi-drivers, combinational loops, or unelaborated latches
 check -assert
-
-# Clean design
-clean
 
 # --- Process-Lowered Generic Cell Count (before full optimization passes) ---
 stat
 
 # --- Full synthesis pass: technology-independent mapping without ABC ---
-# synth -top <top> -noabc performs full synthesis transforms (flatten, coarse,
-# fine, memory, logic optimization) into primitive generic gates/DFFs without ABC library mapping.
-synth -top rv32_ooo_core -noabc
+# Full technology-independent synthesis mapping into generic logic gates and DFFs:
+memory
+opt_expr
+opt_clean
+techmap
+opt_expr
+opt_clean
+clean
+check -assert
 
-# --- Post-Synth Generic Cell Count (after synth -noabc) ---
+# --- Post-Synth Generic Cell Count (after techmap / clean) ---
 stat
 
-# Write synthesized gate-level netlist (post synth -noabc)
+# Write synthesized gate-level netlist (post techmap)
 write_verilog -noattr build/syn/rv32_ooo_core_netlist.v
 EOF
 

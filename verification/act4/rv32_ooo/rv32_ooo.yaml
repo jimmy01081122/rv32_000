@@ -51,7 +51,6 @@ params:
   # Bits[1:0] are forced to 2'b00 on CSR write. Vectored mode (1) cannot be stored.
   MTVEC_MODES: [0]
   MTVEC_BASE_ALIGNMENT_DIRECT: 4
-  MTVEC_BASE_ALIGNMENT_VECTORED: 4
   MTVEC_ILLEGAL_WRITE_BEHAVIOR: retain
   # NOTE on Interrupts (mip / mie CSRs):
   #   CSR addresses 0x304 (mie) and 0x344 (mip) are not implemented in the CSR

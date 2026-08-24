@@ -80,14 +80,20 @@ def check_spike_diff(dir_path: Path) -> Tuple[bool, str]:
 # ---------------------------------------------------------------------------
 # Allowed post-synthesis generic cell types (whitelist)
 # These are standard Yosys generic cells that result from proc lowering and
-# synth -noabc passes. $process cells are forbidden.
+# techmap passes. $process cells are strictly forbidden.
 # ---------------------------------------------------------------------------
 SYNTH_CELL_WHITELIST = {
-    # Sequential
+    # Sequential ($dff, $_DFF_*)
     "$dff", "$adff", "$sdff", "$dffe", "$adffe", "$sdffe",
     "$dlatch", "$adlatch",
-    # Combinational
+    "$_DFF_P_", "$_DFF_N_", "$_DFF_NN0_", "$_DFF_NN1_", "$_DFF_NP0_", "$_DFF_NP1_",
+    "$_DFF_PN0_", "$_DFF_PN1_", "$_DFF_PP0_", "$_DFF_PP1_",
+    "$_DLATCH_N_", "$_DLATCH_P_", "$_DLATCH_NN0_", "$_DLATCH_NN1_", "$_DLATCH_NP0_", "$_DLATCH_NP1_",
+    "$_DLATCH_PN0_", "$_DLATCH_PN1_", "$_DLATCH_PP0_", "$_DLATCH_PP1_",
+    # Combinational ($mux, $_MUX_, $_AND_, $_OR_, $_XOR_, $_NOT_, etc.)
     "$mux", "$pmux", "$tribuf",
+    "$_MUX_", "$_AND_", "$_OR_", "$_XOR_", "$_NOT_", "$_NAND_", "$_NOR_", "$_XNOR_",
+    "$_ANDNOT_", "$_ORNOT_", "$_AOI3_", "$_OAI3_", "$_AOI4_", "$_OAI4_",
     "$and", "$or", "$xor", "$xnor", "$not", "$nor", "$nand",
     "$add", "$sub", "$mul", "$div", "$mod",
     "$eq", "$ne", "$lt", "$le", "$gt", "$ge",
@@ -95,9 +101,9 @@ SYNTH_CELL_WHITELIST = {
     "$reduce_and", "$reduce_or", "$reduce_xor", "$reduce_xnor", "$reduce_bool",
     "$shl", "$shr", "$sshl", "$sshr", "$shiftx",
     "$neg", "$pos", "$concat", "$slice",
-    # Memory macros (intentionally left as high-level)
+    # Memory macros (if retained)
     "$mem", "$memrd", "$memwr", "$meminit",
-    # Misc
+    # Verification assertions
     "$assert", "$assume", "$cover",
 }
 

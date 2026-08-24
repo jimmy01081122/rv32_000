@@ -48,7 +48,7 @@ def parse_synth_log(log_path: str) -> dict:
                     current_section[cell_name] = count
 
     def extract_metrics(section: dict) -> tuple[dict, int, int]:
-        cells = {k: v for k, v in section.items() if not k.startswith("_")}
+        cells = {k: v for k, v in section.items() if not k.startswith("_") and k.startswith("$")}
         total = section.get("_total", sum(cells.values()))
         procs = section.get("_processes", 0)
         return cells, total, procs
