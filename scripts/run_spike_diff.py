@@ -160,9 +160,11 @@ def run_spike(elf_path: str, isa: str = "rv32im_zicsr") -> Tuple[bool, List[Dict
         "-m0x80000000:0x100000,0x10000000:0x1000",
         elf_path
     ]
+    env = os.environ.copy()
+    env["PATH"] = f"/home/a/.local/opt/spike/bin:/home/a/.local/bin:{env.get('PATH', '')}"
 
     try:
-        proc = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=30)
+        proc = subprocess.run(cmd, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=30)
         output = proc.stdout
         with open(spike_log_path, "w", encoding="utf-8") as f:
             f.write(output)
