@@ -190,23 +190,36 @@ True architectural lockstep verification comparing PC, instruction word, GPR wri
 
 ## 4. Synthesis & ASIC Implementation Results
 
-The core is 100% synthesizable SystemVerilog, verified with Yosys 0.9 with zero inferred latches, zero combinational loops, and zero unelaborated processes.
+The core is 100% synthesizable SystemVerilog, verified with Yosys 0.9 with zero inferred latches, zero combinational loops, and zero unelaborated processes (`$process == 0`). Both process-lowered and technology-independent post-synthesis generic cell counts are reported distinctly:
 
 | Metric | Value | Status |
 |---|---|---|
 | **Target Top Module** | [`rv32_ooo_core`](file:///home/a/ooo/rtl/core/rv32_ooo_core.sv) | Synthesizable |
-| **Total Generic Cells (Process-Lowered)** | **31,257** | **CLEAN** |
-| **Sequential Elements (`$dff`)** | **747** | **MAPPED** |
-| **Combinational Logic Cells** | **30,510** | **OPTIMIZED** |
-| **Macro Cells (`$mul` / `$mem`)** | **0** (Fully Lowered) | **CLEAN** |
-| **Unelaborated Processes (`$process`)** | **0** (Forbid `$process`) | **CLEAN** |
-| **Inferred Latches (`$_DLATCH_`)** | **0** | **100% Latch-Free** |
+| **Process-Lowered Generic Cells** (`proc; opt -fast`) | **32,596** | **CLEAN** |
+| **Post-Synthesis Generic Cells** (`synth -noabc`) | **1,190,403** | **CLEAN** |
+| **Sequential Elements** (`$_DFF_P_`) | **18,435** | **MAPPED** |
+| **Combinational Logic Gates** (`$_MUX_`, `$_AND_`, `$_OR_`, `$_XOR_`, `$_NOT_`) | **1,171,968** | **OPTIMIZED** |
+| **Macro Cells** (`$mul` / `$mem` / `$div`) | **0** (Fully Lowered to Logic) | **CLEAN** |
+| **Unelaborated Processes** (`$process`) | **0** (Strictly Forbidden) | **CLEAN** |
+| **Inferred Latches** (`$_DLATCH_`) | **0** | **100% Latch-Free** |
 | **Combinational Loops** | **0** | **Clean DAG** |
 | **Verilator Lint Status** | `verilator --lint-only -Wall` | **0 Errors / 0 Warnings** |
 
 ---
 
-## 5. Quickstart & Reproducibility
+## 5. Continuous Integration & GitHub Actions
+
+Automated signoff verification runs on every push and pull request to `main` via [`.github/workflows/signoff.yml`](.github/workflows/signoff.yml) on clean Ubuntu 22.04 runners:
+
+* **Job 1 (lint):** Verilator `--lint-only -Wall` strict syntax and semantic linting.
+* **Job 2 (spike-diff):** Full architectural lockstep differential verification (14/14 tests) + negative fault injection tests (11/11).
+* **Job 3 (act4):** Fresh generation from Sail reference model (`sail_riscv_sim 0.13.1`) + 58/58 self-checking ELFs on DUT simulator.
+* **Job 4 (coremark-smoke):** 5-run cycle-exact determinism verification.
+* **Job 5 (synthesis):** sv2v + Yosys logic synthesis with 0 latches, 0 combinational loops, 0 `$process` cells assertion.
+
+---
+
+## 6. Quickstart & Reproducibility
 
 ### 1. Build Simulation Environment
 ```bash
@@ -234,10 +247,13 @@ make act4-run
 # Run Spike Differential Lockstep Verification & Negative Self-Tests
 make diff-test
 make diff-selftest
+
+# Run Yosys Logic Synthesis
+make synth
 ```
 
 ---
 
-## 6. License
+## 7. License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
