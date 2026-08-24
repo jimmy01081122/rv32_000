@@ -60,6 +60,7 @@ EOF
 
 # 2. Build Simulator Executable & Compile Tests
 echo "==> [2/8] Building Verilator simulation binary and compiling test suite..."
+rm -rf build/sim
 mkdir -p build/sim
 verilator --cc --exe --trace \
   -Wall -Wno-UNUSED -Wno-STMTDLY \
