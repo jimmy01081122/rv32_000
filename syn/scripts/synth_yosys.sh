@@ -44,7 +44,10 @@ read_verilog build/syn/rv32_ooo_core.v2k.v
 # Elaborate hierarchy
 hierarchy -check -top rv32_ooo_core
 
-# Process compilation
+# Pre-synthesis elaborated AST statistics
+stat
+
+# Process elaboration and lowering to registers/muxes
 proc_clean
 proc_rmdead
 proc_init
@@ -55,16 +58,16 @@ opt_clean
 proc_dff
 proc_clean
 
-# Clean up redundant logic and fold multiplexers before assert check
+# Logic optimization and constant propagation
 opt -fast
 
-# Check for combinational loops, latches, and missing drivers
+# Verify no multi-drivers, combinational loops, or unelaborated latches
 check -assert
 
 # Clean design
 clean
 
-# Print cell count and area statistics
+# Post-synthesis generic gate-level cell statistics
 stat
 
 # Write synthesized gate-level netlist

@@ -750,7 +750,7 @@ module rv32_ooo_frontend
 
         // ── FENCE / FENCE.I ───────────────────────────────────────────────
         7'b0001111: begin
-          dec.op                = UOP_FENCE;
+          dec.op                = (funct3 == 3'b001) ? UOP_FENCE_I : UOP_FENCE;
           dec.fu_class          = FU_INT_ALU;
           dec.serializing       = 1'b1;
           dec.requires_rob_head = 1'b1;

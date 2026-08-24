@@ -196,7 +196,7 @@ module rv32_ooo_core
       redirect_pc    = mtvec_out;
     end else if (mret_valid) begin
       redirect_valid = 1'b1;
-      redirect_pc    = mepc_out;
+      redirect_pc    = (retire_entry.op == UOP_FENCE_I) ? (retire_entry.pc + 32'd4) : mepc_out;
     end else if (rollback_valid) begin
       redirect_valid = 1'b1;
       redirect_pc    = retire_entry.branch_target;

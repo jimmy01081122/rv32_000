@@ -105,6 +105,7 @@ package rv32_ooo_types;
 
     // Ordering / system
     UOP_FENCE,
+    UOP_FENCE_I,
     UOP_ECALL,
     UOP_EBREAK,
     UOP_MRET,

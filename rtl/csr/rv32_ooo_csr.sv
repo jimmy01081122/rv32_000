@@ -177,7 +177,7 @@ module rv32_ooo_csr
           12'h300: csr_mstatus  <= (wdata_calc & 32'h0000_1888) | (csr_mstatus & ~32'h0000_1888);
           12'h305: csr_mtvec    <= {wdata_calc[31:2], 2'b00}; // Direct mode
           12'h340: csr_mscratch <= wdata_calc;
-          12'h341: csr_mepc     <= {wdata_calc[31:1], 1'b0};
+          12'h341: csr_mepc     <= {wdata_calc[31:2], 2'b00};
           12'h342: csr_mcause   <= wdata_calc;
           12'h343: csr_mtval    <= wdata_calc;
 

@@ -103,11 +103,12 @@ module rv32_ooo_rob
   assign retire_fflags_delta = head_entry.fp_flags;
 
   // Trap / MRET signals
-  wire is_trap = rob_head_completed && rob_head_exception && (current_state == CORE_RUN);
-  wire is_mret = can_retire && (head_entry.op == UOP_MRET);
+  wire is_trap    = rob_head_completed && rob_head_exception && (current_state == CORE_RUN);
+  wire is_mret    = can_retire && (head_entry.op == UOP_MRET);
+  wire is_fence_i = can_retire && (head_entry.op == UOP_FENCE_I);
 
   assign trap_valid = is_trap;
-  assign mret_valid = is_mret;
+  assign mret_valid = is_mret || is_fence_i;
   assign trap_pc    = head_entry.pc;
   assign trap_cause = {27'd0, head_entry.exception.cause};
   assign trap_tval  = head_entry.exception.tval;
@@ -187,7 +188,7 @@ module rv32_ooo_rob
     end
 
     always_ff @(posedge clk) begin
-      if (rst || is_trap || (can_retire && head_entry.branch_mispredict)) begin
+      if (rst || is_trap || is_mret || is_fence_i || (can_retire && head_entry.branch_mispredict)) begin
         entries[i] <= '0;
       end else begin
         entries[i] <= entry_next;
@@ -208,7 +209,7 @@ module rv32_ooo_rob
       current_state <= CORE_RUN;
       event_counter <= '0;
       commit_trace  <= '0;
-    end else if (is_trap || (can_retire && head_entry.branch_mispredict)) begin
+    end else if (is_trap || is_mret || is_fence_i || (can_retire && head_entry.branch_mispredict)) begin
       head          <= '0;
       tail          <= '0;
       rob_count     <= '0;
@@ -224,7 +225,7 @@ module rv32_ooo_rob
         commit_trace.trap_tval   <= head_entry.exception.tval;
         event_counter            <= event_counter + 64'd1;
       end else if (can_retire) begin
-        // Mispredicted branch commit trace
+        // Mispredicted branch, MRET, or FENCE.I commit trace
         commit_trace.retire_valid  <= 1'b1;
         commit_trace.event_order   <= event_counter;
         commit_trace.pc            <= head_entry.pc;
@@ -241,6 +242,8 @@ module rv32_ooo_rob
 
       if (is_trap) begin
         current_state <= TRAP_RECOVERY;
+      end else if (is_mret || is_fence_i) begin
+        current_state <= MRET_RECOVERY;
       end else begin
         current_state <= BRANCH_ROLLBACK;
       end

@@ -104,8 +104,8 @@ def check_act4(dir_path: Path) -> Tuple[bool, str]:
     passed = data.get("passed_tests", 0)
     failed = data.get("failed_tests", 1)
 
-    if total >= 53 and passed == total and failed == 0:
-        return True, f"All {passed}/{total} ACT4 official certification tests passed (RV32I, RV32M, Zicsr)"
+    if total >= 58 and passed == total and failed == 0:
+        return True, f"All {passed}/{total} ACT4 official certification tests passed (RV32I, RV32M, Zicsr, Zifencei, Zmmul)"
     return False, f"ACT4 verification failed: {passed}/{total} passed, {failed} failed"
 
 
@@ -198,11 +198,11 @@ def main() -> int:
     checks = [
         ("Spike Differential Verification (14/14 tests)", check_spike_diff),
         ("Differential Negative Self-Tests (11/11 tests)", check_spike_selftest),
-        ("ACT4 Architectural Certification (53/53 tests)", check_act4),
+        ("ACT4 Architectural Regression (58/58 tests, Sail Reference)", check_act4),
         ("CoreMark Reproducibility & Determinism (5 runs)", check_coremark_reproducibility),
         ("CoreMark Official-Style Run (>= 10.0 seconds)", check_coremark_official),
         ("Embench-IoT 1.0 RV32IM Subset (14 workloads)", check_embench),
-        ("Yosys Synthesis (0 latches, 0 loops)", check_synthesis),
+        ("Yosys Synthesis (0 latches, 0 loops, 0 processes)", check_synthesis),
         ("Artifact Cryptographic Integrity (SHA256SUMS)", verify_sha256sums)
     ]
 

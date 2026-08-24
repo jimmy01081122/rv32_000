@@ -194,7 +194,7 @@ module rv32_ooo_int_execute
 
   assign csr_req_valid = issue_valid && (issue_req.uop.fu_class == FU_CSR_SERIAL) && issue_req.uop.csr.valid;
   assign csr_ctrl      = issue_req.uop.csr;
-  assign csr_wdata     = op0;
+  assign csr_wdata     = issue_req.uop.csr.use_zimm ? imm : op0;
 
   // =========================================================================
   // 6. Completion Packet Formation

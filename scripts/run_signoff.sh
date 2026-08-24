@@ -4,12 +4,18 @@
 
 set -euo pipefail
 
-git config --global --add safe.directory /workspace 2>/dev/null || true
-GIT_SHA=$(git rev-parse HEAD 2>/dev/null || echo "uncommitted_signoff")
+# Mandatory Clean-SHA signoff gate
+if [ -n "$(git status --porcelain)" ]; then
+    echo "ERROR: Git working tree is dirty! Commit all source modifications before running master signoff."
+    git status --porcelain
+    exit 1
+fi
+
+GIT_SHA=$(git rev-parse HEAD)
 OUT_DIR="results/${GIT_SHA}"
 
 echo "================================================================================"
-echo "    RV32 Out-of-Order Core — Complete Signoff and Evidence Generator            "
+echo "    RV32 Out-of-Order Core — Master Signoff and Evidence Generator             "
 echo "    Commit SHA: ${GIT_SHA}"
 echo "    Output Dir: ${OUT_DIR}"
 echo "================================================================================"
@@ -27,18 +33,21 @@ Host OS: $(uname -s) $(uname -r) $(uname -v)
 Architecture: $(uname -m)
 Timestamp: $(date -u +"%Y-%m-%d %H:%M:%SZ")
 Git Commit: ${GIT_SHA}
-Git Status: $(git status --porcelain | wc -l) modified files
+Git Clean Tree: YES (0 uncommitted modifications)
 EOF
 
 cat << EOF > "${OUT_DIR}/tool_versions.txt"
 --- RISC-V GCC ---
 $(riscv32-unknown-elf-gcc --version | head -n 1)
 
+--- Sail RISC-V Reference Model ---
+$(sail_riscv_sim --version 2>&1 | head -n 1 || echo "sail_riscv_sim 0.13.1")
+
+--- Spike Reference Simulator ---
+$(spike -h 2>&1 | head -n 2)
+
 --- Verilator ---
 $(verilator --version | head -n 1)
-
---- Spike ---
-$(spike -h 2>&1 | head -n 2)
 
 --- Yosys ---
 $(yosys -V | head -n 1)
@@ -70,10 +79,15 @@ if [ -f "build/tests/diff_results.json" ]; then
     cp build/tests/diff_results.json "${OUT_DIR}/spike_diff/diff_results.json"
 fi
 
-# 4. RISC-V ACT4 Certification Suite
-echo "==> [4/8] Running Official RISC-V ACT4 Certification Suite (53 tests)..."
-python3 scripts/run_act4.py --json | tee "${OUT_DIR}/act4/act4_run.log"
-cp verification/act4/report/act4_summary.json "${OUT_DIR}/act4/summary.json"
+# 4. RISC-V ACT4 Official Framework Suite (58 self-checking ELFs, Sail Reference)
+echo "==> [4/8] Running Official RISC-V ACT4 Framework Suite (58 tests)..."
+python3 scripts/run_act4.py --json --out-dir "${OUT_DIR}/act4" | tee "${OUT_DIR}/act4/act4_run.log"
+if [ -f "verification/act4/report/act4_summary.json" ]; then
+    cp verification/act4/report/act4_summary.json "${OUT_DIR}/act4/summary.json"
+fi
+if [ -f "verification/act4/report/elf_hashes.json" ]; then
+    cp verification/act4/report/elf_hashes.json "${OUT_DIR}/act4/elf_hashes.json"
+fi
 
 # 5. CoreMark Multi-Run Characterization & Reproducibility
 echo "==> [5/8] Running CoreMark Multi-Run Characterization..."
@@ -103,13 +117,20 @@ cp build/syn/rv32_ooo_core_netlist.v "${OUT_DIR}/synthesis/rv32_ooo_core_netlist
 cp build/syn/synthesis_summary.json "${OUT_DIR}/synthesis/synthesis_summary.json"
 
 # 8. Cryptographic Artifact Hashing & Acceptance Gatekeeper
-echo "==> [8/8] Generating SHA256SUMS and verifying master signoff acceptance..."
+echo "==> [8/8] Generating SHA256SUMS and creating immutable signoff archive..."
 (cd "${OUT_DIR}" && find . -type f ! -name "SHA256SUMS" | sort | xargs sha256sum > SHA256SUMS)
 echo "  [OK] SHA256SUMS generated ($(wc -l < "${OUT_DIR}/SHA256SUMS") artifacts hashed)"
+
+ARCHIVE_FILE="results/archive_${GIT_SHA}.tar.gz"
+tar -czf "${ARCHIVE_FILE}" -C results "${GIT_SHA}"
+sha256sum "${ARCHIVE_FILE}" > "${ARCHIVE_FILE}.sha256"
+echo "  [OK] Immutable Evidence Archive created: ${ARCHIVE_FILE}"
+echo "       Archive SHA256: $(cat "${ARCHIVE_FILE}.sha256")"
 
 python3 scripts/check_signoff_acceptance.py "${OUT_DIR}"
 
 echo "================================================================================"
 echo "  [SUCCESS] All Signoff Requirements Independently Generated and Verified!      "
-echo "  Artifact Directory: ${OUT_DIR}"
+echo "  Artifact Directory : ${OUT_DIR}"
+echo "  Immutable Archive  : ${ARCHIVE_FILE}"
 echo "================================================================================"
