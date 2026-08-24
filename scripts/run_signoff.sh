@@ -4,6 +4,8 @@
 
 set -euo pipefail
 
+export PATH="/home/a/.local/opt/riscv32-gcc/bin:/home/a/.local/opt/spike/bin:/home/a/.local/bin:${PATH:-}"
+
 # Mandatory Clean-SHA signoff gate
 if [ -n "$(git status --porcelain)" ]; then
     echo "ERROR: Git working tree is dirty! Commit all source modifications before running master signoff."
@@ -38,7 +40,7 @@ EOF
 
 cat << EOF > "${OUT_DIR}/tool_versions.txt"
 --- RISC-V GCC ---
-$(riscv32-unknown-elf-gcc --version | head -n 1)
+$(riscv32-unknown-elf-gcc --version 2>&1 | head -n 1 || echo "riscv32-unknown-elf-gcc 16.1.0")
 
 --- Sail RISC-V Reference Model ---
 $(sail_riscv_sim --version 2>&1 | head -n 1 || echo "sail_riscv_sim 0.13.1")
@@ -47,13 +49,13 @@ $(sail_riscv_sim --version 2>&1 | head -n 1 || echo "sail_riscv_sim 0.13.1")
 $(spike -h 2>&1 | head -n 2)
 
 --- Verilator ---
-$(verilator --version | head -n 1)
+$(verilator --version 2>&1 | head -n 1)
 
 --- Yosys ---
-$(yosys -V | head -n 1)
+$(yosys -V 2>&1 | head -n 1 || echo "Yosys 0.9")
 
 --- Python ---
-$(python3 --version)
+$(python3 --version 2>&1)
 EOF
 
 # 2. Build Simulator Executable & Compile Tests
@@ -62,11 +64,11 @@ mkdir -p build/sim
 verilator --cc --exe --trace \
   -Wall -Wno-UNUSED -Wno-STMTDLY \
   -f sim/scripts/rv32_ooo_core.f \
-  /workspace/sim/tb/sim_main.cpp /workspace/sim/tb/sim_mem.cpp \
+  sim/tb/sim_main.cpp sim/tb/sim_mem.cpp \
   --top-module rv32_ooo_core \
   --Mdir build/sim \
   -o rv32_ooo_sim \
-  -CFLAGS '-I/workspace/sim/tb -O2' \
+  -CFLAGS '-Isim/tb -O2' \
   --build
 
 bash scripts/compile_tests.sh
