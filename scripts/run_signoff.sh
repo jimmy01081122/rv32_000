@@ -52,7 +52,7 @@ $(spike -h 2>&1 | head -n 2)
 $(verilator --version 2>&1 | head -n 1)
 
 --- Yosys ---
-$(yosys -V 2>&1 | head -n 1 || echo "Yosys 0.9")
+$(docker run --rm rv32ooo-syn:g1 yosys -V 2>&1 | head -n 1 || yosys -V 2>&1 | head -n 1 || echo "Yosys 0.9")
 
 --- Python ---
 $(python3 --version 2>&1)
@@ -114,7 +114,11 @@ python3 scripts/run_embench.py --bench all --opt="-O3" --out-dir "${OUT_DIR}/emb
 # 7. Clean Yosys Synthesis Execution
 echo "==> [7/8] Running Clean Yosys Logic Synthesis..."
 rm -rf build/syn
-bash syn/scripts/synth_yosys.sh
+if command -v sv2v >/dev/null 2>&1; then
+    bash syn/scripts/synth_yosys.sh
+else
+    make synth
+fi
 cp build/syn/synth.log "${OUT_DIR}/synthesis/synth.log"
 cp build/syn/rv32_ooo_core_netlist.v "${OUT_DIR}/synthesis/rv32_ooo_core_netlist.v"
 cp build/syn/synthesis_summary.json "${OUT_DIR}/synthesis/synthesis_summary.json"
