@@ -64,11 +64,11 @@ mkdir -p build/sim
 verilator --cc --exe --trace \
   -Wall -Wno-UNUSED -Wno-STMTDLY \
   -f sim/scripts/rv32_ooo_core.f \
-  sim/tb/sim_main.cpp sim/tb/sim_mem.cpp \
+  "$(pwd)/sim/tb/sim_main.cpp" "$(pwd)/sim/tb/sim_mem.cpp" \
   --top-module rv32_ooo_core \
   --Mdir build/sim \
   -o rv32_ooo_sim \
-  -CFLAGS '-Isim/tb -O2' \
+  -CFLAGS "-I$(pwd)/sim/tb -O2" \
   --build
 
 bash scripts/compile_tests.sh
