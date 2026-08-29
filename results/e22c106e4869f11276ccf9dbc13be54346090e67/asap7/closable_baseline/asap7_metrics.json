@@ -1,0 +1,52 @@
+{
+  "source_sha": "e22c106e4869f11276ccf9dbc13be54346090e67",
+  "phase": "AP0.1",
+  "classification": "Closable Physical Baseline",
+  "pdk": "ASAP7 predictive 7nm FinFET (RVT 7.5T)",
+  "flow": "OpenROAD Flow Scripts (ORFS)",
+  "provenance": {
+    "rtl_source_sha": "e22c106e4869f11276ccf9dbc13be54346090e67",
+    "physical_flow_sha": "8359fde81991e6118b15b8a93fcde606b577794d",
+    "orfs_sha": "8359fde81991e6118b15b8a93fcde606b577794d",
+    "openroad_version": "26Q1-2900-gdf79404cd8",
+    "asap7_platform_revision": "ORFS_SHA_8359fde81991e6118b15b8a93fcde606b577794d"
+  },
+  "clock": {
+    "target_period_ns": 13.0,
+    "target_freq_mhz": 76.92,
+    "fmax_mhz": 76.67,
+    "min_period_ns": 13.043,
+    "wns_ps": -42.91,
+    "tns_ps": -3148.97,
+    "hold_slack_ps": 9.72,
+    "setup_skew_ps": 96.58
+  },
+  "cells": {
+    "core_cells": 206019,
+    "sequential_cells": 17605,
+    "combinational_cells": 158223,
+    "timing_buffers": 14906,
+    "clock_buffers": 1130,
+    "unmapped_cells": 0
+  },
+  "area": {
+    "stdcell_area_um2": 24196.2,
+    "core_area_um2": 49089.69,
+    "die_area_um2": 50985.64,
+    "utilization_pct": 49.29
+  },
+  "power": {
+    "operating_frequency_mhz": 76.92,
+    "total_power_mw": 6.67,
+    "internal_power_mw": 4.3,
+    "switching_power_mw": 2.35,
+    "leakage_power_uw": 20.8
+  },
+  "verified_functional_metrics": {
+    "coremark_per_mhz": 2.5282,
+    "embench_speed_score": 1.0325,
+    "embench_geomean_ipc": 0.7007,
+    "spike_differential": "14/14 PASS",
+    "act4_regression": "58/58 PASS"
+  }
+}

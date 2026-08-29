@@ -55,9 +55,20 @@ module rv32_ooo_int_iq
   logic [INT_IQ_ENTRIES-1:0] ready_mask;
   always_comb begin
     for (int i = 0; i < INT_IQ_ENTRIES; i++) begin
+      logic older_store_in_iq;
+      older_store_in_iq = 1'b0;
+      if (entries[i].uop.mem.is_load) begin
+        for (int j = 0; j < i; j++) begin
+          if (entries[j].valid && entries[j].uop.mem.is_store) begin
+            older_store_in_iq = 1'b1;
+          end
+        end
+      end
+
       ready_mask[i] = entries[i].valid &&
                       entries[i].src0_ready &&
                       entries[i].src1_ready &&
+                      !older_store_in_iq &&
                       (core_state == CORE_RUN);
     end
   end

@@ -1,0 +1,9 @@
+segment_id,segment_name,ap0_1_delay_ns,ap0_1_levels,ap0_1_delay_pct,ap1a_delay_ns,ap1a_levels,ap1a_delay_pct,notes
+1,Issue Queue wakeup & age selection,1.15,48,10.0%,0.98,42,8.8%,Isolated before EX0 register
+2,Issue-to-PRF routing & PRF read,1.62,65,14.1%,1.45,58,13.0%,Read into operand capture stage
+3,Operand / Bypass Muxing,0.94,38,8.2%,0.82,32,7.3%,Muxed into int_ex0_req_q register
+4,Execution Cone (ALU / Branch / M-ext),3.86,152,33.6%,3.82,150,34.1%,Current dominant cone post-EX0
+5,Completion Arbitration & Routing,1.28,53,11.1%,1.25,51,11.2%,Execute to completion bus
+6,ROB State & PRF Write,1.94,78,16.9%,1.89,76,16.9%,Completion bus to ROB/PRF commit
+7,Clock skew & setup margin,0.69,27,6.0%,0.98,34,8.8%,Post-route clock skew + library setup
+Total,,11.48,461,100.0%,11.19,443,100.0%,AP1A successfully splits segments 1-3 from 4-6

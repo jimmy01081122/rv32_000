@@ -1,0 +1,38 @@
+# ============================================================================
+# RV32 OoO Core — ASAP7 Toolchain Lock
+# Pinned EDA Tools, PDK Revisions, and Standard Cell Library Files
+# ============================================================================
+
+[openroad_flow_scripts]
+orfs_git_sha = 8359fde81991e6118b15b8a93fcde606b577794d
+docker_image = openroad/flow-ubuntu22.04-builder:836842-26Q1-2900-gdf79404cd8
+docker_digest = sha256:fd940893eafe2410ed9513441f91e15be5fe9f73a29d68e5655ad62a39ac2e9a
+
+[openroad]
+version = OpenROAD 26Q1-2900-gdf79404cd8
+features = +GPU +GUI +Python
+
+[yosys]
+version = Yosys 0.63 (git sha1 70a11c6bf)
+compiler = g++ 11.4.0 -fPIC -O3
+
+[asap7_pdk]
+platform_name = asap7
+process_node = 7nm FinFET (Predictive)
+cell_library = asap7sc7p5t (7.5-track standard cells)
+tech_lef = asap7_tech_1x_201209.lef
+cell_lefs = asap7sc7p5t_28_R_1x_220121a.lef, asap7sc7p5t_28_L_1x_220121a.lef, asap7sc7p5t_28_SL_1x_220121a.lef, asap7sc7p5t_28_SRAM_1x_220121a.lef
+rc_rules = rcx_patterns.rules
+set_rc_tcl = setRC.tcl
+
+[timing_corners]
+nominal_tt = TT / 0.70V / 0C
+worst_ss = SS / 0.63V / 100C
+best_ff = FF / 0.77V / 25C
+
+[liberty_files_nldm]
+ao_libs = asap7sc7p5t_AO_{RVT,LVT,SLVT}_{TT,SS,FF}_nldm_211120.lib.gz
+invbuf_libs = asap7sc7p5t_INVBUF_{RVT,LVT,SLVT}_{TT,SS,FF}_nldm_220122.lib.gz
+oa_libs = asap7sc7p5t_OA_{RVT,LVT,SLVT}_{TT,SS,FF}_nldm_211120.lib.gz
+simple_libs = asap7sc7p5t_SIMPLE_{RVT,LVT,SLVT}_{TT,SS,FF}_nldm_211120.lib.gz
+seq_libs = asap7sc7p5t_SEQ_{RVT,LVT,SLVT}_{TT,SS,FF}_nldm_220123.lib

@@ -1,0 +1,47 @@
+================================================================================
+                    ASAP7 SDC & CONSTRAINT AUDIT REPORT
+================================================================================
+Design: rv32_ooo_core
+Flow: OpenROAD Flow Scripts / OpenSTA (26Q1-2900-gdf79404cd8)
+PDK: ASAP7 7.5T RVT (Predictive 7nm FinFET)
+
+--------------------------------------------------------------------------------
+1. EFFECTIVE CLOCKS
+--------------------------------------------------------------------------------
+Clock Name:       core_clk
+Source Port:      clk
+Period:           1000.000000 ps (1.0 ns, 1000.0 MHz)
+Waveform:         0.0 500.0 ps (50% duty cycle)
+
+--------------------------------------------------------------------------------
+2. CLOCK UNCERTAINTY & PROPERTIES
+--------------------------------------------------------------------------------
+Setup Uncertainty: 50.0 ps
+Hold Uncertainty:  25.0 ps
+Clock Transition:  20.0 ps
+
+--------------------------------------------------------------------------------
+3. I/O DELAYS & CONSTRAINTS
+--------------------------------------------------------------------------------
+Total Input Ports (non-clock):  71
+Total Output Ports:             449
+Input Delay (nominal):          200.0 ps (20% of 1.0 ns clock)
+Output Delay (nominal):         200.0 ps (20% of 1.0 ns clock)
+Input Transition:               20.0 ps
+Output Load:                    2.0 fF
+
+--------------------------------------------------------------------------------
+4. EXCEPTION CONSTRAINTS
+--------------------------------------------------------------------------------
+False Paths:     0 (none defined; all paths strictly synchronous)
+Multicycle Paths: 0 (none defined; all single-cycle 1-period setup / 0-period hold)
+
+--------------------------------------------------------------------------------
+5. ENDPOINT CONSTRAINMENT AUDIT
+--------------------------------------------------------------------------------
+Register Data Pin Endpoints:    17605
+Primary Output Endpoints:       449
+Total Constrained Endpoints:    18054
+Unconstrained Endpoints:        0
+Constrained Endpoints Rate:     100.0%
+================================================================================

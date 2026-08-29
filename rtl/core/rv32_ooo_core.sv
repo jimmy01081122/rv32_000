@@ -159,15 +159,58 @@ module rv32_ooo_core
   end
 
   // =========================================================================
-  // 3. PRF Operand Fetch & Execution Request Formation
+  // 3. AP1A: PRF Operand Fetch & EX0 Pipeline Stage
   // =========================================================================
 
-  // Integer Execution Request
+  // EX0 Register declarations
+  logic      int_ex0_valid_q;
+  exec_req_t int_ex0_req_q;
+  logic      int_execute_ready;
+
+  // Downstream execution readiness
+  wire int_ex0_is_lsu = int_ex0_valid_q && (int_ex0_req_q.uop.fu_class == FU_LSU_AGU);
+  wire ex0_out_ready  = int_ex0_is_lsu ? lsu_ready : (core_state == CORE_RUN);
+  wire ex0_out_valid  = int_ex0_valid_q;
+
+  // Elastic input handshake to Integer IQ
+  wire ex0_in_ready   = !int_ex0_valid_q || (ex0_out_valid && ex0_out_ready);
+  assign int_issue_ready = ex0_in_ready;
+
+  // PRF read data with bypass from same-cycle completion buses
+  wire [31:0] int_op0_bypassed = (int_issue_uop.src0.phys == 6'd0) ? 32'd0 :
+                                 (int_cmp.valid && int_cmp.result_valid && (int_cmp.result_domain == REG_INT) && (int_cmp.result_phys == int_issue_uop.src0.phys)) ? int_cmp.result_data :
+                                 (fp_cmp_raw.valid && fp_cmp_raw.result_valid && (fp_cmp_raw.result_domain == REG_INT) && (fp_cmp_raw.result_phys == int_issue_uop.src0.phys)) ? fp_cmp_raw.result_data :
+                                 (ld_cmp.valid && ld_cmp.result_valid && (ld_cmp.result_domain == REG_INT) && (ld_cmp.result_phys == int_issue_uop.src0.phys)) ? ld_cmp.result_data :
+                                 int_rd0;
+
+  wire [31:0] int_op1_bypassed = (int_issue_uop.src1.phys == 6'd0) ? 32'd0 :
+                                 (int_cmp.valid && int_cmp.result_valid && (int_cmp.result_domain == REG_INT) && (int_cmp.result_phys == int_issue_uop.src1.phys)) ? int_cmp.result_data :
+                                 (fp_cmp_raw.valid && fp_cmp_raw.result_valid && (fp_cmp_raw.result_domain == REG_INT) && (fp_cmp_raw.result_phys == int_issue_uop.src1.phys)) ? fp_cmp_raw.result_data :
+                                 (ld_cmp.valid && ld_cmp.result_valid && (ld_cmp.result_domain == REG_INT) && (ld_cmp.result_phys == int_issue_uop.src1.phys)) ? ld_cmp.result_data :
+                                 (int_issue_uop.mem.is_fp ? fp_rd_sq : int_rd1);
+
+  // Integer Execution Request formation at issue
   always_comb begin
     int_issue_req.uop      = int_issue_uop;
-    int_issue_req.operand0 = int_rd0;
-    int_issue_req.operand1 = int_issue_uop.mem.is_fp ? fp_rd_sq : int_rd1; // FSW reads FP PRF
+    int_issue_req.operand0 = int_op0_bypassed;
+    int_issue_req.operand1 = int_op1_bypassed;
     int_issue_req.operand2 = 32'd0;
+  end
+
+  // EX0 register sequential update
+  always_ff @(posedge clk) begin
+    if (rst || flush_valid) begin
+      int_ex0_valid_q <= 1'b0;
+      int_ex0_req_q   <= '0;
+    end else begin
+      if (int_issue_valid && ex0_in_ready) begin
+        int_ex0_valid_q <= 1'b1;
+        int_ex0_req_q   <= int_issue_req;
+      end else if (ex0_out_valid && ex0_out_ready) begin
+        int_ex0_valid_q <= 1'b0;
+        int_ex0_req_q   <= '0;
+      end
+    end
   end
 
   // FP Execution Request
@@ -367,9 +410,9 @@ module rv32_ooo_core
     .rst              (rst),
     .core_state       (core_state),
     .dmem_pending     (dmem_pending),
-    .issue_valid      (int_issue_valid),
-    .issue_req        (int_issue_req),
-    .issue_ready      (int_issue_ready),
+    .issue_valid      (int_ex0_valid_q),
+    .issue_req        (int_ex0_req_q),
+    .issue_ready      (int_execute_ready),
     .agu_valid        (agu_valid),
     .agu_req          (agu_req),
     .agu_addr         (agu_addr),
@@ -451,5 +494,18 @@ module rv32_ooo_core
     .cycle_inc           (1'b1),
     .instret_inc         (retire_valid)
   );
+
+  // =========================================================================
+  // AP1A Assertions: Flushed EX0 entry never produces completion
+  // =========================================================================
+`ifndef SYNTHESIS
+  always_ff @(posedge clk) begin
+    if (!rst && flush_valid) begin
+      // On any flush event, EX0 stage must be invalidated immediately
+      assert (!int_ex0_valid_q || (int_issue_valid && ex0_in_ready))
+        else $error("[AP1A Assertion Failed] Flushed EX0 entry was not invalidated.");
+    end
+  end
+`endif
 
 endmodule

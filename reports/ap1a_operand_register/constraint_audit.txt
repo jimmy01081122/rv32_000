@@ -1,0 +1,43 @@
+================================================================================
+                    ASAP7 SDC & CONSTRAINT AUDIT REPORT
+================================================================================
+
+Design: rv32_ooo_core
+Flow: OpenROAD Flow Scripts / OpenSTA
+PDK: ASAP7 7.5T RVT
+
+--------------------------------------------------------------------------------
+1. EFFECTIVE CLOCKS
+--------------------------------------------------------------------------------
+Clock Name:       core_clk
+Source Port:      clk
+Period:           12000.000000 ps (12.0 ns, 83.33333333333333 MHz)
+
+--------------------------------------------------------------------------------
+2. CLOCK UNCERTAINTY & PROPERTIES
+--------------------------------------------------------------------------------
+Setup Uncertainty: 50.0 ps
+Hold Uncertainty:  25.0 ps
+
+--------------------------------------------------------------------------------
+3. I/O CONSTRAINTS
+--------------------------------------------------------------------------------
+Total Input Ports (non-clock):  71
+Total Output Ports:             449
+Input Delay (nominal):          200.0 ps
+Output Delay (nominal):         200.0 ps
+
+--------------------------------------------------------------------------------
+4. EXCEPTION CONSTRAINTS
+--------------------------------------------------------------------------------
+False Paths:     None (all paths synchronous single-cycle)
+Multicycle Paths: None (all paths single-cycle setup/hold)
+
+--------------------------------------------------------------------------------
+5. ENDPOINT CONSTRAINMENT AUDIT
+--------------------------------------------------------------------------------
+Register Data Pin Endpoints:    17605
+Primary Output Endpoints:       449
+Total Constrained Endpoints:    18054
+Unconstrained Endpoints:        0
+

@@ -1,0 +1,29 @@
+{
+  "source_sha": "e22c106e4869f11276ccf9dbc13be54346090e67",
+  "coremark_mhz": 2.5282,
+  "embench_speed_score": 1.0325,
+  "embench_geomean_ipc": 0.7007,
+  "spike_diff_pass": "14/14",
+  "act_regression_pass": "58/58",
+  "target_clock_ns": 1.0,
+  "target_freq_mhz": 1000.0,
+  "platform": "asap7",
+  "platform_revision": "ORFS_SHA_8359fde81991e6118b15b8a93fcde606b577794d",
+  "flow": "OpenROAD-flow-scripts",
+  "top_module": "rv32_ooo_core",
+  "phase": "AP0",
+  "phase_objective": "ASAP7 physical baseline measurement. No RTL microarchitectural changes.",
+  "acceptance_criteria": {
+    "post_route_fmax_min_mhz": 1000.0,
+    "coremark_mhz_hard_minimum": 0.8,
+    "coremark_mhz_preferred": 1.5,
+    "coremark_mhz_stretch": 2.0,
+    "correctness": {
+      "spike_diff": "PASS",
+      "act_regression": "PASS"
+    }
+  },
+  "ap0_rule": "DO NOT optimize RTL during AP0. Measure only.",
+  "git_status_clean": true,
+  "recorded_at": "2026-08-26T00:00:00Z"
+}

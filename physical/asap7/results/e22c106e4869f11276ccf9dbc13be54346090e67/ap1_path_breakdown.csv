@@ -1,0 +1,8 @@
+segment,start_net_cell,end_net_cell,delay_ns,logic_levels,percentage_of_total
+IQ Select & Issue Arbitration,_386358_/QN (Issue Queue slot valid/age state),_210745_/Y (Issue grant & PRF read addr select),0.653,24,5.7
+PRF Address Decode & Asynchronous Read Mux,_210745_/Y (PRF read port address),_217545_/Y (64-entry 32-bit PRF array read output),1.219,48,10.6
+Load-Result & Completion Bypass Mux Network,_217545_/Y (Raw PRF register read data),_218635_/Y (ALU execution operand A/B bypass mux),1.567,62,13.6
+Integer ALU 32-bit Carry/Arithmetic Tree & Multiplier Mux,_218635_/Y (Resolved execute operands),_227733_/Y (ALU / MULDIV / Branch compute output),4.932,196,43.0
+Completion / Exception Result Muxing,_227733_/Y (Raw execution unit result),_230422_/Y (Unified integer completion payload),1.095,44,9.5
+ROB State Update & Completion Routing,_230422_/Y (Completion valid/tag broadcast),_232248_/Y (ROB entry state / exception update),1.112,46,9.7
+PRF Write Port Input Logic & Setup Margin,_232248_/Y (PRF destination data routing),_395836_/D (DFF data setup),0.905,41,7.9

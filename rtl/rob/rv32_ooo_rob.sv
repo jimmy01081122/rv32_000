@@ -68,10 +68,21 @@ module rv32_ooo_rob
   core_state_e current_state;
   assign core_state = current_state;
 
+  // In-flight serializing instruction check
+  logic in_flight_serializing;
+  always_comb begin
+    in_flight_serializing = 1'b0;
+    for (int i = 0; i < ROB_ENTRIES; i++) begin
+      if (entries[i].valid && entries[i].serializing && !entries[i].completed) begin
+        in_flight_serializing = 1'b1;
+      end
+    end
+  end
+
   wire rob_full  = (rob_count == ROB_ENTRIES[4:0]);
   wire rob_empty = (rob_count == 5'd0);
 
-  assign alloc_ready   = !rob_full && (current_state == CORE_RUN);
+  assign alloc_ready   = (alloc_uop.serializing ? rob_empty : (!rob_full && !in_flight_serializing)) && (current_state == CORE_RUN);
   assign alloc_rob_tag = '{seq: next_seq, idx: tail};
 
   // Monotonic commit trace event order

@@ -1,0 +1,63 @@
+{
+  "source_sha": "e22c106e4869f11276ccf9dbc13be54346090e67",
+  "phase": "AP0",
+  "pdk": "ASAP7 predictive 7nm FinFET (RVT 7.5T)",
+  "flow": "OpenROAD Flow Scripts (ORFS)",
+  "toolchain": {
+    "orfs_builder_tag": "836842-26Q1-2900-gdf79404cd8",
+    "openroad_version": "26Q1-2900-gdf79404cd8",
+    "yosys_version": "0.63 (git sha1 2478d38bf)"
+  },
+  "clock": {
+    "target_period_ns": 1.0,
+    "target_period_ps": 1000.0,
+    "target_freq_mhz": 1000.0,
+    "min_period_ps": 10898.2,
+    "fmax_mhz": 91.76,
+    "wns_ps": -9898.2,
+    "tns_ps": -56579772.0,
+    "hold_slack_ps": 3.31,
+    "setup_skew_ps": 96.88
+  },
+  "clock_tree": {
+    "sinks": 17605,
+    "leaf_clusters": 901,
+    "clock_buffers": 1124,
+    "tree_depth": "7-8",
+    "buffer_type": "BUFx24_ASAP7_75t_R"
+  },
+  "cells": {
+    "total_instances": 503122,
+    "core_cells": 245186,
+    "sequential_cells": 17605,
+    "combinational_cells": 161535,
+    "timing_buffers": 48426,
+    "inverters": 10775,
+    "clock_inverters": 220,
+    "tap_cells": 4928,
+    "tie_cells": 32,
+    "filler_cells": 257936,
+    "unmapped_cells": 0
+  },
+  "area": {
+    "stdcell_area_um2": 28507.0,
+    "core_area_um2": 49089.69,
+    "die_area_um2": 50985.64,
+    "die_width_um": 225.8,
+    "die_height_um": 225.8,
+    "utilization_pct": 58.08
+  },
+  "power": {
+    "total_power_mw": 90.2,
+    "internal_power_mw": 58.8,
+    "switching_power_mw": 31.4,
+    "leakage_power_uw": 26.1
+  },
+  "verified_functional_metrics": {
+    "coremark_per_mhz": 2.5282,
+    "embench_speed_score": 1.0325,
+    "embench_geomean_ipc": 0.7007,
+    "spike_differential": "14/14 PASS",
+    "act4_regression": "58/58 PASS"
+  }
+}
