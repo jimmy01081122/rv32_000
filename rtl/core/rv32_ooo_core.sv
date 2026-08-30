@@ -90,10 +90,24 @@ module rv32_ooo_core
   logic [FLEN-1:0] fp_rd0,  fp_rd1,  fp_rd2, fp_rd_sq;
 
   // Completion Busses (§24.1)
+  completion_t  int_cmp_comb;
+  logic [31:0]  int_cmp_pc_comb;
   completion_t  int_cmp;
   logic [31:0]  int_cmp_pc;
   completion_t  fp_cmp_raw;
   completion_t  ld_cmp;
+
+  // AP1B: Registered Integer Completion Pipeline Stage
+  always_ff @(posedge clk) begin
+    if (rst || flush_valid) begin
+      int_cmp.valid <= 1'b0;
+      int_cmp       <= '0;
+      int_cmp_pc    <= 32'd0;
+    end else begin
+      int_cmp    <= int_cmp_comb;
+      int_cmp_pc <= int_cmp_pc_comb;
+    end
+  end
 
   // ROB Retirement & Control Events
   logic         retire_valid;
@@ -417,8 +431,8 @@ module rv32_ooo_core
     .agu_req          (agu_req),
     .agu_addr         (agu_addr),
     .lsu_ready        (lsu_ready),
-    .int_cmp          (int_cmp),
-    .int_cmp_pc       (int_cmp_pc),
+    .int_cmp          (int_cmp_comb),
+    .int_cmp_pc       (int_cmp_pc_comb),
     .csr_req_valid    (csr_req_valid),
     .csr_ctrl         (csr_ctrl),
     .csr_wdata        (csr_wdata),
@@ -496,7 +510,7 @@ module rv32_ooo_core
   );
 
   // =========================================================================
-  // AP1A Assertions: Flushed EX0 entry never produces completion
+  // AP1A / AP1B Assertions
   // =========================================================================
 `ifndef SYNTHESIS
   always_ff @(posedge clk) begin
@@ -504,6 +518,11 @@ module rv32_ooo_core
       // On any flush event, EX0 stage must be invalidated immediately
       assert (!int_ex0_valid_q || (int_issue_valid && ex0_in_ready))
         else $error("[AP1A Assertion Failed] Flushed EX0 entry was not invalidated.");
+    end
+    if (!rst && $past(!rst && flush_valid)) begin
+      // On cycle following flush, completion register must be deasserted
+      assert (!int_cmp.valid)
+        else $error("[AP1B Assertion Failed] Flushed completion register produced valid output.");
     end
   end
 `endif
