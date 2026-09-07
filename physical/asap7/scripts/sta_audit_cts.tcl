@@ -3,10 +3,10 @@ read_liberty /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_IN
 read_liberty /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
 read_liberty /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
 read_liberty /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
-read_db /OpenROAD-flow-scripts/flow/results/asap7/rv32_ooo/base/6_final.odb
-read_sdc /OpenROAD-flow-scripts/flow/results/asap7/rv32_ooo/base/5_route.sdc
+read_db /OpenROAD-flow-scripts/flow/results/asap7/rv32_ooo/base/4_cts.odb
+read_sdc /OpenROAD-flow-scripts/flow/results/asap7/rv32_ooo/base/4_cts.sdc
 source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
-estimate_parasitics -global_routing
+estimate_parasitics -placement
 
 set rpt_dir "/OpenROAD-flow-scripts/flow/reports/asap7/rv32_ooo/base"
 
@@ -62,31 +62,24 @@ puts $audit_fp "False Paths:     None (all paths synchronous single-cycle)"
 puts $audit_fp "Multicycle Paths: None (all paths single-cycle setup/hold)"
 puts $audit_fp ""
 
-puts $audit_fp "--------------------------------------------------------------------------------"
-puts $audit_fp "5. ENDPOINT CONSTRAINMENT AUDIT"
-puts $audit_fp "--------------------------------------------------------------------------------"
-set reg_endpoints [all_registers -data_pins]
-set num_reg_endpoints [llength $reg_endpoints]
-set num_out_endpoints [llength $out_ports]
-set total_constrained [expr $num_reg_endpoints + $num_out_endpoints]
-
-puts $audit_fp "Register Data Pin Endpoints:    $num_reg_endpoints"
-puts $audit_fp "Primary Output Endpoints:       $num_out_endpoints"
-puts $audit_fp "Total Constrained Endpoints:    $total_constrained"
-puts $audit_fp "Unconstrained Endpoints:        0"
-puts $audit_fp ""
-
 close $audit_fp
 puts "SDC audit written to $rpt_dir/constraint_audit.txt"
 
 # =========================================================================
 # SECTION 2: SEPARATE STA PATH CLASSES
 # =========================================================================
-puts "Dumping timing_reg2reg.rpt..."
-report_checks -path_delay max -from [all_registers] -to [all_registers] -endpoint_path_count 50 -unique_paths_to_endpoint -format full_clock_expanded > "$rpt_dir/timing_reg2reg.rpt"
+puts "Dumping timing_summary.rpt..."
+set sum_fp [open "$rpt_dir/timing_summary.rpt" "w"]
+puts $sum_fp "Setup WNS:  [sta::worst_slack -max]"
+puts $sum_fp "Setup TNS:  [sta::total_negative_slack -max]"
+puts $sum_fp "Hold Slack: [sta::worst_slack -min]"
+close $sum_fp
+
+puts "Dumping timing_reg2reg.rpt (top 50 endpoints)..."
+report_checks -path_delay max -from [all_registers] -to [all_registers] -endpoint_count 50 -format full_clock_expanded > "$rpt_dir/timing_reg2reg.rpt"
 
 puts "Dumping timing_in2reg.rpt..."
-report_checks -path_delay max -from [all_inputs -no_clocks] -to [all_registers] -endpoint_path_count 50 -unique_paths_to_endpoint -format full_clock_expanded > "$rpt_dir/timing_in2reg.rpt"
+report_checks -path_delay max -from [all_inputs -no_clocks] -to [all_registers] -endpoint_count 20 -format full_clock_expanded > "$rpt_dir/timing_in2reg.rpt"
 
 puts "Dumping timing_reg2out.rpt..."
 report_checks -path_delay max -from [all_registers] -to [all_outputs] -endpoint_count 20 -format full_clock_expanded > "$rpt_dir/timing_reg2out.rpt"

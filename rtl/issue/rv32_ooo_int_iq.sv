@@ -28,7 +28,10 @@ module rv32_ooo_int_iq
 
   // Flush on rollback / recovery
   input  logic         flush_valid,
-  input  rob_tag_t     flush_rob_tag
+  input  rob_tag_t     flush_rob_tag,
+
+  // Functional unit status
+  input  logic         divider_busy
 );
 
   typedef struct packed {
@@ -56,6 +59,7 @@ module rv32_ooo_int_iq
   always_comb begin
     for (int i = 0; i < INT_IQ_ENTRIES; i++) begin
       logic older_store_in_iq;
+      logic fu_available;
       older_store_in_iq = 1'b0;
       if (entries[i].uop.mem.is_load) begin
         for (int j = 0; j < i; j++) begin
@@ -65,10 +69,13 @@ module rv32_ooo_int_iq
         end
       end
 
+      fu_available = (entries[i].uop.fu_class == FU_INT_DIV) ? !divider_busy : 1'b1;
+
       ready_mask[i] = entries[i].valid &&
                       entries[i].src0_ready &&
                       entries[i].src1_ready &&
                       !older_store_in_iq &&
+                      fu_available &&
                       (core_state == CORE_RUN);
     end
   end

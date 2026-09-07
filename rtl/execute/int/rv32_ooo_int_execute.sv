@@ -1,5 +1,5 @@
 // rv32_ooo_int_execute.sv — Integer Execution Cluster
-// Implements ALU, Branch / Jump unit, Multiplier / Divider (RV32M), AGU, and CSR execution
+// Implements ALU, Branch / Jump unit, Multiplier, Iterative Divider (RV32M), AGU, and CSR execution
 // architecture_spec.md §18, §19, §20, §21, §22 | uop_spec.md §3–§5, §18–§19
 
 module rv32_ooo_int_execute
@@ -8,6 +8,7 @@ module rv32_ooo_int_execute
 (
   input  logic        clk,
   input  logic        rst,          // synchronous active-high
+  input  logic        flush_valid,  // pipeline flush/recovery
 
   input  core_state_e    core_state,
   input  dmem_pending_t  dmem_pending,
@@ -33,13 +34,14 @@ module rv32_ooo_int_execute
   output logic [31:0] csr_wdata,
   input  logic [31:0] csr_rdata,
   input  logic        csr_rdata_valid,
-  input  exception_t  csr_exc
+  input  exception_t  csr_exc,
+
+  // Functional unit status to Issue Queue
+  output logic        divider_busy
 );
 
   wire is_lsu_op = (issue_req.uop.fu_class == FU_LSU_AGU);
-
-  // Issue ready logic: stalls AGU if LSU cannot accept request
-  assign issue_ready = is_lsu_op ? lsu_ready : (core_state == CORE_RUN);
+  wire is_div_op = (issue_req.uop.fu_class == FU_INT_DIV);
 
   wire [31:0] op0 = issue_req.operand0;
   wire [31:0] op1 = issue_req.operand1;
@@ -48,8 +50,6 @@ module rv32_ooo_int_execute
   wire [4:0]  shamt = (issue_req.uop.op == UOP_SLLI ||
                        issue_req.uop.op == UOP_SRLI ||
                        issue_req.uop.op == UOP_SRAI) ? imm[4:0] : op1[4:0];
-
-  assign int_cmp_pc = pc;
 
   // =========================================================================
   // 1. Integer ALU
@@ -132,56 +132,79 @@ module rv32_ooo_int_execute
   end
 
   // =========================================================================
-  // 3. Integer Multiplier & Divider (RV32M)
+  // 3. Integer Multiplier (RV32M)
   // =========================================================================
 
-  logic [31:0] muldiv_result;
+  logic [31:0] mul_result;
 
   // 64-bit products
   wire signed [63:0] mul_ss = $signed(op0) * $signed(op1);
   wire signed [63:0] mul_su = $signed(op0) * $signed({1'b0, op1});
   wire        [63:0] mul_uu = {32'd0, op0} * {32'd0, op1};
 
-  // Division with RISC-V corner-case semantics
-  wire div_by_zero = (op1 == 32'd0);
-  wire div_overflow = ($signed(op0) == -32'sd2147483648) && ($signed(op1) == -32'sd1);
-
   always_comb begin
-    muldiv_result = 32'd0;
+    mul_result = 32'd0;
     case (issue_req.uop.op)
-      UOP_MUL:    muldiv_result = mul_ss[31:0];
-      UOP_MULH:   muldiv_result = mul_ss[63:32];
-      UOP_MULHSU: muldiv_result = mul_su[63:32];
-      UOP_MULHU:  muldiv_result = mul_uu[63:32];
-
-      UOP_DIV: begin
-        if (div_by_zero)       muldiv_result = -32'd1;
-        else if (div_overflow) muldiv_result = op0;
-        else                   muldiv_result = $signed(op0) / $signed(op1);
-      end
-
-      UOP_DIVU: begin
-        if (div_by_zero) muldiv_result = 32'hFFFF_FFFF;
-        else             muldiv_result = op0 / op1;
-      end
-
-      UOP_REM: begin
-        if (div_by_zero)       muldiv_result = op0;
-        else if (div_overflow) muldiv_result = 32'd0;
-        else                   muldiv_result = $signed(op0) % $signed(op1);
-      end
-
-      UOP_REMU: begin
-        if (div_by_zero) muldiv_result = op0;
-        else             muldiv_result = op0 % op1;
-      end
-
-      default: muldiv_result = 32'd0;
+      UOP_MUL:    mul_result = mul_ss[31:0];
+      UOP_MULH:   mul_result = mul_ss[63:32];
+      UOP_MULHSU: mul_result = mul_su[63:32];
+      UOP_MULHU:  mul_result = mul_uu[63:32];
+      default:    mul_result = 32'd0;
     endcase
   end
 
   // =========================================================================
-  // 4. AGU Interface to LSU
+  // 4. Multi-Cycle Iterative Divider (RV32M DIV, DIVU, REM, REMU)
+  // =========================================================================
+
+  logic        div_req_valid;
+  logic        div_req_ready;
+  logic        div_rsp_valid;
+  logic [31:0] div_rsp_result;
+  rob_tag_t    div_rsp_rob_tag;
+  phys_reg_t   div_rsp_dest_phys;
+  reg_domain_e div_rsp_dest_domain;
+  logic [31:0] div_rsp_pc;
+  logic        div_rsp_ready;
+
+  assign div_req_valid = issue_valid && is_div_op;
+
+  rv32_ooo_divider u_divider (
+    .clk              (clk),
+    .rst              (rst),
+    .flush_valid      (flush_valid),
+    .req_valid        (div_req_valid),
+    .req_op           (issue_req.uop.op),
+    .req_op0          (op0),
+    .req_op1          (op1),
+    .req_rob_tag      (issue_req.uop.rob_tag),
+    .req_dest_phys    (issue_req.uop.dst.new_phys),
+    .req_dest_domain  (issue_req.uop.dst.domain),
+    .req_pc           (pc),
+    .req_ready        (div_req_ready),
+    .rsp_valid        (div_rsp_valid),
+    .rsp_result       (div_rsp_result),
+    .rsp_rob_tag      (div_rsp_rob_tag),
+    .rsp_dest_phys    (div_rsp_dest_phys),
+    .rsp_dest_domain  (div_rsp_dest_domain),
+    .rsp_pc           (div_rsp_pc),
+    .rsp_ready        (div_rsp_ready),
+    .busy             (divider_busy)
+  );
+
+  // Issue ready logic
+  always_comb begin
+    if (is_div_op) begin
+      issue_ready = div_req_ready;
+    end else if (is_lsu_op) begin
+      issue_ready = lsu_ready && !div_rsp_valid;
+    end else begin
+      issue_ready = (core_state == CORE_RUN) && !div_rsp_valid;
+    end
+  end
+
+  // =========================================================================
+  // 5. AGU Interface to LSU
   // =========================================================================
 
   assign agu_valid = issue_valid && is_lsu_op;
@@ -189,7 +212,7 @@ module rv32_ooo_int_execute
   assign agu_addr  = op0 + imm;
 
   // =========================================================================
-  // 5. CSR Access Interface
+  // 6. CSR Access Interface
   // =========================================================================
 
   assign csr_req_valid = issue_valid && (issue_req.uop.fu_class == FU_CSR_SERIAL) && issue_req.uop.csr.valid;
@@ -197,49 +220,79 @@ module rv32_ooo_int_execute
   assign csr_wdata     = issue_req.uop.csr.use_zimm ? imm : op0;
 
   // =========================================================================
-  // 6. Completion Packet Formation
+  // 7. Completion Packet Formation & Arbitration
   // =========================================================================
 
+  completion_t alu_cmp;
+  completion_t div_cmp;
+
+  // Single-cycle ALU / Branch / CSR / MUL / AGU store completion
   always_comb begin
-    int_cmp = '0;
+    alu_cmp = '0;
 
     if (issue_valid) begin
-      // Loads do not complete in AGU; completion packet is emitted by LSU upon memory response
-      if (issue_req.uop.fu_class == FU_LSU_AGU && issue_req.uop.mem.is_load) begin
-        int_cmp.valid = 1'b0;
+      // Loads and divide operations do not complete in single-cycle path
+      if ((issue_req.uop.fu_class == FU_LSU_AGU && issue_req.uop.mem.is_load) ||
+          (issue_req.uop.fu_class == FU_INT_DIV)) begin
+        alu_cmp.valid = 1'b0;
       end else begin
-        int_cmp.valid     = 1'b1;
-        int_cmp.rob_tag   = issue_req.uop.rob_tag;
-        int_cmp.exception = issue_req.uop.exception;
+        alu_cmp.valid     = 1'b1;
+        alu_cmp.rob_tag   = issue_req.uop.rob_tag;
+        alu_cmp.exception = issue_req.uop.exception;
 
         // Branch resolution
         if (issue_req.uop.fu_class == FU_BRANCH) begin
-          int_cmp.branch_valid      = 1'b1;
-          int_cmp.branch_taken      = branch_taken;
-          int_cmp.branch_target     = branch_taken ? branch_target : (pc + 32'd4);
-          int_cmp.branch_mispredict = branch_mispredict;
+          alu_cmp.branch_valid      = 1'b1;
+          alu_cmp.branch_taken      = branch_taken;
+          alu_cmp.branch_target     = branch_taken ? branch_target : (pc + 32'd4);
+          alu_cmp.branch_mispredict = branch_mispredict;
         end
 
         // Result data routing
         if (issue_req.uop.dst.valid && (issue_req.uop.dst.domain == REG_INT)) begin
-          int_cmp.result_valid  = 1'b1;
-          int_cmp.result_domain = REG_INT;
-          int_cmp.result_phys   = issue_req.uop.dst.new_phys;
+          alu_cmp.result_valid  = 1'b1;
+          alu_cmp.result_domain = REG_INT;
+          alu_cmp.result_phys   = issue_req.uop.dst.new_phys;
 
           if (issue_req.uop.fu_class == FU_INT_ALU) begin
-            int_cmp.result_data = alu_result;
+            alu_cmp.result_data = alu_result;
           end else if (issue_req.uop.fu_class == FU_BRANCH) begin
-            int_cmp.result_data = link_data; // JAL / JALR link register
-          end else if (issue_req.uop.fu_class == FU_INT_MUL || issue_req.uop.fu_class == FU_INT_DIV) begin
-            int_cmp.result_data = muldiv_result;
+            alu_cmp.result_data = link_data; // JAL / JALR link register
+          end else if (issue_req.uop.fu_class == FU_INT_MUL) begin
+            alu_cmp.result_data = mul_result;
           end else if (issue_req.uop.fu_class == FU_CSR_SERIAL) begin
-            int_cmp.result_data = csr_rdata;
+            alu_cmp.result_data = csr_rdata;
             if (csr_exc.valid) begin
-              int_cmp.exception = csr_exc;
+              alu_cmp.exception = csr_exc;
             end
           end
         end
       end
+    end
+  end
+
+  // Multi-cycle Divider completion
+  always_comb begin
+    div_cmp = '0;
+    div_cmp.valid         = div_rsp_valid;
+    div_cmp.rob_tag       = div_rsp_rob_tag;
+    div_cmp.exception     = '0;
+    div_cmp.result_valid  = (div_rsp_dest_domain == REG_INT);
+    div_cmp.result_domain = div_rsp_dest_domain;
+    div_cmp.result_phys   = div_rsp_dest_phys;
+    div_cmp.result_data   = div_rsp_result;
+  end
+
+  // Output arbitration: Divider completion has priority
+  always_comb begin
+    if (div_rsp_valid) begin
+      int_cmp       = div_cmp;
+      int_cmp_pc    = div_rsp_pc;
+      div_rsp_ready = 1'b1;
+    end else begin
+      int_cmp       = alu_cmp;
+      int_cmp_pc    = pc;
+      div_rsp_ready = 1'b0;
     end
   end
 

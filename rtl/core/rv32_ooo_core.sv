@@ -166,10 +166,10 @@ module rv32_ooo_core
   logic      int_ex0_valid_q;
   exec_req_t int_ex0_req_q;
   logic      int_execute_ready;
+  logic      divider_busy;
 
   // Downstream execution readiness
-  wire int_ex0_is_lsu = int_ex0_valid_q && (int_ex0_req_q.uop.fu_class == FU_LSU_AGU);
-  wire ex0_out_ready  = int_ex0_is_lsu ? lsu_ready : (core_state == CORE_RUN);
+  wire ex0_out_ready  = int_execute_ready;
   wire ex0_out_valid  = int_ex0_valid_q;
 
   // Elastic input handshake to Integer IQ
@@ -340,7 +340,8 @@ module rv32_ooo_core
     .issue_uop      (int_issue_uop),
     .issue_ready    (int_issue_ready),
     .flush_valid    (flush_valid),
-    .flush_rob_tag  (flush_rob_tag)
+    .flush_rob_tag  (flush_rob_tag),
+    .divider_busy   (divider_busy)
   );
 
   rv32_ooo_int_prf u_int_prf (
@@ -408,6 +409,7 @@ module rv32_ooo_core
   rv32_ooo_int_execute u_int_execute (
     .clk              (clk),
     .rst              (rst),
+    .flush_valid      (flush_valid),
     .core_state       (core_state),
     .dmem_pending     (dmem_pending),
     .issue_valid      (int_ex0_valid_q),
@@ -424,7 +426,8 @@ module rv32_ooo_core
     .csr_wdata        (csr_wdata),
     .csr_rdata        (csr_rdata),
     .csr_rdata_valid  (csr_rdata_valid),
-    .csr_exc          (csr_exc)
+    .csr_exc          (csr_exc),
+    .divider_busy     (divider_busy)
   );
 
   rv32_ooo_fp_execute u_fp_execute (

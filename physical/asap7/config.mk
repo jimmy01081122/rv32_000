@@ -47,16 +47,11 @@ export ROUTING_LAYER_ADJUSTMENT = 0.25
 export LIB_MODEL              = NLDM
 
 # Random seed for reproducibility
-export GPL_RANDOM_SEED        = 42
-
-# Disable Kepler LEC check (avoid illegal instruction on host CPU)
-export LEC_CHECK              = 0
-
-# Skip CTS timing repair for fast baseline exploration
+# Fast exploration settings
+export SKIP_REPORT_METRICS    = 1
+export REMOVE_ABC_BUFFERS     = 1
+export GPL_TIMING_DRIVEN      = 0
+export GPL_ROUTING_DRIVEN     = 0
 export SKIP_CTS_REPAIR_TIMING = 1
-
-# Skip GRT incremental repair for fast baseline exploration
 export SKIP_INCREMENTAL_REPAIR = 1
-
-# Skip detailed route to avoid 8GB peak memory OOM on 240k cell CPU
 export SKIP_DETAILED_ROUTE    = 1

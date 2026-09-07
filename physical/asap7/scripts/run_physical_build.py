@@ -5,10 +5,10 @@ import sys
 import json
 import shutil
 
-def run_physical_implementation(period_ns, build_tag="closable"):
+def run_physical_implementation(period_ns, build_tag="closable", clean=True):
     period_ps = period_ns * 1000.0
     print(f"\n==================================================================")
-    print(f"  STARTING FRESH PHYSICAL IMPLEMENTATION FOR T = {period_ns:.2f} ns ({1000.0/period_ns:.2f} MHz)")
+    print(f"  STARTING PHYSICAL IMPLEMENTATION FOR T = {period_ns:.2f} ns ({1000.0/period_ns:.2f} MHz)")
     print(f"==================================================================")
     
     # 1. Generate constraint.sdc
@@ -46,21 +46,30 @@ group_path -name in2out  -from $non_clock_inputs -to $all_outputs_list
     with open("/home/a/ooo/physical/asap7/constraint.sdc", "w") as f:
         f.write(sdc_content)
         
-    # Create clean build dir
+    # Create clean build dir if clean=True
     build_dir = f"/home/a/ooo/build/asap7_{build_tag}_{period_ns}ns"
-    shutil.rmtree(build_dir, ignore_errors=True)
+    if clean:
+        shutil.rmtree(build_dir, ignore_errors=True)
     os.makedirs(f"{build_dir}/results", exist_ok=True)
     os.makedirs(f"{build_dir}/logs", exist_ok=True)
     os.makedirs(f"{build_dir}/reports", exist_ok=True)
     os.makedirs(f"{build_dir}/objects", exist_ok=True)
+    if not clean:
+        for f in ["1_synth.odb", "1_synth.sdc", "1_2_yosys.v", "1_2_yosys.sdc"]:
+            p = os.path.join(build_dir, "results", f)
+            if os.path.exists(p):
+                os.utime(p, None)
     
     orfs_tag = "836842-26Q1-2900-gdf79404cd8"
+    docker_bin = shutil.which("docker") or "/mnt/wsl/docker-desktop/cli-tools/usr/bin/docker"
     
     # 2. Run ORFS flow inside container
     cmd = [
-        "docker", "run", "--rm",
+        docker_bin, "run", "--rm",
+        "-v", "/home/a/ooo:/home/a/ooo",
         "-v", "/home/a/OpenROAD-flow-scripts/flow/designs/asap7/rv32_ooo:/OpenROAD-flow-scripts/flow/designs/asap7/rv32_ooo",
         "-v", "/home/a/OpenROAD-flow-scripts/flow/designs/src/rv32_ooo:/OpenROAD-flow-scripts/flow/designs/src/rv32_ooo",
+        "-v", "/home/a/OpenROAD-flow-scripts/flow/scripts:/OpenROAD-flow-scripts/flow/scripts",
         "-v", f"{build_dir}/results:/OpenROAD-flow-scripts/flow/results/asap7/rv32_ooo/base",
         "-v", f"{build_dir}/logs:/OpenROAD-flow-scripts/flow/logs/asap7/rv32_ooo/base",
         "-v", f"{build_dir}/reports:/OpenROAD-flow-scripts/flow/reports/asap7/rv32_ooo/base",
@@ -132,4 +141,5 @@ group_path -name in2out  -from $non_clock_inputs -to $all_outputs_list
 
 if __name__ == "__main__":
     t = float(sys.argv[1]) if len(sys.argv) > 1 else 12.0
-    run_physical_implementation(t)
+    clean = not (len(sys.argv) > 2 and sys.argv[2] == "resume")
+    run_physical_implementation(t, clean=clean)
