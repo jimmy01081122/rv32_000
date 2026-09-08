@@ -42,6 +42,7 @@ module rv32_ooo_int_execute
 
   wire is_lsu_op = (issue_req.uop.fu_class == FU_LSU_AGU);
   wire is_div_op = (issue_req.uop.fu_class == FU_INT_DIV);
+  wire is_mul_op = (issue_req.uop.fu_class == FU_INT_MUL);
 
   wire [31:0] op0 = issue_req.operand0;
   wire [31:0] op1 = issue_req.operand1;
@@ -132,26 +133,47 @@ module rv32_ooo_int_execute
   end
 
   // =========================================================================
-  // 3. Integer Multiplier (RV32M)
+  // =========================================================================
+  // 3. Pipelined Integer Multiplier (RV32M MUL, MULH, MULHSU, MULHU)
   // =========================================================================
 
-  logic [31:0] mul_result;
+  logic        mul_req_valid;
+  logic        mul_req_ready;
+  logic        mul_rsp_valid;
+  logic [31:0] mul_rsp_result;
+  rob_tag_t    mul_rsp_rob_tag;
+  phys_reg_t   mul_rsp_dest_phys;
+  reg_domain_e mul_rsp_dest_domain;
+  logic [31:0] mul_rsp_pc;
+  logic        mul_rsp_ready;
+  logic        multiplier_busy;
 
-  // 64-bit products
-  wire signed [63:0] mul_ss = $signed(op0) * $signed(op1);
-  wire signed [63:0] mul_su = $signed(op0) * $signed({1'b0, op1});
-  wire        [63:0] mul_uu = {32'd0, op0} * {32'd0, op1};
+  assign mul_req_valid = issue_valid && is_mul_op;
 
-  always_comb begin
-    mul_result = 32'd0;
-    case (issue_req.uop.op)
-      UOP_MUL:    mul_result = mul_ss[31:0];
-      UOP_MULH:   mul_result = mul_ss[63:32];
-      UOP_MULHSU: mul_result = mul_su[63:32];
-      UOP_MULHU:  mul_result = mul_uu[63:32];
-      default:    mul_result = 32'd0;
-    endcase
-  end
+  rv32_ooo_multiplier #(
+    .LATENCY(3)
+  ) u_multiplier (
+    .clk              (clk),
+    .rst              (rst),
+    .flush_valid      (flush_valid),
+    .req_valid        (mul_req_valid),
+    .req_op           (issue_req.uop.op),
+    .req_op0          (op0),
+    .req_op1          (op1),
+    .req_rob_tag      (issue_req.uop.rob_tag),
+    .req_dest_phys    (issue_req.uop.dst.new_phys),
+    .req_dest_domain  (issue_req.uop.dst.domain),
+    .req_pc           (pc),
+    .req_ready        (mul_req_ready),
+    .rsp_valid        (mul_rsp_valid),
+    .rsp_result       (mul_rsp_result),
+    .rsp_rob_tag      (mul_rsp_rob_tag),
+    .rsp_dest_phys    (mul_rsp_dest_phys),
+    .rsp_dest_domain  (mul_rsp_dest_domain),
+    .rsp_pc           (mul_rsp_pc),
+    .rsp_ready        (mul_rsp_ready),
+    .busy             (multiplier_busy)
+  );
 
   // =========================================================================
   // 4. Multi-Cycle Iterative Divider (RV32M DIV, DIVU, REM, REMU)
@@ -192,14 +214,18 @@ module rv32_ooo_int_execute
     .busy             (divider_busy)
   );
 
-  // Issue ready logic
+  // Issue ready logic: hold if downstream M-extension completion bus is active
+  wire m_extension_rsp_active = div_rsp_valid || mul_rsp_valid;
+
   always_comb begin
     if (is_div_op) begin
-      issue_ready = div_req_ready;
+      issue_ready = div_req_ready && !mul_rsp_valid;
+    end else if (is_mul_op) begin
+      issue_ready = mul_req_ready && !div_rsp_valid;
     end else if (is_lsu_op) begin
-      issue_ready = lsu_ready && !div_rsp_valid;
+      issue_ready = lsu_ready && !m_extension_rsp_active;
     end else begin
-      issue_ready = (core_state == CORE_RUN) && !div_rsp_valid;
+      issue_ready = (core_state == CORE_RUN) && !m_extension_rsp_active;
     end
   end
 
@@ -225,15 +251,17 @@ module rv32_ooo_int_execute
 
   completion_t alu_cmp;
   completion_t div_cmp;
+  completion_t mul_cmp;
 
-  // Single-cycle ALU / Branch / CSR / MUL / AGU store completion
+  // Single-cycle ALU / Branch / CSR / AGU store completion
   always_comb begin
     alu_cmp = '0;
 
     if (issue_valid) begin
-      // Loads and divide operations do not complete in single-cycle path
+      // Loads, divide, and multiply operations do not complete in single-cycle path
       if ((issue_req.uop.fu_class == FU_LSU_AGU && issue_req.uop.mem.is_load) ||
-          (issue_req.uop.fu_class == FU_INT_DIV)) begin
+          (issue_req.uop.fu_class == FU_INT_DIV) ||
+          (issue_req.uop.fu_class == FU_INT_MUL)) begin
         alu_cmp.valid = 1'b0;
       end else begin
         alu_cmp.valid     = 1'b1;
@@ -258,8 +286,6 @@ module rv32_ooo_int_execute
             alu_cmp.result_data = alu_result;
           end else if (issue_req.uop.fu_class == FU_BRANCH) begin
             alu_cmp.result_data = link_data; // JAL / JALR link register
-          end else if (issue_req.uop.fu_class == FU_INT_MUL) begin
-            alu_cmp.result_data = mul_result;
           end else if (issue_req.uop.fu_class == FU_CSR_SERIAL) begin
             alu_cmp.result_data = csr_rdata;
             if (csr_exc.valid) begin
@@ -283,16 +309,35 @@ module rv32_ooo_int_execute
     div_cmp.result_data   = div_rsp_result;
   end
 
-  // Output arbitration: Divider completion has priority
+  // Multi-cycle Multiplier completion
+  always_comb begin
+    mul_cmp = '0;
+    mul_cmp.valid         = mul_rsp_valid;
+    mul_cmp.rob_tag       = mul_rsp_rob_tag;
+    mul_cmp.exception     = '0;
+    mul_cmp.result_valid  = (mul_rsp_dest_domain == REG_INT);
+    mul_cmp.result_domain = mul_rsp_dest_domain;
+    mul_cmp.result_phys   = mul_rsp_dest_phys;
+    mul_cmp.result_data   = mul_rsp_result;
+  end
+
+  // Output arbitration: Divider completion has priority, then Multiplier, then Single-cycle ALU
   always_comb begin
     if (div_rsp_valid) begin
       int_cmp       = div_cmp;
       int_cmp_pc    = div_rsp_pc;
       div_rsp_ready = 1'b1;
+      mul_rsp_ready = 1'b0;
+    end else if (mul_rsp_valid) begin
+      int_cmp       = mul_cmp;
+      int_cmp_pc    = mul_rsp_pc;
+      div_rsp_ready = 1'b0;
+      mul_rsp_ready = 1'b1;
     end else begin
       int_cmp       = alu_cmp;
       int_cmp_pc    = pc;
       div_rsp_ready = 1'b0;
+      mul_rsp_ready = 1'b0;
     end
   end
 

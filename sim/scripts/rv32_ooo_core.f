@@ -8,6 +8,7 @@ rtl/rob/rv32_ooo_rob.sv
 rtl/issue/rv32_ooo_int_iq.sv
 rtl/issue/rv32_ooo_fp_iq.sv
 rtl/execute/int/rv32_ooo_divider.sv
+rtl/execute/int/rv32_ooo_multiplier.sv
 rtl/execute/int/rv32_ooo_int_execute.sv
 rtl/execute/fp/rv32_ooo_fp_execute.sv
 rtl/lsu/rv32_ooo_lsu.sv
