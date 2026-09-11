@@ -214,23 +214,40 @@ module rv32_ooo_int_execute
     .busy             (divider_busy)
   );
 
-  // Issue ready logic: hold if downstream M-extension completion bus is active
-  wire m_extension_rsp_active = div_rsp_valid || mul_rsp_valid;
+  wire is_load = is_lsu_op && issue_req.uop.mem.is_load;
 
+  // =========================================================================
+  // 5. AP2C: 2-Entry ALU Completion FIFO & Independent Holding Buffer
+  // =========================================================================
+
+  completion_t alu_fifo_cmp [1:0];
+  logic [31:0] alu_fifo_pc  [1:0];
+  logic        alu_fifo_head;
+  logic        alu_fifo_tail;
+  logic [1:0]  alu_fifo_count;
+
+  wire alu_fifo_has_space = (alu_fifo_count < 2'd2);
+  wire alu_fifo_empty     = (alu_fifo_count == 2'd0);
+  wire alu_in_valid       = issue_valid && issue_ready && !is_load && !is_div_op && !is_mul_op;
+  wire alu_can_passthru   = alu_fifo_empty && !div_has_cmp && !mul_has_cmp && alu_in_valid;
+  wire alu_fifo_push      = alu_in_valid && !alu_can_passthru;
+  wire alu_fifo_pop; // Driven by completion arbiter grant
+
+  // Issue ready logic: completely decoupled per functional unit class
   always_comb begin
     if (is_div_op) begin
-      issue_ready = div_req_ready && !mul_rsp_valid;
+      issue_ready = div_req_ready;
     end else if (is_mul_op) begin
-      issue_ready = mul_req_ready && !div_rsp_valid;
+      issue_ready = mul_req_ready;
     end else if (is_lsu_op) begin
-      issue_ready = lsu_ready && !m_extension_rsp_active;
+      issue_ready = is_load ? lsu_ready : (lsu_ready && alu_fifo_has_space);
     end else begin
-      issue_ready = (core_state == CORE_RUN) && !m_extension_rsp_active;
+      issue_ready = (core_state == CORE_RUN) && alu_fifo_has_space;
     end
   end
 
   // =========================================================================
-  // 5. AGU Interface to LSU
+  // 6. AGU Interface to LSU
   // =========================================================================
 
   assign agu_valid = issue_valid && is_lsu_op;
@@ -238,7 +255,7 @@ module rv32_ooo_int_execute
   assign agu_addr  = op0 + imm;
 
   // =========================================================================
-  // 6. CSR Access Interface
+  // 7. CSR Access Interface
   // =========================================================================
 
   assign csr_req_valid = issue_valid && (issue_req.uop.fu_class == FU_CSR_SERIAL) && issue_req.uop.csr.valid;
@@ -246,50 +263,50 @@ module rv32_ooo_int_execute
   assign csr_wdata     = issue_req.uop.csr.use_zimm ? imm : op0;
 
   // =========================================================================
-  // 7. Completion Packet Formation & Arbitration
+  // 8. Completion Packet Formation & Independent Producer Holding
   // =========================================================================
 
-  completion_t alu_cmp;
+  completion_t alu_cmp_in;
   completion_t div_cmp;
   completion_t mul_cmp;
 
-  // Single-cycle ALU / Branch / CSR / AGU store completion
+  // Single-cycle ALU / Branch / CSR / AGU store completion formation (into FIFO)
   always_comb begin
-    alu_cmp = '0;
+    alu_cmp_in = '0;
 
     if (issue_valid) begin
       // Loads, divide, and multiply operations do not complete in single-cycle path
       if ((issue_req.uop.fu_class == FU_LSU_AGU && issue_req.uop.mem.is_load) ||
           (issue_req.uop.fu_class == FU_INT_DIV) ||
           (issue_req.uop.fu_class == FU_INT_MUL)) begin
-        alu_cmp.valid = 1'b0;
+        alu_cmp_in.valid = 1'b0;
       end else begin
-        alu_cmp.valid     = 1'b1;
-        alu_cmp.rob_tag   = issue_req.uop.rob_tag;
-        alu_cmp.exception = issue_req.uop.exception;
+        alu_cmp_in.valid     = 1'b1;
+        alu_cmp_in.rob_tag   = issue_req.uop.rob_tag;
+        alu_cmp_in.exception = issue_req.uop.exception;
 
         // Branch resolution
         if (issue_req.uop.fu_class == FU_BRANCH) begin
-          alu_cmp.branch_valid      = 1'b1;
-          alu_cmp.branch_taken      = branch_taken;
-          alu_cmp.branch_target     = branch_taken ? branch_target : (pc + 32'd4);
-          alu_cmp.branch_mispredict = branch_mispredict;
+          alu_cmp_in.branch_valid      = 1'b1;
+          alu_cmp_in.branch_taken      = branch_taken;
+          alu_cmp_in.branch_target     = branch_taken ? branch_target : (pc + 32'd4);
+          alu_cmp_in.branch_mispredict = branch_mispredict;
         end
 
         // Result data routing
         if (issue_req.uop.dst.valid && (issue_req.uop.dst.domain == REG_INT)) begin
-          alu_cmp.result_valid  = 1'b1;
-          alu_cmp.result_domain = REG_INT;
-          alu_cmp.result_phys   = issue_req.uop.dst.new_phys;
+          alu_cmp_in.result_valid  = 1'b1;
+          alu_cmp_in.result_domain = REG_INT;
+          alu_cmp_in.result_phys   = issue_req.uop.dst.new_phys;
 
           if (issue_req.uop.fu_class == FU_INT_ALU) begin
-            alu_cmp.result_data = alu_result;
+            alu_cmp_in.result_data = alu_result;
           end else if (issue_req.uop.fu_class == FU_BRANCH) begin
-            alu_cmp.result_data = link_data; // JAL / JALR link register
+            alu_cmp_in.result_data = link_data; // JAL / JALR link register
           end else if (issue_req.uop.fu_class == FU_CSR_SERIAL) begin
-            alu_cmp.result_data = csr_rdata;
+            alu_cmp_in.result_data = csr_rdata;
             if (csr_exc.valid) begin
-              alu_cmp.exception = csr_exc;
+              alu_cmp_in.exception = csr_exc;
             end
           end
         end
@@ -297,7 +314,36 @@ module rv32_ooo_int_execute
     end
   end
 
-  // Multi-cycle Divider completion
+  // Sequential update of 2-entry ALU Completion FIFO
+  always_ff @(posedge clk) begin
+    if (rst || flush_valid) begin
+      alu_fifo_head   <= 1'b0;
+      alu_fifo_tail   <= 1'b0;
+      alu_fifo_count  <= 2'd0;
+      alu_fifo_cmp[0] <= '0;
+      alu_fifo_cmp[1] <= '0;
+      alu_fifo_pc[0]  <= 32'd0;
+      alu_fifo_pc[1]  <= 32'd0;
+    end else begin
+      case ({alu_fifo_push, alu_fifo_pop})
+        2'b10: alu_fifo_count <= alu_fifo_count + 2'd1;
+        2'b01: alu_fifo_count <= alu_fifo_count - 2'd1;
+        default: ; // 2'b00 or 2'b11: count unchanged
+      endcase
+
+      if (alu_fifo_push) begin
+        alu_fifo_cmp[alu_fifo_tail] <= alu_cmp_in;
+        alu_fifo_pc[alu_fifo_tail]  <= pc;
+        alu_fifo_tail               <= ~alu_fifo_tail;
+      end
+
+      if (alu_fifo_pop) begin
+        alu_fifo_head               <= ~alu_fifo_head;
+      end
+    end
+  end
+
+  // Multi-cycle Divider completion packet
   always_comb begin
     div_cmp = '0;
     div_cmp.valid         = div_rsp_valid;
@@ -309,7 +355,7 @@ module rv32_ooo_int_execute
     div_cmp.result_data   = div_rsp_result;
   end
 
-  // Multi-cycle Multiplier completion
+  // Multi-cycle Multiplier completion packet
   always_comb begin
     mul_cmp = '0;
     mul_cmp.valid         = mul_rsp_valid;
@@ -321,24 +367,74 @@ module rv32_ooo_int_execute
     mul_cmp.result_data   = mul_rsp_result;
   end
 
-  // Output arbitration: Divider completion has priority, then Multiplier, then Single-cycle ALU
+  // =========================================================================
+  // 9. Completion Arbiter (Drain at most 1 completion/cycle: DIV > MUL > ALU)
+  // =========================================================================
+
+  wire div_has_cmp = div_rsp_valid;
+  wire mul_has_cmp = mul_rsp_valid;
+  wire alu_has_cmp = !alu_fifo_empty || alu_can_passthru;
+
+  wire grant_div = div_has_cmp;
+  wire grant_mul = !grant_div && mul_has_cmp;
+  wire grant_alu = !grant_div && !grant_mul && alu_has_cmp;
+
+  assign div_rsp_ready = grant_div;
+  assign mul_rsp_ready = grant_mul;
+  assign alu_fifo_pop  = !grant_div && !grant_mul && !alu_fifo_empty;
+
   always_comb begin
-    if (div_rsp_valid) begin
-      int_cmp       = div_cmp;
-      int_cmp_pc    = div_rsp_pc;
-      div_rsp_ready = 1'b1;
-      mul_rsp_ready = 1'b0;
-    end else if (mul_rsp_valid) begin
-      int_cmp       = mul_cmp;
-      int_cmp_pc    = mul_rsp_pc;
-      div_rsp_ready = 1'b0;
-      mul_rsp_ready = 1'b1;
+    if (flush_valid) begin
+      int_cmp    = '0;
+      int_cmp_pc = 32'd0;
+    end else if (grant_div) begin
+      int_cmp    = div_cmp;
+      int_cmp_pc = div_rsp_pc;
+    end else if (grant_mul) begin
+      int_cmp    = mul_cmp;
+      int_cmp_pc = mul_rsp_pc;
+    end else if (!alu_fifo_empty) begin
+      int_cmp    = alu_fifo_cmp[alu_fifo_head];
+      int_cmp_pc = alu_fifo_pc[alu_fifo_head];
+    end else if (alu_can_passthru) begin
+      int_cmp    = alu_cmp_in;
+      int_cmp_pc = pc;
     end else begin
-      int_cmp       = alu_cmp;
-      int_cmp_pc    = pc;
-      div_rsp_ready = 1'b0;
-      mul_rsp_ready = 1'b0;
+      int_cmp    = '0;
+      int_cmp_pc = 32'd0;
     end
   end
+
+  // =========================================================================
+  // 10. Performance & Collision Counters (AP2C)
+  // =========================================================================
+
+  logic [31:0] alu_completion_wait_cycles;
+  logic [31:0] mul_completion_wait_cycles;
+  logic [31:0] div_completion_wait_cycles;
+  logic [31:0] completion_collision_count;
+
+  wire collision = (div_has_cmp && mul_has_cmp) ||
+                   (div_has_cmp && alu_has_cmp) ||
+                   (mul_has_cmp && alu_has_cmp);
+
+  wire alu_wait = alu_has_cmp && !grant_alu;
+  wire mul_wait = mul_has_cmp && !grant_mul;
+  wire div_wait = div_has_cmp && !grant_div;
+
+  always_ff @(posedge clk) begin
+    if (rst) begin
+      alu_completion_wait_cycles <= 32'd0;
+      mul_completion_wait_cycles <= 32'd0;
+      div_completion_wait_cycles <= 32'd0;
+      completion_collision_count <= 32'd0;
+    end else begin
+      if (collision) completion_collision_count <= completion_collision_count + 32'd1;
+      if (alu_wait)  alu_completion_wait_cycles <= alu_completion_wait_cycles + 32'd1;
+      if (mul_wait)  mul_completion_wait_cycles <= mul_completion_wait_cycles + 32'd1;
+      if (div_wait)  div_completion_wait_cycles <= div_completion_wait_cycles + 32'd1;
+    end
+  end
+
 
 endmodule

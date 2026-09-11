@@ -235,6 +235,6 @@ module rv32_ooo_divider
   assign rsp_dest_phys   = dest_phys_q;
   assign rsp_dest_domain = dest_domain_q;
   assign rsp_pc          = pc_q;
-  assign busy            = (state_q != DIV_IDLE) || (req_valid && !req_ready);
+  assign busy            = (state_q != DIV_IDLE);
 
 endmodule
