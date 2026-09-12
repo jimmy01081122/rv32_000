@@ -183,11 +183,15 @@ module rv32_ooo_core
                                  (ld_cmp.valid && ld_cmp.result_valid && (ld_cmp.result_domain == REG_INT) && (ld_cmp.result_phys == int_issue_uop.src0.phys)) ? ld_cmp.result_data :
                                  int_rd0;
 
+  wire [31:0] fp_sq_bypassed = (fp_cmp_raw.valid && fp_cmp_raw.result_valid && (fp_cmp_raw.result_domain == REG_FP) && (fp_cmp_raw.result_phys == int_issue_uop.src1.phys)) ? fp_cmp_raw.result_data :
+                               (ld_cmp.valid && ld_cmp.result_valid && (ld_cmp.result_domain == REG_FP) && (ld_cmp.result_phys == int_issue_uop.src1.phys)) ? ld_cmp.result_data :
+                               fp_rd_sq;
+
   wire [31:0] int_op1_bypassed = (int_issue_uop.src1.phys == 6'd0) ? 32'd0 :
                                  (int_cmp.valid && int_cmp.result_valid && (int_cmp.result_domain == REG_INT) && (int_cmp.result_phys == int_issue_uop.src1.phys)) ? int_cmp.result_data :
                                  (fp_cmp_raw.valid && fp_cmp_raw.result_valid && (fp_cmp_raw.result_domain == REG_INT) && (fp_cmp_raw.result_phys == int_issue_uop.src1.phys)) ? fp_cmp_raw.result_data :
                                  (ld_cmp.valid && ld_cmp.result_valid && (ld_cmp.result_domain == REG_INT) && (ld_cmp.result_phys == int_issue_uop.src1.phys)) ? ld_cmp.result_data :
-                                 (int_issue_uop.mem.is_fp ? fp_rd_sq : int_rd1);
+                                 (int_issue_uop.mem.is_fp ? fp_sq_bypassed : int_rd1);
 
   // Integer Execution Request formation at issue
   always_comb begin
@@ -213,13 +217,66 @@ module rv32_ooo_core
     end
   end
 
-  // FP Execution Request
+  // =========================================================================
+  // 3b. AP3A1: FP PRF Operand Fetch & FP_EX0 Pipeline Stage
+  // =========================================================================
+
+  // FP EX0 Register declarations
+  logic      fp_ex0_valid_q;
+  exec_req_t fp_ex0_req_q;
+  logic      fp_execute_ready;
+
+  // Downstream FP execution readiness
+  wire fp_ex0_out_ready = fp_execute_ready;
+  wire fp_ex0_out_valid = fp_ex0_valid_q;
+
+  // Elastic input handshake to FP IQ
+  wire fp_ex0_in_ready  = !fp_ex0_valid_q || (fp_ex0_out_valid && fp_ex0_out_ready);
+  assign fp_issue_ready = fp_ex0_in_ready;
+
+  // FP operand bypassing from same-cycle completion buses
+  wire [31:0] int_op_fp_bypassed = (fp_issue_uop.src0.phys == 6'd0) ? 32'd0 :
+                                   (int_cmp.valid && int_cmp.result_valid && (int_cmp.result_domain == REG_INT) && (int_cmp.result_phys == fp_issue_uop.src0.phys)) ? int_cmp.result_data :
+                                   (fp_cmp_raw.valid && fp_cmp_raw.result_valid && (fp_cmp_raw.result_domain == REG_INT) && (fp_cmp_raw.result_phys == fp_issue_uop.src0.phys)) ? fp_cmp_raw.result_data :
+                                   (ld_cmp.valid && ld_cmp.result_valid && (ld_cmp.result_domain == REG_INT) && (ld_cmp.result_phys == fp_issue_uop.src0.phys)) ? ld_cmp.result_data :
+                                   int_rd_fp;
+
+  wire [31:0] fp_op0_bypassed = (fp_cmp_raw.valid && fp_cmp_raw.result_valid && (fp_cmp_raw.result_domain == REG_FP) && (fp_cmp_raw.result_phys == fp_issue_uop.src0.phys)) ? fp_cmp_raw.result_data :
+                                (ld_cmp.valid && ld_cmp.result_valid && (ld_cmp.result_domain == REG_FP) && (ld_cmp.result_phys == fp_issue_uop.src0.phys)) ? ld_cmp.result_data :
+                                fp_rd0;
+
+  wire [31:0] fp_op1_bypassed = (fp_cmp_raw.valid && fp_cmp_raw.result_valid && (fp_cmp_raw.result_domain == REG_FP) && (fp_cmp_raw.result_phys == fp_issue_uop.src1.phys)) ? fp_cmp_raw.result_data :
+                                (ld_cmp.valid && ld_cmp.result_valid && (ld_cmp.result_domain == REG_FP) && (ld_cmp.result_phys == fp_issue_uop.src1.phys)) ? ld_cmp.result_data :
+                                fp_rd1;
+
+  wire [31:0] fp_op2_bypassed = (fp_cmp_raw.valid && fp_cmp_raw.result_valid && (fp_cmp_raw.result_domain == REG_FP) && (fp_cmp_raw.result_phys == fp_issue_uop.src2.phys)) ? fp_cmp_raw.result_data :
+                                (ld_cmp.valid && ld_cmp.result_valid && (ld_cmp.result_domain == REG_FP) && (ld_cmp.result_phys == fp_issue_uop.src2.phys)) ? ld_cmp.result_data :
+                                fp_rd2;
+
+  // FP Execution Request formation at issue
   always_comb begin
     fp_issue_req.uop      = fp_issue_uop;
-    fp_issue_req.operand0 = (fp_issue_uop.src0.kind == SRC_INT_REG) ? int_rd_fp : fp_rd0;
-    fp_issue_req.operand1 = fp_rd1;
-    fp_issue_req.operand2 = fp_rd2;
+    fp_issue_req.operand0 = (fp_issue_uop.src0.kind == SRC_INT_REG) ? int_op_fp_bypassed : fp_op0_bypassed;
+    fp_issue_req.operand1 = fp_op1_bypassed;
+    fp_issue_req.operand2 = fp_op2_bypassed;
   end
+
+  // FP EX0 register sequential update
+  always_ff @(posedge clk) begin
+    if (rst || flush_valid) begin
+      fp_ex0_valid_q <= 1'b0;
+      fp_ex0_req_q   <= '0;
+    end else begin
+      if (fp_issue_valid && fp_ex0_in_ready) begin
+        fp_ex0_valid_q <= 1'b1;
+        fp_ex0_req_q   <= fp_issue_req;
+      end else if (fp_ex0_out_valid && fp_ex0_out_ready) begin
+        fp_ex0_valid_q <= 1'b0;
+        fp_ex0_req_q   <= '0;
+      end
+    end
+  end
+
 
   // =========================================================================
   // 4. Redirect Priority Multiplexer (§11.3)
@@ -350,10 +407,12 @@ module rv32_ooo_core
     .wr0_en          (int_cmp.valid && int_cmp.result_valid && (int_cmp.result_domain == REG_INT)),
     .wr0_addr        (int_cmp.result_phys),
     .wr0_data        (int_cmp.result_data),
-    .wr1_en          ((ld_cmp.valid && ld_cmp.result_valid && (ld_cmp.result_domain == REG_INT)) ||
-                      (fp_cmp_raw.valid && fp_cmp_raw.result_valid && (fp_cmp_raw.result_domain == REG_INT))),
-    .wr1_addr        ((ld_cmp.valid && (ld_cmp.result_domain == REG_INT)) ? ld_cmp.result_phys : fp_cmp_raw.result_phys),
-    .wr1_data        ((ld_cmp.valid && (ld_cmp.result_domain == REG_INT)) ? ld_cmp.result_data : fp_cmp_raw.result_data),
+    .wr1_en          (ld_cmp.valid && ld_cmp.result_valid && (ld_cmp.result_domain == REG_INT)),
+    .wr1_addr        (ld_cmp.result_phys),
+    .wr1_data        (ld_cmp.result_data),
+    .wr2_en          (fp_cmp_raw.valid && fp_cmp_raw.result_valid && (fp_cmp_raw.result_domain == REG_INT)),
+    .wr2_addr        (fp_cmp_raw.result_phys),
+    .wr2_data        (fp_cmp_raw.result_data),
     .lsu_bypass_en   (ld_cmp.valid && ld_cmp.result_valid && (ld_cmp.result_domain == REG_INT)),
     .lsu_bypass_addr (ld_cmp.result_phys),
     .lsu_bypass_data (ld_cmp.result_data),
@@ -434,9 +493,9 @@ module rv32_ooo_core
     .clk         (clk),
     .rst         (rst),
     .core_state  (core_state),
-    .issue_valid (fp_issue_valid),
-    .issue_req   (fp_issue_req),
-    .issue_ready (fp_issue_ready),
+    .issue_valid (fp_ex0_valid_q),
+    .issue_req   (fp_ex0_req_q),
+    .issue_ready (fp_execute_ready),
     .fp_cmp      (fp_cmp_raw)
   );
 
@@ -499,14 +558,17 @@ module rv32_ooo_core
   );
 
   // =========================================================================
-  // AP1A Assertions: Flushed EX0 entry never produces completion
+  // AP1A / AP3A1 Assertions: Flushed EX0 entry never produces completion
   // =========================================================================
 `ifndef SYNTHESIS
   always_ff @(posedge clk) begin
     if (!rst && flush_valid) begin
-      // On any flush event, EX0 stage must be invalidated immediately
+      // On any flush event, INT EX0 stage must be invalidated immediately
       assert (!int_ex0_valid_q || (int_issue_valid && ex0_in_ready))
-        else $error("[AP1A Assertion Failed] Flushed EX0 entry was not invalidated.");
+        else $error("[AP1A Assertion Failed] Flushed INT EX0 entry was not invalidated.");
+      // On any flush event, FP EX0 stage must be invalidated immediately
+      assert (!fp_ex0_valid_q || (fp_issue_valid && fp_ex0_in_ready))
+        else $error("[AP3A1 Assertion Failed] Flushed FP EX0 entry was not invalidated.");
     end
   end
 `endif

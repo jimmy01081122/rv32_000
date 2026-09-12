@@ -14,10 +14,15 @@ module rv32_ooo_int_prf
   input  phys_reg_t       wr0_addr,
   input  logic [XLEN-1:0] wr0_data,
 
-  // Write port 1 (from LSU load completion / FP-to-INT completion)
+  // Write port 1 (from LSU load completion)
   input  logic            wr1_en,
   input  phys_reg_t       wr1_addr,
   input  logic [XLEN-1:0] wr1_data,
+
+  // Write port 2 (from FP-to-INT execution completion)
+  input  logic            wr2_en,
+  input  phys_reg_t       wr2_addr,
+  input  logic [XLEN-1:0] wr2_data,
 
   // Dedicated LSU load bypass channel (purely from ld_cmp to break combinational loops)
   input  logic            lsu_bypass_en,
@@ -57,7 +62,9 @@ module rv32_ooo_int_prf
       if (rst) begin
         entry_q <= '0;
       end else begin
-        if (wr1_en && (wr1_addr == i[PHYS_W-1:0])) begin
+        if (wr2_en && (wr2_addr == i[PHYS_W-1:0])) begin
+          entry_q <= wr2_data;
+        end else if (wr1_en && (wr1_addr == i[PHYS_W-1:0])) begin
           entry_q <= wr1_data;
         end else if (wr0_en && (wr0_addr == i[PHYS_W-1:0])) begin
           entry_q <= wr0_data;

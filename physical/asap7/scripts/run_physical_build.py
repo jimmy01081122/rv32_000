@@ -77,7 +77,7 @@ group_path -name in2out  -from $non_clock_inputs -to $all_outputs_list
         "-w", "/OpenROAD-flow-scripts/flow",
         f"openroad/flow-ubuntu22.04-builder:{orfs_tag}",
         "bash", "-c",
-        "make DESIGN_CONFIG=designs/asap7/rv32_ooo/config.mk finish"
+        "make DESIGN_CONFIG=designs/asap7/rv32_ooo/config.mk NUM_CORES=1 finish"
     ]
     
     print(f"Executing: make DESIGN_CONFIG=designs/asap7/rv32_ooo/config.mk finish in Docker...")
