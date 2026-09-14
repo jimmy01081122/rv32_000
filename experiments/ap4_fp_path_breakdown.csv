@@ -1,0 +1,11 @@
+category,delay_ps,delay_ns,pct_delay,gate_count,start_ps,end_ps,description
+unpack/classification,685.34,0.685,4.48,13,0.00,915.68,"Op0 exponent check (8hFF/8d0), NaN/Inf/Zero detection and mantissa extraction"
+exponent compare/alignment,97.94,0.098,0.64,3,915.67,1013.61,"Exponent parity evaluation (e0[0]) and initial radicand alignment shift"
+mantissa arithmetic,11448.01,11.448,74.76,301,1013.61,13265.62,"Unrolled 28-iteration combinational square-root (FSQRT) comparator-subtractor-mux array"
+multiply,0.00,0.000,0.00,0,0.00,0.00,"FMUL 24x24 mantissa multiplier (runs in parallel; off critical path)"
+FMA datapath,0.00,0.000,0.00,0,0.00,0.00,"FMADD 72-bit product-add-align datapath (runs in parallel; off critical path)"
+normalization,299.05,0.299,1.95,11,13265.62,13564.67,"Square-root mantissa alignment to unit bit 26"
+priority encoding,430.07,0.430,2.81,10,13564.68,13994.76,"48-bit MSB priority encoder in round_and_pack"
+round_and_pack,940.81,0.941,6.14,19,13994.76,14935.56,"Barrel shift, guard/round/sticky evaluation, rounding adder, and NX flag generation"
+conversion,0.00,0.000,0.00,0,0.00,0.00,"Float-to-int and int-to-float conversion (runs in parallel; off critical path)"
+result mux,377.40,0.377,2.46,8,14935.56,15312.95,"Opcode case-statement result selection and completion packet formation"
