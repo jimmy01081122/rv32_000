@@ -876,7 +876,7 @@ module rv32_ooo_frontend (
 	end
 	assign uop_valid = !iq_empty && (core_state == 3'd0);
 	assign uop_out = dec;
-endmodule
+	endmodule
 module rv32_ooo_rename (
 	clk,
 	rst,
@@ -1225,7 +1225,7 @@ module rv32_ooo_rename (
 	endgenerate
 	assign ren_valid = (dec_valid && free_dest_available) && (core_state == 3'd0);
 	assign ren_uop = ren_d;
-endmodule
+	endmodule
 module rv32_ooo_rob (
 	clk,
 	rst,
@@ -1498,7 +1498,7 @@ module rv32_ooo_rob (
 			else if (!(alloc_valid && alloc_ready) && can_retire)
 				rob_count <= rob_count - 5'd1;
 		end
-endmodule
+	endmodule
 module rv32_ooo_int_iq (
 	clk,
 	rst,
@@ -1673,7 +1673,7 @@ module rv32_ooo_int_iq (
 		end
 		else
 			entries <= next_entries;
-endmodule
+	endmodule
 module rv32_ooo_fp_iq (
 	clk,
 	rst,
@@ -1837,7 +1837,7 @@ module rv32_ooo_fp_iq (
 		end
 		else
 			entries <= next_entries;
-endmodule
+	endmodule
 module rv32_ooo_divider (
 	clk,
 	rst,
@@ -2047,7 +2047,7 @@ module rv32_ooo_divider (
 	assign rsp_dest_domain = dest_domain_q;
 	assign rsp_pc = pc_q;
 	assign busy = state_q != 2'd0;
-endmodule
+	endmodule
 module rv32_ooo_multiplier (
 	clk,
 	rst,
@@ -2201,7 +2201,7 @@ module rv32_ooo_multiplier (
 	assign rsp_dest_domain = s3_dest_domain;
 	assign rsp_pc = s3_pc;
 	assign busy = (s1_valid || s2_valid) || s3_valid;
-endmodule
+	endmodule
 module rv32_ooo_int_execute (
 	clk,
 	rst,
@@ -2567,7 +2567,7 @@ module rv32_ooo_int_execute (
 			if (div_wait)
 				div_completion_wait_cycles <= div_completion_wait_cycles + 32'd1;
 		end
-endmodule
+	endmodule
 module rv32_ooo_fp_execute (
 	clk,
 	rst,
@@ -3582,7 +3582,7 @@ module rv32_ooo_fp_execute (
 			fp_cmp[80 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))-:((80 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))) >= (42 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))) ? ((80 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))) - (42 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))))) + 1 : ((42 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))) - (80 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))) + 1)] = issue_req[(((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? ((((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? (((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 40 : 1 - ((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39)) + 95) - ((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 2) : 96)-:38];
 		end
 	end
-endmodule
+	endmodule
 module rv32_ooo_lsu (
 	clk,
 	rst,
@@ -4050,7 +4050,7 @@ module rv32_ooo_lsu (
 				end
 			end
 		end
-endmodule
+	endmodule
 module rv32_ooo_csr (
 	clk,
 	rst,
@@ -4214,7 +4214,7 @@ module rv32_ooo_csr (
 						;
 				endcase
 		end
-endmodule
+	endmodule
 module rv32_ooo_core (
 	clk,
 	rst,
@@ -4307,8 +4307,11 @@ module rv32_ooo_core (
 	wire [rv32_ooo_params_FLEN - 1:0] fp_rd_sq;
 	wire [(((((((1 + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 3) + rv32_ooo_params_PHYS_W) + 112) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) - 1:0] int_cmp;
 	wire [31:0] int_cmp_pc;
+	wire [(((((((1 + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 3) + rv32_ooo_params_PHYS_W) + 112) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) - 1:0] fp_cmp_comb;
+	reg [(((((((1 + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 3) + rv32_ooo_params_PHYS_W) + 112) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) - 1:0] fp_cmp_q;
 	wire [(((((((1 + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 3) + rv32_ooo_params_PHYS_W) + 112) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) - 1:0] fp_cmp_raw;
 	wire [(((((((1 + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 3) + rv32_ooo_params_PHYS_W) + 112) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) - 1:0] ld_cmp;
+	assign fp_cmp_raw = fp_cmp_q;
 	wire retire_valid;
 	wire [(((((((2 + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 72) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 116) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 1:0] retire_entry;
 	wire retire_fp_valid;
@@ -4393,7 +4396,10 @@ module rv32_ooo_core (
 		end
 	reg fp_ex0_valid_q;
 	reg [(((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? (((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 40 : 1 - ((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39)) + 95:0] fp_ex0_req_q;
-	wire fp_execute_ready;
+	wire fp_execute_ready_raw;
+	wire fp_cmp_ready = 1'b1;
+	wire fp_cmp_in_ready = !fp_cmp_q[1 + ((rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W) + (3 + (rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))))))] || fp_cmp_ready;
+	wire fp_execute_ready = fp_cmp_in_ready;
 	wire fp_ex0_out_ready = fp_execute_ready;
 	wire fp_ex0_out_valid = fp_ex0_valid_q;
 	wire fp_ex0_in_ready = !fp_ex0_valid_q || (fp_ex0_out_valid && fp_ex0_out_ready);
@@ -4423,6 +4429,11 @@ module rv32_ooo_core (
 			fp_ex0_valid_q <= 1'b0;
 			fp_ex0_req_q <= 1'sb0;
 		end
+	always @(posedge clk)
+		if (rst || flush_valid)
+			fp_cmp_q <= 1'sb0;
+		else if (fp_cmp_in_ready)
+			fp_cmp_q <= fp_cmp_comb;
 	reg redirect_valid;
 	reg [31:0] redirect_pc;
 	reg [rv32_ooo_params_FETCH_EPOCH_W - 1:0] redirect_epoch;
@@ -4626,8 +4637,8 @@ module rv32_ooo_core (
 		.core_state(core_state),
 		.issue_valid(fp_ex0_valid_q),
 		.issue_req(fp_ex0_req_q),
-		.issue_ready(fp_execute_ready),
-		.fp_cmp(fp_cmp_raw)
+		.issue_ready(fp_execute_ready_raw),
+		.fp_cmp(fp_cmp_comb)
 	);
 	rv32_ooo_lsu u_lsu(
 		.clk(clk),
@@ -4685,7 +4696,10 @@ module rv32_ooo_core (
 		.cycle_inc(1'b1),
 		.instret_inc(retire_valid)
 	);
-	always @(posedge clk)
+	always @(posedge clk) begin
 		if (!rst && flush_valid)
 			;
-endmodule
+		if (!rst && $past(!rst && flush_valid))
+			;
+	end
+	endmodule

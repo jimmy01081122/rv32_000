@@ -92,8 +92,12 @@ module rv32_ooo_core
   // Completion Busses (§24.1)
   completion_t  int_cmp;
   logic [31:0]  int_cmp_pc;
+  completion_t  fp_cmp_comb;
+  completion_t  fp_cmp_q;
   completion_t  fp_cmp_raw;
   completion_t  ld_cmp;
+
+  assign fp_cmp_raw = fp_cmp_q;
 
   // ROB Retirement & Control Events
   logic         retire_valid;
@@ -218,13 +222,18 @@ module rv32_ooo_core
   end
 
   // =========================================================================
-  // 3b. AP3A1: FP PRF Operand Fetch & FP_EX0 Pipeline Stage
+  // 3b. AP3A1 / AP3A2: FP PRF Operand Fetch, FP_EX0, & Completion Register
   // =========================================================================
 
   // FP EX0 Register declarations
   logic      fp_ex0_valid_q;
   exec_req_t fp_ex0_req_q;
-  logic      fp_execute_ready;
+  logic      fp_execute_ready_raw;
+
+  // AP3A2: FP Completion Register declarations and handshaking
+  wire fp_cmp_ready     = 1'b1; // PRF write ports and ROB are non-blocking sinks
+  wire fp_cmp_in_ready  = !fp_cmp_q.valid || fp_cmp_ready;
+  wire fp_execute_ready = fp_cmp_in_ready;
 
   // Downstream FP execution readiness
   wire fp_ex0_out_ready = fp_execute_ready;
@@ -276,6 +285,18 @@ module rv32_ooo_core
       end
     end
   end
+
+  // AP3A2: FP Completion Register sequential update
+  always_ff @(posedge clk) begin
+    if (rst || flush_valid) begin
+      fp_cmp_q <= '0;
+    end else begin
+      if (fp_cmp_in_ready) begin
+        fp_cmp_q <= fp_cmp_comb;
+      end
+    end
+  end
+
 
 
   // =========================================================================
@@ -495,8 +516,8 @@ module rv32_ooo_core
     .core_state  (core_state),
     .issue_valid (fp_ex0_valid_q),
     .issue_req   (fp_ex0_req_q),
-    .issue_ready (fp_execute_ready),
-    .fp_cmp      (fp_cmp_raw)
+    .issue_ready (fp_execute_ready_raw),
+    .fp_cmp      (fp_cmp_comb)
   );
 
   rv32_ooo_lsu u_lsu (
@@ -558,7 +579,7 @@ module rv32_ooo_core
   );
 
   // =========================================================================
-  // AP1A / AP3A1 Assertions: Flushed EX0 entry never produces completion
+  // AP1A / AP3A1 / AP3A2 Assertions: Flushed entry never produces completion
   // =========================================================================
 `ifndef SYNTHESIS
   always_ff @(posedge clk) begin
@@ -569,6 +590,11 @@ module rv32_ooo_core
       // On any flush event, FP EX0 stage must be invalidated immediately
       assert (!fp_ex0_valid_q || (fp_issue_valid && fp_ex0_in_ready))
         else $error("[AP3A1 Assertion Failed] Flushed FP EX0 entry was not invalidated.");
+    end
+    if (!rst && $past(!rst && flush_valid)) begin
+      // On cycle following flush, completion registers must be deasserted
+      assert (!fp_cmp_q.valid)
+        else $error("[AP3A2 Assertion Failed] Flushed FP completion register produced valid output.");
     end
   end
 `endif
