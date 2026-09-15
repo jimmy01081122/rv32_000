@@ -9,19 +9,20 @@ module rv32_ooo_fp_execute
 (
   input  logic        clk,
   input  logic        rst,          // synchronous active-high
+  input  logic        flush_valid,  // pipeline flush
 
   input  core_state_e core_state,
 
   // Execution request from FP IQ (post PRF read)
-  input  logic       issue_valid,
-  input  exec_req_t  issue_req,
-  output logic       issue_ready,
+  input  logic        issue_valid,
+  input  exec_req_t   issue_req,
+  output logic        issue_ready,
 
-  // Completion packet to writeback arbiter / ROB
-  output completion_t fp_cmp
+  // Registered completion packet to completion arbiter
+  output logic        cmp_valid,
+  output completion_t cmp_data,
+  input  logic        cmp_ready
 );
-
-  assign issue_ready = 1'b1;
 
   wire [31:0] op0 = issue_req.operand0;
   wire [31:0] op1 = issue_req.operand1;
@@ -271,136 +272,7 @@ module rv32_ooo_fp_execute
     res_flags  = '0;
 
     case (issue_req.uop.op)
-      // ── FMV.X.W ─────────────────────────────────────────────────────────
-      UOP_FMV_X_W: begin
-        res_data   = op0;
-        res_domain = REG_INT;
-      end
-
-      // ── FMV.W.X ─────────────────────────────────────────────────────────
-      UOP_FMV_W_X: begin
-        res_data   = op0;
-        res_domain = REG_FP;
-      end
-
-      // ── FSGNJ.S, FSGNJN.S, FSGNJX.S ──────────────────────────────────────
-      UOP_FSGNJ_S: begin
-        res_data   = {op1[31], op0[30:0]};
-        res_domain = REG_FP;
-      end
-
-      UOP_FSGNJN_S: begin
-        res_data   = {~op1[31], op0[30:0]};
-        res_domain = REG_FP;
-      end
-
-      UOP_FSGNJX_S: begin
-        res_data   = {op0[31] ^ op1[31], op0[30:0]};
-        res_domain = REG_FP;
-      end
-
-      // ── FMIN.S & FMAX.S ──────────────────────────────────────────────────
-      UOP_FMIN_S, UOP_FMAX_S: begin : blk_fminmax
-        logic is_min = (issue_req.uop.op == UOP_FMIN_S);
-        res_domain = REG_FP;
-
-        if (is_snan(op0) || is_snan(op1)) begin
-          res_flags.nv = 1'b1;
-        end
-
-        if (is_nan(op0) && is_nan(op1)) begin
-          res_data = CANONICAL_NAN;
-        end else if (is_nan(op0)) begin
-          res_data = op1;
-        end else if (is_nan(op1)) begin
-          res_data = op0;
-        end else if (is_zero(op0) && is_zero(op1)) begin
-          // -0.0 is considered smaller than +0.0
-          if (op0[31] != op1[31]) begin
-            res_data = is_min ? (op0[31] ? op0 : op1) : (op0[31] ? op1 : op0);
-          end else begin
-            res_data = op0;
-          end
-        end else begin
-          logic op0_less;
-          if (op0[31] != op1[31]) begin
-            op0_less = op0[31]; // negative is smaller
-          end else if (op0[31]) begin
-            op0_less = (op0[30:0] > op1[30:0]); // both neg
-          end else begin
-            op0_less = (op0[30:0] < op1[30:0]); // both pos
-          end
-
-          if (is_min) begin
-            res_data = op0_less ? op0 : op1;
-          end else begin
-            res_data = op0_less ? op1 : op0;
-          end
-        end
-      end
-
-      // ── FEQ.S, FLT.S, FLE.S ──────────────────────────────────────────────
-      UOP_FEQ_S: begin
-        res_domain = REG_INT;
-        if (is_snan(op0) || is_snan(op1)) res_flags.nv = 1'b1;
-        if (is_nan(op0) || is_nan(op1)) begin
-          res_data = 32'd0;
-        end else if (is_zero(op0) && is_zero(op1)) begin
-          res_data = 32'd1; // +0.0 == -0.0
-        end else begin
-          res_data = (op0 == op1) ? 32'd1 : 32'd0;
-        end
-      end
-
-      UOP_FLT_S: begin
-        res_domain = REG_INT;
-        if (is_nan(op0) || is_nan(op1)) begin
-          res_flags.nv = 1'b1;
-          res_data     = 32'd0;
-        end else if (is_zero(op0) && is_zero(op1)) begin
-          res_data = 32'd0;
-        end else if (op0[31] != op1[31]) begin
-          res_data = op0[31] ? 32'd1 : 32'd0;
-        end else if (op0[31]) begin
-          res_data = (op0[30:0] > op1[30:0]) ? 32'd1 : 32'd0; // both neg
-        end else begin
-          res_data = (op0[30:0] < op1[30:0]) ? 32'd1 : 32'd0; // both pos
-        end
-      end
-
-      UOP_FLE_S: begin
-        res_domain = REG_INT;
-        if (is_nan(op0) || is_nan(op1)) begin
-          res_flags.nv = 1'b1;
-          res_data     = 32'd0;
-        end else if (is_zero(op0) && is_zero(op1)) begin
-          res_data = 32'd1;
-        end else if (op0 == op1) begin
-          res_data = 32'd1;
-        end else if (op0[31] != op1[31]) begin
-          res_data = op0[31] ? 32'd1 : 32'd0;
-        end else if (op0[31]) begin
-          res_data = (op0[30:0] >= op1[30:0]) ? 32'd1 : 32'd0; // both neg
-        end else begin
-          res_data = (op0[30:0] <= op1[30:0]) ? 32'd1 : 32'd0; // both pos
-        end
-      end
-
-      // ── FCLASS.S ─────────────────────────────────────────────────────────
-      UOP_FCLASS_S: begin
-        res_domain = REG_INT;
-        res_data   = 32'd0;
-        if (is_snan(op0))                       res_data[8] = 1'b1; // signaling NaN
-        else if (is_qnan(op0))                  res_data[9] = 1'b1; // quiet NaN
-        else if (op0[31] && is_inf(op0))        res_data[0] = 1'b1; // -inf
-        else if (op0[31] && is_subnormal(op0))  res_data[2] = 1'b1; // -subnormal
-        else if (op0[31] && is_zero(op0))       res_data[3] = 1'b1; // -0.0
-        else if (op0[31])                       res_data[1] = 1'b1; // -normal
-        else if (!op0[31] && is_zero(op0))      res_data[4] = 1'b1; // +0.0
-        else if (!op0[31] && is_subnormal(op0)) res_data[5] = 1'b1; // +subnormal
-        else if (!op0[31] && is_inf(op0))       res_data[7] = 1'b1; // +inf
-        else                                    res_data[6] = 1'b1; // +normal
-      end
+      // Note: FMV, FSGNJ, FMIN/MAX, FEQ/LT/LE, FCLASS extracted to rv32_ooo_fp_simple (AP4B)
 
       // ── FCVT.W.S & FCVT.WU.S ─────────────────────────────────────────────
       UOP_FCVT_W_S: begin : blk_fcvt_w
@@ -866,23 +738,54 @@ module rv32_ooo_fp_execute
   end
 
   // =========================================================================
-  // Completion Packet Formation
+  // Combinational Completion Packet Formation
   // =========================================================================
 
+  completion_t comb_cmp;
+
   always_comb begin
-    fp_cmp = '0;
+    comb_cmp = '0;
 
     if (issue_valid) begin
-      fp_cmp.valid          = 1'b1;
-      fp_cmp.rob_tag        = issue_req.uop.rob_tag;
-      fp_cmp.result_valid   = issue_req.uop.dst.valid;
-      fp_cmp.result_domain  = res_domain;
-      fp_cmp.result_phys    = issue_req.uop.dst.new_phys;
-      fp_cmp.result_data    = res_data;
-      fp_cmp.fp_flags_valid = 1'b1;
-      fp_cmp.fp_flags       = res_flags;
-      fp_cmp.exception      = issue_req.uop.exception;
+      comb_cmp.valid          = 1'b1;
+      comb_cmp.rob_tag        = issue_req.uop.rob_tag;
+      comb_cmp.result_valid   = issue_req.uop.dst.valid;
+      comb_cmp.result_domain  = res_domain;
+      comb_cmp.result_phys    = issue_req.uop.dst.new_phys;
+      comb_cmp.result_data    = res_data;
+      comb_cmp.fp_flags_valid = 1'b1;
+      comb_cmp.fp_flags       = res_flags;
+      comb_cmp.exception      = issue_req.uop.exception;
     end
   end
+
+  // =========================================================================
+  // Independent Registered Holding Output Stage
+  // =========================================================================
+
+  logic        holding_valid;
+  completion_t holding_data;
+
+  wire can_accept = !holding_valid || cmp_ready;
+  assign issue_ready = can_accept;
+
+  always_ff @(posedge clk) begin
+    if (rst || flush_valid) begin
+      holding_valid <= 1'b0;
+      holding_data  <= '0;
+    end else begin
+      if (can_accept) begin
+        holding_valid <= issue_valid;
+        if (issue_valid) begin
+          holding_data <= comb_cmp;
+        end else begin
+          holding_data <= '0;
+        end
+      end
+    end
+  end
+
+  assign cmp_valid = holding_valid;
+  assign cmp_data  = holding_data;
 
 endmodule

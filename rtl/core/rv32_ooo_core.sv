@@ -92,7 +92,6 @@ module rv32_ooo_core
   // Completion Busses (§24.1)
   completion_t  int_cmp;
   logic [31:0]  int_cmp_pc;
-  completion_t  fp_cmp_comb;
   completion_t  fp_cmp_q;
   completion_t  fp_cmp_raw;
   completion_t  ld_cmp;
@@ -222,21 +221,23 @@ module rv32_ooo_core
   end
 
   // =========================================================================
-  // 3b. AP3A1 / AP3A2: FP PRF Operand Fetch, FP_EX0, & Completion Register
+  // 3b. AP4B: FP Execution Cluster Steering & 2:1 Completion Arbiter
   // =========================================================================
 
   // FP EX0 Register declarations
   logic      fp_ex0_valid_q;
   exec_req_t fp_ex0_req_q;
-  logic      fp_execute_ready_raw;
 
-  // AP3A2: FP Completion Register declarations and handshaking
-  wire fp_cmp_ready     = 1'b1; // PRF write ports and ROB are non-blocking sinks
-  wire fp_cmp_in_ready  = !fp_cmp_q.valid || fp_cmp_ready;
-  wire fp_execute_ready = fp_cmp_in_ready;
+  wire fp_ex0_is_simple = (fp_ex0_req_q.uop.fu_class == FU_FP_MISC);
 
-  // Downstream FP execution readiness
-  wire fp_ex0_out_ready = fp_execute_ready;
+  wire fp_simple_issue_valid = fp_ex0_valid_q && fp_ex0_is_simple;
+  wire fp_heavy_issue_valid  = fp_ex0_valid_q && !fp_ex0_is_simple;
+
+  logic fp_simple_issue_ready;
+  logic fp_heavy_issue_ready;
+
+  wire fp_target_ready  = fp_ex0_is_simple ? fp_simple_issue_ready : fp_heavy_issue_ready;
+  wire fp_ex0_out_ready = fp_target_ready;
   wire fp_ex0_out_valid = fp_ex0_valid_q;
 
   // Elastic input handshake to FP IQ
@@ -286,14 +287,29 @@ module rv32_ooo_core
     end
   end
 
-  // AP3A2: FP Completion Register sequential update
-  always_ff @(posedge clk) begin
-    if (rst || flush_valid) begin
-      fp_cmp_q <= '0;
-    end else begin
-      if (fp_cmp_in_ready) begin
-        fp_cmp_q <= fp_cmp_comb;
-      end
+  // AP4B: FP 2:1 Completion Arbiter
+  // PRF write ports and ROB are non-blocking sinks: fp_cmp_ready = 1'b1.
+  wire fp_cmp_ready = 1'b1;
+
+  logic        fp_simple_cmp_valid;
+  completion_t fp_simple_cmp_data;
+  logic        fp_simple_cmp_ready;
+
+  logic        fp_heavy_cmp_valid;
+  completion_t fp_heavy_cmp_data;
+  logic        fp_heavy_cmp_ready;
+
+  always_comb begin
+    fp_cmp_q            = '0;
+    fp_simple_cmp_ready = 1'b0;
+    fp_heavy_cmp_ready  = 1'b0;
+
+    if (fp_simple_cmp_valid) begin
+      fp_cmp_q            = fp_simple_cmp_data;
+      fp_simple_cmp_ready = fp_cmp_ready;
+    end else if (fp_heavy_cmp_valid) begin
+      fp_cmp_q            = fp_heavy_cmp_data;
+      fp_heavy_cmp_ready  = fp_cmp_ready;
     end
   end
 
@@ -510,14 +526,29 @@ module rv32_ooo_core
     .divider_busy     (divider_busy)
   );
 
+  rv32_ooo_fp_simple u_fp_simple (
+    .clk         (clk),
+    .rst         (rst),
+    .flush_valid (flush_valid),
+    .issue_valid (fp_simple_issue_valid),
+    .issue_req   (fp_ex0_req_q),
+    .issue_ready (fp_simple_issue_ready),
+    .cmp_valid   (fp_simple_cmp_valid),
+    .cmp_data    (fp_simple_cmp_data),
+    .cmp_ready   (fp_simple_cmp_ready)
+  );
+
   rv32_ooo_fp_execute u_fp_execute (
     .clk         (clk),
     .rst         (rst),
+    .flush_valid (flush_valid),
     .core_state  (core_state),
-    .issue_valid (fp_ex0_valid_q),
+    .issue_valid (fp_heavy_issue_valid),
     .issue_req   (fp_ex0_req_q),
-    .issue_ready (fp_execute_ready_raw),
-    .fp_cmp      (fp_cmp_comb)
+    .issue_ready (fp_heavy_issue_ready),
+    .cmp_valid   (fp_heavy_cmp_valid),
+    .cmp_data    (fp_heavy_cmp_data),
+    .cmp_ready   (fp_heavy_cmp_ready)
   );
 
   rv32_ooo_lsu u_lsu (
