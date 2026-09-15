@@ -22,6 +22,7 @@ RTL_FILES=(
   rtl/execute/int/rv32_ooo_int_execute.sv
   rtl/execute/fp/rv32_ooo_fp_simple.sv
   rtl/execute/fp/rv32_ooo_fp_execute.sv
+  rtl/execute/fp/rv32_ooo_fp_divsqrt.sv
   rtl/lsu/rv32_ooo_lsu.sv
   rtl/csr/rv32_ooo_csr.sv
   rtl/core/rv32_ooo_core.sv

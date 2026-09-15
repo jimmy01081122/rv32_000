@@ -3130,22 +3130,6 @@ module rv32_ooo_fp_execute (
 		input reg [47:0] inp;
 		sv2v_cast_48 = inp;
 	endfunction
-	function automatic [49:0] sv2v_cast_50;
-		input reg [49:0] inp;
-		sv2v_cast_50 = inp;
-	endfunction
-	function automatic [23:0] sv2v_cast_24;
-		input reg [23:0] inp;
-		sv2v_cast_24 = inp;
-	endfunction
-	function automatic [55:0] sv2v_cast_56;
-		input reg [55:0] inp;
-		sv2v_cast_56 = inp;
-	endfunction
-	function automatic signed [27:0] sv2v_cast_28_signed;
-		input reg signed [27:0] inp;
-		sv2v_cast_28_signed = inp;
-	endfunction
 	always @(*) begin
 		if (_sv2v_0)
 			;
@@ -3584,126 +3568,6 @@ module rv32_ooo_fp_execute (
 						round_and_pack(sign_final, base_exp, fma_mant, rm, res_data, res_flags);
 				end
 			end
-			8'd66: begin : blk_fdiv
-				reg sign_div;
-				reg s0;
-				reg s1;
-				reg signed [31:0] e0;
-				reg signed [31:0] e1;
-				reg [23:0] m0;
-				reg [23:0] m1;
-				reg [49:0] dividend;
-				reg [49:0] div_res;
-				reg [23:0] rem_res;
-				reg [47:0] quotient;
-				reg signed [31:0] exp_div;
-				sign_div = 1'b0;
-				s0 = 1'sb0;
-				s1 = 1'sb0;
-				e0 = 0;
-				e1 = 0;
-				m0 = 1'sb0;
-				m1 = 1'sb0;
-				dividend = 1'sb0;
-				div_res = 1'sb0;
-				rem_res = 1'sb0;
-				quotient = 1'sb0;
-				exp_div = 0;
-				res_domain = 2'b10;
-				sign_div = op0[31] ^ op1[31];
-				if (is_snan(op0) || is_snan(op1)) begin
-					res_flags[4] = 1'b1;
-					res_data = CANONICAL_NAN;
-				end
-				else if (is_nan(op0) || is_nan(op1))
-					res_data = CANONICAL_NAN;
-				else if (is_zero(op0) && is_zero(op1)) begin
-					res_flags[4] = 1'b1;
-					res_data = CANONICAL_NAN;
-				end
-				else if (is_inf(op0) && is_inf(op1)) begin
-					res_flags[4] = 1'b1;
-					res_data = CANONICAL_NAN;
-				end
-				else if (is_inf(op0))
-					res_data = {sign_div, 31'h7f800000};
-				else if (is_inf(op1))
-					res_data = {sign_div, 31'd0};
-				else if (is_zero(op1)) begin
-					res_flags[3] = 1'b1;
-					res_data = {sign_div, 31'h7f800000};
-				end
-				else if (is_zero(op0))
-					res_data = {sign_div, 31'd0};
-				else begin
-					unpack_f32(op0, s0, e0, m0);
-					unpack_f32(op1, s1, e1, m1);
-					dividend = {m0[23:0], 26'd0};
-					div_res = dividend / sv2v_cast_50(m1[23:0]);
-					rem_res = sv2v_cast_24(dividend % sv2v_cast_50(m1[23:0]));
-					quotient = {div_res[47:1], div_res[0] | (|rem_res)};
-					exp_div = e0 - e1;
-					round_and_pack(sign_div, exp_div, quotient, rm, res_data, res_flags);
-				end
-			end
-			8'd67: begin : blk_fsqrt
-				reg s0;
-				reg signed [31:0] e0;
-				reg [23:0] m0;
-				reg [55:0] radicand;
-				reg [55:0] rem_val;
-				reg signed [31:0] exp_sqrt;
-				reg [27:0] q;
-				reg [47:0] sqrt_mant;
-				s0 = 1'b0;
-				e0 = 0;
-				m0 = 1'sb0;
-				radicand = 1'sb0;
-				rem_val = 1'sb0;
-				exp_sqrt = 0;
-				q = 1'sb0;
-				sqrt_mant = 1'sb0;
-				res_domain = 2'b10;
-				if (is_snan(op0)) begin
-					res_flags[4] = 1'b1;
-					res_data = CANONICAL_NAN;
-				end
-				else if (is_nan(op0))
-					res_data = CANONICAL_NAN;
-				else if (op0[31] && !is_zero(op0)) begin
-					res_flags[4] = 1'b1;
-					res_data = CANONICAL_NAN;
-				end
-				else if (is_zero(op0) || is_inf(op0))
-					res_data = op0;
-				else begin
-					unpack_f32(op0, s0, e0, m0);
-					if (e0[0]) begin
-						radicand = {2'd0, m0[23:0], 30'd0};
-						exp_sqrt = (e0 < 0 ? (e0 - 1) / 2 : e0 / 2);
-					end
-					else begin
-						radicand = {3'd0, m0[23:0], 29'd0};
-						exp_sqrt = e0 / 2;
-					end
-					rem_val = radicand;
-					q = 28'd0;
-					begin : sv2v_autoblock_11
-						reg signed [31:0] b;
-						for (b = 27; b >= 0; b = b - 1)
-							begin : sv2v_autoblock_12
-								reg [55:0] sub_val;
-								sub_val = (sv2v_cast_56(q) << (b + 1)) | (56'd1 << (2 * b));
-								if (rem_val >= sub_val) begin
-									rem_val = rem_val - sub_val;
-									q = q | sv2v_cast_28_signed(1 << b);
-								end
-							end
-					end
-					sqrt_mant = {21'd0, q[26:0]};
-					round_and_pack(1'b0, exp_sqrt, sqrt_mant, rm, res_data, res_flags);
-				end
-			end
 			default: begin
 				res_data = 32'd0;
 				res_domain = 2'b10;
@@ -3745,6 +3609,623 @@ module rv32_ooo_fp_execute (
 		end
 	assign cmp_valid = holding_valid;
 	assign cmp_data = holding_data;
+	initial _sv2v_0 = 0;
+endmodule
+module rv32_ooo_fp_divsqrt (
+	clk,
+	rst,
+	flush_valid,
+	issue_valid,
+	issue_req,
+	issue_ready,
+	cmp_valid,
+	cmp_data,
+	cmp_ready
+);
+	reg _sv2v_0;
+	input wire clk;
+	input wire rst;
+	input wire flush_valid;
+	input wire issue_valid;
+	localparam integer rv32_ooo_params_FETCH_EPOCH_W = 4;
+	localparam integer rv32_ooo_params_LQ_IDX_W = 4;
+	localparam integer rv32_ooo_params_LSQ_GEN_W = 4;
+	localparam integer rv32_ooo_params_ARCH_REG_W = 5;
+	localparam integer rv32_ooo_params_PHYS_W = 6;
+	localparam integer rv32_ooo_params_ROB_IDX_W = 4;
+	localparam integer rv32_ooo_params_ROB_SEQ_WIDTH = 12;
+	localparam integer rv32_ooo_params_SQ_IDX_W = 4;
+	input wire [(((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? (((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 40 : 1 - ((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39)) + 95:0] issue_req;
+	output wire issue_ready;
+	output reg cmp_valid;
+	output reg [(((((((1 + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 3) + rv32_ooo_params_PHYS_W) + 112) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) - 1:0] cmp_data;
+	input wire cmp_ready;
+	localparam [31:0] CANONICAL_NAN = 32'h7fc00000;
+	function automatic is_nan;
+		input reg [31:0] f;
+		is_nan = (f[30:23] == 8'hff) && (f[22:0] != 23'd0);
+	endfunction
+	function automatic is_snan;
+		input reg [31:0] f;
+		is_snan = ((f[30:23] == 8'hff) && (f[22] == 1'b0)) && (f[21:0] != 22'd0);
+	endfunction
+	function automatic is_qnan;
+		input reg [31:0] f;
+		is_qnan = (f[30:23] == 8'hff) && (f[22] == 1'b1);
+	endfunction
+	function automatic is_inf;
+		input reg [31:0] f;
+		is_inf = (f[30:23] == 8'hff) && (f[22:0] == 23'd0);
+	endfunction
+	function automatic is_zero;
+		input reg [31:0] f;
+		is_zero = f[30:0] == 31'd0;
+	endfunction
+	function automatic is_subnormal;
+		input reg [31:0] f;
+		is_subnormal = (f[30:23] == 8'd0) && (f[22:0] != 23'd0);
+	endfunction
+	function automatic signed [31:0] sv2v_cast_32_signed;
+		input reg signed [31:0] inp;
+		sv2v_cast_32_signed = inp;
+	endfunction
+	task automatic unpack_f32;
+		input reg [31:0] f;
+		output reg s;
+		output reg signed [31:0] e;
+		output reg [23:0] m;
+		begin
+			s = f[31];
+			if (f[30:23] == 8'd0) begin
+				e = -126;
+				m = {1'b0, f[22:0]};
+			end
+			else begin
+				e = sv2v_cast_32_signed(f[30:23]) - 127;
+				m = {1'b1, f[22:0]};
+			end
+		end
+	endtask
+	function automatic signed [31:0] clz24;
+		input reg [23:0] val;
+		reg signed [31:0] res;
+		reg [0:1] _sv2v_jump;
+		begin
+			_sv2v_jump = 2'b00;
+			res = 24;
+			begin : sv2v_autoblock_1
+				reg signed [31:0] i;
+				begin : sv2v_autoblock_2
+					reg signed [31:0] _sv2v_value_on_break;
+					for (i = 23; i >= 0; i = i - 1)
+						if (_sv2v_jump < 2'b10) begin
+							_sv2v_jump = 2'b00;
+							if (val[i]) begin
+								res = 23 - i;
+								_sv2v_jump = 2'b10;
+							end
+							_sv2v_value_on_break = i;
+						end
+					if (!(_sv2v_jump < 2'b10))
+						i = _sv2v_value_on_break;
+					if (_sv2v_jump != 2'b11)
+						_sv2v_jump = 2'b00;
+				end
+			end
+			if (_sv2v_jump == 2'b00) begin
+				clz24 = res;
+				_sv2v_jump = 2'b11;
+			end
+		end
+	endfunction
+	function automatic signed [7:0] sv2v_cast_8_signed;
+		input reg signed [7:0] inp;
+		sv2v_cast_8_signed = inp;
+	endfunction
+	task automatic round_and_pack;
+		input reg sign;
+		input reg signed [31:0] exp;
+		input reg [47:0] mantissa;
+		input reg [2:0] rmode;
+		output reg [31:0] out_f;
+		output reg [4:0] flags;
+		reg signed [31:0] norm_exp;
+		reg [47:0] norm_mant;
+		reg guard;
+		reg round_bit;
+		reg sticky;
+		reg round_up;
+		reg [24:0] significand;
+		reg signed [31:0] final_exp;
+		reg [5:0] msb_pos;
+		reg signed [31:0] shift_amt;
+		reg signed [31:0] max_lshift;
+		reg [47:0] sticky_mask;
+		begin
+			flags = 1'sb0;
+			norm_exp = exp;
+			norm_mant = mantissa;
+			sticky = 1'b0;
+			guard = 1'b0;
+			round_bit = 1'b0;
+			round_up = 1'b0;
+			significand = 1'sb0;
+			final_exp = 0;
+			out_f = 1'sb0;
+			msb_pos = 1'sb0;
+			shift_amt = 0;
+			max_lshift = 0;
+			sticky_mask = 1'sb0;
+			if (norm_mant == 48'd0)
+				out_f = {sign, 31'd0};
+			else begin
+				if (norm_mant[47])
+					msb_pos = 6'd47;
+				else if (norm_mant[46])
+					msb_pos = 6'd46;
+				else if (norm_mant[45])
+					msb_pos = 6'd45;
+				else if (norm_mant[44])
+					msb_pos = 6'd44;
+				else if (norm_mant[43])
+					msb_pos = 6'd43;
+				else if (norm_mant[42])
+					msb_pos = 6'd42;
+				else if (norm_mant[41])
+					msb_pos = 6'd41;
+				else if (norm_mant[40])
+					msb_pos = 6'd40;
+				else if (norm_mant[39])
+					msb_pos = 6'd39;
+				else if (norm_mant[38])
+					msb_pos = 6'd38;
+				else if (norm_mant[37])
+					msb_pos = 6'd37;
+				else if (norm_mant[36])
+					msb_pos = 6'd36;
+				else if (norm_mant[35])
+					msb_pos = 6'd35;
+				else if (norm_mant[34])
+					msb_pos = 6'd34;
+				else if (norm_mant[33])
+					msb_pos = 6'd33;
+				else if (norm_mant[32])
+					msb_pos = 6'd32;
+				else if (norm_mant[31])
+					msb_pos = 6'd31;
+				else if (norm_mant[30])
+					msb_pos = 6'd30;
+				else if (norm_mant[29])
+					msb_pos = 6'd29;
+				else if (norm_mant[28])
+					msb_pos = 6'd28;
+				else if (norm_mant[27])
+					msb_pos = 6'd27;
+				else if (norm_mant[26])
+					msb_pos = 6'd26;
+				else if (norm_mant[25])
+					msb_pos = 6'd25;
+				else if (norm_mant[24])
+					msb_pos = 6'd24;
+				else if (norm_mant[23])
+					msb_pos = 6'd23;
+				else if (norm_mant[22])
+					msb_pos = 6'd22;
+				else if (norm_mant[21])
+					msb_pos = 6'd21;
+				else if (norm_mant[20])
+					msb_pos = 6'd20;
+				else if (norm_mant[19])
+					msb_pos = 6'd19;
+				else if (norm_mant[18])
+					msb_pos = 6'd18;
+				else if (norm_mant[17])
+					msb_pos = 6'd17;
+				else if (norm_mant[16])
+					msb_pos = 6'd16;
+				else if (norm_mant[15])
+					msb_pos = 6'd15;
+				else if (norm_mant[14])
+					msb_pos = 6'd14;
+				else if (norm_mant[13])
+					msb_pos = 6'd13;
+				else if (norm_mant[12])
+					msb_pos = 6'd12;
+				else if (norm_mant[11])
+					msb_pos = 6'd11;
+				else if (norm_mant[10])
+					msb_pos = 6'd10;
+				else if (norm_mant[9])
+					msb_pos = 6'd9;
+				else if (norm_mant[8])
+					msb_pos = 6'd8;
+				else if (norm_mant[7])
+					msb_pos = 6'd7;
+				else if (norm_mant[6])
+					msb_pos = 6'd6;
+				else if (norm_mant[5])
+					msb_pos = 6'd5;
+				else if (norm_mant[4])
+					msb_pos = 6'd4;
+				else if (norm_mant[3])
+					msb_pos = 6'd3;
+				else if (norm_mant[2])
+					msb_pos = 6'd2;
+				else if (norm_mant[1])
+					msb_pos = 6'd1;
+				else
+					msb_pos = 6'd0;
+				shift_amt = sv2v_cast_32_signed(msb_pos) - 26;
+				if (shift_amt > 0) begin
+					sticky_mask = (shift_amt >= 48 ? {48 {1'sb1}} : (48'd1 << shift_amt) - 48'd1);
+					sticky = |(norm_mant & sticky_mask);
+					norm_mant = (shift_amt >= 48 ? {48 {1'sb0}} : norm_mant >> shift_amt);
+					norm_exp = norm_exp + shift_amt;
+				end
+				if (shift_amt < 0) begin
+					max_lshift = norm_exp + 126;
+					if (max_lshift <= 0) begin : sv2v_autoblock_3
+						reg signed [31:0] sub_rshift;
+						sub_rshift = -(norm_exp + 126);
+						sticky_mask = (sub_rshift >= 48 ? {48 {1'sb1}} : (48'd1 << sub_rshift) - 48'd1);
+						sticky = |(norm_mant & sticky_mask);
+						norm_mant = (sub_rshift >= 48 ? {48 {1'sb0}} : norm_mant >> sub_rshift);
+						norm_exp = -126;
+					end
+					else begin : sv2v_autoblock_4
+						reg signed [31:0] lshift;
+						lshift = (-shift_amt < max_lshift ? -shift_amt : max_lshift);
+						norm_mant = norm_mant << lshift;
+						norm_exp = norm_exp - lshift;
+					end
+				end
+				guard = norm_mant[2];
+				round_bit = norm_mant[1];
+				sticky = sticky | norm_mant[0];
+				round_up = 1'b0;
+				case (rmode)
+					3'b000: round_up = guard && ((round_bit || sticky) || norm_mant[3]);
+					3'b001: round_up = 1'b0;
+					3'b010: round_up = sign && ((guard || round_bit) || sticky);
+					3'b011: round_up = !sign && ((guard || round_bit) || sticky);
+					3'b100: round_up = guard;
+					default: round_up = guard && ((round_bit || sticky) || norm_mant[3]);
+				endcase
+				if ((guard || round_bit) || sticky)
+					flags[0] = 1'b1;
+				significand = {1'b0, norm_mant[26:3]};
+				if (round_up)
+					significand = significand + 25'd1;
+				final_exp = norm_exp;
+				if (significand[24]) begin
+					significand = significand >> 1;
+					final_exp = final_exp + 1;
+				end
+				if (final_exp >= 128) begin
+					flags[2] = 1'b1;
+					flags[0] = 1'b1;
+					case (rmode)
+						3'b000, 3'b100: out_f = {sign, 31'h7f800000};
+						3'b001: out_f = {sign, 31'h7f7fffff};
+						3'b010: out_f = (sign ? 32'hff800000 : 32'h7f7fffff);
+						3'b011: out_f = (sign ? 32'hff7fffff : 32'h7f800000);
+						default: out_f = {sign, 31'h7f800000};
+					endcase
+				end
+				else if (final_exp < -126) begin
+					flags[1] = 1'b1;
+					flags[0] = 1'b1;
+					out_f = {sign, 31'd0};
+				end
+				else
+					out_f = {sign, sv2v_cast_8_signed(final_exp + 127), significand[22:0]};
+			end
+		end
+	endtask
+	function automatic [(((((((1 + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 3) + rv32_ooo_params_PHYS_W) + 112) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) - 1:0] make_completion;
+		input reg [(((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39:0] uop_in;
+		input reg [31:0] data_in;
+		input reg [4:0] flags_in;
+		reg [(((((((1 + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 3) + rv32_ooo_params_PHYS_W) + 112) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) - 1:0] cmp;
+		begin
+			cmp = 1'sb0;
+			cmp[1 + ((rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W) + (3 + (rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))))))] = 1'b1;
+			cmp[(rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W) + (3 + (rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))))-:(((rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W) + (3 + (rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))))) >= (3 + (rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))))) ? (((rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W) + (3 + (rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))))) - (3 + (rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))))))) + 1 : ((3 + (rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))))) - ((rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W) + (3 + (rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))))))) + 1)] = uop_in[(rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W) + (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))-:(((rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W) + (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) >= (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) ? (((rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W) + (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40)))))))))) + 1 : ((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) - ((rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W) + (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))))) + 1)];
+			cmp[3 + (rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))))] = uop_in[((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))) - (((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) - 1) - (3 + (rv32_ooo_params_ARCH_REG_W + (rv32_ooo_params_PHYS_W + (rv32_ooo_params_PHYS_W - 1)))))];
+			cmp[2 + (rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))))-:((2 + (rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))))) >= (rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))))) ? ((2 + (rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))))) - (rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))))) + 1 : ((rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))))) - (2 + (rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))))) + 1)] = 2'b10;
+			cmp[rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))-:((rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))) >= (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))) ? ((rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))) - (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))))) + 1 : ((112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))) - (rv32_ooo_params_PHYS_W + (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))))) + 1)] = uop_in[((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))) - (((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) - 1) - (rv32_ooo_params_PHYS_W + (rv32_ooo_params_PHYS_W - 1)))-:((rv32_ooo_params_PHYS_W + (rv32_ooo_params_PHYS_W - 1)) >= (rv32_ooo_params_PHYS_W + 0) ? ((rv32_ooo_params_PHYS_W + (rv32_ooo_params_PHYS_W - 1)) - (rv32_ooo_params_PHYS_W + 0)) + 1 : ((rv32_ooo_params_PHYS_W + 0) - (rv32_ooo_params_PHYS_W + (rv32_ooo_params_PHYS_W - 1))) + 1)];
+			cmp[112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))-:((112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))) >= (80 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))) ? ((112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))) - (80 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))))) + 1 : ((80 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))) - (112 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))) + 1)] = data_in;
+			cmp[42 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))] = 1'b1;
+			cmp[41 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))-:((41 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))) >= (36 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))) ? ((41 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))) - (36 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))))) + 1 : ((36 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))) - (41 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))) + 1)] = flags_in;
+			cmp[80 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))-:((80 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))) >= (42 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))) ? ((80 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))) - (42 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0))))) + 1 : ((42 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))) - (80 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 0)))) + 1)] = uop_in[37-:38];
+			make_completion = cmp;
+		end
+	endfunction
+	reg [2:0] state;
+	reg [(((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39:0] uop_saved;
+	reg [2:0] rm_saved;
+	reg [7:0] op_saved;
+	reg sign_reg;
+	reg signed [31:0] exp_reg;
+	reg [31:0] special_res_data;
+	reg [4:0] special_res_flags;
+	reg [55:0] rem;
+	reg [24:0] divisor_reg;
+	reg [27:0] q;
+	reg [4:0] count;
+	reg holding_valid;
+	reg [(((((((1 + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 3) + rv32_ooo_params_PHYS_W) + 112) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) - 1:0] holding_data;
+	assign issue_ready = (state == 3'd0) && !holding_valid;
+	wire [31:0] op0 = issue_req[95-:32];
+	wire [31:0] op1 = issue_req[63-:32];
+	reg is_div_special;
+	reg [31:0] div_special_data;
+	reg [4:0] div_special_flags;
+	always @(*) begin
+		if (_sv2v_0)
+			;
+		is_div_special = 1'b0;
+		div_special_data = 1'sb0;
+		div_special_flags = 1'sb0;
+		if (issue_req[(((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? ((((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? (((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 40 : 1 - ((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39)) + 95) - (((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) : ((96 - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + ((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) >= (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) ? ((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) - (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40)))))))))) + 1 : ((4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + 1)) - 1)-:((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) >= (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) ? ((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) - (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40)))))))))) + 1 : ((4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + 1)] == 8'd66) begin : sv2v_autoblock_5
+			reg sign_div;
+			sign_div = op0[31] ^ op1[31];
+			if (is_snan(op0) || is_snan(op1)) begin
+				is_div_special = 1'b1;
+				div_special_flags[4] = 1'b1;
+				div_special_data = CANONICAL_NAN;
+			end
+			else if (is_nan(op0) || is_nan(op1)) begin
+				is_div_special = 1'b1;
+				div_special_data = CANONICAL_NAN;
+			end
+			else if (is_zero(op0) && is_zero(op1)) begin
+				is_div_special = 1'b1;
+				div_special_flags[4] = 1'b1;
+				div_special_data = CANONICAL_NAN;
+			end
+			else if (is_inf(op0) && is_inf(op1)) begin
+				is_div_special = 1'b1;
+				div_special_flags[4] = 1'b1;
+				div_special_data = CANONICAL_NAN;
+			end
+			else if (is_inf(op0)) begin
+				is_div_special = 1'b1;
+				div_special_data = {sign_div, 31'h7f800000};
+			end
+			else if (is_inf(op1)) begin
+				is_div_special = 1'b1;
+				div_special_data = {sign_div, 31'd0};
+			end
+			else if (is_zero(op1)) begin
+				is_div_special = 1'b1;
+				div_special_flags[3] = 1'b1;
+				div_special_data = {sign_div, 31'h7f800000};
+			end
+			else if (is_zero(op0)) begin
+				is_div_special = 1'b1;
+				div_special_data = {sign_div, 31'd0};
+			end
+		end
+	end
+	reg is_sqrt_special;
+	reg [31:0] sqrt_special_data;
+	reg [4:0] sqrt_special_flags;
+	always @(*) begin
+		if (_sv2v_0)
+			;
+		is_sqrt_special = 1'b0;
+		sqrt_special_data = 1'sb0;
+		sqrt_special_flags = 1'sb0;
+		if (issue_req[(((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? ((((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? (((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 40 : 1 - ((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39)) + 95) - (((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) : ((96 - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + ((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) >= (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) ? ((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) - (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40)))))))))) + 1 : ((4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + 1)) - 1)-:((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) >= (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) ? ((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) - (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40)))))))))) + 1 : ((4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + 1)] == 8'd67) begin
+			if (is_snan(op0)) begin
+				is_sqrt_special = 1'b1;
+				sqrt_special_flags[4] = 1'b1;
+				sqrt_special_data = CANONICAL_NAN;
+			end
+			else if (is_nan(op0)) begin
+				is_sqrt_special = 1'b1;
+				sqrt_special_data = CANONICAL_NAN;
+			end
+			else if (op0[31] && !is_zero(op0)) begin
+				is_sqrt_special = 1'b1;
+				sqrt_special_flags[4] = 1'b1;
+				sqrt_special_data = CANONICAL_NAN;
+			end
+			else if (is_zero(op0) || is_inf(op0)) begin
+				is_sqrt_special = 1'b1;
+				sqrt_special_data = op0;
+			end
+		end
+	end
+	wire s0_unpk;
+	wire s1_unpk;
+	wire signed [31:0] e0_unpk;
+	wire signed [31:0] e1_unpk;
+	wire [23:0] m0_unpk;
+	wire [23:0] m1_unpk;
+	reg signed [31:0] lz0;
+	reg signed [31:0] lz1;
+	reg [23:0] norm_m0;
+	reg [23:0] norm_m1;
+	reg signed [31:0] norm_e0;
+	reg signed [31:0] norm_e1;
+	always @(*) begin
+		if (_sv2v_0)
+			;
+		unpack_f32(op0, s0_unpk, e0_unpk, m0_unpk);
+		unpack_f32(op1, s1_unpk, e1_unpk, m1_unpk);
+		lz0 = clz24(m0_unpk);
+		lz1 = clz24(m1_unpk);
+		norm_m0 = m0_unpk << lz0;
+		norm_e0 = e0_unpk - lz0;
+		norm_m1 = m1_unpk << lz1;
+		norm_e1 = e1_unpk - lz1;
+	end
+	wire [24:0] div_curr_rem = rem[24:0];
+	wire div_sub_ok = div_curr_rem >= divisor_reg;
+	wire [24:0] div_diff = (div_sub_ok ? div_curr_rem - divisor_reg : div_curr_rem);
+	wire [27:0] next_div_q = {q[26:0], div_sub_ok};
+	function automatic [55:0] sv2v_cast_56;
+		input reg [55:0] inp;
+		sv2v_cast_56 = inp;
+	endfunction
+	wire [55:0] sqrt_sub_val = (sv2v_cast_56(q) << (count + 5'd1)) | (56'd1 << (2 * count));
+	wire sqrt_sub_ok = rem >= sqrt_sub_val;
+	wire [55:0] next_sqrt_rem = (sqrt_sub_ok ? rem - sqrt_sub_val : rem);
+	wire [27:0] next_sqrt_q = (sqrt_sub_ok ? q | (28'd1 << count) : q);
+	reg [31:0] round_data;
+	reg [4:0] round_flags;
+	reg [(((((((1 + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 3) + rv32_ooo_params_PHYS_W) + 112) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) - 1:0] round_cmp;
+	always @(*) begin : sv2v_autoblock_6
+		reg [47:0] mant;
+		if (_sv2v_0)
+			;
+		round_data = 1'sb0;
+		round_flags = 1'sb0;
+		if (op_saved == 8'd66) begin
+			mant = {21'd0, q[26:1], q[0] | (|rem)};
+			round_and_pack(sign_reg, exp_reg, mant, rm_saved, round_data, round_flags);
+		end
+		else begin
+			mant = {21'd0, q[26:1], q[0] | (|rem)};
+			round_and_pack(1'b0, exp_reg, mant, rm_saved, round_data, round_flags);
+		end
+		round_cmp = make_completion(uop_saved, round_data, round_flags);
+	end
+	wire [(((((((1 + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 3) + rv32_ooo_params_PHYS_W) + 112) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) - 1:0] special_cmp;
+	assign special_cmp = make_completion(uop_saved, special_res_data, special_res_flags);
+	always @(*) begin
+		if (_sv2v_0)
+			;
+		if (state == 3'd5) begin
+			cmp_valid = 1'b1;
+			cmp_data = holding_data;
+		end
+		else if (state == 3'd4) begin
+			cmp_valid = 1'b1;
+			cmp_data = round_cmp;
+		end
+		else if (state == 3'd1) begin
+			cmp_valid = 1'b1;
+			cmp_data = special_cmp;
+		end
+		else begin
+			cmp_valid = 1'b0;
+			cmp_data = 1'sb0;
+		end
+	end
+	always @(posedge clk)
+		if (rst || flush_valid) begin
+			state <= 3'd0;
+			holding_valid <= 1'b0;
+			holding_data <= 1'sb0;
+			rem <= 1'sb0;
+			divisor_reg <= 1'sb0;
+			q <= 1'sb0;
+			count <= 1'sb0;
+			sign_reg <= 1'b0;
+			exp_reg <= 0;
+			special_res_data <= 1'sb0;
+			special_res_flags <= 1'sb0;
+			uop_saved <= 1'sb0;
+			rm_saved <= 3'b000;
+			op_saved <= 8'd66;
+		end
+		else
+			case (state)
+				3'd0:
+					if (issue_valid && issue_ready) begin
+						uop_saved <= issue_req[(((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? (((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 40 : 1 - ((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39)) + 95-:(((((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? (((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 40 : 1 - ((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39)) + 95) >= 96 ? (((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? (((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 40 : 1 - ((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39)) + 0 : 97 - ((((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? (((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 40 : 1 - ((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39)) + 95))];
+						rm_saved <= issue_req[(((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? ((((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? (((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 40 : 1 - ((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39)) + 95) - (((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) - ((7 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))) - 2)) : (96 + (2 - (7 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))) + 2)-:3];
+						op_saved <= issue_req[(((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? ((((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? (((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 40 : 1 - ((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39)) + 95) - (((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) : ((96 - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + ((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) >= (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) ? ((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) - (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40)))))))))) + 1 : ((4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + 1)) - 1)-:((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) >= (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) ? ((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) - (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40)))))))))) + 1 : ((4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + 1)];
+						if (issue_req[(((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? ((((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? (((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 40 : 1 - ((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39)) + 95) - (((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) : ((96 - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + ((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) >= (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) ? ((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) - (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40)))))))))) + 1 : ((4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + 1)) - 1)-:((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) >= (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) ? ((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) - (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40)))))))))) + 1 : ((4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + 1)] == 8'd66) begin
+							if (is_div_special) begin
+								special_res_data <= div_special_data;
+								special_res_flags <= div_special_flags;
+								state <= 3'd1;
+							end
+							else begin
+								sign_reg <= s0_unpk ^ s1_unpk;
+								exp_reg <= norm_e0 - norm_e1;
+								rem <= {32'd0, norm_m0};
+								divisor_reg <= {1'b0, norm_m1};
+								q <= 28'd0;
+								count <= 5'd26;
+								state <= 3'd2;
+							end
+						end
+						else if (issue_req[(((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? ((((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? (((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 40 : 1 - ((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39)) + 95) - (((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) : ((96 - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + ((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) >= (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) ? ((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) - (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40)))))))))) + 1 : ((4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + 1)) - 1)-:((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) >= (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) ? ((12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) - (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40)))))))))) + 1 : ((4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) - (12 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + 1)] == 8'd67) begin
+							if (is_sqrt_special) begin
+								special_res_data <= sqrt_special_data;
+								special_res_flags <= sqrt_special_flags;
+								state <= 3'd1;
+							end
+							else begin
+								sign_reg <= 1'b0;
+								q <= 28'd0;
+								count <= 5'd27;
+								state <= 3'd3;
+								if (norm_e0[0]) begin
+									rem <= {2'd0, norm_m0, 30'd0};
+									exp_reg <= (norm_e0 < 0 ? (norm_e0 - 1) / 2 : norm_e0 / 2);
+								end
+								else begin
+									rem <= {3'd0, norm_m0, 29'd0};
+									exp_reg <= norm_e0 / 2;
+								end
+							end
+						end
+					end
+				3'd1:
+					if (cmp_ready) begin
+						holding_valid <= 1'b0;
+						holding_data <= 1'sb0;
+						state <= 3'd0;
+					end
+					else begin
+						holding_valid <= 1'b1;
+						holding_data <= special_cmp;
+						state <= 3'd5;
+					end
+				3'd2:
+					if (count == 5'd0) begin
+						rem <= {31'd0, div_diff};
+						q <= next_div_q;
+						state <= 3'd4;
+					end
+					else begin
+						rem <= {30'd0, div_diff, 1'b0};
+						q <= next_div_q;
+						count <= count - 5'd1;
+					end
+				3'd3: begin
+					rem <= next_sqrt_rem;
+					q <= next_sqrt_q;
+					if (count == 5'd0)
+						state <= 3'd4;
+					else
+						count <= count - 5'd1;
+				end
+				3'd4:
+					if (cmp_ready) begin
+						holding_valid <= 1'b0;
+						holding_data <= 1'sb0;
+						state <= 3'd0;
+					end
+					else begin
+						holding_valid <= 1'b1;
+						holding_data <= round_cmp;
+						state <= 3'd5;
+					end
+				3'd5:
+					if (cmp_ready) begin
+						holding_valid <= 1'b0;
+						holding_data <= 1'sb0;
+						state <= 3'd0;
+					end
+				default: state <= 3'd0;
+			endcase
 	initial _sv2v_0 = 0;
 endmodule
 module rv32_ooo_lsu (
@@ -4562,11 +5043,15 @@ module rv32_ooo_core (
 	reg fp_ex0_valid_q;
 	reg [(((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? (((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 40 : 1 - ((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39)) + 95:0] fp_ex0_req_q;
 	wire fp_ex0_is_simple = fp_ex0_req_q[(((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? ((((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? (((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 40 : 1 - ((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39)) + 95) - (((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) - (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) : ((96 - (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + ((4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) >= ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40)))))))) ? ((4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) - ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) + 1 : (((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40)))))))) - (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + 1)) - 1)-:((4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) >= ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40)))))))) ? ((4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) - ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) + 1 : (((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40)))))))) - (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + 1)] == 4'd10;
+	wire fp_ex0_is_divsqrt = fp_ex0_req_q[(((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? ((((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) >= 0 ? (((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 40 : 1 - ((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39)) + 95) - (((((((((((((64 + ((rv32_ooo_params_FETCH_EPOCH_W + 32) >= 0 ? rv32_ooo_params_FETCH_EPOCH_W + 33 : 1 - (rv32_ooo_params_FETCH_EPOCH_W + 32))) + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 12) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0))) + (((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W)) + 69) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) + 39) - (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) : ((96 - (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + ((4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) >= ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40)))))))) ? ((4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) - ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) + 1 : (((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40)))))))) - (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + 1)) - 1)-:((4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) >= ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40)))))))) ? ((4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39))))))))) - ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40))))))))) + 1 : (((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 40)))))))) - (4 + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_PHYS_W) + 0) >= 0 ? (3 + rv32_ooo_params_PHYS_W) + 1 : 1 - ((3 + rv32_ooo_params_PHYS_W) + 0)) + ((((3 + rv32_ooo_params_ARCH_REG_W) + rv32_ooo_params_PHYS_W) + rv32_ooo_params_PHYS_W) + (69 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W) + (1 + ((rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W) + 39)))))))))) + 1)] == 4'd9;
+	wire fp_ex0_is_heavy = !fp_ex0_is_simple && !fp_ex0_is_divsqrt;
 	wire fp_simple_issue_valid = fp_ex0_valid_q && fp_ex0_is_simple;
-	wire fp_heavy_issue_valid = fp_ex0_valid_q && !fp_ex0_is_simple;
+	wire fp_divsqrt_issue_valid = fp_ex0_valid_q && fp_ex0_is_divsqrt;
+	wire fp_heavy_issue_valid = fp_ex0_valid_q && fp_ex0_is_heavy;
 	wire fp_simple_issue_ready;
+	wire fp_divsqrt_issue_ready;
 	wire fp_heavy_issue_ready;
-	wire fp_target_ready = (fp_ex0_is_simple ? fp_simple_issue_ready : fp_heavy_issue_ready);
+	wire fp_target_ready = (fp_ex0_is_simple ? fp_simple_issue_ready : (fp_ex0_is_divsqrt ? fp_divsqrt_issue_ready : fp_heavy_issue_ready));
 	wire fp_ex0_out_ready = fp_target_ready;
 	wire fp_ex0_out_valid = fp_ex0_valid_q;
 	wire fp_ex0_in_ready = !fp_ex0_valid_q || (fp_ex0_out_valid && fp_ex0_out_ready);
@@ -4603,12 +5088,16 @@ module rv32_ooo_core (
 	wire fp_heavy_cmp_valid;
 	wire [(((((((1 + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 3) + rv32_ooo_params_PHYS_W) + 112) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) - 1:0] fp_heavy_cmp_data;
 	reg fp_heavy_cmp_ready;
+	wire fp_divsqrt_cmp_valid;
+	wire [(((((((1 + (rv32_ooo_params_ROB_SEQ_WIDTH + rv32_ooo_params_ROB_IDX_W)) + 3) + rv32_ooo_params_PHYS_W) + 112) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_LQ_IDX_W)) + 1) + (rv32_ooo_params_LSQ_GEN_W + rv32_ooo_params_SQ_IDX_W)) - 1:0] fp_divsqrt_cmp_data;
+	reg fp_divsqrt_cmp_ready;
 	always @(*) begin
 		if (_sv2v_0)
 			;
 		fp_cmp_q = 1'sb0;
 		fp_simple_cmp_ready = 1'b0;
 		fp_heavy_cmp_ready = 1'b0;
+		fp_divsqrt_cmp_ready = 1'b0;
 		if (fp_simple_cmp_valid) begin
 			fp_cmp_q = fp_simple_cmp_data;
 			fp_simple_cmp_ready = fp_cmp_ready;
@@ -4616,6 +5105,10 @@ module rv32_ooo_core (
 		else if (fp_heavy_cmp_valid) begin
 			fp_cmp_q = fp_heavy_cmp_data;
 			fp_heavy_cmp_ready = fp_cmp_ready;
+		end
+		else if (fp_divsqrt_cmp_valid) begin
+			fp_cmp_q = fp_divsqrt_cmp_data;
+			fp_divsqrt_cmp_ready = fp_cmp_ready;
 		end
 	end
 	reg redirect_valid;
@@ -4837,6 +5330,17 @@ module rv32_ooo_core (
 		.cmp_valid(fp_heavy_cmp_valid),
 		.cmp_data(fp_heavy_cmp_data),
 		.cmp_ready(fp_heavy_cmp_ready)
+	);
+	rv32_ooo_fp_divsqrt u_fp_divsqrt(
+		.clk(clk),
+		.rst(rst),
+		.flush_valid(flush_valid),
+		.issue_valid(fp_divsqrt_issue_valid),
+		.issue_req(fp_ex0_req_q),
+		.issue_ready(fp_divsqrt_issue_ready),
+		.cmp_valid(fp_divsqrt_cmp_valid),
+		.cmp_data(fp_divsqrt_cmp_data),
+		.cmp_ready(fp_divsqrt_cmp_ready)
 	);
 	rv32_ooo_lsu u_lsu(
 		.clk(clk),

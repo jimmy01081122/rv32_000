@@ -228,15 +228,19 @@ module rv32_ooo_core
   logic      fp_ex0_valid_q;
   exec_req_t fp_ex0_req_q;
 
-  wire fp_ex0_is_simple = (fp_ex0_req_q.uop.fu_class == FU_FP_MISC);
+  wire fp_ex0_is_simple  = (fp_ex0_req_q.uop.fu_class == FU_FP_MISC);
+  wire fp_ex0_is_divsqrt = (fp_ex0_req_q.uop.fu_class == FU_FP_DIVSQRT);
+  wire fp_ex0_is_heavy   = !fp_ex0_is_simple && !fp_ex0_is_divsqrt;
 
-  wire fp_simple_issue_valid = fp_ex0_valid_q && fp_ex0_is_simple;
-  wire fp_heavy_issue_valid  = fp_ex0_valid_q && !fp_ex0_is_simple;
+  wire fp_simple_issue_valid  = fp_ex0_valid_q && fp_ex0_is_simple;
+  wire fp_divsqrt_issue_valid = fp_ex0_valid_q && fp_ex0_is_divsqrt;
+  wire fp_heavy_issue_valid   = fp_ex0_valid_q && fp_ex0_is_heavy;
 
   logic fp_simple_issue_ready;
+  logic fp_divsqrt_issue_ready;
   logic fp_heavy_issue_ready;
 
-  wire fp_target_ready  = fp_ex0_is_simple ? fp_simple_issue_ready : fp_heavy_issue_ready;
+  wire fp_target_ready  = fp_ex0_is_simple ? fp_simple_issue_ready : (fp_ex0_is_divsqrt ? fp_divsqrt_issue_ready : fp_heavy_issue_ready);
   wire fp_ex0_out_ready = fp_target_ready;
   wire fp_ex0_out_valid = fp_ex0_valid_q;
 
@@ -287,7 +291,7 @@ module rv32_ooo_core
     end
   end
 
-  // AP4B: FP 2:1 Completion Arbiter
+  // AP4F: FP 3:1 Completion Arbiter (Simple FP, Heavy FP, DIV/SQRT)
   // PRF write ports and ROB are non-blocking sinks: fp_cmp_ready = 1'b1.
   wire fp_cmp_ready = 1'b1;
 
@@ -299,17 +303,25 @@ module rv32_ooo_core
   completion_t fp_heavy_cmp_data;
   logic        fp_heavy_cmp_ready;
 
+  logic        fp_divsqrt_cmp_valid;
+  completion_t fp_divsqrt_cmp_data;
+  logic        fp_divsqrt_cmp_ready;
+
   always_comb begin
-    fp_cmp_q            = '0;
-    fp_simple_cmp_ready = 1'b0;
-    fp_heavy_cmp_ready  = 1'b0;
+    fp_cmp_q             = '0;
+    fp_simple_cmp_ready  = 1'b0;
+    fp_heavy_cmp_ready   = 1'b0;
+    fp_divsqrt_cmp_ready = 1'b0;
 
     if (fp_simple_cmp_valid) begin
       fp_cmp_q            = fp_simple_cmp_data;
       fp_simple_cmp_ready = fp_cmp_ready;
     end else if (fp_heavy_cmp_valid) begin
-      fp_cmp_q            = fp_heavy_cmp_data;
-      fp_heavy_cmp_ready  = fp_cmp_ready;
+      fp_cmp_q           = fp_heavy_cmp_data;
+      fp_heavy_cmp_ready = fp_cmp_ready;
+    end else if (fp_divsqrt_cmp_valid) begin
+      fp_cmp_q             = fp_divsqrt_cmp_data;
+      fp_divsqrt_cmp_ready = fp_cmp_ready;
     end
   end
 
@@ -549,6 +561,18 @@ module rv32_ooo_core
     .cmp_valid   (fp_heavy_cmp_valid),
     .cmp_data    (fp_heavy_cmp_data),
     .cmp_ready   (fp_heavy_cmp_ready)
+  );
+
+  rv32_ooo_fp_divsqrt u_fp_divsqrt (
+    .clk         (clk),
+    .rst         (rst),
+    .flush_valid (flush_valid),
+    .issue_valid (fp_divsqrt_issue_valid),
+    .issue_req   (fp_ex0_req_q),
+    .issue_ready (fp_divsqrt_issue_ready),
+    .cmp_valid   (fp_divsqrt_cmp_valid),
+    .cmp_data    (fp_divsqrt_cmp_data),
+    .cmp_ready   (fp_divsqrt_cmp_ready)
   );
 
   rv32_ooo_lsu u_lsu (
