@@ -1,0 +1,410 @@
+Startpoint: rst (input port clocked by core_clk)
+Endpoint: dmem_req_wdata[20] (output port clocked by core_clk)
+Path Group: in2out
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+1000.00 1000.00 v input external delay
+   0.00 1000.00 v rst (in)
+  33.58 1033.58 v input106/Y (BUFx8_ASAP7_75t_R)
+  41.38 1074.96 v wire4546/Y (BUFx24_ASAP7_75t_R)
+  41.48 1116.45 v load_slew4545/Y (BUFx16f_ASAP7_75t_R)
+ 109.39 1225.83 v wire4532/Y (BUFx24_ASAP7_75t_R)
+  84.68 1310.51 v wire4531/Y (BUFx16f_ASAP7_75t_R)
+ 109.62 1420.13 v wire4530/Y (BUFx24_ASAP7_75t_R)
+ 111.57 1531.70 v wire4528/Y (BUFx16f_ASAP7_75t_R)
+ 111.87 1643.57 v wire4527/Y (BUFx16f_ASAP7_75t_R)
+  84.31 1727.88 v load_slew4526/Y (BUFx16f_ASAP7_75t_R)
+ 130.97 1858.85 ^ _167892_/Y (NOR2x2_ASAP7_75t_R)
+  35.40 1894.25 ^ load_slew3425/Y (BUFx16f_ASAP7_75t_R)
+  38.69 1932.94 ^ load_slew3423/Y (BUFx16f_ASAP7_75t_R)
+  45.16 1978.10 ^ _173675_/Y (OA21x2_ASAP7_75t_R)
+  16.66 1994.77 ^ output188/Y (BUFx2_ASAP7_75t_R)
+   0.39 1995.16 ^ dmem_req_wdata[20] (out)
+        1995.16   data arrival time
+
+5000.00 5000.00   clock core_clk (rise edge)
+   0.00 5000.00   clock network delay (propagated)
+ -50.00 4950.00   clock uncertainty
+   0.00 4950.00   clock reconvergence pessimism
+-1000.00 3950.00   output external delay
+        3950.00   data required time
+---------------------------------------------------------
+        3950.00   data required time
+        -1995.16   data arrival time
+---------------------------------------------------------
+        1954.84   slack (MET)
+
+
+Startpoint: rst (input port clocked by core_clk)
+Endpoint: dmem_req_wdata[4] (output port clocked by core_clk)
+Path Group: in2out
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+1000.00 1000.00 v input external delay
+   0.00 1000.00 v rst (in)
+  33.58 1033.58 v input106/Y (BUFx8_ASAP7_75t_R)
+  41.38 1074.96 v wire4546/Y (BUFx24_ASAP7_75t_R)
+  41.48 1116.45 v load_slew4545/Y (BUFx16f_ASAP7_75t_R)
+ 109.39 1225.83 v wire4532/Y (BUFx24_ASAP7_75t_R)
+  84.68 1310.51 v wire4531/Y (BUFx16f_ASAP7_75t_R)
+ 109.62 1420.13 v wire4530/Y (BUFx24_ASAP7_75t_R)
+ 111.57 1531.70 v wire4528/Y (BUFx16f_ASAP7_75t_R)
+ 111.87 1643.57 v wire4527/Y (BUFx16f_ASAP7_75t_R)
+  84.31 1727.88 v load_slew4526/Y (BUFx16f_ASAP7_75t_R)
+ 130.97 1858.85 ^ _167892_/Y (NOR2x2_ASAP7_75t_R)
+  35.40 1894.25 ^ load_slew3425/Y (BUFx16f_ASAP7_75t_R)
+  38.69 1932.94 ^ load_slew3423/Y (BUFx16f_ASAP7_75t_R)
+  44.86 1977.81 ^ _173197_/Y (OA21x2_ASAP7_75t_R)
+  16.51 1994.32 ^ output202/Y (BUFx2_ASAP7_75t_R)
+   0.41 1994.73 ^ dmem_req_wdata[4] (out)
+        1994.73   data arrival time
+
+5000.00 5000.00   clock core_clk (rise edge)
+   0.00 5000.00   clock network delay (propagated)
+ -50.00 4950.00   clock uncertainty
+   0.00 4950.00   clock reconvergence pessimism
+-1000.00 3950.00   output external delay
+        3950.00   data required time
+---------------------------------------------------------
+        3950.00   data required time
+        -1994.73   data arrival time
+---------------------------------------------------------
+        1955.27   slack (MET)
+
+
+Startpoint: rst (input port clocked by core_clk)
+Endpoint: dmem_req_wdata[21] (output port clocked by core_clk)
+Path Group: in2out
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+1000.00 1000.00 v input external delay
+   0.00 1000.00 v rst (in)
+  33.58 1033.58 v input106/Y (BUFx8_ASAP7_75t_R)
+  41.38 1074.96 v wire4546/Y (BUFx24_ASAP7_75t_R)
+  41.48 1116.45 v load_slew4545/Y (BUFx16f_ASAP7_75t_R)
+ 109.39 1225.83 v wire4532/Y (BUFx24_ASAP7_75t_R)
+  84.68 1310.51 v wire4531/Y (BUFx16f_ASAP7_75t_R)
+ 109.62 1420.13 v wire4530/Y (BUFx24_ASAP7_75t_R)
+ 111.57 1531.70 v wire4528/Y (BUFx16f_ASAP7_75t_R)
+ 111.87 1643.57 v wire4527/Y (BUFx16f_ASAP7_75t_R)
+  84.31 1727.88 v load_slew4526/Y (BUFx16f_ASAP7_75t_R)
+ 130.97 1858.85 ^ _167892_/Y (NOR2x2_ASAP7_75t_R)
+  35.40 1894.25 ^ load_slew3425/Y (BUFx16f_ASAP7_75t_R)
+  38.69 1932.94 ^ load_slew3423/Y (BUFx16f_ASAP7_75t_R)
+  44.39 1977.33 ^ _173703_/Y (OA21x2_ASAP7_75t_R)
+  15.96 1993.29 ^ output189/Y (BUFx2_ASAP7_75t_R)
+   0.33 1993.62 ^ dmem_req_wdata[21] (out)
+        1993.62   data arrival time
+
+5000.00 5000.00   clock core_clk (rise edge)
+   0.00 5000.00   clock network delay (propagated)
+ -50.00 4950.00   clock uncertainty
+   0.00 4950.00   clock reconvergence pessimism
+-1000.00 3950.00   output external delay
+        3950.00   data required time
+---------------------------------------------------------
+        3950.00   data required time
+        -1993.62   data arrival time
+---------------------------------------------------------
+        1956.38   slack (MET)
+
+
+Startpoint: rst (input port clocked by core_clk)
+Endpoint: dmem_req_addr[3] (output port clocked by core_clk)
+Path Group: in2out
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+1000.00 1000.00 v input external delay
+   0.00 1000.00 v rst (in)
+  33.58 1033.58 v input106/Y (BUFx8_ASAP7_75t_R)
+  41.38 1074.96 v wire4546/Y (BUFx24_ASAP7_75t_R)
+  41.48 1116.45 v load_slew4545/Y (BUFx16f_ASAP7_75t_R)
+ 109.39 1225.83 v wire4532/Y (BUFx24_ASAP7_75t_R)
+  84.68 1310.51 v wire4531/Y (BUFx16f_ASAP7_75t_R)
+ 109.62 1420.13 v wire4530/Y (BUFx24_ASAP7_75t_R)
+ 111.57 1531.70 v wire4528/Y (BUFx16f_ASAP7_75t_R)
+ 111.87 1643.57 v wire4527/Y (BUFx16f_ASAP7_75t_R)
+  84.31 1727.88 v load_slew4526/Y (BUFx16f_ASAP7_75t_R)
+ 130.97 1858.85 ^ _167892_/Y (NOR2x2_ASAP7_75t_R)
+  42.53 1901.38 ^ load_slew3424/Y (BUFx16f_ASAP7_75t_R)
+  35.36 1936.75 ^ _172076_/Y (OA21x2_ASAP7_75t_R)
+  30.37 1967.12 ^ _172077_/Y (AO21x1_ASAP7_75t_R)
+  25.51 1992.63 ^ output165/Y (BUFx2_ASAP7_75t_R)
+   0.39 1993.03 ^ dmem_req_addr[3] (out)
+        1993.03   data arrival time
+
+5000.00 5000.00   clock core_clk (rise edge)
+   0.00 5000.00   clock network delay (propagated)
+ -50.00 4950.00   clock uncertainty
+   0.00 4950.00   clock reconvergence pessimism
+-1000.00 3950.00   output external delay
+        3950.00   data required time
+---------------------------------------------------------
+        3950.00   data required time
+        -1993.03   data arrival time
+---------------------------------------------------------
+        1956.97   slack (MET)
+
+
+Startpoint: rst (input port clocked by core_clk)
+Endpoint: dmem_req_addr[13] (output port clocked by core_clk)
+Path Group: in2out
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+1000.00 1000.00 v input external delay
+   0.00 1000.00 v rst (in)
+  33.58 1033.58 v input106/Y (BUFx8_ASAP7_75t_R)
+  41.38 1074.96 v wire4546/Y (BUFx24_ASAP7_75t_R)
+  41.48 1116.45 v load_slew4545/Y (BUFx16f_ASAP7_75t_R)
+ 109.39 1225.83 v wire4532/Y (BUFx24_ASAP7_75t_R)
+  84.68 1310.51 v wire4531/Y (BUFx16f_ASAP7_75t_R)
+ 109.62 1420.13 v wire4530/Y (BUFx24_ASAP7_75t_R)
+ 111.57 1531.70 v wire4528/Y (BUFx16f_ASAP7_75t_R)
+ 111.87 1643.57 v wire4527/Y (BUFx16f_ASAP7_75t_R)
+  84.31 1727.88 v load_slew4526/Y (BUFx16f_ASAP7_75t_R)
+ 130.97 1858.85 ^ _167892_/Y (NOR2x2_ASAP7_75t_R)
+  42.53 1901.38 ^ load_slew3424/Y (BUFx16f_ASAP7_75t_R)
+  24.10 1925.49 ^ _172382_/Y (OA21x2_ASAP7_75t_R)
+  37.24 1962.72 ^ _172383_/Y (AO21x1_ASAP7_75t_R)
+  29.69 1992.41 ^ output145/Y (BUFx2_ASAP7_75t_R)
+   0.39 1992.81 ^ dmem_req_addr[13] (out)
+        1992.81   data arrival time
+
+5000.00 5000.00   clock core_clk (rise edge)
+   0.00 5000.00   clock network delay (propagated)
+ -50.00 4950.00   clock uncertainty
+   0.00 4950.00   clock reconvergence pessimism
+-1000.00 3950.00   output external delay
+        3950.00   data required time
+---------------------------------------------------------
+        3950.00   data required time
+        -1992.81   data arrival time
+---------------------------------------------------------
+        1957.19   slack (MET)
+
+
+Startpoint: rst (input port clocked by core_clk)
+Endpoint: dmem_req_wdata[22] (output port clocked by core_clk)
+Path Group: in2out
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+1000.00 1000.00 v input external delay
+   0.00 1000.00 v rst (in)
+  33.58 1033.58 v input106/Y (BUFx8_ASAP7_75t_R)
+  41.38 1074.96 v wire4546/Y (BUFx24_ASAP7_75t_R)
+  41.48 1116.45 v load_slew4545/Y (BUFx16f_ASAP7_75t_R)
+ 109.39 1225.83 v wire4532/Y (BUFx24_ASAP7_75t_R)
+  84.68 1310.51 v wire4531/Y (BUFx16f_ASAP7_75t_R)
+ 109.62 1420.13 v wire4530/Y (BUFx24_ASAP7_75t_R)
+ 111.57 1531.70 v wire4528/Y (BUFx16f_ASAP7_75t_R)
+ 111.87 1643.57 v wire4527/Y (BUFx16f_ASAP7_75t_R)
+  84.31 1727.88 v load_slew4526/Y (BUFx16f_ASAP7_75t_R)
+ 130.97 1858.85 ^ _167892_/Y (NOR2x2_ASAP7_75t_R)
+  35.40 1894.25 ^ load_slew3425/Y (BUFx16f_ASAP7_75t_R)
+  38.69 1932.94 ^ load_slew3423/Y (BUFx16f_ASAP7_75t_R)
+  43.18 1976.13 ^ _173731_/Y (OA21x2_ASAP7_75t_R)
+  16.29 1992.42 ^ output190/Y (BUFx2_ASAP7_75t_R)
+   0.33 1992.75 ^ dmem_req_wdata[22] (out)
+        1992.75   data arrival time
+
+5000.00 5000.00   clock core_clk (rise edge)
+   0.00 5000.00   clock network delay (propagated)
+ -50.00 4950.00   clock uncertainty
+   0.00 4950.00   clock reconvergence pessimism
+-1000.00 3950.00   output external delay
+        3950.00   data required time
+---------------------------------------------------------
+        3950.00   data required time
+        -1992.75   data arrival time
+---------------------------------------------------------
+        1957.25   slack (MET)
+
+
+Startpoint: rst (input port clocked by core_clk)
+Endpoint: dmem_req_wdata[6] (output port clocked by core_clk)
+Path Group: in2out
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+1000.00 1000.00 v input external delay
+   0.00 1000.00 v rst (in)
+  33.58 1033.58 v input106/Y (BUFx8_ASAP7_75t_R)
+  41.38 1074.96 v wire4546/Y (BUFx24_ASAP7_75t_R)
+  41.48 1116.45 v load_slew4545/Y (BUFx16f_ASAP7_75t_R)
+ 109.39 1225.83 v wire4532/Y (BUFx24_ASAP7_75t_R)
+  84.68 1310.51 v wire4531/Y (BUFx16f_ASAP7_75t_R)
+ 109.62 1420.13 v wire4530/Y (BUFx24_ASAP7_75t_R)
+ 111.57 1531.70 v wire4528/Y (BUFx16f_ASAP7_75t_R)
+ 111.87 1643.57 v wire4527/Y (BUFx16f_ASAP7_75t_R)
+  84.31 1727.88 v load_slew4526/Y (BUFx16f_ASAP7_75t_R)
+ 130.97 1858.85 ^ _167892_/Y (NOR2x2_ASAP7_75t_R)
+  35.40 1894.25 ^ load_slew3425/Y (BUFx16f_ASAP7_75t_R)
+  38.69 1932.94 ^ load_slew3423/Y (BUFx16f_ASAP7_75t_R)
+  43.08 1976.02 ^ _173257_/Y (OA21x2_ASAP7_75t_R)
+  16.10 1992.13 ^ output204/Y (BUFx2_ASAP7_75t_R)
+   0.36 1992.49 ^ dmem_req_wdata[6] (out)
+        1992.49   data arrival time
+
+5000.00 5000.00   clock core_clk (rise edge)
+   0.00 5000.00   clock network delay (propagated)
+ -50.00 4950.00   clock uncertainty
+   0.00 4950.00   clock reconvergence pessimism
+-1000.00 3950.00   output external delay
+        3950.00   data required time
+---------------------------------------------------------
+        3950.00   data required time
+        -1992.49   data arrival time
+---------------------------------------------------------
+        1957.51   slack (MET)
+
+
+Startpoint: rst (input port clocked by core_clk)
+Endpoint: dmem_req_wdata[19] (output port clocked by core_clk)
+Path Group: in2out
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+1000.00 1000.00 v input external delay
+   0.00 1000.00 v rst (in)
+  33.58 1033.58 v input106/Y (BUFx8_ASAP7_75t_R)
+  41.38 1074.96 v wire4546/Y (BUFx24_ASAP7_75t_R)
+  41.48 1116.45 v load_slew4545/Y (BUFx16f_ASAP7_75t_R)
+ 109.39 1225.83 v wire4532/Y (BUFx24_ASAP7_75t_R)
+  84.68 1310.51 v wire4531/Y (BUFx16f_ASAP7_75t_R)
+ 109.62 1420.13 v wire4530/Y (BUFx24_ASAP7_75t_R)
+ 111.57 1531.70 v wire4528/Y (BUFx16f_ASAP7_75t_R)
+ 111.87 1643.57 v wire4527/Y (BUFx16f_ASAP7_75t_R)
+  84.31 1727.88 v load_slew4526/Y (BUFx16f_ASAP7_75t_R)
+ 130.97 1858.85 ^ _167892_/Y (NOR2x2_ASAP7_75t_R)
+  35.40 1894.25 ^ load_slew3425/Y (BUFx16f_ASAP7_75t_R)
+  38.69 1932.94 ^ load_slew3423/Y (BUFx16f_ASAP7_75t_R)
+  42.79 1975.74 ^ _173642_/Y (OA21x2_ASAP7_75t_R)
+  15.76 1991.49 ^ output186/Y (BUFx2_ASAP7_75t_R)
+   0.38 1991.88 ^ dmem_req_wdata[19] (out)
+        1991.88   data arrival time
+
+5000.00 5000.00   clock core_clk (rise edge)
+   0.00 5000.00   clock network delay (propagated)
+ -50.00 4950.00   clock uncertainty
+   0.00 4950.00   clock reconvergence pessimism
+-1000.00 3950.00   output external delay
+        3950.00   data required time
+---------------------------------------------------------
+        3950.00   data required time
+        -1991.88   data arrival time
+---------------------------------------------------------
+        1958.12   slack (MET)
+
+
+Startpoint: rst (input port clocked by core_clk)
+Endpoint: dmem_req_wdata[5] (output port clocked by core_clk)
+Path Group: in2out
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+1000.00 1000.00 v input external delay
+   0.00 1000.00 v rst (in)
+  33.58 1033.58 v input106/Y (BUFx8_ASAP7_75t_R)
+  41.38 1074.96 v wire4546/Y (BUFx24_ASAP7_75t_R)
+  41.48 1116.45 v load_slew4545/Y (BUFx16f_ASAP7_75t_R)
+ 109.39 1225.83 v wire4532/Y (BUFx24_ASAP7_75t_R)
+  84.68 1310.51 v wire4531/Y (BUFx16f_ASAP7_75t_R)
+ 109.62 1420.13 v wire4530/Y (BUFx24_ASAP7_75t_R)
+ 111.57 1531.70 v wire4528/Y (BUFx16f_ASAP7_75t_R)
+ 111.87 1643.57 v wire4527/Y (BUFx16f_ASAP7_75t_R)
+  84.31 1727.88 v load_slew4526/Y (BUFx16f_ASAP7_75t_R)
+ 130.97 1858.85 ^ _167892_/Y (NOR2x2_ASAP7_75t_R)
+  35.40 1894.25 ^ load_slew3425/Y (BUFx16f_ASAP7_75t_R)
+  38.69 1932.94 ^ load_slew3423/Y (BUFx16f_ASAP7_75t_R)
+  42.85 1975.79 ^ _173227_/Y (OA21x2_ASAP7_75t_R)
+  15.50 1991.29 ^ output203/Y (BUFx2_ASAP7_75t_R)
+   0.45 1991.74 ^ dmem_req_wdata[5] (out)
+        1991.74   data arrival time
+
+5000.00 5000.00   clock core_clk (rise edge)
+   0.00 5000.00   clock network delay (propagated)
+ -50.00 4950.00   clock uncertainty
+   0.00 4950.00   clock reconvergence pessimism
+-1000.00 3950.00   output external delay
+        3950.00   data required time
+---------------------------------------------------------
+        3950.00   data required time
+        -1991.74   data arrival time
+---------------------------------------------------------
+        1958.26   slack (MET)
+
+
+Startpoint: rst (input port clocked by core_clk)
+Endpoint: dmem_req_wdata[3] (output port clocked by core_clk)
+Path Group: in2out
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+1000.00 1000.00 v input external delay
+   0.00 1000.00 v rst (in)
+  33.58 1033.58 v input106/Y (BUFx8_ASAP7_75t_R)
+  41.38 1074.96 v wire4546/Y (BUFx24_ASAP7_75t_R)
+  41.48 1116.45 v load_slew4545/Y (BUFx16f_ASAP7_75t_R)
+ 109.39 1225.83 v wire4532/Y (BUFx24_ASAP7_75t_R)
+  84.68 1310.51 v wire4531/Y (BUFx16f_ASAP7_75t_R)
+ 109.62 1420.13 v wire4530/Y (BUFx24_ASAP7_75t_R)
+ 111.57 1531.70 v wire4528/Y (BUFx16f_ASAP7_75t_R)
+ 111.87 1643.57 v wire4527/Y (BUFx16f_ASAP7_75t_R)
+  84.31 1727.88 v load_slew4526/Y (BUFx16f_ASAP7_75t_R)
+ 130.97 1858.85 ^ _167892_/Y (NOR2x2_ASAP7_75t_R)
+  35.40 1894.25 ^ load_slew3425/Y (BUFx16f_ASAP7_75t_R)
+  38.69 1932.94 ^ load_slew3423/Y (BUFx16f_ASAP7_75t_R)
+  42.86 1975.81 ^ _173168_/Y (OA21x2_ASAP7_75t_R)
+  15.56 1991.36 ^ output201/Y (BUFx2_ASAP7_75t_R)
+   0.33 1991.69 ^ dmem_req_wdata[3] (out)
+        1991.69   data arrival time
+
+5000.00 5000.00   clock core_clk (rise edge)
+   0.00 5000.00   clock network delay (propagated)
+ -50.00 4950.00   clock uncertainty
+   0.00 4950.00   clock reconvergence pessimism
+-1000.00 3950.00   output external delay
+        3950.00   data required time
+---------------------------------------------------------
+        3950.00   data required time
+        -1991.69   data arrival time
+---------------------------------------------------------
+        1958.31   slack (MET)
+
+

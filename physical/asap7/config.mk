@@ -48,7 +48,7 @@ export LIB_MODEL              = NLDM
 
 # Random seed for reproducibility
 # Fast exploration settings
-export SKIP_REPORT_METRICS    = 1
+export SKIP_REPORT_METRICS    = 0
 export REMOVE_ABC_BUFFERS     = 1
 export GPL_TIMING_DRIVEN      = 0
 export GPL_ROUTING_DRIVEN     = 0

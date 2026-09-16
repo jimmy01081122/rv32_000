@@ -1,0 +1,95 @@
+Found gzip magic in file `/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz', decompressing using zlib.
+Found gzip magic in file `/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz', decompressing using zlib.
+Found gzip magic in file `/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz', decompressing using zlib.
+Found gzip magic in file `/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz', decompressing using zlib.
+
+30. Printing statistics.
+
+=== rv32_ooo_core ===
+
+        +----------Local Count, excluding submodules.
+        |        +-Local Area, excluding submodules.
+        |        | 
+   169551        - wires
+   170052        - wire bits
+    20319        - public wires
+    20820        - public wire bits
+       20        - ports
+      521        - port bits
+   169534 2.04E+04 cells
+     9653  844.444   AND2x2_ASAP7_75t_R
+       13    1.895   AND2x4_ASAP7_75t_R
+     5922  518.057   AND3x1_ASAP7_75t_R
+       12    1.225   AND3x2_ASAP7_75t_R
+     2383  243.209   AND4x1_ASAP7_75t_R
+        4    0.467   AND4x2_ASAP7_75t_R
+      463   54.004   AND5x1_ASAP7_75t_R
+        9    2.624   AND5x2_ASAP7_75t_R
+       32    7.465   AO211x2_ASAP7_75t_R
+    17975 1.57E+03   AO21x1_ASAP7_75t_R
+        8    0.816   AO21x2_ASAP7_75t_R
+     1405  204.849   AO221x1_ASAP7_75t_R
+        5    0.802   AO221x2_ASAP7_75t_R
+      114   19.945   AO222x2_ASAP7_75t_R
+     1014  133.057   AO22x1_ASAP7_75t_R
+       51   11.897   AO31x2_ASAP7_75t_R
+     3542  413.139   AO32x1_ASAP7_75t_R
+       14    1.837   AO32x2_ASAP7_75t_R
+      170   24.786   AO33x2_ASAP7_75t_R
+      220   38.491   AOI211x1_ASAP7_75t_R
+     1005  117.223   AOI21x1_ASAP7_75t_R
+      109   22.249   AOI221x1_ASAP7_75t_R
+      293   42.719   AOI22x1_ASAP7_75t_R
+        3    0.612   BUFx10_ASAP7_75t_R
+        1    0.233   BUFx12_ASAP7_75t_R
+        1    0.262   BUFx12f_ASAP7_75t_R
+    17798  1.3E+03   BUFx2_ASAP7_75t_R
+      296   25.894   BUFx3_ASAP7_75t_R
+       58    5.919   BUFx4_ASAP7_75t_R
+      126   14.697   BUFx4f_ASAP7_75t_R
+       22    2.566   BUFx5_ASAP7_75t_R
+      146   21.287   BUFx6f_ASAP7_75t_R
+        4      0.7   BUFx8_ASAP7_75t_R
+    18751 5.47E+03   DFFHQNx1_ASAP7_75t_R
+     9250  404.595   INVx1_ASAP7_75t_R
+        1    0.058   INVx2_ASAP7_75t_R
+        1    0.073   INVx3_ASAP7_75t_R
+        1    0.087   INVx4_ASAP7_75t_R
+        1    0.102   INVx5_ASAP7_75t_R
+     2854  374.502   MAJx2_ASAP7_75t_R
+        2    0.292   MAJx3_ASAP7_75t_R
+    13850 1.21E+03   NAND2x1_ASAP7_75t_R
+        3    0.437   NAND2x2_ASAP7_75t_R
+      164   26.302   NAND3x1_ASAP7_75t_R
+        1    0.292   NAND3x2_ASAP7_75t_R
+     7708  674.296   NOR2x1_ASAP7_75t_R
+       13    1.895   NOR2x2_ASAP7_75t_R
+      112   17.963   NOR3x1_ASAP7_75t_R
+    12649 1.48E+03   OA211x2_ASAP7_75t_R
+     8629  880.676   OA21x2_ASAP7_75t_R
+        7    1.633   OA221x2_ASAP7_75t_R
+      856  149.766   OA222x2_ASAP7_75t_R
+     4513  657.995   OA22x2_ASAP7_75t_R
+       46    10.06   OA31x2_ASAP7_75t_R
+      318   46.364   OA33x2_ASAP7_75t_R
+     2928  341.522   OAI21x1_ASAP7_75t_R
+     4383  639.041   OAI22x1_ASAP7_75t_R
+     2998  262.265   OR2x2_ASAP7_75t_R
+        2    0.233   OR2x4_ASAP7_75t_R
+        1    0.175   OR2x6_ASAP7_75t_R
+     6392  559.172   OR3x1_ASAP7_75t_R
+       64    6.532   OR3x2_ASAP7_75t_R
+        1    0.131   OR3x4_ASAP7_75t_R
+     1861  189.934   OR4x1_ASAP7_75t_R
+        2    0.233   OR4x2_ASAP7_75t_R
+      416   48.522   OR5x1_ASAP7_75t_R
+        1    0.044   TIEHIx1_ASAP7_75t_R
+        1    0.044   TIELOx1_ASAP7_75t_R
+        4      0.7   XNOR2x1_ASAP7_75t_R
+     5684    911.6   XNOR2x2_ASAP7_75t_R
+        1    0.175   XOR2x1_ASAP7_75t_R
+     2194  351.874   XOR2x2_ASAP7_75t_R
+
+   Chip area for module '\rv32_ooo_core': 20361.655260
+     of which used for sequential elements: 5467.791600 (26.85%)
+

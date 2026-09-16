@@ -4,8 +4,9 @@ import re
 import sys
 import json
 import shutil
+from sta_analyzer import run_sta_signoff
 
-def run_physical_implementation(period_ns, build_tag="closable", clean=True):
+def run_physical_implementation(period_ns, build_tag="closable", clean=True, reuse_synth=True):
     period_ps = period_ns * 1000.0
     print(f"\n==================================================================")
     print(f"  STARTING PHYSICAL IMPLEMENTATION FOR T = {period_ns:.2f} ns ({1000.0/period_ns:.2f} MHz)")
@@ -46,14 +47,26 @@ group_path -name in2out  -from $non_clock_inputs -to $all_outputs_list
     with open("/home/a/ooo/physical/asap7/constraint.sdc", "w") as f:
         f.write(sdc_content)
         
-    # Create clean build dir if clean=True
-    build_dir = f"/home/a/ooo/build/asap7_{build_tag}_{period_ns}ns"
+    # Create build dir
+    build_dir = f"/home/a/ooo/build/asap7_{build_tag}_{period_ns:.1f}ns"
     if clean:
         shutil.rmtree(build_dir, ignore_errors=True)
     os.makedirs(f"{build_dir}/results", exist_ok=True)
     os.makedirs(f"{build_dir}/logs", exist_ok=True)
     os.makedirs(f"{build_dir}/reports", exist_ok=True)
     os.makedirs(f"{build_dir}/objects", exist_ok=True)
+    
+    # Optionally seed gate-level netlist from AP4F base if reuse_synth=True
+    base_synth_v = "/home/a/ooo/build/asap7_closable_12.0ns/results/1_2_yosys.v"
+    if reuse_synth and os.path.exists(base_synth_v):
+        target_synth_v = f"{build_dir}/results/1_2_yosys.v"
+        if not os.path.exists(target_synth_v):
+            print(f"Reusing verified AP4F synthesized netlist: {base_synth_v} -> {target_synth_v}")
+            shutil.copy(base_synth_v, target_synth_v)
+            base_stat = "/home/a/ooo/build/asap7_closable_12.0ns/reports/synth_stat.txt"
+            if os.path.exists(base_stat):
+                shutil.copy(base_stat, f"{build_dir}/reports/synth_stat.txt")
+    
     if not clean:
         for f in ["1_synth.odb", "1_synth.sdc", "1_2_yosys.v", "1_2_yosys.sdc"]:
             p = os.path.join(build_dir, "results", f)
@@ -80,66 +93,27 @@ group_path -name in2out  -from $non_clock_inputs -to $all_outputs_list
         "make DESIGN_CONFIG=designs/asap7/rv32_ooo/config.mk NUM_CORES=1 finish"
     ]
     
-    print(f"Executing: make DESIGN_CONFIG=designs/asap7/rv32_ooo/config.mk finish in Docker...")
+    print(f"Executing ORFS physical flow for T = {period_ns:.2f} ns in Docker...")
     res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
-    
-    report_file = f"{build_dir}/reports/6_finish.rpt"
-    if not os.path.exists(report_file):
-        print(f"ERROR: 6_finish.rpt not found! Build failed.")
+    with open(f"{build_dir}/logs/make_finish.log", "w") as f:
+        f.write(res.stdout + "\n" + res.stderr)
+        
+    odb_file = f"{build_dir}/results/6_final.odb"
+    if not os.path.exists(odb_file):
+        print(f"ERROR: 6_final.odb not found! Physical flow failed.")
         print("STDOUT tail:")
         print(res.stdout[-2000:])
         print("STDERR tail:")
         print(res.stderr[-2000:])
         return None
         
-    with open(report_file) as f:
-        rpt_text = f.read()
-        
-    metrics = {
-        "period_ns": period_ns,
-        "period_ps": period_ps,
-        "freq_mhz": 1000.0 / period_ns,
-        "build_dir": build_dir
-    }
+    print(f"Physical implementation complete. 6_final.odb generated ({os.path.getsize(odb_file) / (1024*1024):.1f} MB).")
     
-    m_wns = re.search(r"wns\s+([-+]?\d+\.\d+)", rpt_text)
-    if m_wns: metrics["wns_ps"] = float(m_wns.group(1))
-    
-    m_tns = re.search(r"tns\s+([-+]?\d+\.\d+)", rpt_text)
-    if m_tns: metrics["tns_ps"] = float(m_tns.group(1))
-    
-    m_hold = re.search(r"worst_slack\s+([-+]?\d+\.\d+)", rpt_text)
-    if m_hold: metrics["worst_hold_slack_ps"] = float(m_hold.group(1))
-    
-    m_inst = re.search(r"instance count\s+(\d+)", rpt_text)
-    if m_inst: metrics["total_instances"] = int(m_inst.group(1))
-    
-    m_area = re.search(r"stdcell_area\s+([\d\.]+)", rpt_text)
-    if m_area: metrics["stdcell_area_um2"] = float(m_area.group(1))
-    
-    m_core = re.search(r"core_area\s+([\d\.]+)", rpt_text)
-    if m_core: metrics["core_area_um2"] = float(m_core.group(1))
-    
-    m_util = re.search(r"utilization_pct\s+([\d\.]+)", rpt_text)
-    if m_util: metrics["utilization_pct"] = float(m_util.group(1))
-    
-    m_pwr = re.search(r"total_power\s+([\d\.eE+-]+)", rpt_text)
-    if m_pwr: metrics["total_power_w"] = float(m_pwr.group(1))
-    
-    print(f"\n==================================================================")
-    print(f"RESULTS FOR T = {period_ns:.2f} ns ({metrics['freq_mhz']:.2f} MHz):")
-    print(f"  Setup WNS:       {metrics.get('wns_ps')} ps")
-    print(f"  Setup TNS:       {metrics.get('tns_ps')} ps")
-    print(f"  Worst Hold Slack:{metrics.get('worst_hold_slack_ps')} ps")
-    print(f"  Total Instances: {metrics.get('total_instances')}")
-    print(f"  Stdcell Area:    {metrics.get('stdcell_area_um2')} um^2")
-    pwr_mw = metrics.get('total_power_w', 0.0) * 1000.0 if metrics.get('total_power_w') else 0.0
-    print(f"  Total Power:     {pwr_mw:.2f} mW")
-    print(f"==================================================================")
-    
+    # 3. Perform STA signoff with hold repair and extraction
+    metrics = run_sta_signoff(build_dir, period_ns, orfs_tag=orfs_tag)
     return metrics
 
 if __name__ == "__main__":
-    t = float(sys.argv[1]) if len(sys.argv) > 1 else 12.0
+    t = float(sys.argv[1]) if len(sys.argv) > 1 else 6.0
     clean = not (len(sys.argv) > 2 and sys.argv[2] == "resume")
     run_physical_implementation(t, clean=clean)
