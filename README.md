@@ -14,7 +14,7 @@ Designed using an explicit Physical Register File (PRF) Tomasulo microarchitectu
 
 ---
 ## Current Block
-![archi graph](/ooo/graph/ap5a.png)
+![archi graph](https://github.com/jimmy01081122/rv32_000/blob/main/graph/ap5a.png)
 ---
 ## 1. Microarchitectural Overview
 
