@@ -3,6 +3,8 @@
 #include <memory>
 #include <string>
 #include <fstream>
+#include <deque>
+#include <cstdlib>
 #include <verilated.h>
 #include <verilated_vcd_c.h>
 
@@ -15,6 +17,8 @@ struct SimConfig {
     std::string trace_file;
     uint64_t max_cycles = 1000000;
     uint64_t no_retire_limit = 10000;
+    int dmem_latency = 1;
+    int dmem_rand_delay = 0;
     bool enable_vcd = false;
     bool enable_trace = false;
 };
@@ -34,6 +38,10 @@ void parse_args(int argc, char** argv, SimConfig& config) {
             config.max_cycles = std::stoull(arg.substr(arg.find('=') + 1));
         } else if (arg.rfind("+no-retire-max=", 0) == 0) {
             config.no_retire_limit = std::stoull(arg.substr(arg.find('=') + 1));
+        } else if (arg.rfind("+dmem-latency=", 0) == 0 || arg.rfind("--dmem-latency=", 0) == 0) {
+            config.dmem_latency = std::stoi(arg.substr(arg.find('=') + 1));
+        } else if (arg.rfind("+dmem-rand-delay=", 0) == 0 || arg.rfind("--dmem-rand-delay=", 0) == 0) {
+            config.dmem_rand_delay = std::stoi(arg.substr(arg.find('=') + 1));
         }
     }
 }
@@ -107,8 +115,11 @@ int main(int argc, char** argv) {
     bool imem_pipe_valid = false;
     uint32_t imem_pipe_data = 0;
 
-    bool dmem_rsp_pending = false;
-    uint32_t dmem_rsp_data = 0;
+    struct DMemQueueEntry {
+        uint32_t data;
+        int delay;
+    };
+    std::deque<DMemQueueEntry> dmem_q;
 
     bool exit_pending = false;
     int exit_drain_cycles = 0;
@@ -135,9 +146,10 @@ int main(int argc, char** argv) {
         top->imem_rsp_rdata = imem_pipe_data;
         top->imem_rsp_error = 0;
 
-        top->dmem_req_ready = !dmem_rsp_pending;
-        top->dmem_rsp_valid = dmem_rsp_pending ? 1 : 0;
-        top->dmem_rsp_rdata = dmem_rsp_data;
+        top->dmem_req_ready = dmem_q.empty() ? 1 : 0;
+        bool dmem_rsp_drive = (!dmem_q.empty() && dmem_q.front().delay <= 0);
+        top->dmem_rsp_valid = dmem_rsp_drive ? 1 : 0;
+        top->dmem_rsp_rdata = dmem_rsp_drive ? dmem_q.front().data : 0;
         top->dmem_rsp_error = 0;
 
         top->eval();
@@ -148,24 +160,37 @@ int main(int argc, char** argv) {
         uint32_t next_imem_data = imem_accepted ? memory.read32(top->imem_req_addr) : 0;
         bool next_imem_valid = imem_accepted;
 
-        bool dmem_accepted = (top->dmem_req_valid && top->dmem_req_ready && !dmem_rsp_pending);
+        // D-memory response handshake
         if (top->dmem_rsp_valid && top->dmem_rsp_ready) {
-            dmem_rsp_pending = false;
+            dmem_q.pop_front();
         }
+
+        // D-memory request handshake
+        bool dmem_accepted = (top->dmem_req_valid && top->dmem_req_ready);
         if (dmem_accepted) {
-            dmem_rsp_pending = true;
+            DMemQueueEntry entry;
             if (top->dmem_req_wen) {
                 memory.write32(top->dmem_req_addr, top->dmem_req_wdata, top->dmem_req_byte_en);
-                dmem_rsp_data = 0;
+                entry.data = 0;
             } else {
-                dmem_rsp_data = memory.read32(top->dmem_req_addr);
+                entry.data = memory.read32(top->dmem_req_addr);
             }
+            int lat = config.dmem_latency;
+            if (config.dmem_rand_delay > 0) {
+                lat += (std::rand() % (config.dmem_rand_delay + 1));
+            }
+            entry.delay = lat;
+            dmem_q.push_back(entry);
         }
 
         // --- Rising Edge (Clock High) ---
         top->clk = 1;
         top->eval();
         if (tfp) tfp->dump(sim_time++);
+
+        for (auto& entry : dmem_q) {
+            if (entry.delay > 0) entry.delay--;
+        }
 
         imem_pipe_valid = next_imem_valid;
         imem_pipe_data  = next_imem_data;

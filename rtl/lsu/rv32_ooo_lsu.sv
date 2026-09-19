@@ -1,6 +1,7 @@
 // rv32_ooo_lsu.sv — Load/Store Unit
 // Complete Store Queue (SQ) and Load Queue (LQ) with safe in-order store retirement,
 // store-to-load forwarding, memory disambiguation, and speculative wrong-path isolation.
+// AP5B: Registered Load Response & LSU Timing Decoupling
 // Architecture Spec §20–§22 | Uop Spec §21–§22
 
 module rv32_ooo_lsu
@@ -146,24 +147,41 @@ module rv32_ooo_lsu
   endfunction
 
   // =========================================================================
-  // 3. In-Flight Memory Request Tracking
+  // 3. In-Flight Memory Request Tracking & Registered Response Buffer (AP5B)
   // =========================================================================
 
-  logic        in_flight_valid;
-  logic        in_flight_is_store;
-  rob_tag_t    in_flight_rob_tag;
-  logic [31:0] in_flight_addr;
-  exec_req_t   in_flight_load_req;
+  logic                in_flight_valid;
+  logic                in_flight_killed;
+  logic                in_flight_is_store;
+  rob_tag_t            in_flight_rob_tag;
+  logic [31:0]         in_flight_addr;
+  exec_req_t           in_flight_load_req;
   logic [SQ_IDX_W-1:0] in_flight_sq_idx;
 
-  assign dmem_pending.valid    = in_flight_valid;
-  assign dmem_pending.rob_tag  = in_flight_rob_tag;
-  assign dmem_pending.lq_valid = in_flight_valid && !in_flight_is_store;
+  // Registered load response buffer (1 entry) — eliminates external-response combinational path
+  logic         rsp_buf_valid;
+  logic [31:0]  rsp_buf_rdata;
+  logic         rsp_buf_error;
+  rob_tag_t     rsp_buf_rob_tag;
+  renamed_dst_t rsp_buf_dst;
+  logic [31:0]  rsp_buf_addr;
+  mem_size_e    rsp_buf_size;
+  load_ext_e    rsp_buf_load_ext;
+  reg_domain_e  rsp_buf_domain;
+
+  assign dmem_pending.valid    = in_flight_valid || rsp_buf_valid;
+  assign dmem_pending.rob_tag  = in_flight_valid ? in_flight_rob_tag : rsp_buf_rob_tag;
+  assign dmem_pending.lq_valid = (in_flight_valid && !in_flight_is_store) || rsp_buf_valid;
   assign dmem_pending.lq_tag   = '0;
   assign dmem_pending.sq_valid = in_flight_valid && in_flight_is_store;
   assign dmem_pending.sq_tag   = '0;
 
-  assign dmem_rsp_ready = 1'b1;
+  // Buffer-aware ready: can accept response whenever response buffer is empty
+  assign dmem_rsp_ready = !rsp_buf_valid;
+
+  // Flush condition for in-flight transaction
+  wire in_flight_flushed = flush_valid && in_flight_valid && !in_flight_is_store && is_older_rob(flush_rob_tag, in_flight_rob_tag);
+  wire kill_in_flight    = in_flight_killed || in_flight_flushed;
 
   // =========================================================================
   // 4. Store Queue Allocation & Update Logic
@@ -299,18 +317,27 @@ module rv32_ooo_lsu
   wire effective_fwd_valid = fwd_valid && !load_stall_unresolved && !load_stall_partial;
 
   // Can load issue to external D-memory?
+  // AP5B: Also requires !rsp_buf_valid to prevent external request when response buffer is occupied
   wire can_issue_load = agu_valid && agu_req.uop.mem.is_load && !agu_misaligned &&
                         !effective_fwd_valid && !load_stall_unresolved && !load_stall_partial &&
-                        !in_flight_valid && !sq_has_send && (core_state == CORE_RUN);
+                        !in_flight_valid && !rsp_buf_valid && !sq_has_send && !flush_valid && (core_state == CORE_RUN);
 
   // Can retired store issue to external D-memory?
-  wire can_issue_store = sq_has_send && !in_flight_valid && (core_state == CORE_RUN);
+  wire can_issue_store = sq_has_send && !in_flight_valid && !rsp_buf_valid && !flush_valid && (core_state == CORE_RUN);
 
   wire sq_full = !sq_has_free;
 
+  // Forwarding and misalignment buffer acceptance guards
+  wire lsu_can_accept_fwd;
+  wire lsu_can_accept_misalign;
+
   assign lsu_ready = (core_state == CORE_RUN) && (
     (agu_req.uop.mem.is_store && (!sq_full || sq_matched)) ||
-    (agu_req.uop.mem.is_load  && (agu_misaligned || effective_fwd_valid || can_issue_load))
+    (agu_req.uop.mem.is_load  && (
+      (agu_misaligned && lsu_can_accept_misalign) ||
+      (effective_fwd_valid && lsu_can_accept_fwd) ||
+      can_issue_load
+    ))
   );
 
   // =========================================================================
@@ -342,40 +369,56 @@ module rv32_ooo_lsu
   end
 
   // =========================================================================
-  // 7. Load Completion Packet Formation
+  // 7. Load Completion Packet Formation (Decoupled Output Arbiter)
   // =========================================================================
 
-  // Forwarded load completion register for clean 1-cycle timing
+  // Forwarded load completion register for clean 1-cycle timing (independent path)
   logic        fwd_reg_valid;
   exec_req_t   fwd_reg_req;
   logic [31:0] fwd_reg_data;
 
-  // Direct misaligned load completion
+  // Direct misaligned load completion register
   logic        misalign_reg_valid;
   exec_req_t   misalign_reg_req;
   logic [31:0] misalign_reg_addr;
 
-  always_comb begin
-    ld_cmp = '0;
+  logic rsp_buf_ack;
+  logic fwd_reg_ack;
+  logic misalign_reg_ack;
 
-    // Source 1: D-memory response
-    if (in_flight_valid && !in_flight_is_store && dmem_rsp_valid) begin
+  wire rsp_buf_flushed      = flush_valid && is_older_rob(flush_rob_tag, rsp_buf_rob_tag);
+  wire fwd_reg_flushed      = flush_valid && is_older_rob(flush_rob_tag, fwd_reg_req.uop.rob_tag);
+  wire misalign_reg_flushed = flush_valid && is_older_rob(flush_rob_tag, misalign_reg_req.uop.rob_tag);
+
+  assign lsu_can_accept_fwd      = !fwd_reg_valid || fwd_reg_ack;
+  assign lsu_can_accept_misalign = !misalign_reg_valid || misalign_reg_ack;
+
+  always_comb begin
+    ld_cmp           = '0;
+    rsp_buf_ack      = 1'b0;
+    fwd_reg_ack      = 1'b0;
+    misalign_reg_ack = 1'b0;
+
+    // Source 1: Registered D-memory response (primary external path)
+    if (rsp_buf_valid && !rsp_buf_flushed) begin
+      rsp_buf_ack          = 1'b1;
       ld_cmp.valid         = 1'b1;
-      ld_cmp.rob_tag       = in_flight_load_req.uop.rob_tag;
-      ld_cmp.result_valid  = in_flight_load_req.uop.dst.valid;
-      ld_cmp.result_domain = in_flight_load_req.uop.dst.domain;
-      ld_cmp.result_phys   = in_flight_load_req.uop.dst.new_phys;
-      ld_cmp.result_data   = extract_load_data(dmem_rsp_rdata, in_flight_addr[1:0],
-                                               in_flight_load_req.uop.mem.size,
-                                               in_flight_load_req.uop.mem.load_ext);
-      if (dmem_rsp_error) begin
+      ld_cmp.rob_tag       = rsp_buf_rob_tag;
+      ld_cmp.result_valid  = rsp_buf_dst.valid;
+      ld_cmp.result_domain = rsp_buf_domain;
+      ld_cmp.result_phys   = rsp_buf_dst.new_phys;
+      ld_cmp.result_data   = extract_load_data(rsp_buf_rdata, rsp_buf_addr[1:0],
+                                               rsp_buf_size,
+                                               rsp_buf_load_ext);
+      if (rsp_buf_error) begin
         ld_cmp.exception.valid = 1'b1;
         ld_cmp.exception.cause = EXC_LOAD_ACCESS_FAULT;
-        ld_cmp.exception.tval  = in_flight_addr;
+        ld_cmp.exception.tval  = rsp_buf_addr;
       end
     end
-    // Source 2: Store-to-Load Forwarding response
-    else if (fwd_reg_valid) begin
+    // Source 2: Store-to-Load Forwarding response (preserved fast path)
+    else if (fwd_reg_valid && !fwd_reg_flushed) begin
+      fwd_reg_ack          = 1'b1;
       ld_cmp.valid         = 1'b1;
       ld_cmp.rob_tag       = fwd_reg_req.uop.rob_tag;
       ld_cmp.result_valid  = fwd_reg_req.uop.dst.valid;
@@ -384,7 +427,8 @@ module rv32_ooo_lsu
       ld_cmp.result_data   = fwd_reg_data;
     end
     // Source 3: Misaligned load exception
-    else if (misalign_reg_valid) begin
+    else if (misalign_reg_valid && !misalign_reg_flushed) begin
+      misalign_reg_ack       = 1'b1;
       ld_cmp.valid           = 1'b1;
       ld_cmp.rob_tag         = misalign_reg_req.uop.rob_tag;
       ld_cmp.result_valid    = 1'b0;
@@ -404,7 +448,7 @@ module rv32_ooo_lsu
       if (sq[retire_sq_idx].exception.valid) begin
         // Misaligned store traps without writing memory
         sq_retire_ack = 1'b1;
-      end else if (sq[retire_sq_idx].rsp_done || (in_flight_valid && in_flight_is_store && (in_flight_sq_idx == retire_sq_idx) && dmem_rsp_valid)) begin
+      end else if (sq[retire_sq_idx].rsp_done || (in_flight_valid && in_flight_is_store && (in_flight_sq_idx == retire_sq_idx) && dmem_rsp_valid && dmem_rsp_ready)) begin
         sq_retire_ack = 1'b1;
       end
     end
@@ -417,11 +461,23 @@ module rv32_ooo_lsu
   always_ff @(posedge clk) begin
     if (rst) begin
       in_flight_valid     <= 1'b0;
+      in_flight_killed    <= 1'b0;
       in_flight_is_store  <= 1'b0;
       in_flight_rob_tag   <= '0;
       in_flight_addr      <= 32'd0;
       in_flight_load_req  <= '0;
       in_flight_sq_idx    <= '0;
+
+      rsp_buf_valid       <= 1'b0;
+      rsp_buf_rdata       <= 32'd0;
+      rsp_buf_error       <= 1'b0;
+      rsp_buf_rob_tag     <= '0;
+      rsp_buf_dst         <= '0;
+      rsp_buf_addr        <= 32'd0;
+      rsp_buf_size        <= MEM_WORD;
+      rsp_buf_load_ext    <= LOAD_UNSIGNED;
+      rsp_buf_domain      <= REG_NONE;
+
       fwd_reg_valid       <= 1'b0;
       fwd_reg_req         <= '0;
       fwd_reg_data        <= 32'd0;
@@ -433,54 +489,62 @@ module rv32_ooo_lsu
         sq[i] <= '0;
       end
     end else begin
-      // Default auto-clearing single-cycle pulses
-      fwd_reg_valid      <= 1'b0;
-      misalign_reg_valid <= 1'b0;
-
-      // ── Pipeline Flush (Wrong-Path Purge) ──────────────────────────────────
-      if (flush_valid) begin
-        // Only flush in-flight if it was a non-retired speculative load
-        if (in_flight_valid && !in_flight_is_store) begin
-          in_flight_valid <= 1'b0;
-        end
-        fwd_reg_valid      <= 1'b0;
+      // ── 1. Buffer Acknowledgment and Flush Processing ──────────────────
+      if (rsp_buf_ack || rsp_buf_flushed) begin
+        rsp_buf_valid <= 1'b0;
+      end
+      if (fwd_reg_ack || fwd_reg_flushed) begin
+        fwd_reg_valid <= 1'b0;
+      end
+      if (misalign_reg_ack || misalign_reg_flushed) begin
         misalign_reg_valid <= 1'b0;
+      end
 
-        // Invalidate all un-retired speculative stores in SQ!
+      // ── 2. In-Flight Load Kill on Flush (Physical Transaction Persists) ─
+      if (in_flight_flushed) begin
+        in_flight_killed <= 1'b1;
+      end
+
+      // ── 3. Store Queue Flush on Rollback ───────────────────────────────
+      if (flush_valid) begin
         for (int i = 0; i < SQ_SIZE; i++) begin
           if (sq[i].valid && !sq[i].retired) begin
             sq[i] <= '0;
           end
         end
-      end else begin
-        // ── Forwarding & Misalignment Capture ───────────────────────────────
-        if (agu_valid && agu_req.uop.mem.is_load) begin
-          if (agu_misaligned) begin
+      end
+
+      // ── 4. Forwarding & Misalignment Capture from AGU ──────────────────
+      if (agu_valid && agu_req.uop.mem.is_load) begin
+        if (!flush_valid || !is_older_rob(flush_rob_tag, agu_req.uop.rob_tag)) begin
+          if (agu_misaligned && lsu_can_accept_misalign) begin
             misalign_reg_valid <= 1'b1;
             misalign_reg_req   <= agu_req;
             misalign_reg_addr  <= agu_addr;
-          end else if (effective_fwd_valid) begin
+          end else if (effective_fwd_valid && lsu_can_accept_fwd) begin
             fwd_reg_valid <= 1'b1;
             fwd_reg_req   <= agu_req;
             fwd_reg_data  <= fwd_data;
           end
         end
+      end
 
-        // ── Store Queue Dispatch Allocation (Early Reservation for Disambiguation)
-        if (disp_valid && disp_uop.mem.is_store && sq_has_free) begin
-          sq[free_sq_idx].valid      <= 1'b1;
-          sq[free_sq_idx].rob_tag    <= disp_uop.rob_tag;
-          sq[free_sq_idx].addr_valid <= 1'b0;
-          sq[free_sq_idx].size       <= disp_uop.mem.size;
-          sq[free_sq_idx].is_fp      <= disp_uop.mem.is_fp;
-          sq[free_sq_idx].retired    <= 1'b0;
-          sq[free_sq_idx].req_sent   <= 1'b0;
-          sq[free_sq_idx].rsp_done   <= 1'b0;
-          sq[free_sq_idx].exception  <= '{valid: 1'b0, cause: 5'd0, tval: 32'd0};
-        end
+      // ── 5. Store Queue Dispatch Allocation ─────────────────────────────
+      if (disp_valid && disp_uop.mem.is_store && sq_has_free && !flush_valid) begin
+        sq[free_sq_idx].valid      <= 1'b1;
+        sq[free_sq_idx].rob_tag    <= disp_uop.rob_tag;
+        sq[free_sq_idx].addr_valid <= 1'b0;
+        sq[free_sq_idx].size       <= disp_uop.mem.size;
+        sq[free_sq_idx].is_fp      <= disp_uop.mem.is_fp;
+        sq[free_sq_idx].retired    <= 1'b0;
+        sq[free_sq_idx].req_sent   <= 1'b0;
+        sq[free_sq_idx].rsp_done   <= 1'b0;
+        sq[free_sq_idx].exception  <= '{valid: 1'b0, cause: 5'd0, tval: 32'd0};
+      end
 
-        // ── Store Queue AGU Ingestion ───────────────────────────────────────
-        if (agu_valid && agu_req.uop.mem.is_store) begin
+      // ── 6. Store Queue AGU Ingestion ───────────────────────────────────
+      if (agu_valid && agu_req.uop.mem.is_store) begin
+        if (!flush_valid || !is_older_rob(flush_rob_tag, agu_req.uop.rob_tag)) begin
           logic [SQ_IDX_W-1:0] target_idx;
           target_idx = sq_matched ? match_sq_idx : free_sq_idx;
 
@@ -500,45 +564,133 @@ module rv32_ooo_lsu
             end
           end
         end
+      end
 
-        // ── ROB Store Retirement Marking ────────────────────────────────────
-        if (sq_retire_valid && retire_sq_match) begin
-          sq[retire_sq_idx].retired <= 1'b1;
+      // ── 7. ROB Store Retirement Marking ────────────────────────────────
+      if (sq_retire_valid && retire_sq_match) begin
+        sq[retire_sq_idx].retired <= 1'b1;
+      end
+
+      // ── 8. Outbound Memory Request Dispatch ────────────────────────────
+      if (dmem_req_valid && dmem_req_ready) begin
+        in_flight_valid <= 1'b1;
+        if (dmem_req_wen) begin
+          in_flight_is_store       <= 1'b1;
+          in_flight_killed         <= 1'b0;
+          in_flight_rob_tag        <= sq[send_sq_idx].rob_tag;
+          in_flight_addr           <= sq[send_sq_idx].addr;
+          in_flight_sq_idx         <= send_sq_idx;
+          sq[send_sq_idx].req_sent <= 1'b1;
+        end else begin
+          in_flight_is_store <= 1'b0;
+          in_flight_killed   <= flush_valid && is_older_rob(flush_rob_tag, agu_req.uop.rob_tag);
+          in_flight_rob_tag  <= agu_req.uop.rob_tag;
+          in_flight_addr     <= agu_addr;
+          in_flight_load_req <= agu_req;
         end
+      end else if (in_flight_flushed) begin
+        in_flight_killed <= 1'b1;
+      end
 
-        // ── Outbound Memory Request Dispatch ────────────────────────────────
-        if (dmem_req_valid && dmem_req_ready) begin
-          in_flight_valid <= 1'b1;
-          if (dmem_req_wen) begin
-            in_flight_is_store       <= 1'b1;
-            in_flight_rob_tag        <= sq[send_sq_idx].rob_tag;
-            in_flight_addr           <= sq[send_sq_idx].addr;
-            in_flight_sq_idx         <= send_sq_idx;
-            sq[send_sq_idx].req_sent <= 1'b1;
+      // ── 9. Memory Response Handling & Deallocation ─────────────────────
+      if (dmem_rsp_valid && dmem_rsp_ready && in_flight_valid) begin
+        in_flight_valid  <= 1'b0;
+        in_flight_killed <= 1'b0;
+        if (in_flight_is_store) begin
+          sq[in_flight_sq_idx] <= '0; // Deallocate completed store immediately upon response
+        end else begin
+          // External load response
+          if (!kill_in_flight) begin
+            rsp_buf_valid    <= 1'b1;
+            rsp_buf_rdata    <= dmem_rsp_rdata;
+            rsp_buf_error    <= dmem_rsp_error;
+            rsp_buf_rob_tag  <= in_flight_rob_tag;
+            rsp_buf_dst      <= in_flight_load_req.uop.dst;
+            rsp_buf_addr     <= in_flight_addr;
+            rsp_buf_size     <= in_flight_load_req.uop.mem.size;
+            rsp_buf_load_ext <= in_flight_load_req.uop.mem.load_ext;
+            rsp_buf_domain   <= in_flight_load_req.uop.dst.domain;
           end else begin
-            in_flight_is_store <= 1'b0;
-            in_flight_rob_tag  <= agu_req.uop.rob_tag;
-            in_flight_addr     <= agu_addr;
-            in_flight_load_req <= agu_req;
+            rsp_buf_valid    <= 1'b0;
           end
         end
+      end
 
-        // ── Memory Response Handling & Deallocation ─────────────────────────
-        if (dmem_rsp_valid && in_flight_valid) begin
-          in_flight_valid <= 1'b0;
-          if (in_flight_is_store) begin
-            sq[in_flight_sq_idx] <= '0; // Deallocate completed store immediately upon response
-          end
-        end
-
-        // ── Deallocate Exception Store Entries ──────────────────────────────
-        for (int i = 0; i < SQ_SIZE; i++) begin
-          if (sq[i].valid && sq[i].retired && sq[i].exception.valid) begin
-            sq[i] <= '0;
-          end
+      // ── 10. Deallocate Exception Store Entries ─────────────────────────
+      for (int i = 0; i < SQ_SIZE; i++) begin
+        if (sq[i].valid && sq[i].retired && sq[i].exception.valid) begin
+          sq[i] <= '0;
         end
       end
     end
   end
+
+  // =========================================================================
+  // 10. Architectural SVA Assertions (AP5B Contract Verification)
+  // =========================================================================
+
+`ifndef SYNTHESIS
+  // Assertion 1: accepted request remains tracked until response handshake
+  always_ff @(posedge clk) begin
+    if (!rst && $past(!rst && in_flight_valid && !(dmem_rsp_valid && dmem_rsp_ready))) begin
+      assert (in_flight_valid)
+        else $error("[AP5B SVA Violation] in_flight_valid dropped before physical response handshake!");
+    end
+  end
+
+  // Assertion 2: at most one external request outstanding
+  always_ff @(posedge clk) begin
+    if (!rst && dmem_req_valid && dmem_req_ready) begin
+      assert (!in_flight_valid)
+        else $error("[AP5B SVA Violation] New request dispatched while in_flight_valid already asserted!");
+      assert (!rsp_buf_valid)
+        else $error("[AP5B SVA Violation] New request dispatched while rsp_buf_valid already asserted!");
+    end
+  end
+
+  // Assertion 3: killed response never creates ld_cmp
+  always_ff @(posedge clk) begin
+    if (!rst && ld_cmp.valid && (ld_cmp.rob_tag == in_flight_rob_tag)) begin
+      assert (!in_flight_killed)
+        else $error("[AP5B SVA Violation] Killed in-flight response generated ld_cmp!");
+    end
+  end
+
+  // Assertion 4: rsp_buf metadata remains stable while valid
+  always_ff @(posedge clk) begin
+    if (!rst && $past(!rst && rsp_buf_valid) && rsp_buf_valid) begin
+      assert (rsp_buf_rob_tag == $past(rsp_buf_rob_tag))
+        else $error("[AP5B SVA Violation] rsp_buf_rob_tag mutated while valid!");
+      assert (rsp_buf_rdata == $past(rsp_buf_rdata))
+        else $error("[AP5B SVA Violation] rsp_buf_rdata mutated while valid!");
+      assert (rsp_buf_addr == $past(rsp_buf_addr))
+        else $error("[AP5B SVA Violation] rsp_buf_addr mutated while valid!");
+      assert (rsp_buf_dst.new_phys == $past(rsp_buf_dst.new_phys))
+        else $error("[AP5B SVA Violation] rsp_buf_dst.new_phys mutated while valid!");
+      assert (rsp_buf_dst.valid == $past(rsp_buf_dst.valid))
+        else $error("[AP5B SVA Violation] rsp_buf_dst.valid mutated while valid!");
+    end
+  end
+
+  // Assertion 5: ld_cmp metadata matches buffered transaction
+  always_ff @(posedge clk) begin
+    if (!rst && rsp_buf_ack) begin
+      assert (ld_cmp.rob_tag == rsp_buf_rob_tag)
+        else $error("[AP5B SVA Violation] ld_cmp rob_tag mismatch vs buffered transaction!");
+      assert (ld_cmp.result_phys == rsp_buf_dst.new_phys)
+        else $error("[AP5B SVA Violation] ld_cmp result_phys mismatch vs buffered transaction!");
+      assert (ld_cmp.result_domain == rsp_buf_domain)
+        else $error("[AP5B SVA Violation] ld_cmp result_domain mismatch vs buffered transaction!");
+    end
+  end
+
+  // Assertion 6: new request cannot alias an unconsumed old response
+  always_ff @(posedge clk) begin
+    if (!rst && (in_flight_valid || rsp_buf_valid)) begin
+      assert (!(dmem_req_valid && dmem_req_ready))
+        else $error("[AP5B SVA Violation] Request accepted while transaction pending or response unconsumed!");
+    end
+  end
+`endif
 
 endmodule

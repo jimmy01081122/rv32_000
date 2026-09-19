@@ -6,7 +6,7 @@ import json
 import shutil
 from sta_analyzer import run_sta_signoff
 
-def run_physical_implementation(period_ns, build_tag="closable", clean=True, reuse_synth=True):
+def run_physical_implementation(period_ns, build_tag="closable", clean=True, reuse_synth=False, synth_base=None):
     period_ps = period_ns * 1000.0
     print(f"\n==================================================================")
     print(f"  STARTING PHYSICAL IMPLEMENTATION FOR T = {period_ns:.2f} ns ({1000.0/period_ns:.2f} MHz)")
@@ -56,16 +56,19 @@ group_path -name in2out  -from $non_clock_inputs -to $all_outputs_list
     os.makedirs(f"{build_dir}/reports", exist_ok=True)
     os.makedirs(f"{build_dir}/objects", exist_ok=True)
     
-    # Optionally seed gate-level netlist from AP4F base if reuse_synth=True
-    base_synth_v = "/home/a/ooo/build/asap7_closable_12.0ns/results/1_2_yosys.v"
-    if reuse_synth and os.path.exists(base_synth_v):
-        target_synth_v = f"{build_dir}/results/1_2_yosys.v"
-        if not os.path.exists(target_synth_v):
-            print(f"Reusing verified AP4F synthesized netlist: {base_synth_v} -> {target_synth_v}")
-            shutil.copy(base_synth_v, target_synth_v)
-            base_stat = "/home/a/ooo/build/asap7_closable_12.0ns/reports/synth_stat.txt"
-            if os.path.exists(base_stat):
-                shutil.copy(base_stat, f"{build_dir}/reports/synth_stat.txt")
+    # Optionally seed gate-level netlist if reuse_synth=True
+    if reuse_synth:
+        base_synth_v = synth_base or "/home/a/ooo/build/asap7_closable_5.0ns/results/1_2_yosys.v"
+        if os.path.exists(base_synth_v):
+            target_synth_v = f"{build_dir}/results/1_2_yosys.v"
+            if not os.path.exists(target_synth_v):
+                print(f"Reusing synthesized netlist: {base_synth_v} -> {target_synth_v}")
+                shutil.copy(base_synth_v, target_synth_v)
+                base_dir = os.path.dirname(os.path.dirname(base_synth_v))
+                base_stat = os.path.join(base_dir, "reports/synth_stat.txt")
+                if os.path.exists(base_stat):
+                    shutil.copy(base_stat, f"{build_dir}/reports/synth_stat.txt")
+            os.utime(target_synth_v, None)
     
     if not clean:
         for f in ["1_synth.odb", "1_synth.sdc", "1_2_yosys.v", "1_2_yosys.sdc"]:
@@ -114,6 +117,11 @@ group_path -name in2out  -from $non_clock_inputs -to $all_outputs_list
     return metrics
 
 if __name__ == "__main__":
-    t = float(sys.argv[1]) if len(sys.argv) > 1 else 6.0
-    clean = not (len(sys.argv) > 2 and sys.argv[2] == "resume")
-    run_physical_implementation(t, clean=clean)
+    t = float(sys.argv[1]) if len(sys.argv) > 1 and not sys.argv[1].startswith("-") else 5.0
+    clean = "resume" not in sys.argv
+    reuse = "--reuse-synth" in sys.argv
+    base = None
+    for arg in sys.argv:
+        if arg.startswith("--synth-base="):
+            base = arg.split("=", 1)[1]
+    run_physical_implementation(t, clean=clean, reuse_synth=reuse, synth_base=base)
