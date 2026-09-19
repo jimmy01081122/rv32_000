@@ -13,7 +13,9 @@ An open-source, synthesizable, high-performance **32-bit RISC-V Out-of-Order (Oo
 Designed using an explicit Physical Register File (PRF) Tomasulo microarchitecture with age-matrix issue queues, speculative register renaming, precise exception recovery via Reorder Buffer (ROB), pipelined continuous instruction fetch with dynamic BTB/BHT branch prediction, store-to-load forwarding LSU with memory disambiguation, and single-precision IEEE 754 hardware FPU. Verified via official **RISC-V ACT4** framework regression using the Sail reference simulator (`sail_riscv_sim 0.13.1`), multi-workload **Embench-IoT 1.0 RV32IM subset (14 workloads)**, and true lockstep differential testing against the **Spike Golden Model**.
 
 ---
-
+## Current Block
+[archi graph](/ooo/graph/ap5a.png)
+---
 ## 1. Microarchitectural Overview
 
 ```
