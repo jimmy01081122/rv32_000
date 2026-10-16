@@ -49,6 +49,10 @@ configuration, and must not be merged into this run's pass counts.
    to tests/assertions. Complete reviewable coverage and focused formal plans.
 5. **Performance:** qualify the [candidate workload sets](WORKLOADS.md), memory
    contract, compiler settings, reference outputs and counter instrumentation.
+   [Initial probes](WORKLOAD_QUALIFICATION_2026-10-16.md) found that all five omitted
+   Embench workloads pass native self-checks but fail target linking with the current
+   single-library, `ilp32d` toolchain. PolyBench MINI/SMALL native runs and target
+   object compilation succeeded; bare-metal execution and numerical checking remain open.
 6. **Physical results:** port hardcoded host paths, provision pinned ORFS/ASAP7,
    audit measurement units, synthesis boundary, constraints, corners and parasitic
    stage, then reproduce AP5B results. Current config skips detailed routing;

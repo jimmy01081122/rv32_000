@@ -13,6 +13,7 @@ signoff label applies only to the source/configuration and checks in that record
 | [Architecture](../architecture_spec.md) | Implemented structures and architectural obligations |
 | [Micro-operations](../uop_spec.md) | Current packet/schema reference |
 | [Workloads](WORKLOADS.md) | Candidate benchmark contract; not yet an implemented acceptance gate |
+| [Initial workload qualification](WORKLOAD_QUALIFICATION_2026-10-16.md) | Embench library blockers and PolyBench FP32 source/resource probes |
 | [Session handoff](SESSION_HANDOFF.md) | Bring-up measurements, tool images and local evidence locations |
 | [CI workflow](../.github/workflows/README.md) | Existing jobs, prerequisites and limits |
 | [Physical flow](../physical/asap7/README.md) | ASAP7 setup status and current research limitations |
