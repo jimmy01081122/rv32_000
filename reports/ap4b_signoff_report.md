@@ -1,3 +1,8 @@
+> **Historical phase report — not current checkout signoff.**
+> Preserved for traceability; original claims and section references below
+> apply to their historical scope. See the [archive index](README.md) and
+> [current status](../docs/STATUS.md) for applicability and known gaps.
+
 # AP4B Physical Implementation & Architectural Signoff Report: Simple Floating-Point Operation Separation
 
 **Phase:** AP4B — Simple FP Execution Separation  

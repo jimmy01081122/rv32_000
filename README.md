@@ -1,278 +1,112 @@
-# RV32_OOO: High-Performance RV32IMF Out-of-Order RISC-V Core
+# RV32 OoO CPU research project
 
-> **Current checkout:** the RTL includes AP5B LSU response buffering. The badges and
-> benchmark tables below describe archived runs, not a fresh signoff of this checkout.
-> See [session handoff and environment status](docs/SESSION_HANDOFF.md) for the current
-> source baseline, reproducible setup, measured checks, and remaining limitations.
+A scalar, single-retirement-width RISC-V core targeting RV32IMF + Zicsr,
+developed with SystemVerilog and open-source simulation and ASIC design tools.
+The execution environment is bare metal. This is an architecture and PPA research
+project; tape-out is outside the agreed scope.
 
-[![ISA](https://img.shields.io/badge/ISA-RV32IMF%20%2B%20Zicsr-blue.svg)](https://riscv.org/)
-[![CoreMark](https://img.shields.io/badge/CoreMark%2FMHz-2.528%20(10%20iter)-brightgreen.svg)]()
-[![ACT4](https://img.shields.io/badge/RISC--V%20ACT4-58%2F58%20PASS%20(100%25)-success.svg)]()
-[![Embench-IoT](https://img.shields.io/badge/Embench--IoT%201.0-14%2F14%20PASS%20(100%25)-success.svg)]()
-[![Verification](https://img.shields.io/badge/Spike%20Diff--Test-14%2F14%20PASS%20(100%25)-success.svg)]()
-[![Synthesis](https://img.shields.io/badge/Synthesis-0%20Inferred%20Latches-brightgreen.svg)]()
-[![License](https://img.shields.io/badge/License-MIT-lightgrey.svg)](LICENSE)
+General embedded performance and single-precision floating-point performance
+are equally important project objectives. Workload qualification and a fresh
+AP5B baseline precede the next architecture optimization.
 
-An open-source, synthesizable, high-performance **32-bit RISC-V Out-of-Order (OoO) superscalar core** implementing the complete **RV32IMF** unprivileged ISA, **Zicsr**, and Machine-mode privileged architecture.
+## Start here
 
-Designed using an explicit Physical Register File (PRF) Tomasulo microarchitecture with age-matrix issue queues, speculative register renaming, precise exception recovery via Reorder Buffer (ROB), pipelined continuous instruction fetch with dynamic BTB/BHT branch prediction, store-to-load forwarding LSU with memory disambiguation, and single-precision IEEE 754 hardware FPU. Verified via official **RISC-V ACT4** framework regression using the Sail reference simulator (`sail_riscv_sim 0.13.1`), multi-workload **Embench-IoT 1.0 RV32IM subset (14 workloads)**, and true lockstep differential testing against the **Spike Golden Model**.
+| Document | Purpose |
+| --- | --- |
+| [Project plan](PLAN.md) | Agreed scope, decision process and next milestones |
+| [Current status](docs/STATUS.md) | Measured checks, implementation drift and open verification gaps |
+| [Architecture](architecture_spec.md) | Current implementation inventory and architectural requirements |
+| [Micro-operations](uop_spec.md) | Implemented packet types and their limitations |
+| [Workload proposal](docs/WORKLOADS.md) | Candidate benchmark sets and numerical targets awaiting qualification |
+| [Session handoff](docs/SESSION_HANDOFF.md) | Environment bring-up evidence and reproduction details |
+| [Documentation index](docs/README.md) | Current documents and historical references |
 
----
-## Current Block
-![archi graph](https://github.com/jimmy01081122/rv32_000/blob/main/graph/ap5a.png)
----
-## 1. Microarchitectural Overview
+## Implementation snapshot
 
-```
-                      +---------------------------------------+
-                      |         Instruction Memory / Bus       |
-                      +---------------------------------------+
-                                          |
-                                          v
-                      +---------------------------------------+
-                      |     Pipelined Fetch Engine (1-IPC)    |
-                      |  - 4-Entry In-Flight Tracking FIFO    |
-                      |  - 64-Entry Direct-Mapped BTB         |
-                      |  - 64-Entry 2-bit BHT Saturating Regs |
-                      +---------------------------------------+
-                                          |
-                                          v
-                      +---------------------------------------+
-                      |         Decode & Expansion Stage      |
-                      |  - RV32I / M / F / Zicsr Decoders     |
-                      |  - 8-Entry Instruction Queue (IQ)     |
-                      +---------------------------------------+
-                                          |
-                                          v
-                      +---------------------------------------+
-                      |       Rename & Dispatch Stage         |
-                      | - Integer RAT (32 ARF -> 48 PRF)      |
-                      | - Floating-Point RAT (32 ARF -> 48 PRF|
-                      | - Dual Free Lists & RRAT (Retirement) |
-                      | - Destination Allocation & Dispatch   |
-                      +---------------------------------------+
-                                   /             \
-                                  /               \
-                                 v                 v
-                 +-----------------------+   +-----------------------+
-                 |  Integer Issue Queue  |   |    FP Issue Queue     |
-                 |  (8 Entries, Age-CAM) |   |  (4 Entries, 3-Src)   |
-                 +-----------------------+   +-----------------------+
-                            |                            |
-                            v                            v
-                 +-----------------------+   +-----------------------+
-                 |    Integer PRF Read   |   |      FP PRF Read      |
-                 | (48x32b, 4R/2W ports) |   | (48x32b, 4R/2W ports) |
-                 +-----------------------+   +-----------------------+
-                            |                            |
-         +------------------+------------------+         |
-         |                  |                  |         |
-         v                  v                  v         v
-+-----------------+ +-----------------+ +-------------+ +-----------------+
-|   Integer ALU   | | Branch Resolve  | | MULDIV Unit | | IEEE 754 FPU    |
-| (1-cycle, cond) | | (Branch / JALR) | | (Div FSM)   | | (FMA/FDIV/FSQRT)|
-+-----------------+ +-----------------+ +-------------+ +-----------------+
-         |                  |                  |                 |
-         +------------------+--------+---------+                 |
-                                     |                           |
-                                     v                           |
-                      +-------------------------------+          |
-                      |      Load / Store Unit (LSU)  |          |
-                      |  - 16-Entry Store Queue (SQ)  |          |
-                      |  - 16-Entry Load Queue (LQ)   |          |
-                      |  - Store-to-Load Forwarding   |          |
-                      |  - Speculative Disambiguation |          |
-                      +-------------------------------+          |
-                                     |                           |
-                                     v                           v
-                      +---------------------------------------------------+
-                      |             Common Data Bus (CDB) Bypass          |
-                      |  (Wakeup Broadcast & PRF Speculative Writeback)   |
-                      +---------------------------------------------------+
-                                               |
-                                               v
-                      +---------------------------------------------------+
-                      |               Reorder Buffer (ROB)                |
-                      |  - 16 Entries (In-Order Commit / Recovery)        |
-                      |  - Precise Exception & Interrupt Handling         |
-                      |  - Retirement RAT (RRAT) Flash Rollback           |
-                      |  - In-Order Store Retirement Handshake to LSU     |
-                      +---------------------------------------------------+
-```
+| Component | Current implementation |
+| --- | --- |
+| Fetch / decode / rename / dispatch / retirement | One instruction per cycle at each boundary |
+| ROB | 16 entries; 12-bit sequence number |
+| Integer / FP physical registers | 48 × 32 bits each |
+| Integer / FP issue queues | 8 / 4 entries |
+| Frontend | 8-entry instruction FIFO, 4-entry fetch tracking, 64-entry BTB and 64-entry two-bit BHT |
+| Integer / FP PRF interfaces | 4 read / 3 write ports; 4 read / 2 write ports |
+| Store queue | 16 allocated slots |
+| Load tracking | One external transaction plus AP5B response buffer; no allocated 16-entry LQ |
+| Data-memory requests | At most one outstanding transaction |
 
----
+Integer and FP execution can overlap; sustained retirement IPC is at most one.
+The `LQ_ENTRIES` and PRF-port constants do not fully describe the instantiated
+structures; see the architecture inventory before changing their values.
 
-## 2. Multi-Benchmark Performance & Verification Signoff
+The current RTL contains AP5B registered load responses. Its physical performance
+has not been re-established in this session. Archived AP5A MHz, area, power and
+benchmark numbers are linked from [historical reports](reports/README.md).
 
-### CoreMark / MHz Performance
+## Reproducible development
 
-The core is characterized against the official EEMBC CoreMark workload in a bare-metal environment with hardware timers. Re-computation and independent verification are executed with `scripts/check_coremark_result.py` and `scripts/verify_coremark_reproducibility.py`.
+Run these commands from the repository root on a host with Git, Make, Bash and Docker:
 
-* **Compiler Configuration:** GCC 16.1.0 (`-march=rv32im_zicsr -mabi=ilp32 -O3 -fno-common -funroll-loops -finline-functions --param max-inline-insns-auto=20 -falign-functions=4 -falign-jumps=4 -falign-loops=4`).
-
-| Benchmark Run | Iterations | Optimization | Measured Cycles | Retired Insns | IPC | **CoreMark / MHz** | Verification Status |
-|---|---|---|---|---|---|---|---|
-| **CoreMark Performance Run (-O3)** | **10** | `-O3` | **3,955,412** | **2,953,511** | **0.7415** | **2.5282** | **PASS (100% Deterministic Reproducibility)** |
-| **CoreMark Performance Run (-O2)** | **10** | `-O2` | **3,857,171** | **2,869,307** | **0.7380** | **2.5926** | **PASS (100% Deterministic Reproducibility)** |
-| **CoreMark Validation Run (-O3)** | **1** | `-O3` | **387,150** | **305,676** | **0.7320** | **2.5830** | **PASS (100% CRC Validated)** |
-| **CoreMark Official Run (>= 10s @ 1MHz)** | **26** | `-O3` | **10,284,714** | **7,649,847** | **0.7418** | **2.5280** | **PASS (Official 10.28s Cycle-Normalized Execution)** |
-
-* **Formula:** $\text{CoreMark/MHz} = \frac{\text{Iterations} \times 1{,}000{,}000}{\text{Measured Execution Cycles}}$
-
----
-
-### Embench-IoT 1.0 RV32IM Integer Subset
-
-Embench-IoT 1.0 (pinned commit `0466a18e`) executes across 14 diverse integer embedded workloads measuring execution cycles, retired instructions, IPC, code footprint, and official relative speed scores against `baseline-data/speed.json`:
-
-| Benchmark Workload | Execution Cycles | Simulation Cycles | Retired Insns | IPC | Relative Speed | Text Size | Status |
-|---|---|---|---|---|---|---|---|
-| **aha-mont64** | 5,071,977 | 5,468,065 | 4,778,064 | **0.8738** | 0.789x | 6,246 B | PASS |
-| **crc32** | 4,355,834 | 4,768,358 | 4,284,543 | **0.8985** | 0.921x | 4,688 B | PASS |
-| **edn** | 4,082,104 | 4,532,347 | 3,684,607 | **0.8130** | 0.982x | 8,400 B | PASS |
-| **huffbench** | 3,068,671 | 3,758,334 | 2,579,565 | **0.6864** | 1.343x | 7,756 B | PASS |
-| **matmult-int** | 5,498,654 | 6,049,329 | 4,379,813 | **0.7240** | 0.725x | 6,112 B | PASS |
-| **nettle-aes** | 4,631,941 | 5,091,585 | 4,505,222 | **0.8848** | 0.869x | 19,240 B | PASS |
-| **nettle-sha256** | 4,403,922 | 4,807,497 | 4,270,819 | **0.8884** | 0.908x | 12,800 B | PASS |
-| **nsichneu** | 5,577,723 | 5,976,453 | 2,501,420 | **0.4185** | 0.717x | 22,850 B | PASS |
-| **picojpeg** | 4,724,687 | 5,910,801 | 4,184,746 | **0.7080** | 0.853x | 23,120 B | PASS |
-| **qrduino** | 3,613,708 | 4,743,165 | 3,602,770 | **0.7596** | 1.177x | 26,168 B | PASS |
-| **sglib-combined** | 3,937,271 | 4,488,565 | 2,676,282 | **0.5962** | 1.011x | 22,336 B | PASS |
-| **slre** | 3,926,091 | 4,355,880 | 2,774,393 | **0.6369** | 1.021x | 8,208 B | PASS |
-| **statemate** | 3,022,772 | 3,419,492 | 1,815,908 | **0.5310** | 1.324x | 10,802 B | PASS |
-| **ud** | 1,377,647 | 1,776,177 | 1,080,073 | **0.6081** | 2.903x | 7,312 B | PASS |
-| **Suite Summary** | **3,902,900.09** | **4,561,192.15** | **3,195,960.33** | **0.7007** (IPC) | **1.0325** (Speed Score) | — | **14 / 14 (100% PASS)** |
-
-* **Official Embench Speed Score:** **1.0325** (Speed/MHz: **1.0325**)
-* **Geometric StdDev / Range:** **1.4089** / **0.7219**
-* **Diagnostic Geomean IPC:** **0.7007** (Local microarchitectural metric)
-
----
-
-### Official RISC-V Architectural Test (ACT4) Regression
-
-Architectural conformance verified against official RISC-V ACT4 test suite (pinned commit `74efcaac`) with native UDB configuration (`verification/act4/riscv-arch-test/config/cores/rv32_ooo/rv32_ooo.yaml`) and reference golden signatures generated by `sail_riscv_sim 0.13.1`:
-
-| Test Suite | Extension Focus | Framework ELFs | Passed | Failed | Status |
-|---|---|---|---|---|---|
-| **RV32I Suite** | Base 32-bit Integer ISA | 39 | 39 | 0 | **100% PASS** |
-| **RV32M Suite** | Integer Hardware Multiply/Divide | 8 | 8 | 0 | **100% PASS** |
-| **Zicsr Suite** | Control and Status Registers | 6 | 6 | 0 | **100% PASS** |
-| **Zifencei Suite** | Instruction Fetch Synchronization | 1 | 1 | 0 | **100% PASS** |
-| **Zmmul Suite** | Hardware Multiplier Subset | 4 | 4 | 0 | **100% PASS** |
-| **Total ACT4** | Full Conformance Regression | **58** | **58** | **0** | **100% PASS** |
-
----
-
-## 3. Spike Differential Verification & Self-Tests
-
-True architectural lockstep verification comparing PC, instruction word, GPR writebacks, FPR writebacks, and Store address/data against Spike (`riscv-isa-sim` with `--log-commits`):
-
-```text
-================================================================================
-      RV32 OoO Core — True Architectural Spike Differential Verification       
-================================================================================
-  [PASS] fibonacci              | Cycles: 8166   | Retired: 4384   | IPC: 0.5369 | Diff: MATCH
-  [PASS] fp_basic               | Cycles: 549    | Retired: 378    | IPC: 0.6885 | Diff: MATCH
-  [PASS] fp_fma                 | Cycles: 485    | Retired: 342    | IPC: 0.7052 | Diff: MATCH
-  [PASS] fp_matmul              | Cycles: 757    | Retired: 498    | IPC: 0.6579 | Diff: MATCH
-  [PASS] hello                  | Cycles: 270    | Retired: 178    | IPC: 0.6593 | Diff: MATCH
-  [PASS] matmul                 | Cycles: 1630   | Retired: 1060   | IPC: 0.6503 | Diff: MATCH
-  [PASS] partial_overlap        | Cycles: 652    | Retired: 423    | IPC: 0.6488 | Diff: MATCH
-  [PASS] qsort                  | Cycles: 3392   | Retired: 1968   | IPC: 0.5802 | Diff: MATCH
-  [PASS] rv32_csr               | Cycles: 540    | Retired: 354    | IPC: 0.6556 | Diff: MATCH
-  [PASS] rv32i_basic            | Cycles: 524    | Retired: 352    | IPC: 0.6718 | Diff: MATCH
-  [PASS] rv32m_muldiv           | Cycles: 546    | Retired: 372    | IPC: 0.6813 | Diff: MATCH
-  [PASS] store_forwarding       | Cycles: 848    | Retired: 560    | IPC: 0.6604 | Diff: MATCH
-  [PASS] unresolved_store       | Cycles: 975    | Retired: 650    | IPC: 0.6667 | Diff: MATCH
-  [PASS] wrong_path_store       | Cycles: 808    | Retired: 532    | IPC: 0.6584 | Diff: MATCH
-================================================================================
- Verification Signoff: 14 / 14 passed (0 failed) — 100% Architectural State Match
-================================================================================
-```
-
-* **Negative Self-Tests:** 11/11 fault injection tests pass (length mismatch, PC mutation, instruction mutation, GPR dst mutation, GPR val mutation, FPR dst mutation, FPR val mutation, store addr mutation, store data mutation, empty trace). Run with `make diff-selftest`.
-
----
-
-## 4. Synthesis & ASIC Implementation Results
-
-The core is 100% synthesizable SystemVerilog, verified with Yosys 0.9 with zero inferred latches, zero combinational loops, and zero unelaborated processes (`$process == 0`). Both process-lowered and technology-independent post-synthesis generic cell counts are reported distinctly:
-
-| Metric | Value | Status |
-|---|---|---|
-| **Target Top Module** | [`rv32_ooo_core`](file:///home/a/ooo/rtl/core/rv32_ooo_core.sv) | Synthesizable |
-| **Process-Lowered Generic Cells** (`proc; opt -fast`) | **32,596** | **CLEAN** |
-| **Post-Synthesis Generic Cells** (`synth -noabc`) | **1,190,403** | **CLEAN** |
-| **Sequential Elements** (`$_DFF_P_`) | **18,435** | **MAPPED** |
-| **Combinational Logic Gates** (`$_MUX_`, `$_AND_`, `$_OR_`, `$_XOR_`, `$_NOT_`) | **1,171,968** | **OPTIMIZED** |
-| **Macro Cells** (`$mul` / `$mem` / `$div`) | **0** (Fully Lowered to Logic) | **CLEAN** |
-| **Unelaborated Processes** (`$process`) | **0** (Strictly Forbidden) | **CLEAN** |
-| **Inferred Latches** (`$_DLATCH_`) | **0** | **100% Latch-Free** |
-| **Combinational Loops** | **0** | **Clean DAG** |
-| **Verilator Lint Status** | `verilator --lint-only -Wall` | **0 Errors / 0 Warnings** |
-
----
-
-## 5. Continuous Integration & GitHub Actions
-
-Automated signoff verification runs on every push and pull request to `main` via [`.github/workflows/signoff.yml`](.github/workflows/signoff.yml) on clean Ubuntu 22.04 runners:
-
-* **Job 1 (lint):** Verilator `--lint-only -Wall` strict syntax and semantic linting.
-* **Job 2 (spike-diff):** Full architectural lockstep differential verification (14/14 tests) + negative fault injection tests (11/11).
-* **Job 3 (act4):** Fresh generation from Sail reference model (`sail_riscv_sim 0.13.1`) + 58/58 self-checking ELFs on DUT simulator.
-* **Job 4 (coremark-smoke):** 5-run cycle-exact determinism verification.
-* **Job 5 (synthesis):** sv2v + Yosys logic synthesis with 0 latches, 0 combinational loops, 0 `$process` cells assertion.
-
----
-
-## 6. Quickstart & Reproducibility
-
-### 1. Build Simulation Environment
 ```bash
-# Initialize the exact benchmark/framework commits and build the tool images
 make deps-init
 make docker-build
 make check-env
-
-# Build simulation binary (incremental on subsequent invocations)
-make sim-build
-```
-
-For HTTPS builds behind a custom CA, use
-`make docker-build PROXY_CA=/path/to/combined-ca-bundle.pem`.
-The CA is mounted as a BuildKit secret and is not copied into either image.
-Simulation/differential tools and generic synthesis tools have separate images.
-Fresh ACT4 generation requires an additional prepared `ACT_IMAGE` with Sail and
-mise or uv + Ruby/Bundler; `make check-signoff-env ACT_IMAGE=<image>` checks it.
-
-### 2. Run Complete Master Signoff
-```bash
-# Executes Spike differential, negative self-tests, ACT4 regression, CoreMark, Embench, and synthesis
-make signoff ACT_IMAGE=<prepared-act4-image>
-```
-
-### 3. Run Individual Benchmark Suites
-```bash
-# Run official CoreMark (set ITER=<N>)
-make coremark ITER=10
-
-# Run Embench-IoT 1.0 suite
-make embench-run
-
-# Run official RISC-V ACT4 Regression Suite (Sail reference)
-make act4-run
-
-# Run Spike Differential Lockstep Verification & Negative Self-Tests
-make diff-test
-make diff-selftest
-
-# Run Yosys Logic Synthesis
+make lint smoke
+make test diff-test diff-selftest coremark-smoke
 make synth
+python3 scripts/test_workflow_guards.py
 ```
 
----
+The simulation and generic-synthesis images are separate. For a proxy/private CA:
 
-## 7. License
+```bash
+make docker-build PROXY_CA=/path/to/combined-ca-bundle.pem
+```
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+The CA is a build secret. `SIM_IMAGE`, `SYN_IMAGE` and `JOBS` are Make overrides;
+versions are recorded in [toolchain.lock](toolchain.lock). The simulator build is
+incremental. After switching to an incompatible tool image, rebuild it explicitly.
+
+Useful individual commands:
+
+```bash
+make sim ELF=build/tests/store_forwarding.elf SIM_ARGS="+dmem-latency=3 +dmem-rand-delay=5"
+make coremark ITER=10 OPT=-O3
+make embench-run EMBENCH_BENCH=crc32
+make embench-run
+```
+
+`make coremark` produces development measurements. A fixed iteration count does
+not by itself satisfy CoreMark reporting rules. `make embench-run` currently runs
+the existing 14-workload subset, not the proposed full 19-workload set.
+
+## Verification and physical scope
+
+The 2026-10-16 bring-up passed 18 directed workloads, 18 corresponding Spike
+comparisons, comparator self-tests, 24 memory-delay configurations, lint and
+generic synthesis. Evidence and limits are recorded in the session handoff.
+These checks do not establish complete RV32IMF or machine-mode conformance.
+
+Fresh ACT4 generation requires a prepared image with Sail 0.13.1 and the pinned
+framework's generator dependencies:
+
+```bash
+make check-signoff-env ACT_IMAGE=your-prepared-act4-image
+make act4-run ACT_IMAGE=your-prepared-act4-image
+# Existing regression/archive workflow; requires a clean working tree:
+make signoff ACT_IMAGE=your-prepared-act4-image
+```
+
+The existing `signoff` target has legacy acceptance thresholds and does not
+implement the proposed dual-performance milestone. Its ACT4 set excludes F;
+the differential parser does not yet compare trap cause/tval. Full ACT4 and
+physical qualification remain open.
+
+The [GitHub workflow](.github/workflows/README.md) runs on pushes to `main` and
+pull requests targeting `main`. The [ASAP7 flow](physical/asap7/README.md) is a
+separate environment that still needs porting and requalification.
+
+## License
+
+Project code uses the [MIT license](LICENSE). Vendored benchmarks and frameworks
+retain their own licenses; consult their source trees before redistribution.

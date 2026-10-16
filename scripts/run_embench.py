@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """
-scripts/run_embench.py — Embench-IoT 1.0 RV32IM Integer Subset Benchmark Runner & Official Speed Scorer
-Compiles, executes, verifies, and profiles the 14 integer workloads of the Embench-IoT 1.0 benchmark suite.
+scripts/run_embench.py — Existing Embench-IoT 1.0 14-workload subset runner
+Compiles, executes, verifies, and profiles the selected RV32IM workloads.
+This is not the full 19-workload suite or the proposed FP32 performance gate.
 Computes:
   - Per-workload execution cycles, total simulation cycles, retired instructions, IPC, code size
   - Per-workload relative speed against official Embench baseline (baseline-data/speed.json)
@@ -261,7 +262,7 @@ def main() -> int:
     summary_data = {
         "suite": "Embench-IoT 1.0 RV32IM integer subset",
         "pinned_commit": "0466a18e4f6b47e19598d7c6ba72916d54b68f65",
-        "subset_description": "14 RV32IM bare-metal integer benchmarks (excluding double-precision float benchmarks)",
+        "subset_description": "14 RV32IM workloads; excludes cubic, minver, nbody, st and wikisort (not solely double-precision programs)",
         "opt_flags": args.opt,
         "total_benchmarks": total_count,
         "passed_benchmarks": passed_count,
@@ -288,8 +289,8 @@ def main() -> int:
             f.write(f"{r['benchmark']},{r['pass']},{r['bench_cycles']},{r['total_cycles']},{r['retired']},{r['ipc']},{r.get('relative_speed', 0.0)},{r['text_size']}\n")
 
     print("=" * 100)
-    print(f" Embench Summary       : {passed_count} / {total_count} PASSED (100% Correctness Validation)")
-    print(f" Official Speed Score  : {geomean_speed:.4f} (Speed/MHz: {geomean_speed:.4f})")
+    print(f" Embench Subset Summary: {passed_count} / {total_count} passed workload result checks")
+    print(f" Subset Relative Score : {geomean_speed:.4f} (Speed/MHz: {geomean_speed:.4f})")
     print(f" Geo StdDev / Range    : {geosd:.4f} / {georange:.4f}")
     print(f" Diagnostic Core IPC   : {geomean_ipc:.4f} (Local Diagnostic Metric)")
     print(f" JSON Evidence Report  : {results_json_path}")

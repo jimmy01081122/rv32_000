@@ -1,152 +1,67 @@
-# GitHub Actions CI — RV32 Out-of-Order Core
+# GitHub Actions verification workflow
 
-> Workflow file: `.github/workflows/signoff.yml`
-> Repository: <https://github.com/jimmy01081122/rv32_000>
+Source: [signoff.yml](signoff.yml). Updated 2026-10-16.
 
-## Overview
+The workflow runs on pushes to `main` and pull requests targeting `main`.
+Pushing a maintenance branch alone does not trigger it. Local static checks have
+passed; this session has not executed the revised workflow on GitHub.
+The job ID and required-check name `signoff-gate` are retained for compatibility.
+Passing it means the configured jobs passed, not full ISA or physical qualification.
 
-The `Signoff CI` workflow runs on every **push to `main`** and every **pull request targeting `main`**.
-It is structured as five parallel verification jobs that fan-in to a single **signoff gate**.
+## Jobs and actual coverage
 
-```
-                         ┌─ lint ──────────┐
-push / PR ──► checkout ──┤                 ├─► signoff-gate
-                         ├─ spike-diff ────┤
-                         ├─ act4 ──────────┤
-                         ├─ coremark-smoke ┤
-                         └─ synthesis ─────┘
-```
+`lint` runs first. The other four verification jobs depend on it, and the final
+gate checks all five results.
 
----
+| Job | Work performed | Scope/limits |
+| --- | --- | --- |
+| `lint` | Verilator lint over the shared RTL list | `UNUSED` and `STMTDLY` are excluded |
+| `spike-diff` | Compile directed programs and run DUT/Spike trace comparison | Current source set has 18 workloads; trap cause/tval comparison is incomplete |
+| `act4` | Fresh framework generation with Sail, then self-checking ELFs on DUT | Expected historical set: I 39, M 8, Zicsr 6, Zifencei 1, Zmmul 4; no F |
+| `coremark-smoke` | Five runs of a 3-iteration `-O2` performance binary | Cycle/retirement/CRC reproducibility, not an official-duration performance report |
+| `synthesis` | sv2v and generic Yosys synthesis/checks | No physical implementation or timing/power qualification |
+| `signoff-gate` | Fail if any prerequisite job did not succeed | Existing automated regression gate |
 
-## Jobs
+The default simulator build does not enable `--assert`. The broader verification
+and measurement work is tracked in [STATUS.md](../../docs/STATUS.md).
+Comparator negative self-tests run through local `make diff-selftest` and the
+host `make signoff` pipeline; this GitHub job does not currently invoke them.
 
-### `lint` · Verilator lint-only
-| | |
-|---|---|
-| **Runner** | `ubuntu-22.04` |
-| **Timeout** | 10 min |
-| **Tool** | `verilator` (apt, Ubuntu 22.04 package) |
-| **What it does** | Runs `verilator --lint-only -Wall -f sim/scripts/rv32_ooo_core.f` on the full RTL filelist. |
-| **Gate** | Zero lint errors/warnings (excluding `UNUSED`, `STMTDLY`). |
-| **Why first** | All other jobs depend on `lint` passing to avoid burning runner-minutes on broken RTL. |
+## Dependencies and caching
 
----
+Tools are installed on Ubuntu 22.04 runners. Exact download versions are in the
+workflow environment, and the simulator build uses
+[build_sim.sh](../../scripts/build_sim.sh), shared with Make.
 
-### `spike-diff` · Differential verification (18 directed workloads in the current checkout)
-| | |
-|---|---|
-| **Runner** | `ubuntu-22.04` |
-| **Timeout** | 45 min |
-| **Tools** | Verilator (apt), riscv32-unknown-elf GCC (riscv-collab pre-built), Spike v1.1.0 (built from source) |
-| **What it does** | 1. Downloads `riscv32-elf-ubuntu-22.04-gcc.tar.xz` from riscv-collab releases and installs to `/opt/riscv32-gcc/`.<br>2. Clones and builds Spike v1.1.0 with `--enable-commitlog`.<br>3. Builds the Verilator C++ simulator (`rv32_ooo_sim`) via the shared `scripts/build_sim.sh`.<br>4. Cross-compiles all directed test ELFs from `software/directed/` and `verif/directed/`.<br>5. Runs `python3 scripts/run_spike_diff.py` which executes each test on both DUT and Spike and compares PC, register writebacks, stores, and traps in lockstep. |
-| **Gate** | Every directed test passes differential comparison (zero mismatches). |
-| **Caching** | GCC toolchain cached by version tag; Spike binary cached by git tag; Verilator build cached by RTL/TB file hashes. |
-| **Artifacts** | `spike-diff-logs/` — `spike_diff.log`, `diff_results.json` |
+- Verilator 4.038 and Yosys 0.9 from Ubuntu packages.
+- RISC-V GCC release 2026.07.15; Spike v1.1.0; sv2v v0.0.12.
+- Sail 0.13.1, Ruby 3.4.10, Bundler 4.0.18 and uv 0.11.33 for ACT4.
+- ACT4 framework SHA `74efcaac81f48f437f58868771daf2ed2776d422`.
 
----
+GCC, Spike, sv2v, Sail and simulator outputs are cached. Simulator keys include
+RTL, harness, filelist and shared build script. Sail's key includes `verified-v2`
+to avoid reusing earlier invalid cached content. Consult the YAML for exact keys,
+timeouts and artifact paths.
 
-### `act4` · ACT4 fresh ELF generation + DUT execution (58/58)
-| | |
-|---|---|
-| **Runner** | `ubuntu-22.04` |
-| **Timeout** | 60 min |
-| **Tools** | Verilator (apt), riscv32-unknown-elf GCC (riscv-collab), sail_riscv_sim (pre-built), Ruby 3.4.10, Bundler 4.0.18, uv 0.11.33 |
-| **What it does** | Initialises the pinned ACT4 submodule, installs the real Sail 0.13.1 release plus Ruby/Bundler and uv, builds the DUT with the shared build script, then runs `scripts/run_act4.py`. The runner freshly generates all self-checking ELFs through the official framework Makefile with the project config before executing them. Missing dependencies, failed generation, and fewer than 58 ELFs fail the job. |
-| **Gate** | 58/58 ELFs produce `Exit code: 0 (PASS)` on the DUT. |
-| **ELF coverage** | RV32I (39), RV32M (8), Zicsr (6), Zifencei (1), Zmmul (4). |
-| **Caching** | GCC toolchain, verified Sail binary, and Verilator build are cached. |
-| **Artifacts** | `act4-results/` — `act4_summary.json`, `elf_hashes.json`, `act4_run.log` |
+Sail is a real prerequisite: missing Sail, failed generation and fewer than 58
+generated ELFs fail ACT4. There is no successful stub or fallback to old ELFs.
+ACT4 executes the generated tests on the DUT; Spike differential testing is a
+separate job, not a second execution stage in `run_act4.py`.
 
-> Sail is required. There is no successful stub or DUT-only fallback for fresh generation.
+## Local reproduction and troubleshooting
 
----
+Use the [root quickstart](../../README.md) and
+[session handoff](../../docs/SESSION_HANDOFF.md). Locally, ACT4 needs a separately
+prepared `ACT_IMAGE`; the default simulation image does not provide Sail or its
+generator environment. `make check-signoff-env` checks prerequisites early.
 
-### `coremark-smoke` · 5-run cycle-exact determinism
-| | |
-|---|---|
-| **Runner** | `ubuntu-22.04` |
-| **Timeout** | 30 min |
-| **Tools** | Verilator (apt), riscv32-unknown-elf GCC (riscv-collab) |
-| **What it does** | 1. Cross-compiles CoreMark with 3 iterations, `-O2`, `PERFORMANCE_RUN`.<br>2. Runs `python3 scripts/verify_coremark_reproducibility.py --runs 5 --iterations 3 --opt=-O2` which executes the ELF 5 times on the DUT simulator and compares cycle counts, retired instruction counts, and CRC values across all runs. |
-| **Gate** | All 5 runs produce **identical** cycle counts, retired instruction counts, and CRC values (cycle-exact determinism). |
-| **Why 3 iterations?** | Faster CI run while still exercising the full CoreMark logic path. Production signoff uses 26 iterations. |
-| **Caching** | GCC toolchain, Verilator build. |
-| **Artifacts** | `coremark-results/` — `coremark_reproducibility.json`, per-run logs, compile log |
+- Missing compiler/Sail: check the pinned release URL, executable path and version;
+  dependency changes must be recorded, not substituted with a success stub.
+- Spike build dependencies include `libboost-regex-dev`, `libboost-system-dev`
+  and `device-tree-compiler`; the former Boost-all requirement was removed.
+- Synthesis latches/loops: inspect the source and synthesis log; do not waive a
+  failure by relabeling the job or changing report counts.
 
----
-
-### `synthesis` · Yosys (0 latches, 0 loops)
-| | |
-|---|---|
-| **Runner** | `ubuntu-22.04` |
-| **Timeout** | 30 min |
-| **Tools** | Yosys (apt), sv2v v0.0.12 (pre-built binary from zachjs/sv2v) |
-| **What it does** | 1. Downloads `sv2v-Linux.zip` from GitHub releases and installs to `/usr/local/bin/`.<br>2. Runs `bash syn/scripts/synth_yosys.sh` which:<br>   - Converts all RTL files from `sim/scripts/rv32_ooo_core.f` to Verilog-2005 via `sv2v --top=rv32_ooo_core`<br>   - Elaborates and synthesises with Yosys (`proc` + `opt -fast` + `check -assert`)<br>   - Runs `python3 scripts/parse_synth_log.py` to extract metrics.<br>3. Asserts `latch_count == 0`, `loop_count == 0`, `check_errors == 0`. |
-| **Gate** | Zero inferred latches, zero combinational loops, zero Yosys check errors. |
-| **Caching** | sv2v binary cached by version tag. |
-| **Artifacts** | `synthesis-results/` — `synth.log`, `rv32_ooo_core_netlist.v`, `synthesis_summary.json` |
-
----
-
-### `signoff-gate` · All checks passed
-| | |
-|---|---|
-| **Runner** | `ubuntu-22.04` |
-| **Condition** | `if: always()` — runs even if upstream jobs fail, to collect a consolidated summary |
-| **What it does** | Checks the `result` of all five jobs and prints a pass/fail table. Exits non-zero if any job did not succeed. |
-| **Purpose** | Single required status check for branch protection rules. Set `signoff-gate` as the required check in GitHub repository settings. |
-
----
-
-## Toolchain Versions
-
-| Tool | Version | Source |
-|---|---|---|
-| Verilator | Ubuntu 22.04 package (`4.038`) | `apt` |
-| Yosys | Ubuntu 22.04 package (`0.9`) | `apt` |
-| riscv32-unknown-elf GCC | `2026.07.15` | [riscv-collab/riscv-gnu-toolchain](https://github.com/riscv-collab/riscv-gnu-toolchain/releases) |
-| Spike | `v1.1.0` | Built from [riscv-software-src/riscv-isa-sim](https://github.com/riscv-software-src/riscv-isa-sim) |
-| sv2v | `v0.0.12` | [zachjs/sv2v](https://github.com/zachjs/sv2v/releases) |
-| sail_riscv_sim | `0.13.1` | [riscv/sail-riscv](https://github.com/riscv/sail-riscv/releases) pre-built |
-
----
-
-## Caching Strategy
-
-All heavyweight downloads are cached with `actions/cache@v4` keyed on:
-
-- **GCC toolchain** — `riscv32-gcc-<VER>-ubuntu22`
-- **Spike binary** — `spike-<TAG>-ubuntu22`
-- **Verilator build** — hash of all RTL `.sv` + TB `.cpp`/`.h` + filelist `.f`
-- **sv2v binary** — `sv2v-<VER>-ubuntu22`
-- **Sail binary** — `sail-riscv-<VER>-ubuntu22`
-
-Cache hits skip the corresponding download/build step entirely.
-
----
-
-## Branch Protection Setup
-
-To enforce signoff as a required merge gate:
-
-1. Go to **Settings → Branches → Branch protection rules** for `main`.
-2. Enable **Require status checks to pass before merging**.
-3. Add `✓ signoff · All checks passed` as a required status check.
-4. Enable **Require branches to be up to date before merging**.
-
----
-
-## Troubleshooting
-
-**`riscv32-unknown-elf-gcc` not found:**  
-The download URL uses `RISCV_COLLAB_VER` from the top-level `env:` block. If the release does not exist, update the version string.
-
-**Spike build fails:**  
-Spike requires `libboost-all-dev` and `device-tree-compiler`. Both are installed in the `Install system packages` step.
-
-**`sail_riscv_sim` binary not found:**  
-The job gracefully falls back to DUT-only mode. The ACT4 ELFs embed result signatures that the DUT verifies internally; Sail is not strictly required for pass/fail determination.
-
-**Yosys synthesis reports latches:**  
-This indicates a missing `default` in a `case` statement or an incompletely assigned signal path in the RTL. Check `build/syn/synth.log` for `Latch inferred` messages.
+Branch protection can require the existing `signoff-gate` check. No repository
+protection settings are changed by this documentation. The proposed independent
+embedded/FP32 performance gates are not yet implemented in this workflow.

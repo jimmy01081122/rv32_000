@@ -1,5 +1,5 @@
 // rv32_ooo_int_prf.sv — Integer Physical Register File (PRF)
-// 48 entries × 32-bit XLEN, 3 asynchronous read ports with dedicated LSU bypass, 2 synchronous write ports
+// 48 entries × 32-bit XLEN, 4 asynchronous read ports with LSU bypass, 3 synchronous write ports
 // architecture_spec.md §14.5 | uop_spec.md §17
 
 module rv32_ooo_int_prf

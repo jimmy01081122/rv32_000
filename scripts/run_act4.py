@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """
-scripts/run_act4.py — RISC-V Architectural Certification Test (ACT4) Suite Runner
-Compiles and executes the official RISC-V Architectural Certification Tests (ACT4)
-on both DUT (rv32_ooo_sim) and Reference Simulator (Spike).
-Collects machine-readable JSON metrics and verification report.
+scripts/run_act4.py — Pinned RISC-V ACT4 architectural-test runner
+Freshly generates tests with the framework and Sail, then executes the resulting
+self-checking ELFs on the DUT (rv32_ooo_sim). Spike comparison is a separate flow.
+The current I/M/Zicsr/Zifencei/Zmmul profile excludes F. Collects JSON evidence;
+passing this configured suite alone is not full RV32IMF certification.
 """
 
 import os
@@ -138,7 +139,7 @@ def main():
     os.makedirs(args.out_dir, exist_ok=True)
 
     print("=" * 80)
-    print("   RISC-V Architectural Certification Test (ACT4) Official Framework Runner ")
+    print("   Pinned RISC-V ACT4 architectural-test framework runner (non-F profile) ")
     print("=" * 80)
 
     try:

@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """
-scripts/check_signoff_acceptance.py — Master Independent Signoff Acceptance Gatekeeper
-Independently verifies that 100% of verification, benchmark, and synthesis signoff criteria are met:
-  1. Differential Spike Verification: 14/14 bare-metal tests pass full architectural comparison.
+scripts/check_signoff_acceptance.py — Existing regression/archive acceptance checks
+Checks the legacy result criteria below; see docs/STATUS.md for coverage limits.
+These thresholds have not yet been replaced by the proposed dual-performance gates.
+  1. Directed Spike comparisons: all reported tests pass, with a legacy minimum of 14.
   2. Differential Negative Self-Tests: 11/11 fault injection tests caught with expected error.
-  3. ACT4 Certification: 53/53 tests pass on both DUT and Spike (RV32I, RV32M, Zicsr).
+  3. ACT4: at least 58 Sail-generated self-checking DUT tests with recorded ELF hashes;
+     the configured I/M/Zicsr/Zifencei/Zmmul profile excludes F.
   4. CoreMark Reproducibility: 5 independent runs produce 100% identical cycle counts.
-  5. CoreMark Official Run: Execution time >= 10.0s, valid CRCs, score >= 2.50 CoreMark/MHz.
+  5. CoreMark reporting-mode artifact: declared execution time >= 10.0s, valid CRCs,
+     score >= 2.50 CoreMark/MHz (the runner currently declares a 1 MHz clock).
   6. CoreMark Validation Run: 1-iteration validation run passes with valid CRCs.
   7. Embench-IoT 1.0 RV32IM: 14/14 workloads pass with valid speed scores and statistics.
   8. Yosys Logic Synthesis: 0 latches, 0 combinational loops, valid gate netlist.
@@ -73,7 +76,7 @@ def check_spike_diff(dir_path: Path) -> Tuple[bool, str]:
     failed = data.get("failed", 1)
 
     if total >= 14 and passed == total and failed == 0:
-        return True, f"All {passed}/{total} tests passed 100% full architectural state lockstep comparison"
+        return True, f"All {passed}/{total} reported directed tests passed the implemented trace comparison"
     return False, f"Spike diff verification incomplete: {passed}/{total} passed, {failed} failed"
 
 
@@ -279,7 +282,7 @@ def main() -> int:
     print("=" * 90)
 
     checks = [
-        ("Spike Differential Verification (14/14 tests)", check_spike_diff),
+        ("Directed Spike comparison (legacy minimum: 14 tests)", check_spike_diff),
         ("Differential Negative Self-Tests (11/11 tests)", check_spike_selftest),
         ("ACT4 Architectural Regression (58/58 tests, Sail Reference)", check_act4),
         ("CoreMark Reproducibility & Determinism (5 runs)", check_coremark_reproducibility),
@@ -299,7 +302,7 @@ def main() -> int:
 
     print("=" * 90)
     if all_passed:
-        print("  >>> MASTER SIGNOFF ACCEPTANCE: 100% PASS — ALL REQUIREMENTS INDEPENDENTLY PROVEN <<<")
+        print("  >>> EXISTING REGRESSION/ARCHIVE GATES PASSED — see docs/STATUS.md for coverage limits <<<")
         print("=" * 90)
         return 0
     else:

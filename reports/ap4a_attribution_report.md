@@ -1,3 +1,8 @@
+> **Historical phase report — not current checkout signoff.**
+> Preserved for traceability; original claims and section references below
+> apply to their historical scope. See the [archive index](README.md) and
+> [current status](../docs/STATUS.md) for applicability and known gaps.
+
 # AP4A Forensic Attribution Report: Floating-Point Critical Sub-Operation Analysis
 **Phase:** AP4A — Source-Level Physical Attribution of FP Critical Paths  
 **PDK:** ASAP7 7.5T RVT  

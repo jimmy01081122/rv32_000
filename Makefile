@@ -215,7 +215,7 @@ EMBENCH_BENCH ?= all
 EMBENCH_OPT ?= -O3
 
 .PHONY: embench-run
-embench-run: sim-build ## Run Embench-IoT suite (set EMBENCH_BENCH=<name|all>, EMBENCH_OPT=<-O3|-O2>)
+embench-run: sim-build ## Run existing Embench 14-workload subset (EMBENCH_BENCH=<name|all>, EMBENCH_OPT=<-O3|-O2>)
 	$(DOCKER_RUN) $(SIM_IMAGE) -c "\
 	  python3 scripts/run_embench.py --bench $(EMBENCH_BENCH) --opt=\"$(EMBENCH_OPT)\" \
 	  "
@@ -262,7 +262,7 @@ coremark: sim-build ## Run CoreMark benchmark and compute CoreMark/MHz (set ITER
 # ─────────────────────────────────────────────────────────────────────────────
 
 .PHONY: synth
-synth: ## Run full Yosys synthesis flow (Milestone G15)
+synth: ## Run generic Yosys synthesis and structural checks
 	$(DOCKER_RUN) $(SYN_IMAGE) -c "\
 	  bash syn/scripts/synth_yosys.sh \
 	  "
@@ -272,7 +272,7 @@ synth: ## Run full Yosys synthesis flow (Milestone G15)
 # ─────────────────────────────────────────────────────────────────────────────
 
 .PHONY: signoff
-signoff: ## Execute complete multi-benchmark, certification, and synthesis signoff
+signoff: ## Run existing regression/archive gates (see docs/STATUS.md for scope)
 	@if [ -n "$$(git status --porcelain)" ]; then \
 		echo "ERROR: Working tree is dirty! 'make signoff' requires a clean git working tree."; \
 		git status --short; \

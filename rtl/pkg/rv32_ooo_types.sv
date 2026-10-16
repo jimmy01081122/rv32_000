@@ -1,6 +1,7 @@
-// All width constants are replicated here for Yosys 0.9 compatibility.
-// Values MUST match rv32_ooo_params.sv — verified by G1.1 cross-check.
-// Yosys 0.9 does not support 'import pkg::*' inside another package.
+// Shared packed types; widths are imported from rv32_ooo_params.
+// Generic synthesis lowers SystemVerilog packages through sv2v before Yosys.
+// Legacy section references below refer to docs/archive/g0/uop_spec.md and
+// docs/archive/g0/architecture_spec.md; current usage is summarized in uop_spec.md.
 
 package rv32_ooo_types;
   import rv32_ooo_params::*;
@@ -550,7 +551,7 @@ package rv32_ooo_types;
   } rob_entry_t;
 
   // =========================================================================
-  // §21  Load Queue entry
+  // §21  Reserved Load Queue entry schema (not instantiated by the current LSU)
   // =========================================================================
 
   typedef struct packed {
@@ -573,7 +574,7 @@ package rv32_ooo_types;
   } lq_entry_t;
 
   // =========================================================================
-  // §22  Store Queue entry
+  // §22  Proposed Store Queue entry schema (LSU currently uses local sq_slot_t)
   //   data_valid == 1 iff store-data bits are physically captured in `data`
   //   (not merely src1.ready). Dedicated SQ PRF port; never contested
   //   because rename_width = 1.
@@ -603,8 +604,8 @@ package rv32_ooo_types;
 
   // =========================================================================
   // architecture_spec §15.2  Pending memory transaction record
-  //   Set on (dmem_req_valid && dmem_req_ready).
-  //   Cleared on (dmem_rsp_valid && dmem_rsp_ready).
+  //   Tracks accepted external work and the AP5B buffered response lifetime.
+  //   May remain valid after (dmem_rsp_valid && dmem_rsp_ready).
   //   Normative source for ROB sequence-alias guard and stale load validation.
   // =========================================================================
 
@@ -644,7 +645,7 @@ package rv32_ooo_types;
     // Trap
     logic [31:0] trap_cause;
     logic [31:0] trap_tval;
-    // Architectural fflags after this instruction
+    // Current ROB producer assigns this entry's flags, not accrued CSR fflags.
     fp_flags_t   fflags;
   } commit_trace_t;
 

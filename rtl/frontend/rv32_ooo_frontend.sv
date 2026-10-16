@@ -1,5 +1,5 @@
 // rv32_ooo_frontend.sv — Instruction Fetch & Decode Engine
-// Pipelined instruction fetch, dynamic branch predictor (BTB + 2-bit BHT + RAS),
+// Pipelined instruction fetch, dynamic branch predictor (BTB + 2-bit BHT),
 // and single-cycle RV32I / RV32M / RV32F / Zicsr decoder.
 // Architecture Spec §12, §13, §23 | Uop Spec §4–§15
 
@@ -41,7 +41,7 @@ module rv32_ooo_frontend
 );
 
   // =========================================================================
-  // 1. Branch Predictor (64-entry BTB + 64-entry 2-bit BHT + 4-entry RAS)
+  // 1. Branch Predictor (64-entry BTB + 64-entry 2-bit BHT; no RAS)
   // =========================================================================
 
   localparam int BTB_ENTRIES = 64;

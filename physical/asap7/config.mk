@@ -1,10 +1,9 @@
 # ============================================================================
 # RV32 OoO Core — ASAP7 Physical Implementation Config (ORFS)
-# Phase: AP0 — Baseline Measurement (NO RTL CHANGES)
-#
-# Source SHA: e22c106e4869f11276ccf9dbc13be54346090e67
-# CoreMark/MHz Baseline: 2.5282
-# Target: 1.000 ns (1.0 GHz)
+# Existing research configuration; source and results must be pinned per run.
+# Checked-in SDC is 5.5 ns under the ASAP7 ps-unit convention.
+# This is an exploration constraint, not a qualified frequency target.
+# See README.md for path portability, routing-stage and corner limitations.
 # ============================================================================
 
 export PLATFORM               = asap7

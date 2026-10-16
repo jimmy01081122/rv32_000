@@ -1,6 +1,6 @@
 # =============================================================================
 # rv32-ooo toolchain.lock
-# G1 Frozen — 2026-08-15
+# Tool pins originated at G1 — 2026-08-15; dependency profile updated 2026-10-16.
 #
 # Local EDA tools run through Docker; CI uses the same Ubuntu 22.04 tool versions.
 # Host Make/Bash/Git orchestrate the containers; EDA binaries stay in Docker.
@@ -39,7 +39,7 @@ yosys_sha1           = 1979e0b
 sv2v_tag             = v0.0.12
 sv2v_source          = https://github.com/zachjs/sv2v
 
-# ── Optional architectural certification / physical design ──────────────────
+# ── Optional architectural tests / physical design ───────────────────────────
 [act4]
 framework_commit    = 74efcaac81f48f437f58868771daf2ed2776d422
 sail_version        = 0.13.1
@@ -50,7 +50,7 @@ sail_version        = 0.13.1
 toolchain_lock      = physical/asap7/toolchain.lock
 # OpenROAD/ORFS/ASAP7 are separate from the generic synthesis image.
 
-# ── Build-time record ────────────────────────────────────────────────────────
+# ── Historical G1 metadata (not the current project plan/status) ─────────────
 [meta]
 lock_date        = 2026-08-15
 plan_version     = v1.2

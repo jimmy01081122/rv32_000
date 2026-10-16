@@ -1,3 +1,8 @@
+> **Historical audit/evidence record — not current checkout signoff.**
+> Preserved for traceability; original claims and section references below
+> apply to their historical scope. See the [archive index](README.md) and
+> [current status](../docs/STATUS.md) for applicability and known gaps.
+
 # Behavioral Completeness Audit Findings
 
 ### [FINDING-1] Free-List Exhaustion Behavior Not Specified

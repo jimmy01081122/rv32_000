@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 """
-scripts/run_spike_diff.py — True Architectural Spike Lockstep Differential Verification Runner
-Executes bare-metal ELFs concurrently on DUT (rv32_ooo_sim) and Golden Reference (Spike),
-comparing complete architectural state writebacks:
+scripts/run_spike_diff.py — Directed Spike commit-trace comparison
+Executes bare-metal ELFs on DUT (rv32_ooo_sim) and reference model (Spike),
+comparing the parsed architectural events:
   - PC
   - Instruction word bits
   - GPR destination & value writeback
   - FPR destination & value writeback
   - Store address & Store data
-  - Traps / Exceptions (cause & tval)
 Strictly requires exact event count match: len(DUT) == len(Spike).
+Dynamic counter read values are normalized. Trap cause/tval are currently unset
+by the parsers; these results do not establish complete exception/CSR/FP coverage.
 """
 from __future__ import annotations
 
@@ -321,7 +322,7 @@ def diff_traces(dut_events: List[Dict[str, Any]], spike_events: List[Dict[str, A
                 msg.append(f"    Spike[#{c}]: {spike_events[c]['raw']}")
         return False, "\n".join(msg)
 
-    return True, f"Exact architectural state match across all {len_dut} retired instructions!"
+    return True, f"Parsed trace fields match across all {len_dut} retired instructions"
 
 
 def run_test(elf_path: str) -> Dict[str, Any]:

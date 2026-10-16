@@ -1,6 +1,6 @@
 // rv32_ooo_lsu.sv — Load/Store Unit
-// Complete Store Queue (SQ) and Load Queue (LQ) with safe in-order store retirement,
-// store-to-load forwarding, memory disambiguation, and speculative wrong-path isolation.
+// 16-entry store queue, single in-flight data transaction and load-response buffer.
+// Implements store forwarding and conservative ordering; no LQ array is allocated.
 // AP5B: Registered Load Response & LSU Timing Decoupling
 // Architecture Spec §20–§22 | Uop Spec §21–§22
 
@@ -62,8 +62,8 @@ module rv32_ooo_lsu
   // 1. Structure Definitions & Age Comparison Helper
   // =========================================================================
 
-  localparam integer SQ_SIZE = SQ_ENTRIES; // 4
-  localparam integer LQ_SIZE = LQ_ENTRIES; // 4
+  localparam integer SQ_SIZE = SQ_ENTRIES; // 16 implemented slots
+  localparam integer LQ_SIZE = LQ_ENTRIES; // 16 declared; no LQ array instantiated
 
   typedef struct packed {
     logic        valid;

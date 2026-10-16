@@ -6,8 +6,8 @@
 # Jobs
 # ─────────────────────────────────────────────────────────────────────────────
 #  lint            Verilator --lint-only (fast syntax + semantic check)
-#  spike-diff      Spike lockstep differential verification (14 ELFs)
-#  act4            ACT4 fresh ELF execution on DUT (58/58)
+#  spike-diff      Spike comparison of the current directed ELF set
+#  act4            ACT4 fresh generation and DUT execution (non-F profile)
 #  coremark-smoke  CoreMark 5-run cycle-exact determinism check
 #  synthesis       sv2v → Yosys (0 latches, 0 loops gate)
 # =============================================================================
@@ -78,7 +78,7 @@ jobs:
   # 2. SPIKE-DIFF — Spike lockstep differential verification
   # ───────────────────────────────────────────────────────────────────────────
   spike-diff:
-    name: "spike-diff · Differential verification (14/14)"
+    name: "spike-diff · Directed trace comparison"
     runs-on: ubuntu-22.04
     timeout-minutes: 45
     needs: lint
@@ -186,7 +186,7 @@ jobs:
           bash scripts/compile_tests.sh 2>&1 | tee build/compile_tests.log
 
       # ── Run Spike differential verification ─────────────────────────────────
-      - name: Run spike-diff (14/14)
+      - name: Compare directed DUT and Spike traces
         run: |
           set -euo pipefail
           mkdir -p results
@@ -205,7 +205,7 @@ jobs:
           retention-days: 30
 
   # ───────────────────────────────────────────────────────────────────────────
-  # 3. ACT4 — RISC-V Architectural Certification (58 self-checking ELFs)
+  # 3. ACT4 — pinned architectural tests (non-F profile, at least 58 ELFs)
   # ───────────────────────────────────────────────────────────────────────────
   act4:
     name: "act4 · ACT4 fresh ELF generation + DUT execution (58/58)"

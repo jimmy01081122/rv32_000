@@ -1,5 +1,10 @@
 # Session handoff — 2026-10-16
 
+> Environment bring-up snapshot. For subsequent project decisions and open work,
+> use [PLAN.md](../PLAN.md), [STATUS.md](STATUS.md) and [WORKLOADS.md](WORKLOADS.md).
+> The measurements below retain their original scope; documentation cleanup is
+> not a new benchmark or physical run.
+
 ## Source and project state
 
 - Repository: `jimmy01081122/rv32_000`.
@@ -145,8 +150,9 @@ Publishing this maintenance branch does not constitute AP5B architectural or phy
 2. Provision and test a complete ACT4 image for fresh Sail generation. The base
    development images intentionally fail `make check-signoff-env` until then.
    The revised GitHub workflow has not been executed on GitHub in this session.
-3. Reconcile old documentation: baseline spec LQ/SQ=4 vs SQ=16 and an unimplemented LQ
-   parameter of 16, superscalar wording, old benchmark scores/counts, and normative ISA/profile differences.
+3. Documentation entry points have been reconciled and G0 contracts archived.
+   Follow [STATUS.md](STATUS.md) for remaining implementation/profile differences,
+   including legacy PRF constants, unused LQ declarations and CSR/trace coverage.
 4. Review acceptance thresholds: `check_signoff_acceptance.py` still requires
    CoreMark/MHz >=2.50, whereas AP5A reports 2.4748. No threshold was relaxed.
 5. Port the physical flow's `/home/a/ooo` and `/home/a/OpenROAD-flow-scripts`

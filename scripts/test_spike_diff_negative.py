@@ -44,7 +44,7 @@ def test_negative_cases() -> int:
     # Positive baseline check
     ok, msg = diff_traces(base_dut, base_spike)
     assert ok, f"Positive baseline unexpectedly failed: {msg}"
-    print("  [PASS] Positive Baseline   : 100% Architectural state match passes successfully.")
+    print("  [PASS] Positive Baseline   : Matching parsed trace fields pass successfully.")
 
     # 1. Truncated DUT trace
     dut_mut = copy.deepcopy(base_dut[:-1])
@@ -120,7 +120,7 @@ def test_negative_cases() -> int:
     print("  [PASS] Negative Test #11  : Empty trace correctly rejected.")
 
     print("=" * 80)
-    print("  [SUCCESS] All 11 Differential Negative Self-Tests Passed (100% Fault Coverage)")
+    print("  [SUCCESS] All 11 Differential Negative Self-Tests Passed (implemented mutation cases)")
     print("=" * 80)
     return 0
 

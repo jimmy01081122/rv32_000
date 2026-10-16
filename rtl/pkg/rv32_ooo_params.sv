@@ -1,6 +1,7 @@
 // rv32_ooo_params.sv
-// Frozen baseline parameters — architecture_spec.md v0.2.2 §6 + uop_spec.md v0.2.2 §3
-// DO NOT modify without architecture review (Appendix D).
+// Current constants; some legacy fields do not configure the instantiated RTL.
+// See architecture_spec.md for the implementation inventory and PLAN.md for review.
+// Section references below refer to the archived G0 contracts in docs/archive/g0/.
 //
 // Compatibility: Verilator 4.038, Yosys 0.9+
 // * No $clog2 in package scope (Yosys 0.9 rejects it).
@@ -44,7 +45,8 @@ package rv32_ooo_params;
   localparam integer INT_IQ_ENTRIES = 8;
   localparam integer FP_IQ_ENTRIES  = 4;
 
-  // Load / Store queues (architecture_spec §6 / uop_spec §4.3)
+  // Store queue and reserved LQ schema (G0 architecture_spec §6 / uop_spec §4.3)
+  // LQ_ENTRIES does not allocate a load queue in the current LSU.
   localparam integer LQ_ENTRIES = 16;
   localparam integer SQ_ENTRIES = 16;
   localparam integer LQ_IDX_W   = 4;  // $clog2(16)
@@ -57,9 +59,8 @@ package rv32_ooo_params;
   // Fetch epoch (uop_spec §4.4)
   localparam integer FETCH_EPOCH_W = 4;
 
-  // PRF ports (architecture_spec §6, Appendix C items 4-5)
-  // INT: 2 IQ issue + 1 SQ dedicated (never contested, rename_width=1)
-  // FP:  3 FP-IQ FMA + 1 SQ/FSW dedicated (never contested)
+  // Legacy PRF port constants (G0 architecture_spec §6, Appendix C items 4-5).
+  // Actual module interfaces: INT 4R/3W, FP 4R/2W; these constants do not size them.
   localparam integer INT_PRF_READ_PORTS  = 3;
   localparam integer INT_PRF_WRITE_PORTS = 1;
   localparam integer FP_PRF_READ_PORTS   = 4;
