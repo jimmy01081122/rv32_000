@@ -12,7 +12,10 @@
 
 The implementation is a scalar RV32 OoO core targeting RV32IMF + Zicsr, with
 one-wide fetch/rename/dispatch/retirement, ROB=16, integer/FP PRFs=48 each,
-integer IQ=8, FP IQ=4, and LQ/SQ=16 each. Retirement limits sustained IPC to 1;
+integer IQ=8, FP IQ=4, and a 16-entry store queue. `LQ_ENTRIES=16` is a
+parameter, but the current LSU has no allocated 16-entry load queue: load tags
+are zero and external memory transactions use one in-flight record plus a
+response buffer. Retirement limits sustained IPC to 1;
 concurrent execution does not make it a two-wide superscalar processor.
 
 The newest report is `reports/ap5a_signoff_report.md`, but current
@@ -142,8 +145,8 @@ Publishing this maintenance branch does not constitute AP5B architectural or phy
 2. Provision and test a complete ACT4 image for fresh Sail generation. The base
    development images intentionally fail `make check-signoff-env` until then.
    The revised GitHub workflow has not been executed on GitHub in this session.
-3. Reconcile old documentation: baseline spec LQ/SQ=4 vs RTL=16, superscalar
-   wording, old benchmark scores/counts, and normative ISA/profile differences.
+3. Reconcile old documentation: baseline spec LQ/SQ=4 vs SQ=16 and an unimplemented LQ
+   parameter of 16, superscalar wording, old benchmark scores/counts, and normative ISA/profile differences.
 4. Review acceptance thresholds: `check_signoff_acceptance.py` still requires
    CoreMark/MHz >=2.50, whereas AP5A reports 2.4748. No threshold was relaxed.
 5. Port the physical flow's `/home/a/ooo` and `/home/a/OpenROAD-flow-scripts`
