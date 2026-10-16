@@ -9,21 +9,33 @@ SHELL         := bash
 .DEFAULT_GOAL := help
 
 # ── Image names ───────────────────────────────────────────────────────────────
-SIM_IMAGE     := rv32ooo-sim:g1
-SYN_IMAGE     := rv32ooo-syn:g1
+SIM_IMAGE     ?= rv32ooo-sim:g1
+SYN_IMAGE     ?= rv32ooo-syn:g1
+ACT_IMAGE     ?= $(SIM_IMAGE)
+JOBS          ?= $(shell nproc)
+PROXY_CA      ?= $(if $(CODEX_PROXY_CERT),/etc/ssl/certs/ca-certificates.crt,)
+ifneq ($(strip $(PROXY_CA)),)
+DOCKER_SECRETS = --secret id=proxy_ca,src=$(PROXY_CA)
+endif
 PROJECT_ROOT  := $(CURDIR)
+SIM_BINARY    := build/sim/rv32_ooo_sim
+RTL_FILES     := $(shell cat sim/scripts/rv32_ooo_core.f)
+SIM_SOURCES   := sim/tb/sim_main.cpp sim/tb/sim_mem.cpp $(wildcard sim/tb/*.h)
+
+# Keep buildx state writable without replacing Docker's registry configuration.
+export BUILDX_CONFIG ?= $(PROJECT_ROOT)/build/buildx
 
 # ── Docker run common flags ───────────────────────────────────────────────────
 DOCKER_RUN    := docker run --rm \
+                  --user $(shell id -u):$(shell id -g) \
                   -v $(PROJECT_ROOT):/workspace \
-                  -w /workspace \
-                  -e HOME=/tmp
+                  -w /workspace
 
 # Interactive docker run (adds -it)
 DOCKER_IT     := docker run --rm -it \
+                  --user $(shell id -u):$(shell id -g) \
                   -v $(PROJECT_ROOT):/workspace \
-                  -w /workspace \
-                  -e HOME=/tmp
+                  -w /workspace
 
 # ─────────────────────────────────────────────────────────────────────────────
 # BUILD CONTAINERS
@@ -32,7 +44,8 @@ DOCKER_IT     := docker run --rm -it \
 .PHONY: docker-build-sim
 docker-build-sim: ## Build the simulation/verification Docker image
 	docker build \
-	  --build-arg NJOBS=$$(nproc) \
+	  $(DOCKER_SECRETS) \
+	  --build-arg NJOBS=$(JOBS) \
 	  -t $(SIM_IMAGE) \
 	  containers/rv32ooo/
 	@echo "✓ $(SIM_IMAGE) built"
@@ -40,13 +53,23 @@ docker-build-sim: ## Build the simulation/verification Docker image
 .PHONY: docker-build-syn
 docker-build-syn: ## Build the synthesis Docker image
 	docker build \
-	  --build-arg NJOBS=$$(nproc) \
+	  $(DOCKER_SECRETS) \
 	  -t $(SYN_IMAGE) \
 	  containers/rv32ooo-syn/
 	@echo "✓ $(SYN_IMAGE) built"
 
 .PHONY: docker-build
 docker-build: docker-build-sim docker-build-syn ## Build both Docker images
+
+.PHONY: deps-init check-env check-signoff-env
+deps-init: ## Fetch benchmark and ACT4 submodules at the tracked commits
+	git submodule update --init --depth 1 -- software/embench/embench-iot verification/act4/riscv-arch-test
+
+check-env: ## Check Docker, tool images and pinned source dependencies
+	SIM_IMAGE=$(SIM_IMAGE) SYN_IMAGE=$(SYN_IMAGE) bash scripts/check_environment.sh
+
+check-signoff-env: ## Also check the ACT4 reference-model/generator tools
+	SIM_IMAGE=$(SIM_IMAGE) SYN_IMAGE=$(SYN_IMAGE) ACT_IMAGE=$(ACT_IMAGE) bash scripts/check_environment.sh --signoff
 
 # ─────────────────────────────────────────────────────────────────────────────
 # INTERACTIVE SHELLS
@@ -68,12 +91,12 @@ syn-shell: ## Launch interactive shell in synthesis container
 check-tools: ## Verify all tool versions in simulation container
 	@echo "=== Simulation container tool versions ==="
 	$(DOCKER_RUN) $(SIM_IMAGE) -c "\
-	  echo '--- Verilator ---'  && verilator --version; \
-	  echo '--- Yosys ---'      && yosys -V; \
-	  echo '--- Spike ---'      && (spike -h 2>&1 || true); \
-	  echo '--- RISC-V GCC ---' && riscv32-unknown-elf-gcc --version; \
-	  echo '--- Python ---'     && python3 --version; \
-	  echo '--- pyelftools ---' && python3 -c 'import elftools; print(elftools.__version__)'; \
+	  set -eu; \
+	  verilator --version; \
+	  test -x /opt/spike/bin/spike; \
+	  spike -h; \
+	  riscv32-unknown-elf-gcc --version; \
+	  python3 --version; \
 	"
 
 .PHONY: check-syn-tools
@@ -88,8 +111,8 @@ check-syn-tools: ## Verify tool versions in synthesis container
 # ─────────────────────────────────────────────────────────────────────────────
 
 .PHONY: smoke
-smoke: ## Run Yosys hierarchy smoke-test (G1 exit criterion)
-	$(DOCKER_RUN) $(SIM_IMAGE) -c "bash sim/scripts/yosys_hierarchy_smoke.sh"
+smoke: ## Run sv2v + Yosys hierarchy smoke-test
+	$(DOCKER_RUN) $(SYN_IMAGE) -c "bash sim/scripts/yosys_hierarchy_smoke.sh"
 
 # ─────────────────────────────────────────────────────────────────────────────
 # VERILATOR ELABORATION / LINT
@@ -123,27 +146,20 @@ elab: ## Full Verilator elaboration (minimal SV testbench)
 # ─────────────────────────────────────────────────────────────────────────────
 
 .PHONY: sim-build
-sim-build: ## Build the C++ Verilator simulator binary (G2 platform)
-	mkdir -p build/sim
-	$(DOCKER_RUN) $(SIM_IMAGE) -c "\
-	  verilator --cc --exe --trace \
-	    -Wall -Wno-UNUSED -Wno-STMTDLY \
-	    -f sim/scripts/rv32_ooo_core.f \
-	    /workspace/sim/tb/sim_main.cpp /workspace/sim/tb/sim_mem.cpp \
-	    --top-module rv32_ooo_core \
-	    --Mdir build/sim \
-	    -o rv32_ooo_sim \
-	    -CFLAGS '-I/workspace/sim/tb -O2' \
-	    --build \
-	"
+sim-build: $(SIM_BINARY) ## Build the C++ simulator only when its sources change
+
+$(SIM_BINARY): $(RTL_FILES) $(SIM_SOURCES) scripts/build_sim.sh sim/scripts/rv32_ooo_core.f toolchain.lock containers/rv32ooo/Dockerfile Makefile
+	$(DOCKER_RUN) $(SIM_IMAGE) -c "bash scripts/build_sim.sh $(JOBS)"
+	@touch $(SIM_BINARY)
 
 # Usage: make sim ELF=build/tests/hello.elf
 ELF ?= build/tests/hello.elf
+SIM_ARGS ?=
 
 .PHONY: sim
 sim: ## Run simulation with specified ELF (set ELF=<path>)
 	$(DOCKER_RUN) $(SIM_IMAGE) -c "\
-	  ./build/sim/rv32_ooo_sim +elf=$(ELF) \
+	  ./build/sim/rv32_ooo_sim +elf=$(ELF) $(SIM_ARGS) \
 	  "
 
 # ─────────────────────────────────────────────────────────────────────────────
@@ -183,7 +199,7 @@ act4-build: sim-build ## Prepare ACT4 framework and configurations
 
 .PHONY: act4-run
 act4-run: sim-build ## Run full RISC-V ACT4 certification suite (RV32I, RV32M, Zicsr)
-	$(DOCKER_RUN) $(SIM_IMAGE) -c "\
+	$(DOCKER_RUN) $(ACT_IMAGE) -c "\
 	  python3 scripts/run_act4.py \
 	  "
 
@@ -225,15 +241,19 @@ coremark-compile: ## Cross-compile official EEMBC CoreMark (set ITER=<N>, RUN_TY
 .PHONY: coremark-smoke
 coremark-smoke: sim-build ## Run CoreMark smoke test (1 iteration, validation run)
 	$(DOCKER_RUN) $(SIM_IMAGE) -c "\
+	  set -euo pipefail; \
 	  bash scripts/compile_coremark.sh 1 VALIDATION_RUN -O2 && \
-	  ./build/sim/rv32_ooo_sim +elf=build/coremark/coremark_iter1.elf +max-cycles=2000000 \
+	  ./build/sim/rv32_ooo_sim +elf=build/coremark/coremark_iter1.elf +max-cycles=2000000 | tee build/coremark/smoke.log && \
+	  python3 scripts/check_coremark_result.py build/coremark/smoke.log --mode development \
 	  "
 
 .PHONY: coremark
 coremark: sim-build ## Run CoreMark benchmark and compute CoreMark/MHz (set ITER=<N>)
 	$(DOCKER_RUN) $(SIM_IMAGE) -c "\
+	  set -euo pipefail; \
 	  bash scripts/compile_coremark.sh $(ITER) PERFORMANCE_RUN $(OPT) && \
-	  ./build/sim/rv32_ooo_sim +elf=build/coremark/coremark_iter$(ITER).elf +max-cycles=10000000 \
+	  ./build/sim/rv32_ooo_sim +elf=build/coremark/coremark_iter$(ITER).elf +max-cycles=10000000 | tee build/coremark/performance.log && \
+	  python3 scripts/check_coremark_result.py build/coremark/performance.log --mode development \
 	  "
 
 
@@ -259,9 +279,7 @@ signoff: ## Execute complete multi-benchmark, certification, and synthesis signo
 		exit 1; \
 	fi
 	@echo "Starting master signoff from clean commit $$(git rev-parse HEAD)..."
-	$(DOCKER_RUN) $(SIM_IMAGE) -c "\
-	  bash scripts/run_signoff.sh \
-	  "
+	SIM_IMAGE=$(SIM_IMAGE) SYN_IMAGE=$(SYN_IMAGE) ACT_IMAGE=$(ACT_IMAGE) JOBS=$(JOBS) bash scripts/run_signoff.sh
 
 # ─────────────────────────────────────────────────────────────────────────────
 # CLEAN

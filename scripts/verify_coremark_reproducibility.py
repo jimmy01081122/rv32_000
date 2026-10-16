@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python3
 """
 scripts/verify_coremark_reproducibility.py — CoreMark Determinism and Reproducibility Verification Engine
 Executes N independent CoreMark runs (10 iterations) and verifies cycle-level deterministic reproducibility.

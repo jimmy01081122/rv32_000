@@ -7,26 +7,7 @@ set -euo pipefail
 OUT_DIR="build/syn"
 mkdir -p "${OUT_DIR}"
 
-RTL_FILES=(
-  rtl/pkg/rv32_ooo_params.sv
-  rtl/pkg/rv32_ooo_types.sv
-  rtl/rename/rv32_ooo_int_prf.sv
-  rtl/rename/rv32_ooo_fp_prf.sv
-  rtl/frontend/rv32_ooo_frontend.sv
-  rtl/rename/rv32_ooo_rename.sv
-  rtl/rob/rv32_ooo_rob.sv
-  rtl/issue/rv32_ooo_int_iq.sv
-  rtl/issue/rv32_ooo_fp_iq.sv
-  rtl/execute/int/rv32_ooo_divider.sv
-  rtl/execute/int/rv32_ooo_multiplier.sv
-  rtl/execute/int/rv32_ooo_int_execute.sv
-  rtl/execute/fp/rv32_ooo_fp_simple.sv
-  rtl/execute/fp/rv32_ooo_fp_execute.sv
-  rtl/execute/fp/rv32_ooo_fp_divsqrt.sv
-  rtl/lsu/rv32_ooo_lsu.sv
-  rtl/csr/rv32_ooo_csr.sv
-  rtl/core/rv32_ooo_core.sv
-)
+mapfile -t RTL_FILES < sim/scripts/rv32_ooo_core.f
 
 echo "============================================================"
 echo "    RV32 Out-of-Order Core — Synthesis Flow (Yosys)        "

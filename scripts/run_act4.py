@@ -19,8 +19,9 @@ from pathlib import Path
 from typing import List, Dict, Any, Tuple
 
 ACT4_ROOT = "verification/act4/riscv-arch-test"
-CORE_CONFIG_DIR = "verification/act4/riscv-arch-test/config/cores/rv32_ooo"
 SRC_CONFIG_DIR = "verification/act4/rv32_ooo"
+CORE_CONFIG_DIR = SRC_CONFIG_DIR
+PINNED_ACT_COMMIT = "74efcaac81f48f437f58868771daf2ed2776d422"
 ELF_DIR = "verification/act4/riscv-arch-test/work/rv32_ooo/elfs/rv32i"
 REPORT_DIR = "verification/act4/report"
 GENERATION_LOG_PATH = "verification/act4/report/act4_generation.log"
@@ -35,20 +36,22 @@ def sha256_file(filepath: str) -> str:
 
 def ensure_act4_elfs(out_dir: str = REPORT_DIR) -> List[str]:
     """Always perform a fresh ACT4 ELF generation from scratch using Sail reference."""
-    # 1. Explicitly sync core config from verification/act4/rv32_ooo into pinned ACT tree
-    os.makedirs(CORE_CONFIG_DIR, exist_ok=True)
-    for cfg_file in ["rv32_ooo.yaml", "sail.json", "test_config.yaml", "link.ld", "rvmodel_macros.h", "rvtest_config.h"]:
-        src_path = os.path.join(SRC_CONFIG_DIR, cfg_file)
-        dst_path = os.path.join(CORE_CONFIG_DIR, cfg_file)
-        if os.path.exists(src_path):
-            shutil.copy2(src_path, dst_path)
-
-    # If running inside Docker container where mise is not present, use generated ELFs
-    if not shutil.which("mise"):
-        elfs = sorted(glob.glob(f"{ELF_DIR}/**/*.elf", recursive=True))
-        if elfs:
-            print(f"==> Container environment detected (mise not present). Using {len(elfs)} pre-built official Sail ELFs.")
-            return elfs
+    if not os.path.isfile(os.path.join(ACT4_ROOT, "Makefile")):
+        raise RuntimeError("ACT4 framework missing. Run 'make deps-init' first.")
+    revision = subprocess.check_output(["git", "-C", ACT4_ROOT, "rev-parse", "HEAD"], text=True).strip()
+    if revision != PINNED_ACT_COMMIT:
+        raise RuntimeError(f"ACT4 revision {revision} differs from pinned {PINNED_ACT_COMMIT}.")
+    if not shutil.which("sail_riscv_sim"):
+        raise RuntimeError("Fresh ACT4 generation requires sail_riscv_sim 0.13.1; no pre-built fallback is used.")
+    if shutil.which("mise"):
+        cmd = ["mise", "exec", "--", "make"]
+    elif shutil.which("uv") and shutil.which("bundle"):
+        cmd = ["make"]
+    else:
+        raise RuntimeError("ACT4 requires mise or uv + Ruby/Bundler. Supply a prepared ACT_IMAGE.")
+    # Use the project's configuration directly, without modifying vendor sources.
+    config = Path(SRC_CONFIG_DIR, "test_config.yaml").resolve()
+    cmd.append(f"CONFIG_FILES={config}")
 
     # 2. Delete work/rv32_ooo before generation — forbidden to skip generation if ELFs exist
     work_dir = os.path.join(ACT4_ROOT, "work", "rv32_ooo")
@@ -57,12 +60,7 @@ def ensure_act4_elfs(out_dir: str = REPORT_DIR) -> List[str]:
         shutil.rmtree(work_dir, ignore_errors=True)
 
     print("==> Building fresh ACT4 self-checking ELFs via official Sail flow...")
-    cmd = [
-        "mise", "exec", "--",
-        "make", "CONFIG_FILES=config/cores/rv32_ooo/test_config.yaml"
-    ]
     env = os.environ.copy()
-    env["PATH"] = f"/home/a/.local/opt/riscv32-gcc/bin:/home/a/.local/opt/spike/bin:/home/a/.local/bin:{env.get('PATH', '')}"
     env["MISE_YES"] = "1"
 
     proc = subprocess.run(cmd, cwd=ACT4_ROOT, env=env, capture_output=True, text=True)
@@ -80,10 +78,11 @@ def ensure_act4_elfs(out_dir: str = REPORT_DIR) -> List[str]:
         shutil.copy2(GENERATION_LOG_PATH, os.path.join(out_dir, "act4_generation.log"))
 
     if proc.returncode != 0:
-        print(f"ACT4 framework build failed:\n{proc.stdout}\n{proc.stderr}")
-        sys.exit(1)
+        raise RuntimeError(f"ACT4 framework build failed. See {GENERATION_LOG_PATH}.\n{proc.stderr}")
 
     elfs = sorted(glob.glob(f"{ELF_DIR}/**/*.elf", recursive=True))
+    if len(elfs) < 58:
+        raise RuntimeError(f"ACT4 generated {len(elfs)} ELFs; expected at least 58. See {GENERATION_LOG_PATH}.")
     return elfs
 
 def run_act_dut(elf_path: str) -> Tuple[bool, int, int, float, str]:
@@ -123,7 +122,6 @@ def run_act_spike(elf_path: str) -> Tuple[bool, str]:
         elf_path
     ]
     env = os.environ.copy()
-    env["PATH"] = f"/home/a/.local/opt/spike/bin:{env.get('PATH', '')}"
 
     try:
         proc = subprocess.run(cmd, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=30)
@@ -143,7 +141,11 @@ def main():
     print("   RISC-V Architectural Certification Test (ACT4) Official Framework Runner ")
     print("=" * 80)
 
-    elfs = ensure_act4_elfs(args.out_dir)
+    try:
+        elfs = ensure_act4_elfs(args.out_dir)
+    except (RuntimeError, OSError, subprocess.CalledProcessError) as exc:
+        print(f"ERROR: {exc}", file=sys.stderr)
+        return 1
     print(f"Discovered {len(elfs)} official framework-generated self-checking ELFs (Sail reference).")
 
     all_tests: List[Dict[str, Any]] = []
@@ -200,16 +202,16 @@ def main():
     summary_data = {
         "framework": "ACT4 / riscv-arch-test (Official Framework)",
         "reference_model": "sail_riscv_sim 0.13.1",
-        "pinned_act_commit": "74efcaac81f48f437f58868771daf2ed2776d422",
-        "udb_config": "verification/act4/riscv-arch-test/config/cores/rv32_ooo/rv32_ooo.yaml",
-        "sail_config": "verification/act4/riscv-arch-test/config/cores/rv32_ooo/sail.json",
+        "pinned_act_commit": PINNED_ACT_COMMIT,
+        "udb_config": f"{SRC_CONFIG_DIR}/rv32_ooo.yaml",
+        "sail_config": f"{SRC_CONFIG_DIR}/sail.json",
         "generation_log": "act4_generation.log",
         "config_checksums": config_checksums,
         "total_tests": total_count,
         "passed_tests": total_passed,
         "failed_tests": total_failed,
         "pass_rate_pct": round(100.0 * total_passed / total_count, 2) if total_count > 0 else 0.0,
-        "all_passed": (total_failed == 0),
+        "all_passed": (total_count >= 58 and total_failed == 0),
         "elapsed_seconds": round(elapsed, 2),
         "results": all_tests
     }

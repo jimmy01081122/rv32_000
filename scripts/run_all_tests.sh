@@ -19,7 +19,14 @@ PASS_COUNT=0
 FAIL_COUNT=0
 TOTAL_COUNT=0
 
-for elf in "$TEST_DIR"/*.elf; do
+shopt -s nullglob
+tests=("$TEST_DIR"/*.elf)
+if [ "${#tests[@]}" -eq 0 ]; then
+    echo "Error: No test ELFs found. Run 'make compile-tests' first." >&2
+    exit 1
+fi
+
+for elf in "${tests[@]}"; do
     [ -f "$elf" ] || continue
     test_name=$(basename "$elf" .elf)
     TOTAL_COUNT=$((TOTAL_COUNT + 1))

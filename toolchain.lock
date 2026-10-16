@@ -2,8 +2,9 @@
 # rv32-ooo toolchain.lock
 # G1 Frozen — 2026-08-15
 #
-# All EDA tools are used exclusively through Docker containers.
-# Any direct host-system invocation is non-canonical and not reproducible.
+# Local EDA tools run through Docker; CI uses the same Ubuntu 22.04 tool versions.
+# Host Make/Bash/Git orchestrate the containers; EDA binaries stay in Docker.
+# Container dependency profile simplified 2026-10-16; EDA versions unchanged.
 # =============================================================================
 
 # ── Simulation / Verification Container (rv32ooo-sim) ───────────────────────
@@ -15,10 +16,6 @@ verilator_tag        = v4.038
 verilator_source     = https://github.com/verilator/verilator.git
 verilator_sha1       = 0cd4a57ad  # sha1 reported by binary, ref v4.038
 
-yosys_tag            = yosys-0.9
-yosys_source         = https://github.com/YosysHQ/yosys.git
-yosys_sha1           = 1979e0b    # reported by yosys -V
-
 spike_tag            = v1.1.0
 spike_source         = https://github.com/riscv-software-src/riscv-isa-sim.git
 
@@ -29,10 +26,7 @@ riscv_gcc_arch       = rv32imf
 riscv_gcc_abi        = ilp32
 
 python_version       = 3.10   # ubuntu 22.04 system
-pyelftools_version   = 0.31
-pyyaml_version       = 6.0.2
-tabulate_version     = 0.9.0
-rich_version         = 13.9.4
+# Project runners use only Python's standard library.
 
 # ── Synthesis Container (rv32ooo-syn) ────────────────────────────────────────
 [syn]
@@ -42,16 +36,19 @@ base_image           = ubuntu:22.04
 yosys_tag            = yosys-0.9
 yosys_source         = https://github.com/YosysHQ/yosys.git
 yosys_sha1           = 1979e0b
+sv2v_tag             = v0.0.12
+sv2v_source          = https://github.com/zachjs/sv2v
 
-# OpenROAD — installed via OpenROAD-flow-scripts docker_shell
-# Pinned commit for reproducibility (update with architecture_spec §D)
-openroad_flow_scripts_repo   = https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts.git
-openroad_flow_scripts_commit = TBD  # Set at G15 synthesis signoff
-openroad_version             = TBD  # Reported by 'openroad -version'
+# ── Optional architectural certification / physical design ──────────────────
+[act4]
+framework_commit    = 74efcaac81f48f437f58868771daf2ed2776d422
+sail_version        = 0.13.1
+# Requires a separate prepared ACT_IMAGE with Sail and mise or uv + Ruby/Bundler.
+# Python/Ruby dependencies are pinned by the ACT4 framework, not the sim image.
 
-# PDK versions (used at G15/G16)
-nangate45_source    = https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts/tree/master/flow/platforms/nangate45
-sky130hd_source     = https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts/tree/master/flow/platforms/sky130hd
+[physical]
+toolchain_lock      = physical/asap7/toolchain.lock
+# OpenROAD/ORFS/ASAP7 are separate from the generic synthesis image.
 
 # ── Build-time record ────────────────────────────────────────────────────────
 [meta]

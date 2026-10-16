@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env python3
 """
 scripts/run_spike_diff.py — True Architectural Spike Lockstep Differential Verification Runner
 Executes bare-metal ELFs concurrently on DUT (rv32_ooo_sim) and Golden Reference (Spike),
@@ -161,7 +161,6 @@ def run_spike(elf_path: str, isa: str = "rv32im_zicsr") -> Tuple[bool, List[Dict
         elf_path
     ]
     env = os.environ.copy()
-    env["PATH"] = f"/home/a/.local/opt/spike/bin:/home/a/.local/bin:{env.get('PATH', '')}"
 
     try:
         proc = subprocess.run(cmd, env=env, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True, timeout=30)
@@ -418,7 +417,7 @@ def main() -> int:
     print("=" * 80)
     passed_count = sum(1 for r in results if r["pass"])
     total_count = len(results)
-    print(f" Verification Signoff: {passed_count} / {total_count} passed ({total_count - passed_count} failed) — 100% Architectural State Match")
+    print(f" Verification Signoff: {passed_count} / {total_count} passed ({total_count - passed_count} failed)")
     print("=" * 80)
 
     if args.json:

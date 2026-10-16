@@ -33,14 +33,14 @@ push / PR ──► checkout ──┤                 ├─► signoff-gate
 
 ---
 
-### `spike-diff` · Differential verification (14/14)
+### `spike-diff` · Differential verification (18 directed workloads in the current checkout)
 | | |
 |---|---|
 | **Runner** | `ubuntu-22.04` |
 | **Timeout** | 45 min |
 | **Tools** | Verilator (apt), riscv32-unknown-elf GCC (riscv-collab pre-built), Spike v1.1.0 (built from source) |
-| **What it does** | 1. Downloads `riscv32-elf-ubuntu-22.04-gcc.tar.xz` from riscv-collab releases and installs to `/opt/riscv32-gcc/`.<br>2. Clones and builds Spike v1.1.0 with `--enable-commitlog`.<br>3. Builds the Verilator C++ simulator (`rv32_ooo_sim`).<br>4. Cross-compiles all directed test ELFs from `software/directed/` and `verif/directed/`.<br>5. Runs `python3 scripts/run_spike_diff.py` which executes each test on both DUT and Spike and compares PC, register writebacks, stores, and traps in lockstep. |
-| **Gate** | 14/14 tests pass differential comparison (zero mismatches). |
+| **What it does** | 1. Downloads `riscv32-elf-ubuntu-22.04-gcc.tar.xz` from riscv-collab releases and installs to `/opt/riscv32-gcc/`.<br>2. Clones and builds Spike v1.1.0 with `--enable-commitlog`.<br>3. Builds the Verilator C++ simulator (`rv32_ooo_sim`) via the shared `scripts/build_sim.sh`.<br>4. Cross-compiles all directed test ELFs from `software/directed/` and `verif/directed/`.<br>5. Runs `python3 scripts/run_spike_diff.py` which executes each test on both DUT and Spike and compares PC, register writebacks, stores, and traps in lockstep. |
+| **Gate** | Every directed test passes differential comparison (zero mismatches). |
 | **Caching** | GCC toolchain cached by version tag; Spike binary cached by git tag; Verilator build cached by RTL/TB file hashes. |
 | **Artifacts** | `spike-diff-logs/` — `spike_diff.log`, `diff_results.json` |
 
@@ -51,17 +51,14 @@ push / PR ──► checkout ──┤                 ├─► signoff-gate
 |---|---|
 | **Runner** | `ubuntu-22.04` |
 | **Timeout** | 60 min |
-| **Tools** | Verilator (apt), riscv32-unknown-elf GCC (riscv-collab), sail_riscv_sim (pre-built), Ruby/Bundler (apt + gems) |
-| **What it does** | 1. Initialises the `verification/act4/riscv-arch-test` submodule.<br>2. Installs Ruby gems for the ACT4 framework (`bundle install`).<br>3. Installs `sail_riscv_sim` — tries known pre-built binary URLs; falls back to a DUT-only stub if unavailable (ACT4 ELFs are self-checking via embedded signature comparison, so DUT pass alone is valid).<br>4. Runs `python3 verification/act4/riscv-arch-test/run_tests.py` to **freshly generate** all 58 self-checking ELFs using the Sail reference model.<br>5. Runs `python3 scripts/run_act4.py` to execute each ELF on the DUT simulator and collect pass/fail. |
+| **Tools** | Verilator (apt), riscv32-unknown-elf GCC (riscv-collab), sail_riscv_sim (pre-built), Ruby 3.4.10, Bundler 4.0.18, uv 0.11.33 |
+| **What it does** | Initialises the pinned ACT4 submodule, installs the real Sail 0.13.1 release plus Ruby/Bundler and uv, builds the DUT with the shared build script, then runs `scripts/run_act4.py`. The runner freshly generates all self-checking ELFs through the official framework Makefile with the project config before executing them. Missing dependencies, failed generation, and fewer than 58 ELFs fail the job. |
 | **Gate** | 58/58 ELFs produce `Exit code: 0 (PASS)` on the DUT. |
-| **ELF coverage** | RV32I (39 tests), RV32M (8 tests), Zicsr (11 tests). |
-| **Caching** | GCC toolchain, Sail binary, Verilator build, Bundler gems all cached. |
+| **ELF coverage** | RV32I (39), RV32M (8), Zicsr (6), Zifencei (1), Zmmul (4). |
+| **Caching** | GCC toolchain, verified Sail binary, and Verilator build are cached. |
 | **Artifacts** | `act4-results/` — `act4_summary.json`, `elf_hashes.json`, `act4_run.log` |
 
-> **Note on Sail binary availability:** The `sail_riscv_sim` binary URL depends on the upstream
-> sail-riscv release format. If the binary is unavailable, the job falls back to DUT-only mode.
-> The self-checking signature mechanism in ACT4 ELFs means DUT-only verification is still
-> architecturally meaningful.
+> Sail is required. There is no successful stub or DUT-only fallback for fresh generation.
 
 ---
 
@@ -85,7 +82,7 @@ push / PR ──► checkout ──┤                 ├─► signoff-gate
 | **Runner** | `ubuntu-22.04` |
 | **Timeout** | 30 min |
 | **Tools** | Yosys (apt), sv2v v0.0.12 (pre-built binary from zachjs/sv2v) |
-| **What it does** | 1. Downloads `sv2v-Linux.zip` from GitHub releases and installs to `/usr/local/bin/`.<br>2. Runs `bash syn/scripts/synth_yosys.sh` which:<br>   - Converts all 14 RTL `.sv` files to Verilog-2005 via `sv2v --top=rv32_ooo_core`<br>   - Elaborates and synthesises with Yosys (`proc` + `opt -fast` + `check -assert`)<br>   - Runs `python3 scripts/parse_synth_log.py` to extract metrics.<br>3. Asserts `latch_count == 0`, `loop_count == 0`, `check_errors == 0`. |
+| **What it does** | 1. Downloads `sv2v-Linux.zip` from GitHub releases and installs to `/usr/local/bin/`.<br>2. Runs `bash syn/scripts/synth_yosys.sh` which:<br>   - Converts all RTL files from `sim/scripts/rv32_ooo_core.f` to Verilog-2005 via `sv2v --top=rv32_ooo_core`<br>   - Elaborates and synthesises with Yosys (`proc` + `opt -fast` + `check -assert`)<br>   - Runs `python3 scripts/parse_synth_log.py` to extract metrics.<br>3. Asserts `latch_count == 0`, `loop_count == 0`, `check_errors == 0`. |
 | **Gate** | Zero inferred latches, zero combinational loops, zero Yosys check errors. |
 | **Caching** | sv2v binary cached by version tag. |
 | **Artifacts** | `synthesis-results/` — `synth.log`, `rv32_ooo_core_netlist.v`, `synthesis_summary.json` |
@@ -124,7 +121,6 @@ All heavyweight downloads are cached with `actions/cache@v4` keyed on:
 - **Verilator build** — hash of all RTL `.sv` + TB `.cpp`/`.h` + filelist `.f`
 - **sv2v binary** — `sv2v-<VER>-ubuntu22`
 - **Sail binary** — `sail-riscv-<VER>-ubuntu22`
-- **ACT4 gems** — hash of `Gemfile.lock`
 
 Cache hits skip the corresponding download/build step entirely.
 

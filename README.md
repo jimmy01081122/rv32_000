@@ -1,5 +1,10 @@
 # RV32_OOO: High-Performance RV32IMF Out-of-Order RISC-V Core
 
+> **Current checkout:** the RTL includes AP5B LSU response buffering. The badges and
+> benchmark tables below describe archived runs, not a fresh signoff of this checkout.
+> See [session handoff and environment status](docs/SESSION_HANDOFF.md) for the current
+> source baseline, reproducible setup, measured checks, and remaining limitations.
+
 [![ISA](https://img.shields.io/badge/ISA-RV32IMF%20%2B%20Zicsr-blue.svg)](https://riscv.org/)
 [![CoreMark](https://img.shields.io/badge/CoreMark%2FMHz-2.528%20(10%20iter)-brightgreen.svg)]()
 [![ACT4](https://img.shields.io/badge/RISC--V%20ACT4-58%2F58%20PASS%20(100%25)-success.svg)]()
@@ -225,14 +230,26 @@ Automated signoff verification runs on every push and pull request to `main` via
 
 ### 1. Build Simulation Environment
 ```bash
-# Build simulation binary
+# Initialize the exact benchmark/framework commits and build the tool images
+make deps-init
+make docker-build
+make check-env
+
+# Build simulation binary (incremental on subsequent invocations)
 make sim-build
 ```
+
+For HTTPS builds behind a custom CA, use
+`make docker-build PROXY_CA=/path/to/combined-ca-bundle.pem`.
+The CA is mounted as a BuildKit secret and is not copied into either image.
+Simulation/differential tools and generic synthesis tools have separate images.
+Fresh ACT4 generation requires an additional prepared `ACT_IMAGE` with Sail and
+mise or uv + Ruby/Bundler; `make check-signoff-env ACT_IMAGE=<image>` checks it.
 
 ### 2. Run Complete Master Signoff
 ```bash
 # Executes Spike differential, negative self-tests, ACT4 regression, CoreMark, Embench, and synthesis
-make signoff
+make signoff ACT_IMAGE=<prepared-act4-image>
 ```
 
 ### 3. Run Individual Benchmark Suites

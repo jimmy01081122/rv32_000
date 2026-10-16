@@ -4,7 +4,6 @@
 #
 # Pinned tool versions (see toolchain.lock):
 #   verilator   : 4.038-1     (Ubuntu 22.04 LTS native package)
-#   yosys       : 0.9-2       (Ubuntu 22.04 LTS native package)
 #   riscv32-gcc : 2026.07.15  (riscv-collab/riscv-gnu-toolchain)
 #   spike       : v1.1.0      (riscv-software-src/riscv-isa-sim)
 #   python      : 3.10        (Ubuntu 22.04 system)
@@ -20,17 +19,21 @@ ARG NJOBS=12
 RUN apt-get update && apt-get install -y --no-install-recommends \
     git ca-certificates \
     build-essential \
-    device-tree-compiler libboost-all-dev \
+    device-tree-compiler libboost-regex-dev libboost-system-dev \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /build/spike
-ARG CACHEBUST=commitlog_v1
-RUN git clone --depth 1 --branch ${SPIKE_TAG} \
+RUN --mount=type=secret,id=proxy_ca \
+    if [ -f /run/secrets/proxy_ca ]; then export GIT_SSL_CAINFO=/run/secrets/proxy_ca; fi; \
+    git clone --depth 1 --branch ${SPIKE_TAG} \
         https://github.com/riscv-software-src/riscv-isa-sim.git . \
     && mkdir build && cd build \
     && ../configure --prefix=/opt/spike --enable-commitlog \
     && make -j${NJOBS} \
     && make install
+
+# Runtime needs the simulator, not its static libraries, headers or auxiliary tools.
+RUN strip --strip-debug /opt/spike/bin/spike
 
 # ── Stage 2: runtime image ───────────────────────────────────────────────────
 FROM ubuntu:22.04
@@ -39,53 +42,38 @@ ARG DEBIAN_FRONTEND=noninteractive
 ARG RISCV_GCC_RELEASE=2026.07.15
 
 LABEL maintainer="rv32ooo-project"
-LABEL description="rv32ooo sim/verif: Verilator 4.038, Yosys 0.9, RISC-V GCC 2026.07.15, Spike v1.1.0"
+LABEL description="rv32ooo sim/verif: Verilator 4.038, RISC-V GCC 2026.07.15, Spike v1.1.0"
 LABEL verilator.version="4.038-1"
-LABEL yosys.version="0.9-2"
 LABEL riscv_gcc.version="${RISCV_GCC_RELEASE}"
 LABEL spike.version="v1.1.0"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    git ca-certificates wget curl xz-utils file \
-    make cmake \
+    git ca-certificates curl xz-utils file \
+    make \
     build-essential \
     verilator=4.038* \
-    yosys=0.9* \
     libgmp10 libmpfr6 libmpc3 \
-    libfl2 libreadline8 libtcl8.6 libffi7 zlib1g \
-    libboost-all-dev \
+    libfl2 libreadline8 zlib1g \
+    libboost-regex1.74.0 \
     device-tree-compiler \
-    python3 python3-pip python3-venv \
-    time less tree unzip \
+    python3 \
+    time \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -sL https://github.com/zachjs/sv2v/releases/download/v0.0.12/sv2v-Linux.zip -o /tmp/sv2v.zip \
-    && unzip -q /tmp/sv2v.zip -d /tmp/ \
-    && mv /tmp/sv2v-Linux/sv2v /usr/local/bin/sv2v \
-    && chmod +x /usr/local/bin/sv2v \
-    && rm -rf /tmp/sv2v*
-
-COPY --from=spike_builder /opt/spike /opt/spike
+COPY --from=spike_builder /opt/spike/bin/spike /opt/spike/bin/spike
 
 # ── RISC-V GCC pre-built elf/newlib toolchain (rv32) ────────────────────────
-RUN wget -q \
+RUN --mount=type=secret,id=proxy_ca \
+    if [ -f /run/secrets/proxy_ca ]; then export CURL_CA_BUNDLE=/run/secrets/proxy_ca; fi; \
+    curl --fail --location --retry 3 \
     "https://github.com/riscv-collab/riscv-gnu-toolchain/releases/download/${RISCV_GCC_RELEASE}/riscv32-elf-ubuntu-22.04-gcc.tar.xz" \
-    -O /tmp/riscv32-gcc.tar.xz \
+    -o /tmp/riscv32-gcc.tar.xz \
     && mkdir -p /opt/riscv32-gcc \
     && tar -xf /tmp/riscv32-gcc.tar.xz -C /opt/riscv32-gcc --strip-components=1 \
     && rm /tmp/riscv32-gcc.tar.xz \
+    && find /opt/riscv32-gcc/bin /opt/riscv32-gcc/libexec -type f \
+       -exec sh -c 'for binary do if file -b "$binary" | grep -q "ELF .*x86-64"; then strip --strip-debug "$binary"; fi; done' sh {} + \
     && /opt/riscv32-gcc/bin/riscv32-unknown-elf-gcc --version
-
-# ── Python packages ───────────────────────────────────────────────────────────
-RUN pip3 install --no-cache-dir \
-    pyelftools==0.31 \
-    pyyaml==6.0.2 \
-    tabulate==0.9.0 \
-    rich==13.9.4 \
-    typer==0.23.1 \
-    pydantic==2.12.5 \
-    pyjson5==2 \
-    ruamel.yaml==0.18.16
 
 ENV PATH="/opt/spike/bin:/opt/riscv32-gcc/bin:${PATH}"
 ENV RISCV="/opt/riscv32-gcc"
@@ -95,10 +83,9 @@ WORKDIR /workspace
 # ── Smoke-test all tools ──────────────────────────────────────────────────────
 RUN echo "=== rv32ooo-sim toolchain ===" \
     && verilator --version \
-    && yosys -V \
     && (spike -h 2>&1 | head -n 2 || true) \
     && riscv32-unknown-elf-gcc --version \
-    && python3 -c "import elftools; print('elftools OK')" \
+    && python3 --version \
     && echo "=== G1 verification OK ==="
 
 ENTRYPOINT ["/bin/bash"]

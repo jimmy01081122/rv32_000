@@ -96,7 +96,7 @@ jobs:
           sudo apt-get install -y --no-install-recommends \
             verilator \
             build-essential cmake \
-            libboost-all-dev device-tree-compiler \
+            libboost-regex-dev libboost-system-dev device-tree-compiler \
             python3 python3-pip \
             wget xz-utils
 
@@ -167,22 +167,14 @@ jobs:
         uses: actions/cache@v4
         with:
           path: build/sim
-          key: sim-${{ hashFiles('rtl/**/*.sv', 'sim/tb/*.cpp', 'sim/tb/*.h', 'sim/scripts/*.f') }}
+          key: sim-${{ hashFiles('rtl/**/*.sv', 'sim/tb/*.cpp', 'sim/tb/*.h', 'sim/scripts/*.f', 'scripts/build_sim.sh') }}
 
       - name: Build rv32_ooo_sim
         if: steps.cache-sim.outputs.cache-hit != 'true'
         run: |
           set -euo pipefail
           mkdir -p build/sim
-          verilator --cc --exe --trace \
-            -Wall -Wno-UNUSED -Wno-STMTDLY \
-            -f sim/scripts/rv32_ooo_core.f \
-            "$(pwd)/sim/tb/sim_main.cpp" "$(pwd)/sim/tb/sim_mem.cpp" \
-            --top-module rv32_ooo_core \
-            --Mdir build/sim \
-            -o rv32_ooo_sim \
-            -CFLAGS "-I$(pwd)/sim/tb -O2" \
-            --build 2>&1 | tee build/sim/verilator_build.log
+          bash scripts/build_sim.sh 2>&1 | tee build/sim/verilator_build.log
           echo "✓ rv32_ooo_sim built"
 
       - name: Verify simulator binary
@@ -232,7 +224,7 @@ jobs:
       - name: Init riscv-arch-test submodule
         run: |
           git submodule update --init --depth 1 \
-            verification/act4/riscv-arch-test 2>/dev/null || true
+            verification/act4/riscv-arch-test
 
       # ── System packages ───────────────────────────────────────────────────────
       - name: Install system packages
@@ -243,12 +235,13 @@ jobs:
             build-essential \
             python3 python3-pip \
             wget xz-utils \
-            ruby ruby-dev \
-            libboost-all-dev device-tree-compiler
+            libboost-regex-dev libboost-system-dev device-tree-compiler
 
-      # Bundler gem for ACT4 framework
-      - name: Install bundler
-        run: sudo gem install bundler --no-document -q 2>/dev/null || gem install bundler -q
+      - name: Set up ACT4 Ruby and Bundler
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.4.10"
+          bundler: "4.0.18"
 
       # ── riscv32-unknown-elf GCC ───────────────────────────────────────────────
       - name: Cache RISC-V GCC toolchain
@@ -278,78 +271,26 @@ jobs:
         uses: actions/cache@v4
         with:
           path: /usr/local/bin/sail_riscv_sim
-          key: sail-riscv-${{ env.SAIL_RISCV_VER }}-ubuntu22
+          key: sail-riscv-${{ env.SAIL_RISCV_VER }}-ubuntu22-verified-v2
 
       - name: Download / install sail_riscv_sim
         if: steps.cache-sail.outputs.cache-hit != 'true'
         run: |
           set -euo pipefail
-          # Try known release URLs (exact URL depends on upstream release naming)
-          URLS=(
-            "https://github.com/riscv/sail-riscv/releases/download/${SAIL_RISCV_VER}/sail_riscv_linux_rv32.tar.gz"
-            "https://github.com/rems-project/sail-riscv/releases/download/${SAIL_RISCV_VER}/sail_riscv_linux.tar.gz"
-            "https://github.com/riscv/sail-riscv/releases/download/${SAIL_RISCV_VER}/riscv_sim_RV32-linux-x86_64.tar.gz"
-          )
-          DOWNLOADED=false
-          for URL in "${URLS[@]}"; do
-            if wget -q --spider "${URL}" 2>/dev/null; then
-              wget -q "${URL}" -O /tmp/sail_riscv.tar.gz && DOWNLOADED=true && break
-            fi
-          done
-
-          if ${DOWNLOADED}; then
-            cd /tmp && tar -xzf sail_riscv.tar.gz
-            SAIL_BIN=$(find /tmp -maxdepth 3 -type f -name "sail_riscv_sim" \
-                       -o -name "riscv_sim_RV32" 2>/dev/null | head -1)
-            [ -z "${SAIL_BIN}" ] && SAIL_BIN=$(find /tmp -maxdepth 3 -type f -executable \
-                                               ! -name "*.sh" ! -name "*.tar*" | head -1)
-            sudo install -m 0755 "${SAIL_BIN}" /usr/local/bin/sail_riscv_sim
-          else
-            # Stub for CI: Sail unavailable → DUT-only mode (still validates correctness
-            # via self-checking test signatures embedded in the ACT4 ELFs themselves)
-            echo "WARNING: sail_riscv_sim binary not found at any known URL — using DUT-only mode."
-            cat > /tmp/sail_stub.sh << 'STUB'
-          #!/bin/bash
-          # sail_riscv_sim CI stub — DUT-only verification mode
-          echo "sail_riscv_sim (stub): DUT-only mode active"
-          exit 0
-          STUB
-            sudo install -m 0755 /tmp/sail_stub.sh /usr/local/bin/sail_riscv_sim
-          fi
+          curl --fail --location --retry 3 \
+            "https://github.com/riscv/sail-riscv/releases/download/${SAIL_RISCV_VER}/sail-riscv-Linux-x86_64.tar.gz" \
+            -o /tmp/sail_riscv.tar.gz
+          mkdir -p /tmp/sail-riscv
+          tar -xzf /tmp/sail_riscv.tar.gz -C /tmp/sail-riscv
+          SAIL_BIN=$(find /tmp/sail-riscv -type f -name sail_riscv_sim -print -quit)
+          test -n "${SAIL_BIN}"
+          sudo install -m 0755 "${SAIL_BIN}" /usr/local/bin/sail_riscv_sim
 
       - name: Verify Sail
-        run: sail_riscv_sim --version 2>&1 || sail_riscv_sim --help 2>&1 | head -2 || true
+        run: test "$(sail_riscv_sim --version)" = "${SAIL_RISCV_VER}"
 
-      # ── Python deps ──────────────────────────────────────────────────────────
-      - name: Install Python packages
-        run: |
-          pip3 install --quiet \
-            pyelftools==0.31 \
-            pyyaml \
-            tabulate \
-            rich \
-            pyjson5 \
-            "ruamel.yaml>=0.18"
-
-      # ── ACT4 framework Ruby/Bundler deps ─────────────────────────────────────
-      - name: Cache ACT4 Bundler gems
-        uses: actions/cache@v4
-        with:
-          path: |
-            verification/act4/riscv-arch-test/vendor/bundle
-            ~/.bundle/cache
-          key: act4-gems-${{ hashFiles('verification/act4/riscv-arch-test/Gemfile.lock') }}
-          restore-keys: act4-gems-
-
-      - name: Install ACT4 Ruby gems
-        run: |
-          if [ -f verification/act4/riscv-arch-test/Gemfile ]; then
-            cd verification/act4/riscv-arch-test
-            bundle config set --local path vendor/bundle
-            bundle install --quiet 2>&1 | tail -5
-          else
-            echo "No Gemfile found (submodule not cloned) — skipping bundle install."
-          fi
+      - name: Install ACT4 Python package manager
+        run: pip3 install --quiet uv==0.11.33
 
       # ── Build DUT simulator ───────────────────────────────────────────────────
       - name: Cache Verilator build
@@ -357,56 +298,16 @@ jobs:
         uses: actions/cache@v4
         with:
           path: build/sim
-          key: sim-${{ hashFiles('rtl/**/*.sv', 'sim/tb/*.cpp', 'sim/tb/*.h', 'sim/scripts/*.f') }}
+          key: sim-${{ hashFiles('rtl/**/*.sv', 'sim/tb/*.cpp', 'sim/tb/*.h', 'sim/scripts/*.f', 'scripts/build_sim.sh') }}
 
       - name: Build rv32_ooo_sim
         if: steps.cache-sim.outputs.cache-hit != 'true'
         run: |
           set -euo pipefail
           mkdir -p build/sim
-          verilator --cc --exe --trace \
-            -Wall -Wno-UNUSED -Wno-STMTDLY \
-            -f sim/scripts/rv32_ooo_core.f \
-            "$(pwd)/sim/tb/sim_main.cpp" "$(pwd)/sim/tb/sim_mem.cpp" \
-            --top-module rv32_ooo_core \
-            --Mdir build/sim \
-            -o rv32_ooo_sim \
-            -CFLAGS "-I$(pwd)/sim/tb -O2" \
-            --build 2>&1 | tee build/sim/verilator_build.log
+          bash scripts/build_sim.sh 2>&1 | tee build/sim/verilator_build.log
 
-      # ── Generate fresh ACT4 ELFs via the official riscv-arch-test framework ──
-      # The framework uses Sail as the reference model to produce self-checking
-      # ELFs. When submodule is available this runs the full generator; when not,
-      # it falls back to the pre-built ELFs already committed to the repo.
-      - name: Generate fresh ACT4 ELFs (official framework)
-        env:
-          PATH: "${{ env.RISCV_COLLAB_DIR }}/bin:/usr/local/bin:$PATH"
-        run: |
-          set -euo pipefail
-          mkdir -p verification/act4/report
-          ACT4_ROOT="verification/act4/riscv-arch-test"
-
-          if [ -f "${ACT4_ROOT}/run_tests.py" ]; then
-            echo "==> Generating fresh ACT4 ELFs via official framework..."
-            cd "${ACT4_ROOT}"
-            python3 run_tests.py \
-              --config config/cores/rv32_ooo/test_config.yaml \
-              --no-ref-run \
-              2>&1 | tee /tmp/act4_gen.log || \
-            python3 run_tests.py \
-              --config config/cores/rv32_ooo/test_config.yaml \
-              2>&1 | tee /tmp/act4_gen.log || true
-            cd "$GITHUB_WORKSPACE"
-            ELF_COUNT=$(find verification/act4/riscv-arch-test/work/rv32_ooo/elfs \
-                        -name "*.elf" 2>/dev/null | wc -l)
-            echo "==> ${ELF_COUNT} ELFs present after framework run."
-          else
-            echo "==> riscv-arch-test not cloned; using pre-built ELFs from repo."
-            ELF_COUNT=$(find verification/act4/riscv-arch-test/work/rv32_ooo/elfs \
-                        -name "*.elf" 2>/dev/null | wc -l)
-            echo "    Pre-built ELF count: ${ELF_COUNT}"
-          fi
-
+      # run_act4.py performs one fresh generation with real Sail before DUT execution.
       # ── Execute 58 ELFs on DUT ────────────────────────────────────────────────
       - name: Run ACT4 DUT execution (58/58)
         run: |
@@ -498,22 +399,14 @@ jobs:
         uses: actions/cache@v4
         with:
           path: build/sim
-          key: sim-${{ hashFiles('rtl/**/*.sv', 'sim/tb/*.cpp', 'sim/tb/*.h', 'sim/scripts/*.f') }}
+          key: sim-${{ hashFiles('rtl/**/*.sv', 'sim/tb/*.cpp', 'sim/tb/*.h', 'sim/scripts/*.f', 'scripts/build_sim.sh') }}
 
       - name: Build rv32_ooo_sim
         if: steps.cache-sim.outputs.cache-hit != 'true'
         run: |
           set -euo pipefail
           mkdir -p build/sim
-          verilator --cc --exe --trace \
-            -Wall -Wno-UNUSED -Wno-STMTDLY \
-            -f sim/scripts/rv32_ooo_core.f \
-            "$(pwd)/sim/tb/sim_main.cpp" "$(pwd)/sim/tb/sim_mem.cpp" \
-            --top-module rv32_ooo_core \
-            --Mdir build/sim \
-            -o rv32_ooo_sim \
-            -CFLAGS "-I$(pwd)/sim/tb -O2" \
-            --build 2>&1 | tee build/sim/verilator_build.log
+          bash scripts/build_sim.sh 2>&1 | tee build/sim/verilator_build.log
 
       # ── Compile CoreMark ──────────────────────────────────────────────────────
       - name: Compile CoreMark (3 iterations, PERFORMANCE_RUN, -O2)

@@ -1,5 +1,5 @@
 # ============================================================================
-# rv32ooo-syn — G1 Synthesis + Physical Design Container
+# rv32ooo-syn — Generic Synthesis Container (OpenROAD/PDK are separate)
 # Base: ubuntu:22.04
 #
 # Pinned tool versions (see toolchain.lock):
@@ -12,30 +12,23 @@ FROM ubuntu:22.04
 ARG DEBIAN_FRONTEND=noninteractive
 
 LABEL maintainer="rv32ooo-project"
-LABEL description="rv32ooo synthesis: Yosys 0.9 + STA / PPA tools"
+LABEL description="rv32ooo generic synthesis: sv2v 0.0.12 + Yosys 0.9"
 LABEL yosys.version="0.9-2"
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    git ca-certificates wget curl unzip \
-    build-essential make cmake \
+    ca-certificates curl unzip \
     yosys=0.9* \
-    tcl-dev libffi-dev libboost-all-dev \
-    libfl2 libreadline8 zlib1g \
-    libeigen3-dev libgomp1 \
-    python3 python3-pip python3-venv \
-    time tree less \
+    python3 \
+    time \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -sL https://github.com/zachjs/sv2v/releases/download/v0.0.12/sv2v-Linux.zip -o /tmp/sv2v.zip \
+RUN --mount=type=secret,id=proxy_ca \
+    if [ -f /run/secrets/proxy_ca ]; then export CURL_CA_BUNDLE=/run/secrets/proxy_ca; fi; \
+    curl --fail --location --retry 3 https://github.com/zachjs/sv2v/releases/download/v0.0.12/sv2v-Linux.zip -o /tmp/sv2v.zip \
     && unzip -q /tmp/sv2v.zip -d /tmp/ \
     && mv /tmp/sv2v-Linux/sv2v /usr/local/bin/sv2v \
     && chmod +x /usr/local/bin/sv2v \
     && rm -rf /tmp/sv2v*
-
-RUN pip3 install --no-cache-dir \
-    pyyaml==6.0.2 \
-    tabulate==0.9.0 \
-    rich==13.9.4
 
 WORKDIR /workspace
 
