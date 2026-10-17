@@ -92,7 +92,8 @@ limitations remain visible rather than being silently changed during doc cleanup
   on GitHub in this session. GitHub-hosted runners are optional remote automation,
   not an assumed replacement for the available local host.
 
-The general embedded and FP32 goals have equal priority. Their suggested 20%
-improvement targets and 10% area allowance remain proposals until baseline and
-measurement review. Document cleanup does not waive old failures or activate
-new performance gates.
+The general embedded and FP32 goals have equal priority. The user approved
+planning targets of at least 1.20x speedup for each category and at most 1.10x
+baseline standard-cell area on 2026-10-17. Baseline and measurement contracts
+remain open; no measured improvement or new performance gate is claimed.
+Document cleanup does not waive old failures.
