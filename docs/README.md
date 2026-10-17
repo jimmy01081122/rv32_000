@@ -1,6 +1,6 @@
 # Documentation index
 
-Updated 2026-10-16. Begin with current documents below. A historical PASS or
+Updated 2026-10-17. Begin with current documents below. A historical PASS or
 signoff label applies only to the source/configuration and checks in that record.
 
 ## Current documents
@@ -14,6 +14,7 @@ signoff label applies only to the source/configuration and checks in that record
 | [Micro-operations](../uop_spec.md) | Current packet/schema reference |
 | [Workloads](WORKLOADS.md) | Candidate benchmark contract; not yet an implemented acceptance gate |
 | [Initial workload qualification](WORKLOAD_QUALIFICATION_2026-10-16.md) | Embench library blockers and PolyBench FP32 source/resource probes |
+| [Progress and baseline review](PROGRESS_REVIEW.md) | Updated FP toolchain evidence, honest progress gates and discussion proposals |
 | [Session handoff](SESSION_HANDOFF.md) | Bring-up measurements, tool images and local evidence locations |
 | [CI workflow](../.github/workflows/README.md) | Existing jobs, prerequisites and limits |
 | [Physical flow](../physical/asap7/README.md) | ASAP7 setup status and current research limitations |

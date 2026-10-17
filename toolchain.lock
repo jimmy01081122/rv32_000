@@ -28,6 +28,9 @@ riscv_gcc_artifact   = riscv32-elf-ubuntu-22.04-gcc.tar.xz
 riscv_gcc_default_arch = rv32imafdc_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcd_zcf
 riscv_gcc_default_abi  = ilp32d
 
+python_version       = 3.10   # ubuntu 22.04 system
+# Project runners use only Python's standard library.
+
 # ── FP workload image (separate from historical G1) ─────────────────────────
 [fp]
 docker_image         = rv32ooo-fp:p1
@@ -40,9 +43,6 @@ artifact_sha256      = aaaa8060c914851a3e5ee1ba82cc3d6f80972f90638a05c6e823a3755
 target_arch          = rv32imf_zicsr
 target_abi           = ilp32f
 source               = https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack
-
-python_version       = 3.10   # ubuntu 22.04 system
-# Project runners use only Python's standard library.
 
 # ── Synthesis Container (rv32ooo-syn) ────────────────────────────────────────
 [syn]

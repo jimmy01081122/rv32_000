@@ -18,6 +18,7 @@ AP5B baseline precede the next architecture optimization.
 | [Architecture](architecture_spec.md) | Current implementation inventory and architectural requirements |
 | [Micro-operations](uop_spec.md) | Implemented packet types and their limitations |
 | [Workload proposal](docs/WORKLOADS.md) | Candidate benchmark sets and numerical targets awaiting qualification |
+| [Progress and baseline review](docs/PROGRESS_REVIEW.md) | Evidence gates, current blockers and decisions for discussion |
 | [Session handoff](docs/SESSION_HANDOFF.md) | Environment bring-up evidence and reproduction details |
 | [Documentation index](docs/README.md) | Current documents and historical references |
 
@@ -56,6 +57,11 @@ make test diff-test diff-selftest coremark-smoke
 make synth
 python3 scripts/test_workflow_guards.py
 ```
+
+The separate RV32IMF benchmark toolchain can be built with
+`make docker-build-fp`, checked with `make check-fp-env`, and used with
+`make qualify-embench-fp-reference`. The 19-workload reference probe now passes;
+the [DUT qualification status](docs/PROGRESS_REVIEW.md) remains open.
 
 The simulation and generic-synthesis images are separate. For a proxy/private CA:
 

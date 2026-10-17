@@ -1,6 +1,6 @@
 # Current project status
 
-Updated 2026-10-16. Documentation baseline: maintenance commit `1b266ed0b17aaec2dc598e5128fc57ab9edf56bb`;
+Updated 2026-10-17. Documentation baseline: maintenance commit `1b266ed0b17aaec2dc598e5128fc57ab9edf56bb`;
 incoming RTL revision: `0d79df58e65c2e1034e40f7f586a463fd8602ff1`.
 The documentation cleanup changes no RTL behavior or executable acceptance thresholds.
 
@@ -51,8 +51,12 @@ configuration, and must not be merged into this run's pass counts.
    contract, compiler settings, reference outputs and counter instrumentation.
    [Initial probes](WORKLOAD_QUALIFICATION_2026-10-16.md) found that all five omitted
    Embench workloads pass native self-checks but fail target linking with the current
-   single-library, `ilp32d` toolchain. PolyBench MINI/SMALL native runs and target
-   object compilation succeeded; bare-metal execution and numerical checking remain open.
+   single-library, `ilp32d` toolchain. The separate [FP toolchain and progress
+   review](PROGRESS_REVIEW.md) now records 19/19 new-toolchain build/Spike passes;
+   `minver` still fails the DUT self-check; its first parsed divergence is incorrect
+   FP-store data at PC `0x80001220`. PolyBench MINI/SMALL native runs and
+   target object compilation succeeded; bare-metal execution and numerical checking
+   remain open.
 6. **Physical results:** port hardcoded host paths, provision pinned ORFS/ASAP7,
    audit measurement units, synthesis boundary, constraints, corners and parasitic
    stage, then reproduce AP5B results. Current config skips detailed routing;
