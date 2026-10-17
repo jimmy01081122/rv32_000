@@ -190,11 +190,14 @@ module rv32_ooo_core
                                (ld_cmp.valid && ld_cmp.result_valid && (ld_cmp.result_domain == REG_FP) && (ld_cmp.result_phys == int_issue_uop.src1.phys)) ? ld_cmp.result_data :
                                fp_rd_sq;
 
-  wire [31:0] int_op1_bypassed = (int_issue_uop.src1.phys == 6'd0) ? 32'd0 :
+  // Physical register numbers are independent in the integer and FP domains.
+  // An FSW must never take an integer completion that happens to share its FP tag.
+  wire [31:0] int_op1_bypassed = (int_issue_uop.src1.kind == SRC_FP_REG) ? fp_sq_bypassed :
+                                 (int_issue_uop.src1.phys == 6'd0) ? 32'd0 :
                                  (int_cmp.valid && int_cmp.result_valid && (int_cmp.result_domain == REG_INT) && (int_cmp.result_phys == int_issue_uop.src1.phys)) ? int_cmp.result_data :
                                  (fp_cmp_raw.valid && fp_cmp_raw.result_valid && (fp_cmp_raw.result_domain == REG_INT) && (fp_cmp_raw.result_phys == int_issue_uop.src1.phys)) ? fp_cmp_raw.result_data :
                                  (ld_cmp.valid && ld_cmp.result_valid && (ld_cmp.result_domain == REG_INT) && (ld_cmp.result_phys == int_issue_uop.src1.phys)) ? ld_cmp.result_data :
-                                 (int_issue_uop.mem.is_fp ? fp_sq_bypassed : int_rd1);
+                                 int_rd1;
 
   // Integer Execution Request formation at issue
   always_comb begin
