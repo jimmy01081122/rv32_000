@@ -252,6 +252,11 @@ module rv32_ooo_fp_execute
         flags.uf = 1'b1;
         flags.nx = 1'b1;
         out_f = {sign, 31'd0};
+      end else if ((final_exp == -126) && !significand[23]) begin
+        // Tininess is detected after rounding. An exact subnormal does not
+        // raise UF; rounding up to the minimum normal follows the next branch.
+        out_f = {sign, 8'd0, significand[22:0]};
+        flags.uf = flags.nx;
       end else begin
         out_f = {sign, 8'(final_exp + 127), significand[22:0]};
       end
@@ -557,12 +562,15 @@ module rv32_ooo_fp_execute
         int exp_diff;
         logic [71:0] fma_prod, fma_c, sum;
         logic [47:0] fma_mant;
+        logic [71:0] fma_sticky_mask;
+        int fma_msb, fma_shift;
         int base_exp;
         logic sign_final;
         negate_prod = 1'b0; negate_c = 1'b0; c_val = '0; sign_prod = 1'b0;
         s0 = '0; s1 = '0; sc = '0; e0 = 0; e1 = 0; ec = 0; m0 = '0; m1 = '0; mc = '0;
         prod = '0; ep = 0; exp_diff = 0; fma_prod = '0; fma_c = '0; sum = '0;
         fma_mant = '0; base_exp = 0; sign_final = 1'b0;
+        fma_sticky_mask = '0; fma_msb = 0; fma_shift = 0;
 
         res_domain  = REG_FP;
         negate_prod = (issue_req.uop.op == UOP_FNMSUB_S) || (issue_req.uop.op == UOP_FNMADD_S);
@@ -599,15 +607,28 @@ module rv32_ooo_fp_execute
           ep   = e0 + e1;
 
           exp_diff = ep - ec;
-          fma_prod = {24'd0, prod};           // Unit bit at 46
-          fma_c    = {25'd0, mc[23:0], 23'd0}; // Unit bit at 46
+          // Preserve all product bits through cancellation, plus alignment
+          // guard space. The common unit bit is now 69, within the existing
+          // 72-bit accumulator (the product can have its leading bit at 70).
+          fma_prod = {1'b0, prod, 23'd0};
+          fma_c    = {2'd0, mc[23:0], 46'd0};
 
           if (exp_diff >= 0) begin
             base_exp = ep;
-            fma_c = (exp_diff > 70) ? 72'd0 : (fma_c >> exp_diff);
+            if (exp_diff >= 72) begin
+              fma_c = {71'd0, |fma_c};
+            end else if (exp_diff != 0) begin
+              fma_sticky_mask = (72'd1 << exp_diff) - 1;
+              fma_c = (fma_c >> exp_diff) | {71'd0, |(fma_c & fma_sticky_mask)};
+            end
           end else begin
             base_exp = ec;
-            fma_prod = (-exp_diff > 70) ? 72'd0 : (fma_prod >> (-exp_diff));
+            if (-exp_diff >= 72) begin
+              fma_prod = {71'd0, |fma_prod};
+            end else begin
+              fma_sticky_mask = (72'd1 << (-exp_diff)) - 1;
+              fma_prod = (fma_prod >> (-exp_diff)) | {71'd0, |(fma_prod & fma_sticky_mask)};
+            end
           end
 
           if (sign_prod == sc) begin
@@ -623,12 +644,38 @@ module rv32_ooo_fp_execute
             end
           end
 
-          // Unit bit was at 46 of sum. Align to unit bit 26 (shift right by 20):
-          fma_mant = {sum[67:20]} | {47'd0, |sum[19:0]};
-
-          if (fma_mant == 48'd0) begin
-            res_data = {(rm == RM_RDN), 31'd0};
+          if (sum == 72'd0) begin
+            // Same-sign zero terms retain that sign in every rounding mode.
+            res_data = {((prod == 0) && (mc == 0) && (sign_prod == sc))
+                        ? sign_prod : (rm == RM_RDN), 31'd0};
           end else begin
+            // Locate the leading bit before reducing to G/R/S precision.
+            // Collapsing low bits first turns e.g. an exact 2^-46 residual
+            // into a spurious 2^-26 value after leading-zero normalization.
+            for (int bit_index = 0; bit_index < 72; bit_index++) begin
+              if (sum[bit_index]) fma_msb = bit_index;
+            end
+            base_exp = base_exp + fma_msb - 69;
+            if (fma_msb > 26) begin
+              fma_shift = fma_msb - 26;
+              fma_sticky_mask = (72'd1 << fma_shift) - 1;
+              fma_mant = 48'(sum >> fma_shift) | {47'd0, |(sum & fma_sticky_mask)};
+            end else begin
+              fma_mant = 48'(sum << (26 - fma_msb));
+            end
+            // Pack receives a normalized significand; align tiny results to
+            // the subnormal floor explicitly before its G/R/S rounding.
+            if (base_exp < -126) begin
+              fma_shift = -126 - base_exp;
+              if (fma_shift >= 48) begin
+                fma_mant = {47'd0, |fma_mant};
+              end else begin
+                fma_sticky_mask = (72'd1 << fma_shift) - 1;
+                fma_mant = (fma_mant >> fma_shift)
+                           | {47'd0, |(72'(fma_mant) & fma_sticky_mask)};
+              end
+              base_exp = -126;
+            end
             round_and_pack(sign_final, base_exp, fma_mant, rm, res_data, res_flags);
           end
         end
