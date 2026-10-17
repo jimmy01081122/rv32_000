@@ -10,6 +10,7 @@ SHELL         := bash
 
 # ── Image names ───────────────────────────────────────────────────────────────
 SIM_IMAGE     ?= rv32ooo-sim:g1
+FP_IMAGE      ?= rv32ooo-fp:p1
 SYN_IMAGE     ?= rv32ooo-syn:g1
 ACT_IMAGE     ?= $(SIM_IMAGE)
 JOBS          ?= $(shell nproc)
@@ -58,6 +59,15 @@ docker-build-syn: ## Build the synthesis Docker image
 	  containers/rv32ooo-syn/
 	@echo "✓ $(SYN_IMAGE) built"
 
+.PHONY: docker-build-fp
+docker-build-fp: ## Build the optional RV32IMF benchmark toolchain image (requires SIM_IMAGE)
+	docker build \
+	  $(DOCKER_SECRETS) \
+	  --build-arg SIM_BASE_IMAGE=$(SIM_IMAGE) \
+	  -t $(FP_IMAGE) \
+	  containers/rv32ooo-fp/
+	@echo "✓ $(FP_IMAGE) built"
+
 .PHONY: docker-build
 docker-build: docker-build-sim docker-build-syn ## Build both Docker images
 
@@ -70,6 +80,20 @@ check-env: ## Check Docker, tool images and pinned source dependencies
 
 check-signoff-env: ## Also check the ACT4 reference-model/generator tools
 	SIM_IMAGE=$(SIM_IMAGE) SYN_IMAGE=$(SYN_IMAGE) ACT_IMAGE=$(ACT_IMAGE) bash scripts/check_environment.sh --signoff
+
+.PHONY: check-fp-env
+check-fp-env: ## Check the separate RV32IMF/ilp32f workload toolchain
+	$(DOCKER_RUN) $(FP_IMAGE) -c 'set -eu; \
+	  test "$$(riscv-none-elf-gcc -march=rv32imf_zicsr -mabi=ilp32f -print-multi-directory)" = rv32imf_zicsr/ilp32f; \
+	  test -f "$$(riscv-none-elf-gcc -march=rv32imf_zicsr -mabi=ilp32f -print-file-name=libm.a)"; \
+	  riscv-none-elf-gcc --version | head -1'
+
+.PHONY: qualify-embench-fp-reference qualify-embench-fp-dut
+qualify-embench-fp-reference: check-fp-env ## Build and self-check all 19 programs on Spike
+	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/qualify_embench_candidates.py --toolchain fp --suite full --run-spike'
+
+qualify-embench-fp-dut: check-fp-env ## Also run all 19 programs on the current DUT (diagnostic)
+	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/qualify_embench_candidates.py --toolchain fp --suite full --run-spike --run-dut'
 
 # ─────────────────────────────────────────────────────────────────────────────
 # INTERACTIVE SHELLS

@@ -22,8 +22,24 @@ spike_source         = https://github.com/riscv-software-src/riscv-isa-sim.git
 riscv_gcc_release    = 2026.07.15
 riscv_gcc_source     = https://github.com/riscv-collab/riscv-gnu-toolchain
 riscv_gcc_artifact   = riscv32-elf-ubuntu-22.04-gcc.tar.xz
-riscv_gcc_arch       = rv32imf
-riscv_gcc_abi        = ilp32
+# This distribution has only one runtime multilib: its default is
+# rv32imafdc_zicsr_zifencei.../ilp32d. Existing integer-only ports compile
+# with explicit -march/-mabi, but the bundled libgcc/libm do not cover RV32IMF.
+riscv_gcc_default_arch = rv32imafdc_zicsr_zifencei_zmmul_zaamo_zalrsc_zca_zcd_zcf
+riscv_gcc_default_abi  = ilp32d
+
+# ── FP workload image (separate from historical G1) ─────────────────────────
+[fp]
+docker_image         = rv32ooo-fp:p1
+base_image           = rv32ooo-sim:g1
+gcc_distribution     = xpack-riscv-none-elf-gcc
+gcc_release          = v15.2.0-1
+newlib_version       = 4.5.0
+artifact             = xpack-riscv-none-elf-gcc-15.2.0-1-linux-x64.tar.gz
+artifact_sha256      = aaaa8060c914851a3e5ee1ba82cc3d6f80972f90638a05c6e823a37557a33758
+target_arch          = rv32imf_zicsr
+target_abi           = ilp32f
+source               = https://github.com/xpack-dev-tools/riscv-none-elf-gcc-xpack
 
 python_version       = 3.10   # ubuntu 22.04 system
 # Project runners use only Python's standard library.
