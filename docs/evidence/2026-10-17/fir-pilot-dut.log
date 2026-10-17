@@ -1,0 +1,18 @@
+[SimMemory] Loaded segment to 0x80000000 (filesz: 0x4a90, memsz: 0x4a90)
+[SimMemory] Found 'tohost' symbol at 0x80004a80
+[SimMemory] ELF loaded successfully. Entry PC = 0x80000000
+[Simulator] Starting simulation run...
+FP FIR PILOT PASS checksum=30ef51c5 cycles=00012646
+
+[SimMemory] TOHOST exit (0x1) received. Exit code: 0 (PASS)
+
+[SimMemory] SIM_EXIT received with code: 0 (PASS)
+
+================ Simulation Summary ================
+  ELF binary     : /workspace/build/qualification/fp-balanced/fir-pilot/fir-rv32.elf
+  Cycles         : 4089773
+  Retired insns  : 2590363
+  IPC            : 0.6334
+  Exit status    : PASS (0)
+====================================================
+

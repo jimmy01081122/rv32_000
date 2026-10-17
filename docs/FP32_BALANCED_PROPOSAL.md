@@ -1,9 +1,9 @@
-# FP32 均衡工作負載提案
+# FP32 均衡工作負載與資格檢查
 
-更新：2026-10-17。已確認：FP32 同時涵蓋控制／訊號處理及矩陣／ML，兩者均衡。
-以下 4+4 項、權重與資料大小是資格檢查提案；正式集合、數值容差及改善門檻待定。
+更新：2026-10-17。已核准以下 4+4 項與兩個子群各 50% 的評分權重。
+資料大小、數值容差、編譯與量測契約及改善門檻仍需資格檢查與共同審查。
 
-## 建議集合
+## 已選集合
 
 | 子群 | 核心 | 建議來源 | 觀察重點 |
 | --- | --- | --- | --- |
@@ -17,7 +17,7 @@
 | 矩陣／ML | 線性 SVM | CMSIS-DSP `arm_svm_linear_predict_f32` | 固定模型的分類推論、點積與判斷 |
 
 SVM 加入實際分類介面；此子群仍是核心運算集合，尚不代表完整神經網路應用。
-原先已初檢的 `jacobi-2d` 保留作 stencil／記憶體診斷候選，不列入這份 4+4 提案。
+原先已初檢的 `jacobi-2d` 保留作 stencil／記憶體診斷候選，不列入這份 4+4 集合。
 原有四項 PolyBench 的[初檢紀錄](WORKLOAD_QUALIFICATION_2026-10-16.md)保留原範圍。
 這是專案選定的 scalar FP32 集合，報告不沿用上游完整 benchmark 的官方分數名稱。
 
@@ -42,8 +42,21 @@ CMSIS-DSP 以其 `__GNUC_PYTHON__` 選項停用 CMSIS-Core 相依，走純 C sca
 
 兩種目標為 Ubuntu GCC 11.4 主機及 RV32IMF GCC 15.2。
 RV32 objects 的 attributes 均為 `rv32i2p1_m2p0_f2p2_zicsr2p0_zmmul1p0`。
-反組譯可見單精度運算；這些 object 尚未連結成候選裸機程式，也未作數值或 DUT 驗收。
+反組譯可見單精度運算；這些 object 的初檢本身不構成數值或 DUT 驗收。
 此次沒有執行 CMSIS-DSP 的完整上游測試套件。
+
+已建立一項[可重跑 FIR 裸機 pilot](../scripts/qualify_fp_fir_pilot.py)：
+`make qualify-fp-fir-pilot` 會先核對來源，建置主機與 RV32 程式，
+再在 Spike 和 DUT 執行。固定暫定 32 taps × 256 samples、模數公式輸入；
+每筆輸出與獨立 double 直接卷積作絕對誤差 `1e-5` 檢查，
+並核對末端 FIR 狀態。初始化在計時區間外。主機與 DUT 輸出 checksum
+均為 `30ef51c5`；Spike 的整個程式自我檢查通過。DUT 計時區間為
+75,334 週期；ELF SHA-256 為
+`91a6a903790aa3a17626e17c2d260e269637d74a507aa2e147b92411bf6a7506`。
+完整原始結果與編譯命令見忽略版本控制的
+`build/qualification/fp-balanced/fir-pilot/summary.json`。
+這項尺寸及容差只供資格實驗，尚未核定為最終 4+4 量測契約；
+其餘七項尚未完成裸機數值檢查。
 
 KissFFT object 仍有軟體 double、`cos/sin/floor/sqrt`、配置器及錯誤輸出依賴。
 原始碼中的 twiddle／分解初始化需要數學函式庫。建議固定 2 的冪次 FFT、
@@ -51,8 +64,13 @@ KissFFT object 仍有軟體 double、`cos/sin/floor/sqrt`、配置器及錯誤�
 仍須確認計時區間內沒有非預期的軟體 double 或 heap 操作。
 
 原始命令、object、反組譯與錯誤紀錄存於忽略版本控制的
-`build/qualification/fp-balanced/`；這些來源尚未加入正式 vendor dependency。
-例如在 FP 映像內，取得上述來源後可重現 FIR object 探測：
+`build/qualification/fp-balanced/`；這些來源不複製進 repo。
+從 repo 根目錄執行 `make fetch-fp-sources` 取得缺少的來源，
+`make check-fp-sources` 會核對兩個 Git commit、checkout 是否有追蹤檔修改、
+PolyBench 封存檔 SHA-256 及本集合所需的來源檔內容。
+來源驗證輸出在 `build/qualification/fp-balanced/source-summary.json`；
+這是來源身分檢查，還不是數值資格驗收。
+例如在 FP 映像內，可重現 FIR object 探測：
 
 ```bash
 src=build/qualification/fp-balanced/CMSIS-DSP
@@ -92,7 +110,7 @@ SVM 的生成程式使用 NumPy／scikit-learn 且未在該檔固定亂數種子
    上表大小尚未在 DUT 執行；PolyBench SMALL 陣列尖峰至多 115,200 bytes，
    其餘程式連結後仍須逐項確認符合現有 1 MiB RAM。
 
-## 均衡評分提案
+## 已核准的均衡評分權重
 
 控制／DSP 和矩陣／ML 各占 FP32 主成績的 **50%**，子群內每項等權。
 令每項加速比為相同量測契約下的 `baseline_time / candidate_time`：

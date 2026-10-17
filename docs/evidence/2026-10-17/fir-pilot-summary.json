@@ -1,0 +1,121 @@
+{
+  "scope": "provisional FIR diagnostic; no suite score",
+  "fixture": "32 taps, 256 samples, deterministic modular fractions",
+  "reference": "double direct convolution plus terminal FIR state",
+  "absolute_tolerance": 1e-05,
+  "source_sha256": "f1c5d4ee75c4634159e588f3c85b390e9f134b31413e84906a02827a9a77acef",
+  "source_check": {
+    "command": [
+      "python3",
+      "scripts/prepare_fp_sources.py"
+    ],
+    "returncode": 0,
+    "log": "build/qualification/fp-balanced/fir-pilot/sources.log"
+  },
+  "native_build": {
+    "command": [
+      "gcc",
+      "-std=gnu11",
+      "-O3",
+      "-ffp-contract=off",
+      "-D__GNUC_PYTHON__",
+      "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+      "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+      "-DFP_BENCH_HOST",
+      "/workspace/software/fp_bench/fir_pilot.c",
+      "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/FilteringFunctions/arm_fir_f32.c",
+      "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/FilteringFunctions/arm_fir_init_f32.c",
+      "-o",
+      "/workspace/build/qualification/fp-balanced/fir-pilot/fir-native"
+    ],
+    "returncode": 0,
+    "log": "build/qualification/fp-balanced/fir-pilot/native-build.log"
+  },
+  "target_build": {
+    "command": [
+      "riscv-none-elf-gcc",
+      "-std=gnu11",
+      "-O3",
+      "-ffp-contract=off",
+      "-D__GNUC_PYTHON__",
+      "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+      "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+      "-march=rv32imf_zicsr",
+      "-mabi=ilp32f",
+      "-ffreestanding",
+      "-nostartfiles",
+      "-nostdlib",
+      "-Isoftware/include",
+      "-Tsoftware/linker/link.ld",
+      "software/crt0/crt0.S",
+      "software/embench/fail_syscalls.c",
+      "/workspace/software/fp_bench/fir_pilot.c",
+      "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/FilteringFunctions/arm_fir_f32.c",
+      "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/FilteringFunctions/arm_fir_init_f32.c",
+      "-o",
+      "/workspace/build/qualification/fp-balanced/fir-pilot/fir-rv32.elf",
+      "-Wl,--start-group",
+      "-lm",
+      "-lc",
+      "-lgcc",
+      "-Wl,--end-group"
+    ],
+    "returncode": 0,
+    "log": "build/qualification/fp-balanced/fir-pilot/rv32-build.log"
+  },
+  "run_dut": true,
+  "strip": {
+    "command": [
+      "riscv-none-elf-strip",
+      "--strip-unneeded",
+      "--keep-symbol=tohost",
+      "--keep-symbol=fromhost",
+      "/workspace/build/qualification/fp-balanced/fir-pilot/fir-rv32.elf"
+    ],
+    "returncode": 0,
+    "log": "build/qualification/fp-balanced/fir-pilot/strip.log"
+  },
+  "elf_sha256": "91a6a903790aa3a17626e17c2d260e269637d74a507aa2e147b92411bf6a7506",
+  "attributes": {
+    "command": [
+      "riscv-none-elf-readelf",
+      "-h",
+      "-A",
+      "/workspace/build/qualification/fp-balanced/fir-pilot/fir-rv32.elf"
+    ],
+    "returncode": 0,
+    "log": "build/qualification/fp-balanced/fir-pilot/attributes.log"
+  },
+  "native": {
+    "command": [
+      "/workspace/build/qualification/fp-balanced/fir-pilot/fir-native"
+    ],
+    "returncode": 0,
+    "log": "build/qualification/fp-balanced/fir-pilot/native.log"
+  },
+  "spike": {
+    "command": [
+      "spike",
+      "--isa=rv32imf_zicsr",
+      "-m0x80000000:0x100000,0x10000000:0x1000",
+      "/workspace/build/qualification/fp-balanced/fir-pilot/fir-rv32.elf"
+    ],
+    "returncode": 0,
+    "log": "build/qualification/fp-balanced/fir-pilot/spike.log"
+  },
+  "simulator_sha256": "44d59f5b29fe427e20988799d2780e127b15f833f21e10a3af7348361e54c1c7",
+  "dut": {
+    "command": [
+      "/workspace/build/sim/rv32_ooo_sim",
+      "+elf=/workspace/build/qualification/fp-balanced/fir-pilot/fir-rv32.elf",
+      "+max-cycles=25000000"
+    ],
+    "returncode": 0,
+    "log": "build/qualification/fp-balanced/fir-pilot/dut.log"
+  },
+  "checksums": {
+    "native": "30ef51c5",
+    "dut": "30ef51c5"
+  },
+  "passed": true
+}

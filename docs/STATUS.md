@@ -52,14 +52,19 @@ configuration, and must not be merged into this run's pass counts.
    [Initial probes](WORKLOAD_QUALIFICATION_2026-10-16.md) found that all five omitted
    Embench workloads pass native self-checks but fail target linking with the current
    single-library, `ilp32d` toolchain. The separate [FP toolchain and progress
-   review](PROGRESS_REVIEW.md) now records 19/19 new-toolchain build/Spike passes;
-   `minver` still fails the DUT self-check; its first parsed divergence is incorrect
-   FP-store data at PC `0x80001220`. PolyBench MINI/SMALL native runs and
+   review](PROGRESS_REVIEW.md) now records 19/19 new-toolchain build/Spike passes.
+   The FP-store cross-domain bypass error at PC `0x80001220` was corrected;
+   `minver` now passes DUT self-check. The full 19-program DUT functional probe
+   also passes 19/19, with [archived evidence](evidence/2026-10-17/README.md).
+   PolyBench MINI/SMALL native runs and
    target object compilation succeeded; bare-metal execution and numerical checking
    remain open.
-   The user selected balanced control/DSP and matrix/ML coverage. The [4+4 FP32
-   proposal](FP32_BALANCED_PROPOSAL.md) records 18/18 native/RV32 object builds for
-   additional sources; no new-kernel execution or numerical pass is claimed.
+   The user approved balanced control/DSP and matrix/ML coverage with four
+   kernels per group and equal group weights. The [FP32 workload record](FP32_BALANCED_PROPOSAL.md)
+   notes 18/18 native/RV32 object builds for
+   additional sources; pinned CMSIS-DSP, KissFFT and PolyBench source identities
+   pass `make check-fp-sources`. A provisional FIR pilot passes native, Spike
+   and DUT numerical checks; the other seven kernels remain unqualified.
 6. **Physical results:** port hardcoded host paths, provision pinned ORFS/ASAP7,
    audit measurement units, synthesis boundary, constraints, corners and parasitic
    stage, then reproduce AP5B results. Current config skips detailed routing;

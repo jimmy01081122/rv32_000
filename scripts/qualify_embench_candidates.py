@@ -127,6 +127,19 @@ def main() -> int:
             record = {"benchmark": bench, "profile": profile,
                       "build": run(command, prefix.with_suffix(".build.log"))}
             if record["build"]["returncode"] == 0:
+                if profile != "native" and args.toolchain == "fp":
+                    # GCC's one-shot compile/link emits a random cc*.o FILE symbol.
+                    # Remove unused local symbols so identical loadable programs
+                    # have identical ELF hashes; retain HTIF symbols for Spike
+                    # and the simulator's tohost exit detection.
+                    record["strip"] = run(
+                        [target_prefix + "strip", "--strip-unneeded",
+                         "--keep-symbol=tohost", "--keep-symbol=fromhost", str(elf)],
+                        prefix.with_suffix(".strip.log"))
+                    if record["strip"]["returncode"] != 0:
+                        records.append(record)
+                        print(f"{bench:8s} {profile:18s} strip failed", flush=True)
+                        continue
                 record["elf_sha256"] = hashlib.sha256(elf.read_bytes()).hexdigest()
                 if profile == "native":
                     record["native"] = run([str(elf)], prefix.with_suffix(".native.log"))

@@ -8,8 +8,8 @@
 | 關卡（對照 [計畫](../PLAN.md)） | 證據 | 狀態 |
 | --- | --- | --- |
 | 1. 現行文件與歷史資料整理 | 規格與報告已校正／封存，連結及流程檢查完成 | 完成 |
-| 2. 固定工作負載資格 | Embench 19/19 主機、RV32 建置及 Spike 自我檢查通過；FP32 原有四項完成主機／object 初檢，新增 DSP／SVM／FFT 來源完成 18/18 主機及 RV32 object 編譯 | 進行中 |
-| 3. 驗證基礎 | 既有 18 項定向程式及 Spike 差異檢查曾通過；`minver` 在新設定的 DUT 自我檢查失敗，ACT4／FP 覆蓋仍缺 | 進行中、有阻礙 |
+| 2. 固定工作負載資格 | Embench 19/19 主機、RV32、Spike、DUT 自我檢查通過；已選 FP32 4+4 集合，新增來源 18/18 object 編譯，FIR 暫定裸機 pilot 主機／Spike／DUT 數值檢查通過 | 進行中 |
+| 3. 驗證基礎 | 修正 FP store 資料旁路後，18/18 定向程式與 `minver` 的主機／Spike／DUT 自我檢查通過；ACT4／FP 覆蓋仍缺 | 進行中 |
 | 4. AP5B 雙類效能與實體基線 | DUT 全集合正確性、FP32 裸機輸出、記憶體契約及新鮮實體量測未齊 | 尚未成立 |
 | 5. 目標與第一項 CPU 方案 | 兩類各 1.20 倍、面積 ≤1.10 倍仍是待共同審查的規劃值 | 待討論 |
 | 6. 優化驗收 | 須對同條件 AP5B 基線驗證正確性、兩類效能及面積 | 未開始 |
@@ -36,20 +36,60 @@ Spike 整個程式自我檢查。19 個 ELF attributes 均為
 若被呼叫，程式會報錯，避免默默接受無效 I/O。這些結果證明移植及參考執行可行，
 沒有證明 DUT 的全部指令、數值或效能正確。
 
-新設定已抽查的 DUT 程式：
+為確保 ELF 雜湊可重現，FP 資格腳本在連結後以 `strip --strip-unneeded`
+移除 GCC 隨機命名的暫存 object 本機符號，同時保留 Spike 需要的
+`tohost`、`fromhost`。連續兩次 `minver` 建置所得 ELF SHA-256 均為
+`18aacebbf740134d2a42b5550224155b171250ebf3456c087030258ac1e66aff`，
+兩次主機、Spike、DUT 自我檢查均通過；完整 19 項參考檢查也在這個
+輸出規則下重跑並 19/19 通過。先前未去除本機符號的 ELF 雜湊仍對應其原始
+追蹤，但不能與新 ELF 雜湊視為同一份檔案。
+
+已選 FP32 集合的上游來源可由 `make fetch-fp-sources` 取得、
+`make check-fp-sources` 核對：CMSIS-DSP 與 KissFFT 固定 Git commit，
+PolyBench/C 固定封存檔 SHA-256 及所需檔案內容。本機三項來源檢查均通過；
+它不代表裸機數值驗收。[來源檢查腳本](../scripts/prepare_fp_sources.py)
+與[集合紀錄](FP32_BALANCED_PROPOSAL.md)保留準確版本及範圍。
+另有 [FIR pilot](../software/fp_bench/fir_pilot.c) 已在主機、Spike 和 DUT
+通過逐筆 double 卷積及末端狀態檢查；主機與 DUT 全部輸出的 checksum
+均為 `30ef51c5`，DUT ROI 為 75,334 週期。這項輸入及 `1e-5` 容差
+尚未核准為正式 FP32 量測契約，不能代替八項集合分數。
+
+完成一次完整 19 項 DUT 診斷，主機、RV32 建置、Spike 和 DUT
+自我檢查均 **19/19 通過**，全部 19 項都有 ROI 週期、總週期及退休指令。
+原始命令、每項退出狀態、ELF 雜湊與 DUT 日誌已存入
+[可審查證據](evidence/2026-10-17/README.md)。診斷報告的模擬器
+SHA-256 為 `44d59f5b29fe427e20988799d2780e127b15f833f21e10a3af7348361e54c1c7`，
+腳本 SHA-256 為 `677e52f1c508a6d79c93a9632c47f6014c23d02dcff68751e8d6dac5280f340a`。
+ROI 週期範圍從 `wikisort` 的 2,173,042 到 `cubic` 的 14,490,894；
+這些是單一 DUT 的診斷週期，尚無新舊架構加速比。
+執行時工作樹已含下述 FP-store 修正但尚未 commit，JSON 中的 Git HEAD
+只記到修正前的提交。正式基線須在乾淨提交、量測契約凍結後重跑。
+
+新設定已抽查的 DUT 程式；表中 `minver` 是修正前的紀錄：
 
 | 程式 | Spike 自我檢查 | DUT 自我檢查 | DUT 計時區間週期 | 結論 |
 | --- | --- | --- | ---: | --- |
 | `crc32` | PASS | PASS | 5,402,220 | 一般嵌入式個例 |
 | `nbody` | PASS | PASS | 5,893,151 | 軟體 double 個例 |
-| `minver` | PASS | FAIL，退出碼 1 | 878,777 | FP store 資料出錯，根因待定位 |
+| `minver`（修正前） | PASS | FAIL，退出碼 1 | 878,777 | FP store 資料錯誤，見下方修正紀錄 |
 
 `minver` 的完整執行追蹤進一步找到第一筆可見差異：第 262,506 筆 commit
 事件（從 0 起算），PC `0x80001220`、指令 `0x00d62027`，即
 `fsw fa3, 0(a2)`。儲存位址均為 `0x80043980`，但 DUT 寫入
 `0x00000000`，Spike 寫入 `0x41100000`（9.0）；之前 `fa3` 的載入
-均為 9.0，後續 DUT 載入也讀到 0。這將問題縮小到儲存資料取得／傳遞，
-還不能認定是哪個 RTL 模組的根因。此診斷未修改 CPU RTL。
+均為 9.0，後續 DUT 載入也讀到 0。後續檢查確定：整數與 FP physical register
+編號屬不同 domain，但 [core 的 operand1 旁路](../rtl/core/rv32_ooo_core.sv)
+先依編號接受整數 completion，才考慮 `FSW` 的 FP 資料。同號碰撞時可能把
+整數結果寫進 FP store。[修正](../rtl/core/rv32_ooo_core.sv)依來源 domain
+先選 FP 資料路徑，再處理整數旁路。
+
+在原始 ELF（下方 SHA-256）上重建 DUT 後，`minver` 自我檢查從退出碼 1
+變為 PASS；量測區間仍為 878,777 週期。修正後追蹤與原 Spike 追蹤在前
+263,004 筆已解析 commit 事件相符，涵蓋原錯誤點第 262,506 筆。
+下一個差異為 `rdcycle` 值寫入 `start_cycles_64` 的 store；兩個模型的計數值
+本來不同，因此這項追蹤比較不宣稱整個程式的完整架構等價。
+可重跑的 `make check-minver-fp` 同時檢查主機、Spike 與 DUT 自我檢查，
+目前均通過；每次重建的 ELF 雜湊須與當次報告一起保存。
 
 追蹤檔位於 `build/qualification/toolchain/minver-fp-{dut,spike}.trace`，
 第一筆差異紀錄為同目錄的 `minver-first-divergence.txt`。
@@ -59,7 +99,8 @@ Spike 整個程式自我檢查。19 個 ELF attributes 均為
 DUT 模擬器 SHA-256：
 `d84eb0db5f49be49bc6006c11c1c8ed4ad5cd82d675fa565bff8c3a6d45e64a9`。
 
-這三項的週期只供除錯；它們不是有效的 19 項分數。先前在較舊工具鏈下的
+修正前這三項的週期只供除錯；上面的完整 19 項功能診斷也不是正式加速比。
+先前在較舊工具鏈下的
 `cubic` DUT 試跑達 180 秒上限，未取得完成結果，不能算為新工具鏈的 DUT 結果。
 目前診斷腳本[在此](../scripts/qualify_embench_candidates.py)；完整命令、ELF
 SHA-256、原始輸出與失敗紀錄在忽略版本控制的 `build/qualification/`。
@@ -70,13 +111,19 @@ SHA-256、原始輸出與失敗紀錄在忽略版本控制的 `build/qualificati
 make docker-build-sim                 # 首次建立 G1 基礎映像時
 make docker-build-fp
 make check-fp-env
+make fetch-fp-sources               # 取得／核對已選 FP32 的固定上游來源
 make qualify-embench-fp-reference    # 19 項主機、建置及 Spike 檢查
+make check-minver-fp                  # 單項主機、Spike、DUT 正確性回歸
+make qualify-fp-fir-pilot             # 暫定 FIR 逐筆數值與狀態檢查
 ```
 
-用 `make qualify-embench-fp-dut` 會額外嘗試 19 項 DUT；現階段有已知失敗，
-非「預期全通過」的流程。單項可用
+用 `make qualify-embench-fp-dut` 會額外嘗試 19 項 DUT；本次功能診斷全通過，
+正式量測契約仍待確認。單項可用
 `python3 scripts/qualify_embench_candidates.py --toolchain fp --suite full --bench minver --run-spike --run-dut`
-在 FP 映像內重現。新的 19 項設定不與舊 GCC／14 項成績相除。
+在 FP 映像內重現。完整執行後，`make summarize-embench-fp-dut` 檢查固定
+19 項的主機／Spike／DUT 結果，另產出每項 ROI 週期及模擬器雜湊的診斷報告；
+任一項失敗仍保留於報告，且不產生集合分數。新的 19 項設定不與舊
+GCC／14 項成績相除。
 
 ## 何時才可稱為可信 AP5B 基線
 
@@ -96,14 +143,14 @@ make qualify-embench-fp-reference    # 19 項主機、建置及 Spike 檢查
 
 - 是否採完整 Embench 19 項作一般嵌入式主集合，接受其中的軟體 double
   成本；CoreMark 保留獨立附表。建議採用，但須先讓 DUT 全部通過。
-- 已確認 FP32 控制／訊號處理與矩陣／ML 兩者均衡。
-  [新提案](FP32_BALANCED_PROPOSAL.md)為兩群各 4 項、各 50% 權重；
-  項目、資料、容差及權重仍須資格確認，原先四項 PolyBench 不再是唯一候選。
+- 已核准 [FP32 集合](FP32_BALANCED_PROPOSAL.md)：控制／DSP 與矩陣／ML
+  各 4 項、各 50% 權重。資料、容差與完整量測契約仍須資格確認。
 - 暫定一般嵌入式和 FP32 **各 ≥1.20 倍**、標準元件面積 **≤1.10 倍**；
   個別退步超過 5% 共同審查。兩類都達標才算優化成功。
   這些數字待基線完成後審核，絕對頻率和能耗數字當時再定。
 - 系統吞吐的主記憶體模型與服務時間尚須選定；固定 cycle 模型可先報
   週期效率，另列延遲敏感度。這項選擇會直接影響提頻收益，需在看優化結果前固定。
 
-下一個可審查的工作單位是 `minver` 差異歸因及其回歸測試，再擴展 DUT
-工作負載檢查。CPU 結構優化須在正確性與基線成立後共同排序。
+接下來須將其餘七項已選 FP32 工作負載連結成裸機程式、固定資料與核對
+獨立數值參考，再確認記憶體及實體量測契約。CPU 結構優化須在正確性
+與基線成立後共同排序。

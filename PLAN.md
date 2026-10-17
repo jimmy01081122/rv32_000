@@ -1,6 +1,6 @@
 # RV32 OoO 專案計畫
 
-版本：2.1；更新：2026-10-17；狀態：方向已確認，量測契約待定案。
+版本：2.2；更新：2026-10-17；狀態：FP32 集合與權重已確認，量測契約待定案。
 
 ## 已確認的方向
 
@@ -8,7 +8,7 @@
 - 不進行 tape-out；目前沒有另購主機、FPGA 或商用 EDA 的計畫。
 - 時程沒有硬性限制，依驗證與量測證據推進。
 - 一般嵌入式效能與單精度浮點效能同等重要，兩者都必須有改善目標。
-- FP32 集合同時涵蓋控制／訊號處理及矩陣／ML，兩者均衡；候選與權重仍須資格確認。
+- FP32 集合採 4 項控制／DSP、4 項矩陣／ML，兩個子群各占 50%；輸入與數值契約仍須資格確認。
 - 使用者參與優化方向、架構取捨、策略調整與工作流程決策。
 - 先整理文件，再資格確認工作負載及 AP5B 基線，之後選擇 CPU 優化方案。
 
@@ -25,7 +25,7 @@ LSU response buffer；新鮮的完整功能及實體基線尚未完成。
 - [uop_spec.md](uop_spec.md)：現行封包與來源程式碼對照。
 - [docs/STATUS.md](docs/STATUS.md)：證據範圍、已知落差與未完成事項。
 - [docs/WORKLOADS.md](docs/WORKLOADS.md)：候選集合、量測條件與數字草案。
-- [docs/FP32_BALANCED_PROPOSAL.md](docs/FP32_BALANCED_PROPOSAL.md)：FP32 均衡集合、來源及評分提案。
+- [docs/FP32_BALANCED_PROPOSAL.md](docs/FP32_BALANCED_PROPOSAL.md)：已選 FP32 均衡集合、來源及評分權重。
 
 G0 的長篇契約保留於 [歷史文件](docs/archive/README.md)，供追溯設計意圖與
 舊章節引用。它們不再代表目前已實作或已驗證的功能。

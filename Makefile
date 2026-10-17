@@ -88,12 +88,30 @@ check-fp-env: ## Check the separate RV32IMF/ilp32f workload toolchain
 	  test -f "$$(riscv-none-elf-gcc -march=rv32imf_zicsr -mabi=ilp32f -print-file-name=libm.a)"; \
 	  riscv-none-elf-gcc --version | head -1'
 
-.PHONY: qualify-embench-fp-reference qualify-embench-fp-dut
+.PHONY: check-fp-sources fetch-fp-sources
+check-fp-sources: ## Verify pinned CMSIS-DSP, KissFFT and PolyBench sources
+	python3 scripts/prepare_fp_sources.py
+
+fetch-fp-sources: ## Fetch missing FP32 sources, then verify their pinned identities
+	python3 scripts/prepare_fp_sources.py --fetch
+
+.PHONY: qualify-embench-fp-reference qualify-embench-fp-dut check-minver-fp
 qualify-embench-fp-reference: check-fp-env ## Build and self-check all 19 programs on Spike
 	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/qualify_embench_candidates.py --toolchain fp --suite full --run-spike'
 
 qualify-embench-fp-dut: check-fp-env ## Also run all 19 programs on the current DUT (diagnostic)
 	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/qualify_embench_candidates.py --toolchain fp --suite full --run-spike --run-dut'
+
+check-minver-fp: check-fp-env sim-build ## Regress the FP-store workload against native, Spike and DUT
+	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/qualify_embench_candidates.py --toolchain fp --suite full --bench minver --run-spike --run-dut'
+
+.PHONY: qualify-fp-fir-pilot
+qualify-fp-fir-pilot: check-fp-env check-fp-sources sim-build ## Probe one provisional FIR fixture on native, Spike and DUT
+	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/qualify_fp_fir_pilot.py --run-dut'
+
+.PHONY: summarize-embench-fp-dut
+summarize-embench-fp-dut: ## Check complete DUT evidence and list each workload's diagnostic cycles
+	python3 scripts/summarize_embench_fp_dut.py
 
 # ─────────────────────────────────────────────────────────────────────────────
 # INTERACTIVE SHELLS

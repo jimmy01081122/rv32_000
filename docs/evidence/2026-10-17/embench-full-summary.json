@@ -1,0 +1,2601 @@
+{
+  "scope": "candidate diagnostics; no performance score or acceptance decision",
+  "toolchain": "fp",
+  "suite": "full",
+  "selected_count": 19,
+  "run_spike": true,
+  "run_dut": true,
+  "probe_sha256": "677e52f1c508a6d79c93a9632c47f6014c23d02dcff68751e8d6dac5280f340a",
+  "metadata": {
+    "repository": {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/embench-fp-full/repository.log"
+    },
+    "embench": {
+      "command": [
+        "git",
+        "-C",
+        "software/embench/embench-iot",
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/embench-fp-full/embench.log"
+    },
+    "native-gcc": {
+      "command": [
+        "gcc",
+        "--version"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/embench-fp-full/native-gcc.log"
+    },
+    "riscv-gcc": {
+      "command": [
+        "riscv-none-elf-gcc",
+        "--version"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/embench-fp-full/riscv-gcc.log"
+    },
+    "multilib": {
+      "command": [
+        "riscv-none-elf-gcc",
+        "-print-multi-lib"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/embench-fp-full/multilib.log"
+    },
+    "defaults": {
+      "command": [
+        "riscv-none-elf-gcc",
+        "-Q",
+        "--help=target"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/embench-fp-full/defaults.log"
+    }
+  },
+  "records": [
+    {
+      "benchmark": "aha-mont64",
+      "profile": "native",
+      "build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/aha-mont64",
+          "-Isoftware/embench/embench-iot/config/native/boards/default",
+          "-Isoftware/embench/embench-iot/config/native/chips/speed-test-gcc",
+          "software/embench/embench-iot/config/native/boards/default/boardsupport.c",
+          "software/embench/embench-iot/config/native/chips/speed-test-gcc/chipsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/aha-mont64/mont64.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/aha-mont64-native.elf",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/aha-mont64-native.build.log"
+      },
+      "elf_sha256": "09914cf359166232cb85b5df2ec9dadb2c5972658d3d4b47117d2b2651dfad32",
+      "native": {
+        "command": [
+          "/workspace/build/qualification/embench-fp-full/aha-mont64-native.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/aha-mont64-native.native.log"
+      }
+    },
+    {
+      "benchmark": "aha-mont64",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/aha-mont64",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/aha-mont64/mont64.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "646339be04ace2ff6291544862b423f2ea96dfe4dced3313a2abad477d3aff80",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.attributes.log"
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.size.log"
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.dis.log"
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.spike.log"
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.dut.log",
+        "self_check_pass": true
+      }
+    },
+    {
+      "benchmark": "crc32",
+      "profile": "native",
+      "build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/crc32",
+          "-Isoftware/embench/embench-iot/config/native/boards/default",
+          "-Isoftware/embench/embench-iot/config/native/chips/speed-test-gcc",
+          "software/embench/embench-iot/config/native/boards/default/boardsupport.c",
+          "software/embench/embench-iot/config/native/chips/speed-test-gcc/chipsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/crc32/crc_32.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/crc32-native.elf",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/crc32-native.build.log"
+      },
+      "elf_sha256": "20484535ea1653a39c201dce24fa374a404e430f63a558526210b243f2607ba6",
+      "native": {
+        "command": [
+          "/workspace/build/qualification/embench-fp-full/crc32-native.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/crc32-native.native.log"
+      }
+    },
+    {
+      "benchmark": "crc32",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/crc32",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/crc32/crc_32.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "f9301202f690efdcb5051e6b280c79d8aa2961cad46969cadd050fa904ee05ca",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.attributes.log"
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.size.log"
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.dis.log"
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.spike.log"
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.dut.log",
+        "self_check_pass": true
+      }
+    },
+    {
+      "benchmark": "cubic",
+      "profile": "native",
+      "build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/cubic",
+          "-Isoftware/embench/embench-iot/config/native/boards/default",
+          "-Isoftware/embench/embench-iot/config/native/chips/speed-test-gcc",
+          "software/embench/embench-iot/config/native/boards/default/boardsupport.c",
+          "software/embench/embench-iot/config/native/chips/speed-test-gcc/chipsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/cubic/basicmath_small.c",
+          "software/embench/embench-iot/src/cubic/libcubic.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/cubic-native.elf",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/cubic-native.build.log"
+      },
+      "elf_sha256": "6b1102adcde48b2dd48b624fcdded579541c46bd4272593981213ce13c74baae",
+      "native": {
+        "command": [
+          "/workspace/build/qualification/embench-fp-full/cubic-native.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/cubic-native.native.log"
+      }
+    },
+    {
+      "benchmark": "cubic",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/cubic",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/cubic/basicmath_small.c",
+          "software/embench/embench-iot/src/cubic/libcubic.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "19c60cec9bfb2baf24390771eb58565a057371d6708c0528b63dfc43d137af97",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.attributes.log"
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.size.log"
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.dis.log"
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.spike.log"
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.dut.log",
+        "self_check_pass": true
+      }
+    },
+    {
+      "benchmark": "edn",
+      "profile": "native",
+      "build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/edn",
+          "-Isoftware/embench/embench-iot/config/native/boards/default",
+          "-Isoftware/embench/embench-iot/config/native/chips/speed-test-gcc",
+          "software/embench/embench-iot/config/native/boards/default/boardsupport.c",
+          "software/embench/embench-iot/config/native/chips/speed-test-gcc/chipsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/edn/libedn.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/edn-native.elf",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/edn-native.build.log"
+      },
+      "elf_sha256": "d9a0db4ff881313a1870a9ab294d60542a05bf5cb8c32ed6982fd94f76fd37ff",
+      "native": {
+        "command": [
+          "/workspace/build/qualification/embench-fp-full/edn-native.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/edn-native.native.log"
+      }
+    },
+    {
+      "benchmark": "edn",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/edn",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/edn/libedn.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "896e38b739b9013db07719be16af254e744b2c234451cf9ced4bbdbc2d6de265",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.attributes.log"
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.size.log"
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.dis.log"
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.spike.log"
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.dut.log",
+        "self_check_pass": true
+      }
+    },
+    {
+      "benchmark": "huffbench",
+      "profile": "native",
+      "build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/huffbench",
+          "-Isoftware/embench/embench-iot/config/native/boards/default",
+          "-Isoftware/embench/embench-iot/config/native/chips/speed-test-gcc",
+          "software/embench/embench-iot/config/native/boards/default/boardsupport.c",
+          "software/embench/embench-iot/config/native/chips/speed-test-gcc/chipsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/huffbench/libhuffbench.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/huffbench-native.elf",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/huffbench-native.build.log"
+      },
+      "elf_sha256": "9d9921ee566e24850bb81180d88574829f5ba6cf720cb8b2ce68d43f8cc875ff",
+      "native": {
+        "command": [
+          "/workspace/build/qualification/embench-fp-full/huffbench-native.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/huffbench-native.native.log"
+      }
+    },
+    {
+      "benchmark": "huffbench",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/huffbench",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/huffbench/libhuffbench.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "a11e08cd4b67943abc867ee6a5f21f02913c15d4957c5c5ac46db16f7ae0b4a6",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.attributes.log"
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.size.log"
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.dis.log"
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.spike.log"
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.dut.log",
+        "self_check_pass": true
+      }
+    },
+    {
+      "benchmark": "matmult-int",
+      "profile": "native",
+      "build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/matmult-int",
+          "-Isoftware/embench/embench-iot/config/native/boards/default",
+          "-Isoftware/embench/embench-iot/config/native/chips/speed-test-gcc",
+          "software/embench/embench-iot/config/native/boards/default/boardsupport.c",
+          "software/embench/embench-iot/config/native/chips/speed-test-gcc/chipsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/matmult-int/matmult-int.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/matmult-int-native.elf",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/matmult-int-native.build.log"
+      },
+      "elf_sha256": "cd4db597d95ff2a857bf44bce58b10ecb835faa9cd007d2c0bf43abc53e19b8d",
+      "native": {
+        "command": [
+          "/workspace/build/qualification/embench-fp-full/matmult-int-native.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/matmult-int-native.native.log"
+      }
+    },
+    {
+      "benchmark": "matmult-int",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/matmult-int",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/matmult-int/matmult-int.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "a68d3088aa484d21d87d2b5892039df135c22d192f019fab483a62a9df515a02",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.attributes.log"
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.size.log"
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.dis.log"
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.spike.log"
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.dut.log",
+        "self_check_pass": true
+      }
+    },
+    {
+      "benchmark": "minver",
+      "profile": "native",
+      "build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/minver",
+          "-Isoftware/embench/embench-iot/config/native/boards/default",
+          "-Isoftware/embench/embench-iot/config/native/chips/speed-test-gcc",
+          "software/embench/embench-iot/config/native/boards/default/boardsupport.c",
+          "software/embench/embench-iot/config/native/chips/speed-test-gcc/chipsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/minver/libminver.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/minver-native.elf",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/minver-native.build.log"
+      },
+      "elf_sha256": "794c65e7d6e997e96cf997162332e37d1b26a5c87ad27cda51cfa8568c8174da",
+      "native": {
+        "command": [
+          "/workspace/build/qualification/embench-fp-full/minver-native.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/minver-native.native.log"
+      }
+    },
+    {
+      "benchmark": "minver",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/minver",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/minver/libminver.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "18aacebbf740134d2a42b5550224155b171250ebf3456c087030258ac1e66aff",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.attributes.log"
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.size.log"
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.dis.log"
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.spike.log"
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.dut.log",
+        "self_check_pass": true
+      }
+    },
+    {
+      "benchmark": "nbody",
+      "profile": "native",
+      "build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/nbody",
+          "-Isoftware/embench/embench-iot/config/native/boards/default",
+          "-Isoftware/embench/embench-iot/config/native/chips/speed-test-gcc",
+          "software/embench/embench-iot/config/native/boards/default/boardsupport.c",
+          "software/embench/embench-iot/config/native/chips/speed-test-gcc/chipsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/nbody/nbody.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/nbody-native.elf",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nbody-native.build.log"
+      },
+      "elf_sha256": "14c93c34de40cf95e8bdd722fe1436d9abc494035af75c970fd9125629edd26f",
+      "native": {
+        "command": [
+          "/workspace/build/qualification/embench-fp-full/nbody-native.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nbody-native.native.log"
+      }
+    },
+    {
+      "benchmark": "nbody",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/nbody",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/nbody/nbody.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "ad6739f77c7f1c54740a8d23d6d8e1ae214f9762851834307d2007045917a9f1",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.attributes.log"
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.size.log"
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.dis.log"
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.spike.log"
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.dut.log",
+        "self_check_pass": true
+      }
+    },
+    {
+      "benchmark": "nettle-aes",
+      "profile": "native",
+      "build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/nettle-aes",
+          "-Isoftware/embench/embench-iot/config/native/boards/default",
+          "-Isoftware/embench/embench-iot/config/native/chips/speed-test-gcc",
+          "software/embench/embench-iot/config/native/boards/default/boardsupport.c",
+          "software/embench/embench-iot/config/native/chips/speed-test-gcc/chipsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/nettle-aes/nettle-aes.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/nettle-aes-native.elf",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-aes-native.build.log"
+      },
+      "elf_sha256": "3cb502302fab57bde5d367248d6fffe2d298242b3b073fb2edbedcf17575b7af",
+      "native": {
+        "command": [
+          "/workspace/build/qualification/embench-fp-full/nettle-aes-native.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-aes-native.native.log"
+      }
+    },
+    {
+      "benchmark": "nettle-aes",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/nettle-aes",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/nettle-aes/nettle-aes.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "8f0a391fe5e947776ec30e3712d37970c4d8c3f40cc5adbb8591e5643c1210fd",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.attributes.log"
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.size.log"
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.dis.log"
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.spike.log"
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.dut.log",
+        "self_check_pass": true
+      }
+    },
+    {
+      "benchmark": "nettle-sha256",
+      "profile": "native",
+      "build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/nettle-sha256",
+          "-Isoftware/embench/embench-iot/config/native/boards/default",
+          "-Isoftware/embench/embench-iot/config/native/chips/speed-test-gcc",
+          "software/embench/embench-iot/config/native/boards/default/boardsupport.c",
+          "software/embench/embench-iot/config/native/chips/speed-test-gcc/chipsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/nettle-sha256/nettle-sha256.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/nettle-sha256-native.elf",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-sha256-native.build.log"
+      },
+      "elf_sha256": "711bc6a440fc3e82a4aea74116587fce6671768deb4014bd8b47001b249b8a26",
+      "native": {
+        "command": [
+          "/workspace/build/qualification/embench-fp-full/nettle-sha256-native.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-sha256-native.native.log"
+      }
+    },
+    {
+      "benchmark": "nettle-sha256",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/nettle-sha256",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/nettle-sha256/nettle-sha256.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "dd21a0328aff4b858aa9eca8577c0a8a0d92b916fa308c87b559a355d78efe6d",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.attributes.log"
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.size.log"
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.dis.log"
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.spike.log"
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.dut.log",
+        "self_check_pass": true
+      }
+    },
+    {
+      "benchmark": "nsichneu",
+      "profile": "native",
+      "build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/nsichneu",
+          "-Isoftware/embench/embench-iot/config/native/boards/default",
+          "-Isoftware/embench/embench-iot/config/native/chips/speed-test-gcc",
+          "software/embench/embench-iot/config/native/boards/default/boardsupport.c",
+          "software/embench/embench-iot/config/native/chips/speed-test-gcc/chipsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/nsichneu/libnsichneu.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/nsichneu-native.elf",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nsichneu-native.build.log"
+      },
+      "elf_sha256": "fde99adb5aa58dba218454283599b2130f1b6c606ae8bf0e364348a98e39e153",
+      "native": {
+        "command": [
+          "/workspace/build/qualification/embench-fp-full/nsichneu-native.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nsichneu-native.native.log"
+      }
+    },
+    {
+      "benchmark": "nsichneu",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/nsichneu",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/nsichneu/libnsichneu.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "1bdf7a8f3fff68ae4cd3eb308633d879ae46a02ef868765f667902b10aef4a66",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.attributes.log"
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.size.log"
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.dis.log"
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.spike.log"
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.dut.log",
+        "self_check_pass": true
+      }
+    },
+    {
+      "benchmark": "picojpeg",
+      "profile": "native",
+      "build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/picojpeg",
+          "-Isoftware/embench/embench-iot/config/native/boards/default",
+          "-Isoftware/embench/embench-iot/config/native/chips/speed-test-gcc",
+          "software/embench/embench-iot/config/native/boards/default/boardsupport.c",
+          "software/embench/embench-iot/config/native/chips/speed-test-gcc/chipsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/picojpeg/libpicojpeg.c",
+          "software/embench/embench-iot/src/picojpeg/picojpeg_test.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/picojpeg-native.elf",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/picojpeg-native.build.log"
+      },
+      "elf_sha256": "6c502f0032475f81c6d709e9c9e16a000a4aa99bdd9ad980ced31d958ac80828",
+      "native": {
+        "command": [
+          "/workspace/build/qualification/embench-fp-full/picojpeg-native.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/picojpeg-native.native.log"
+      }
+    },
+    {
+      "benchmark": "picojpeg",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/picojpeg",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/picojpeg/libpicojpeg.c",
+          "software/embench/embench-iot/src/picojpeg/picojpeg_test.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "721fa0ec08a47a4affcfc3251e8bee579dd8784b0c0be6f09e8981a19b11455e",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.attributes.log"
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.size.log"
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.dis.log"
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.spike.log"
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.dut.log",
+        "self_check_pass": true
+      }
+    },
+    {
+      "benchmark": "qrduino",
+      "profile": "native",
+      "build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/qrduino",
+          "-Isoftware/embench/embench-iot/config/native/boards/default",
+          "-Isoftware/embench/embench-iot/config/native/chips/speed-test-gcc",
+          "software/embench/embench-iot/config/native/boards/default/boardsupport.c",
+          "software/embench/embench-iot/config/native/chips/speed-test-gcc/chipsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/qrduino/qrencode.c",
+          "software/embench/embench-iot/src/qrduino/qrframe.c",
+          "software/embench/embench-iot/src/qrduino/qrtest.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/qrduino-native.elf",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/qrduino-native.build.log"
+      },
+      "elf_sha256": "57a33a6417f7711ac5926de4e37556699b39311eb7c8cbc11c3b767bad8d1062",
+      "native": {
+        "command": [
+          "/workspace/build/qualification/embench-fp-full/qrduino-native.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/qrduino-native.native.log"
+      }
+    },
+    {
+      "benchmark": "qrduino",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/qrduino",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/qrduino/qrencode.c",
+          "software/embench/embench-iot/src/qrduino/qrframe.c",
+          "software/embench/embench-iot/src/qrduino/qrtest.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "e6d28953f0cbf52f35ace14aee266a5acd2566859bce0e0a086a76da211de6ac",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.attributes.log"
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.size.log"
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.dis.log"
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.spike.log"
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.dut.log",
+        "self_check_pass": true
+      }
+    },
+    {
+      "benchmark": "sglib-combined",
+      "profile": "native",
+      "build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/sglib-combined",
+          "-Isoftware/embench/embench-iot/config/native/boards/default",
+          "-Isoftware/embench/embench-iot/config/native/chips/speed-test-gcc",
+          "software/embench/embench-iot/config/native/boards/default/boardsupport.c",
+          "software/embench/embench-iot/config/native/chips/speed-test-gcc/chipsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/sglib-combined/combined.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/sglib-combined-native.elf",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/sglib-combined-native.build.log"
+      },
+      "elf_sha256": "d7f34e7873d5e15064d06ca09bc99e752b14d15ea51a831ef78b7e1012ddde78",
+      "native": {
+        "command": [
+          "/workspace/build/qualification/embench-fp-full/sglib-combined-native.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/sglib-combined-native.native.log"
+      }
+    },
+    {
+      "benchmark": "sglib-combined",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/sglib-combined",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/sglib-combined/combined.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "3b69ad94081db32fe7d92537f25ee82118a6fbe07feee7c83cd262a87327aee6",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.attributes.log"
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.size.log"
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.dis.log"
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.spike.log"
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.dut.log",
+        "self_check_pass": true
+      }
+    },
+    {
+      "benchmark": "slre",
+      "profile": "native",
+      "build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/slre",
+          "-Isoftware/embench/embench-iot/config/native/boards/default",
+          "-Isoftware/embench/embench-iot/config/native/chips/speed-test-gcc",
+          "software/embench/embench-iot/config/native/boards/default/boardsupport.c",
+          "software/embench/embench-iot/config/native/chips/speed-test-gcc/chipsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/slre/libslre.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/slre-native.elf",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/slre-native.build.log"
+      },
+      "elf_sha256": "1f1758fa4d6352fad1386b9eeaf5b268d52e2f56a78c07df7f4c2a9b05bd47ab",
+      "native": {
+        "command": [
+          "/workspace/build/qualification/embench-fp-full/slre-native.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/slre-native.native.log"
+      }
+    },
+    {
+      "benchmark": "slre",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/slre",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/slre/libslre.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "e3b81e869126d7cc252c4aa482515f51e14f81945a0daa2a7d9392250ccb8769",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.attributes.log"
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.size.log"
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.dis.log"
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.spike.log"
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.dut.log",
+        "self_check_pass": true
+      }
+    },
+    {
+      "benchmark": "st",
+      "profile": "native",
+      "build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/st",
+          "-Isoftware/embench/embench-iot/config/native/boards/default",
+          "-Isoftware/embench/embench-iot/config/native/chips/speed-test-gcc",
+          "software/embench/embench-iot/config/native/boards/default/boardsupport.c",
+          "software/embench/embench-iot/config/native/chips/speed-test-gcc/chipsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/st/libst.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/st-native.elf",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/st-native.build.log"
+      },
+      "elf_sha256": "ce74b4db91d853c6bb959d28c008ae99acb091e5b32287e9f92c2a8090bf7e11",
+      "native": {
+        "command": [
+          "/workspace/build/qualification/embench-fp-full/st-native.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/st-native.native.log"
+      }
+    },
+    {
+      "benchmark": "st",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/st",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/st/libst.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "4836e2d559e258a0af8ff49fdfa87b00a1c6b440a28dda2413536c015deef167",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.attributes.log"
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.size.log"
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.dis.log"
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.spike.log"
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.dut.log",
+        "self_check_pass": true
+      }
+    },
+    {
+      "benchmark": "statemate",
+      "profile": "native",
+      "build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/statemate",
+          "-Isoftware/embench/embench-iot/config/native/boards/default",
+          "-Isoftware/embench/embench-iot/config/native/chips/speed-test-gcc",
+          "software/embench/embench-iot/config/native/boards/default/boardsupport.c",
+          "software/embench/embench-iot/config/native/chips/speed-test-gcc/chipsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/statemate/libstatemate.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/statemate-native.elf",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/statemate-native.build.log"
+      },
+      "elf_sha256": "a8f68f9e06e806146bd1f4b83758a712b421c5a2cce03ccf9385e9a9eea7e440",
+      "native": {
+        "command": [
+          "/workspace/build/qualification/embench-fp-full/statemate-native.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/statemate-native.native.log"
+      }
+    },
+    {
+      "benchmark": "statemate",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/statemate",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/statemate/libstatemate.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "89817da7b119f2d38d64fd49847161968a27319c45071cf7b92986c71017a52e",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.attributes.log"
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.size.log"
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.dis.log"
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.spike.log"
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.dut.log",
+        "self_check_pass": true
+      }
+    },
+    {
+      "benchmark": "ud",
+      "profile": "native",
+      "build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/ud",
+          "-Isoftware/embench/embench-iot/config/native/boards/default",
+          "-Isoftware/embench/embench-iot/config/native/chips/speed-test-gcc",
+          "software/embench/embench-iot/config/native/boards/default/boardsupport.c",
+          "software/embench/embench-iot/config/native/chips/speed-test-gcc/chipsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/ud/libud.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/ud-native.elf",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/ud-native.build.log"
+      },
+      "elf_sha256": "36e669516e07a6c7a6d95503344beaf6ef35c53bcc05b07ffecb02c0887bc22b",
+      "native": {
+        "command": [
+          "/workspace/build/qualification/embench-fp-full/ud-native.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/ud-native.native.log"
+      }
+    },
+    {
+      "benchmark": "ud",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/ud",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/ud/libud.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "34a2c84b2c1e37427638a7bc10aa0e3ec9118661dbad7083f1596b0c1fc2bfe7",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.attributes.log"
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.size.log"
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.dis.log"
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.spike.log"
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.dut.log",
+        "self_check_pass": true
+      }
+    },
+    {
+      "benchmark": "wikisort",
+      "profile": "native",
+      "build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/wikisort",
+          "-Isoftware/embench/embench-iot/config/native/boards/default",
+          "-Isoftware/embench/embench-iot/config/native/chips/speed-test-gcc",
+          "software/embench/embench-iot/config/native/boards/default/boardsupport.c",
+          "software/embench/embench-iot/config/native/chips/speed-test-gcc/chipsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/wikisort/libwikisort.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/wikisort-native.elf",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/wikisort-native.build.log"
+      },
+      "elf_sha256": "a196b0f91745f9a879f3612f6e6aa388f71cc1867290308d8681cb78a5f8faa6",
+      "native": {
+        "command": [
+          "/workspace/build/qualification/embench-fp-full/wikisort-native.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/wikisort-native.native.log"
+      }
+    },
+    {
+      "benchmark": "wikisort",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/wikisort",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/wikisort/libwikisort.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "7ed46e9144605bbbe601030d821055443c72ed60e9760cc9627cc1b24f70c6d6",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.attributes.log"
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.size.log"
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.dis.log"
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.spike.log"
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.dut.log",
+        "self_check_pass": true
+      }
+    }
+  ]
+}

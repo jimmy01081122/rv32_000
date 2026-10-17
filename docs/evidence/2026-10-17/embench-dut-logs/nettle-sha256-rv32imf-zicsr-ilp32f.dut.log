@@ -1,0 +1,19 @@
+[SimMemory] Loaded segment to 0x80000000 (filesz: 0x43050, memsz: 0x43050)
+[SimMemory] Found 'tohost' symbol at 0x80043040
+[SimMemory] ELF loaded successfully. Entry PC = 0x80000000
+[Simulator] Starting simulation run...
+
+[Embench] Benchmark executed in cycles: 4307562
+
+[SimMemory] TOHOST exit (0x1) received. Exit code: 0 (PASS)
+
+[SimMemory] SIM_EXIT received with code: 0 (PASS)
+
+================ Simulation Summary ================
+  ELF binary     : /workspace/build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.elf
+  Cycles         : 4711146
+  Retired insns  : 4088517
+  IPC            : 0.8678
+  Exit status    : PASS (0)
+====================================================
+
