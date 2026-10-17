@@ -1,0 +1,46 @@
+{
+  "scope": "Approved full Embench suite functional rerun; diagnostic cycles only",
+  "started_at_utc": "2026-10-17T13:10:38.696790+00:00",
+  "repository_commit": "7ba020297da6e6cdc4e5857fdde6ff57fec627d6",
+  "repository_tree": "e597a4031532332cb41f645e60012737cd443765",
+  "working_tree_clean_at_start": true,
+  "embench_commit": "0466a18e4f6b47e19598d7c6ba72916d54b68f65",
+  "embench_working_tree_clean_at_start": true,
+  "image_ids": {
+    "rv32ooo-fp:p1": "sha256:2140263677b3a378d5cab75a3d0d4fd285ddb38a1a5a1f81f5cf97db024a02d5",
+    "rv32ooo-sim:g1": "sha256:0d80d39df2f24dc60a77387242f781edc1cc67f53865719981e01b5b5a989d26"
+  },
+  "simulator_sha256_at_start": "44d59f5b29fe427e20988799d2780e127b15f833f21e10a3af7348361e54c1c7",
+  "toolchain_lock_sha256": "56ff4cb566de48636c1f704feead87919aeeef32d5883ae8ffa39a1684a6b14c",
+  "qualifier_sha256": "677e52f1c508a6d79c93a9632c47f6014c23d02dcff68751e8d6dac5280f340a",
+  "command": [
+    "make",
+    "qualify-embench-fp-dut",
+    "JOBS=4"
+  ],
+  "build_command": [
+    "make",
+    "check-fp-env",
+    "sim-build",
+    "JOBS=4"
+  ],
+  "memory_model": {
+    "ram_bytes": 1048576,
+    "dmem_latency_cycles": 1,
+    "random_extra_latency_cycles": 0,
+    "note": "Current simulator defaults; provisional diagnostic conditions; random delay disabled, no seed supplied",
+    "random_seed": null
+  },
+  "limits": {
+    "dut_max_cycles": 25000000,
+    "dut_timeout_seconds": 180,
+    "spike_timeout_seconds": 120
+  },
+  "finished_at_utc": "2026-10-17T13:29:28.495781+00:00",
+  "returncode": 0,
+  "working_tree_clean_at_end": true,
+  "simulator_sha256_at_end": "44d59f5b29fe427e20988799d2780e127b15f833f21e10a3af7348361e54c1c7",
+  "warmup_heat": 1,
+  "cpu_mhz_scaling": 1,
+  "no_retire_limit": 10000
+}

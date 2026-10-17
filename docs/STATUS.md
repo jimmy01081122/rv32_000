@@ -56,6 +56,11 @@ configuration, and must not be merged into this run's pass counts.
    The FP-store cross-domain bypass error at PC `0x80001220` was corrected;
    `minver` now passes DUT self-check. The full 19-program DUT functional probe
    also passes 19/19, with [archived evidence](evidence/2026-10-17/README.md).
+   The user approved all 19 workloads as the general embedded suite. A
+   [clean-commit rerun](evidence/2026-10-17/embench-approved-rerun/README.md)
+   at `7ba020297da6e6cdc4e5857fdde6ff57fec627d6` passes 19/19 native,
+   Spike and DUT self-checks plus ELF ISA/ABI checks. All target ELF hashes and
+   diagnostic metrics match the earlier run. The measurement contract remains open.
    PolyBench MINI/SMALL native runs and
    target object compilation succeeded; bare-metal execution and numerical checking
    remain open.

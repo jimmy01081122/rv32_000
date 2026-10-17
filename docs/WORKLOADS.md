@@ -14,6 +14,8 @@ FP32 內部也確認採控制／訊號處理與矩陣／ML 均衡方向。
 尚未完成裸機執行與數值驗收。
 新建的獨立 FP 工具鏈已讓[全部 19 項通過建置與 Spike 自我檢查](PROGRESS_REVIEW.md)；
 `minver` 的 FP store 旁路錯誤已修正，完整 19 項也通過 DUT 自我檢查。
+核准集合後已從乾淨 commit 重跑，主機／Spike／DUT 各 19/19 通過；
+[本輪證據](evidence/2026-10-17/embench-approved-rerun/README.md)保留每項週期及原始記錄。
 量測契約與實體結果仍待確認，集合效能基線未成立。
 
 ## 已選主集合與輔助測試

@@ -1,0 +1,44 @@
+docker run --rm --user 1000:1000 -v /workspace/rv32_000:/workspace -w /workspace rv32ooo-fp:p1 -c 'set -eu; \
+  test "$(riscv-none-elf-gcc -march=rv32imf_zicsr -mabi=ilp32f -print-multi-directory)" = rv32imf_zicsr/ilp32f; \
+  test -f "$(riscv-none-elf-gcc -march=rv32imf_zicsr -mabi=ilp32f -print-file-name=libm.a)"; \
+  riscv-none-elf-gcc --version | head -1'
+riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 15.2.0
+docker run --rm --user 1000:1000 -v /workspace/rv32_000:/workspace -w /workspace rv32ooo-fp:p1 -c 'python3 scripts/qualify_embench_candidates.py --toolchain fp --suite full --run-spike --run-dut'
+aha-mont64 native             {'build': 0, 'native': 0}
+aha-mont64 rv32imf-zicsr-ilp32f {'build': 0, 'strip': 0, 'attributes': 0, 'size': 0, 'disassembly': 0, 'spike': 0, 'dut': 0}
+crc32    native             {'build': 0, 'native': 0}
+crc32    rv32imf-zicsr-ilp32f {'build': 0, 'strip': 0, 'attributes': 0, 'size': 0, 'disassembly': 0, 'spike': 0, 'dut': 0}
+cubic    native             {'build': 0, 'native': 0}
+cubic    rv32imf-zicsr-ilp32f {'build': 0, 'strip': 0, 'attributes': 0, 'size': 0, 'disassembly': 0, 'spike': 0, 'dut': 0}
+edn      native             {'build': 0, 'native': 0}
+edn      rv32imf-zicsr-ilp32f {'build': 0, 'strip': 0, 'attributes': 0, 'size': 0, 'disassembly': 0, 'spike': 0, 'dut': 0}
+huffbench native             {'build': 0, 'native': 0}
+huffbench rv32imf-zicsr-ilp32f {'build': 0, 'strip': 0, 'attributes': 0, 'size': 0, 'disassembly': 0, 'spike': 0, 'dut': 0}
+matmult-int native             {'build': 0, 'native': 0}
+matmult-int rv32imf-zicsr-ilp32f {'build': 0, 'strip': 0, 'attributes': 0, 'size': 0, 'disassembly': 0, 'spike': 0, 'dut': 0}
+minver   native             {'build': 0, 'native': 0}
+minver   rv32imf-zicsr-ilp32f {'build': 0, 'strip': 0, 'attributes': 0, 'size': 0, 'disassembly': 0, 'spike': 0, 'dut': 0}
+nbody    native             {'build': 0, 'native': 0}
+nbody    rv32imf-zicsr-ilp32f {'build': 0, 'strip': 0, 'attributes': 0, 'size': 0, 'disassembly': 0, 'spike': 0, 'dut': 0}
+nettle-aes native             {'build': 0, 'native': 0}
+nettle-aes rv32imf-zicsr-ilp32f {'build': 0, 'strip': 0, 'attributes': 0, 'size': 0, 'disassembly': 0, 'spike': 0, 'dut': 0}
+nettle-sha256 native             {'build': 0, 'native': 0}
+nettle-sha256 rv32imf-zicsr-ilp32f {'build': 0, 'strip': 0, 'attributes': 0, 'size': 0, 'disassembly': 0, 'spike': 0, 'dut': 0}
+nsichneu native             {'build': 0, 'native': 0}
+nsichneu rv32imf-zicsr-ilp32f {'build': 0, 'strip': 0, 'attributes': 0, 'size': 0, 'disassembly': 0, 'spike': 0, 'dut': 0}
+picojpeg native             {'build': 0, 'native': 0}
+picojpeg rv32imf-zicsr-ilp32f {'build': 0, 'strip': 0, 'attributes': 0, 'size': 0, 'disassembly': 0, 'spike': 0, 'dut': 0}
+qrduino  native             {'build': 0, 'native': 0}
+qrduino  rv32imf-zicsr-ilp32f {'build': 0, 'strip': 0, 'attributes': 0, 'size': 0, 'disassembly': 0, 'spike': 0, 'dut': 0}
+sglib-combined native             {'build': 0, 'native': 0}
+sglib-combined rv32imf-zicsr-ilp32f {'build': 0, 'strip': 0, 'attributes': 0, 'size': 0, 'disassembly': 0, 'spike': 0, 'dut': 0}
+slre     native             {'build': 0, 'native': 0}
+slre     rv32imf-zicsr-ilp32f {'build': 0, 'strip': 0, 'attributes': 0, 'size': 0, 'disassembly': 0, 'spike': 0, 'dut': 0}
+st       native             {'build': 0, 'native': 0}
+st       rv32imf-zicsr-ilp32f {'build': 0, 'strip': 0, 'attributes': 0, 'size': 0, 'disassembly': 0, 'spike': 0, 'dut': 0}
+statemate native             {'build': 0, 'native': 0}
+statemate rv32imf-zicsr-ilp32f {'build': 0, 'strip': 0, 'attributes': 0, 'size': 0, 'disassembly': 0, 'spike': 0, 'dut': 0}
+ud       native             {'build': 0, 'native': 0}
+ud       rv32imf-zicsr-ilp32f {'build': 0, 'strip': 0, 'attributes': 0, 'size': 0, 'disassembly': 0, 'spike': 0, 'dut': 0}
+wikisort native             {'build': 0, 'native': 0}
+wikisort rv32imf-zicsr-ilp32f {'build': 0, 'strip': 0, 'attributes': 0, 'size': 0, 'disassembly': 0, 'spike': 0, 'dut': 0}

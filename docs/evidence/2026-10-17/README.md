@@ -1,8 +1,13 @@
 # 2026-10-17 qualification evidence
 
-These are small snapshots of one FP-profile diagnostic run. The generated ELFs,
-disassemblies and remaining logs stay under the ignored `build/qualification/`
-directory and can be rebuilt with the commands in [the progress review](../../PROGRESS_REVIEW.md).
+This directory preserves the earlier FP-profile diagnostic run. The later
+[approved full-suite rerun](embench-approved-rerun/README.md) records a clean
+source commit, 19/19 native/Spike/DUT checks and matching diagnostic outputs.
+
+The earlier snapshots below omit generated ELFs, disassemblies and some logs.
+The ignored `build/qualification/` directory is reused by later runs; regenerate
+those outputs with the commands in [the progress review](../../PROGRESS_REVIEW.md)
+and use each archived run's source and tool identities.
 
 - [Embench full summary](embench-full-summary.json): commands, source/tool probes,
   return codes, ELF hashes and references to raw logs for all 19 workloads.

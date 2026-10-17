@@ -63,8 +63,10 @@ python3 scripts/test_workflow_guards.py
 
 The separate RV32IMF benchmark toolchain can be built with
 `make docker-build-fp`, checked with `make check-fp-env`, and used with
-`make qualify-embench-fp-reference`. The 19-workload reference probe now passes;
-the [DUT qualification status](docs/PROGRESS_REVIEW.md) remains open.
+`make qualify-embench-fp-reference`. The approved 19-workload suite passes native,
+Spike and DUT self-checks in a [clean-commit rerun](docs/evidence/2026-10-17/embench-approved-rerun/README.md).
+The performance and physical baseline contracts remain open; see the
+[qualification status](docs/PROGRESS_REVIEW.md).
 
 The simulation and generic-synthesis images are separate. For a proxy/private CA:
 

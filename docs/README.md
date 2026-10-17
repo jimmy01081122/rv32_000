@@ -12,9 +12,10 @@ signoff label applies only to the source/configuration and checks in that record
 | [Status](STATUS.md) | Evidence and unresolved implementation/verification gaps |
 | [Architecture](../architecture_spec.md) | Implemented structures and architectural obligations |
 | [Micro-operations](../uop_spec.md) | Current packet/schema reference |
-| [Workloads](WORKLOADS.md) | Candidate benchmark contract; not yet an implemented acceptance gate |
-| [Balanced FP32 proposal](FP32_BALANCED_PROPOSAL.md) | Control/DSP and matrix/ML candidates, source probes and proposed weights |
+| [Workloads](WORKLOADS.md) | Approved main suites and targets; detailed measurement contract remains provisional |
+| [Balanced FP32 proposal](FP32_BALANCED_PROPOSAL.md) | Approved control/DSP and matrix/ML selection and weights; source and numerical qualification |
 | [Initial workload qualification](WORKLOAD_QUALIFICATION_2026-10-16.md) | Embench library blockers and PolyBench FP32 source/resource probes |
+| [Approved Embench rerun](evidence/2026-10-17/embench-approved-rerun/README.md) | Clean-commit 19/19 native/Spike/DUT checks, diagnostic cycles, raw logs and hashes |
 | [Progress and baseline review](PROGRESS_REVIEW.md) | Updated FP toolchain evidence, honest progress gates and discussion proposals |
 | [Session handoff](SESSION_HANDOFF.md) | Bring-up measurements, tool images and local evidence locations |
 | [CI workflow](../.github/workflows/README.md) | Existing jobs, prerequisites and limits |
