@@ -3,6 +3,7 @@
 更新：2026-10-17。已確認：一般嵌入式與 FP32 效能同等重要，兩者都需要改善。
 FP32 內部也確認採控制／訊號處理與矩陣／ML 均衡方向。
 已確認：FP32 的 4+4 項及兩子群各 50% 權重。
+已核准：完整 Embench-IoT 1.0 的 19 項作一般嵌入式主集合，保留上游數值語意。
 已核准：一般嵌入式與 FP32 各 ≥1.20 倍、標準元件面積 ≤1.10 倍，作為規劃目標。
 待確認：來源/資料集/編譯選項、記憶體條件、基線與其他驗收規則。
 目前 runner 尚未實作完整集合。
@@ -15,7 +16,7 @@ FP32 內部也確認採控制／訊號處理與矩陣／ML 均衡方向。
 `minver` 的 FP store 旁路錯誤已修正，完整 19 項也通過 DUT 自我檢查。
 量測契約與實體結果仍待確認，集合效能基線未成立。
 
-## 候選集合
+## 已選主集合與輔助測試
 
 | 集合 | 角色 | 目前狀態 |
 | --- | --- | --- |
@@ -27,17 +28,18 @@ FP32 內部也確認採控制／訊號處理與矩陣／ML 均衡方向。
 兩個主集合各自計算加速比及幾何平均，不把所有程式混成單一總分。
 CoreMark 不作為 FP32 效能代理；正確性測試與效能驗收各自保留。
 
-## Embench 候選清單
+## 已核准的 Embench 19 項
 
 版本：`embench-1.0`，SHA `0466a18e4f6b47e19598d7c6ba72916d54b68f65`。
 [上游專案](https://github.com/embench/embench-iot)；
 [固定版本來源](../software/embench/embench-iot)。
 
-現有 14 項：`aha-mont64`、`crc32`、`edn`、`huffbench`、`matmult-int`、
+舊效能 runner 的 14 項：`aha-mont64`、`crc32`、`edn`、`huffbench`、`matmult-int`、
 `nettle-aes`、`nettle-sha256`、`nsichneu`、`picojpeg`、`qrduino`、
 `sglib-combined`、`slre`、`statemate`、`ud`。
 
-待補的五項及依賴：
+完整集合另含以下五項，已通過主機／Spike／DUT 功能資格檢查；
+舊效能 runner 尚未整合這五項：
 
 | 項目 | 資格確認重點 |
 | --- | --- |
@@ -55,8 +57,8 @@ RV32F 不提供 double 硬體運算。完整 Embench 成績包含軟體浮點/�
 預設 `-O3`。是否改採允許 F 的設定，必須在建置所有候選程式及檢查反組譯後
 共同凍結；一旦更換，AP5B 與候選 RTL 都用同一套新設定重新量測。
 新[資格腳本](../scripts/qualify_embench_candidates.py)已以
-`rv32imf_zicsr / ilp32f` 建置及在 Spike 執行 19 項，但未改動舊效能 runner
-或驗收門檻；新設定尚須完成 DUT 正確性和工作負載契約討論。
+`rv32imf_zicsr / ilp32f` 建置，19 項的主機／Spike／DUT 自我檢查均通過，
+但未改動舊效能 runner 或驗收門檻；編譯與量測契約仍須共同確認。
 歷史 14 項分數與新的 19 項分數不可直接相除當作架構加速比。
 
 ## FP32 候選清單

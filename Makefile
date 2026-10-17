@@ -99,7 +99,7 @@ fetch-fp-sources: ## Fetch missing FP32 sources, then verify their pinned identi
 qualify-embench-fp-reference: check-fp-env ## Build and self-check all 19 programs on Spike
 	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/qualify_embench_candidates.py --toolchain fp --suite full --run-spike'
 
-qualify-embench-fp-dut: check-fp-env ## Also run all 19 programs on the current DUT (diagnostic)
+qualify-embench-fp-dut: check-fp-env sim-build ## Also run all 19 programs on the current DUT (diagnostic)
 	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/qualify_embench_candidates.py --toolchain fp --suite full --run-spike --run-dut'
 
 check-minver-fp: check-fp-env sim-build ## Regress the FP-store workload against native, Spike and DUT

@@ -87,7 +87,8 @@ make embench-run
 
 `make coremark` produces development measurements. A fixed iteration count does
 not by itself satisfy CoreMark reporting rules. `make embench-run` currently runs
-the existing 14-workload subset, not the proposed full 19-workload set.
+the existing 14-workload subset. The approved general embedded suite contains
+all 19 workloads; use `make qualify-embench-fp-dut` for its functional checks.
 
 ## Verification and physical scope
 
