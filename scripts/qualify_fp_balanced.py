@@ -9,6 +9,7 @@ import json
 import math
 from pathlib import Path
 import re
+import shutil
 import struct
 import subprocess
 import time
@@ -50,7 +51,8 @@ def run(command, log, timeout=120):
         output, code = str(exc), 127
     log.write_text(output)
     return {'command': list(map(str, command)), 'returncode': code,
-            'log': str(log.relative_to(ROOT)), 'wall_seconds': time.monotonic() - started}
+            'log': str(log.relative_to(ROOT)), 'log_sha256': digest(log),
+            'wall_seconds': time.monotonic() - started}
 
 
 def validate(case, log):
@@ -105,9 +107,20 @@ def validate(case, log):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--run-dut', action='store_true')
+    parser.add_argument('--profile-roi', action='store_true',
+                        help='Count retired instructions/FMA between the two RDCYCLE markers')
     parser.add_argument('--bench', choices=('all', *NAMES), default='all')
+    parser.add_argument('--fp-contract', choices=('off', 'fast'), default='off',
+                        help='Only control multiply-add contraction; fast-math remains disabled')
+    parser.add_argument('--out-dir', type=Path,
+                        help='Use a separate evidence directory for controlled experiments')
     args = parser.parse_args()
-    out = BASE / 'baremetal'
+    if args.profile_roi and not args.run_dut:
+        parser.error('--profile-roi requires --run-dut')
+    out = (args.out_dir or BASE / ('baremetal' if args.fp_contract == 'off'
+                                  else 'baremetal-contract-fast')).resolve()
+    if not out.is_relative_to(ROOT):
+        parser.error('--out-dir must be inside the repository workspace')
     out.mkdir(parents=True, exist_ok=True)
     path = out / ('summary.json' if args.bench == 'all' else f'summary-{args.bench}.json')
     path.unlink(missing_ok=True)
@@ -128,11 +141,18 @@ def main():
               'started_at_utc': datetime.now(timezone.utc).isoformat(),
               'selected': selected, 'selected_count': len(selected), 'expected_count': 8,
               'run_dut': args.run_dut, 'source_check': source_check, 'metadata': metadata,
+              'fp_contract': args.fp_contract, 'fast_math': False,
+              'profile_roi': args.profile_roi,
+              'source_identity_sha256': digest(BASE / 'source-summary.json'),
+              'compiler_version_sha256': {name: digest(ROOT / metadata[name]['log'])
+                                          for name in ('native-gcc', 'riscv-gcc')},
               'project_source_sha256': {p: digest(ROOT / p) for p in (
                   'scripts/qualify_fp_balanced.py', 'scripts/fp_balanced_fixtures.py',
                   'scripts/prepare_fp_sources.py', 'software/fp_bench/balanced.c',
                   'software/fp_bench/fft_alloc_guard.h', 'software/crt0/crt0.S',
-                  'software/linker/link.ld', 'software/embench/fail_syscalls.c')},
+                  'software/linker/link.ld', 'software/embench/fail_syscalls.c',
+                  'rtl/execute/fp/rv32_ooo_fp_execute.sv', 'sim/tb/sim_main.cpp',
+                  'sim/tb/fp_roi_profile.h')},
               'simulator_sha256': digest(ROOT / 'build/sim/rv32_ooo_sim') if args.run_dut else None,
               'records': []}
     for name in selected:
@@ -147,7 +167,7 @@ def main():
             continue
         (directory / 'fixture.json').write_text(json.dumps(case, indent=2) + '\n')
         write_header(case, directory / 'fp_fixture.h')
-        common = ['-std=gnu11', '-O3', '-ffp-contract=off', '-fno-fast-math',
+        common = ['-std=gnu11', '-O3', '-fno-fast-math', f'-ffp-contract={args.fp_contract}',
                   '-ffunction-sections', '-fdata-sections', '-fstack-usage',
                   '-D__GNUC_PYTHON__', f'-DFP_CASE={NAMES.index(name)}',
                   f'-I{directory}', f'-I{CMSIS / "Include"}', f'-I{CMSIS / "PrivateInclude"}']
@@ -178,6 +198,12 @@ def main():
             row['native'] = run([str(native)], directory / 'native.log')
             row['native_numeric'] = validate(case, directory / 'native.log')
         if row['target_build']['returncode'] == 0:
+            # Keep symbols for scoped instruction/call analysis; execute the
+            # stripped copy with reproducible identity as before.
+            symbols = directory / 'rv32-symbols.elf'
+            shutil.copy2(target, symbols)
+            row['symbol_disassembly'] = run(
+                ['riscv-none-elf-objdump', '-d', str(symbols)], directory / 'symbols-disassembly.log')
             row['strip'] = run(['riscv-none-elf-strip', '--strip-unneeded', '--keep-symbol=tohost',
                                 '--keep-symbol=fromhost', str(target)], directory / 'strip.log')
             row['elf_sha256'] = digest(target)
@@ -193,9 +219,16 @@ def main():
                                     and 'single-float ABI' in attrs)
             if args.run_dut:
                 row['dut'] = run([str(ROOT / 'build/sim/rv32_ooo_sim'), f'+elf={target}',
-                                   '+max-cycles=25000000'], directory / 'dut.log', 180)
+                                   '+max-cycles=25000000', *(['+profile-fp-roi'] if args.profile_roi else [])], directory / 'dut.log', 180)
                 row['dut_numeric'] = validate(case, directory / 'dut.log')
                 row['dut_exit_passed'] = 'Exit status    : PASS (0)' in (directory / 'dut.log').read_text()
+                if args.profile_roi:
+                    found = re.search(r'^FP ROI cycle_reads=(\d+) retired=(\d+) fmadd_s=(\d+) fmsub_s=(\d+) fnmsub_s=(\d+) fnmadd_s=(\d+)$',
+                                      (directory / 'dut.log').read_text(), re.MULTILINE)
+                    row['roi_profile'] = dict(zip(('cycle_reads', 'retired', 'fmadd_s', 'fmsub_s', 'fnmsub_s', 'fnmadd_s'),
+                                                   map(int, found.groups()))) if found else {}
+                    row['roi_profile_passed'] = (row['roi_profile'].get('cycle_reads') == 2
+                                                 and row['roi_profile'].get('retired', 0) > 0)
         required = ['native_build', 'target_build', 'native', 'strip', 'attributes', 'size', 'disassembly', 'spike']
         if args.run_dut:
             required.append('dut')
@@ -204,6 +237,7 @@ def main():
                          and row.get('isa_abi_passed') is True
                          and (not args.run_dut or (row.get('dut_numeric', {}).get('passed') is True
                                                    and row.get('dut_exit_passed') is True)))
+        row['passed'] &= not args.profile_roi or row.get('roi_profile_passed') is True
         report['records'].append(row)
         path.write_text(json.dumps(report, indent=2, allow_nan=False) + '\n')
         print(f"{name:9s} {'PASS' if row['passed'] else 'FAIL'} "

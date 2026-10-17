@@ -116,6 +116,13 @@ qualify-fp-balanced-reference: check-fp-env check-fp-sources ## Numerically prob
 qualify-fp-balanced-dut: check-fp-env check-fp-sources sim-build ## Also validate every FP32 output on the DUT
 	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/qualify_fp_balanced.py --run-dut'
 
+.PHONY: check-fma-finite compare-fp-contraction
+check-fma-finite: check-fp-env sim-build ## Check exact finite FMA values/flags against integer reference and Spike
+	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/check_fma_finite.py'
+
+compare-fp-contraction: check-fma-finite check-fp-sources ## Matched off/fast FP32 numerical and retired-FMA comparison
+	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/compare_fp_contraction.py'
+
 .PHONY: summarize-embench-fp-dut
 summarize-embench-fp-dut: ## Check complete DUT evidence and list each workload's diagnostic cycles
 	python3 scripts/summarize_embench_fp_dut.py

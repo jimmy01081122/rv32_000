@@ -10,6 +10,7 @@
 
 #include "Vrv32_ooo_core.h"
 #include "sim_mem.h"
+#include "fp_roi_profile.h"
 
 struct SimConfig {
     std::string elf_file;
@@ -21,6 +22,7 @@ struct SimConfig {
     int dmem_rand_delay = 0;
     bool enable_vcd = false;
     bool enable_trace = false;
+    bool profile_fp_roi = false;
 };
 
 void parse_args(int argc, char** argv, SimConfig& config) {
@@ -34,6 +36,8 @@ void parse_args(int argc, char** argv, SimConfig& config) {
         } else if (arg.rfind("+trace=", 0) == 0 || arg.rfind("--trace=", 0) == 0) {
             config.trace_file = arg.substr(arg.find('=') + 1);
             config.enable_trace = true;
+        } else if (arg == "+profile-fp-roi") {
+            config.profile_fp_roi = true;
         } else if (arg.rfind("+max-cycles=", 0) == 0) {
             config.max_cycles = std::stoull(arg.substr(arg.find('=') + 1));
         } else if (arg.rfind("+no-retire-max=", 0) == 0) {
@@ -88,6 +92,7 @@ int main(int argc, char** argv) {
     uint64_t cycles = 0;
     uint64_t retired_insns = 0;
     uint64_t last_retire_cycle = 0;
+    FpRoiProfile fp_roi;
 
     // Reset sequence: initialize pins and hold rst=1 for 10 cycles
     top->clk = 0;
@@ -207,6 +212,7 @@ int main(int argc, char** argv) {
 
             uint32_t commit_pc = ((top->commit_trace[8] & 0x3FFFFF) << 10) | ((top->commit_trace[7] >> 22) & 0x3FF);
             uint32_t commit_insn = ((top->commit_trace[7] & 0x3FFFFF) << 10) | ((top->commit_trace[6] >> 22) & 0x3FF);
+            if (config.profile_fp_roi) fp_roi.observe(commit_insn);
             bool     int_dst_valid = (top->commit_trace[6] >> 21) & 1;
             uint32_t int_dst_arch  = (top->commit_trace[6] >> 16) & 0x1F;
             uint32_t int_dst_data  = ((top->commit_trace[6] & 0xFFFF) << 16) | ((top->commit_trace[5] >> 16) & 0xFFFF);
@@ -264,6 +270,13 @@ int main(int argc, char** argv) {
     }
 
     double ipc = (cycles > 0) ? (static_cast<double>(retired_insns) / cycles) : 0.0;
+
+    if (config.profile_fp_roi) {
+        std::cout << "FP ROI cycle_reads=" << std::dec << fp_roi.cycle_reads
+                  << " retired=" << fp_roi.retired
+                  << " fmadd_s=" << fp_roi.fused[0] << " fmsub_s=" << fp_roi.fused[1]
+                  << " fnmsub_s=" << fp_roi.fused[2] << " fnmadd_s=" << fp_roi.fused[3] << std::endl;
+    }
 
     std::cout << "\n================ Simulation Summary ================" << std::endl;
     std::cout << "  ELF binary     : " << config.elf_file << std::endl;
