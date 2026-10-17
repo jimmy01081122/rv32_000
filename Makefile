@@ -109,6 +109,13 @@ check-minver-fp: check-fp-env sim-build ## Regress the FP-store workload against
 qualify-fp-fir-pilot: check-fp-env check-fp-sources sim-build ## Probe one provisional FIR fixture on native, Spike and DUT
 	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/qualify_fp_fir_pilot.py --run-dut'
 
+.PHONY: qualify-fp-balanced-reference qualify-fp-balanced-dut
+qualify-fp-balanced-reference: check-fp-env check-fp-sources ## Numerically probe all eight provisional FP32 cases on host and Spike
+	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/qualify_fp_balanced.py'
+
+qualify-fp-balanced-dut: check-fp-env check-fp-sources sim-build ## Also validate every FP32 output on the DUT
+	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/qualify_fp_balanced.py --run-dut'
+
 .PHONY: summarize-embench-fp-dut
 summarize-embench-fp-dut: ## Check complete DUT evidence and list each workload's diagnostic cycles
 	python3 scripts/summarize_embench_fp_dut.py

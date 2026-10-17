@@ -29,6 +29,8 @@ GIT_SOURCES = {
         "commit": "4b6f26593e9d3b24a9bc93b3646a3a859238eae2",
         "files": (
             "LICENSE", "Include/arm_math.h", "PrivateInclude/arm_compiler_specific.h",
+            "Include/dsp/controller_functions.h", "Include/dsp/filtering_functions.h",
+            "Include/dsp/svm_functions.h",
             "Source/FilteringFunctions/arm_fir_f32.c",
             "Source/FilteringFunctions/arm_fir_init_f32.c",
             "Source/FilteringFunctions/arm_biquad_cascade_df2T_f32.c",
@@ -36,13 +38,18 @@ GIT_SOURCES = {
             "Source/ControllerFunctions/arm_pid_init_f32.c",
             "Source/SVMFunctions/arm_svm_linear_predict_f32.c",
             "Source/SVMFunctions/arm_svm_linear_init_f32.c",
+            "Testing/Source/Tests/SVMF32.cpp",
+            "Testing/Patterns/DSP/SVM/SVMF32/Dims1_s16.txt",
+            "Testing/Patterns/DSP/SVM/SVMF32/Params1_f32.txt",
+            "Testing/Patterns/DSP/SVM/SVMF32/Samples1_f32.txt",
+            "Testing/Patterns/DSP/SVM/SVMF32/Reference1_s32.txt",
         ),
     },
     "kissfft": {
         "url": "https://github.com/mborgerding/kissfft.git",
         "tag": "131.2.0",
         "commit": "7bce4153c6bc8aba2db0e889e576f9d00505cbe1",
-        "files": ("COPYING", "kiss_fft.c", "kiss_fft.h", "_kiss_fft_guts.h"),
+        "files": ("COPYING", "kiss_fft.c", "kiss_fft.h", "_kiss_fft_guts.h", "kiss_fft_log.h"),
     },
 }
 
@@ -76,9 +83,20 @@ def check_git(name: str, pin: dict, fetch: bool) -> dict:
         raise ValueError(f"{name}: HEAD {head} differs from pinned {pin['commit']}")
     if command("git", "-C", str(path), "status", "--porcelain", "--untracked-files=no"):
         raise ValueError(f"{name}: tracked source files were modified")
-    missing = [item for item in pin["files"] if not (path / item).is_file()]
-    if missing:
-        raise ValueError(f"{name}: required files missing: {missing}")
+    for relative in pin["files"]:
+        target = path / relative
+        if not target.is_file() and fetch:
+            data = subprocess.check_output(["git", "-C", str(path), "show",
+                                            f"{pin['commit']}:{relative}"])
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(data)
+            mode = command("git", "-C", str(path), "ls-tree", pin["commit"], "--", relative).split()[0]
+            target.chmod(0o755 if mode == "100755" else 0o644)
+        if not target.is_file():
+            raise ValueError(f"{name}: missing {relative}; use --fetch")
+        expected = command("git", "-C", str(path), "rev-parse", f"{pin['commit']}:{relative}")
+        if command("git", "hash-object", str(target)) != expected:
+            raise ValueError(f"{name}: source content differs from pin: {relative}")
     return {"commit": head, "path": str(path.relative_to(ROOT)),
             "files_checked": len(pin["files"])}
 
