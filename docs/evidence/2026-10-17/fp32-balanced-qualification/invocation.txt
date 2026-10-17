@@ -1,0 +1,19 @@
+docker run --rm --user 1000:1000 -v /workspace/rv32_000:/workspace -w /workspace rv32ooo-fp:p1 -c 'set -eu; \
+  test "$(riscv-none-elf-gcc -march=rv32imf_zicsr -mabi=ilp32f -print-multi-directory)" = rv32imf_zicsr/ilp32f; \
+  test -f "$(riscv-none-elf-gcc -march=rv32imf_zicsr -mabi=ilp32f -print-file-name=libm.a)"; \
+  riscv-none-elf-gcc --version | head -1'
+riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 15.2.0
+python3 scripts/prepare_fp_sources.py
+CMSIS-DSP: pinned source OK (18 files checked)
+kissfft: pinned source OK (5 files checked)
+PolyBench-C: pinned source OK (9 files checked)
+docker run --rm --user 1000:1000 -v /workspace/rv32_000:/workspace -w /workspace rv32ooo-fp:p1 -c 'python3 scripts/qualify_fp_balanced.py --run-dut'
+fir       PASS native=True DUT=True ROI=75326
+iir       PASS native=True DUT=True ROI=17653
+fft       PASS native=True DUT=True ROI=41929
+pid       PASS native=True DUT=True ROI=8782
+gemm      PASS native=True DUT=True ROI=155749
+bicg      PASS native=True DUT=True ROI=24053
+cholesky  PASS native=True DUT=True ROI=225987
+svm       PASS native=True DUT=True ROI=45492
+FP32 qualification: 8/8; build/qualification/fp-balanced/baremetal/summary.json

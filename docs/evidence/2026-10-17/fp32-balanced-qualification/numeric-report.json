@@ -1,0 +1,245 @@
+{
+  "scope": "Each emitted host/DUT binary32 result compared against independent host double reference",
+  "records": [
+    {
+      "name": "fir",
+      "native": {
+        "passed": true,
+        "checked_values": 574,
+        "failed_indices": [],
+        "checksum": "fccef1fd",
+        "checksum_verified": true,
+        "roi_cycles": 0,
+        "max_absolute_error": 0.0,
+        "max_tolerance_fraction": 0.0,
+        "streaming_matches_whole_block_bits": true
+      },
+      "dut": {
+        "passed": true,
+        "checked_values": 574,
+        "failed_indices": [],
+        "checksum": "fccef1fd",
+        "checksum_verified": true,
+        "roi_cycles": 75326,
+        "max_absolute_error": 0.0,
+        "max_tolerance_fraction": 0.0,
+        "streaming_matches_whole_block_bits": true
+      },
+      "native_dut_checksum_equal": true,
+      "static_section_bytes": {
+        "text": 5844,
+        "data": 16,
+        "bss": 3456
+      }
+    },
+    {
+      "name": "iir",
+      "native": {
+        "passed": true,
+        "checked_values": 528,
+        "failed_indices": [],
+        "checksum": "fd1da799",
+        "checksum_verified": true,
+        "roi_cycles": 0,
+        "max_absolute_error": 7.602541506057658e-09,
+        "max_tolerance_fraction": 0.00439651714448257,
+        "streaming_matches_whole_block_bits": true
+      },
+      "dut": {
+        "passed": true,
+        "checked_values": 528,
+        "failed_indices": [],
+        "checksum": "fd1da799",
+        "checksum_verified": true,
+        "roi_cycles": 17653,
+        "max_absolute_error": 7.602541506057658e-09,
+        "max_tolerance_fraction": 0.00439651714448257,
+        "streaming_matches_whole_block_bits": true
+      },
+      "native_dut_checksum_equal": true,
+      "static_section_bytes": {
+        "text": 5580,
+        "data": 16,
+        "bss": 2156
+      }
+    },
+    {
+      "name": "fft",
+      "native": {
+        "passed": true,
+        "checked_values": 512,
+        "failed_indices": [],
+        "checksum": "cd16c1a3",
+        "checksum_verified": true,
+        "roi_cycles": 0,
+        "max_absolute_error": 3.6661736482201945e-06,
+        "max_tolerance_fraction": 0.05977733854629219
+      },
+      "dut": {
+        "passed": true,
+        "checked_values": 512,
+        "failed_indices": [],
+        "checksum": "cd16c1a3",
+        "checksum_verified": true,
+        "roi_cycles": 41929,
+        "max_absolute_error": 3.6661736482201945e-06,
+        "max_tolerance_fraction": 0.05977733854629219
+      },
+      "native_dut_checksum_equal": true,
+      "static_section_bytes": {
+        "text": 41628,
+        "data": 340,
+        "bss": 22848
+      }
+    },
+    {
+      "name": "pid",
+      "native": {
+        "passed": true,
+        "checked_values": 515,
+        "failed_indices": [],
+        "checksum": "c5957fb7",
+        "checksum_verified": true,
+        "roi_cycles": 0,
+        "max_absolute_error": 0.0,
+        "max_tolerance_fraction": 0.0
+      },
+      "dut": {
+        "passed": true,
+        "checked_values": 515,
+        "failed_indices": [],
+        "checksum": "c5957fb7",
+        "checksum_verified": true,
+        "roi_cycles": 8782,
+        "max_absolute_error": 0.0,
+        "max_tolerance_fraction": 0.0
+      },
+      "native_dut_checksum_equal": true,
+      "static_section_bytes": {
+        "text": 6356,
+        "data": 16,
+        "bss": 2096
+      }
+    },
+    {
+      "name": "gemm",
+      "native": {
+        "passed": true,
+        "checked_values": 500,
+        "failed_indices": [],
+        "checksum": "5daa43c6",
+        "checksum_verified": true,
+        "roi_cycles": 0,
+        "max_absolute_error": 2.455711365811908e-06,
+        "max_tolerance_fraction": 0.022551123063845276
+      },
+      "dut": {
+        "passed": true,
+        "checked_values": 500,
+        "failed_indices": [],
+        "checksum": "5daa43c6",
+        "checksum_verified": true,
+        "roi_cycles": 155749,
+        "max_absolute_error": 2.455711365811908e-06,
+        "max_tolerance_fraction": 0.022551123063845276
+      },
+      "native_dut_checksum_equal": true,
+      "static_section_bytes": {
+        "text": 11456,
+        "data": 16,
+        "bss": 9400
+      }
+    },
+    {
+      "name": "bicg",
+      "native": {
+        "passed": true,
+        "checked_values": 80,
+        "failed_indices": [],
+        "checksum": "042846fa",
+        "checksum_verified": true,
+        "roi_cycles": 0,
+        "max_absolute_error": 1.9710629199920504e-06,
+        "max_tolerance_fraction": 0.016831848597752545
+      },
+      "dut": {
+        "passed": true,
+        "checked_values": 80,
+        "failed_indices": [],
+        "checksum": "042846fa",
+        "checksum_verified": true,
+        "roi_cycles": 24053,
+        "max_absolute_error": 1.9710629199920504e-06,
+        "max_tolerance_fraction": 0.016831848597752545
+      },
+      "native_dut_checksum_equal": true,
+      "static_section_bytes": {
+        "text": 9028,
+        "data": 16,
+        "bss": 7344
+      }
+    },
+    {
+      "name": "cholesky",
+      "native": {
+        "passed": true,
+        "checked_values": 820,
+        "failed_indices": [],
+        "checksum": "22958dce",
+        "checksum_verified": true,
+        "roi_cycles": 0,
+        "max_absolute_error": 4.82792760325701e-07,
+        "max_tolerance_fraction": 0.002054436934076892,
+        "reconstruction_relative_inf_residual": 5.0252092818979085e-08,
+        "positive_diagonal": true
+      },
+      "dut": {
+        "passed": true,
+        "checked_values": 820,
+        "failed_indices": [],
+        "checksum": "22958dce",
+        "checksum_verified": true,
+        "roi_cycles": 225987,
+        "max_absolute_error": 4.82792760325701e-07,
+        "max_tolerance_fraction": 0.002054436934076892,
+        "reconstruction_relative_inf_residual": 5.0252092818979085e-08,
+        "positive_diagonal": true
+      },
+      "native_dut_checksum_equal": true,
+      "static_section_bytes": {
+        "text": 12336,
+        "data": 340,
+        "bss": 9992
+      }
+    },
+    {
+      "name": "svm",
+      "native": {
+        "passed": true,
+        "checked_values": 100,
+        "failed_indices": [],
+        "checksum": "28464095",
+        "checksum_verified": true,
+        "roi_cycles": 0,
+        "max_absolute_error": 0.0,
+        "max_tolerance_fraction": null
+      },
+      "dut": {
+        "passed": true,
+        "checked_values": 100,
+        "failed_indices": [],
+        "checksum": "28464095",
+        "checksum_verified": true,
+        "roi_cycles": 45492,
+        "max_absolute_error": 0.0,
+        "max_tolerance_fraction": null
+      },
+      "native_dut_checksum_equal": true,
+      "static_section_bytes": {
+        "text": 6708,
+        "data": 16,
+        "bss": 824
+      }
+    }
+  ]
+}

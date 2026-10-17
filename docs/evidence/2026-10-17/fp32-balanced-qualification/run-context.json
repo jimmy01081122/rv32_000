@@ -1,0 +1,41 @@
+{
+  "scope": "Clean-commit provisional 4+4 FP32 numerical qualification; no score",
+  "repository_commit": "df97854c719014df862d6d6df450d02fe0cee756",
+  "repository_tree": "71056dcca9047a45f75d88aba3da8e966b877aa2",
+  "working_tree_clean_at_start": true,
+  "image_ids": {
+    "rv32ooo-fp:p1": "sha256:2140263677b3a378d5cab75a3d0d4fd285ddb38a1a5a1f81f5cf97db024a02d5",
+    "rv32ooo-sim:g1": "sha256:0d80d39df2f24dc60a77387242f781edc1cc67f53865719981e01b5b5a989d26"
+  },
+  "build_command": [
+    "make",
+    "check-fp-env",
+    "sim-build",
+    "JOBS=4"
+  ],
+  "command": [
+    "make",
+    "qualify-fp-balanced-dut",
+    "JOBS=4"
+  ],
+  "memory_model": {
+    "ram_bytes": 1048576,
+    "dmem_latency_cycles": 1,
+    "random_extra_latency_cycles": 0,
+    "random_seed": null
+  },
+  "limits": {
+    "dut_max_cycles": 25000000,
+    "dut_timeout_seconds": 180,
+    "spike_timeout_seconds": 120
+  },
+  "build_started_at_utc": "2026-10-17T13:46:08.415163+00:00",
+  "build_finished_at_utc": "2026-10-17T13:46:44.504272+00:00",
+  "build_returncode": 0,
+  "started_at_utc": "2026-10-17T13:46:44.504334+00:00",
+  "simulator_sha256_at_start": "44d59f5b29fe427e20988799d2780e127b15f833f21e10a3af7348361e54c1c7",
+  "finished_at_utc": "2026-10-17T13:48:02.023567+00:00",
+  "returncode": 0,
+  "working_tree_clean_at_end": true,
+  "simulator_sha256_at_end": "44d59f5b29fe427e20988799d2780e127b15f833f21e10a3af7348361e54c1c7"
+}

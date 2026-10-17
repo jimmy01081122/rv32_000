@@ -68,6 +68,12 @@ Spike and DUT self-checks in a [clean-commit rerun](docs/evidence/2026-10-17/emb
 The performance and physical baseline contracts remain open; see the
 [qualification status](docs/PROGRESS_REVIEW.md).
 
+`make qualify-fp-balanced-dut JOBS=4` builds and numerically checks the selected
+FP32 4+4 kernels on native, Spike and DUT. All eight provisional daily cases
+pass; [archived results](docs/evidence/2026-10-17/fp32-balanced-qualification/README.md)
+include every output, independent references and source identities. Their formal
+measurement contract remains open.
+
 The simulation and generic-synthesis images are separate. For a proxy/private CA:
 
 ```bash

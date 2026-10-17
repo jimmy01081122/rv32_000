@@ -3,6 +3,8 @@
 This directory preserves the earlier FP-profile diagnostic run. The later
 [approved full-suite rerun](embench-approved-rerun/README.md) records a clean
 source commit, 19/19 native/Spike/DUT checks and matching diagnostic outputs.
+The [balanced FP32 qualification](fp32-balanced-qualification/README.md) adds a
+separate clean-commit 8/8 numerical run with all inputs, references and outputs.
 
 The earlier snapshots below omit generated ELFs, disassemblies and some logs.
 The ignored `build/qualification/` directory is reused by later runs; regenerate

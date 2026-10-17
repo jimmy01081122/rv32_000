@@ -68,8 +68,13 @@ configuration, and must not be merged into this run's pass counts.
    kernels per group and equal group weights. The [FP32 workload record](FP32_BALANCED_PROPOSAL.md)
    notes 18/18 native/RV32 object builds for
    additional sources; pinned CMSIS-DSP, KissFFT and PolyBench source identities
-   pass `make check-fp-sources`. A provisional FIR pilot passes native, Spike
-   and DUT numerical checks; the other seven kernels remain unqualified.
+   pass `make check-fp-sources`. The [balanced FP32 qualification](evidence/2026-10-17/fp32-balanced-qualification/README.md)
+   now passes 8/8 native, Spike and DUT cases from clean commit
+   `df97854c719014df862d6d6df450d02fe0cee756`. Each native/DUT run emits 3,629
+   values independently checked against host-double references. Streaming states,
+   Cholesky reconstruction and pinned upstream SVM labels pass; six checker
+   positive/negative controls pass. Formal sizes, tolerances, FMA policy,
+   timer overhead, stack high-water and memory/physical contracts remain open.
 6. **Physical results:** port hardcoded host paths, provision pinned ORFS/ASAP7,
    audit measurement units, synthesis boundary, constraints, corners and parasitic
    stage, then reproduce AP5B results. Current config skips detailed routing;

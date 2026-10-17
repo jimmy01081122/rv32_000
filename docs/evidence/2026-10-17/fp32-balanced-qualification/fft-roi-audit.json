@@ -1,0 +1,79 @@
+{
+  "scope": "Exact ELF static FFT call audit plus runtime fatal allocation guard; 256-point out-of-place fixture only",
+  "identity": {
+    "build_command": [
+      "riscv-none-elf-gcc",
+      "-std=gnu11",
+      "-O3",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-ffunction-sections",
+      "-fdata-sections",
+      "-fstack-usage",
+      "-D__GNUC_PYTHON__",
+      "-DFP_CASE=2",
+      "-I/workspace/build/qualification/fp-balanced/baremetal/fft",
+      "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+      "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+      "-I/workspace/build/qualification/fp-balanced/kissfft",
+      "-DNDEBUG",
+      "-DKISS_FFT_MALLOC=fp_fft_malloc",
+      "-DKISS_FFT_FREE=fp_fft_free",
+      "-include",
+      "software/fp_bench/fft_alloc_guard.h",
+      "-march=rv32imf_zicsr",
+      "-mabi=ilp32f",
+      "-ffreestanding",
+      "-nostartfiles",
+      "-nostdlib",
+      "-Isoftware/include",
+      "-Tsoftware/linker/link.ld",
+      "software/crt0/crt0.S",
+      "software/embench/fail_syscalls.c",
+      "software/fp_bench/balanced.c",
+      "/workspace/build/qualification/fp-balanced/kissfft/kiss_fft.c",
+      "-Wl,--gc-sections",
+      "-o",
+      "build/qualification/fp-balanced/baremetal/fft/audit.elf",
+      "-Wl,--start-group",
+      "-lm",
+      "-lc",
+      "-lgcc",
+      "-Wl,--end-group"
+    ],
+    "stripped_elf_matches_executed": true,
+    "elf_sha256": "7c4761ad6c9138d2ea03d1092a2cdbadf5eab661cf6047fd65638ae36545a323"
+  },
+  "timed_function_edges": {
+    "fp_kernel": [
+      "kiss_fft"
+    ],
+    "kiss_fft": [
+      "fp_fft_free",
+      "fp_fft_malloc",
+      "kf_work",
+      "memcpy"
+    ],
+    "kf_work": [
+      "fp_fft_free",
+      "fp_fft_malloc",
+      "kf_work"
+    ]
+  },
+  "unresolved_indirect_calls": {
+    "fp_kernel": [],
+    "kiss_fft": [],
+    "kf_work": []
+  },
+  "soft_double_or_libm_calls_in_timed_closure": false,
+  "initialization_only_functions": [
+    "kiss_fft_alloc",
+    "cos",
+    "sin",
+    "floor",
+    "sqrt",
+    "software double helpers"
+  ],
+  "allocation_guard": "Any KissFFT malloc/free attempt sets a volatile failure flag; final DUT and host checks passed",
+  "config": "NDEBUG disables optional upstream logging; numerical checks and allocation guard remain active"
+}

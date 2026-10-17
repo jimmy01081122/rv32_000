@@ -57,12 +57,58 @@ RV32 objects 的 attributes 均為 `rv32i2p1_m2p0_f2p2_zicsr2p0_zmmul1p0`。
 完整原始結果與編譯命令見忽略版本控制的
 `build/qualification/fp-balanced/fir-pilot/summary.json`。
 這項尺寸及容差只供資格實驗，尚未核定為最終 4+4 量測契約；
-其餘七項尚未完成裸機數值檢查。
+其餘七項的後續裸機數值檢查已完成，見下節；FIR 舊 pilot 與新共同 harness
+的計時入口不同，不將兩者的診斷週期差解讀為 CPU 改善。
 
 KissFFT object 仍有軟體 double、`cos/sin/floor/sqrt`、配置器及錯誤輸出依賴。
 原始碼中的 twiddle／分解初始化需要數學函式庫。建議固定 2 的冪次 FFT、
 不同的輸入輸出緩衝區，將配置及初始化放在 ROI 外；完整 ELF 和呼叫追蹤
-仍須確認計時區間內沒有非預期的軟體 double 或 heap 操作。
+已在下述 256 點資格案例完成精確 ELF 的呼叫稽核及配置器 guard；
+其他尺寸仍須重新確認。
+
+## 八項裸機數值資格結果
+
+從乾淨 commit `df97854c719014df862d6d6df450d02fe0cee756` 執行
+`make qualify-fp-balanced-dut JOBS=4`：主機、Spike、DUT 各 **8/8 通過**，
+目標 ELF 的 ISA／single-float ABI 均符合預期。完整
+[封存證據](evidence/2026-10-17/fp32-balanced-qualification/README.md)包含每項資料、
+輸入與參考值雜湊、編譯命令、逐筆原始輸出、工具身分與診斷週期。
+
+獨立 Python double 參考先對序列化 binary32 輸入計算；DUT 與主機各輸出
+3,629 筆結果，主機逐筆以 `abs(error) <= atol + rtol * abs(reference)` 重算檢查。
+兩者八項輸出 checksum 全部一致；Spike 執行 ELF 內的 binary32 參考檢查，
+其 MMIO 輸出不由 Spike 轉送。這不是完整指令／FP flag 差分測試。
+
+| 核心 | 檢查數量 | 暫定 atol / rtol | DUT 最大絕對誤差 | 診斷 ROI 週期 |
+| --- | ---: | --- | ---: | ---: |
+| FIR | 574 | 1e-5 / 1e-5 | 0 | 75,326 |
+| IIR | 528 | 1e-6 / 2e-5 | 7.603e-9 | 17,653 |
+| FFT | 512 | 2e-5 / 2e-5 | 3.666e-6 | 41,929 |
+| PID | 515 | 1e-5 / 1e-5 | 0 | 8,782 |
+| GEMM | 500 | 1e-5 / 1e-5 | 2.456e-6 | 155,749 |
+| BiCG | 80 | 1e-5 / 1e-5 | 1.971e-6 | 24,053 |
+| Cholesky | 820 | 1e-4 / 2e-4 | 4.828e-7 | 225,987 |
+| SVM | 100 | 分類標籤完全相同 | 0 | 45,492 |
+
+FIR／IIR 包含整批、4×64 串流輸出及各自末端狀態，兩種分段結果逐位元一致；
+PID 核對完整軌跡與末端狀態。FIR／PID 的這組二進位分數資料恰好運算精確，
+誤差為零不代表已涵蓋一般捨入情境。
+
+Cholesky 核對全部下三角及正對角，double 重建相對 infinity-norm 殘差為
+`5.0252092818979085e-08`，低於暫定 `2e-5`；序列化輸入的 double 參考條件數
+估計為 `1671.5124509163`。SVM 使用上游 test-1 固定模型：100 筆、10 維、
+4 個 support vectors；全部標籤也與獨立 double 權重折疊參考一致。
+最小決策絕對值為 `0.6061864351498374`，這組資料未涵蓋接近邊界的分類。
+
+FFT 採上游 `NDEBUG` 關閉選用的 stderr logging；數值檢查仍啟用。
+精確 ELF 的靜態呼叫稽核顯示計時函式閉包沒有軟體 double／libm 呼叫；
+配置器 guard 確認本次沒有 malloc／free 嘗試。twiddle 配置與數學初始化在 ROI 外。
+移植時的標頭／stderr 連結失敗已修正，原始開發失敗另存於封存，不當成 DUT 結果。
+
+驗證器的六項正反向測試通過：包含錯誤數值、NaN／infinity、漏樣／重複樣本、
+錯誤分類與超標的 Cholesky 重建殘差。這些容差在 DUT 執行前設定，沒有因失敗放寬。
+日常尺寸的裸機數值資格已成立；正式資料規模、FMA、暖機、計時器成本、stack 峰值
+及記憶體／實體契約仍待完成，尚未產生集合加速比。
 
 原始命令、object、反組譯與錯誤紀錄存於忽略版本控制的
 `build/qualification/fp-balanced/`；這些來源不複製進 repo。
@@ -108,8 +154,9 @@ SVM 的生成程式使用 NumPy／scikit-learn 且未在該檔固定亂數種子
 3. 本次 `-ffp-contract=off` 是來源資格探測條件。正式 FMA 融合政策與容差在
    看優化成績前核定；不從 object 編譯成功推導任何 FP 正確性結論。
 4. 每項須核對 RAM／stack 尖峰、完整輸出、數值容差及執行成本。
-   上表大小尚未在 DUT 執行；PolyBench SMALL 陣列尖峰至多 115,200 bytes，
-   其餘程式連結後仍須逐項確認符合現有 1 MiB RAM。
+   日常欄的暫定大小已在 DUT 通過；里程碑欄尚未執行。
+   已保留靜態 text/data/bss 與編譯器 stack frame 記錄，仍須量測實際 stack 峰值；
+   PolyBench SMALL 陣列尖峰至多 115,200 bytes，須另做 RAM 餘裕確認。
 
 ## 已核准的均衡評分權重
 
