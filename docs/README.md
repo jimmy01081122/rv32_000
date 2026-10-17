@@ -13,6 +13,7 @@ signoff label applies only to the source/configuration and checks in that record
 | [Architecture](../architecture_spec.md) | Implemented structures and architectural obligations |
 | [Micro-operations](../uop_spec.md) | Current packet/schema reference |
 | [Workloads](WORKLOADS.md) | Candidate benchmark contract; not yet an implemented acceptance gate |
+| [Balanced FP32 proposal](FP32_BALANCED_PROPOSAL.md) | Control/DSP and matrix/ML candidates, source probes and proposed weights |
 | [Initial workload qualification](WORKLOAD_QUALIFICATION_2026-10-16.md) | Embench library blockers and PolyBench FP32 source/resource probes |
 | [Progress and baseline review](PROGRESS_REVIEW.md) | Updated FP toolchain evidence, honest progress gates and discussion proposals |
 | [Session handoff](SESSION_HANDOFF.md) | Bring-up measurements, tool images and local evidence locations |

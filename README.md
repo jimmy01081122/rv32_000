@@ -8,6 +8,8 @@ project; tape-out is outside the agreed scope.
 General embedded performance and single-precision floating-point performance
 are equally important project objectives. Workload qualification and a fresh
 AP5B baseline precede the next architecture optimization.
+The FP32 workload direction balances control/DSP and matrix/ML kernels;
+the [candidate set and scoring proposal](docs/FP32_BALANCED_PROPOSAL.md) await qualification.
 
 ## Start here
 

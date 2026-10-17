@@ -57,6 +57,9 @@ configuration, and must not be merged into this run's pass counts.
    FP-store data at PC `0x80001220`. PolyBench MINI/SMALL native runs and
    target object compilation succeeded; bare-metal execution and numerical checking
    remain open.
+   The user selected balanced control/DSP and matrix/ML coverage. The [4+4 FP32
+   proposal](FP32_BALANCED_PROPOSAL.md) records 18/18 native/RV32 object builds for
+   additional sources; no new-kernel execution or numerical pass is claimed.
 6. **Physical results:** port hardcoded host paths, provision pinned ORFS/ASAP7,
    audit measurement units, synthesis boundary, constraints, corners and parasitic
    stage, then reproduce AP5B results. Current config skips detailed routing;
