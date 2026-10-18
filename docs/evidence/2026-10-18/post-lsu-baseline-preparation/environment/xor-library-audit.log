@@ -1,0 +1,121 @@
+TT asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz /*
+BSD 3-Clause License
+
+Copyright 2020 Lawrence T. Clark, Vinay Vashishtha, or Arizona State
+University
+
+Redistribution
+pg_pin (VDD) {
+pg_pin (VSS) {
+when : "(A * B * !Y)";
+when : "(A * B * !Y)";
+when : "(A * !B * Y)";
+when : "(A * !B * Y)";
+when : "(!A * B * Y)";
+when : "(!A * B * Y)";
+when : "(!A * !B * !Y)";
+when : "(!A * !B * !Y)";
+pin (Y) {
+function : "(A * !B) + (!A * B)";
+power_down_function : "(!VDD) + (VSS)";
+related_pin : "A";
+timing_sense : positive_unate;
+timing_type : combinational;
+when : "!B";
+related_pin : "A";
+timing_sense : negative_unate;
+timing_type : combinational;
+when : "B";
+related_pin : "B";
+timing_sense : positive_unate;
+timing_type : combinational;
+when : "!A";
+related_pin : "B";
+timing_sense : negative_unate;
+timing_type : combinational;
+when : "A";
+related_pin : "A";
+when : "B";
+related_pin : "A";
+when : "B";
+related_pin : "A";
+SS asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz /*
+BSD 3-Clause License
+
+Copyright 2020 Lawrence T. Clark, Vinay Vashishtha, or Arizona State
+University
+
+Redistribution
+pg_pin (VDD) {
+pg_pin (VSS) {
+when : "(A * B * !Y)";
+when : "(A * B * !Y)";
+when : "(A * !B * Y)";
+when : "(A * !B * Y)";
+when : "(!A * B * Y)";
+when : "(!A * B * Y)";
+when : "(!A * !B * !Y)";
+when : "(!A * !B * !Y)";
+pin (Y) {
+function : "(A * !B) + (!A * B)";
+power_down_function : "(!VDD) + (VSS)";
+related_pin : "A";
+timing_sense : positive_unate;
+timing_type : combinational;
+when : "!B";
+related_pin : "A";
+timing_sense : negative_unate;
+timing_type : combinational;
+when : "B";
+related_pin : "B";
+timing_sense : positive_unate;
+timing_type : combinational;
+when : "!A";
+related_pin : "B";
+timing_sense : negative_unate;
+timing_type : combinational;
+when : "A";
+related_pin : "A";
+when : "B";
+related_pin : "A";
+when : "B";
+related_pin : "A";
+when : "!B";
+FF asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz /*
+BSD 3-Clause License
+
+Copyright 2020 Lawrence T. Clark, Vinay Vashishtha, or Arizona State
+University
+
+Redistribution
+pg_pin (VDD) {
+pg_pin (VSS) {
+when : "(A * B)";
+when : "(A * !B)";
+when : "(!A * B)";
+when : "(!A * !B)";
+pin (Y) {
+function : "(A * !B) + (!A * B)";
+power_down_function : "(!VDD) + (VSS)";
+related_pin : "A";
+timing_sense : positive_unate;
+timing_type : combinational;
+when : "!B";
+related_pin : "A";
+timing_sense : non_unate;
+timing_type : combinational;
+related_pin : "A";
+timing_sense : negative_unate;
+timing_type : combinational;
+when : "B";
+related_pin : "B";
+timing_sense : positive_unate;
+timing_type : combinational;
+when : "!A";
+related_pin : "B";
+timing_sense : non_unate;
+timing_type : combinational;
+related_pin : "B";
+timing_sense : negative_unate;
+timing_type : combinational;
+when : "A";

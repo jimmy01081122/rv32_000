@@ -1,0 +1,66 @@
+[TCL: yosys -import] Command name collision: found pre-existing command `cd' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `eval' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `exec' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `read' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `trace' -> skip.
+
+1. Executing Verilog-2005 frontend: build/baseline-setup/hook-controls/good.v
+Parsing Verilog input from `build/baseline-setup/hook-controls/good.v' to AST representation.
+Generating RTLIL representation for module `\good'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \good
+
+2.2. Analyzing design hierarchy..
+Top module:  \good
+Removed 0 unused modules.
+
+3. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$build/baseline-setup/hook-controls/good.v:2$1 in module good.
+Removed a total of 0 dead cases.
+
+5. Executing PROC_INIT pass (extract init attributes).
+
+6. Executing PROC_ARST pass (detect async resets in processes).
+
+7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\good.$proc$build/baseline-setup/hook-controls/good.v:3$2'.
+     1/1: $0\q[0:0]
+Creating decoders for process `\good.$proc$build/baseline-setup/hook-controls/good.v:2$1'.
+     1/2: $1\y[0:0]
+     2/2: $0\y[0:0]
+
+8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module good.
+
+9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Warning: Ignoring module good because it contains processes (run 'proc' command first).
+
+10. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\good.\q' using process `\good.$proc$build/baseline-setup/hook-controls/good.v:3$2'.
+  created $dff cell `$procdff$6' with positive edge clock.
+Creating register for signal `\good.\y' using process `\good.$proc$build/baseline-setup/hook-controls/good.v:2$1'.
+  created direct connection (no actual register cell created).
+
+11. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+12. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `good.$proc$build/baseline-setup/hook-controls/good.v:3$2'.
+Found and cleaned up 1 empty switch in `\good.$proc$build/baseline-setup/hook-controls/good.v:2$1'.
+Removing empty process `good.$proc$build/baseline-setup/hook-controls/good.v:2$1'.
+Cleaned up 1 empty switch.
+
+13. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \good..
+Removed 0 unused cells and 5 unused wires.
+<suppressed ~1 debug messages>
+
+14. Executing CHECK pass (checking for obvious problems).
+Checking module good...
+Found and reported 0 problems.

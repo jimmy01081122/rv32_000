@@ -1,0 +1,66 @@
+[TCL: yosys -import] Command name collision: found pre-existing command `cd' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `eval' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `exec' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `read' -> skip.
+[TCL: yosys -import] Command name collision: found pre-existing command `trace' -> skip.
+
+1. Executing Verilog-2005 frontend: build/baseline-setup/hook-controls/latch.v
+Parsing Verilog input from `build/baseline-setup/hook-controls/latch.v' to AST representation.
+Generating RTLIL representation for module `\bad'.
+Successfully finished Verilog frontend.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \bad
+
+2.2. Analyzing design hierarchy..
+Top module:  \bad
+Removed 0 unused modules.
+
+3. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Marked 1 switch rules as full_case in process $proc$build/baseline-setup/hook-controls/latch.v:2$1 in module bad.
+Removed a total of 0 dead cases.
+
+5. Executing PROC_INIT pass (extract init attributes).
+
+6. Executing PROC_ARST pass (detect async resets in processes).
+
+7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `\bad.$proc$build/baseline-setup/hook-controls/latch.v:2$1'.
+     1/2: $1\y[0:0]
+     2/2: $0\y[0:0]
+
+8. Executing OPT_EXPR pass (perform const folding).
+Optimizing module bad.
+
+9. Executing OPT_CLEAN pass (remove unused cells and wires).
+Warning: Ignoring module bad because it contains processes (run 'proc' command first).
+
+10. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `\bad.\y' using process `\bad.$proc$build/baseline-setup/hook-controls/latch.v:2$1'.
+  created direct connection (no actual register cell created).
+
+11. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+12. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Found and cleaned up 1 empty switch in `\bad.$proc$build/baseline-setup/hook-controls/latch.v:2$1'.
+Removing empty process `bad.$proc$build/baseline-setup/hook-controls/latch.v:2$1'.
+Cleaned up 1 empty switch.
+
+13. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \bad..
+Removed 0 unused cells and 4 unused wires.
+<suppressed ~1 debug messages>
+
+14. Executing CHECK pass (checking for obvious problems).
+Checking module bad...
+Warning: found logic loop in module bad:
+    cell $procmux$3 ($mux) source: build/baseline-setup/hook-controls/latch.v:2.14-2.15|build/baseline-setup/hook-controls/latch.v:2.11-2.21
+      A[0] --> Y[0]
+    wire \y source: build/baseline-setup/hook-controls/latch.v:1.41-1.42
+Found and reported 1 problems.
+ERROR: Found 1 problems in 'check -assert'.
