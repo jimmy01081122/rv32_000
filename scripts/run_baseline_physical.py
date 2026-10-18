@@ -28,7 +28,7 @@ def main():
     parser.add_argument('--synthesis-from',type=Path,help='reuse a completed, identity-checked synthesis stage from another attempt')
     parser.add_argument('--cts-from',type=Path,help='restart global routing from a completed, identity-checked TT CTS stage')
     parser.add_argument('--grt-from',type=Path,help='incrementally repair a completed, identity-checked TT global-route stage')
-    parser.add_argument('--eco-slew-margin',type=int,default=30,help='TT ECO slew margin percent; independent corner limits stay unchanged')
+    parser.add_argument('--eco-slew-margin',type=int,default=45,help='TT ECO slew margin percent; independent corner limits stay unchanged')
     parser.add_argument('--eco-hold-margin-ps',type=int,default=50,help='TT ECO hold repair margin ps; independent corner uncertainty stays unchanged')
     args = parser.parse_args()
     if args.period_ps <= 2200 or args.jobs < 1:

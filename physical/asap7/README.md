@@ -61,7 +61,7 @@ remains a failure. Mismatched periods or mapping policies are rejected.
 When independent corners expose electrical gaps, `--grt-from build/...` starts
 an explicit TT-only post-route ECO from immutable incoming DB/SDC files. It
 reuses the pinned ORFS environment and existing routes, repairs slew with a
-30% optimizer margin and hold with 50 ps, legalizes and incrementally reroutes.
+45% optimizer margin and hold with 50 ps, legalizes and incrementally reroutes.
 These optimizer margins preserve the independent acceptance constraints. The
 Makefile/Tcl and incoming checkpoint are hashed by the durable worker. All three
 corners must be collected and reviewed again after this stage; the initial v4
@@ -70,6 +70,10 @@ The ECO concludes with a fresh whole-design global route and antenna-model
 report. Incremental demand tables describe modified nets; the final full-route
 table is used for whole-design congestion review. Analysis requires the explicit
 full-route completion marker as well as the hashed final checkpoint.
+The earlier 30% probe cleared FF slew but left 171 SS violations. Direct pin/net
+diagnosis found a representative 222.67 ps TT / 349.18 ps SS data transition with
+17.49 fF wire capacitance; the clock input was 24.14 ps at SS. The 45% optimizer
+margin targets 176 ps at TT while all independent corner limits stay unchanged.
 
 The following items describe the **legacy** flow in this directory:
 
