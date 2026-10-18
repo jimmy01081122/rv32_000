@@ -1,0 +1,23 @@
+docker run --rm --user 1000:1000 -v /workspace/rv32_000:/workspace -w /workspace rv32ooo-fp:p1 -c 'set -eu; \
+  test "$(riscv-none-elf-gcc -march=rv32imf_zicsr -mabi=ilp32f -print-multi-directory)" = rv32imf_zicsr/ilp32f; \
+  test -f "$(riscv-none-elf-gcc -march=rv32imf_zicsr -mabi=ilp32f -print-file-name=libm.a)"; \
+  riscv-none-elf-gcc --version | head -1'
+riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 15.2.0
+docker run --rm --user 1000:1000 -v /workspace/rv32_000:/workspace -w /workspace rv32ooo-fp:p1 -c 'python3 scripts/check_fma_finite.py'
+FMA rounding: PASS
+FMA finite: PASS
+python3 scripts/prepare_fp_sources.py
+CMSIS-DSP: pinned source OK (18 files checked)
+kissfft: pinned source OK (5 files checked)
+PolyBench-C: pinned source OK (9 files checked)
+docker run --rm --user 1000:1000 -v /workspace/rv32_000:/workspace -w /workspace rv32ooo-fp:p1 -c 'python3 scripts/compare_fp_contraction.py'
+off: exit 0
+fast: exit 0
+fir 75326 74311 1.0136588122888939
+iir 17653 13523 1.305405605265104
+fft 41929 40867 1.0259867374654366
+pid 8782 7248 1.211644591611479
+gemm 155749 133275 1.1686287750891016
+bicg 24053 23927 1.005266017469804
+cholesky 225987 194161 1.1639155134141255
+svm 45492 43392 1.048396017699115

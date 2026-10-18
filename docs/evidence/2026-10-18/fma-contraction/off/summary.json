@@ -1,0 +1,1726 @@
+{
+  "scope": "Provisional 4+4 numerical qualification; no score or frozen baseline",
+  "started_at_utc": "2026-10-17T23:50:19.516940+00:00",
+  "selected": [
+    "fir",
+    "iir",
+    "fft",
+    "pid",
+    "gemm",
+    "bicg",
+    "cholesky",
+    "svm"
+  ],
+  "selected_count": 8,
+  "expected_count": 8,
+  "run_dut": true,
+  "source_check": {
+    "command": [
+      "python3",
+      "scripts/prepare_fp_sources.py"
+    ],
+    "returncode": 0,
+    "log": "build/qualification/fp-balanced/fma-comparison/off/sources.log",
+    "log_sha256": "a3f568923e9fa316bcd817d29eb69f5f2aa2db88ee595c4f5cc2a0c41ff9d109",
+    "wall_seconds": 0.10971933599648764
+  },
+  "metadata": {
+    "repository": {
+      "command": [
+        "git",
+        "rev-parse",
+        "HEAD"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/fp-balanced/fma-comparison/off/repository.log",
+      "log_sha256": "1632ae2ca40b51b993059b8bd3089aeea54732f70e9aab29879992182388c7f2",
+      "wall_seconds": 0.001163913999334909
+    },
+    "working-tree": {
+      "command": [
+        "git",
+        "status",
+        "--porcelain"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/fp-balanced/fma-comparison/off/working-tree.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "wall_seconds": 0.017191819002619013
+    },
+    "native-gcc": {
+      "command": [
+        "gcc",
+        "--version"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/fp-balanced/fma-comparison/off/native-gcc.log",
+      "log_sha256": "9829ba25432aae95cc193accafa14bfab70abb264f797d07c47ba1dcdf4f31a1",
+      "wall_seconds": 0.0011560409984667785
+    },
+    "riscv-gcc": {
+      "command": [
+        "riscv-none-elf-gcc",
+        "--version"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/fp-balanced/fma-comparison/off/riscv-gcc.log",
+      "log_sha256": "5709e2a2d58f0b756243f3cc20a21793a150e281f61b8ec4e5eaee556f1f65aa",
+      "wall_seconds": 0.001961103997018654
+    },
+    "verilator": {
+      "command": [
+        "verilator",
+        "--version"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/fp-balanced/fma-comparison/off/verilator.log",
+      "log_sha256": "e9af8edbc4366e97ab35cf36cc274bf8d63b74abd46f00b89eb874fc502f2774",
+      "wall_seconds": 0.038535225998202804
+    }
+  },
+  "fp_contract": "off",
+  "fast_math": false,
+  "profile_roi": true,
+  "source_identity_sha256": "c41eaef98bd1caf594c38bf87bcfd90e472eaf4c430a333acc44fa270fd6d9b7",
+  "compiler_version_sha256": {
+    "native-gcc": "9829ba25432aae95cc193accafa14bfab70abb264f797d07c47ba1dcdf4f31a1",
+    "riscv-gcc": "5709e2a2d58f0b756243f3cc20a21793a150e281f61b8ec4e5eaee556f1f65aa"
+  },
+  "project_source_sha256": {
+    "scripts/qualify_fp_balanced.py": "68c0b17961725aa1f183f68ca68f6754cb6917d034a0cc16a350031fd71b8fb8",
+    "scripts/fp_balanced_fixtures.py": "15408929495ab58f86ac329c53c157c9c23138a2dbdf13e14ed871e5ad12990a",
+    "scripts/prepare_fp_sources.py": "614dcfdd7e0256776b3bdf43011cecbacebe564eebaafdfcde87408831ba3f3e",
+    "software/fp_bench/balanced.c": "f55128a2fd854653b751351ab8e3ef1dc710fb22982067e8876b03cbf2d11afe",
+    "software/fp_bench/fft_alloc_guard.h": "bc5dc669b576bf6b8e7c478a9620291896ccc1b0acb1f011683158b2e52ebd48",
+    "software/crt0/crt0.S": "2bff1b7d8250a6ef699624832b42c6209fcacbc6e6315ae6f067559f5975ac18",
+    "software/linker/link.ld": "ed6226b801eb75e26f49c8e0be63dcd840b33c84b4a95348045fbfd1baf26ff0",
+    "software/embench/fail_syscalls.c": "0808bccf3214b12140c457ca688282b64e247e6149a38221bbbbe29ca5ae1017",
+    "rtl/execute/fp/rv32_ooo_fp_execute.sv": "ee83a69dfbd7b2c9d141ebe14e1c40605ca43ce0f5f490d324113bcb9465c63b",
+    "sim/tb/sim_main.cpp": "0a7495efcc7230c128e05cacde3296e0a64dcbf13d01050cb57e10572f8da224",
+    "sim/tb/fp_roi_profile.h": "b8fe3395a5c8c00b17104a1337ed3eecebff41abc41aa739757bf77485cea09b"
+  },
+  "simulator_sha256": "ff7ae35345e422e93c73a54c3fe0e849b460d56e1234596c50d9625767b0ce7c",
+  "records": [
+    {
+      "name": "fir",
+      "fixture_sha256": "7bc00de30cd7d6e1e6f59782271cd4fe2b9663c716d616d5309a80e2f60be2d5",
+      "fixture_header_sha256": "e29ec52c4e470bb4da06df9f80cbbf71bf76af691f9eaaae5f86270ca26794c4",
+      "native_build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=0",
+          "-I/workspace/build/qualification/fp-balanced/fma-comparison/off/fir",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-DFP_BENCH_HOST",
+          "software/fp_bench/balanced.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/FilteringFunctions/arm_fir_f32.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/FilteringFunctions/arm_fir_init_f32.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/fir/native",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/fir/native-build.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.1235046380024869
+      },
+      "target_build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=0",
+          "-I/workspace/build/qualification/fp-balanced/fma-comparison/off/fir",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/fail_syscalls.c",
+          "software/fp_bench/balanced.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/FilteringFunctions/arm_fir_f32.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/FilteringFunctions/arm_fir_init_f32.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/fir/rv32.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/fir/target-build.log",
+        "log_sha256": "c1d90619cafd99274d1a8fb314134f1567b516e224e91579b52275221729d752",
+        "wall_seconds": 0.17342301099415636
+      },
+      "native": {
+        "command": [
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/fir/native"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/fir/native.log",
+        "log_sha256": "a34565bc624eeee2370eb088412800ad1eaa3b79c987370e06cccba6aeaa48ee",
+        "wall_seconds": 0.0008305709998239763
+      },
+      "native_numeric": {
+        "passed": true,
+        "checked_values": 574,
+        "failed_indices": [],
+        "checksum": "fccef1fd",
+        "checksum_verified": true,
+        "roi_cycles": 0,
+        "max_absolute_error": 0.0,
+        "max_tolerance_fraction": 0.0,
+        "streaming_matches_whole_block_bits": true
+      },
+      "symbol_disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/fir/rv32-symbols.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/fir/symbols-disassembly.log",
+        "log_sha256": "ea13bffd1654139bbb46766c4d7dfb94a6efb8b428aa299b284b09117042f4b5",
+        "wall_seconds": 0.0018861019998439588
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/fir/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/fir/strip.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.001471266004955396
+      },
+      "elf_sha256": "ba78979d45035232be13c4c5e114d5b782a0caf58eb3d2d5b1183d8621c4ba36",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/fir/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/fir/attributes.log",
+        "log_sha256": "71a9da634afed4a8d12587e655496488e04af2b3bcd38ea15e271a4506af9d09",
+        "wall_seconds": 0.0010009370016632602
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/fir/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/fir/size.log",
+        "log_sha256": "a8d71d1a014d801f1bd59082c2c48fb005fccb3901003bf19786be763654fc16",
+        "wall_seconds": 0.0009144470022874884
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/fir/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/fir/disassembly.log",
+        "log_sha256": "40155f055efac7e94645a39f88a24736b3109a7697c3a6df28e0c17c022efc87",
+        "wall_seconds": 0.0016719089981052093
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/fir/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/fir/spike.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.016706387999875005
+      },
+      "isa_abi_passed": true,
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/off/fir/rv32.elf",
+          "+max-cycles=25000000",
+          "+profile-fp-roi"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/fir/dut.log",
+        "log_sha256": "6243a6ded9d95eb7132a772aee71c0455cd5e7985267798dbce81a79100a1174",
+        "wall_seconds": 3.8349126579996664
+      },
+      "dut_numeric": {
+        "passed": true,
+        "checked_values": 574,
+        "failed_indices": [],
+        "checksum": "fccef1fd",
+        "checksum_verified": true,
+        "roi_cycles": 75326,
+        "max_absolute_error": 0.0,
+        "max_tolerance_fraction": 0.0,
+        "streaming_matches_whole_block_bits": true
+      },
+      "dut_exit_passed": true,
+      "roi_profile": {
+        "cycle_reads": 2,
+        "retired": 69329,
+        "fmadd_s": 0,
+        "fmsub_s": 0,
+        "fnmsub_s": 0,
+        "fnmadd_s": 0
+      },
+      "roi_profile_passed": true,
+      "passed": true
+    },
+    {
+      "name": "iir",
+      "fixture_sha256": "401924e8b575e87f6c3a7f760e2a8326770772da42239ee5aff48101c6abafea",
+      "fixture_header_sha256": "c359efee60a0127211fa0ba17d10e06dc1ec3353c6334f3e4a48963ef6066c89",
+      "native_build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=1",
+          "-I/workspace/build/qualification/fp-balanced/fma-comparison/off/iir",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-DFP_BENCH_HOST",
+          "software/fp_bench/balanced.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/FilteringFunctions/arm_biquad_cascade_df2T_f32.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/FilteringFunctions/arm_biquad_cascade_df2T_init_f32.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/iir/native",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/iir/native-build.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.1092257359996438
+      },
+      "target_build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=1",
+          "-I/workspace/build/qualification/fp-balanced/fma-comparison/off/iir",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/fail_syscalls.c",
+          "software/fp_bench/balanced.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/FilteringFunctions/arm_biquad_cascade_df2T_f32.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/FilteringFunctions/arm_biquad_cascade_df2T_init_f32.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/iir/rv32.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/iir/target-build.log",
+        "log_sha256": "2156926c8e683904ce86c8de7f1d04c7e14e7f0e33275cdb92cd5665df8bfff7",
+        "wall_seconds": 0.1815863919982803
+      },
+      "native": {
+        "command": [
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/iir/native"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/iir/native.log",
+        "log_sha256": "8c2be2afce7e4b8038d6d86e43224b72d21051151e24bd6c97bfea93ec5954bc",
+        "wall_seconds": 0.0009049330037669279
+      },
+      "native_numeric": {
+        "passed": true,
+        "checked_values": 528,
+        "failed_indices": [],
+        "checksum": "fd1da799",
+        "checksum_verified": true,
+        "roi_cycles": 0,
+        "max_absolute_error": 7.602541506057658e-09,
+        "max_tolerance_fraction": 0.00439651714448257,
+        "streaming_matches_whole_block_bits": true
+      },
+      "symbol_disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/iir/rv32-symbols.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/iir/symbols-disassembly.log",
+        "log_sha256": "228e50eb537a30fe1b9c56c894b6e10b3ef6e1a837f94f461458979d212f7c7b",
+        "wall_seconds": 0.0017930710018845275
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/iir/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/iir/strip.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.001550435001263395
+      },
+      "elf_sha256": "ef2f66cc52c4fb4e8c1d01698c2c5e034cf4dac2a184bfe5381f2d708db07359",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/iir/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/iir/attributes.log",
+        "log_sha256": "d8823d57818d293dc833f87a10c8a03cfc4d34545fee5657b449962cee566213",
+        "wall_seconds": 0.0009721539972815663
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/iir/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/iir/size.log",
+        "log_sha256": "b75f903a6d32eeee40096f4cef2b23266d151912433851ece74b9db08b66e221",
+        "wall_seconds": 0.0009046229970408604
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/iir/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/iir/disassembly.log",
+        "log_sha256": "f80dd46e0a4a9e48dfbae1e80cc41cf30bfc4c76b51ed1163cce7fae676533b6",
+        "wall_seconds": 0.0020139530024607666
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/iir/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/iir/spike.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.011019706005754415
+      },
+      "isa_abi_passed": true,
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/off/iir/rv32.elf",
+          "+max-cycles=25000000",
+          "+profile-fp-roi"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/iir/dut.log",
+        "log_sha256": "400e6704ad3fc71de1d9b37af2fa1976125f49398f6e045c8b3a264bb947fb46",
+        "wall_seconds": 2.75430476499605
+      },
+      "dut_numeric": {
+        "passed": true,
+        "checked_values": 528,
+        "failed_indices": [],
+        "checksum": "fd1da799",
+        "checksum_verified": true,
+        "roi_cycles": 17653,
+        "max_absolute_error": 7.602541506057658e-09,
+        "max_tolerance_fraction": 0.00439651714448257,
+        "streaming_matches_whole_block_bits": true
+      },
+      "dut_exit_passed": true,
+      "roi_profile": {
+        "cycle_reads": 2,
+        "retired": 15443,
+        "fmadd_s": 0,
+        "fmsub_s": 0,
+        "fnmsub_s": 0,
+        "fnmadd_s": 0
+      },
+      "roi_profile_passed": true,
+      "passed": true
+    },
+    {
+      "name": "fft",
+      "fixture_sha256": "a00e27408849f441313bef45afbedf6153e1de47f22d5da342c32efa7faf9f87",
+      "fixture_header_sha256": "a2fe9583978d3eea9f2a5eef9174b40fa469afd81c8307ad7570b95e0d44bc38",
+      "native_build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=2",
+          "-I/workspace/build/qualification/fp-balanced/fma-comparison/off/fft",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-I/workspace/build/qualification/fp-balanced/kissfft",
+          "-DNDEBUG",
+          "-DKISS_FFT_MALLOC=fp_fft_malloc",
+          "-DKISS_FFT_FREE=fp_fft_free",
+          "-include",
+          "software/fp_bench/fft_alloc_guard.h",
+          "-DFP_BENCH_HOST",
+          "software/fp_bench/balanced.c",
+          "/workspace/build/qualification/fp-balanced/kissfft/kiss_fft.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/fft/native",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/fft/native-build.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.2789423989961506
+      },
+      "target_build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=2",
+          "-I/workspace/build/qualification/fp-balanced/fma-comparison/off/fft",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-I/workspace/build/qualification/fp-balanced/kissfft",
+          "-DNDEBUG",
+          "-DKISS_FFT_MALLOC=fp_fft_malloc",
+          "-DKISS_FFT_FREE=fp_fft_free",
+          "-include",
+          "software/fp_bench/fft_alloc_guard.h",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/fail_syscalls.c",
+          "software/fp_bench/balanced.c",
+          "/workspace/build/qualification/fp-balanced/kissfft/kiss_fft.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/fft/rv32.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/fft/target-build.log",
+        "log_sha256": "4b61627da97e9f7671dbc272d12d5878a17f3e5de6e08a8e62a733ae9098ed1a",
+        "wall_seconds": 0.2744363120000344
+      },
+      "native": {
+        "command": [
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/fft/native"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/fft/native.log",
+        "log_sha256": "4e5014b3e5da1d5bbaf7beea69b7fb081b416ed89698df52336dd8e7e2d01441",
+        "wall_seconds": 0.0008354689998668619
+      },
+      "native_numeric": {
+        "passed": true,
+        "checked_values": 512,
+        "failed_indices": [],
+        "checksum": "cd16c1a3",
+        "checksum_verified": true,
+        "roi_cycles": 0,
+        "max_absolute_error": 3.6661736482201945e-06,
+        "max_tolerance_fraction": 0.05977733854629219
+      },
+      "symbol_disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/fft/rv32-symbols.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/fft/symbols-disassembly.log",
+        "log_sha256": "abda385c5748b0a1a1da627712abd2f04559f2e3c7e85f76167de46031c4977e",
+        "wall_seconds": 0.010343532005208544
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/fft/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/fft/strip.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.0015749730009702034
+      },
+      "elf_sha256": "7c4761ad6c9138d2ea03d1092a2cdbadf5eab661cf6047fd65638ae36545a323",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/fft/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/fft/attributes.log",
+        "log_sha256": "10ccd1a17929a77f3f93235a404f361ed54aa5ed131249bee447944399e9ae4a",
+        "wall_seconds": 0.0011899829987669364
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/fft/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/fft/size.log",
+        "log_sha256": "8717e8c2039d9c1de401aa18c2413c58ba21507df8521b5f9a1c342940190b1f",
+        "wall_seconds": 0.0009055539994733408
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/fft/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/fft/disassembly.log",
+        "log_sha256": "fe265a2cf30bbca220c241f08866565e490ee75812dda7e8052814620e382763",
+        "wall_seconds": 0.010859237998374738
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/fft/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/fft/spike.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.08030873499956215
+      },
+      "isa_abi_passed": true,
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/off/fft/rv32.elf",
+          "+max-cycles=25000000",
+          "+profile-fp-roi"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/fft/dut.log",
+        "log_sha256": "f36a0e63c72bac6087340a483fe4ccc8d68a22e667be277dde99ceb5d181bf14",
+        "wall_seconds": 37.569722416999866
+      },
+      "dut_numeric": {
+        "passed": true,
+        "checked_values": 512,
+        "failed_indices": [],
+        "checksum": "cd16c1a3",
+        "checksum_verified": true,
+        "roi_cycles": 41929,
+        "max_absolute_error": 3.6661736482201945e-06,
+        "max_tolerance_fraction": 0.05977733854629219
+      },
+      "dut_exit_passed": true,
+      "roi_profile": {
+        "cycle_reads": 2,
+        "retired": 25336,
+        "fmadd_s": 0,
+        "fmsub_s": 0,
+        "fnmsub_s": 0,
+        "fnmadd_s": 0
+      },
+      "roi_profile_passed": true,
+      "passed": true
+    },
+    {
+      "name": "pid",
+      "fixture_sha256": "086d757924622c1d4636413dce5635530a241ec901a4a352403c19d37cf795bd",
+      "fixture_header_sha256": "13d5f2fa4f0759adaffc4938e2ac541d502edbd9ea18cfaeb848218ee4a22e75",
+      "native_build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=3",
+          "-I/workspace/build/qualification/fp-balanced/fma-comparison/off/pid",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-DFP_BENCH_HOST",
+          "software/fp_bench/balanced.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/ControllerFunctions/arm_pid_init_f32.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/pid/native",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/pid/native-build.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.09137358100269921
+      },
+      "target_build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=3",
+          "-I/workspace/build/qualification/fp-balanced/fma-comparison/off/pid",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/fail_syscalls.c",
+          "software/fp_bench/balanced.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/ControllerFunctions/arm_pid_init_f32.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/pid/rv32.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/pid/target-build.log",
+        "log_sha256": "b21daf12cc5e10f134dec13bf3566ede0c622a55341a7b8b3f8c37bc33a59db2",
+        "wall_seconds": 0.14214082500257064
+      },
+      "native": {
+        "command": [
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/pid/native"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/pid/native.log",
+        "log_sha256": "193576b356b08f5fd1c8010b1aeefa8230a6efeb6e8a81cd1f0a1ecafcd274de",
+        "wall_seconds": 0.0007934250024845824
+      },
+      "native_numeric": {
+        "passed": true,
+        "checked_values": 515,
+        "failed_indices": [],
+        "checksum": "c5957fb7",
+        "checksum_verified": true,
+        "roi_cycles": 0,
+        "max_absolute_error": 0.0,
+        "max_tolerance_fraction": 0.0
+      },
+      "symbol_disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/pid/rv32-symbols.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/pid/symbols-disassembly.log",
+        "log_sha256": "1c57876e9773d2acc90b283b89a57bd7b57be45e7d798da2675fc9b9d3796fd7",
+        "wall_seconds": 0.001734181001666002
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/pid/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/pid/strip.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.0013491520003299229
+      },
+      "elf_sha256": "f7ce0725df3f4237f35b19e198cdb17bdbcb5a3220b0772149b322b948079f0f",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/pid/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/pid/attributes.log",
+        "log_sha256": "d8e8a474c5881cc92bb9b64674104e1b7edf5a9a5f9ac358cf2f721b29dfe470",
+        "wall_seconds": 0.000827645999379456
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/pid/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/pid/size.log",
+        "log_sha256": "85c2ea35b04878e367b46ebaf39425e9ea431c274914d8b6995fce6d12b31401",
+        "wall_seconds": 0.0008735159935895354
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/pid/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/pid/disassembly.log",
+        "log_sha256": "fae93f933c16a92f5a93b71f396655e020413e472cd337f077c944c7aeb7adea",
+        "wall_seconds": 0.001554971000587102
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/pid/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/pid/spike.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.010300112997356337
+      },
+      "isa_abi_passed": true,
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/off/pid/rv32.elf",
+          "+max-cycles=25000000",
+          "+profile-fp-roi"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/pid/dut.log",
+        "log_sha256": "1979867fd544d74f4a879332e9df648b7d11351b20047801f99f8e5c1490703a",
+        "wall_seconds": 2.237190104999172
+      },
+      "dut_numeric": {
+        "passed": true,
+        "checked_values": 515,
+        "failed_indices": [],
+        "checksum": "c5957fb7",
+        "checksum_verified": true,
+        "roi_cycles": 8782,
+        "max_absolute_error": 0.0,
+        "max_tolerance_fraction": 0.0
+      },
+      "dut_exit_passed": true,
+      "roi_profile": {
+        "cycle_reads": 2,
+        "retired": 6675,
+        "fmadd_s": 0,
+        "fmsub_s": 0,
+        "fnmsub_s": 0,
+        "fnmadd_s": 0
+      },
+      "roi_profile_passed": true,
+      "passed": true
+    },
+    {
+      "name": "gemm",
+      "fixture_sha256": "39ab803bc2400bc3eba86219392bab5c33f0921736e9adeba92b8eb6b956a6a6",
+      "fixture_header_sha256": "9b6171f083cc705b1fc16eabc9236ca1d2a491f559d5163e7df80fa9e36ec5fd",
+      "native_build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=4",
+          "-I/workspace/build/qualification/fp-balanced/fma-comparison/off/gemm",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-DMINI_DATASET",
+          "-DDATA_TYPE_IS_FLOAT",
+          "-DPOLYBENCH_STACK_ARRAYS",
+          "-I/workspace/build/qualification/polybench-c-4.2.1-beta/utilities",
+          "-I/workspace/build/qualification/polybench-c-4.2.1-beta/linear-algebra/blas/gemm",
+          "-DFP_BENCH_HOST",
+          "software/fp_bench/balanced.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/gemm/native",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/gemm/native-build.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.1346976810018532
+      },
+      "target_build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=4",
+          "-I/workspace/build/qualification/fp-balanced/fma-comparison/off/gemm",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-DMINI_DATASET",
+          "-DDATA_TYPE_IS_FLOAT",
+          "-DPOLYBENCH_STACK_ARRAYS",
+          "-I/workspace/build/qualification/polybench-c-4.2.1-beta/utilities",
+          "-I/workspace/build/qualification/polybench-c-4.2.1-beta/linear-algebra/blas/gemm",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/fail_syscalls.c",
+          "software/fp_bench/balanced.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/gemm/rv32.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/gemm/target-build.log",
+        "log_sha256": "cdf765b5c93fe674a89650d883c6112034ea43cb132c28e902c5832ed4cec8ba",
+        "wall_seconds": 0.1426323290070286
+      },
+      "native": {
+        "command": [
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/gemm/native"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/gemm/native.log",
+        "log_sha256": "7ecdc5370b3d90708290037a98d2bf58f1515b7139d01e911ef127da3e673151",
+        "wall_seconds": 0.0008521530035068281
+      },
+      "native_numeric": {
+        "passed": true,
+        "checked_values": 500,
+        "failed_indices": [],
+        "checksum": "5daa43c6",
+        "checksum_verified": true,
+        "roi_cycles": 0,
+        "max_absolute_error": 2.455711365811908e-06,
+        "max_tolerance_fraction": 0.022551123063845276
+      },
+      "symbol_disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/gemm/rv32-symbols.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/gemm/symbols-disassembly.log",
+        "log_sha256": "bfb293a5622b3246b70fe4a5035d70df42d0e1cb778a0a85dcb1c4271f857228",
+        "wall_seconds": 0.001667602002271451
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/gemm/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/gemm/strip.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.001443018001737073
+      },
+      "elf_sha256": "b16c6f8971a61af764ae1279a34a5cede55c7ff3b98ddf2f9f3e079c4973bb40",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/gemm/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/gemm/attributes.log",
+        "log_sha256": "06998446d61dfb6903612491a690fa0a000fb59050115e342e6246000e7e11d2",
+        "wall_seconds": 0.0009131249971687794
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/gemm/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/gemm/size.log",
+        "log_sha256": "9fb03492e5308da1cca37939adefa1680831db98819fd8a69be3f30259a4f13b",
+        "wall_seconds": 0.0009180330016533844
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/gemm/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/gemm/disassembly.log",
+        "log_sha256": "30d1ac7ef0a40a7389c56541933de8041277fca2a48e3a30b370f4fcc3b8fe88",
+        "wall_seconds": 0.0015641599966329522
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/gemm/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/gemm/spike.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.01696818700293079
+      },
+      "isa_abi_passed": true,
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/off/gemm/rv32.elf",
+          "+max-cycles=25000000",
+          "+profile-fp-roi"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/gemm/dut.log",
+        "log_sha256": "f88986bb4c43c48ad7556cb2dacc63c1996cf5acce38b9058904d1e659e6a469",
+        "wall_seconds": 4.026462335998076
+      },
+      "dut_numeric": {
+        "passed": true,
+        "checked_values": 500,
+        "failed_indices": [],
+        "checksum": "5daa43c6",
+        "checksum_verified": true,
+        "roi_cycles": 155749,
+        "max_absolute_error": 2.455711365811908e-06,
+        "max_tolerance_fraction": 0.022551123063845276
+      },
+      "dut_exit_passed": true,
+      "roi_profile": {
+        "cycle_reads": 2,
+        "retired": 95976,
+        "fmadd_s": 0,
+        "fmsub_s": 0,
+        "fnmsub_s": 0,
+        "fnmadd_s": 0
+      },
+      "roi_profile_passed": true,
+      "passed": true
+    },
+    {
+      "name": "bicg",
+      "fixture_sha256": "bc13451e5ee70f8b9ff2bc33e8f158cab00a1f1ded5a01f1dba9310759ae9db9",
+      "fixture_header_sha256": "946f442fd89cc0fc4b3f1850d7b3713fb4ecb8999dae007e0aba16d61554d26f",
+      "native_build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=5",
+          "-I/workspace/build/qualification/fp-balanced/fma-comparison/off/bicg",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-DMINI_DATASET",
+          "-DDATA_TYPE_IS_FLOAT",
+          "-DPOLYBENCH_STACK_ARRAYS",
+          "-I/workspace/build/qualification/polybench-c-4.2.1-beta/utilities",
+          "-I/workspace/build/qualification/polybench-c-4.2.1-beta/linear-algebra/kernels/bicg",
+          "-DFP_BENCH_HOST",
+          "software/fp_bench/balanced.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/bicg/native",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/bicg/native-build.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.12361349300044822
+      },
+      "target_build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=5",
+          "-I/workspace/build/qualification/fp-balanced/fma-comparison/off/bicg",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-DMINI_DATASET",
+          "-DDATA_TYPE_IS_FLOAT",
+          "-DPOLYBENCH_STACK_ARRAYS",
+          "-I/workspace/build/qualification/polybench-c-4.2.1-beta/utilities",
+          "-I/workspace/build/qualification/polybench-c-4.2.1-beta/linear-algebra/kernels/bicg",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/fail_syscalls.c",
+          "software/fp_bench/balanced.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/bicg/rv32.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/bicg/target-build.log",
+        "log_sha256": "9f1145f88406228d726109aab0aab3ffbce54eebd8bc5eb1e0a67e63aff215e8",
+        "wall_seconds": 0.1370399939987692
+      },
+      "native": {
+        "command": [
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/bicg/native"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/bicg/native.log",
+        "log_sha256": "d0ad8df9704967c31e00908996f82a36a6f8bfd81bc36113db32da23284ad7ff",
+        "wall_seconds": 0.0008197749993996695
+      },
+      "native_numeric": {
+        "passed": true,
+        "checked_values": 80,
+        "failed_indices": [],
+        "checksum": "042846fa",
+        "checksum_verified": true,
+        "roi_cycles": 0,
+        "max_absolute_error": 1.9710629199920504e-06,
+        "max_tolerance_fraction": 0.016831848597752545
+      },
+      "symbol_disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/bicg/rv32-symbols.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/bicg/symbols-disassembly.log",
+        "log_sha256": "bd7c6acd983267aeeceb9164e69f72ad92a4b1d3202774818ca50575b1c32353",
+        "wall_seconds": 0.001937603003170807
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/bicg/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/bicg/strip.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.0016757379999035038
+      },
+      "elf_sha256": "84ba91db9de30c7b213821399c6b00ea6c64315b5207fd941d00111af02bde17",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/bicg/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/bicg/attributes.log",
+        "log_sha256": "e21e274f2cebc31d2758e713949149935f96bd2b120b9d6d1cdc23d266d2e19f",
+        "wall_seconds": 0.0009631909997551702
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/bicg/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/bicg/size.log",
+        "log_sha256": "d0ed91b5c07873f48d41b2a7198f274f675b9ba8111f7e5c0893f34348dc8fbf",
+        "wall_seconds": 0.0012254149987711571
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/bicg/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/bicg/disassembly.log",
+        "log_sha256": "44a6f0701ae2d2f06c34af29dec5492dc3483853f40588900510652fa0a9f67c",
+        "wall_seconds": 0.0019038370010093786
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/bicg/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/bicg/spike.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.008203735000279266
+      },
+      "isa_abi_passed": true,
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/off/bicg/rv32.elf",
+          "+max-cycles=25000000",
+          "+profile-fp-roi"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/bicg/dut.log",
+        "log_sha256": "4b10563a433d6f4aa9c495cc849459064bfc4f42d44c1e75a8d1f4c1218c7134",
+        "wall_seconds": 0.7271649589965818
+      },
+      "dut_numeric": {
+        "passed": true,
+        "checked_values": 80,
+        "failed_indices": [],
+        "checksum": "042846fa",
+        "checksum_verified": true,
+        "roi_cycles": 24053,
+        "max_absolute_error": 1.9710629199920504e-06,
+        "max_tolerance_fraction": 0.016831848597752545
+      },
+      "dut_exit_passed": true,
+      "roi_profile": {
+        "cycle_reads": 2,
+        "retired": 19700,
+        "fmadd_s": 0,
+        "fmsub_s": 0,
+        "fnmsub_s": 0,
+        "fnmadd_s": 0
+      },
+      "roi_profile_passed": true,
+      "passed": true
+    },
+    {
+      "name": "cholesky",
+      "fixture_sha256": "c902e3b0ea8c5db9b0e34bc9be472c9c2b44401dd92bd1044fe1a49b9448fcf0",
+      "fixture_header_sha256": "7d13da1cc858a065e8add482ac1ad6a25b3dcbf0f91e160cec0047597c6a6392",
+      "native_build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=6",
+          "-I/workspace/build/qualification/fp-balanced/fma-comparison/off/cholesky",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-DMINI_DATASET",
+          "-DDATA_TYPE_IS_FLOAT",
+          "-DPOLYBENCH_STACK_ARRAYS",
+          "-I/workspace/build/qualification/polybench-c-4.2.1-beta/utilities",
+          "-I/workspace/build/qualification/polybench-c-4.2.1-beta/linear-algebra/solvers/cholesky",
+          "-DFP_BENCH_HOST",
+          "software/fp_bench/balanced.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/cholesky/native",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/cholesky/native-build.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.11991444700106513
+      },
+      "target_build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=6",
+          "-I/workspace/build/qualification/fp-balanced/fma-comparison/off/cholesky",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-DMINI_DATASET",
+          "-DDATA_TYPE_IS_FLOAT",
+          "-DPOLYBENCH_STACK_ARRAYS",
+          "-I/workspace/build/qualification/polybench-c-4.2.1-beta/utilities",
+          "-I/workspace/build/qualification/polybench-c-4.2.1-beta/linear-algebra/solvers/cholesky",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/fail_syscalls.c",
+          "software/fp_bench/balanced.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/cholesky/rv32.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/cholesky/target-build.log",
+        "log_sha256": "267f0a95c8ef646aed92a7f5cbe83d7454f6f4ea566aeadff30e3844dc2c1695",
+        "wall_seconds": 0.16439062599965837
+      },
+      "native": {
+        "command": [
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/cholesky/native"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/cholesky/native.log",
+        "log_sha256": "35edc290aa87140fd4e83f2335e406927be6753338755b12be2ffb1038b5e2f2",
+        "wall_seconds": 0.0008954790027928539
+      },
+      "native_numeric": {
+        "passed": true,
+        "checked_values": 820,
+        "failed_indices": [],
+        "checksum": "22958dce",
+        "checksum_verified": true,
+        "roi_cycles": 0,
+        "max_absolute_error": 4.82792760325701e-07,
+        "max_tolerance_fraction": 0.002054436934076892,
+        "reconstruction_relative_inf_residual": 5.0252092818979085e-08,
+        "positive_diagonal": true
+      },
+      "symbol_disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/cholesky/rv32-symbols.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/cholesky/symbols-disassembly.log",
+        "log_sha256": "5a6e990064985f724de54cca79136875a7a8b6439f27c629bae410002d97afb0",
+        "wall_seconds": 0.0018949639998027124
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/cholesky/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/cholesky/strip.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.0015364140053861775
+      },
+      "elf_sha256": "61920374e48bf74c127dc6083981d0258570f3c6a5d87bda3424aa18cd1479cb",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/cholesky/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/cholesky/attributes.log",
+        "log_sha256": "9624fd5091c0884a6848fd4fc84d1dd94702de8137bdf053c0da45160fb50aad",
+        "wall_seconds": 0.0022526180036948062
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/cholesky/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/cholesky/size.log",
+        "log_sha256": "640b09e6472ce3d3244270557f8e4d479066980248bf9b67100614781e3acfcd",
+        "wall_seconds": 0.0009580530022503808
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/cholesky/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/cholesky/disassembly.log",
+        "log_sha256": "98a30bb452bc3cce2054e1ea36d0af677333d07b2f00fa26c6db3f032c19430b",
+        "wall_seconds": 0.00182142300036503
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/cholesky/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/cholesky/spike.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.017585093999514356
+      },
+      "isa_abi_passed": true,
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/off/cholesky/rv32.elf",
+          "+max-cycles=25000000",
+          "+profile-fp-roi"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/cholesky/dut.log",
+        "log_sha256": "e5b1e3f4b5bfcc7069b8e989f05bcae617ff54c5420b93544dd909c2814569ec",
+        "wall_seconds": 6.049569529997825
+      },
+      "dut_numeric": {
+        "passed": true,
+        "checked_values": 820,
+        "failed_indices": [],
+        "checksum": "22958dce",
+        "checksum_verified": true,
+        "roi_cycles": 225987,
+        "max_absolute_error": 4.82792760325701e-07,
+        "max_tolerance_fraction": 0.002054436934076892,
+        "reconstruction_relative_inf_residual": 5.0252092818979085e-08,
+        "positive_diagonal": true
+      },
+      "dut_exit_passed": true,
+      "roi_profile": {
+        "cycle_reads": 2,
+        "retired": 115015,
+        "fmadd_s": 0,
+        "fmsub_s": 0,
+        "fnmsub_s": 0,
+        "fnmadd_s": 0
+      },
+      "roi_profile_passed": true,
+      "passed": true
+    },
+    {
+      "name": "svm",
+      "fixture_sha256": "665e371ba951908d8d535174a79c27f66036a18070a96374f92e4ab3fe17d078",
+      "fixture_header_sha256": "2cef2ea7386f5cc3bb9d7b37f717f391ebe54ec4196ab56fae8a1804faa1f3a0",
+      "native_build": {
+        "command": [
+          "gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=7",
+          "-I/workspace/build/qualification/fp-balanced/fma-comparison/off/svm",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-DFP_BENCH_HOST",
+          "software/fp_bench/balanced.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/SVMFunctions/arm_svm_linear_predict_f32.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/SVMFunctions/arm_svm_linear_init_f32.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/svm/native",
+          "-lm"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/svm/native-build.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.11351514799753204
+      },
+      "target_build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=off",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=7",
+          "-I/workspace/build/qualification/fp-balanced/fma-comparison/off/svm",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/fail_syscalls.c",
+          "software/fp_bench/balanced.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/SVMFunctions/arm_svm_linear_predict_f32.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/SVMFunctions/arm_svm_linear_init_f32.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/svm/rv32.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/svm/target-build.log",
+        "log_sha256": "1864f4f22e28dc9550e53a1440563d9ff9eed4a39a5557d478220cc54e81f9d4",
+        "wall_seconds": 0.1736778209960903
+      },
+      "native": {
+        "command": [
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/svm/native"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/svm/native.log",
+        "log_sha256": "220f3bac73092c968d7eb3c53fbdbc107f154e7d9214f8043dbfd62f353b53c0",
+        "wall_seconds": 0.000733314998797141
+      },
+      "native_numeric": {
+        "passed": true,
+        "checked_values": 100,
+        "failed_indices": [],
+        "checksum": "28464095",
+        "checksum_verified": true,
+        "roi_cycles": 0,
+        "max_absolute_error": 0.0,
+        "max_tolerance_fraction": null
+      },
+      "symbol_disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/svm/rv32-symbols.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/svm/symbols-disassembly.log",
+        "log_sha256": "c35304e8f7a42d96e054a2e2286ea53d85e5d6652e817f6e61473e3e78270e6f",
+        "wall_seconds": 0.0022913909997441806
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/svm/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/svm/strip.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.0016511270005139522
+      },
+      "elf_sha256": "71ae5ab453fa69a26ee68b38641f6097e529c40fa88b6efdcd76b32cd7907e3c",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/svm/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/svm/attributes.log",
+        "log_sha256": "dbb43bec59d0caaa11e9f710e8edb584115c7006918f0c59c66947fcb697e89c",
+        "wall_seconds": 0.000982450001174584
+      },
+      "size": {
+        "command": [
+          "riscv-none-elf-size",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/svm/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/svm/size.log",
+        "log_sha256": "55bb2f11ae40e6683b8fe6fbc4683b407dd0373a066110a98dbf9c5da9e43eca",
+        "wall_seconds": 0.0010947890041279607
+      },
+      "disassembly": {
+        "command": [
+          "riscv-none-elf-objdump",
+          "-d",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/svm/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/svm/disassembly.log",
+        "log_sha256": "c96b8ff9f0d1d9f4ea442032ebf6bd4ed3f8512e3afa45b9759b0e97d21770ed",
+        "wall_seconds": 0.001795774995116517
+      },
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/fp-balanced/fma-comparison/off/svm/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/svm/spike.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.008880714995029848
+      },
+      "isa_abi_passed": true,
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/off/svm/rv32.elf",
+          "+max-cycles=25000000",
+          "+profile-fp-roi"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-comparison/off/svm/dut.log",
+        "log_sha256": "6078af71ba86796b5d2fd5c5045d580f85d3c7604e0e9ae6e5483c4c3e497845",
+        "wall_seconds": 0.8885743339997134
+      },
+      "dut_numeric": {
+        "passed": true,
+        "checked_values": 100,
+        "failed_indices": [],
+        "checksum": "28464095",
+        "checksum_verified": true,
+        "roi_cycles": 45492,
+        "max_absolute_error": 0.0,
+        "max_tolerance_fraction": null
+      },
+      "dut_exit_passed": true,
+      "roi_profile": {
+        "cycle_reads": 2,
+        "retired": 33922,
+        "fmadd_s": 0,
+        "fmsub_s": 0,
+        "fnmsub_s": 0,
+        "fnmadd_s": 0
+      },
+      "roi_profile_passed": true,
+      "passed": true
+    }
+  ],
+  "finished_at_utc": "2026-10-17T23:51:20.462345+00:00",
+  "passed_count": 8,
+  "all_passed": true
+}

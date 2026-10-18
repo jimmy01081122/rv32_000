@@ -1,0 +1,30 @@
+{
+  "scope": "Same ELF and model, observer flag removed; FIR off and fast",
+  "all_passed": true,
+  "results": [
+    {
+      "mode": "off",
+      "command": [
+        "/workspace/build/sim/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/off/fir/rv32.elf",
+        "+max-cycles=25000000"
+      ],
+      "returncode": 0,
+      "roi_and_checksum_match_profiled_run": true,
+      "log": "build/qualification/fp-balanced/fma-comparison/unprofiled-off.log",
+      "log_sha256": "301278a903cc41e2991f830eadd8a36f4c0ff03d6d743e3ca56816f46af008ef"
+    },
+    {
+      "mode": "fast",
+      "command": [
+        "/workspace/build/sim/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/fast/fir/rv32.elf",
+        "+max-cycles=25000000"
+      ],
+      "returncode": 0,
+      "roi_and_checksum_match_profiled_run": true,
+      "log": "build/qualification/fp-balanced/fma-comparison/unprofiled-fast.log",
+      "log_sha256": "04cb1b7bbaa389b9ea4ba46d343650abad1378e9397dd2ce6e9055741ebbbe5a"
+    }
+  ]
+}

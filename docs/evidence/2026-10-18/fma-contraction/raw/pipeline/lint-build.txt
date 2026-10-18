@@ -1,0 +1,8 @@
+docker run --rm --user 1000:1000 -v /workspace/rv32_000:/workspace -w /workspace rv32ooo-sim:g1 -c "\
+  verilator --lint-only \
+    -Wall \
+    -Wno-UNUSED -Wno-STMTDLY \
+    -f sim/scripts/rv32_ooo_core.f \
+    --top-module rv32_ooo_core \
+  "
+make: Nothing to be done for 'sim-build'.

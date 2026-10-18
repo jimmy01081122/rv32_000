@@ -1,0 +1,95 @@
+{
+  "scope": "Post-correctness-fix controlled contraction experiment and regression",
+  "started_at_utc": "2026-10-17T23:49:34.925463+00:00",
+  "started_at_taipei": "2026-10-18T07:49:34.925824+08:00",
+  "repository_commit": "581ee86f1bd55bc6eff7cc123c660ab94446eb6f",
+  "repository_tree": "9710e8007986558ff814f77470c7119f91cbfc3d",
+  "working_tree_clean_at_start": true,
+  "image_ids": {
+    "rv32ooo-fp:p1": "sha256:2140263677b3a378d5cab75a3d0d4fd285ddb38a1a5a1f81f5cf97db024a02d5",
+    "rv32ooo-sim:g1": "sha256:0d80d39df2f24dc60a77387242f781edc1cc67f53865719981e01b5b5a989d26"
+  },
+  "memory_model": {
+    "ram_bytes": 1048576,
+    "dmem_latency_cycles": 1,
+    "random_extra_delay_cycles": 0
+  },
+  "phases": [
+    {
+      "name": "lint-build",
+      "command": [
+        "make",
+        "lint",
+        "sim-build",
+        "JOBS=4"
+      ],
+      "started_at_utc": "2026-10-17T23:49:34.957084+00:00",
+      "returncode": 0,
+      "finished_at_utc": "2026-10-17T23:49:41.303436+00:00",
+      "log": "build/qualification/fp-balanced/fma-comparison/lint-build.log"
+    },
+    {
+      "name": "directed-and-diff",
+      "command": [
+        "make",
+        "test",
+        "diff-test",
+        "JOBS=4"
+      ],
+      "started_at_utc": "2026-10-17T23:49:41.305024+00:00",
+      "returncode": 0,
+      "finished_at_utc": "2026-10-17T23:49:53.634834+00:00",
+      "log": "build/qualification/fp-balanced/fma-comparison/directed-and-diff.log"
+    },
+    {
+      "name": "profile-unit",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/workspace/rv32_000:/workspace",
+        "-w",
+        "/workspace",
+        "rv32ooo-sim:g1",
+        "-c",
+        "g++ -std=c++17 -Wall -Wextra -Isim/tb sim/tb/test_fp_roi_profile.cpp -o build/qualification/fp-balanced/fma-comparison/profile-unit && build/qualification/fp-balanced/fma-comparison/profile-unit"
+      ],
+      "started_at_utc": "2026-10-17T23:49:53.635245+00:00",
+      "returncode": 0,
+      "finished_at_utc": "2026-10-17T23:49:57.709041+00:00",
+      "log": "build/qualification/fp-balanced/fma-comparison/profile-unit.log"
+    },
+    {
+      "name": "contraction",
+      "command": [
+        "make",
+        "compare-fp-contraction",
+        "JOBS=4"
+      ],
+      "started_at_utc": "2026-10-17T23:49:57.709458+00:00",
+      "returncode": 0,
+      "finished_at_utc": "2026-10-17T23:52:21.701589+00:00",
+      "log": "build/qualification/fp-balanced/fma-comparison/contraction.log"
+    },
+    {
+      "name": "embench19",
+      "command": [
+        "make",
+        "qualify-embench-fp-dut",
+        "JOBS=4"
+      ],
+      "started_at_utc": "2026-10-17T23:52:21.702049+00:00",
+      "returncode": 0,
+      "finished_at_utc": "2026-10-18T00:11:05.455062+00:00",
+      "log": "build/qualification/fp-balanced/fma-comparison/embench19.log"
+    }
+  ],
+  "simulator_sha256": "ff7ae35345e422e93c73a54c3fe0e849b460d56e1234596c50d9625767b0ce7c",
+  "finished_at_utc": "2026-10-18T00:11:05.455630+00:00",
+  "finished_at_taipei": "2026-10-18T08:11:05.455638+08:00",
+  "working_tree_clean_at_end": true,
+  "simulator_sha256_at_end": "ff7ae35345e422e93c73a54c3fe0e849b460d56e1234596c50d9625767b0ce7c"
+}

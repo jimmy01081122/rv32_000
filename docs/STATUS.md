@@ -1,6 +1,6 @@
 # Current project status
 
-Updated 2026-10-17. Documentation baseline: maintenance commit `1b266ed0b17aaec2dc598e5128fc57ab9edf56bb`;
+Updated 2026-10-18. Initial documentation-cleanup baseline: maintenance commit `1b266ed0b17aaec2dc598e5128fc57ab9edf56bb`;
 incoming RTL revision: `0d79df58e65c2e1034e40f7f586a463fd8602ff1`.
 The documentation cleanup changes no RTL behavior or executable acceptance thresholds.
 
@@ -75,6 +75,16 @@ configuration, and must not be merged into this run's pass counts.
    Cholesky reconstruction and pinned upstream SVM labels pass; six checker
    positive/negative controls pass. Formal sizes, tolerances, FMA policy,
    timer overhead, stack high-water and memory/physical contracts remain open.
+   A [matched contraction experiment](FMA_CONTRACTION_REVIEW.md) at clean commit
+   `581ee86f1bd55bc6eff7cc123c660ab94446eb6f` now passes all eight cases in both
+   off and fast modes, with diagnostic equal-group cycle ratio 1.113x. Its finite
+   cancellation probe exposed and fixed premature sticky-bit compression in FMA;
+   full-precision normalization and subnormal packing were corrected. All 3,400
+   finite FMA result/flag cases pass the integer oracle, Spike and DUT. Post-fix
+   directed and commit-diff checks pass 18/18 each; Embench passes 19/19 native,
+   Spike and DUT. This is finite-input coverage, not complete NaN/Inf, trap or
+   RV32F conformance. Physical results must be refreshed for the changed datapath;
+   compiler gains do not establish the architecture or area planning targets.
 6. **Physical results:** port hardcoded host paths, provision pinned ORFS/ASAP7,
    audit measurement units, synthesis boundary, constraints, corners and parasitic
    stage, then reproduce AP5B results. Current config skips detailed routing;

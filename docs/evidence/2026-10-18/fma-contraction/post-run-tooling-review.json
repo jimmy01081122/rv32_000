@@ -1,0 +1,24 @@
+{
+  "scope": "Post-measurement tool-only robustness fix, no RTL, compiler, fixture or modeled timing changes",
+  "measured_source_commit": "581ee86f1bd55bc6eff7cc123c660ab94446eb6f",
+  "tool_review_commit": "c65679076f07c43b5bb37a9bb64c94093f8dd648",
+  "changes": [
+    "Reject failed qualification subprocesses instead of reusing prior summaries or scores",
+    "Create missing qualification parent directories"
+  ],
+  "validation": {
+    "command": [
+      "python3",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "scripts",
+      "-p",
+      "test_fp*.py"
+    ],
+    "passed_controls": 13,
+    "log": "post-run-driver-tests.txt",
+    "log_sha256": "2f7b850c977121d8774a5cdcc47ed550746f0edb17a5b087b7ace1ccd82a6307"
+  }
+}

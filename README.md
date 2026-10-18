@@ -10,7 +10,8 @@ are equally important project objectives. Workload qualification and a fresh
 AP5B baseline precede the next architecture optimization.
 The selected FP32 set has four control/DSP and four matrix/ML kernels with
 equal subgroup weights; its [inputs and numerical contract](docs/FP32_BALANCED_PROPOSAL.md)
-still require qualification.
+have passed provisional daily numerical qualification; their formal measurement
+contract remains open.
 
 ## Start here
 
@@ -20,7 +21,8 @@ still require qualification.
 | [Current status](docs/STATUS.md) | Measured checks, implementation drift and open verification gaps |
 | [Architecture](architecture_spec.md) | Current implementation inventory and architectural requirements |
 | [Micro-operations](uop_spec.md) | Implemented packet types and their limitations |
-| [Workload proposal](docs/WORKLOADS.md) | Candidate benchmark sets and numerical targets awaiting qualification |
+| [Workloads](docs/WORKLOADS.md) | Approved suites and planning targets; open measurement contracts |
+| [FMA contraction review](docs/FMA_CONTRACTION_REVIEW.md) | Matched off/fast cycles, numerical differences and corrected finite FMA checks |
 | [Progress and baseline review](docs/PROGRESS_REVIEW.md) | Evidence gates, current blockers and decisions for discussion |
 | [Session handoff](docs/SESSION_HANDOFF.md) | Environment bring-up evidence and reproduction details |
 | [Documentation index](docs/README.md) | Current documents and historical references |
@@ -73,6 +75,12 @@ FP32 4+4 kernels on native, Spike and DUT. All eight provisional daily cases
 pass; [archived results](docs/evidence/2026-10-17/fp32-balanced-qualification/README.md)
 include every output, independent references and source identities. Their formal
 measurement contract remains open.
+
+`make compare-fp-contraction JOBS=4` first checks exact finite FMA results/flags,
+then runs matched off/fast qualifications on the same RTL. The
+[FMA review](docs/FMA_CONTRACTION_REVIEW.md) records the cancellation fix,
+8/8 passes per mode and diagnostic 1.113x cycle speedup from compiler contraction.
+The default qualifier remains `off`; the formal policy and physical baseline are open.
 
 The simulation and generic-synthesis images are separate. For a proxy/private CA:
 

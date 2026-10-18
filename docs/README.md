@@ -1,6 +1,6 @@
 # Documentation index
 
-Updated 2026-10-17. Begin with current documents below. A historical PASS or
+Updated 2026-10-18. Begin with current documents below. A historical PASS or
 signoff label applies only to the source/configuration and checks in that record.
 
 ## Current documents
@@ -17,6 +17,7 @@ signoff label applies only to the source/configuration and checks in that record
 | [Initial workload qualification](WORKLOAD_QUALIFICATION_2026-10-16.md) | Embench library blockers and PolyBench FP32 source/resource probes |
 | [Approved Embench rerun](evidence/2026-10-17/embench-approved-rerun/README.md) | Clean-commit 19/19 native/Spike/DUT checks, diagnostic cycles, raw logs and hashes |
 | [FP32 numerical qualification](evidence/2026-10-17/fp32-balanced-qualification/README.md) | Clean-commit 8/8 provisional cases, independent references, all outputs, numerical bounds and FFT ROI audit |
+| [FMA contraction review](FMA_CONTRACTION_REVIEW.md) | Off/fast policy, matched cycle/error data, finite FMA correctness fix and regression evidence |
 | [Progress and baseline review](PROGRESS_REVIEW.md) | Updated FP toolchain evidence, honest progress gates and discussion proposals |
 | [Session handoff](SESSION_HANDOFF.md) | Bring-up measurements, tool images and local evidence locations |
 | [CI workflow](../.github/workflows/README.md) | Existing jobs, prerequisites and limits |

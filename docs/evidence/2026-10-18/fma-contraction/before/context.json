@@ -1,0 +1,23 @@
+{
+  "scope": "Pre-fix FMA cancellation failure; experiment tooling is uncommitted, tracked RTL is clean",
+  "repository_commit": "26aac4370d62381830fff1bf97132615ab1d61de",
+  "rtl_working_tree_clean": true,
+  "simulator_sha256": "44d59f5b29fe427e20988799d2780e127b15f833f21e10a3af7348361e54c1c7",
+  "probe_elf_sha256": "1e6608fbdf58babf2a6089bd72d6dd1759684eacd9ae4a5b2e0328098317d0b0",
+  "probe_source_sha256": "ec56bf7c94d99a6ac2bcbe90ea49ecea43f60d1a0e7c4b4d30140eabe72b4041",
+  "fp_execute_source_sha256": "8e5063a9c8b47267c20a5eff18e7573f3541c3469c845f27547d90ab7e6eb407",
+  "spike_returncode": 0,
+  "dut_returncode": 1,
+  "expected_fused_words": [
+    "a8800000",
+    "a8800000",
+    "28800000",
+    "28800000"
+  ],
+  "observed_fused_words": [
+    "b2800000",
+    "b2800000",
+    "32800000",
+    "32800000"
+  ]
+}

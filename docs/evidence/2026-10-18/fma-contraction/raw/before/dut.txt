@@ -1,0 +1,23 @@
+[SimMemory] Loaded segment to 0x80000000 (filesz: 0xa10, memsz: 0xa10)
+[SimMemory] Found 'tohost' symbol at 0x80000a00
+[SimMemory] ELF loaded successfully. Entry PC = 0x80000000
+[Simulator] Starting simulation run...
+FMA PROBE separate=00000000 flags=00000001
+FMA PROBE op=00000000 actual=b2800000 expected=a8800000 flags=00000000
+FMA PROBE op=00000001 actual=b2800000 expected=a8800000 flags=00000000
+FMA PROBE op=00000002 actual=32800000 expected=28800000 flags=00000000
+FMA PROBE op=00000003 actual=32800000 expected=28800000 flags=00000000
+FMA ROUNDING PROBE FAIL
+
+[SimMemory] TOHOST exit (0x3) received. Exit code: 1 (FAIL)
+
+[SimMemory] SIM_EXIT received with code: 1 (FAIL)
+
+================ Simulation Summary ================
+  ELF binary     : build/qualification/fp-balanced/fma-rounding-before/probe.elf
+  Cycles         : 2089
+  Retired insns  : 1047
+  IPC            : 0.5012
+  Exit status    : FAIL
+====================================================
+
