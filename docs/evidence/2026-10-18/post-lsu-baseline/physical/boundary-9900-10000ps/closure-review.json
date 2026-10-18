@@ -1,0 +1,85 @@
+{
+  "scope": "tested global-route timing trials only; routing review and formal measurement still required",
+  "analysis_report_sha256": "cefe47e6985e9ffc36d5b82a6a82119ac1127e0b64d634e6818d48ead4ec7caa",
+  "implementation_report_sha256": "248dcd7b09307d4ae6be058fa8387171eafaa1d924f6335b16fbbb18010e2a35",
+  "checker_sha256": "170a5abc90b2f6dad76d2fa0a81a5b6601b897865862b867d784e888fc1048b5",
+  "records": [
+    {
+      "corner": "TT",
+      "standard_cell_area_um2": 22081.118400004027,
+      "standard_cell_count": 180612,
+      "register_count": 18157,
+      "library_warning_cell_instances": 0,
+      "trials": [
+        {
+          "period_ps": 9900,
+          "setup_slack_ps": 2860.5411487252168,
+          "hold_slack_ps": 48.43675480073882,
+          "problems": [],
+          "passed": true
+        },
+        {
+          "period_ps": 10000,
+          "setup_slack_ps": 2960.541157398834,
+          "hold_slack_ps": 48.43675480073882,
+          "problems": [],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "corner": "SS",
+      "standard_cell_area_um2": 22081.118400004027,
+      "standard_cell_count": 180612,
+      "register_count": 18157,
+      "library_warning_cell_instances": 0,
+      "trials": [
+        {
+          "period_ps": 9900,
+          "setup_slack_ps": -69.12870303832482,
+          "hold_slack_ps": 83.92586659195791,
+          "problems": [
+            "setup violation"
+          ],
+          "passed": false
+        },
+        {
+          "period_ps": 10000,
+          "setup_slack_ps": 30.871305635292604,
+          "hold_slack_ps": 83.92586659195791,
+          "problems": [],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "corner": "FF",
+      "standard_cell_area_um2": 22081.118400004027,
+      "standard_cell_count": 180612,
+      "register_count": 18157,
+      "library_warning_cell_instances": 0,
+      "trials": [
+        {
+          "period_ps": 9900,
+          "setup_slack_ps": 4497.620072138476,
+          "hold_slack_ps": 17.16443660734924,
+          "problems": [],
+          "passed": true
+        },
+        {
+          "period_ps": 10000,
+          "setup_slack_ps": 4597.620080812094,
+          "hold_slack_ps": 17.16443660734924,
+          "problems": [],
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "qualified_periods_ps": [
+    10000
+  ],
+  "smallest_tested_passing_period_ps": 10000,
+  "standard_cell_area_um2": 22081.118400004027,
+  "passed": true
+}

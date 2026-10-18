@@ -1,0 +1,23 @@
+{
+  "scope": "global-route research routing review; no detailed-route DRC/LVS/extracted-RC or manufacturing signoff",
+  "implementation_report_sha256": "248dcd7b09307d4ae6be058fa8387171eafaa1d924f6335b16fbbb18010e2a35",
+  "log_sha256": "bebb756f080b5d94a06dc48b5f2b1723190ce5a7ce0069cd6d58219381d18135",
+  "full_route_completion_marker": true,
+  "eco_completion_marker": true,
+  "total_resource": 6523053,
+  "total_demand": 1930867,
+  "total_demand_percent": 29.6,
+  "total_overflow": 0,
+  "routed_nets": 175272,
+  "wirelength_um": 1438123,
+  "detailed_placement_failure_counts": [
+    0,
+    0
+  ],
+  "check_placement": "two native check_placement -verbose calls returned normally; no ERROR in complete log",
+  "native_antenna_net_violations": 0,
+  "native_antenna_pin_violations": 0,
+  "antenna_model_scope": "predictive platform models; not manufacturing verification",
+  "have_routes": "verified by all three independent STA collectors",
+  "passed": true
+}

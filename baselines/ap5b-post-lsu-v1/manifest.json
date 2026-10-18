@@ -39,10 +39,10 @@
     "ram_bytes": 1048576,
     "channels": "independent instruction/data ports",
     "policy": "fixed_absolute_time",
-    "reference_core_period_ps": null,
-    "instruction_response_ps": null,
-    "instruction_initiation_interval_ps": null,
-    "data_response_ps": null,
+    "reference_core_period_ps": 10000,
+    "instruction_response_ps": 10000,
+    "instruction_initiation_interval_ps": 10000,
+    "data_response_ps": 10000,
     "reference_latency_cycles": 1,
     "sensitivity_latency_multipliers": [
       2,
@@ -66,7 +66,7 @@
     "missing_or_failed_cases": "invalidate complete family score; do not reduce denominator"
   },
   "physical": {
-    "status": "implementation_in_progress",
+    "status": "qualified_global_route_measurement_pending",
     "pinned_orfs_commit": "8359fde81991e6118b15b8a93fcde606b577794d",
     "pinned_parent_image_digest": "sha256:fd940893eafe2410ed9513441f91e15be5fe9f73a29d68e5655ad62a39ac2e9a",
     "platform": "asap7",
@@ -78,8 +78,8 @@
     ],
     "implementation_stage": "global_route_estimated_parasitics",
     "core_boundary": "entire rv32_ooo_core, including register arrays/SQ/commit-trace; external RAM excluded",
-    "closed_period_ps": null,
-    "standard_cell_area_um2": null,
+    "closed_period_ps": 10000,
+    "standard_cell_area_um2": 22081.118400004027,
     "wire_rc": "shared platform nominal setRC.tcl; not multi-corner extracted RC",
     "io_constraints": {
       "input_delay_ps": 1100,
@@ -106,7 +106,32 @@
         "voltage_v": 0.77,
         "temperature_c": 0
       }
-    }
+    },
+    "standard_cell_count": 180612,
+    "register_count": 18157,
+    "macro_count": 0,
+    "construction_period_ps": 14000,
+    "synthesis_mapping_period_ps": 5500,
+    "period_selection": "smallest actually tested passing 100 ps grid point; 9900 ps fails SS setup, 10000 ps passes TT/SS/FF",
+    "period_grid_ps": 100,
+    "synthesis_adder_mapping": "abc",
+    "construction_overrides": {
+      "GPL_RANDOM_SEED": "",
+      "CORNER": "TC",
+      "CORNERS": "typical",
+      "REPORT_CLOCK_SKEW": "0",
+      "OPT_POST_GRT_WNS": "0",
+      "ADDER_MAP_FILE": ""
+    },
+    "post_route_eco": {
+      "construction_corner": "TT",
+      "slew_margin_percent": 45,
+      "hold_margin_ps": 50,
+      "final_whole_design_route_recheck": true
+    },
+    "qualified_evidence": "docs/evidence/2026-10-18/post-lsu-baseline/physical",
+    "closure_review_sha256": "76cecb0b59cd3d5f016ac29076be3ce914f31659a92553f61770eb60a8f6daa7",
+    "routing_review_sha256": "43d7dbebddb305bb074fc1f7b1e7a0cd98fa87374911bebebc4e9d7a46711f77"
   },
   "qualification_evidence": "docs/evidence/2026-10-18/lsu-interface-fix",
   "workloads": [

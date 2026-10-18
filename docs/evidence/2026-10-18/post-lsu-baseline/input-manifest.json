@@ -1,0 +1,419 @@
+{
+  "schema_version": 1,
+  "baseline_id": "ap5b-post-lsu-v1",
+  "state": "preparing",
+  "rtl_reference_commit": "71c24f5f5a62577912ee5c8eab1f7328ee4c0e46",
+  "rtl_files_sha256": {
+    "rtl/pkg/rv32_ooo_params.sv": "3fc72080a0387a5424badf665656399ecc48e1c9170bedecb0aea16bd7602523",
+    "rtl/pkg/rv32_ooo_types.sv": "01be8e3b4c3959d9284e105412e415d77a6702db7de86eb1505d6fd428ee6759",
+    "rtl/rename/rv32_ooo_int_prf.sv": "69261b57971908d2765555c540ba4292a169024a222983143fdf4785f0fe2406",
+    "rtl/rename/rv32_ooo_fp_prf.sv": "452daf771a3c83fc24693a54b6ce46da762a1942b5ca56eac5440e948bb83603",
+    "rtl/frontend/rv32_ooo_frontend.sv": "c0e222d798dc8c18d5e75bd25a7c9cf0d7b053f91c49650d27c0b8bb49f2dd4d",
+    "rtl/rename/rv32_ooo_rename.sv": "1eb31d73eb54785c3e816eda35381e5b9d362b378ad0f118ac125d753063d574",
+    "rtl/rob/rv32_ooo_rob.sv": "94e4874dfcb3274fd5d0759776acde8dae373988151b4470698fa847c0a78555",
+    "rtl/issue/rv32_ooo_int_iq.sv": "c12029eec5fca025da55c95d6c0207f6472f9eb653a3a1020d1543f78aa9d349",
+    "rtl/issue/rv32_ooo_fp_iq.sv": "7968fa7b3ce4b51b54e4ba21e41b1b5bc4989ac68b405c7a2a7e3e3394e43ca2",
+    "rtl/execute/int/rv32_ooo_divider.sv": "b8ca86ee486d8976ccf07f25adb4955a3945d348a7f5b1350fb8b6edbec91de6",
+    "rtl/execute/int/rv32_ooo_multiplier.sv": "09afa5a87fbd59873a4cfc5f78a48492e928cc7b16f372dd51d71af96703a1d8",
+    "rtl/execute/int/rv32_ooo_int_execute.sv": "dde3fee3c0031150f9cf45b9b1d6f2e665868be754ec70566d95c77dff7bb632",
+    "rtl/execute/fp/rv32_ooo_fp_simple.sv": "bff3232ceafd3da96d85729ad630745b14cd47e398a32e35d11c25fe38547f4b",
+    "rtl/execute/fp/rv32_ooo_fp_execute.sv": "ee83a69dfbd7b2c9d141ebe14e1c40605ca43ce0f5f490d324113bcb9465c63b",
+    "rtl/execute/fp/rv32_ooo_fp_divsqrt.sv": "0c5e80032fd016aa60557d3e3908f07732c9230c50cea3519e1106b2f7715b3f",
+    "rtl/lsu/rv32_ooo_lsu.sv": "a3bd7ce933b33088c2fda9b9ff4b13dc9c7b0a5ac7ec6972b832b7dc02e612b0",
+    "rtl/csr/rv32_ooo_csr.sv": "68c911e9e956761b3ffdb86fec2b82e94b5fc7632953dca308c30658e70f176e",
+    "rtl/core/rv32_ooo_core.sv": "81c116be3845d05c63ab6ffa31efdf5fee9e7374a6902ef0d54555e8a13fcb1c"
+  },
+  "software_reference_commit": "71c24f5f5a62577912ee5c8eab1f7328ee4c0e46",
+  "tool_images": {
+    "rv32ooo-sim:g1": "sha256:0d80d39df2f24dc60a77387242f781edc1cc67f53865719981e01b5b5a989d26",
+    "rv32ooo-fp:p1": "sha256:2140263677b3a378d5cab75a3d0d4fd285ddb38a1a5a1f81f5cf97db024a02d5"
+  },
+  "cpu_change_policy": "No A/B/C RTL before baseline completion and joint experiment selection",
+  "planning_targets": {
+    "embench_time_speedup_geomean_min": 1.2,
+    "fp32_time_speedup_geomean_min": 1.2,
+    "standard_cell_area_ratio_max": 1.1
+  },
+  "memory": {
+    "ram_base": "0x80000000",
+    "ram_bytes": 1048576,
+    "channels": "independent instruction/data ports",
+    "policy": "fixed_absolute_time",
+    "reference_core_period_ps": 10000,
+    "instruction_response_ps": 10000,
+    "instruction_initiation_interval_ps": 10000,
+    "data_response_ps": 10000,
+    "reference_latency_cycles": 1,
+    "sensitivity_latency_multipliers": [
+      2,
+      4
+    ],
+    "random_extra_delay": 0,
+    "fault_injection": false,
+    "time_sampling": "first core sampling edge at or after absolute due time; quantization reported",
+    "read_capture": "accepted_request",
+    "store_visibility": "accepted_request; fault injection disabled for scored workloads",
+    "sensitivity_scope": "data-response delay only; instruction latency/initiation interval remain fixed"
+  },
+  "measurement": {
+    "timer": "unchanged instruction-level RDCYCLE markers in the frozen ELF",
+    "timer_overhead": "included; no subtraction",
+    "embench_warmup_heat": 1,
+    "embench_cpu_mhz_scale": 1,
+    "fp32_fma": "fast",
+    "fast_math": false,
+    "score": "equal-weight geometric means per family, FP32 groups 50/50",
+    "missing_or_failed_cases": "invalidate complete family score; do not reduce denominator"
+  },
+  "physical": {
+    "status": "qualified_global_route_measurement_pending",
+    "pinned_orfs_commit": "8359fde81991e6118b15b8a93fcde606b577794d",
+    "pinned_parent_image_digest": "sha256:fd940893eafe2410ed9513441f91e15be5fe9f73a29d68e5655ad62a39ac2e9a",
+    "platform": "asap7",
+    "library_vt": "RVT",
+    "construction_corner": "TT",
+    "analysis_corners": [
+      "SS",
+      "FF"
+    ],
+    "implementation_stage": "global_route_estimated_parasitics",
+    "core_boundary": "entire rv32_ooo_core, including register arrays/SQ/commit-trace; external RAM excluded",
+    "closed_period_ps": 10000,
+    "standard_cell_area_um2": 22081.118400004027,
+    "wire_rc": "shared platform nominal setRC.tcl; not multi-corner extracted RC",
+    "io_constraints": {
+      "input_delay_ps": 1100,
+      "output_delay_ps": 1100,
+      "input_transition_ps": 20,
+      "output_load_ff": 2,
+      "setup_uncertainty_ps": 50,
+      "hold_uncertainty_ps": 25,
+      "period_scaling": false,
+      "input_delay_min_ps": 0,
+      "output_delay_min_ps": 0,
+      "delay_ps_fields_mean": "maximum setup budget; explicit minimum hold delays are zero"
+    },
+    "library_operating_conditions": {
+      "TT": {
+        "voltage_v": 0.7,
+        "temperature_c": 25
+      },
+      "SS": {
+        "voltage_v": 0.63,
+        "temperature_c": 100
+      },
+      "FF": {
+        "voltage_v": 0.77,
+        "temperature_c": 0
+      }
+    },
+    "standard_cell_count": 180612,
+    "register_count": 18157,
+    "macro_count": 0,
+    "construction_period_ps": 14000,
+    "synthesis_mapping_period_ps": 5500,
+    "period_selection": "smallest actually tested passing 100 ps grid point; 9900 ps fails SS setup, 10000 ps passes TT/SS/FF",
+    "period_grid_ps": 100,
+    "synthesis_adder_mapping": "abc",
+    "construction_overrides": {
+      "GPL_RANDOM_SEED": "",
+      "CORNER": "TC",
+      "CORNERS": "typical",
+      "REPORT_CLOCK_SKEW": "0",
+      "OPT_POST_GRT_WNS": "0",
+      "ADDER_MAP_FILE": ""
+    },
+    "post_route_eco": {
+      "construction_corner": "TT",
+      "slew_margin_percent": 45,
+      "hold_margin_ps": 50,
+      "final_whole_design_route_recheck": true
+    },
+    "qualified_evidence": "docs/evidence/2026-10-18/post-lsu-baseline/physical",
+    "closure_review_sha256": "76cecb0b59cd3d5f016ac29076be3ce914f31659a92553f61770eb60a8f6daa7",
+    "routing_review_sha256": "43d7dbebddb305bb074fc1f7b1e7a0cd98fa87374911bebebc4e9d7a46711f77"
+  },
+  "qualification_evidence": "docs/evidence/2026-10-18/lsu-interface-fix",
+  "workloads": [
+    {
+      "family": "fp32",
+      "name": "fir",
+      "group": "dsp",
+      "source_elf": "build/qualification/fp-balanced/baremetal-contract-fast/fir/rv32.elf",
+      "elf_sha256": "5f10e8af6146a6241196a33800a585dd320cf718f9ceca4777193993630fc531",
+      "fixture": "baselines/ap5b-post-lsu-v1/fixtures/fir.json",
+      "fixture_sha256": "7bc00de30cd7d6e1e6f59782271cd4fe2b9663c716d616d5309a80e2f60be2d5",
+      "dimensions": {
+        "samples": 256,
+        "taps": 32,
+        "split_block": 64
+      },
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 1e-05,
+      "checked_values": 574,
+      "reference_cycles": 74311,
+      "reference_checksum": "fccef1fd"
+    },
+    {
+      "family": "fp32",
+      "name": "iir",
+      "group": "dsp",
+      "source_elf": "build/qualification/fp-balanced/baremetal-contract-fast/iir/rv32.elf",
+      "elf_sha256": "1c6e106298136dd718ba116bf159dc30fc1c9dea906f0fb2430df4340d61a1dd",
+      "fixture": "baselines/ap5b-post-lsu-v1/fixtures/iir.json",
+      "fixture_sha256": "401924e8b575e87f6c3a7f760e2a8326770772da42239ee5aff48101c6abafea",
+      "dimensions": {
+        "samples": 256,
+        "sections": 4,
+        "split_block": 64
+      },
+      "absolute_tolerance": 1e-06,
+      "relative_tolerance": 2e-05,
+      "checked_values": 528,
+      "reference_cycles": 13523,
+      "reference_checksum": "fee8b5ed"
+    },
+    {
+      "family": "fp32",
+      "name": "fft",
+      "group": "dsp",
+      "source_elf": "build/qualification/fp-balanced/baremetal-contract-fast/fft/rv32.elf",
+      "elf_sha256": "fb91c70cb5fa040f01f2e7fcd56fd50427fb4defaf81134a73cc814543d7102b",
+      "fixture": "baselines/ap5b-post-lsu-v1/fixtures/fft.json",
+      "fixture_sha256": "a00e27408849f441313bef45afbedf6153e1de47f22d5da342c32efa7faf9f87",
+      "dimensions": {
+        "points": 256
+      },
+      "absolute_tolerance": 2e-05,
+      "relative_tolerance": 2e-05,
+      "checked_values": 512,
+      "reference_cycles": 40867,
+      "reference_checksum": "c60690be"
+    },
+    {
+      "family": "fp32",
+      "name": "pid",
+      "group": "dsp",
+      "source_elf": "build/qualification/fp-balanced/baremetal-contract-fast/pid/rv32.elf",
+      "elf_sha256": "22bc6dfaf2603e5348eee853165184f0b9c39af8b239f1cecfdce23b443aa583",
+      "fixture": "baselines/ap5b-post-lsu-v1/fixtures/pid.json",
+      "fixture_sha256": "086d757924622c1d4636413dce5635530a241ec901a4a352403c19d37cf795bd",
+      "dimensions": {
+        "samples": 512
+      },
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 1e-05,
+      "checked_values": 515,
+      "reference_cycles": 7248,
+      "reference_checksum": "c5957fb7"
+    },
+    {
+      "family": "fp32",
+      "name": "gemm",
+      "group": "matrix_ml",
+      "source_elf": "build/qualification/fp-balanced/baremetal-contract-fast/gemm/rv32.elf",
+      "elf_sha256": "9a16655c43124ba4d274e7705236c3fee508332bda9721c423f5ae8e9db83092",
+      "fixture": "baselines/ap5b-post-lsu-v1/fixtures/gemm.json",
+      "fixture_sha256": "39ab803bc2400bc3eba86219392bab5c33f0921736e9adeba92b8eb6b956a6a6",
+      "dimensions": {
+        "ni": 20,
+        "nj": 25,
+        "nk": 30
+      },
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 1e-05,
+      "checked_values": 500,
+      "reference_cycles": 133275,
+      "reference_checksum": "7159f884"
+    },
+    {
+      "family": "fp32",
+      "name": "bicg",
+      "group": "matrix_ml",
+      "source_elf": "build/qualification/fp-balanced/baremetal-contract-fast/bicg/rv32.elf",
+      "elf_sha256": "35c46dd5c424f24982c05034680abd9a9a38ca0c48657e560ccd97471a84a38f",
+      "fixture": "baselines/ap5b-post-lsu-v1/fixtures/bicg.json",
+      "fixture_sha256": "bc13451e5ee70f8b9ff2bc33e8f158cab00a1f1ded5a01f1dba9310759ae9db9",
+      "dimensions": {
+        "m": 38,
+        "n": 42
+      },
+      "absolute_tolerance": 1e-05,
+      "relative_tolerance": 1e-05,
+      "checked_values": 80,
+      "reference_cycles": 23927,
+      "reference_checksum": "a9945cbb"
+    },
+    {
+      "family": "fp32",
+      "name": "cholesky",
+      "group": "matrix_ml",
+      "source_elf": "build/qualification/fp-balanced/baremetal-contract-fast/cholesky/rv32.elf",
+      "elf_sha256": "d3d004ba777fe92ccf0d85d2cdedad7eddc9ede16f630501dace9ddf3e9d383d",
+      "fixture": "baselines/ap5b-post-lsu-v1/fixtures/cholesky.json",
+      "fixture_sha256": "c902e3b0ea8c5db9b0e34bc9be472c9c2b44401dd92bd1044fe1a49b9448fcf0",
+      "dimensions": {
+        "n": 40
+      },
+      "absolute_tolerance": 0.0001,
+      "relative_tolerance": 0.0002,
+      "checked_values": 820,
+      "reference_cycles": 194161,
+      "reference_checksum": "b727bb8d"
+    },
+    {
+      "family": "fp32",
+      "name": "svm",
+      "group": "matrix_ml",
+      "source_elf": "build/qualification/fp-balanced/baremetal-contract-fast/svm/rv32.elf",
+      "elf_sha256": "cce4a937dd64b388e6fea04ae59d426e9311dd321c4af21e6b0dee90f3c4e759",
+      "fixture": "baselines/ap5b-post-lsu-v1/fixtures/svm.json",
+      "fixture_sha256": "665e371ba951908d8d535174a79c27f66036a18070a96374f92e4ab3fe17d078",
+      "dimensions": {
+        "samples": 100,
+        "dimension": 10,
+        "support_vectors": 4,
+        "class0": 0,
+        "class1": 1
+      },
+      "absolute_tolerance": 0.0,
+      "relative_tolerance": 0.0,
+      "checked_values": 100,
+      "reference_cycles": 43392,
+      "reference_checksum": "28464095"
+    },
+    {
+      "family": "embench",
+      "name": "aha-mont64",
+      "source_elf": "build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.elf",
+      "elf_sha256": "646339be04ace2ff6291544862b423f2ea96dfe4dced3313a2abad477d3aff80",
+      "reference_cycles": 5356670
+    },
+    {
+      "family": "embench",
+      "name": "crc32",
+      "source_elf": "build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.elf",
+      "elf_sha256": "f9301202f690efdcb5051e6b280c79d8aa2961cad46969cadd050fa904ee05ca",
+      "reference_cycles": 5402220
+    },
+    {
+      "family": "embench",
+      "name": "cubic",
+      "source_elf": "build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.elf",
+      "elf_sha256": "19c60cec9bfb2baf24390771eb58565a057371d6708c0528b63dfc43d137af97",
+      "reference_cycles": 14490894
+    },
+    {
+      "family": "embench",
+      "name": "edn",
+      "source_elf": "build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.elf",
+      "elf_sha256": "896e38b739b9013db07719be16af254e744b2c234451cf9ced4bbdbc2d6de265",
+      "reference_cycles": 4754496
+    },
+    {
+      "family": "embench",
+      "name": "huffbench",
+      "source_elf": "build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.elf",
+      "elf_sha256": "a11e08cd4b67943abc867ee6a5f21f02913c15d4957c5c5ac46db16f7ae0b4a6",
+      "reference_cycles": 3377028
+    },
+    {
+      "family": "embench",
+      "name": "matmult-int",
+      "source_elf": "build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.elf",
+      "elf_sha256": "a68d3088aa484d21d87d2b5892039df135c22d192f019fab483a62a9df515a02",
+      "reference_cycles": 4193163
+    },
+    {
+      "family": "embench",
+      "name": "minver",
+      "source_elf": "build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.elf",
+      "elf_sha256": "18aacebbf740134d2a42b5550224155b171250ebf3456c087030258ac1e66aff",
+      "reference_cycles": 878777
+    },
+    {
+      "family": "embench",
+      "name": "nbody",
+      "source_elf": "build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.elf",
+      "elf_sha256": "ad6739f77c7f1c54740a8d23d6d8e1ae214f9762851834307d2007045917a9f1",
+      "reference_cycles": 5893151
+    },
+    {
+      "family": "embench",
+      "name": "nettle-aes",
+      "source_elf": "build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.elf",
+      "elf_sha256": "8f0a391fe5e947776ec30e3712d37970c4d8c3f40cc5adbb8591e5643c1210fd",
+      "reference_cycles": 5203513
+    },
+    {
+      "family": "embench",
+      "name": "nettle-sha256",
+      "source_elf": "build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.elf",
+      "elf_sha256": "dd21a0328aff4b858aa9eca8577c0a8a0d92b916fa308c87b559a355d78efe6d",
+      "reference_cycles": 4307562
+    },
+    {
+      "family": "embench",
+      "name": "nsichneu",
+      "source_elf": "build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.elf",
+      "elf_sha256": "1bdf7a8f3fff68ae4cd3eb308633d879ae46a02ef868765f667902b10aef4a66",
+      "reference_cycles": 7298679
+    },
+    {
+      "family": "embench",
+      "name": "picojpeg",
+      "source_elf": "build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.elf",
+      "elf_sha256": "721fa0ec08a47a4affcfc3251e8bee579dd8784b0c0be6f09e8981a19b11455e",
+      "reference_cycles": 5300988
+    },
+    {
+      "family": "embench",
+      "name": "qrduino",
+      "source_elf": "build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.elf",
+      "elf_sha256": "e6d28953f0cbf52f35ace14aee266a5acd2566859bce0e0a086a76da211de6ac",
+      "reference_cycles": 4524180
+    },
+    {
+      "family": "embench",
+      "name": "sglib-combined",
+      "source_elf": "build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.elf",
+      "elf_sha256": "3b69ad94081db32fe7d92537f25ee82118a6fbe07feee7c83cd262a87327aee6",
+      "reference_cycles": 4526268
+    },
+    {
+      "family": "embench",
+      "name": "slre",
+      "source_elf": "build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.elf",
+      "elf_sha256": "e3b81e869126d7cc252c4aa482515f51e14f81945a0daa2a7d9392250ccb8769",
+      "reference_cycles": 4902163
+    },
+    {
+      "family": "embench",
+      "name": "st",
+      "source_elf": "build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.elf",
+      "elf_sha256": "4836e2d559e258a0af8ff49fdfa87b00a1c6b440a28dda2413536c015deef167",
+      "reference_cycles": 7165107
+    },
+    {
+      "family": "embench",
+      "name": "statemate",
+      "source_elf": "build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.elf",
+      "elf_sha256": "89817da7b119f2d38d64fd49847161968a27319c45071cf7b92986c71017a52e",
+      "reference_cycles": 3368567
+    },
+    {
+      "family": "embench",
+      "name": "ud",
+      "source_elf": "build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.elf",
+      "elf_sha256": "34a2c84b2c1e37427638a7bc10aa0e3ec9118661dbad7083f1596b0c1fc2bfe7",
+      "reference_cycles": 2775897
+    },
+    {
+      "family": "embench",
+      "name": "wikisort",
+      "source_elf": "build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.elf",
+      "elf_sha256": "7ed46e9144605bbbe601030d821055443c72ed60e9760cc9627cc1b24f70c6d6",
+      "reference_cycles": 2173042
+    }
+  ]
+}
