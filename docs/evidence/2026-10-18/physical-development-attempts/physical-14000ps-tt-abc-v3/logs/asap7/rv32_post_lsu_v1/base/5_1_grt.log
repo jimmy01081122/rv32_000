@@ -1,0 +1,463 @@
+OpenROAD 26Q1-2900-gdf79404cd8 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 2 thread(s).
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_db /workspace/build/baselines/ap5b-post-lsu-v1/physical-14000ps-tt-abc-v3/results/asap7/rv32_post_lsu_v1/base/4_cts.odb
+read_sdc /workspace/build/baselines/ap5b-post-lsu-v1/physical-14000ps-tt-abc-v3/results/asap7/rv32_post_lsu_v1/base/4_cts.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+pin_access
+[INFO DRT-0149] Reading tech and libs.
+
+Units:                1000
+Number of layers:     21
+Number of macros:     212
+Number of vias:       15
+Number of viarulegen: 11
+
+[INFO DRT-0150] Reading design.
+[WARNING DRT-0120] Large net net18781 has 107 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net18779 has 119 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net18768 has 107 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net18803 has 125 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15847 has 122 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15416 has 109 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15450 has 107 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15493 has 108 pins which may impact routing performance. Consider optimization.
+
+Design:                   rv32_ooo_core
+Die area:                 ( 0 0 ) ( 210076 210076 )
+Number of track patterns: 32
+Number of DEF vias:       0
+Number of components:     175034
+Number of terminals:      523
+Number of snets:          2
+Number of nets:           169694
+
+[INFO DRT-0167] List of default vias:
+  Layer V2
+    default via: VIA23
+  Layer V3
+    default via: VIA34
+  Layer V4
+    default via: VIA45
+  Layer V5
+    default via: VIA56
+  Layer V6
+    default via: VIA67
+  Layer V7
+    default via: VIA78
+  Layer V8
+    default via: VIA89
+  Layer V9
+    default via: VIA9Pad
+[INFO DRT-0162] Library cell analysis.
+[INFO DRT-0163] Instance analysis.
+  Complete 100000 instances.
+[INFO DRT-0164] Number of unique instances = 278.
+[INFO DRT-0168] Init region query.
+[INFO DRT-0018]   Complete 100000 insts.
+[INFO DRT-0024]   Complete Active.
+[INFO DRT-0024]   Complete V0.
+[INFO DRT-0024]   Complete M1.
+[INFO DRT-0024]   Complete V1.
+[INFO DRT-0024]   Complete M2.
+[INFO DRT-0024]   Complete V2.
+[INFO DRT-0024]   Complete M3.
+[INFO DRT-0024]   Complete V3.
+[INFO DRT-0024]   Complete M4.
+[INFO DRT-0024]   Complete V4.
+[INFO DRT-0024]   Complete M5.
+[INFO DRT-0024]   Complete V5.
+[INFO DRT-0024]   Complete M6.
+[INFO DRT-0024]   Complete V6.
+[INFO DRT-0024]   Complete M7.
+[INFO DRT-0024]   Complete V7.
+[INFO DRT-0024]   Complete M8.
+[INFO DRT-0024]   Complete V8.
+[INFO DRT-0024]   Complete M9.
+[INFO DRT-0024]   Complete V9.
+[INFO DRT-0024]   Complete Pad.
+[INFO DRT-0033] Active shape region query size = 0.
+[INFO DRT-0033] V0 shape region query size = 0.
+[INFO DRT-0033] M1 shape region query size = 3066524.
+[INFO DRT-0033] V1 shape region query size = 4529437.
+[INFO DRT-0033] M2 shape region query size = 85823.
+[INFO DRT-0033] V2 shape region query size = 89271.
+[INFO DRT-0033] M3 shape region query size = 89271.
+[INFO DRT-0033] V3 shape region query size = 59514.
+[INFO DRT-0033] M4 shape region query size = 59833.
+[INFO DRT-0033] V4 shape region query size = 59514.
+[INFO DRT-0033] M5 shape region query size = 33040.
+[INFO DRT-0033] V5 shape region query size = 6162.
+[INFO DRT-0033] M6 shape region query size = 3157.
+[INFO DRT-0033] V6 shape region query size = 0.
+[INFO DRT-0033] M7 shape region query size = 0.
+[INFO DRT-0033] V7 shape region query size = 0.
+[INFO DRT-0033] M8 shape region query size = 0.
+[INFO DRT-0033] V8 shape region query size = 0.
+[INFO DRT-0033] M9 shape region query size = 0.
+[INFO DRT-0033] V9 shape region query size = 0.
+[INFO DRT-0033] Pad shape region query size = 0.
+[INFO DRT-0165] Start pin access.
+[INFO DRT-0076]   Complete 1000 pins.
+[INFO DRT-0078]   Complete 1581 pins.
+[INFO DRT-0079]   Complete 100 unique inst patterns.
+[INFO DRT-0079]   Complete 200 unique inst patterns.
+[INFO DRT-0081]   Complete 278 unique inst patterns.
+[INFO DRT-0082]   Complete 10000 groups.
+[INFO DRT-0082]   Complete 20000 groups.
+[INFO DRT-0082]   Complete 30000 groups.
+[INFO DRT-0082]   Complete 40000 groups.
+[INFO DRT-0082]   Complete 50000 groups.
+[INFO DRT-0082]   Complete 60000 groups.
+[INFO DRT-0082]   Complete 70000 groups.
+[INFO DRT-0082]   Complete 80000 groups.
+[INFO DRT-0082]   Complete 90000 groups.
+[INFO DRT-0082]   Complete 100000 groups.
+[INFO DRT-0084]   Complete 109774 groups.
+#scanned instances     = 175034
+#unique  instances     = 278
+#stdCellGenAp          = 7821
+#stdCellValidPlanarAp  = 39
+#stdCellValidViaAp     = 6362
+#stdCellPinNoAp        = 0
+#stdCellPinCnt         = 622833
+#instTermValidViaApCnt = 0
+#macroGenAp            = 0
+#macroValidPlanarAp    = 0
+#macroValidViaAp       = 0
+#macroNoAp             = 0
+[INFO DRT-0166] Complete pin access.
+[INFO DRT-0267] cpu time = 00:28:39, elapsed time = 00:14:22, memory = 1006.88 (MB), peak = 1141.85 (MB)
+Took 865 seconds: pin_access
+set_global_routing_random -seed 1
+global_route -congestion_report_file /workspace/build/baselines/ap5b-post-lsu-v1/physical-14000ps-tt-abc-v3/reports/asap7/rv32_post_lsu_v1/base/congestion.rpt -congestion_iterations 30 -congestion_report_iter_step 5 -verbose
+[INFO GRT-0020] Min routing layer: M2
+[INFO GRT-0021] Max routing layer: M7
+[INFO GRT-0022] Global adjustment: 0%
+[INFO GRT-0023] Grid origin: (0, 0)
+[INFO GRT-0088] Layer M1      Track-Pitch = 0.0360  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M2      Track-Pitch = 0.0390  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M3      Track-Pitch = 0.0360  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M4      Track-Pitch = 0.0480  line-2-Via Pitch: 0.0480
+[INFO GRT-0088] Layer M5      Track-Pitch = 0.0480  line-2-Via Pitch: 0.0480
+[INFO GRT-0088] Layer M6      Track-Pitch = 0.0640  line-2-Via Pitch: 0.0640
+[INFO GRT-0088] Layer M7      Track-Pitch = 0.0640  line-2-Via Pitch: 0.0640
+[INFO GRT-0003] Macros: 0
+[INFO GRT-0004] Blockages: 54471
+[INFO GRT-0019] Found 1203 clock nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 125
+
+[INFO GRT-0053] Routing resources analysis:
+          Routing      Original      Derated      Resource
+Layer     Direction    Resources     Resources    Reduction (%)
+---------------------------------------------------------------
+M1         Vertical            0             0          0.00%
+M2         Horizontal    1627173       1174005          27.85%
+M3         Vertical      2054686       1526370          25.71%
+M4         Horizontal    1575042       1169390          25.75%
+M5         Vertical      1518876       1126335          25.84%
+M6         Horizontal    1057884        715507          32.36%
+M7         Vertical      1204494        811437          32.63%
+---------------------------------------------------------------
+
+[INFO GRT-0101] Running extra iterations to remove overflow.
+[INFO GRT-0102] Start extra iteration 1/30
+[INFO GRT-0102] Start extra iteration 2/30
+[INFO GRT-0197] Via related to pin nodes: 1173496
+[INFO GRT-0198] Via related Steiner nodes: 54208
+[INFO GRT-0199] Via filling finished.
+[INFO GRT-0111] Final number of vias: 1571842
+[INFO GRT-0112] Final usage 3D: 6639285
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Overflow
+---------------------------------------------------------------------------------------
+M1                   0             0            0.00%             0 /  0 /  0
+M2             1174005        661382           56.34%             0 /  0 /  0
+M3             1526370        785918           51.49%             0 /  0 /  0
+M4             1169390        273869           23.42%             0 /  0 /  0
+M5             1126335        168284           14.94%             0 /  0 /  0
+M6              715507         28993            4.05%             0 /  0 /  0
+M7              811437          5313            0.65%             0 /  0 /  0
+---------------------------------------------------------------------------------------
+Total          6523044       1923759           29.49%             0 /  0 /  0
+
+[INFO GRT-0018] Total wirelength: 1429819 um
+[INFO GRT-0014] Routed nets: 169694
+[INFO GRT-0303] Global routing runtime = 00:00:29
+Took 30 seconds: global_route -congestion_report_file /workspace/build/baselines/ap5b-post-lsu-v1/physical-14000ps-tt-abc-v3/reports/asap7/rv32_post_lsu_v1/base/congestion.rpt -congestion_iterations 30 -congestion_report_iter_step 5 -verbose
+estimate_parasitics -global_routing
+Took 8 seconds: estimate_parasitics -global_routing
+Perform buffer insertion and gate resizing...
+repair_design -verbose
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |    170526
+     1000 |     +0.0% |       0 |       0 |             0 |    169526
+     2000 |     +0.0% |       0 |       0 |             0 |    168526
+     3000 |     +0.0% |       0 |       0 |             0 |    167526
+     4000 |     +0.0% |       0 |       0 |             0 |    166526
+     5000 |     +0.0% |       0 |       0 |             0 |    165526
+     6000 |     +0.0% |       0 |       0 |             0 |    164526
+     7000 |     +0.0% |       0 |       0 |             0 |    163526
+     8000 |     +0.0% |       0 |       0 |             0 |    162526
+     9000 |     +0.0% |       0 |       0 |             0 |    161526
+    10000 |     +0.0% |       0 |       0 |             0 |    160526
+    11000 |     +0.0% |       0 |       0 |             0 |    159526
+    12000 |     +0.0% |       0 |       0 |             0 |    158526
+    13000 |     +0.0% |       0 |       0 |             0 |    157526
+    14000 |     +0.0% |       0 |       0 |             0 |    156526
+    15000 |     +0.0% |       0 |       0 |             0 |    155526
+    16000 |     +0.0% |       0 |       0 |             0 |    154526
+    17000 |     +0.0% |       0 |       0 |             0 |    153526
+    18000 |     +0.0% |       0 |       0 |             0 |    152526
+    19000 |     +0.0% |       0 |       0 |             0 |    151526
+    20000 |     +0.0% |       0 |       0 |             0 |    150526
+    21000 |     +0.0% |       0 |       0 |             0 |    149526
+    22000 |     +0.0% |       0 |       0 |             0 |    148526
+    23000 |     +0.0% |       0 |       0 |             0 |    147526
+    24000 |     +0.0% |       0 |       0 |             0 |    146526
+    25000 |     +0.0% |       0 |       0 |             0 |    145526
+    26000 |     +0.0% |       0 |       0 |             0 |    144526
+    27000 |     +0.0% |       0 |       0 |             0 |    143526
+    28000 |     +0.0% |       0 |       0 |             0 |    142526
+    29000 |     +0.0% |       0 |       0 |             0 |    141526
+    30000 |     +0.0% |       0 |       0 |             0 |    140526
+    31000 |     +0.0% |       0 |       0 |             0 |    139526
+    32000 |     +0.0% |       0 |       0 |             0 |    138526
+    33000 |     +0.0% |       0 |       0 |             0 |    137526
+    34000 |     +0.0% |       0 |       0 |             0 |    136526
+    35000 |     +0.0% |       0 |       0 |             0 |    135526
+    36000 |     +0.0% |       0 |       0 |             0 |    134526
+    37000 |     +0.0% |       0 |       0 |             0 |    133526
+    38000 |     +0.0% |       0 |       0 |             0 |    132526
+    39000 |     +0.0% |       0 |       0 |             0 |    131526
+    40000 |     +0.0% |       0 |       0 |             0 |    130526
+    41000 |     +0.0% |       0 |       0 |             0 |    129526
+    42000 |     +0.0% |       0 |       0 |             0 |    128526
+    43000 |     +0.0% |       0 |       0 |             0 |    127526
+    44000 |     +0.0% |       0 |       0 |             0 |    126526
+    45000 |     +0.0% |       0 |       0 |             0 |    125526
+    46000 |     +0.0% |       0 |       0 |             0 |    124526
+    47000 |     +0.0% |       0 |       0 |             0 |    123526
+    48000 |     +0.0% |       0 |       0 |             0 |    122526
+    49000 |     +0.0% |       0 |       0 |             0 |    121526
+    50000 |     +0.0% |       0 |       0 |             0 |    120526
+    51000 |     +0.0% |       0 |       0 |             0 |    119526
+    52000 |     +0.0% |       0 |       0 |             0 |    118526
+    53000 |     +0.0% |       0 |       0 |             0 |    117526
+    54000 |     +0.0% |       0 |       0 |             0 |    116526
+    55000 |     +0.0% |       0 |       0 |             0 |    115526
+    56000 |     +0.0% |       0 |       0 |             0 |    114526
+    57000 |     +0.0% |       0 |       0 |             0 |    113526
+    58000 |     +0.0% |       0 |       0 |             0 |    112526
+    59000 |     +0.0% |       0 |       0 |             0 |    111526
+    60000 |     +0.0% |       0 |       0 |             0 |    110526
+    61000 |     +0.0% |       0 |       0 |             0 |    109526
+    62000 |     +0.0% |       0 |       0 |             0 |    108526
+    63000 |     +0.0% |       0 |       0 |             0 |    107526
+    64000 |     +0.0% |       0 |       0 |             0 |    106526
+    65000 |     +0.0% |       0 |       0 |             0 |    105526
+    66000 |     +0.0% |       0 |       1 |             1 |    104526
+    67000 |     +0.0% |       0 |       1 |             1 |    103526
+    68000 |     +0.0% |       0 |       1 |             1 |    102526
+    69000 |     +0.0% |       0 |       1 |             1 |    101526
+    70000 |     +0.0% |       0 |       1 |             1 |    100526
+    71000 |     +0.0% |       0 |       1 |             1 |     99526
+    72000 |     +0.0% |       0 |       1 |             1 |     98526
+    73000 |     +0.0% |       0 |       1 |             1 |     97526
+    74000 |     +0.0% |       0 |       1 |             1 |     96526
+    75000 |     +0.0% |       0 |       1 |             1 |     95526
+    76000 |     +0.0% |       0 |       1 |             1 |     94526
+    77000 |     +0.0% |       0 |       1 |             1 |     93526
+    78000 |     +0.0% |       0 |       1 |             1 |     92526
+    79000 |     +0.0% |       0 |       1 |             1 |     91526
+    80000 |     +0.0% |       0 |       1 |             1 |     90526
+    81000 |     +0.0% |       0 |       1 |             1 |     89526
+    82000 |     +0.0% |       0 |       1 |             1 |     88526
+    83000 |     +0.0% |       0 |       1 |             1 |     87526
+    84000 |     +0.0% |       0 |       1 |             1 |     86526
+    85000 |     +0.0% |       0 |       1 |             1 |     85526
+    86000 |     +0.0% |       0 |       1 |             1 |     84526
+    87000 |     +0.0% |       0 |       1 |             1 |     83526
+    88000 |     +0.0% |       0 |       1 |             1 |     82526
+    89000 |     +0.0% |       0 |       1 |             1 |     81526
+    90000 |     +0.0% |       0 |       1 |             1 |     80526
+    91000 |     +0.0% |       0 |       1 |             1 |     79526
+    92000 |     +0.0% |       0 |       1 |             1 |     78526
+    93000 |     +0.0% |       0 |       1 |             1 |     77526
+    94000 |     +0.0% |       0 |       1 |             1 |     76526
+    95000 |     +0.0% |       0 |       1 |             1 |     75526
+    96000 |     +0.0% |       0 |       1 |             1 |     74526
+    97000 |     +0.0% |       0 |       1 |             1 |     73526
+    98000 |     +0.0% |       0 |       1 |             1 |     72526
+    99000 |     +0.0% |       0 |       1 |             1 |     71526
+   100000 |     +0.0% |       0 |       1 |             1 |     70526
+   101000 |     +0.0% |       0 |       1 |             1 |     69526
+   102000 |     +0.0% |       0 |       1 |             1 |     68526
+   103000 |     +0.0% |       0 |       1 |             1 |     67526
+   104000 |     +0.0% |       0 |       1 |             1 |     66526
+   105000 |     +0.0% |       0 |       1 |             1 |     65526
+   106000 |     +0.0% |       0 |       1 |             1 |     64526
+   107000 |     +0.0% |       0 |       1 |             1 |     63526
+   108000 |     +0.0% |       0 |       1 |             1 |     62526
+   109000 |     +0.0% |       0 |       1 |             1 |     61526
+   110000 |     +0.0% |       0 |       1 |             1 |     60526
+   111000 |     +0.0% |       0 |       1 |             1 |     59526
+   112000 |     +0.0% |       0 |       1 |             1 |     58526
+   113000 |     +0.0% |       0 |       1 |             1 |     57526
+   114000 |     +0.0% |       0 |       1 |             1 |     56526
+   115000 |     +0.0% |       0 |       1 |             1 |     55526
+   116000 |     +0.0% |       0 |       1 |             1 |     54526
+   117000 |     +0.0% |       0 |       1 |             1 |     53526
+   118000 |     +0.0% |       0 |       1 |             1 |     52526
+   119000 |     +0.0% |       0 |       1 |             1 |     51526
+   120000 |     +0.0% |       0 |       1 |             1 |     50526
+   121000 |     +0.0% |       0 |       1 |             1 |     49526
+   122000 |     +0.0% |       0 |       1 |             1 |     48526
+   123000 |     +0.0% |       0 |       1 |             1 |     47526
+   124000 |     +0.0% |       0 |       1 |             1 |     46526
+   125000 |     +0.0% |       0 |       1 |             1 |     45526
+   126000 |     +0.0% |       0 |       1 |             1 |     44526
+   127000 |     +0.0% |       0 |       1 |             1 |     43526
+   128000 |     +0.0% |       0 |       1 |             1 |     42526
+   129000 |     +0.0% |       0 |       1 |             1 |     41526
+   130000 |     +0.0% |       0 |       1 |             1 |     40526
+   131000 |     +0.0% |       0 |       1 |             1 |     39526
+   132000 |     +0.0% |       0 |       1 |             1 |     38526
+   133000 |     +0.0% |       0 |       1 |             1 |     37526
+   134000 |     +0.0% |       0 |       1 |             1 |     36526
+   135000 |     +0.0% |       0 |       1 |             1 |     35526
+   136000 |     +0.0% |       0 |       1 |             1 |     34526
+   137000 |     +0.0% |       0 |       1 |             1 |     33526
+   138000 |     +0.0% |       0 |       1 |             1 |     32526
+   139000 |     +0.0% |       0 |       1 |             1 |     31526
+   140000 |     +0.0% |       0 |       1 |             1 |     30526
+   141000 |     +0.0% |       0 |       1 |             1 |     29526
+   142000 |     +0.0% |       0 |       1 |             1 |     28526
+   143000 |     +0.0% |       0 |       1 |             1 |     27526
+   144000 |     +0.0% |       0 |       1 |             1 |     26526
+   145000 |     +0.0% |       0 |       1 |             1 |     25526
+   146000 |     +0.0% |       0 |       1 |             1 |     24526
+   147000 |     +0.0% |       0 |       1 |             1 |     23526
+   148000 |     +0.0% |       0 |       1 |             1 |     22526
+   149000 |     +0.0% |       0 |       1 |             1 |     21526
+   150000 |     +0.0% |       0 |       1 |             1 |     20526
+   151000 |     +0.0% |       0 |       1 |             1 |     19526
+   152000 |     +0.0% |       0 |       1 |             1 |     18526
+   153000 |     +0.0% |       0 |       1 |             1 |     17526
+   154000 |     +0.0% |       0 |       1 |             1 |     16526
+   155000 |     +0.0% |       0 |       1 |             1 |     15526
+   156000 |     +0.0% |       0 |       1 |             1 |     14526
+   157000 |     +0.0% |       0 |       1 |             1 |     13526
+   158000 |     +0.0% |       0 |       1 |             1 |     12526
+   159000 |     +0.0% |       0 |       1 |             1 |     11526
+   160000 |     +0.0% |       0 |       1 |             1 |     10526
+   161000 |     +0.0% |       0 |       1 |             1 |      9526
+   162000 |     +0.0% |       0 |       1 |             1 |      8526
+   163000 |     +0.0% |       0 |       1 |             1 |      7526
+   164000 |     +0.0% |       0 |       1 |             1 |      6526
+   165000 |     +0.0% |       0 |       1 |             1 |      5526
+   166000 |     +0.0% |       0 |       1 |             1 |      4526
+   167000 |     +0.0% |       0 |       1 |             1 |      3526
+   168000 |     +0.0% |       0 |       1 |             1 |      2526
+   169000 |     +0.0% |       0 |       1 |             1 |      1526
+   170000 |     +0.0% |       0 |       1 |             1 |       526
+    final |     +0.0% |       0 |       1 |             1 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0034] Found 1 slew violations.
+[INFO RSZ-0038] Inserted 1 buffers in 1 nets.
+Took 43 seconds: repair_design -verbose
+global_route -start_incremental
+detailed_placement
+[INFO DPL-0005] Max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+Movements Summary
+---------------------------------------
+Total cells:                  170455
+Diamond Move Success:         170455 (100.00%)
+Diamond Move Failure:              0
+Rip-up and replace Success:        0 (  0.00% of diamond failures)
+Rip-up and replace Failure:        0
+Total Placement Failures:          0
+---------------------------------------
+Placement Analysis
+---------------------------------
+total displacement          2.2 u
+average displacement        0.0 u
+max displacement            0.8 u
+original HPWL          852213.7 u
+legalized HPWL         852214.6 u
+delta HPWL                    0 %
+
+global_route -end_incremental -congestion_report_file /workspace/build/baselines/ap5b-post-lsu-v1/physical-14000ps-tt-abc-v3/reports/asap7/rv32_post_lsu_v1/base/congestion_post_repair_design.rpt
+Repair setup and hold violations...
+estimate_parasitics -global_routing
+Took 8 seconds: estimate_parasitics -global_routing
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
+[INFO RSZ-0098] No setup violations found
+[INFO RSZ-0033] No hold violations found.
+Took 28 seconds: repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+global_route -start_incremental
+detailed_placement
+[INFO DPL-0005] Max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+Movements Summary
+---------------------------------------
+Total cells:                  170455
+Diamond Move Success:         170455 (100.00%)
+Diamond Move Failure:              0
+Rip-up and replace Success:        0 (  0.00% of diamond failures)
+Rip-up and replace Failure:        0
+Total Placement Failures:          0
+---------------------------------------
+Placement Analysis
+---------------------------------
+total displacement          0.0 u
+average displacement        0.0 u
+max displacement            0.0 u
+original HPWL          852214.6 u
+legalized HPWL         852214.6 u
+delta HPWL                    0 %
+
+check_placement -verbose
+global_route -end_incremental -congestion_report_file /workspace/build/baselines/ap5b-post-lsu-v1/physical-14000ps-tt-abc-v3/reports/asap7/rv32_post_lsu_v1/base/congestion_post_repair_timing.rpt
+estimate_parasitics -global_routing
+Took 8 seconds: estimate_parasitics -global_routing
+repair_timing -setup -sequence "vt_swap reroute" -skip_last_gasp -repair_tns 0 -verbose
+terminate called after throwing an instance of 'std::invalid_argument'
+  what():  Invalid move type: reroute
+Signal 6 received
+Stack trace:
+ 0# 0x0000000000DB2BA7 in /OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad
+ 1# 0x0000000000042520 in /lib/x86_64-linux-gnu/libc.so.6
+ 2# pthread_kill in /lib/x86_64-linux-gnu/libc.so.6
+ 3# raise in /lib/x86_64-linux-gnu/libc.so.6
+ 4# abort in /lib/x86_64-linux-gnu/libc.so.6
+ 5# 0x00000000000A2B9E in /lib/x86_64-linux-gnu/libstdc++.so.6
+ 6# 0x00000000000AE20C in /lib/x86_64-linux-gnu/libstdc++.so.6
+ 7# 0x00000000000AE277 in /lib/x86_64-linux-gnu/libstdc++.so.6
+ 8# 0x00000000000AE4D8 in /lib/x86_64-linux-gnu/libstdc++.so.6
+ 9# 0x0000000000BD5520 in /OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad
+10# rsz::Resizer::parseMoveSequence(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) in /OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad
+11# 0x0000000000E8B405 in /OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad
+12# TclNRRunCallbacks in /lib/x86_64-linux-gnu/libtcl8.6.so
+13# 0x000000000003E028 in /lib/x86_64-linux-gnu/libtcl8.6.so
+14# Tcl_EvalEx in /lib/x86_64-linux-gnu/libtcl8.6.so
+15# Tcl_Eval in /lib/x86_64-linux-gnu/libtcl8.6.so
+16# sta::sourceTclFile(char const*, bool, bool, Tcl_Interp*) in /OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad
+17# 0x00000000036A7534 in /OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad
+18# Tcl_MainEx in /lib/x86_64-linux-gnu/libtcl8.6.so
+19# main in /OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad
+20# 0x0000000000029D90 in /lib/x86_64-linux-gnu/libc.so.6
+21# __libc_start_main in /lib/x86_64-linux-gnu/libc.so.6
+22# _start in /OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad
+Elapsed time: 16:40.77[h:]min:sec. CPU time: user 1865.44 sys 30.80 (189%). Peak memory: 3674224KB.

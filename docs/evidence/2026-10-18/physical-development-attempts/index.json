@@ -24,6 +24,22 @@
       "complete_global_route": false,
       "run_report_sha256": "bd92a1d6767d5fb4914c6a6cc9a143c6e7ecf58f24c113f76c0f90aaae007ed8",
       "mapped_netlist_sha256": "298e87969a0d80270fd522803d79ee691808c2549e65d0024532ce86736050b2"
+    },
+    {
+      "attempt": "physical-14000ps-tt-abc-v3",
+      "complete_global_route": false,
+      "run_report_sha256": "a70fe8e8c583061eaccc6a3b9504e6a4a0fa271e1786d51ffe80fc8420271bff",
+      "completed_cts_checkpoint": [
+        {
+          "file": "4_cts.odb",
+          "uncompressed_sha256": "768eabd496162ea76f50e5c5b04411e9420ceeefd986a8625380fece726033ec"
+        },
+        {
+          "file": "4_cts.sdc",
+          "uncompressed_sha256": "90fc6267b0ca3c5bfe3350f2c68440ffd2f3635f32ab3fd371d815a4f787d431"
+        }
+      ],
+      "failure": "ordinary post-route repair finished; optional reroute move unsupported; OpenROAD abort, Make returncode 2"
     }
   ]
 }

@@ -65,10 +65,16 @@ pass 49/49 on a four-cell sequential fixture: three independent corners, explici
 ps units, all four path groups, numerical/report agreement, real setup/hold and
 constraint/electrical failures, and rejection of unrouted or unaudited inputs.
 This qualifies reporting only; the full-core implementation remains in progress.
-The complete baseline/worker/timing-review control target now passes 19 tests,
+The complete baseline/worker/timing-review control target now passes 20 tests,
 including frozen FP32 fixture hashes, dimensions and tolerances. The
 [incomplete physical probes](evidence/2026-10-18/physical-development-attempts/README.md)
 retain failed/unknown exits separately from positive qualification evidence.
+The [complete ORFS-step API fixture](evidence/2026-10-18/global-route-api-validation/README.md)
+now finishes global routing with ordinary repair and passes all three independent
+corner reviews, providing a real positive timing control. The full-core TT run
+completed CTS and ordinary post-route repair, then aborted on an unsupported
+optional `reroute` optimization move. Its Make exit 2 remains a failure. A fresh
+retry reuses the verified CTS checkpoint with that optional pass disabled.
 The separate [assertion-enabled fixed-time controls](evidence/2026-10-18/fixed-time-assertions/README.md)
 also pass 58/58 plus the scheduler unit test; all 12 fault traces match the
 normal-build preparation evidence. The scored simulator remains unchanged.
