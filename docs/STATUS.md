@@ -75,6 +75,13 @@ corner reviews, providing a real positive timing control. The full-core TT run
 completed CTS and ordinary post-route repair, then aborted on an unsupported
 optional `reroute` optimization move. Its Make exit 2 remains a failure. A fresh
 retry reuses the verified CTS checkpoint with that optional pass disabled.
+That retry now [completes global routing](evidence/2026-10-18/global-route-initial-review/README.md)
+with unchanged inputs and exit 0. At 14 ns, independent TT/SS/FF setup and hold
+slacks are positive and constraint coverage passes, but SS has 541 slew
+violations and FF has 30. The review correctly rejects closure. A TT-only
+incremental ECO is running from the saved route solution with a 30% slew
+optimizer margin and 50 ps hold repair margin; independent acceptance limits
+remain unchanged. The manifest still has null period/area.
 The separate [assertion-enabled fixed-time controls](evidence/2026-10-18/fixed-time-assertions/README.md)
 also pass 58/58 plus the scheduler unit test; all 12 fault traces match the
 normal-build preparation evidence. The scored simulator remains unchanged.
