@@ -44,8 +44,14 @@ at clean `5822071` now passes all 27 workloads with absolute-time memory,
 unchanged ROI cycles and 3,629 independently checked FP32 values. The new model
 passes 58 controls and the 18 directed programs. The user selected fixed memory
 time and an ASAP7 RVT global-route research baseline, with TT construction and
-independent SS/FF checks. Pinned physical tools are available and synthesis is
-being restored; 5,500 ps remains an exploration setting, not an achieved clock.
+independent SS/FF checks. Pinned physical tools and completed synthesis stages are
+available. Earlier 5,500 ps attempts stopped before global routing without a
+recorded final exit status. A durable worker now records real exits and verifies
+input hashes; its five controls pass. The first cached 14,000 ps backend attempt
+failed on an unsupported placement seed flag; the runner now explicitly uses
+the pinned tool's placement default. Both periods are exploration constraints,
+not achieved clocks. Cached synthesis retains its original 5,500 ps mapping
+constraint and is checked separately from backend timing.
 The bounded [ASAP7 library validation](evidence/2026-10-18/asap7-library-validation/README.md)
 checks 144 adder transitions, 30 independent min/max timing paths and three
 negative controls; known output-port warnings remain documented. This is tool

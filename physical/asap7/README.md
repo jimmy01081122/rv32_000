@@ -1,10 +1,33 @@
 # ASAP7 physical-design research flow
 
-Updated 2026-10-16. This directory contains the existing OpenROAD Flow Scripts
+Updated 2026-10-18. This directory contains the existing OpenROAD Flow Scripts
 (ORFS) / ASAP7 7.5T research setup, scripts and historical results for
 `rv32_ooo_core`. ASAP7 is a predictive PDK. The project does not target tape-out.
 
 ## Current status
+
+The active post-LSU baseline uses [baseline/config.mk](baseline/config.mk),
+[`scripts/run_baseline_physical.py`](../../scripts/run_baseline_physical.py) and
+independent TT/SS/FF analysis via
+[`scripts/analyze_baseline_physical.py`](../../scripts/analyze_baseline_physical.py).
+The [manifest](../../baselines/ap5b-post-lsu-v1/manifest.json) remains preparing;
+no full-core global-route closure or area baseline has been qualified.
+
+Use a fresh `--label` for each attempt. `--detached --container ID` starts a
+durable worker that records real process status and input identities even when
+the client session ends. Successful execution alone never sets `passed=true`.
+`--synthesis-from build/...` imports a completed mapped netlist only after
+matching RTL, lowering, config, image and adder-mapping identities and checking
+the original synthesis completion log. Its original mapping period stays in the
+record; a different backend period does not constitute remapping at that period.
+Earlier incomplete 5,500 ps attempts remain unqualified. A 14,000 ps backend
+exploration exposed an unsupported `global_placement -random_seed` flag; the
+runner explicitly overrides `GPL_RANDOM_SEED=` to use this pinned binary's
+default. Global routing retains explicit `GRT_SEED=1`. These exact policies must
+be shared by baseline and candidate runs. No placement repeatability claim has
+yet been established by a second completed run.
+
+The following items describe the **legacy** flow in this directory:
 
 - Tool/image/PDK references are in [toolchain.lock](toolchain.lock).
 - [config.mk](config.mk) requests 50% core utilization, placement density 0.55

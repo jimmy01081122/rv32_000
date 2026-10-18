@@ -23,9 +23,13 @@ def main():
     parser.add_argument('--resume-reason', help='resume a failed attempt with identical hashed build inputs; retain the prior log')
     parser.add_argument('--adder-mapping',choices=('platform','abc'),default='platform',
                         help='tool-flow probe: platform full-adder extraction or ordinary ABC gate mapping')
+    parser.add_argument('--detached',action='store_true',help='durable worker in an existing container; does not depend on a tool session')
+    parser.add_argument('--synthesis-from',type=Path,help='reuse a completed, identity-checked synthesis stage from another attempt')
     args = parser.parse_args()
     if args.period_ps <= 2200 or args.jobs < 1:
         parser.error('period must exceed frozen 1100ps input + output budgets; jobs positive')
+    if args.detached and not args.container:parser.error('--detached requires --container')
+    if args.detached and args.resume_reason:parser.error('use a fresh label for detached attempts; synthesis stages can be reused')
     if args.label and not re.fullmatch(r'[a-zA-Z0-9_-]+', args.label):
         parser.error('label may contain letters, digits, underscore and hyphen only')
     source = ROOT / 'build/baseline-setup/ORFS'
@@ -81,7 +85,10 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
            'YOSYS_EXE=/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys',
            'RV32_ROOT=/workspace', f'RV32_SDC={guest(sdc)}', f'WORK_HOME={guest(directory)}',
            'DESIGN_CONFIG=/workspace/physical/asap7/baseline/config.mk',
-           f'NUM_CORES={args.jobs}']
+           f'NUM_CORES={args.jobs}',
+           # This pinned OpenROAD predates ORFS's optional placement seed flag.
+           # An empty Make override omits the unsupported flag in both GPL stages.
+           'GPL_RANDOM_SEED=']
     if args.adder_mapping=='abc':cmd.append('ADDER_MAP_FILE=')
     cmd.append('grt')
     report = {'scope': 'global-route research baseline exploration, not detailed-route signoff',
@@ -90,10 +97,44 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
               'rtl_files_sha256': {str(p.relative_to(ROOT)): sha(p) for p in sorted((ROOT/'rtl').rglob('*.sv'))},
               'config_sha256': sha(ROOT/'physical/asap7/baseline/config.mk'), 'passed': False}
     report['local_image_id'] = expected_image
+    report['placement_seed_policy'] = 'pinned-tool default; GPL_RANDOM_SEED= overrides config seed (unsupported flag)'
     report['synthesis_adder_mapping'] = args.adder_mapping
     report['process_lowering_sha256'] = sha(ROOT/'physical/asap7/baseline/lower_processes.tcl')
     report['source_commit'] = subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     report['source_status'] = subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).splitlines()
+    if args.synthesis_from:
+        cache=args.synthesis_from.resolve()
+        if not cache.is_relative_to(ROOT/'build'):parser.error('synthesis source must be under build/')
+        prior=json.loads((cache/'run.json').read_text())
+        for field in ('orfs_commit','lowered_rtl_sha256','rtl_files_sha256','config_sha256',
+                      'local_image_id','process_lowering_sha256'):
+            if prior[field]!=report[field]:parser.error('cached synthesis input changed: '+field)
+        prior_mapping=prior.get('synthesis_adder_mapping','abc' if 'ADDER_MAP_FILE=' in prior['command'] else 'platform')
+        if prior_mapping!=args.adder_mapping:parser.error('cached adder mapping differs from requested mapping')
+        relative=Path('asap7/rv32_post_lsu_v1/base')
+        netlist=cache/'results'/relative/'1_2_yosys.v'
+        synth_log=cache/'logs'/relative/'1_2_yosys.log'
+        if ('End of script.' not in synth_log.read_text() or 'ERROR:' in synth_log.read_text()
+                or not netlist.read_text().rstrip().endswith('endmodule')):
+            parser.error('cached synthesis did not finish successfully')
+        cmd.insert(-1,'SYNTH_NETLIST_FILES='+guest(netlist))
+        report['cached_synthesis']={'source':str(cache.relative_to(ROOT)),'mapping_period_ps':prior['period_ps'],
+                                   'source_report_sha256':sha(cache/'run.json'),
+                                   'netlist':str(netlist.relative_to(ROOT)),'netlist_sha256':sha(netlist),
+                                   'log':str(synth_log.relative_to(ROOT)),'log_sha256':sha(synth_log)}
+    worker_command=['make','-f','/orfs-source/flow/Makefile',*cmd[cmd.index('baseline-orfs')+1:]]
+    if args.detached:
+        inputs={guest(ROOT/name):value for name,value in report['rtl_files_sha256'].items()}
+        for path in (sdc,ROOT/'physical/asap7/baseline/config.mk',ROOT/'physical/asap7/baseline/lower_processes.tcl',
+                     ROOT/'build/baseline-setup/rtl_lowered.v',ROOT/'scripts/run_physical_job.py'):
+            inputs[guest(path)]=sha(path)
+        if args.synthesis_from:inputs[guest(netlist)]=sha(netlist)
+        spec=directory/'job.json'
+        spec.write_text(json.dumps({'report':guest(directory/'run.json'),'log':guest(directory/'make.log'),
+                                    'command':worker_command,'cwd':'/workspace','inputs':inputs},indent=2)+'\n')
+        cmd=['docker','exec','-d','--user','1000:1000','-w','/workspace',args.container,
+             'python3','/workspace/scripts/run_physical_job.py',guest(spec)]
+        report.update(command=cmd,worker_command=worker_command,job_spec_sha256=sha(spec),job_state='queued')
     if previous:
         for field in ('period_ps','orfs_commit','command','sdc_sha256','lowered_rtl_sha256',
                       'rtl_files_sha256','config_sha256','local_image_id','process_lowering_sha256'):
@@ -105,6 +146,14 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
         previous.update(log=str(prior_log.relative_to(ROOT)),resume_reason=args.resume_reason)
         history.append(previous);report['previous_attempts']=history
     summary = directory/'run.json';summary.write_text(json.dumps(report,indent=2)+'\n')
+    if args.detached:
+        result=subprocess.run(cmd,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True)
+        if result.returncode:
+            report.update(job_state='launch_failed',launch_returncode=result.returncode,launch_output=result.stdout)
+            summary.write_text(json.dumps(report,indent=2)+'\n')
+            raise SystemExit(result.returncode)
+        print('detached job submitted; result:',summary,flush=True)
+        return
     with (directory/'make.log').open('w') as log:
         result = subprocess.run(cmd, stdout=log, stderr=subprocess.STDOUT)
     report.update(returncode=result.returncode, log_sha256=sha(directory/'make.log'))
