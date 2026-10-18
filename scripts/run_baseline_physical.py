@@ -91,7 +91,10 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
            'GPL_RANDOM_SEED=',
            # Construction follows the agreed TT-only policy. SS/FF are loaded
            # later in independent analysis processes, never into this graph.
-           'CORNER=TC', 'CORNERS=typical']
+           'CORNER=TC', 'CORNERS=typical',
+           # The independent STA retains propagated-clock setup/hold paths.
+           # Avoid the costly redundant all-design skew summaries in ORFS.
+           'REPORT_CLOCK_SKEW=0']
     if args.adder_mapping=='abc':cmd.append('ADDER_MAP_FILE=')
     cmd.append('grt')
     report = {'scope': 'global-route research baseline exploration, not detailed-route signoff',
@@ -102,6 +105,7 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
     report['local_image_id'] = expected_image
     report['placement_seed_policy'] = 'pinned-tool default; GPL_RANDOM_SEED= overrides config seed (unsupported flag)'
     report['construction_timing_corners'] = ['TT']
+    report['clock_skew_summary_policy'] = 'ORFS summaries disabled; independent propagated-clock setup/hold checks and expanded paths required'
     report['synthesis_adder_mapping'] = args.adder_mapping
     report['process_lowering_sha256'] = sha(ROOT/'physical/asap7/baseline/lower_processes.tcl')
     report['source_commit'] = subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()

@@ -45,6 +45,10 @@ The earlier `abc-compatible-v2` probe used three construction views and was
 stopped before completion when this contract mismatch was identified. It cannot
 be promoted by the independent analyzer. Its original synthesis cache still
 uses the same TT `LIB_FILES`; `CORNERS` controls only OpenROAD's analysis views.
+New builds set `REPORT_CLOCK_SKEW=0` to avoid expensive duplicate ORFS skew
+summaries. Independent STA still checks setup/hold with propagated clocks and
+preserves full clock-expanded critical paths. This changes report generation;
+the `tt-abc-v3` exploration retains the original enabled summaries in its log.
 
 The following items describe the **legacy** flow in this directory:
 
