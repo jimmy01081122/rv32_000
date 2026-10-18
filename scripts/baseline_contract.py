@@ -18,6 +18,16 @@ def validate(manifest):
     for row in rows:
         if row['reference_cycles']<=0 or len(row['elf_sha256'])!=64:raise ValueError('invalid baseline metric/identity')
         if row['family']=='fp32' and row['group']!=('dsp' if row['name'] in FP[:4] else 'matrix_ml'):raise ValueError('FP32 group changed')
+        if row['family']=='fp32':
+            path=(ROOT/row['fixture']).resolve()
+            if not path.is_relative_to(ROOT/'baselines/ap5b-post-lsu-v1/fixtures') or sha(path)!=row['fixture_sha256']:
+                raise ValueError('frozen FP32 fixture identity changed')
+            fixture=json.loads(path.read_text())
+            if (fixture['name']!=row['name'] or fixture['dimensions']!=row['dimensions']
+                    or fixture['absolute_tolerance']!=row['absolute_tolerance']
+                    or fixture['relative_tolerance']!=row['relative_tolerance']
+                    or len(fixture['expected_double'])!=row['checked_values']):
+                raise ValueError('FP32 fixture dimensions/tolerance/output denominator changed')
     if sum(r.get('checked_values',0) for r in rows)!=3629:raise ValueError('FP32 output denominator changed')
     return rows
 

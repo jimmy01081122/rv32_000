@@ -25,4 +25,10 @@ class Contract(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             path=Path(directory)/'bad.elf';path.write_bytes(b'not an ELF')
             with self.assertRaises(ValueError):image_end(path)
+    def test_fixture_identity_or_tolerance_change_rejected(self):
+        for field,value in [('fixture_sha256','0'*64),('absolute_tolerance',1),
+                            ('relative_tolerance',1),('dimensions',{'samples':1})]:
+            contract=load();row=next(r for r in contract['workloads'] if r['family']=='fp32')
+            row[field]=value
+            with self.assertRaises(ValueError):validate(contract)
 if __name__=='__main__':unittest.main()
