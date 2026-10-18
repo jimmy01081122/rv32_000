@@ -1,0 +1,35 @@
+[SimMemory] Loaded segment to 0x80000000 (filesz: 0xc10, memsz: 0xc10)
+[SimMemory] Found 'tohost' symbol at 0x80000c00
+[SimMemory] ELF loaded successfully. Entry PC = 0x80000000
+[Simulator] Starting simulation run...
+========================================================
+  AP5B Dedicated LSU Redirect & Timing Verification     
+========================================================
+[TEST 1] Load Formatting & Sign/Zero Extension...
+[PASS] Test 1: All load formatting and extension modes verified.
+[TEST 2] Immediate Load-Use Timing Dependency...
+[PASS] Test 2: Immediate load-use resolved correctly.
+[TEST 3] Store-to-Load Forwarding...
+[PASS] Test 3: Store-to-load forwarding verified.
+[TEST 4] Partial Overlap Store-to-Load...
+[PASS] Test 4: Partial overlap read verified.
+[TEST 5] Outstanding Load during Branch Mispredict Flush...
+[PASS] Test 5: Speculative in-flight loads flushed cleanly without corruption.
+[TEST 6] Back-to-Back Sequential Loads...
+[PASS] Test 6: Back-to-back loads completed cleanly.
+========================================================
+  ALL AP5B DEDICATED LSU TESTS PASSED!                  
+========================================================
+
+[SimMemory] TOHOST exit (0x1) received. Exit code: 0 (PASS)
+
+[SimMemory] SIM_EXIT received with code: 0 (PASS)
+
+================ Simulation Summary ================
+  ELF binary     : /workspace/build/tests/lsu_redirect_variable_lat.elf
+  Cycles         : 8641
+  Retired insns  : 4085
+  IPC            : 0.4727
+  Exit status    : PASS (0)
+====================================================
+

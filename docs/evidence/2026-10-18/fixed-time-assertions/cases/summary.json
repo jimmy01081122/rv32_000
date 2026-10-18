@@ -1,0 +1,832 @@
+{
+  "scope": "Fixed-physical-time model qualification; no physical frequency claim",
+  "simulator_sha256": "d5a60109ac5e8daf710bf869975e8c1bc1ab03475fd55209a66f8156de1855be",
+  "reference_simulator_sha256": "4c5e38a317567fe54aee51545d2e04bf6be47f0f76bea4bbf5c04a413630b84f",
+  "records": [
+    {
+      "name": "rv32i_basic",
+      "mode": "old",
+      "command": [
+        "/workspace/build/baselines/ap5b-post-lsu-v1/qualified-reference-sim",
+        "+elf=/workspace/build/tests/rv32i_basic.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/rv32i_basic-old.log",
+      "log_sha256": "3f3e429392f92d423d7cb4a210f31c53cd06f7138269c52806deea42fbf35361"
+    },
+    {
+      "name": "rv32i_basic",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/rv32i_basic.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/rv32i_basic-legacy.log",
+      "log_sha256": "3f3e429392f92d423d7cb4a210f31c53cd06f7138269c52806deea42fbf35361"
+    },
+    {
+      "name": "rv32i_basic",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/rv32i_basic.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/qualification/memory-time-assert/rv32i_basic-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/rv32i_basic-fixed.log",
+      "log_sha256": "3f3e429392f92d423d7cb4a210f31c53cd06f7138269c52806deea42fbf35361"
+    },
+    {
+      "name": "rv32i_basic",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/rv32i_basic.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/qualification/memory-time-assert/rv32i_basic-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/rv32i_basic-faster_core.log",
+      "log_sha256": "6e0bce171a4d8d872fc2d96fad0f9ebf93cfef6c0e32c2c9d3657df96e1423a5"
+    },
+    {
+      "name": "rv32i_basic",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "store_forwarding",
+      "mode": "old",
+      "command": [
+        "/workspace/build/baselines/ap5b-post-lsu-v1/qualified-reference-sim",
+        "+elf=/workspace/build/tests/store_forwarding.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/store_forwarding-old.log",
+      "log_sha256": "08c1d866142a03df63ce452a3e05748dc28a20f9e925b4f608b0c12dafee6381"
+    },
+    {
+      "name": "store_forwarding",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/store_forwarding.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/store_forwarding-legacy.log",
+      "log_sha256": "08c1d866142a03df63ce452a3e05748dc28a20f9e925b4f608b0c12dafee6381"
+    },
+    {
+      "name": "store_forwarding",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/store_forwarding.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/qualification/memory-time-assert/store_forwarding-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/store_forwarding-fixed.log",
+      "log_sha256": "08c1d866142a03df63ce452a3e05748dc28a20f9e925b4f608b0c12dafee6381"
+    },
+    {
+      "name": "store_forwarding",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/store_forwarding.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/qualification/memory-time-assert/store_forwarding-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/store_forwarding-faster_core.log",
+      "log_sha256": "376cbecfc644a57612328dc6dbcec0f4fe169bd7a78ddee36828547483889c4c"
+    },
+    {
+      "name": "store_forwarding",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "lsu_redirect_variable_lat",
+      "mode": "old",
+      "command": [
+        "/workspace/build/baselines/ap5b-post-lsu-v1/qualified-reference-sim",
+        "+elf=/workspace/build/tests/lsu_redirect_variable_lat.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/lsu_redirect_variable_lat-old.log",
+      "log_sha256": "ee890187da4f971940f7fabba0242e6328b503523fecafec954ded08d72a6417"
+    },
+    {
+      "name": "lsu_redirect_variable_lat",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/lsu_redirect_variable_lat.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/lsu_redirect_variable_lat-legacy.log",
+      "log_sha256": "ee890187da4f971940f7fabba0242e6328b503523fecafec954ded08d72a6417"
+    },
+    {
+      "name": "lsu_redirect_variable_lat",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/lsu_redirect_variable_lat.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/qualification/memory-time-assert/lsu_redirect_variable_lat-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/lsu_redirect_variable_lat-fixed.log",
+      "log_sha256": "ee890187da4f971940f7fabba0242e6328b503523fecafec954ded08d72a6417"
+    },
+    {
+      "name": "lsu_redirect_variable_lat",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/lsu_redirect_variable_lat.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/qualification/memory-time-assert/lsu_redirect_variable_lat-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/lsu_redirect_variable_lat-faster_core.log",
+      "log_sha256": "94a76890de500f19f75522a7ac8303167c8b996ca328f6ad1b1af82f24f9cea0"
+    },
+    {
+      "name": "lsu_redirect_variable_lat",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "wrong_path_store",
+      "mode": "old",
+      "command": [
+        "/workspace/build/baselines/ap5b-post-lsu-v1/qualified-reference-sim",
+        "+elf=/workspace/build/tests/wrong_path_store.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/wrong_path_store-old.log",
+      "log_sha256": "bef02e24a76b59a289277eb038fbd89e640fef8bb32368b1733bbf46223d0b4d"
+    },
+    {
+      "name": "wrong_path_store",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/wrong_path_store.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/wrong_path_store-legacy.log",
+      "log_sha256": "bef02e24a76b59a289277eb038fbd89e640fef8bb32368b1733bbf46223d0b4d"
+    },
+    {
+      "name": "wrong_path_store",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/wrong_path_store.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/qualification/memory-time-assert/wrong_path_store-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/wrong_path_store-fixed.log",
+      "log_sha256": "bef02e24a76b59a289277eb038fbd89e640fef8bb32368b1733bbf46223d0b4d"
+    },
+    {
+      "name": "wrong_path_store",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/wrong_path_store.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/qualification/memory-time-assert/wrong_path_store-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/wrong_path_store-faster_core.log",
+      "log_sha256": "3121a8dfa72ff0067931f1927465a99cd9226b8ebeb5fa365ce38c8c832a2992"
+    },
+    {
+      "name": "wrong_path_store",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "partial_overlap",
+      "mode": "old",
+      "command": [
+        "/workspace/build/baselines/ap5b-post-lsu-v1/qualified-reference-sim",
+        "+elf=/workspace/build/tests/partial_overlap.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/partial_overlap-old.log",
+      "log_sha256": "e49dc723e3dd8a80a95f4cb0d2699b4e02d06d6c5a529b8b344e1230bf68df6e"
+    },
+    {
+      "name": "partial_overlap",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/partial_overlap.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/partial_overlap-legacy.log",
+      "log_sha256": "e49dc723e3dd8a80a95f4cb0d2699b4e02d06d6c5a529b8b344e1230bf68df6e"
+    },
+    {
+      "name": "partial_overlap",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/partial_overlap.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/qualification/memory-time-assert/partial_overlap-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/partial_overlap-fixed.log",
+      "log_sha256": "e49dc723e3dd8a80a95f4cb0d2699b4e02d06d6c5a529b8b344e1230bf68df6e"
+    },
+    {
+      "name": "partial_overlap",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/partial_overlap.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/qualification/memory-time-assert/partial_overlap-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/partial_overlap-faster_core.log",
+      "log_sha256": "48b24f583c67158dc909abfc59673039fc73ba9add979f755e8dc18c67c6c294"
+    },
+    {
+      "name": "partial_overlap",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "unresolved_store",
+      "mode": "old",
+      "command": [
+        "/workspace/build/baselines/ap5b-post-lsu-v1/qualified-reference-sim",
+        "+elf=/workspace/build/tests/unresolved_store.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/unresolved_store-old.log",
+      "log_sha256": "c4c88ee9648a8cb3efd8238dba5afdcd3cdcb07bcf4f90089a8dd1df2c3250bb"
+    },
+    {
+      "name": "unresolved_store",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/unresolved_store.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/unresolved_store-legacy.log",
+      "log_sha256": "c4c88ee9648a8cb3efd8238dba5afdcd3cdcb07bcf4f90089a8dd1df2c3250bb"
+    },
+    {
+      "name": "unresolved_store",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/unresolved_store.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/qualification/memory-time-assert/unresolved_store-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/unresolved_store-fixed.log",
+      "log_sha256": "c4c88ee9648a8cb3efd8238dba5afdcd3cdcb07bcf4f90089a8dd1df2c3250bb"
+    },
+    {
+      "name": "unresolved_store",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/unresolved_store.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/qualification/memory-time-assert/unresolved_store-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/unresolved_store-faster_core.log",
+      "log_sha256": "c4070d5faf6fa2b74be7c552b456a300fd9a168a5cb027a55e1940ff6790e8af"
+    },
+    {
+      "name": "unresolved_store",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "fp_basic",
+      "mode": "old",
+      "command": [
+        "/workspace/build/baselines/ap5b-post-lsu-v1/qualified-reference-sim",
+        "+elf=/workspace/build/tests/fp_basic.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/fp_basic-old.log",
+      "log_sha256": "b7dfacf7316bc58e755c382dccc03e45d98803c1aa6259c491085e651c3e528c"
+    },
+    {
+      "name": "fp_basic",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_basic.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/fp_basic-legacy.log",
+      "log_sha256": "b7dfacf7316bc58e755c382dccc03e45d98803c1aa6259c491085e651c3e528c"
+    },
+    {
+      "name": "fp_basic",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_basic.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/qualification/memory-time-assert/fp_basic-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/fp_basic-fixed.log",
+      "log_sha256": "b7dfacf7316bc58e755c382dccc03e45d98803c1aa6259c491085e651c3e528c"
+    },
+    {
+      "name": "fp_basic",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_basic.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/qualification/memory-time-assert/fp_basic-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/fp_basic-faster_core.log",
+      "log_sha256": "a28c82623d42eec821a52b8dc6aa5714b2d95bba1a3061ece90f17560203056d"
+    },
+    {
+      "name": "fp_basic",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "fp_fma",
+      "mode": "old",
+      "command": [
+        "/workspace/build/baselines/ap5b-post-lsu-v1/qualified-reference-sim",
+        "+elf=/workspace/build/tests/fp_fma.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/fp_fma-old.log",
+      "log_sha256": "7f35322d2e840388e60034f09f460a60de8eeebb7e0acb2e64df5a45e30f79c3"
+    },
+    {
+      "name": "fp_fma",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_fma.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/fp_fma-legacy.log",
+      "log_sha256": "7f35322d2e840388e60034f09f460a60de8eeebb7e0acb2e64df5a45e30f79c3"
+    },
+    {
+      "name": "fp_fma",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_fma.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/qualification/memory-time-assert/fp_fma-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/fp_fma-fixed.log",
+      "log_sha256": "7f35322d2e840388e60034f09f460a60de8eeebb7e0acb2e64df5a45e30f79c3"
+    },
+    {
+      "name": "fp_fma",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_fma.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/qualification/memory-time-assert/fp_fma-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/qualification/memory-time-assert/fp_fma-faster_core.log",
+      "log_sha256": "48b5cfc34f00f8562fa6183afdb39c5fb5409621e7d1f67be5b776acd93a6c25"
+    },
+    {
+      "name": "fp_fma",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "zero",
+      "mode": "reject_invalid",
+      "passed": true,
+      "returncode": 2
+    },
+    {
+      "name": "negative",
+      "mode": "reject_invalid",
+      "passed": true,
+      "returncode": 2
+    },
+    {
+      "name": "junk",
+      "mode": "reject_invalid",
+      "passed": true,
+      "returncode": 2
+    },
+    {
+      "name": "partial",
+      "mode": "reject_invalid",
+      "passed": true,
+      "returncode": 2
+    },
+    {
+      "name": "mixed",
+      "mode": "reject_invalid",
+      "passed": true,
+      "returncode": 2
+    },
+    {
+      "name": "overflow",
+      "mode": "reject_invalid",
+      "passed": true,
+      "returncode": 2
+    },
+    {
+      "name": "sw",
+      "mode": "fixed_fault_core5500",
+      "passed": true,
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/sw.elf",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000124",
+        "+trace=/workspace/build/qualification/memory-time-assert/fault-sw-5500.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "bf39cd463c7c0a8fc77724aa275cb7177ef9690e9963d4acf6f8decf7435fc7c",
+      "log": "build/qualification/memory-time-assert/fault-sw-5500.log",
+      "log_sha256": "aaf5051fa242b2507d977469e88f91d44576c1195ce67e21681d187d5b0bc4ce",
+      "trace": "build/qualification/memory-time-assert/fault-sw-5500.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "sw",
+      "mode": "fixed_fault_core3000",
+      "passed": true,
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/sw.elf",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000124",
+        "+trace=/workspace/build/qualification/memory-time-assert/fault-sw-3000.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "bf39cd463c7c0a8fc77724aa275cb7177ef9690e9963d4acf6f8decf7435fc7c",
+      "log": "build/qualification/memory-time-assert/fault-sw-3000.log",
+      "log_sha256": "0971f47ba541c5b683843eded4484ab8d5c9a6351d56a5a4fe83d70524eafd94",
+      "trace": "build/qualification/memory-time-assert/fault-sw-3000.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "sb",
+      "mode": "fixed_fault_core5500",
+      "passed": true,
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/sb.elf",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000128",
+        "+trace=/workspace/build/qualification/memory-time-assert/fault-sb-5500.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "8d887f11e694757ed6a36fe6cb433334e921ea320796894f951cd419d0087eb7",
+      "log": "build/qualification/memory-time-assert/fault-sb-5500.log",
+      "log_sha256": "ff2ecd42f4bf43a61a1db13b3f2a57395dbc0df9b92af197e9aaf7c89e014c36",
+      "trace": "build/qualification/memory-time-assert/fault-sb-5500.trace",
+      "trace_sha256": "ebb34de54ec80adbb823437a51831be1d83e5ad562308bc2a0091a9daaf6a0d2"
+    },
+    {
+      "name": "sb",
+      "mode": "fixed_fault_core3000",
+      "passed": true,
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/sb.elf",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000128",
+        "+trace=/workspace/build/qualification/memory-time-assert/fault-sb-3000.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "8d887f11e694757ed6a36fe6cb433334e921ea320796894f951cd419d0087eb7",
+      "log": "build/qualification/memory-time-assert/fault-sb-3000.log",
+      "log_sha256": "f5769f7dddfd2b13f9f3c02e6aedd2a7379a1a539b8a510a8b2104ff7d7f92d7",
+      "trace": "build/qualification/memory-time-assert/fault-sb-3000.trace",
+      "trace_sha256": "ebb34de54ec80adbb823437a51831be1d83e5ad562308bc2a0091a9daaf6a0d2"
+    },
+    {
+      "name": "sh",
+      "mode": "fixed_fault_core5500",
+      "passed": true,
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/sh.elf",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000128",
+        "+trace=/workspace/build/qualification/memory-time-assert/fault-sh-5500.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "87a47d681b9443b028b536285f59f9638a22b9b7942d511aee4daa5778a111db",
+      "log": "build/qualification/memory-time-assert/fault-sh-5500.log",
+      "log_sha256": "9069a938c622fc67b83c1059749ea213f3164003f3bb62e2bd23e032706bbb6e",
+      "trace": "build/qualification/memory-time-assert/fault-sh-5500.trace",
+      "trace_sha256": "0b6a43cc0fa2838cad77e2294f1a563edc41e1a7b2d85c0395fb76495c0ea0de"
+    },
+    {
+      "name": "sh",
+      "mode": "fixed_fault_core3000",
+      "passed": true,
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/sh.elf",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000128",
+        "+trace=/workspace/build/qualification/memory-time-assert/fault-sh-3000.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "87a47d681b9443b028b536285f59f9638a22b9b7942d511aee4daa5778a111db",
+      "log": "build/qualification/memory-time-assert/fault-sh-3000.log",
+      "log_sha256": "9b7e1da2601505a97a72b0db8a96125560a460ab9dab0366b2e5f444b99d0b12",
+      "trace": "build/qualification/memory-time-assert/fault-sh-3000.trace",
+      "trace_sha256": "0b6a43cc0fa2838cad77e2294f1a563edc41e1a7b2d85c0395fb76495c0ea0de"
+    },
+    {
+      "name": "fsw",
+      "mode": "fixed_fault_core5500",
+      "passed": true,
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/fsw.elf",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000124",
+        "+trace=/workspace/build/qualification/memory-time-assert/fault-fsw-5500.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "d580ab01ad8cf6aa8b0ad8b998cd720bce3309f0975b686051ec29a9ea015f2f",
+      "log": "build/qualification/memory-time-assert/fault-fsw-5500.log",
+      "log_sha256": "b6c694e4c1f4711cdcef7d9bd8cb4624caaf0f40e64780646f9640c507acd4ad",
+      "trace": "build/qualification/memory-time-assert/fault-fsw-5500.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "fsw",
+      "mode": "fixed_fault_core3000",
+      "passed": true,
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/fsw.elf",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000124",
+        "+trace=/workspace/build/qualification/memory-time-assert/fault-fsw-3000.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "d580ab01ad8cf6aa8b0ad8b998cd720bce3309f0975b686051ec29a9ea015f2f",
+      "log": "build/qualification/memory-time-assert/fault-fsw-3000.log",
+      "log_sha256": "e71fa4fb756fa28dc22566148fa6c3697e5654940c0ebcbc6a8100500d13449d",
+      "trace": "build/qualification/memory-time-assert/fault-fsw-3000.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "lw",
+      "mode": "fixed_fault_core5500",
+      "passed": true,
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/lw.elf",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-load=0x80000124",
+        "+trace=/workspace/build/qualification/memory-time-assert/fault-lw-5500.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "70ecbc3c1ef0e4dd354d75d2ac5415db60114cd530ff5917074c85425c02481a",
+      "log": "build/qualification/memory-time-assert/fault-lw-5500.log",
+      "log_sha256": "e6959e9d4418d492e195f2f61409744296f3d9b7ad8db447177a6e50c6ede251",
+      "trace": "build/qualification/memory-time-assert/fault-lw-5500.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    },
+    {
+      "name": "lw",
+      "mode": "fixed_fault_core3000",
+      "passed": true,
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/lw.elf",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-load=0x80000124",
+        "+trace=/workspace/build/qualification/memory-time-assert/fault-lw-3000.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "70ecbc3c1ef0e4dd354d75d2ac5415db60114cd530ff5917074c85425c02481a",
+      "log": "build/qualification/memory-time-assert/fault-lw-3000.log",
+      "log_sha256": "20b999d83672453321a4c371a5d40972cdadb42f6b788261858b67d11233d7d1",
+      "trace": "build/qualification/memory-time-assert/fault-lw-3000.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    },
+    {
+      "name": "flw",
+      "mode": "fixed_fault_core5500",
+      "passed": true,
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/flw.elf",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-load=0x80000124",
+        "+trace=/workspace/build/qualification/memory-time-assert/fault-flw-5500.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "3f43f87231395412252d4107788ed072e62965cf13a5c90e707fd25a67ab6d45",
+      "log": "build/qualification/memory-time-assert/fault-flw-5500.log",
+      "log_sha256": "7028aeaa543f58975f630208be4069d13aae9973ae2912945155e5de3f801200",
+      "trace": "build/qualification/memory-time-assert/fault-flw-5500.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    },
+    {
+      "name": "flw",
+      "mode": "fixed_fault_core3000",
+      "passed": true,
+      "command": [
+        "/workspace/build/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/flw.elf",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-load=0x80000124",
+        "+trace=/workspace/build/qualification/memory-time-assert/fault-flw-3000.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "3f43f87231395412252d4107788ed072e62965cf13a5c90e707fd25a67ab6d45",
+      "log": "build/qualification/memory-time-assert/fault-flw-3000.log",
+      "log_sha256": "cf5b784f0cdd7bbcb243e89e1c8e754bf07cf8801de580c3173988e194fa619b",
+      "trace": "build/qualification/memory-time-assert/fault-flw-3000.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    }
+  ],
+  "passed": true
+}

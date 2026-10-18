@@ -50,6 +50,9 @@ The bounded [ASAP7 library validation](evidence/2026-10-18/asap7-library-validat
 checks 144 adder transitions, 30 independent min/max timing paths and three
 negative controls; known output-port warnings remain documented. This is tool
 qualification, not full-core timing closure.
+The separate [assertion-enabled fixed-time controls](evidence/2026-10-18/fixed-time-assertions/README.md)
+also pass 58/58 plus the scheduler unit test; all 12 fault traces match the
+normal-build preparation evidence. The scored simulator remains unchanged.
 The [v1 manifest](../baselines/ap5b-post-lsu-v1/manifest.json) remains preparing,
 with period/area null. No A/B/C optimization has been implemented.
 

@@ -1,0 +1,18 @@
+{
+  "scope": "assertion-enabled fixed-time model controls; not physical closure",
+  "rtl_reference": "71c24f5f5a62577912ee5c8eab1f7328ee4c0e46",
+  "simulator_sha256": "d5a60109ac5e8daf710bf869975e8c1bc1ab03475fd55209a66f8156de1855be",
+  "source_sha256": {
+    "sim/tb/sim_main.cpp": "1058b8948ed7a8f3dc48d9b2161bb937a85d6c73caca0fc526799a57604a449c",
+    "sim/tb/fixed_time_memory.h": "26c20dad408b63beec9d70245ba966101cc82e730eb2d294cfb09b21a888b376",
+    "sim/tb/sim_mem.cpp": "846764c8816b5c0fbbdb8b497188e5fdff24f180da22d58852edb3348bce0c1a",
+    "scripts/check_memory_time.py": "bdcbe9036b46730fb21242ad5e1370106f4332a8cfdc8613d8b20fecb38d3d07",
+    "scripts/test_fixed_time_memory.py": "cb925ee7cbbbc54854713f0590d9ca61126c3ffb22bd934861d45dcce5260ad9",
+    "sim/tb/test_fixed_time_memory.cpp": "afe31ecf7ee02923ea8218b7fb61e7c51b10b9df9a5c0d00e5060921fadc3798"
+  },
+  "build_command": "make -C build/sim-assert -f Vrv32_ooo_core.mk -j1 CXX=/usr/bin/g++ OBJCACHE=",
+  "runtime_compiler": "GCC 11.4.0-1ubuntu1~22.04.3 from pinned ORFS image; v4.038 headers",
+  "generation_metadata_scope": "reused generated assertion RTL model; .dat records its original generation arguments, not the new C++ runtime compilation timestamp",
+  "precise_fault_trace_comparison": "all 12 trace hashes equal the previous normal-build preparation summary",
+  "normal_scored_simulator_preserved": true
+}
