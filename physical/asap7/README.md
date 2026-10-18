@@ -12,6 +12,11 @@ independent TT/SS/FF analysis via
 [`scripts/analyze_baseline_physical.py`](../../scripts/analyze_baseline_physical.py).
 The [manifest](../../baselines/ap5b-post-lsu-v1/manifest.json) remains preparing;
 no full-core global-route closure or area baseline has been qualified.
+Inside the pinned `rv32ooo-syn:g1` image, create the Verilog input with
+`python3 scripts/lower_baseline_rtl.py --out build/baseline-setup/rtl_lowered.v`.
+The output must not exist; `--compare` can verify a separate fresh reproduction.
+The [source-to-Verilog recheck](../../docs/evidence/2026-10-18/rtl-lowering-validation/README.md)
+reproduces the current physical input byte for byte with `SYNTHESIS` defined.
 After independent analysis, `scripts/check_physical_closure.py --analysis build/.../LABEL`
 reviews only actually tested clock periods, report hashes, four path groups and
 the serialized fixed I/O/uncertainty/load contract. It rejects unresolved
