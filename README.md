@@ -147,7 +147,8 @@ physical qualification remain open.
 
 The [GitHub workflow](.github/workflows/README.md) runs on pushes to `main` and
 pull requests targeting `main`. The [ASAP7 flow](physical/asap7/README.md) is a
-separate environment that still needs porting and requalification.
+separate pinned environment. Its portable post-LSU runner and report controls are
+available; full-core physical qualification remains in progress.
 
 ## License
 

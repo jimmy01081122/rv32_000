@@ -65,6 +65,10 @@ pass 49/49 on a four-cell sequential fixture: three independent corners, explici
 ps units, all four path groups, numerical/report agreement, real setup/hold and
 constraint/electrical failures, and rejection of unrouted or unaudited inputs.
 This qualifies reporting only; the full-core implementation remains in progress.
+The complete baseline/worker/timing-review control target now passes 19 tests,
+including frozen FP32 fixture hashes, dimensions and tolerances. The
+[incomplete physical probes](evidence/2026-10-18/physical-development-attempts/README.md)
+retain failed/unknown exits separately from positive qualification evidence.
 The separate [assertion-enabled fixed-time controls](evidence/2026-10-18/fixed-time-assertions/README.md)
 also pass 58/58 plus the scheduler unit test; all 12 fault traces match the
 normal-build preparation evidence. The scored simulator remains unchanged.
@@ -112,10 +116,11 @@ with period/area null. No A/B/C optimization has been implemented.
    [clean-commit rerun](evidence/2026-10-17/embench-approved-rerun/README.md)
    at `7ba020297da6e6cdc4e5857fdde6ff57fec627d6` passes 19/19 native,
    Spike and DUT self-checks plus ELF ISA/ABI checks. All target ELF hashes and
-   diagnostic metrics match the earlier run. The measurement contract remains open.
-   PolyBench MINI/SMALL native runs and
-   target object compilation succeeded; bare-metal execution and numerical checking
-   remain open.
+   diagnostic metrics match the earlier run. That rerun predates the frozen
+   post-LSU input contract above. Initial broad PolyBench MINI/SMALL probes
+   established native runs and target object compilation. Subsequent balanced-FP32
+   qualification covers bare-metal GEMM, BiCG and Cholesky; it does not qualify
+   the entire PolyBench suite.
    The user approved balanced control/DSP and matrix/ML coverage with four
    kernels per group and equal group weights. The [FP32 workload record](FP32_BALANCED_PROPOSAL.md)
    notes 18/18 native/RV32 object builds for
@@ -125,8 +130,10 @@ with period/area null. No A/B/C optimization has been implemented.
    `df97854c719014df862d6d6df450d02fe0cee756`. Each native/DUT run emits 3,629
    values independently checked against host-double references. Streaming states,
    Cholesky reconstruction and pinned upstream SVM labels pass; six checker
-   positive/negative controls pass. Formal sizes and tolerances,
-   timer overhead, stack high-water and memory/physical contracts remain open.
+   positive/negative controls pass. The later post-LSU manifest freezes sizes,
+   tolerances and ELF bytes, includes timer overhead without subtraction, and
+   records retired-SP stack headroom in all 27 preparation runs. Absolute memory
+   ps still awaits the qualified physical period.
    A [matched contraction experiment](FMA_CONTRACTION_REVIEW.md) at clean commit
    `581ee86f1bd55bc6eff7cc123c660ab94446eb6f` now passes all eight cases in both
    off and fast modes, with diagnostic equal-group cycle ratio 1.113x. Its finite
@@ -144,10 +151,13 @@ with period/area null. No A/B/C optimization has been implemented.
    files/ELFs match the previous qualification; four observer on/off/old-model
    replays, 8/8 implicit-fast cases, 18 Python controls and 18/18 directed/diff
    checks pass. No CPU structure optimization or new physical result is claimed.
-6. **Physical results:** port hardcoded host paths, provision pinned ORFS/ASAP7,
-   audit measurement units, synthesis boundary, constraints, corners and parasitic
-   stage, then reproduce AP5B results. Current config skips detailed routing;
-   the STA helper uses FF libraries and global-route parasitic estimates.
+6. **Physical results:** the portable post-LSU runner now uses pinned
+   ORFS/ASAP7, explicit inputs and durable job records. TT-only construction is
+   active; independent TT/SS/FF reporting and failure controls are qualified.
+   Full-core global-route completion, routing review, corner setup/hold/electrical
+   closure and the formal 27-workload rerun remain open. Historical host-specific
+   scripts and FF-only STA are outside this baseline. Detailed routing is a later
+   milestone.
 7. **Power:** establish and record workload switching activity before treating
    power/energy estimates as comparable workload measurements.
 
@@ -173,6 +183,7 @@ limitations remain visible rather than being silently changed during doc cleanup
 
 The general embedded and FP32 goals have equal priority. The user approved
 planning targets of at least 1.20x speedup for each category and at most 1.10x
-baseline standard-cell area on 2026-10-17. Baseline and measurement contracts
-remain open; no measured improvement or new performance gate is claimed.
+baseline standard-cell area on 2026-10-17. Workload identities and the fixed-time
+policy are recorded; the physical clock, area and formal measurement remain open.
+No measured CPU improvement is claimed.
 Document cleanup does not waive old failures.
