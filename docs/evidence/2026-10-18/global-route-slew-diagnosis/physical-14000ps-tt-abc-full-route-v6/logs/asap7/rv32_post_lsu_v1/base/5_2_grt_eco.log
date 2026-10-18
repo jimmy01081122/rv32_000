@@ -1,0 +1,349 @@
+OpenROAD 26Q1-2900-gdf79404cd8 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 2 thread(s).
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_db /workspace/build/baselines/ap5b-post-lsu-v1/physical-14000ps-tt-abc-full-route-v6/results/asap7/rv32_post_lsu_v1/base/5_0_grt_input.odb
+read_sdc /workspace/build/baselines/ap5b-post-lsu-v1/physical-14000ps-tt-abc-full-route-v6/results/asap7/rv32_post_lsu_v1/base/5_0_grt_input.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+Perform buffer insertion and gate resizing...
+repair_design -verbose -slew_margin 30
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |    175045
+     1000 |     +0.0% |       0 |       0 |             0 |    174045
+     2000 |     +0.0% |       0 |       0 |             0 |    173045
+     3000 |     +0.0% |       0 |       0 |             0 |    172045
+     4000 |     +0.0% |       0 |       0 |             0 |    171045
+     5000 |     +0.0% |       0 |       0 |             0 |    170045
+     6000 |     +0.0% |       0 |       0 |             0 |    169045
+     7000 |     +0.0% |       0 |       0 |             0 |    168045
+     8000 |     +0.0% |       0 |       0 |             0 |    167045
+     9000 |     +0.0% |       0 |       0 |             0 |    166045
+    10000 |     +0.0% |       0 |       0 |             0 |    165045
+    11000 |     +0.0% |       0 |       0 |             0 |    164045
+    12000 |     +0.0% |       0 |       0 |             0 |    163045
+    13000 |     +0.0% |       0 |       0 |             0 |    162045
+    14000 |     +0.0% |       0 |       0 |             0 |    161045
+    15000 |     +0.0% |       0 |       0 |             0 |    160045
+    16000 |     +0.0% |       0 |       0 |             0 |    159045
+    17000 |     +0.0% |       0 |       0 |             0 |    158045
+    18000 |     +0.0% |       0 |       0 |             0 |    157045
+    19000 |     +0.0% |       0 |       0 |             0 |    156045
+    20000 |     +0.0% |       0 |       0 |             0 |    155045
+    21000 |     +0.0% |       0 |       0 |             0 |    154045
+    22000 |     +0.0% |       0 |       0 |             0 |    153045
+    23000 |     +0.0% |       0 |       0 |             0 |    152045
+    24000 |     +0.0% |       0 |       0 |             0 |    151045
+    25000 |     +0.0% |       0 |       0 |             0 |    150045
+    26000 |     +0.0% |       0 |       0 |             0 |    149045
+    27000 |     +0.0% |       0 |       0 |             0 |    148045
+    28000 |     +0.0% |       0 |       0 |             0 |    147045
+    29000 |     +0.0% |       0 |       0 |             0 |    146045
+    30000 |     +0.0% |       0 |       0 |             0 |    145045
+    31000 |     +0.0% |       0 |       0 |             0 |    144045
+    32000 |     +0.0% |       0 |       0 |             0 |    143045
+    33000 |     +0.0% |       0 |       0 |             0 |    142045
+    34000 |     +0.0% |       0 |       0 |             0 |    141045
+    35000 |     +0.0% |       0 |       0 |             0 |    140045
+    36000 |     +0.0% |       0 |       0 |             0 |    139045
+    37000 |     +0.0% |       0 |       0 |             0 |    138045
+    38000 |     +0.0% |       0 |       0 |             0 |    137045
+    39000 |     +0.0% |       0 |       0 |             0 |    136045
+    40000 |     +0.0% |       0 |       0 |             0 |    135045
+    41000 |     +0.0% |       0 |       0 |             0 |    134045
+    42000 |     +0.0% |       0 |       0 |             0 |    133045
+    43000 |     +0.0% |       0 |       0 |             0 |    132045
+    44000 |     +0.0% |       0 |       0 |             0 |    131045
+    45000 |     +0.0% |       0 |       0 |             0 |    130045
+    46000 |     +0.0% |       0 |       0 |             0 |    129045
+    47000 |     +0.0% |       0 |       0 |             0 |    128045
+    48000 |     +0.0% |       0 |       0 |             0 |    127045
+    49000 |     +0.0% |       0 |       0 |             0 |    126045
+    50000 |     +0.0% |       0 |       0 |             0 |    125045
+    51000 |     +0.0% |       0 |       0 |             0 |    124045
+    52000 |     +0.0% |       0 |       0 |             0 |    123045
+    53000 |     +0.0% |       0 |       0 |             0 |    122045
+    54000 |     +0.0% |       0 |       0 |             0 |    121045
+    55000 |     +0.0% |       0 |       0 |             0 |    120045
+    56000 |     +0.0% |       0 |       0 |             0 |    119045
+    57000 |     +0.0% |       0 |       0 |             0 |    118045
+    58000 |     +0.0% |       0 |       0 |             0 |    117045
+    59000 |     +0.0% |       0 |       0 |             0 |    116045
+    60000 |     +0.0% |       0 |       0 |             0 |    115045
+    61000 |     +0.0% |       0 |       0 |             0 |    114045
+    62000 |     +0.0% |       0 |       0 |             0 |    113045
+    63000 |     +0.0% |       0 |       0 |             0 |    112045
+    64000 |     +0.0% |       0 |       0 |             0 |    111045
+    65000 |     +0.0% |       0 |       0 |             0 |    110045
+    66000 |     +0.0% |       0 |       0 |             0 |    109045
+    67000 |     +0.0% |       0 |       0 |             0 |    108045
+    68000 |     +0.0% |       0 |       0 |             0 |    107045
+    69000 |     +0.0% |       0 |       0 |             0 |    106045
+    70000 |     +0.0% |       0 |       0 |             0 |    105045
+    71000 |     +0.0% |       0 |       1 |             1 |    104045
+    72000 |     +0.0% |       0 |       1 |             1 |    103045
+    73000 |     +0.0% |       0 |       2 |             2 |    102045
+    74000 |     +0.0% |       0 |       2 |             2 |    101045
+    75000 |     +0.0% |       0 |       2 |             2 |    100045
+    76000 |     +0.0% |       0 |       2 |             2 |     99045
+    77000 |     +0.0% |       0 |       2 |             2 |     98045
+    78000 |     +0.0% |       0 |       2 |             2 |     97045
+    79000 |     +0.0% |       0 |       2 |             2 |     96045
+    80000 |     +0.0% |       0 |       2 |             2 |     95045
+    81000 |     +0.0% |       0 |       2 |             2 |     94045
+    82000 |     +0.0% |       0 |       2 |             2 |     93045
+    83000 |     +0.0% |       0 |       2 |             2 |     92045
+    84000 |     +0.0% |       0 |       2 |             2 |     91045
+    85000 |     +0.0% |       0 |       2 |             2 |     90045
+    86000 |     +0.0% |       0 |       2 |             2 |     89045
+    87000 |     +0.0% |       0 |       2 |             2 |     88045
+    88000 |     +0.0% |       0 |       2 |             2 |     87045
+    89000 |     +0.0% |       0 |       2 |             2 |     86045
+    90000 |     +0.0% |       0 |       2 |             2 |     85045
+    91000 |     +0.0% |       0 |       2 |             2 |     84045
+    92000 |     +0.0% |       0 |       2 |             2 |     83045
+    93000 |     +0.0% |       0 |       2 |             2 |     82045
+    94000 |     +0.0% |       0 |       2 |             2 |     81045
+    95000 |     +0.0% |       0 |       2 |             2 |     80045
+    96000 |     +0.0% |       0 |       2 |             2 |     79045
+    97000 |     +0.0% |       0 |       2 |             2 |     78045
+    98000 |     +0.0% |       0 |       2 |             2 |     77045
+    99000 |     +0.0% |       0 |       2 |             2 |     76045
+   100000 |     +0.0% |       0 |       2 |             2 |     75045
+   101000 |     +0.0% |       0 |       2 |             2 |     74045
+   102000 |     +0.0% |       0 |       2 |             2 |     73045
+   103000 |     +0.0% |       0 |       2 |             2 |     72045
+   104000 |     +0.0% |       0 |       2 |             2 |     71045
+   105000 |     +0.0% |       0 |       2 |             2 |     70045
+   106000 |     +0.0% |       0 |       2 |             2 |     69045
+   107000 |     +0.0% |       0 |       2 |             2 |     68045
+   108000 |     +0.0% |       0 |       2 |             2 |     67045
+   109000 |     +0.0% |       0 |       2 |             2 |     66045
+   110000 |     +0.0% |       0 |       2 |             2 |     65045
+   111000 |     +0.0% |       0 |       2 |             2 |     64045
+   112000 |     +0.0% |       0 |       2 |             2 |     63045
+   113000 |     +0.0% |       0 |       2 |             2 |     62045
+   114000 |     +0.0% |       0 |       2 |             2 |     61045
+   115000 |     +0.0% |       0 |       2 |             2 |     60045
+   116000 |     +0.0% |       0 |       2 |             2 |     59045
+   117000 |     +0.0% |       0 |       2 |             2 |     58045
+   118000 |     +0.0% |       0 |       2 |             2 |     57045
+   119000 |     +0.0% |       0 |       2 |             2 |     56045
+   120000 |     +0.0% |       0 |       2 |             2 |     55045
+   121000 |     +0.0% |       0 |       2 |             2 |     54045
+   122000 |     +0.0% |       0 |       2 |             2 |     53045
+   123000 |     +0.0% |       0 |       2 |             2 |     52045
+   124000 |     +0.0% |       0 |       2 |             2 |     51045
+   125000 |     +0.0% |       0 |       2 |             2 |     50045
+   126000 |     +0.0% |       0 |       2 |             2 |     49045
+   127000 |     +0.0% |       0 |       2 |             2 |     48045
+   128000 |     +0.0% |       0 |       2 |             2 |     47045
+   129000 |     +0.0% |       0 |       2 |             2 |     46045
+   130000 |     +0.0% |       0 |       2 |             2 |     45045
+   131000 |     +0.0% |       0 |       2 |             2 |     44045
+   132000 |     +0.0% |       0 |       2 |             2 |     43045
+   133000 |     +0.0% |       0 |       2 |             2 |     42045
+   134000 |     +0.0% |       0 |       2 |             2 |     41045
+   135000 |     +0.0% |       0 |       2 |             2 |     40045
+   136000 |     +0.0% |       0 |       2 |             2 |     39045
+   137000 |     +0.0% |       0 |       2 |             2 |     38045
+   138000 |     +0.0% |       0 |       2 |             2 |     37045
+   139000 |     +0.0% |       0 |       2 |             2 |     36045
+   140000 |     +0.0% |       0 |       2 |             2 |     35045
+   141000 |     +0.0% |       0 |       2 |             2 |     34045
+   142000 |     +0.0% |       0 |       2 |             2 |     33045
+   143000 |     +0.0% |       0 |       2 |             2 |     32045
+   144000 |     +0.0% |       0 |       2 |             2 |     31045
+   145000 |     +0.0% |       0 |       2 |             2 |     30045
+   146000 |     +0.0% |       0 |       2 |             2 |     29045
+   147000 |     +0.0% |       0 |       2 |             2 |     28045
+   148000 |     +0.0% |       0 |       2 |             2 |     27045
+   149000 |     +0.0% |       0 |       2 |             2 |     26045
+   150000 |     +0.0% |       0 |       2 |             2 |     25045
+   151000 |     +0.0% |       0 |       2 |             2 |     24045
+   152000 |     +0.0% |       0 |       2 |             2 |     23045
+   153000 |     +0.0% |       0 |       2 |             2 |     22045
+   154000 |     +0.0% |       0 |       2 |             2 |     21045
+   155000 |     +0.0% |       0 |       2 |             2 |     20045
+   156000 |     +0.0% |       0 |       2 |             2 |     19045
+   157000 |     +0.0% |       0 |       2 |             2 |     18045
+   158000 |     +0.0% |       0 |       2 |             2 |     17045
+   159000 |     +0.0% |       0 |       2 |             2 |     16045
+   160000 |     +0.0% |       0 |       2 |             2 |     15045
+   161000 |     +0.0% |       0 |       2 |             2 |     14045
+   162000 |     +0.0% |       0 |       2 |             2 |     13045
+   163000 |     +0.0% |       0 |       2 |             2 |     12045
+   164000 |     +0.0% |       0 |       2 |             2 |     11045
+   165000 |     +0.0% |       0 |       2 |             2 |     10045
+   166000 |     +0.0% |       0 |       2 |             2 |      9045
+   167000 |     +0.0% |       0 |       2 |             2 |      8045
+   168000 |     +0.0% |       0 |       2 |             2 |      7045
+   169000 |     +0.0% |       0 |       2 |             2 |      6045
+   170000 |     +0.0% |       0 |       2 |             2 |      5045
+   171000 |     +0.0% |       0 |       2 |             2 |      4045
+   172000 |     +0.0% |       0 |       2 |             2 |      3045
+   173000 |     +0.0% |       0 |       2 |             2 |      2045
+   174000 |     +0.0% |       0 |       2 |             2 |      1045
+   175000 |     +0.0% |       0 |       2 |             2 |        45
+    final |     +0.0% |       0 |       2 |             2 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0034] Found 2 slew violations.
+[INFO RSZ-0038] Inserted 2 buffers in 2 nets.
+Took 37 seconds: repair_design -verbose -slew_margin 30
+[INFO DPL-0005] Max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+Movements Summary
+---------------------------------------
+Total cells:                  174975
+Diamond Move Success:         174975 (100.00%)
+Diamond Move Failure:              0
+Rip-up and replace Success:        0 (  0.00% of diamond failures)
+Rip-up and replace Failure:        0
+Total Placement Failures:          0
+---------------------------------------
+Placement Analysis
+---------------------------------
+total displacement          2.9 u
+average displacement        0.0 u
+max displacement            0.5 u
+original HPWL          856676.5 u
+legalized HPWL         856677.7 u
+delta HPWL                    0 %
+
+[INFO GRT-0009] rerouting 13 nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 39
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Overflow
+---------------------------------------------------------------------------------------
+M1                   0             0            0.00%             0 /  0 /  0
+M2             1174009           856            0.07%             0 /  0 /  0
+M3             1526370           721            0.05%             0 /  0 /  0
+M4             1169390             0            0.00%             0 /  0 /  0
+M5             1126335             0            0.00%             0 /  0 /  0
+M6              715507             0            0.00%             0 /  0 /  0
+M7              811437             0            0.00%             0 /  0 /  0
+---------------------------------------------------------------------------------------
+Total          6523048          1577            0.02%             0 /  0 /  0
+
+[INFO GRT-0018] Total wirelength: 1435519 um
+[INFO GRT-0014] Routed nets: 174215
+repair_timing -setup_margin 0 -hold_margin 50 -repair_tns 100 -verbose
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
+[INFO RSZ-0098] No setup violations found
+[INFO RSZ-0046] Found 12 endpoints with hold violations.
+Iteration | Resized | Buffers | Cloned Gates |   Area   |   WNS   |   TNS   | Endpoint
+--------------------------------------------------------------------------------------
+        0 |       0 |       0 |            0 |    +0.0% |  48.437 |   0.000 | u_frontend.iq_mem[2][54]$_DFFE_PP_/D
+       10 |       0 |       9 |            0 |    +0.0% |  49.824 |   0.000 | u_lsu.sq[11][80]$_DFFE_PP_/D
+    final |       0 |      12 |            0 |    +0.0% |  50.002 |   0.000 | u_frontend.if_queue[2][7]$_DFFE_PP_/D
+--------------------------------------------------------------------------------------
+[INFO RSZ-0032] Inserted 12 hold buffers.
+Took 26 seconds: repair_timing -setup_margin 0 -hold_margin 50 -repair_tns 100 -verbose
+[INFO DPL-0005] Max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+Movements Summary
+---------------------------------------
+Total cells:                  174987
+Diamond Move Success:         174987 (100.00%)
+Diamond Move Failure:              0
+Rip-up and replace Success:        0 (  0.00% of diamond failures)
+Rip-up and replace Failure:        0
+Total Placement Failures:          0
+---------------------------------------
+Placement Analysis
+---------------------------------
+total displacement          5.3 u
+average displacement        0.0 u
+max displacement            0.6 u
+original HPWL          856682.1 u
+legalized HPWL         856686.6 u
+delta HPWL                    0 %
+
+[INFO GRT-0009] rerouting 19 nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 4
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Overflow
+---------------------------------------------------------------------------------------
+M1                   0             0            0.00%             0 /  0 /  0
+M2             1174009           878            0.07%             0 /  0 /  0
+M3             1526370           740            0.05%             0 /  0 /  0
+M4             1169390             0            0.00%             0 /  0 /  0
+M5             1126335             0            0.00%             0 /  0 /  0
+M6              715507             0            0.00%             0 /  0 /  0
+M7              811437             0            0.00%             0 /  0 /  0
+---------------------------------------------------------------------------------------
+Total          6523048          1618            0.02%             0 /  0 /  0
+
+[INFO GRT-0018] Total wirelength: 1435534 um
+[INFO GRT-0014] Routed nets: 174227
+RV32_GRT_FINAL_FULL_ROUTE_BEGIN
+[INFO GRT-0020] Min routing layer: M2
+[INFO GRT-0021] Max routing layer: M7
+[INFO GRT-0022] Global adjustment: 0%
+[INFO GRT-0023] Grid origin: (0, 0)
+[INFO GRT-0088] Layer M1      Track-Pitch = 0.0360  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M2      Track-Pitch = 0.0390  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M3      Track-Pitch = 0.0360  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M4      Track-Pitch = 0.0480  line-2-Via Pitch: 0.0480
+[INFO GRT-0088] Layer M5      Track-Pitch = 0.0480  line-2-Via Pitch: 0.0480
+[INFO GRT-0088] Layer M6      Track-Pitch = 0.0640  line-2-Via Pitch: 0.0640
+[INFO GRT-0088] Layer M7      Track-Pitch = 0.0640  line-2-Via Pitch: 0.0640
+[INFO GRT-0003] Macros: 0
+[INFO GRT-0004] Blockages: 54471
+[INFO GRT-0019] Found 1203 clock nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 122
+
+[INFO GRT-0053] Routing resources analysis:
+          Routing      Original      Derated      Resource
+Layer     Direction    Resources     Resources    Reduction (%)
+---------------------------------------------------------------
+M1         Vertical            0             0          0.00%
+M2         Horizontal    1627179       1174009          27.85%
+M3         Vertical      2054686       1526370          25.71%
+M4         Horizontal    1575042       1169390          25.75%
+M5         Vertical      1518876       1126335          25.84%
+M6         Horizontal    1057884        715507          32.36%
+M7         Vertical      1204494        811437          32.63%
+---------------------------------------------------------------
+
+[INFO GRT-0101] Running extra iterations to remove overflow.
+[INFO GRT-0102] Start extra iteration 1/30
+[INFO GRT-0102] Start extra iteration 2/30
+[INFO GRT-0197] Via related to pin nodes: 1190113
+[INFO GRT-0198] Via related Steiner nodes: 54163
+[INFO GRT-0199] Via filling finished.
+[INFO GRT-0111] Final number of vias: 1593896
+[INFO GRT-0112] Final usage 3D: 6711485
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Overflow
+---------------------------------------------------------------------------------------
+M1                   0             0            0.00%             0 /  0 /  0
+M2             1174009        664684           56.62%             0 /  0 /  0
+M3             1526370        789054           51.69%             0 /  0 /  0
+M4             1169390        273093           23.35%             0 /  0 /  0
+M5             1126335        168738           14.98%             0 /  0 /  0
+M6              715507         29189            4.08%             0 /  0 /  0
+M7              811437          5039            0.62%             0 /  0 /  0
+---------------------------------------------------------------------------------------
+Total          6523048       1929797           29.58%             0 /  0 /  0
+
+[INFO GRT-0018] Total wirelength: 1436518 um
+[INFO GRT-0014] Routed nets: 174227
+[INFO GRT-0303] Global routing runtime = 00:00:26
+RV32_GRT_FULL_ROUTE_COMPLETE
+[INFO ANT-0002] Found 0 net violations.
+[INFO ANT-0001] Found 0 pin violations.
+write_db /workspace/build/baselines/ap5b-post-lsu-v1/physical-14000ps-tt-abc-full-route-v6/results/asap7/rv32_post_lsu_v1/base/5_1_grt.odb
+write_sdc -no_timestamp /workspace/build/baselines/ap5b-post-lsu-v1/physical-14000ps-tt-abc-full-route-v6/results/asap7/rv32_post_lsu_v1/base/5_1_grt.sdc
+RV32_GRT_ECO_COMPLETE

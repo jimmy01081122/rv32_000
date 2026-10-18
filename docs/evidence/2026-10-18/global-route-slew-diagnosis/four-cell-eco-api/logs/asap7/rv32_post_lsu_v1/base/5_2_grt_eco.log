@@ -1,0 +1,164 @@
+OpenROAD 26Q1-2900-gdf79404cd8 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 2 thread(s).
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_db /workspace/build/baseline-setup/grt-eco-probe-v3/results/asap7/rv32_post_lsu_v1/base/5_0_grt_input.odb
+read_sdc /workspace/build/baseline-setup/grt-eco-probe-v3/results/asap7/rv32_post_lsu_v1/base/5_0_grt_input.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+Perform buffer insertion and gate resizing...
+repair_design -verbose -slew_margin 30
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |        14
+       10 |     +0.0% |       0 |       0 |             0 |         4
+    final |     +0.0% |       0 |       0 |             0 |         0
+---------------------------------------------------------------------
+[INFO DPL-0005] Max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+Movements Summary
+---------------------------------------
+Total cells:                       8
+Diamond Move Success:              8 (100.00%)
+Diamond Move Failure:              0
+Rip-up and replace Success:        0 (  0.00% of diamond failures)
+Rip-up and replace Failure:        0
+Total Placement Failures:          0
+---------------------------------------
+Placement Analysis
+---------------------------------
+total displacement          0.0 u
+average displacement        0.0 u
+max displacement            0.0 u
+original HPWL              19.0 u
+legalized HPWL             19.0 u
+delta HPWL                    0 %
+
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Overflow
+---------------------------------------------------------------------------------------
+M1                   0             0            0.00%             0 /  0 /  0
+M2                2967             0            0.00%             0 /  0 /  0
+M3                3328             0            0.00%             0 /  0 /  0
+M4                2480             0            0.00%             0 /  0 /  0
+M5                2480             0            0.00%             0 /  0 /  0
+M6                1680             0            0.00%             0 /  0 /  0
+M7                1680             0            0.00%             0 /  0 /  0
+---------------------------------------------------------------------------------------
+Total            14615             0            0.00%             0 /  0 /  0
+
+[INFO GRT-0018] Total wirelength: 31 um
+[INFO GRT-0014] Routed nets: 14
+repair_timing -setup_margin 0 -hold_margin 50 -repair_tns 100 -verbose
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
+[INFO RSZ-0098] No setup violations found
+[INFO RSZ-0046] Found 6 endpoints with hold violations.
+Iteration | Resized | Buffers | Cloned Gates |   Area   |   WNS   |   TNS   | Endpoint
+--------------------------------------------------------------------------------------
+        0 |       0 |       0 |            0 |    +0.0% |  16.831 |   0.000 | ff0/D
+    final |       0 |      12 |            0 |   +72.3% |  50.453 |   0.000 | Q
+--------------------------------------------------------------------------------------
+[INFO RSZ-0032] Inserted 12 hold buffers.
+[INFO DPL-0005] Max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+Movements Summary
+---------------------------------------
+Total cells:                      20
+Diamond Move Success:             20 (100.00%)
+Diamond Move Failure:              0
+Rip-up and replace Success:        0 (  0.00% of diamond failures)
+Rip-up and replace Failure:        0
+Total Placement Failures:          0
+---------------------------------------
+Placement Analysis
+---------------------------------
+total displacement         10.5 u
+average displacement        0.5 u
+max displacement            1.4 u
+original HPWL              21.2 u
+legalized HPWL             29.3 u
+delta HPWL                   38 %
+
+[INFO GRT-0009] rerouting 20 nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 3
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Overflow
+---------------------------------------------------------------------------------------
+M1                   0             0            0.00%             0 /  0 /  0
+M2                2967            15            0.51%             0 /  0 /  0
+M3                3328            21            0.63%             0 /  0 /  0
+M4                2480             4            0.16%             0 /  0 /  0
+M5                2480             1            0.04%             0 /  0 /  0
+M6                1680             0            0.00%             0 /  0 /  0
+M7                1680             0            0.00%             0 /  0 /  0
+---------------------------------------------------------------------------------------
+Total            14615            41            0.28%             0 /  0 /  0
+
+[INFO GRT-0018] Total wirelength: 50 um
+[INFO GRT-0014] Routed nets: 26
+RV32_GRT_FINAL_FULL_ROUTE_BEGIN
+[INFO GRT-0020] Min routing layer: M2
+[INFO GRT-0021] Max routing layer: M7
+[INFO GRT-0022] Global adjustment: 0%
+[INFO GRT-0023] Grid origin: (0, 0)
+[INFO GRT-0088] Layer M1      Track-Pitch = 0.0360  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M2      Track-Pitch = 0.0390  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M3      Track-Pitch = 0.0360  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M4      Track-Pitch = 0.0480  line-2-Via Pitch: 0.0480
+[INFO GRT-0088] Layer M5      Track-Pitch = 0.0480  line-2-Via Pitch: 0.0480
+[INFO GRT-0088] Layer M6      Track-Pitch = 0.0640  line-2-Via Pitch: 0.0640
+[INFO GRT-0088] Layer M7      Track-Pitch = 0.0640  line-2-Via Pitch: 0.0640
+[INFO GRT-0003] Macros: 0
+[INFO GRT-0004] Blockages: 6
+[INFO GRT-0019] Found 1 clock nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 3
+
+[INFO GRT-0053] Routing resources analysis:
+          Routing      Original      Derated      Resource
+Layer     Direction    Resources     Resources    Reduction (%)
+---------------------------------------------------------------
+M1         Vertical            0             0          0.00%
+M2         Horizontal       4086          2967          27.39%
+M3         Vertical         4448          3328          25.18%
+M4         Horizontal       3328          2480          25.48%
+M5         Vertical         3328          2480          25.48%
+M6         Horizontal       2496          1680          32.69%
+M7         Vertical         2496          1680          32.69%
+---------------------------------------------------------------
+
+[INFO GRT-0197] Via related to pin nodes: 104
+[INFO GRT-0198] Via related Steiner nodes: 0
+[INFO GRT-0199] Via filling finished.
+[INFO GRT-0111] Final number of vias: 133
+[INFO GRT-0112] Final usage 3D: 448
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Overflow
+---------------------------------------------------------------------------------------
+M1                   0             0            0.00%             0 /  0 /  0
+M2                2967            15            0.51%             0 /  0 /  0
+M3                3328            27            0.81%             0 /  0 /  0
+M4                2480             5            0.20%             0 /  0 /  0
+M5                2480             2            0.08%             0 /  0 /  0
+M6                1680             0            0.00%             0 /  0 /  0
+M7                1680             0            0.00%             0 /  0 /  0
+---------------------------------------------------------------------------------------
+Total            14615            49            0.34%             0 /  0 /  0
+
+[INFO GRT-0018] Total wirelength: 50 um
+[INFO GRT-0014] Routed nets: 26
+[INFO GRT-0303] Global routing runtime = 00:00:00
+RV32_GRT_FULL_ROUTE_COMPLETE
+[INFO ANT-0002] Found 0 net violations.
+[INFO ANT-0001] Found 0 pin violations.
+write_db /workspace/build/baseline-setup/grt-eco-probe-v3/results/asap7/rv32_post_lsu_v1/base/5_1_grt.odb
+write_sdc -no_timestamp /workspace/build/baseline-setup/grt-eco-probe-v3/results/asap7/rv32_post_lsu_v1/base/5_1_grt.sdc
+RV32_GRT_ECO_COMPLETE

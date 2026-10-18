@@ -1,0 +1,117 @@
+OpenROAD 26Q1-2900-gdf79404cd8 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 2 thread(s).
+[WARNING STA-1212] /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz line 13156, timing group from output port.
+[WARNING STA-1212] /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz line 13189, timing group from output port.
+[WARNING STA-1212] /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz line 13222, timing group from output port.
+[WARNING STA-1212] /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz line 13255, timing group from output port.
+[WARNING STA-1212] /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz line 13288, timing group from output port.
+[WARNING STA-1212] /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz line 13321, timing group from output port.
+[WARNING STA-1212] /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz line 13354, timing group from output port.
+[WARNING STA-1212] /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz line 14748, timing group from output port.
+[WARNING STA-1212] /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz line 14781, timing group from output port.
+[WARNING STA-1212] /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz line 14814, timing group from output port.
+PIN place18130/A
+place18130/A ^ 328.2180:349.1768 v 247.4105:261.5822
+Net _013806_
+ Pin capacitance: 3.4869-4.9136
+ Wire capacitance: 17.4939
+ Total capacitance: 20.9808-22.4075
+ Number of drivers: 1
+ Number of loads: 7
+ Number of pins: 8
+
+Driver pins
+ u_rob.next_seq[9]$_SDFFE_PP0P_/QN output (DFFHQNx1_ASAP7_75t_R) (75, 154)
+
+Load pins
+ _203262_/A input (INVx1_ASAP7_75t_R) 0.4183-0.5788 (74, 152)
+ _207238_/A1 input (OA21x2_ASAP7_75t_R) 0.3839-0.5130 (100, 151)
+ _228852_/B input (OR3x1_ASAP7_75t_R) 0.3551-0.5109 (73, 153)
+ _228856_/B input (OAI21x1_ASAP7_75t_R) 0.7291-1.1676 (74, 153)
+ _320642_/A1 input (OA21x2_ASAP7_75t_R) 0.3839-0.5130 (39, 152)
+ _321352_/A1 input (OA21x2_ASAP7_75t_R) 0.3839-0.5130 (41, 154)
+ place18130/A input (BUFx6f_ASAP7_75t_R) 0.8105-1.1192 (16, 151)
+
+PIN _320642_/A1
+_320642_/A1 ^ 327.7853:348.7016 v 246.8188:260.9266
+Net _013806_
+ Pin capacitance: 3.4869-4.9136
+ Wire capacitance: 17.4939
+ Total capacitance: 20.9808-22.4075
+ Number of drivers: 1
+ Number of loads: 7
+ Number of pins: 8
+
+Driver pins
+ u_rob.next_seq[9]$_SDFFE_PP0P_/QN output (DFFHQNx1_ASAP7_75t_R) (75, 154)
+
+Load pins
+ _203262_/A input (INVx1_ASAP7_75t_R) 0.4183-0.5788 (74, 152)
+ _207238_/A1 input (OA21x2_ASAP7_75t_R) 0.3839-0.5130 (100, 151)
+ _228852_/B input (OR3x1_ASAP7_75t_R) 0.3551-0.5109 (73, 153)
+ _228856_/B input (OAI21x1_ASAP7_75t_R) 0.7291-1.1676 (74, 153)
+ _320642_/A1 input (OA21x2_ASAP7_75t_R) 0.3839-0.5130 (39, 152)
+ _321352_/A1 input (OA21x2_ASAP7_75t_R) 0.3839-0.5130 (41, 154)
+ place18130/A input (BUFx6f_ASAP7_75t_R) 0.8105-1.1192 (16, 151)
+
+PIN u_rob.next_seq[9]$_SDFFE_PP0P_/QN
+u_rob.next_seq[9]$_SDFFE_PP0P_/QN ^ 326.6283:347.4814 v 245.3172:259.3374
+Net _013806_
+ Pin capacitance: 3.4869-4.9136
+ Wire capacitance: 17.4939
+ Total capacitance: 20.9808-22.4075
+ Number of drivers: 1
+ Number of loads: 7
+ Number of pins: 8
+
+Driver pins
+ u_rob.next_seq[9]$_SDFFE_PP0P_/QN output (DFFHQNx1_ASAP7_75t_R) (75, 154)
+
+Load pins
+ _203262_/A input (INVx1_ASAP7_75t_R) 0.4183-0.5788 (74, 152)
+ _207238_/A1 input (OA21x2_ASAP7_75t_R) 0.3839-0.5130 (100, 151)
+ _228852_/B input (OR3x1_ASAP7_75t_R) 0.3551-0.5109 (73, 153)
+ _228856_/B input (OAI21x1_ASAP7_75t_R) 0.7291-1.1676 (74, 153)
+ _320642_/A1 input (OA21x2_ASAP7_75t_R) 0.3839-0.5130 (39, 152)
+ _321352_/A1 input (OA21x2_ASAP7_75t_R) 0.3839-0.5130 (41, 154)
+ place18130/A input (BUFx6f_ASAP7_75t_R) 0.8105-1.1192 (16, 151)
+
+PIN u_rob.next_seq[9]$_SDFFE_PP0P_/CLK
+u_rob.next_seq[9]$_SDFFE_PP0P_/CLK ^ 21.3274:24.1427 v 21.3359:23.7955
+Net clknet_leaf_364_clk
+ Pin capacitance: 6.7009-9.3794
+ Wire capacitance: 4.7217-4.7217
+ Total capacitance: 11.4226-14.1011
+ Number of drivers: 1
+ Number of loads: 21
+ Number of pins: 22
+
+Driver pins
+ clkbuf_leaf_364_clk/Y output (BUFx24_ASAP7_75t_R) (78, 154)
+
+Load pins
+ u_lsu.fwd_reg_req[228]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (76, 155)
+ u_lsu.fwd_reg_req[229]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (73, 155)
+ u_lsu.in_flight_load_req[228]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (75, 154)
+ u_lsu.in_flight_load_req[229]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (75, 156)
+ u_lsu.in_flight_load_req[233]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (75, 155)
+ u_lsu.in_flight_load_req[239]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (75, 153)
+ u_lsu.in_flight_load_req[240]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (75, 153)
+ u_lsu.rsp_buf_dst[11]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (77, 156)
+ u_lsu.rsp_buf_dst[17]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (76, 153)
+ u_lsu.rsp_buf_dst[18]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (77, 153)
+ u_lsu.rsp_buf_dst[6]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (77, 154)
+ u_lsu.rsp_buf_dst[7]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (77, 155)
+ u_rob.entries[14][154]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (79, 154)
+ u_rob.entries[14][178]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (79, 156)
+ u_rob.entries[15][188]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (79, 155)
+ u_rob.entries[2][154]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (78, 153)
+ u_rob.entries[4][154]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (79, 153)
+ u_rob.entries[6][188]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (78, 153)
+ u_rob.entries[7][188]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (78, 152)
+ u_rob.next_seq[11]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (74, 154)
+ u_rob.next_seq[9]$_SDFFE_PP0P_/CLK input (DFFHQNx1_ASAP7_75t_R) 0.3191-0.4466 (74, 154)
+

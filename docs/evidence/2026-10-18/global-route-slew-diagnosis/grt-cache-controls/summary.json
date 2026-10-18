@@ -1,0 +1,50 @@
+{
+  "scope": "ECO cache admission controls only",
+  "records": [
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "scripts/run_baseline_physical.py",
+        "--period-ps",
+        "15000",
+        "--jobs",
+        "2",
+        "--label",
+        "grt-negative-period",
+        "--adder-mapping",
+        "abc",
+        "--container",
+        "7ebf37267636",
+        "--grt-from",
+        "build/baselines/ap5b-post-lsu-v1/physical-14000ps-tt-abc-grt-compatible-v4",
+        "--detached"
+      ],
+      "returncode": 2,
+      "expected": "cached global-route input changed: period_ps",
+      "passed": true
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "scripts/run_baseline_physical.py",
+        "--period-ps",
+        "14000",
+        "--jobs",
+        "2",
+        "--label",
+        "grt-negative-failed_source",
+        "--adder-mapping",
+        "abc",
+        "--container",
+        "7ebf37267636",
+        "--grt-from",
+        "build/baselines/ap5b-post-lsu-v1/physical-14000ps-tt-abc-v3",
+        "--detached"
+      ],
+      "returncode": 2,
+      "expected": "ECO requires a completed unchanged TT global-route attempt",
+      "passed": true
+    }
+  ],
+  "passed": true
+}
