@@ -110,8 +110,8 @@ def main():
     parser.add_argument('--profile-roi', action='store_true',
                         help='Count retired instructions/FMA between the two RDCYCLE markers')
     parser.add_argument('--bench', choices=('all', *NAMES), default='all')
-    parser.add_argument('--fp-contract', choices=('off', 'fast'), default='off',
-                        help='Only control multiply-add contraction; fast-math remains disabled')
+    parser.add_argument('--fp-contract', choices=('off', 'fast'), default='fast',
+                        help='Default: fast (approved main policy); fast-math remains disabled')
     parser.add_argument('--out-dir', type=Path,
                         help='Use a separate evidence directory for controlled experiments')
     args = parser.parse_args()

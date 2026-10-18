@@ -123,6 +123,10 @@ check-fma-finite: check-fp-env sim-build ## Check exact finite FMA values/flags 
 compare-fp-contraction: check-fma-finite check-fp-sources ## Matched off/fast FP32 numerical and retired-FMA comparison
 	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/compare_fp_contraction.py'
 
+.PHONY: profile-fp-bottlenecks
+profile-fp-bottlenecks: compare-fp-contraction ## Diagnose FIR/BiCG instruction removal and retirement gaps
+	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/profile_fp_bottlenecks.py'
+
 .PHONY: summarize-embench-fp-dut
 summarize-embench-fp-dut: ## Check complete DUT evidence and list each workload's diagnostic cycles
 	python3 scripts/summarize_embench_fp_dut.py

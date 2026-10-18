@@ -4,6 +4,10 @@ Updated 2026-10-18. Initial documentation-cleanup baseline: maintenance commit `
 incoming RTL revision: `0d79df58e65c2e1034e40f7f586a463fd8602ff1`.
 The documentation cleanup changes no RTL behavior or executable acceptance thresholds.
 
+FP32 compiler contraction is now approved as `fast` with `-fno-fast-math`;
+the daily qualifier defaults to fast and retains explicit off comparisons.
+Formal data/timing/memory and physical contracts remain open.
+
 ## Evidence available
 
 The [session handoff](SESSION_HANDOFF.md) records the bring-up environment and

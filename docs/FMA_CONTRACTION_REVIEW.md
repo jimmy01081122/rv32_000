@@ -1,7 +1,8 @@
 # FMA 融合政策與同條件對照
 
 更新：2026-10-18。這輪比較編譯器是否融合乘加；兩組使用同一份修正後 RTL，
-沒有切換 CPU 的 FMA 硬體。正式 FMA 政策尚未凍結。
+沒有切換 CPU 的 FMA 硬體。使用者已在後續審查核准 fast 納入 FP32 主設定；
+日常 qualifier 已預設 fast，off 保留對照。其他量測條件仍待凍結。
 
 ## 開與關的意思
 
@@ -96,9 +97,9 @@ Spike commit 比對 **18/18**、完整 Embench **19/19 主機／Spike／DUT** �
 
 ## 建議共同決定的方向
 
-建議將 **`-ffp-contract=fast -fno-fast-math` 列為正式主設定候選**，
-保留 off 做數值及效能敏感度附表。目前 qualifier 預設仍為 off，
-未代替使用者凍結正式政策。若採 fast，之後的 AP5B 基線與所有 CPU 候選
+使用者已核准 **`-ffp-contract=fast -fno-fast-math` 作 FP32 主設定**，
+qualifier 預設改為 fast，保留 `--fp-contract off` 做數值及效能敏感度附表。
+之後的 AP5B 基線與所有 CPU 候選
 都須使用相同 fast ELF／資料／契約；不能把這次編譯收益算成架構改善。
 Embench 的編譯政策也須獨立明列並在基線前固定，本輪未改其既有設定。
 

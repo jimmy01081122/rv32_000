@@ -11,11 +11,13 @@
 #include "Vrv32_ooo_core.h"
 #include "sim_mem.h"
 #include "fp_roi_profile.h"
+#include "core_roi_profile.h"
 
 struct SimConfig {
     std::string elf_file;
     std::string vcd_file;
     std::string trace_file;
+    std::string core_profile_file;
     uint64_t max_cycles = 1000000;
     uint64_t no_retire_limit = 10000;
     int dmem_latency = 1;
@@ -37,6 +39,9 @@ void parse_args(int argc, char** argv, SimConfig& config) {
             config.trace_file = arg.substr(arg.find('=') + 1);
             config.enable_trace = true;
         } else if (arg == "+profile-fp-roi") {
+            config.profile_fp_roi = true;
+        } else if (arg.rfind("+profile-core-roi=", 0) == 0) {
+            config.core_profile_file = arg.substr(arg.find('=') + 1);
             config.profile_fp_roi = true;
         } else if (arg.rfind("+max-cycles=", 0) == 0) {
             config.max_cycles = std::stoull(arg.substr(arg.find('=') + 1));
@@ -93,6 +98,15 @@ int main(int argc, char** argv) {
     uint64_t retired_insns = 0;
     uint64_t last_retire_cycle = 0;
     FpRoiProfile fp_roi;
+    CoreRoi::Profile core_roi;
+    std::ofstream core_profile_out;
+    if (!config.core_profile_file.empty()) {
+        core_profile_out.open(config.core_profile_file);
+        if (!core_profile_out) {
+            std::cerr << "Cannot open core ROI profile: " << config.core_profile_file << std::endl;
+            return 1;
+        }
+    }
 
     // Reset sequence: initialize pins and hold rst=1 for 10 cycles
     top->clk = 0;
@@ -160,6 +174,8 @@ int main(int argc, char** argv) {
         top->eval();
         if (tfp) tfp->dump(sim_time++);
 
+        if (core_profile_out.is_open() && fp_roi.active) core_roi.sample(CoreRoi::read(*top));
+
         // Sample memory requests from core
         bool imem_accepted = (top->imem_req_valid && top->imem_req_ready);
         uint32_t next_imem_data = imem_accepted ? memory.read32(top->imem_req_addr) : 0;
@@ -205,13 +221,14 @@ int main(int argc, char** argv) {
         // Commit trace inspection (commit_trace_t 344-bit layout, MSB-first)
         bool retire_valid = (top->commit_trace[10] >> 23) & 1;
         bool trap_valid   = (top->commit_trace[10] >> 22) & 1;
+        uint32_t commit_pc = ((top->commit_trace[8] & 0x3FFFFF) << 10) | ((top->commit_trace[7] >> 22) & 0x3FF);
+        uint32_t commit_insn = ((top->commit_trace[7] & 0x3FFFFF) << 10) | ((top->commit_trace[6] >> 22) & 0x3FF);
+        if (core_profile_out.is_open()) core_roi.finish_cycle(retire_valid, commit_pc, commit_insn);
 
         if (retire_valid) {
             retired_insns++;
             last_retire_cycle = cycles;
 
-            uint32_t commit_pc = ((top->commit_trace[8] & 0x3FFFFF) << 10) | ((top->commit_trace[7] >> 22) & 0x3FF);
-            uint32_t commit_insn = ((top->commit_trace[7] & 0x3FFFFF) << 10) | ((top->commit_trace[6] >> 22) & 0x3FF);
             if (config.profile_fp_roi) fp_roi.observe(commit_insn);
             bool     int_dst_valid = (top->commit_trace[6] >> 21) & 1;
             uint32_t int_dst_arch  = (top->commit_trace[6] >> 16) & 0x1F;
@@ -268,6 +285,7 @@ int main(int argc, char** argv) {
     if (trace_out.is_open()) {
         trace_out.close();
     }
+    if (core_profile_out.is_open()) core_roi.write(core_profile_out);
 
     double ipc = (cycles > 0) ? (static_cast<double>(retired_insns) / cycles) : 0.0;
 

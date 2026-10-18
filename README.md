@@ -80,7 +80,9 @@ measurement contract remains open.
 then runs matched off/fast qualifications on the same RTL. The
 [FMA review](docs/FMA_CONTRACTION_REVIEW.md) records the cancellation fix,
 8/8 passes per mode and diagnostic 1.113x cycle speedup from compiler contraction.
-The default qualifier remains `off`; the formal policy and physical baseline are open.
+The approved main FP32 policy is `-ffp-contract=fast -fno-fast-math` (also the
+qualifier default); use `--fp-contract off` for sensitivity checks. The remaining
+measurement and physical baseline contracts are open.
 
 The simulation and generic-synthesis images are separate. For a proxy/private CA:
 
