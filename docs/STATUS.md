@@ -52,6 +52,10 @@ failed on an unsupported placement seed flag; the runner now explicitly uses
 the pinned tool's placement default. Both periods are exploration constraints,
 not achieved clocks. Cached synthesis retains its original 5,500 ps mapping
 constraint and is checked separately from backend timing.
+Review also found that the initial config loaded all three construction views.
+That exploratory backend was stopped before completion. The runner now overrides
+`CORNER=TC CORNERS=typical` to honor TT-only construction; SS/FF remain independent
+post-route checks. Earlier three-view attempts cannot qualify the baseline.
 The bounded [ASAP7 library validation](evidence/2026-10-18/asap7-library-validation/README.md)
 checks 144 adder transitions, 30 independent min/max timing paths and three
 negative controls; known output-port warnings remain documented. This is tool

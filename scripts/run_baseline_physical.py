@@ -88,7 +88,10 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
            f'NUM_CORES={args.jobs}',
            # This pinned OpenROAD predates ORFS's optional placement seed flag.
            # An empty Make override omits the unsupported flag in both GPL stages.
-           'GPL_RANDOM_SEED=']
+           'GPL_RANDOM_SEED=',
+           # Construction follows the agreed TT-only policy. SS/FF are loaded
+           # later in independent analysis processes, never into this graph.
+           'CORNER=TC', 'CORNERS=typical']
     if args.adder_mapping=='abc':cmd.append('ADDER_MAP_FILE=')
     cmd.append('grt')
     report = {'scope': 'global-route research baseline exploration, not detailed-route signoff',
@@ -98,6 +101,7 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
               'config_sha256': sha(ROOT/'physical/asap7/baseline/config.mk'), 'passed': False}
     report['local_image_id'] = expected_image
     report['placement_seed_policy'] = 'pinned-tool default; GPL_RANDOM_SEED= overrides config seed (unsupported flag)'
+    report['construction_timing_corners'] = ['TT']
     report['synthesis_adder_mapping'] = args.adder_mapping
     report['process_lowering_sha256'] = sha(ROOT/'physical/asap7/baseline/lower_processes.tcl')
     report['source_commit'] = subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()

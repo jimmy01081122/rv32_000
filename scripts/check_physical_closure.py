@@ -94,7 +94,8 @@ def review_collection(directory):
         raise ValueError('implementation record changed')
     implementation=json.loads(implementation_path.read_text())
     if (not implementation.get('flow_completed') or implementation.get('returncode')!=0
-            or not implementation.get('input_identities_unchanged')):
+            or not implementation.get('input_identities_unchanged')
+            or implementation.get('construction_timing_corners')!=['TT']):
         raise ValueError('durable implementation/input identity proof required')
     if sha(directory.parent/'make.log')!=implementation['log_sha256']:
         raise ValueError('implementation log changed')

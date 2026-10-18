@@ -32,6 +32,12 @@ runner explicitly overrides `GPL_RANDOM_SEED=` to use this pinned binary's
 default. Global routing retains explicit `GRT_SEED=1`. These exact policies must
 be shared by baseline and candidate runs. No placement repeatability claim has
 yet been established by a second completed run.
+The runner also overrides `CORNER=TC CORNERS=typical`: synthesis and construction
+use TT only, as agreed; SS/FF are evaluated in fresh independent STA processes.
+The earlier `abc-compatible-v2` probe used three construction views and was
+stopped before completion when this contract mismatch was identified. It cannot
+be promoted by the independent analyzer. Its original synthesis cache still
+uses the same TT `LIB_FILES`; `CORNERS` controls only OpenROAD's analysis views.
 
 The following items describe the **legacy** flow in this directory:
 

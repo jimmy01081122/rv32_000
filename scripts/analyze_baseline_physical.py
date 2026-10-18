@@ -26,6 +26,8 @@ def main():
     if not attempt.is_relative_to(ROOT/'build'):parser.error('attempt must be under repository build/')
     implementation=json.loads((attempt/'run.json').read_text())
     if not implementation.get('flow_completed'):parser.error('implementation command has not completed successfully')
+    if implementation.get('construction_timing_corners')!=['TT']:
+        parser.error('implementation must use the agreed TT-only construction view')
     manifest=load()
     check_rtl(manifest)
     if implementation['rtl_files_sha256']!=manifest['rtl_files_sha256']:
