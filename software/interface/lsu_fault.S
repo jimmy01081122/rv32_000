@@ -1,3 +1,4 @@
+.file "lsu_fault.S"
 /* Environment-only access-fault fixture; no Spike comparison for injected faults.
  * CASE: 0=SW, 1=SB(+1), 2=SH(+2), 3=FSW, 4=LW, 5=FLW.
  * The handler skips the fault and its younger instructions, then checks recovery.

@@ -119,7 +119,7 @@ qualify-fp-balanced-dut: check-fp-env check-fp-sources sim-build ## Also validat
 .PHONY: check-lsu-interface
 check-lsu-interface: check-fp-env sim-build compile-tests ## Check request backpressure and precise load/store access faults with assertions
 	$(DOCKER_RUN) $(FP_IMAGE) -c 'SIM_BUILD_DIR=build/sim-assert SIM_ASSERTIONS=1 bash scripts/build_sim.sh $(JOBS)'
-	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/check_lsu_interface.py'
+	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/test_lsu_interface.py && python3 scripts/check_lsu_interface.py'
 
 .PHONY: check-fma-finite compare-fp-contraction
 check-fma-finite: check-fp-env sim-build ## Check exact finite FMA values/flags against integer reference and Spike

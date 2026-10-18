@@ -20,6 +20,8 @@ def main():
     args = parser.parse_args()
     out = args.out
     out.mkdir(parents=True, exist_ok=True)
+    # An aborted qualification must not leave a previous green result.
+    (out / "summary.json").unlink(missing_ok=True)
     records = []
 
     def run(name, command, check):
