@@ -4,6 +4,7 @@ import argparse
 import hashlib
 import json
 import re
+import shutil
 from pathlib import Path
 import subprocess
 
@@ -25,11 +26,13 @@ def main():
                         help='tool-flow probe: platform full-adder extraction or ordinary ABC gate mapping')
     parser.add_argument('--detached',action='store_true',help='durable worker in an existing container; does not depend on a tool session')
     parser.add_argument('--synthesis-from',type=Path,help='reuse a completed, identity-checked synthesis stage from another attempt')
+    parser.add_argument('--cts-from',type=Path,help='restart global routing from a completed, identity-checked TT CTS stage')
     args = parser.parse_args()
     if args.period_ps <= 2200 or args.jobs < 1:
         parser.error('period must exceed frozen 1100ps input + output budgets; jobs positive')
     if args.detached and not args.container:parser.error('--detached requires --container')
     if args.detached and args.resume_reason:parser.error('use a fresh label for detached attempts; synthesis stages can be reused')
+    if args.cts_from and (args.synthesis_from or args.resume_reason):parser.error('--cts-from requires its own fresh attempt')
     if args.label and not re.fullmatch(r'[a-zA-Z0-9_-]+', args.label):
         parser.error('label may contain letters, digits, underscore and hyphen only')
     source = ROOT / 'build/baseline-setup/ORFS'
@@ -94,7 +97,10 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
            'CORNER=TC', 'CORNERS=typical',
            # The independent STA retains propagated-clock setup/hold paths.
            # Avoid the costly redundant all-design skew summaries in ORFS.
-           'REPORT_CLOCK_SKEW=0']
+           'REPORT_CLOCK_SKEW=0',
+           # This binary has no resizer "reroute" move used by the optional
+           # ORFS WNS pass. Ordinary global-route setup/hold repair stays enabled.
+           'OPT_POST_GRT_WNS=0']
     if args.adder_mapping=='abc':cmd.append('ADDER_MAP_FILE=')
     cmd.append('grt')
     report = {'scope': 'global-route research baseline exploration, not detailed-route signoff',
@@ -106,10 +112,44 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
     report['placement_seed_policy'] = 'pinned-tool default; GPL_RANDOM_SEED= overrides config seed (unsupported flag)'
     report['construction_timing_corners'] = ['TT']
     report['clock_skew_summary_policy'] = 'ORFS summaries disabled; independent propagated-clock setup/hold checks and expanded paths required'
+    report['post_grt_wns_policy'] = 'optional unsupported reroute-move pass disabled; ordinary setup/hold/electrical repair enabled'
     report['synthesis_adder_mapping'] = args.adder_mapping
     report['process_lowering_sha256'] = sha(ROOT/'physical/asap7/baseline/lower_processes.tcl')
     report['source_commit'] = subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     report['source_status'] = subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).splitlines()
+    cts_inputs=[]
+    if args.cts_from:
+        from check_physical_closure import check_constraints
+        cache=args.cts_from.resolve()
+        if not cache.is_relative_to(ROOT/'build'):parser.error('CTS source must be under build/')
+        prior=json.loads((cache/'run.json').read_text())
+        for field in ('orfs_commit','lowered_rtl_sha256','rtl_files_sha256','config_sha256',
+                      'local_image_id','process_lowering_sha256','period_ps','synthesis_adder_mapping'):
+            if prior[field]!=report[field]:parser.error('cached CTS input changed: '+field)
+        if prior.get('construction_timing_corners')!=['TT'] or not prior.get('input_identities_unchanged') or prior.get('job_state')!='finished':
+            parser.error('CTS cache requires a finished TT construction attempt with unchanged inputs')
+        relative=Path('asap7/rv32_post_lsu_v1/base')
+        odb=cache/'results'/relative/'4_cts.odb'
+        cts_sdc=cache/'results'/relative/'4_cts.sdc'
+        cts_log=cache/'logs'/relative/'4_1_cts.log'
+        text=cts_log.read_text()
+        if ('[ERROR ' in text or 'Error:' in text
+                or not re.search(r'^4_1_cts\s+\.odb\s+\d+',text,re.M)
+                or sha(odb)!=sha(odb.with_name('4_1_cts.odb'))):
+            parser.error('cached CTS stage lacks a completed log/database pair')
+        check_constraints(cts_sdc.read_text(),args.period_ps)
+        target=directory/'results'/relative;target.mkdir(parents=True,exist_ok=True)
+        for source_file in (odb,cts_sdc):
+            output=target/source_file.name
+            if output.exists():parser.error('cached CTS destination already exists')
+            shutil.copy2(source_file,output);cts_inputs.append(output)
+        report['cached_cts']={'source':str(cache.relative_to(ROOT)),
+                              'source_report_sha256':sha(cache/'run.json'),
+                              'odb_sha256':sha(odb),'sdc_sha256':sha(cts_sdc),
+                              'completed_stage_log_sha256':sha(cts_log),
+                              'reason':'reuse completed CTS only; source global-route failure remains a failure'}
+        if 'cached_synthesis' in prior:report['cached_synthesis']=prior['cached_synthesis']
+        cmd[-1]='do-5_1_grt'
     if args.synthesis_from:
         cache=args.synthesis_from.resolve()
         if not cache.is_relative_to(ROOT/'build'):parser.error('synthesis source must be under build/')
@@ -137,6 +177,7 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
                      ROOT/'build/baseline-setup/rtl_lowered.v',ROOT/'scripts/run_physical_job.py'):
             inputs[guest(path)]=sha(path)
         if args.synthesis_from:inputs[guest(netlist)]=sha(netlist)
+        for path in cts_inputs:inputs[guest(path)]=sha(path)
         spec=directory/'job.json'
         spec.write_text(json.dumps({'report':guest(directory/'run.json'),'log':guest(directory/'make.log'),
                                     'command':worker_command,'cwd':'/workspace','inputs':inputs},indent=2)+'\n')

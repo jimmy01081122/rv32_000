@@ -49,6 +49,15 @@ New builds set `REPORT_CLOCK_SKEW=0` to avoid expensive duplicate ORFS skew
 summaries. Independent STA still checks setup/hold with propagated clocks and
 preserves full clock-expanded critical paths. This changes report generation;
 the `tt-abc-v3` exploration retains the original enabled summaries in its log.
+The pinned binary also rejects the optional post-route `reroute` resizer move.
+New builds use `OPT_POST_GRT_WNS=0`; ordinary post-route electrical/setup/hold
+repair remains enabled. The complete ORFS global-route step with these settings
+has been exercised on the four-cell fixture before the full-core retry.
+`--cts-from build/...` reuses only a completed TT CTS checkpoint at the same
+period, mapping policy and hashed inputs. It checks the completed stage log,
+database copy identity and the serialized I/O/clock contract, then starts
+`do-5_1_grt` in a fresh output directory. A later failure in the source attempt
+remains a failure. Mismatched periods or mapping policies are rejected.
 
 The following items describe the **legacy** flow in this directory:
 
