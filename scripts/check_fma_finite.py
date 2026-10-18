@@ -11,7 +11,7 @@ from qualify_fp_balanced import ROOT, BASE, run
 
 def main():
     out = BASE / 'fma-finite'
-    out.mkdir(exist_ok=True)
+    out.mkdir(parents=True, exist_ok=True)
     data = vectors()
     (out / 'vectors.json').write_text(json.dumps({'finite_inputs_only': True, 'seed': '0x464d4132',
                                                 'count': len(data), 'vectors': data}, indent=2) + '\n')

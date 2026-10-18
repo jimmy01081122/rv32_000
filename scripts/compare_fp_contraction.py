@@ -67,14 +67,23 @@ def main():
     parser.add_argument('--summarize-only', action='store_true')
     args = parser.parse_args()
     out = BASE / 'fma-comparison'
-    out.mkdir(exist_ok=True)
+    out.mkdir(parents=True, exist_ok=True)
     if not args.summarize_only:
+        (out / 'comparison.json').unlink(missing_ok=True)
         for mode in ('off', 'fast'):
             command = ['python3', 'scripts/qualify_fp_balanced.py', '--run-dut', '--profile-roi',
                        '--fp-contract', mode, '--out-dir', str(out / mode)]
             with (out / f'{mode}-invocation.log').open('w') as log:
                 result = subprocess.run(command, cwd=ROOT, stdout=log, stderr=subprocess.STDOUT)
             print(f'{mode}: exit {result.returncode}', flush=True)
+            if result.returncode:
+                (out / 'comparison.json').write_text(json.dumps({
+                    'scope': 'Failed contraction qualification; no performance ratios',
+                    'all_pairs_valid': False,
+                    'problems': [f'{mode}: qualification process exited {result.returncode}'],
+                    'results': [],
+                }, indent=2) + '\n')
+                return 1
     off, fast = [json.loads((out / mode / 'summary.json').read_text()) for mode in ('off', 'fast')]
     report = compare(off, fast)
     for row, a, b in zip(report['results'], off['records'], fast['records']):

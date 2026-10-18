@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
 """Reject unfair or incomplete contraction comparisons."""
 import copy
+import contextlib
+import io
+import json
+from pathlib import Path
+import subprocess
+import tempfile
+from unittest.mock import patch
+import compare_fp_contraction as driver
 import unittest
 from compare_fp_contraction import compare
 from fp_balanced_fixtures import NAMES
@@ -25,6 +33,23 @@ def reports():
 
 
 class ControlledComparison(unittest.TestCase):
+    def test_failed_process_cannot_reuse_old_score(self):
+        with tempfile.TemporaryDirectory() as directory:
+            base = Path(directory) / 'new-parent'
+            out = base / 'fma-comparison'
+            out.mkdir(parents=True)
+            report = out / 'comparison.json'
+            report.write_text(json.dumps({'all_pairs_valid': True,
+                'diagnostic_group_geomean': {'fp32_equal_groups': 2.0}}))
+            with patch.object(driver, 'BASE', base), patch('sys.argv', ['compare_fp_contraction.py']), \
+                    patch.object(driver.subprocess, 'run', return_value=subprocess.CompletedProcess([], 1)), \
+                    contextlib.redirect_stdout(io.StringIO()):
+                self.assertEqual(driver.main(), 1)
+            failed = json.loads(report.read_text())
+            self.assertFalse(failed['all_pairs_valid'])
+            self.assertEqual(failed['results'], [])
+            self.assertNotIn('diagnostic_group_geomean', failed)
+
     def test_matching_pair(self):
         self.assertTrue(compare(*reports())['all_pairs_valid'])
 
