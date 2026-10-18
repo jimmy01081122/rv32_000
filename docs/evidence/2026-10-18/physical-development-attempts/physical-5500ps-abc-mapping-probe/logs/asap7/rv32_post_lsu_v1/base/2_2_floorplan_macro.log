@@ -1,0 +1,58 @@
+OpenROAD 26Q1-2900-gdf79404cd8 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 2 thread(s).
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner slow /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_SS_nldm_211120.lib.gz
+read_liberty -corner slow /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_SS_nldm_220122.lib.gz
+read_liberty -corner slow /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_SS_nldm_211120.lib.gz
+read_liberty -corner slow /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_SS_nldm_220123.lib
+read_liberty -corner slow /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz
+read_liberty -corner fast /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty -corner fast /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty -corner fast /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty -corner fast /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/HAxp5_ASAP7_75t_R A -> SN timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/HAxp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/HAxp5_ASAP7_75t_R B -> SN timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/HAxp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x1_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x1_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x2_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x2_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2xp5_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2xp5_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x1_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x1_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x2_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x2_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2xp5_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2xp5_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/HAxp5_ASAP7_75t_R A -> SN timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/HAxp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/HAxp5_ASAP7_75t_R B -> SN timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/HAxp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x1_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x1_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x2_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x2_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2xp5_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2xp5_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x1_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x1_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x2_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x2_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2xp5_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2xp5_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2xp5_ASAP7_75t_R.
+read_liberty -corner fast /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /workspace/build/baselines/ap5b-post-lsu-v1/physical-5500ps-abc-mapping-probe/results/asap7/rv32_post_lsu_v1/base/2_1_floorplan.odb
+read_sdc /workspace/build/baselines/ap5b-post-lsu-v1/physical-5500ps-abc-mapping-probe/results/asap7/rv32_post_lsu_v1/base/2_1_floorplan.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+No macros found: Skipping macro_placement
+Design area 21246 um^2 50% utilization.
+write_db /workspace/build/baselines/ap5b-post-lsu-v1/physical-5500ps-abc-mapping-probe/results/asap7/rv32_post_lsu_v1/base/2_2_floorplan_macro.odb
+Elapsed time: 0:06.24[h:]min:sec. CPU time: user 5.93 sys 0.30 (99%). Peak memory: 689000KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_2_floorplan_macro       .odb            6            672 5b776d498df041cf376b

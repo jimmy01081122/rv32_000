@@ -1,0 +1,158 @@
+OpenROAD 26Q1-2900-gdf79404cd8 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 2 thread(s).
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner slow /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_SS_nldm_211120.lib.gz
+read_liberty -corner slow /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_SS_nldm_220122.lib.gz
+read_liberty -corner slow /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_SS_nldm_211120.lib.gz
+read_liberty -corner slow /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_SS_nldm_220123.lib
+read_liberty -corner slow /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz
+read_liberty -corner fast /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty -corner fast /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty -corner fast /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty -corner fast /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/HAxp5_ASAP7_75t_R A -> SN timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/HAxp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/HAxp5_ASAP7_75t_R B -> SN timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/HAxp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x1_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x1_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x2_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x2_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2xp5_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2xp5_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x1_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x1_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x2_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x2_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2xp5_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2xp5_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/HAxp5_ASAP7_75t_R A -> SN timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/HAxp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/HAxp5_ASAP7_75t_R B -> SN timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/HAxp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x1_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x1_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x2_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x2_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2xp5_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2xp5_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x1_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x1_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x2_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x2_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2xp5_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2xp5_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2xp5_ASAP7_75t_R.
+read_liberty -corner fast /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /workspace/build/baselines/ap5b-post-lsu-v1/physical-14000ps-abc-compatible-v2/results/asap7/rv32_post_lsu_v1/base/2_floorplan.odb
+read_sdc /workspace/build/baselines/ap5b-post-lsu-v1/physical-14000ps-abc-compatible-v2/results/asap7/rv32_post_lsu_v1/base/2_floorplan.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+global_placement -skip_io -density 0.55 -pad_left 0 -pad_right 0
+[INFO GPL-0001] ---- Initialize GPL Main Data Structures
+[INFO GPL-0002] DBU: 1000
+[INFO GPL-0003] SiteSize: (  0.054  0.270 ) um
+[INFO GPL-0004] CoreBBox: (  2.052  2.160 ) ( 208.062 207.900 ) um
+[INFO GPL-0036] Movable instances area:      21235.026 um^2
+[INFO GPL-0037] Total instances area:        21368.579 um^2
+[INFO GPL-0035] Pin density area adjust:      2756.964 um^2
+[INFO GPL-0032] ---- Initialize Region: Top-level
+[INFO GPL-0006] Number of instances:            182898
+[INFO GPL-0007] Movable instances:              178318
+[INFO GPL-0008] Fixed instances:                  4580
+[INFO GPL-0009] Dummy instances:                     0
+[INFO GPL-0010] Number of nets:                 178390
+[INFO GPL-0011] Number of pins:                 639423
+[INFO GPL-0012] Die BBox:  (  0.000  0.000 ) ( 210.076 210.076 ) um
+[INFO GPL-0013] Core BBox: (  2.052  2.160 ) ( 208.062 207.900 ) um
+[INFO GPL-0016] Core area:                   42384.497 um^2
+[INFO GPL-0014] Region name: top-level.
+[INFO GPL-0015] Region area:                 42384.497 um^2
+[INFO GPL-0017] Fixed instances area:          133.553 um^2
+[INFO GPL-0018] Movable instances area:      23991.990 um^2
+[INFO GPL-0019] Utilization:                    56.785 %
+[INFO GPL-0020] Standard cells area:         23991.990 um^2
+[INFO GPL-0021] Large instances area:            0.000 um^2
+[INFO GPL-0005] ---- Execute Conjugate Gradient Initial Placement.
+[INFO GPL-0051] Source of initial instance position counters:
+	Odb location = 30	Core center = 178288	Region center = 0
+[INFO GPL-0033] ---- Initialize Nesterov Region: Top-level
+[WARNING GPL-0302] Target density 0.5500 is too low for the available free area.
+Automatically adjusting to uniform density 0.5700.
+[INFO GPL-0023] Placement target density:       0.5700
+[INFO GPL-0024] Movable insts average area:      0.135 um^2
+[INFO GPL-0025] Ideal bin area:                  0.236 um^2
+[INFO GPL-0026] Ideal bin count:                179560
+[INFO GPL-0027] Total bin area:              42384.497 um^2
+[INFO GPL-0028] Bin count (X, Y):         256 ,    256
+[INFO GPL-0029] Bin size (W * H):       0.805 *  0.804 um
+[INFO GPL-0030] Number of bins:                  65536
+[INFO GPL-0007] ---- Execute Nesterov Global Placement.
+[INFO GPL-0031] HPWL: Half-Perimeter Wirelength
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+        0 |   0.9990 |  1.391539e+05 |   +0.00% |  1.11e-14 |      
+       10 |   0.9992 |  3.511928e+04 |  -74.76% |  1.81e-14 |      
+       20 |   0.9992 |  3.349833e+04 |   -4.62% |  2.95e-14 |      
+       30 |   0.9992 |  3.333541e+04 |   -0.49% |  4.80e-14 |      
+       40 |   0.9992 |  3.329415e+04 |   -0.12% |  7.82e-14 |      
+       50 |   0.9992 |  3.327124e+04 |   -0.07% |  1.27e-13 |      
+       60 |   0.9992 |  3.326263e+04 |   -0.03% |  2.08e-13 |      
+       70 |   0.9992 |  3.326353e+04 |   +0.00% |  3.38e-13 |      
+       80 |   0.9992 |  3.330460e+04 |   +0.12% |  5.51e-13 |      
+       90 |   0.9991 |  3.352575e+04 |   +0.66% |  8.97e-13 |      
+      100 |   0.9990 |  3.431015e+04 |   +2.34% |  1.46e-12 |      
+      110 |   0.9989 |  3.644807e+04 |   +6.23% |  2.38e-12 |      
+      120 |   0.9986 |  4.089792e+04 |  +12.21% |  3.87e-12 |      
+      130 |   0.9982 |  4.861279e+04 |  +18.86% |  6.31e-12 |      
+      140 |   0.9973 |  5.966858e+04 |  +22.74% |  1.03e-11 |      
+      150 |   0.9956 |  7.473699e+04 |  +25.25% |  1.67e-11 |      
+      160 |   0.9930 |  9.377610e+04 |  +25.47% |  2.71e-11 |      
+      170 |   0.9895 |  1.164273e+05 |  +24.15% |  4.41e-11 |      
+      180 |   0.9848 |  1.443941e+05 |  +24.02% |  7.16e-11 |      
+      190 |   0.9783 |  1.796427e+05 |  +24.41% |  1.16e-10 |      
+      200 |   0.9689 |  2.218064e+05 |  +23.47% |  1.88e-10 |      
+      210 |   0.9560 |  2.733865e+05 |  +23.25% |  3.05e-10 |      
+      220 |   0.9380 |  3.362300e+05 |  +22.99% |  4.94e-10 |      
+      230 |   0.9164 |  4.066490e+05 |  +20.94% |  7.98e-10 |      
+      240 |   0.8914 |  4.803323e+05 |  +18.12% |  1.29e-09 |      
+      250 |   0.8636 |  5.542030e+05 |  +15.38% |  2.08e-09 |      
+      260 |   0.8337 |  6.253941e+05 |  +12.85% |  3.37e-09 |      
+      270 |   0.8018 |  6.882914e+05 |  +10.06% |  5.45e-09 |      
+      280 |   0.7689 |  7.448965e+05 |   +8.22% |  8.82e-09 |      
+      290 |   0.7366 |  8.057216e+05 |   +8.17% |  1.43e-08 |      
+      300 |   0.7028 |  8.727944e+05 |   +8.32% |  2.31e-08 |      
+      310 |   0.6657 |  9.382881e+05 |   +7.50% |  3.73e-08 |      
+      320 |   0.6284 |  9.916850e+05 |   +5.69% |  6.04e-08 |      
+      330 |   0.5868 |  1.023993e+06 |   +3.26% |  9.80e-08 |      
+      340 |   0.5414 |  1.043739e+06 |   +1.93% |  1.59e-07 |      
+      350 |   0.4942 |  1.065717e+06 |   +2.11% |  2.59e-07 |      
+      360 |   0.4470 |  1.098999e+06 |   +3.12% |  4.20e-07 |      
+      370 |   0.3969 |  1.117024e+06 |   +1.64% |  6.83e-07 |      
+      380 |   0.3501 |  1.130020e+06 |   +1.16% |  1.11e-06 |      
+      390 |   0.3118 |  1.139236e+06 |   +0.82% |  1.67e-06 |      
+      400 |   0.2769 |  1.142757e+06 |   +0.31% |  2.46e-06 |      
+      410 |   0.2443 |  1.147649e+06 |   +0.43% |  3.62e-06 |      
+      420 |   0.2124 |  1.150329e+06 |   +0.23% |  5.33e-06 |      
+      430 |   0.1848 |  1.152499e+06 |   +0.19% |  7.85e-06 |      
+      440 |   0.1595 |  1.154200e+06 |   +0.15% |  1.16e-05 |      
+      450 |   0.1357 |  1.155315e+06 |   +0.10% |  1.70e-05 |      
+      460 |   0.1155 |  1.156066e+06 |   +0.06% |  2.51e-05 |      
+      469 |   0.0993 |  1.156558e+06 |          |  3.69e-05 |      
+---------------------------------------------------------------
+[INFO GPL-1001] Global placement finished at iteration 469
+[INFO GPL-1002] Placed Cell Area            23991.9905
+[INFO GPL-1003] Available Free Area         42250.9446
+[INFO GPL-1004] Minimum Feasible Density        0.5700 (cell_area / free_area)
+[INFO GPL-1006]   Suggested Target Densities:
+[INFO GPL-1007]     - For 90% usage of free space: 0.6309
+[INFO GPL-1008]     - For 80% usage of free space: 0.7098
+[INFO GPL-1014] Final placement area: 23991.99 (+0.00%)
+Took 53 seconds: global_placement -skip_io -density 0.55 -pad_left 0 -pad_right 0
+Design area 21369 um^2 50% utilization.
+write_db /workspace/build/baselines/ap5b-post-lsu-v1/physical-14000ps-abc-compatible-v2/results/asap7/rv32_post_lsu_v1/base/3_1_place_gp_skip_io.odb
+Elapsed time: 0:59.13[h:]min:sec. CPU time: user 73.63 sys 0.40 (125%). Peak memory: 946896KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_1_place_gp_skip_io      .odb           59            924 6942a9dbd342e8024757

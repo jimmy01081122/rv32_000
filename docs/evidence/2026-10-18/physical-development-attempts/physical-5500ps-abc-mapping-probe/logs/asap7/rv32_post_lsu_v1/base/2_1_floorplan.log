@@ -1,0 +1,381 @@
+OpenROAD 26Q1-2900-gdf79404cd8 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 2 thread(s).
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner slow /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_SS_nldm_211120.lib.gz
+read_liberty -corner slow /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_SS_nldm_220122.lib.gz
+read_liberty -corner slow /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_SS_nldm_211120.lib.gz
+read_liberty -corner slow /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_SS_nldm_220123.lib
+read_liberty -corner slow /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz
+read_liberty -corner fast /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_FF_nldm_211120.lib.gz
+read_liberty -corner fast /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_FF_nldm_220122.lib.gz
+read_liberty -corner fast /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_FF_nldm_211120.lib.gz
+read_liberty -corner fast /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/HAxp5_ASAP7_75t_R A -> SN timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/HAxp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/HAxp5_ASAP7_75t_R B -> SN timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/HAxp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x1_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x1_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x2_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x2_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2xp5_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2xp5_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x1_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x1_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x2_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x2_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2xp5_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2xp5_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/HAxp5_ASAP7_75t_R A -> SN timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/HAxp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/HAxp5_ASAP7_75t_R B -> SN timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/HAxp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x1_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x1_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x2_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2x2_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2xp5_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XNOR2xp5_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XNOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x1_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x1_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x1_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x2_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2x2_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2x2_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2xp5_ASAP7_75t_R A -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2xp5_ASAP7_75t_R.
+[WARNING STA-1111] cell asap7sc7p5t_SIMPLE_RVT_FF_nldm_250407/XOR2xp5_ASAP7_75t_R B -> Y timing group combinational not found in cell asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120/XOR2xp5_ASAP7_75t_R.
+read_liberty -corner fast /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_FF_nldm_220123.lib
+read_db /workspace/build/baselines/ap5b-post-lsu-v1/physical-5500ps-abc-mapping-probe/results/asap7/rv32_post_lsu_v1/base/1_synth.odb
+read_sdc /workspace/build/baselines/ap5b-post-lsu-v1/physical-5500ps-abc-mapping-probe/results/asap7/rv32_post_lsu_v1/base/1_synth.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+
+==========================================================================
+Floorplan check_setup
+--------------------------------------------------------------------------
+number instances in verilog is 178290
+[INFO IFP-0107] Defining die area using utilization: 50.00% and aspect ratio: 1.
+[WARNING IFP-0028] Core area lower left (2.000, 2.000) snapped to (2.052, 2.160).
+[INFO IFP-0001] Added 762 rows of 3815 site asap7sc7p5t.
+[INFO IFP-0100] Die BBox:  (  0.000  0.000 ) ( 210.076 210.076 ) um
+[INFO IFP-0101] Core BBox: (  2.052  2.160 ) ( 208.062 207.900 ) um
+[INFO IFP-0102] Core area:                        42384.497 um^2
+[INFO IFP-0103] Total instances area:             21233.802 um^2
+[INFO IFP-0104] Effective utilization:                0.501
+[INFO IFP-0105] Number of instances:                 178290
+source /OpenROAD-flow-scripts/flow/platforms/asap7/openRoad/make_tracks.tcl
+source /OpenROAD-flow-scripts/flow/platforms/asap7/fastroute.tcl
+Repair tie lo fanout...
+[INFO RSZ-0042] Inserted 29 tie TIELOx1_ASAP7_75t_R instances.
+Repair tie hi fanout...
+[INFO RSZ-0042] Inserted 1 tie TIEHIx1_ASAP7_75t_R instances.
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -setup -skip_last_gasp -sequence unbuffer,sizeup,swap,vt_swap -verbose
+[WARNING EST-0027] no estimated parasitics. Using wire load models.
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove 
+[INFO RSZ-0094] Found 8708 endpoints with setup violations.
+[INFO RSZ-0099] Repairing 8708 out of 8708 (100.00%) violating endpoints...
+   Iter   | Removed | Resized | Inserted | Cloned |  Pin  |   Area   |    WNS   |   StTNS    |   EnTNS    |  Viol  |  Worst  
+          | Buffers |  Gates  | Buffers  |  Gates | Swaps |          |          |            |            | Endpts | St/EnPt 
+------------------------------------------------------------------------------------------------------------------------------
+       0* |       0 |       0 |        0 |      0 |     0 |    +0.0% | -1545.248 |  -343085.4 | -7160612.5 |   8708 | dmem_req_byte_en[1]
+      10* |       0 |       6 |        0 |      0 |     3 |    +0.0% | -1498.665 |  -333094.2 | -6756596.5 |   8708 | dmem_req_byte_en[1]
+      20* |       0 |      13 |        0 |      0 |     6 |    +0.0% | -1461.458 |  -323291.9 | -6433906.5 |   8708 | dmem_req_byte_en[1]
+      30* |       0 |      21 |        0 |      0 |     8 |    +0.0% | -1436.855 |  -316196.6 | -6339023.5 |   8708 | dmem_req_addr[23]
+      40* |       0 |      29 |        0 |      0 |    10 |    +0.0% | -1402.195 |  -310556.3 | -6038414.5 |   8708 | dmem_req_addr[23]
+      50* |       0 |      39 |        0 |      0 |    10 |    +0.0% | -1392.417 |  -309932.8 | -5901579.5 |   8708 | dmem_req_byte_en[0]
+      60* |       0 |      49 |        0 |      0 |    10 |    +0.0% | -1386.332 |  -308265.3 | -5901410.0 |   8708 | dmem_req_addr[7]
+      70* |       0 |      58 |        0 |      0 |    11 |    +0.0% | -1376.733 |  -305320.8 | -5842757.0 |   8708 | dmem_req_addr[16]
+      80* |       0 |      68 |        0 |      0 |    11 |    +0.0% | -1360.995 |  -301895.3 | -5755754.0 |   8708 | dmem_req_byte_en[1]
+      90* |       0 |      77 |        0 |      0 |    12 |    +0.0% | -1319.425 |  -290773.1 | -5441317.0 |   8708 | dmem_req_byte_en[1]
+     100* |       0 |      80 |        0 |      0 |    19 |    +0.0% | -1290.398 |  -284873.6 | -5187632.5 |   8708 | dmem_req_byte_en[1]
+     110* |       0 |      87 |        0 |      0 |    22 |    +0.0% | -1270.360 |  -279175.8 | -5013845.0 |   8708 | dmem_req_byte_en[1]
+     120* |       0 |      92 |        0 |      0 |    27 |    +0.0% | -1256.424 |  -275608.2 | -4892978.5 |   8708 | dmem_req_byte_en[1]
+     130* |       0 |     100 |        0 |      0 |    29 |    +0.0% | -1239.922 |  -272543.7 | -4749857.5 |   8708 | dmem_req_byte_en[1]
+     140* |       0 |     108 |        0 |      0 |    31 |    +0.0% | -1217.795 |  -266829.2 | -4627407.0 |   8708 | dmem_req_byte_en[1]
+     150* |       0 |     115 |        0 |      0 |    34 |    +0.0% | -1205.469 |  -264138.7 | -4520506.5 |   8708 | dmem_req_byte_en[1]
+     160* |       0 |     123 |        0 |      0 |    36 |    +0.0% | -1181.548 |  -258139.6 | -4359370.0 |   8708 | dmem_req_byte_en[1]
+     170* |       0 |     127 |        0 |      0 |    42 |    +0.0% | -1166.595 |  -255189.2 | -4229687.0 |   8708 | dmem_req_byte_en[1]
+     180* |       0 |     135 |        0 |      0 |    44 |    +0.0% | -1157.558 |  -253224.2 | -4199085.0 |   8708 | dmem_req_byte_en[1]
+     190* |       0 |     142 |        0 |      0 |    47 |    +0.0% | -1149.516 |  -252135.8 | -4129337.0 |   8708 | dmem_req_byte_en[1]
+     200* |       0 |     147 |        0 |      0 |    52 |    +0.0% | -1160.103 |  -253452.6 | -4221155.0 |   8708 | dmem_req_byte_en[1]
+     210* |       0 |     150 |        0 |      0 |    59 |    +0.0% | -1168.175 |  -252957.5 | -4291165.0 |   8708 | dmem_req_byte_en[1]
+     220* |       0 |     151 |        0 |      0 |    68 |    +0.0% | -1167.778 |  -252863.1 | -4291178.0 |   8708 | dmem_req_addr[26]
+     230* |       0 |     153 |        0 |      0 |    76 |    +0.0% | -1167.570 |  -252813.4 | -4291066.5 |   8708 | dmem_req_addr[7]
+     240* |       0 |     157 |        0 |      0 |    82 |    +0.0% | -1166.368 |  -253419.9 | -4295494.0 |   8708 | dmem_req_byte_en[1]
+     246* |       0 |     145 |        0 |      0 |    50 |    +0.0% | -1145.088 |  -250506.8 | -4090928.5 |   8708 | dmem_req_byte_en[1]
+     250* |       0 |     148 |        0 |      0 |    50 |    +0.0% | -1153.339 |  -252461.3 | -4162491.2 |   8708 | dmem_req_byte_en[1]
+     260* |       0 |     150 |        0 |      0 |    58 |    +0.0% | -1167.235 |  -253960.1 | -4283193.5 |   8708 | dmem_req_addr[23]
+     270* |       0 |     152 |        0 |      0 |    66 |    +0.0% | -1158.037 |  -251778.8 | -4203423.0 |   8708 | dmem_req_addr[23]
+     280* |       0 |     153 |        0 |      0 |    75 |    +0.0% | -1169.912 |  -252759.9 | -4306414.0 |   8708 | dmem_req_addr[23]
+     282* |       0 |     145 |        0 |      0 |    50 |    +0.0% | -1145.088 |  -250506.8 | -4090928.5 |   8708 | dmem_req_byte_en[1]
+     290* |       0 |     152 |        0 |      0 |    50 |    +0.0% | -1167.887 |  -253160.9 | -4276719.0 |   8708 | dmem_req_byte_en[1]
+     296* |       0 |     145 |        0 |      0 |    50 |    +0.0% | -1145.088 |  -250506.8 | -4090928.5 |   8708 | dmem_req_byte_en[1]
+     300* |       0 |     148 |        0 |      0 |    50 |    +0.0% | -1155.037 |  -252868.7 | -4175521.0 |   8708 | dmem_req_byte_en[1]
+     304* |       0 |     145 |        0 |      0 |    50 |    +0.0% | -1145.088 |  -250506.8 | -4090928.5 |   8708 | dmem_req_byte_en[1]
+     310* |       0 |     150 |        0 |      0 |    50 |    +0.0% | -1166.753 |  -252888.7 | -4277134.0 |   8708 | dmem_req_byte_en[1]
+     312* |       0 |     145 |        0 |      0 |    50 |    +0.0% | -1145.088 |  -250506.8 | -4090928.5 |   8708 | dmem_req_byte_en[1]
+     320* |       0 |     152 |        0 |      0 |    50 |    +0.0% | -1167.887 |  -253160.9 | -4276719.0 |   8708 | dmem_req_byte_en[1]
+     320* |       0 |     145 |        0 |      0 |    50 |    +0.0% | -1145.088 |  -250506.8 | -4090928.5 |   8708 | dmem_req_byte_en[1]
+     329* |       0 |     145 |        0 |      0 |    51 |    +0.0% | -1145.088 |  -250506.8 | -4090926.2 |   8708 | dmem_req_byte_en[1]
+     330* |       0 |     145 |        0 |      0 |    51 |    +0.0% | -1145.088 |  -250506.8 | -4090926.2 |   8708 | dmem_req_byte_en[1]
+     338* |       0 |     145 |        0 |      0 |    52 |    +0.0% | -1145.088 |  -250506.8 | -4090923.5 |   8708 | dmem_req_byte_en[1]
+     340* |       0 |     145 |        0 |      0 |    53 |    +0.0% | -1145.088 |  -250506.8 | -4090921.2 |   8708 | dmem_req_byte_en[1]
+     347* |       0 |     145 |        0 |      0 |    53 |    +0.0% | -1145.088 |  -250506.8 | -4090921.2 |   8708 | dmem_req_byte_en[1]
+     350* |       0 |     146 |        0 |      0 |    54 |    +0.0% | -1145.278 |  -250551.5 | -4090872.2 |   8708 | dmem_req_byte_en[1]
+     356* |       0 |     145 |        0 |      0 |    54 |    +0.0% | -1145.088 |  -250506.8 | -4090919.0 |   8708 | dmem_req_byte_en[1]
+     360* |       0 |     148 |        0 |      0 |    54 |    +0.0% | -1155.037 |  -252868.7 | -4175514.8 |   8708 | dmem_req_byte_en[1]
+     364* |       0 |     145 |        0 |      0 |    54 |    +0.0% | -1145.088 |  -250506.8 | -4090919.0 |   8708 | dmem_req_byte_en[1]
+     370* |       0 |     150 |        0 |      0 |    54 |    +0.0% | -1166.753 |  -252888.7 | -4277124.0 |   8708 | dmem_req_byte_en[1]
+     372* |       0 |     145 |        0 |      0 |    54 |    +0.0% | -1145.088 |  -250506.8 | -4090919.0 |   8708 | dmem_req_byte_en[1]
+     380* |       0 |     152 |        0 |      0 |    54 |    +0.0% | -1167.887 |  -253160.9 | -4276709.5 |   8708 | dmem_req_byte_en[1]
+     380* |       0 |     145 |        0 |      0 |    54 |    +0.0% | -1145.088 |  -250506.8 | -4090919.0 |   8708 | dmem_req_byte_en[1]
+     388* |       0 |     145 |        0 |      0 |    54 |    +0.0% | -1145.088 |  -250506.8 | -4090919.0 |   8708 | dmem_req_byte_en[1]
+     390* |       0 |     146 |        0 |      0 |    54 |    +0.0% | -1145.278 |  -250551.5 | -4090869.0 |   8708 | dmem_req_byte_en[1]
+     396* |       0 |     145 |        0 |      0 |    54 |    +0.0% | -1145.088 |  -250506.8 | -4090919.0 |   8708 | dmem_req_byte_en[1]
+     400* |       0 |     148 |        0 |      0 |    54 |    +0.0% | -1155.037 |  -252868.7 | -4175511.5 |   8708 | dmem_req_byte_en[1]
+     404* |       0 |     145 |        0 |      0 |    54 |    +0.0% | -1145.088 |  -250506.8 | -4090919.0 |   8708 | dmem_req_byte_en[1]
+     410* |       0 |     150 |        0 |      0 |    54 |    +0.0% | -1166.753 |  -252888.7 | -4277124.0 |   8708 | dmem_req_byte_en[1]
+     412* |       0 |     145 |        0 |      0 |    54 |    +0.0% | -1145.088 |  -250506.8 | -4090919.0 |   8708 | dmem_req_byte_en[1]
+     420* |       0 |     152 |        0 |      0 |    54 |    +0.0% | -1167.887 |  -253160.9 | -4276709.5 |   8708 | dmem_req_byte_en[1]
+     420* |       0 |     145 |        0 |      0 |    54 |    +0.0% | -1145.088 |  -250506.8 | -4090919.0 |   8708 | dmem_req_byte_en[1]
+     428* |       0 |     145 |        0 |      0 |    54 |    +0.0% | -1145.088 |  -250506.8 | -4090919.0 |   8708 | dmem_req_byte_en[1]
+     430* |       0 |     146 |        0 |      0 |    54 |    +0.0% | -1145.278 |  -250551.5 | -4090869.0 |   8708 | dmem_req_byte_en[1]
+     436* |       0 |     145 |        0 |      0 |    54 |    +0.0% | -1145.088 |  -250506.8 | -4090919.0 |   8708 | dmem_req_byte_en[1]
+     440* |       0 |     147 |        0 |      0 |    55 |    +0.0% | -1156.500 |  -253220.0 | -4188201.2 |   8708 | dmem_req_byte_en[1]
+     445* |       0 |     145 |        0 |      0 |    55 |    +0.0% | -1145.088 |  -250506.8 | -4090916.2 |   8708 | dmem_req_byte_en[1]
+     450* |       0 |     149 |        0 |      0 |    55 |    +0.0% | -1153.529 |  -252506.8 | -4162429.8 |   8708 | dmem_req_byte_en[1]
+     453* |       0 |     145 |        0 |      0 |    55 |    +0.0% | -1145.088 |  -250506.8 | -4090916.2 |   8708 | dmem_req_byte_en[1]
+     460* |       0 |     150 |        0 |      0 |    56 |    +0.0% | -1166.753 |  -252888.7 | -4277121.0 |   8708 | dmem_req_byte_en[1]
+     462* |       0 |     145 |        0 |      0 |    56 |    +0.0% | -1145.088 |  -250506.8 | -4090913.5 |   8708 | dmem_req_byte_en[1]
+     470* |       0 |     152 |        0 |      0 |    56 |    +0.0% | -1167.887 |  -253160.9 | -4276704.5 |   8708 | dmem_req_byte_en[1]
+     470* |       0 |     145 |        0 |      0 |    56 |    +0.0% | -1145.088 |  -250506.8 | -4090913.5 |   8708 | dmem_req_byte_en[1]
+     478* |       0 |     145 |        0 |      0 |    56 |    +0.0% | -1145.088 |  -250506.8 | -4090913.5 |   8708 | dmem_req_byte_en[1]
+     480* |       0 |     146 |        0 |      0 |    56 |    +0.0% | -1145.278 |  -250551.5 | -4090864.0 |   8708 | dmem_req_byte_en[1]
+     486* |       0 |     145 |        0 |      0 |    56 |    +0.0% | -1145.088 |  -250506.8 | -4090913.5 |   8708 | dmem_req_byte_en[1]
+     490* |       0 |     148 |        0 |      0 |    56 |    +0.0% | -1155.037 |  -252868.7 | -4175506.5 |   8708 | dmem_req_byte_en[1]
+     494* |       0 |     145 |        0 |      0 |    56 |    +0.0% | -1145.088 |  -250506.8 | -4090913.5 |   8708 | dmem_req_byte_en[1]
+     500* |       0 |     150 |        0 |      0 |    56 |    +0.0% | -1166.753 |  -252888.7 | -4277119.0 |   8708 | dmem_req_byte_en[1]
+     502* |       0 |     145 |        0 |      0 |    56 |    +0.0% | -1145.088 |  -250506.8 | -4090913.5 |   8708 | dmem_req_byte_en[1]
+     510* |       0 |     152 |        0 |      0 |    56 |    +0.0% | -1167.887 |  -253160.9 | -4276704.5 |   8708 | dmem_req_byte_en[1]
+     510* |       0 |     145 |        0 |      0 |    56 |    +0.0% | -1145.088 |  -250506.8 | -4090913.5 |   8708 | dmem_req_byte_en[1]
+     519* |       0 |     145 |        0 |      0 |    57 |    +0.0% | -1145.088 |  -250506.8 | -4090911.2 |   8708 | dmem_req_byte_en[1]
+     520* |       0 |     145 |        0 |      0 |    57 |    +0.0% | -1145.088 |  -250506.8 | -4090911.2 |   8708 | dmem_req_byte_en[1]
+     528* |       0 |     145 |        0 |      0 |    58 |    +0.0% | -1145.088 |  -250506.8 | -4090908.5 |   8708 | dmem_req_byte_en[1]
+     530* |       0 |     145 |        0 |      0 |    59 |    +0.0% | -1145.088 |  -250506.8 | -4090906.2 |   8708 | dmem_req_byte_en[1]
+     537* |       0 |     145 |        0 |      0 |    59 |    +0.0% | -1145.088 |  -250506.8 | -4090906.2 |   8708 | dmem_req_byte_en[1]
+     540* |       0 |     147 |        0 |      0 |    59 |    +0.0% | -1154.847 |  -252823.3 | -4175548.8 |   8708 | dmem_req_byte_en[1]
+     543* |       0 |     145 |        0 |      0 |    59 |    +0.0% | -1145.088 |  -250506.8 | -4090906.2 |   8708 | dmem_req_byte_en[1]
+     550* |       0 |     150 |        0 |      0 |    60 |    +0.0% | -1166.666 |  -252868.0 | -4277145.5 |   8708 | dmem_req_byte_en[1]
+     551* |       0 |     145 |        0 |      0 |    59 |    +0.0% | -1145.088 |  -250506.8 | -4090906.2 |   8708 | dmem_req_byte_en[1]
+     557* |       0 |     145 |        0 |      0 |    59 |    +0.0% | -1145.088 |  -250506.8 | -4090906.2 |   8708 | dmem_req_byte_en[1]
+     560* |       0 |     146 |        0 |      0 |    60 |    +0.0% | -1145.088 |  -250331.0 | -4090874.0 |   8708 | dmem_req_byte_en[1]
+     570* |       0 |     148 |        0 |      0 |    68 |    +0.0% | -1145.088 |  -249409.9 | -4090443.8 |   8708 | dmem_req_byte_en[1]
+     580* |       0 |     151 |        0 |      0 |    75 |    +0.0% | -1145.088 |  -247770.5 | -4090000.5 |   8708 | dmem_req_byte_en[1]
+     590* |       0 |     155 |        0 |      0 |    81 |    +0.0% | -1145.088 |  -247269.6 | -4089905.5 |   8708 | dmem_req_byte_en[1]
+     600* |       0 |     163 |        0 |      0 |    83 |    +0.0% | -1145.088 |  -246998.2 | -4089777.2 |   8708 | dmem_req_byte_en[1]
+     610* |       0 |     167 |        0 |      0 |    89 |    +0.0% | -1145.088 |  -247057.1 | -4089735.8 |   8708 | dmem_req_byte_en[1]
+     620* |       0 |     174 |        0 |      0 |    92 |    +0.0% | -1145.088 |  -246764.9 | -4089455.2 |   8708 | dmem_req_byte_en[1]
+     630* |       0 |     181 |        0 |      0 |    95 |    +0.0% | -1145.088 |  -246343.0 | -4089230.5 |   8708 | dmem_req_byte_en[1]
+     640* |       0 |     187 |        0 |      0 |    99 |    +0.0% | -1145.088 |  -246312.2 | -4089126.5 |   8708 | dmem_req_byte_en[1]
+     650* |       0 |     190 |        0 |      0 |   106 |    +0.0% | -1145.088 |  -246283.3 | -4089108.2 |   8708 | dmem_req_byte_en[1]
+     660* |       0 |     196 |        0 |      0 |   110 |    +0.0% | -1145.088 |  -246032.1 | -4089073.8 |   8708 | dmem_req_byte_en[1]
+     670* |       0 |     200 |        0 |      0 |   116 |    +0.0% | -1145.088 |  -245461.9 | -4088679.0 |   8708 | dmem_req_byte_en[1]
+     680* |       0 |     206 |        0 |      0 |   120 |    +0.0% | -1145.088 |  -245150.1 | -4088511.5 |   8708 | dmem_req_byte_en[1]
+     690* |       0 |     210 |        0 |      0 |   126 |    +0.0% | -1145.088 |  -245099.2 | -4088574.0 |   8708 | dmem_req_byte_en[1]
+     700* |       0 |     215 |        0 |      0 |   131 |    +0.0% | -1145.088 |  -244837.0 | -4088484.8 |   8708 | dmem_req_byte_en[1]
+     710* |       0 |     217 |        0 |      0 |   139 |    +0.0% | -1145.088 |  -244501.2 | -4088453.2 |   8708 | dmem_req_byte_en[1]
+     720* |       0 |     221 |        0 |      0 |   145 |    +0.0% | -1145.088 |  -244296.7 | -4088360.5 |   8708 | dmem_req_byte_en[1]
+     730* |       0 |     224 |        0 |      0 |   152 |    +0.0% | -1145.088 |  -243898.7 | -4088238.2 |   8708 | dmem_req_byte_en[1]
+     740* |       0 |     228 |        0 |      0 |   158 |    +0.0% | -1145.088 |  -243569.6 | -4088002.2 |   8708 | dmem_req_byte_en[1]
+     750* |       0 |     231 |        0 |      0 |   165 |    +0.0% | -1145.088 |  -243200.5 | -4087820.0 |   8708 | dmem_req_byte_en[1]
+     760* |       0 |     233 |        0 |      0 |   173 |    +0.0% | -1145.088 |  -244105.2 | -4088197.0 |   8708 | dmem_req_byte_en[1]
+     770* |       0 |     234 |        0 |      0 |   182 |    +0.0% | -1145.088 |  -243822.7 | -4088059.5 |   8708 | dmem_req_byte_en[1]
+     780* |       0 |     236 |        0 |      0 |   190 |    +0.0% | -1145.088 |  -244216.3 | -4088187.0 |   8708 | dmem_req_byte_en[1]
+     790* |       0 |     238 |        0 |      0 |   198 |    +0.0% | -1145.088 |  -243001.4 | -4087746.8 |   8708 | dmem_req_byte_en[1]
+     800* |       0 |     246 |        0 |      0 |   200 |    +0.0% | -1145.088 |  -242599.9 | -4087699.0 |   8708 | dmem_req_byte_en[1]
+     807* |       0 |     248 |        0 |      0 |   203 |    +0.0% | -1145.088 |  -242082.4 | -4087670.8 |   8708 | dmem_req_byte_en[1]
+     810* |       0 |     249 |        0 |      0 |   204 |    +0.0% | -1145.088 |  -241936.6 | -4087410.8 |   8708 | dmem_req_byte_en[1]
+     815* |       0 |     252 |        0 |      0 |   205 |    +0.0% | -1145.088 |  -241936.6 | -4087172.0 |   8708 | dmem_req_byte_en[1]
+     820* |       0 |     255 |        0 |      0 |   206 |    +0.0% | -1145.088 |  -241936.6 | -4087167.8 |   8708 | dmem_req_byte_en[1]
+     830* |       0 |     260 |        0 |      0 |   211 |    +0.0% | -1145.088 |  -241937.0 | -4087156.0 |   8708 | dmem_req_byte_en[1]
+     837* |       0 |     261 |        0 |      0 |   211 |    +0.0% | -1145.088 |  -241937.0 | -4087152.2 |   8708 | dmem_req_byte_en[1]
+     840* |       0 |     261 |        0 |      0 |   213 |    +0.0% | -1145.088 |  -242095.5 | -4087157.8 |   8708 | dmem_req_byte_en[1]
+     850* |       0 |     264 |        0 |      0 |   220 |    +0.0% | -1145.088 |  -241642.1 | -4087135.0 |   8708 | dmem_req_byte_en[1]
+     860* |       0 |     268 |        0 |      0 |   226 |    +0.0% | -1145.088 |  -241585.4 | -4087128.2 |   8708 | dmem_req_byte_en[1]
+     861* |       0 |     268 |        0 |      0 |   224 |    +0.0% | -1145.088 |  -241139.6 | -4087118.8 |   8708 | dmem_req_byte_en[1]
+     864* |       0 |     268 |        0 |      0 |   225 |    +0.0% | -1145.088 |  -241139.6 | -4087114.2 |   8708 | dmem_req_byte_en[1]
+     869* |       0 |     268 |        0 |      0 |   225 |    +0.0% | -1145.088 |  -241139.6 | -4087114.2 |   8708 | dmem_req_byte_en[1]
+     870* |       0 |     268 |        0 |      0 |   225 |    +0.0% | -1145.088 |  -241139.6 | -4087114.2 |   8708 | dmem_req_byte_en[1]
+     880* |       0 |     273 |        0 |      0 |   230 |    +0.0% | -1145.088 |  -241366.7 | -4087101.0 |   8708 | dmem_req_byte_en[1]
+     890* |       0 |     280 |        0 |      0 |   233 |    +0.0% | -1145.088 |  -241540.3 | -4087095.0 |   8708 | dmem_req_byte_en[1]
+     892* |       0 |     280 |        0 |      0 |   233 |    +0.0% | -1145.088 |  -241540.3 | -4087095.0 |   8708 | dmem_req_byte_en[1]
+     896* |       0 |     280 |        0 |      0 |   233 |    +0.0% | -1145.088 |  -241540.5 | -4087095.0 |   8708 | dmem_req_byte_en[1]
+     900* |       0 |     280 |        0 |      0 |   236 |    +0.0% | -1145.088 |  -241540.5 | -4087074.0 |   8708 | dmem_req_byte_en[1]
+     910* |       0 |     286 |        0 |      0 |   240 |    +0.0% | -1145.088 |  -241540.5 | -4086867.8 |   8708 | dmem_req_byte_en[1]
+     910* |       0 |     286 |        0 |      0 |   239 |    +0.0% | -1145.088 |  -241540.5 | -4086867.2 |   8708 | dmem_req_byte_en[1]
+     920* |       0 |     291 |        0 |      0 |   243 |    +0.0% | -1145.088 |  -241540.5 | -4086778.5 |   8708 | dmem_req_byte_en[1]
+     926* |       0 |     293 |        0 |      0 |   244 |    +0.0% | -1145.088 |  -241540.5 | -4086765.8 |   8708 | dmem_req_byte_en[1]
+     930* |       0 |     293 |        0 |      0 |   247 |    +0.0% | -1145.088 |  -241540.5 | -4086757.2 |   8708 | dmem_req_byte_en[1]
+     930* |       0 |     293 |        0 |      0 |   247 |    +0.0% | -1145.088 |  -241540.5 | -4086757.2 |   8708 | dmem_req_byte_en[1]
+     934* |       0 |     293 |        0 |      0 |   247 |    +0.0% | -1145.088 |  -241540.5 | -4086757.2 |   8708 | dmem_req_byte_en[1]
+     938* |       0 |     293 |        0 |      0 |   249 |    +0.0% | -1145.088 |  -241554.3 | -4086755.2 |   8708 | dmem_req_byte_en[1]
+     940* |       0 |     293 |        0 |      0 |   250 |    +0.0% | -1145.088 |  -241554.3 | -4086755.0 |   8708 | dmem_req_byte_en[1]
+     944* |       0 |     295 |        0 |      0 |   250 |    +0.0% | -1145.088 |  -241554.3 | -4086756.8 |   8708 | dmem_req_byte_en[1]
+     946* |       0 |     295 |        0 |      0 |   250 |    +0.0% | -1145.088 |  -241554.3 | -4086756.8 |   8708 | dmem_req_byte_en[1]
+     950* |       0 |     296 |        0 |      0 |   252 |    +0.0% | -1145.088 |  -241554.3 | -4086755.8 |   8708 | dmem_req_byte_en[1]
+     952* |       0 |     296 |        0 |      0 |   253 |    +0.0% | -1145.088 |  -241554.3 | -4086755.0 |   8708 | dmem_req_byte_en[1]
+     956* |       0 |     296 |        0 |      0 |   255 |    +0.0% | -1145.088 |  -241554.3 | -4086751.8 |   8708 | dmem_req_byte_en[1]
+     960* |       0 |     297 |        0 |      0 |   257 |    +0.0% | -1145.088 |  -241554.3 | -4086753.0 |   8708 | dmem_req_byte_en[1]
+     962* |       0 |     298 |        0 |      0 |   258 |    +0.0% | -1145.088 |  -241554.3 | -4086760.0 |   8708 | dmem_req_byte_en[1]
+     965* |       0 |     298 |        0 |      0 |   258 |    +0.0% | -1145.088 |  -241554.3 | -4086760.0 |   8708 | dmem_req_byte_en[1]
+     970* |       0 |     299 |        0 |      0 |   261 |    +0.0% | -1145.088 |  -241554.3 | -4086285.2 |   8708 | dmem_req_byte_en[1]
+     980* |       0 |     307 |        0 |      0 |   263 |    +0.0% | -1145.294 |  -241602.8 | -4047470.2 |   8708 | dmem_req_byte_en[1]
+     990* |       0 |     315 |        0 |      0 |   265 |    +0.0% | -1166.769 |  -243940.0 | -4233978.0 |   8708 | dmem_req_byte_en[1]
+     995* |       0 |     304 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4052129.0 |   8708 | dmem_req_byte_en[1]
+    1000* |       0 |     308 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4051365.5 |   8708 | dmem_req_byte_en[1]
+    1010* |       0 |     317 |        0 |      0 |   263 |    +0.0% | -1166.515 |  -243879.3 | -4236929.5 |   8708 | dmem_req_byte_en[1]
+    1010* |       0 |     310 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050997.2 |   8708 | dmem_req_byte_en[1]
+    1020* |       0 |     318 |        0 |      0 |   263 |    +0.0% | -1166.515 |  -243879.3 | -4236937.5 |   8708 | dmem_req_byte_en[1]
+    1020* |       0 |     312 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050990.8 |   8708 | dmem_req_byte_en[1]
+    1028* |       0 |     312 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050990.8 |   8708 | dmem_req_byte_en[1]
+    1030* |       0 |     313 |        0 |      0 |   262 |    +0.0% | -1156.310 |  -244222.0 | -4148324.5 |   8708 | dmem_req_byte_en[1]
+    1036* |       0 |     312 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050990.8 |   8708 | dmem_req_byte_en[1]
+    1040* |       0 |     315 |        0 |      0 |   262 |    +0.0% | -1153.339 |  -243508.8 | -4122553.0 |   8708 | dmem_req_byte_en[1]
+    1044* |       0 |     312 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050990.8 |   8708 | dmem_req_byte_en[1]
+    1050* |       0 |     317 |        0 |      0 |   262 |    +0.0% | -1166.563 |  -243890.7 | -4237348.0 |   8708 | dmem_req_byte_en[1]
+    1052* |       0 |     312 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050990.8 |   8708 | dmem_req_byte_en[1]
+    1060* |       0 |     318 |        0 |      0 |   263 |    +0.0% | -1166.515 |  -243879.3 | -4236937.5 |   8708 | dmem_req_byte_en[1]
+    1060* |       0 |     312 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050990.8 |   8708 | dmem_req_byte_en[1]
+    1068* |       0 |     312 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050990.8 |   8708 | dmem_req_byte_en[1]
+    1070* |       0 |     313 |        0 |      0 |   262 |    +0.0% | -1156.310 |  -244222.0 | -4148324.5 |   8708 | dmem_req_byte_en[1]
+    1076* |       0 |     312 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050990.8 |   8708 | dmem_req_byte_en[1]
+    1080* |       0 |     315 |        0 |      0 |   262 |    +0.0% | -1153.339 |  -243508.8 | -4122553.0 |   8708 | dmem_req_byte_en[1]
+    1084* |       0 |     312 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050990.8 |   8708 | dmem_req_byte_en[1]
+    1090* |       0 |     317 |        0 |      0 |   262 |    +0.0% | -1166.563 |  -243890.7 | -4237226.5 |   8708 | dmem_req_byte_en[1]
+    1093* |       0 |     313 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050971.8 |   8708 | dmem_req_byte_en[1]
+    1100* |       0 |     319 |        0 |      0 |   262 |    +0.0% | -1153.339 |  -243508.8 | -4122459.0 |   8708 | dmem_req_byte_en[1]
+    1100* |       0 |     316 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050896.8 |   8708 | dmem_req_byte_en[1]
+    1108* |       0 |     316 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050896.8 |   8708 | dmem_req_byte_en[1]
+    1110* |       0 |     317 |        0 |      0 |   262 |    +0.0% | -1156.310 |  -244222.0 | -4148230.2 |   8708 | dmem_req_byte_en[1]
+    1116* |       0 |     316 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050896.8 |   8708 | dmem_req_byte_en[1]
+    1120* |       0 |     319 |        0 |      0 |   262 |    +0.0% | -1153.339 |  -243508.8 | -4122459.0 |   8708 | dmem_req_byte_en[1]
+    1124* |       0 |     316 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050896.8 |   8708 | dmem_req_byte_en[1]
+    1130* |       0 |     321 |        0 |      0 |   262 |    +0.0% | -1166.563 |  -243890.7 | -4237252.5 |   8708 | dmem_req_byte_en[1]
+    1132* |       0 |     316 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050896.8 |   8708 | dmem_req_byte_en[1]
+    1140* |       0 |     322 |        0 |      0 |   263 |    +0.0% | -1166.515 |  -243879.3 | -4236841.5 |   8708 | dmem_req_byte_en[1]
+    1140* |       0 |     316 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050896.8 |   8708 | dmem_req_byte_en[1]
+    1148* |       0 |     316 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050896.8 |   8708 | dmem_req_byte_en[1]
+    1150* |       0 |     317 |        0 |      0 |   262 |    +0.0% | -1156.310 |  -244222.0 | -4148230.2 |   8708 | dmem_req_byte_en[1]
+    1156* |       0 |     316 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050896.8 |   8708 | dmem_req_byte_en[1]
+    1160* |       0 |     319 |        0 |      0 |   262 |    +0.0% | -1153.339 |  -243508.8 | -4122459.0 |   8708 | dmem_req_byte_en[1]
+    1164* |       0 |     316 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050896.8 |   8708 | dmem_req_byte_en[1]
+    1170* |       0 |     321 |        0 |      0 |   262 |    +0.0% | -1166.563 |  -243890.7 | -4237252.5 |   8708 | dmem_req_byte_en[1]
+    1172* |       0 |     316 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050896.8 |   8708 | dmem_req_byte_en[1]
+    1180* |       0 |     322 |        0 |      0 |   263 |    +0.0% | -1166.515 |  -243879.3 | -4236841.5 |   8708 | dmem_req_byte_en[1]
+    1180* |       0 |     316 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050896.8 |   8708 | dmem_req_byte_en[1]
+    1190* |       0 |     325 |        0 |      0 |   262 |    +0.1% | -1166.515 |  -243879.3 | -4236765.0 |   8708 | dmem_req_byte_en[1]
+    1191* |       0 |     319 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050821.2 |   8708 | dmem_req_byte_en[1]
+    1199* |       0 |     319 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050821.2 |   8708 | dmem_req_byte_en[1]
+    1200* |       0 |     319 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050821.2 |   8708 | dmem_req_byte_en[1]
+    1207* |       0 |     319 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050821.2 |   8708 | dmem_req_byte_en[1]
+    1210* |       0 |     321 |        0 |      0 |   262 |    +0.0% | -1154.847 |  -243870.8 | -4135463.8 |   8708 | dmem_req_byte_en[1]
+    1215* |       0 |     319 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050821.2 |   8708 | dmem_req_byte_en[1]
+    1220* |       0 |     323 |        0 |      0 |   262 |    +0.0% | -1153.339 |  -243508.8 | -4122484.5 |   8708 | dmem_req_byte_en[1]
+    1223* |       0 |     319 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050821.2 |   8708 | dmem_req_byte_en[1]
+    1230* |       0 |     325 |        0 |      0 |   262 |    +0.1% | -1166.515 |  -243879.3 | -4236765.0 |   8708 | dmem_req_byte_en[1]
+    1231* |       0 |     319 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050821.2 |   8708 | dmem_req_byte_en[1]
+    1239* |       0 |     319 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050821.2 |   8708 | dmem_req_byte_en[1]
+    1240* |       0 |     319 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050821.2 |   8708 | dmem_req_byte_en[1]
+    1247* |       0 |     319 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050821.2 |   8708 | dmem_req_byte_en[1]
+    1250* |       0 |     321 |        0 |      0 |   262 |    +0.0% | -1154.847 |  -243870.8 | -4135463.8 |   8708 | dmem_req_byte_en[1]
+    1255* |       0 |     319 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050821.2 |   8708 | dmem_req_byte_en[1]
+    1260* |       0 |     323 |        0 |      0 |   262 |    +0.0% | -1153.339 |  -243508.8 | -4122484.5 |   8708 | dmem_req_byte_en[1]
+    1263* |       0 |     319 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050821.2 |   8708 | dmem_req_byte_en[1]
+    1270* |       0 |     325 |        0 |      0 |   262 |    +0.1% | -1166.515 |  -243879.3 | -4236765.0 |   8708 | dmem_req_byte_en[1]
+    1271* |       0 |     319 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050821.2 |   8708 | dmem_req_byte_en[1]
+    1280* |       0 |     327 |        0 |      0 |   262 |    +0.1% | -1166.563 |  -243890.7 | -4237100.5 |   8708 | dmem_req_byte_en[1]
+    1282* |       0 |     323 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050845.8 |   8708 | dmem_req_byte_en[1]
+    1289* |       0 |     323 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050845.8 |   8708 | dmem_req_byte_en[1]
+    1290* |       0 |     323 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050845.8 |   8708 | dmem_req_byte_en[1]
+    1296* |       0 |     323 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050845.8 |   8708 | dmem_req_byte_en[1]
+    1300* |       0 |     326 |        0 |      0 |   262 |    +0.0% | -1153.339 |  -243508.8 | -4122408.5 |   8708 | dmem_req_byte_en[1]
+    1300* |       0 |     323 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050845.8 |   8708 | dmem_req_byte_en[1]
+    1307* |       0 |     323 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050845.8 |   8708 | dmem_req_byte_en[1]
+    1310* |       0 |     325 |        0 |      0 |   262 |    +0.0% | -1154.847 |  -243870.8 | -4135488.2 |   8708 | dmem_req_byte_en[1]
+    1314* |       0 |     323 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050845.8 |   8708 | dmem_req_byte_en[1]
+    1320* |       0 |     328 |        0 |      0 |   262 |    +0.1% | -1166.515 |  -243879.3 | -4236689.0 |   8708 | dmem_req_byte_en[1]
+    1321* |       0 |     323 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050845.8 |   8708 | dmem_req_byte_en[1]
+    1328* |       0 |     323 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050845.8 |   8708 | dmem_req_byte_en[1]
+    1330* |       0 |     324 |        0 |      0 |   262 |    +0.0% | -1156.310 |  -244222.0 | -4148180.0 |   8708 | dmem_req_byte_en[1]
+    1335* |       0 |     323 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050845.8 |   8708 | dmem_req_byte_en[1]
+    1340* |       0 |     327 |        0 |      0 |   262 |    +0.1% | -1153.339 |  -243508.8 | -4122508.5 |   8708 | dmem_req_byte_en[1]
+    1343* |       0 |     324 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050946.2 |   8708 | dmem_req_byte_en[1]
+    1350* |       0 |     329 |        0 |      0 |   263 |    +0.1% | -1166.515 |  -243879.3 | -4236790.0 |   8708 | dmem_req_byte_en[1]
+    1350* |       0 |     324 |        0 |      0 |   262 |    +0.0% | -1145.088 |  -241554.3 | -4050946.2 |   8708 | dmem_req_byte_en[1]
+    1360* |       0 |     333 |        0 |      0 |   262 |    +0.1% | -1166.563 |  -243890.7 | -4237039.0 |   8708 | dmem_req_byte_en[1]
+    1362* |       0 |     328 |        0 |      0 |   262 |    +0.1% | -1145.088 |  -241554.3 | -4050740.8 |   8708 | dmem_req_byte_en[1]
+    1370* |       0 |     334 |        0 |      0 |   263 |    +0.1% | -1166.515 |  -243879.3 | -4236628.0 |   8708 | dmem_req_byte_en[1]
+    1370* |       0 |     328 |        0 |      0 |   262 |    +0.1% | -1145.088 |  -241554.3 | -4050740.8 |   8708 | dmem_req_byte_en[1]
+    1378* |       0 |     328 |        0 |      0 |   262 |    +0.1% | -1145.088 |  -241554.3 | -4050740.8 |   8708 | dmem_req_byte_en[1]
+    1380* |       0 |     329 |        0 |      0 |   262 |    +0.1% | -1156.310 |  -244222.0 | -4148074.8 |   8708 | dmem_req_byte_en[1]
+    1386* |       0 |     328 |        0 |      0 |   262 |    +0.1% | -1145.088 |  -241554.3 | -4050740.8 |   8708 | dmem_req_byte_en[1]
+    1390* |       0 |     331 |        0 |      0 |   262 |    +0.1% | -1153.339 |  -243508.8 | -4122303.5 |   8708 | dmem_req_byte_en[1]
+    1394* |       0 |     328 |        0 |      0 |   262 |    +0.1% | -1145.088 |  -241554.3 | -4050740.8 |   8708 | dmem_req_byte_en[1]
+    1400* |       0 |     333 |        0 |      0 |   262 |    +0.1% | -1166.563 |  -243890.7 | -4237039.0 |   8708 | dmem_req_byte_en[1]
+    1400* |       0 |     328 |        0 |      0 |   262 |    +0.1% | -1145.088 |  -241554.3 | -4050740.8 |   8708 | dmem_req_byte_en[1]
+    1400* |       0 |     328 |        0 |      0 |   262 |    +0.1% | -1145.088 |  -241554.3 | -4050740.8 |   8708 | dmem_req_byte_en[1]
+    final |       0 |     328 |        0 |      0 |   262 |    +0.1% | -1145.088 |  -241554.3 | -4050740.8 |   8708 | dmem_req_byte_en[1]
+------------------------------------------------------------------------------------------------------------------------------
+[INFO RSZ-0051] Resized 328 instances: 328 up, 0 up match, 0 down, 0 VT
+[INFO RSZ-0043] Swapped pins on 262 instances.
+[WARNING RSZ-0062] Unable to repair all setup violations.
+Took 3008 seconds: repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -setup -skip_last_gasp -sequence unbuffer,sizeup,swap,vt_swap -verbose
+Default units for flow
+ time 1ps
+ capacitance 1fF
+ resistance 1kohm
+ voltage 1v
+ current 1mA
+ power 1pW
+ distance 1um
+   Layer   | Unit Resistance | Unit Capacitance 
+           |       (kohm/um) |          (fF/um)
+------------------------------------------------
+        M1 |        7.04e-02 |         1.00e-10
+        M2 |        4.62e-02 |         1.85e-01
+        M3 |        3.63e-02 |         1.54e-01
+        M4 |        2.03e-02 |         1.89e-01
+        M5 |        1.93e-02 |         1.72e-01
+        M6 |        1.19e-02 |         1.76e-01
+        M7 |        1.25e-02 |         1.47e-01
+        M8 |        0.00e+00 |         0.00e+00
+        M9 |        0.00e+00 |         0.00e+00
+       Pad |        0.00e+00 |         0.00e+00
+------------------------------------------------
+
+   Layer   | Via Resistance 
+           |         (kohm) 
+----------------------------
+        V1 |       1.72e-02 
+        V2 |       1.72e-02 
+        V3 |       1.72e-02 
+        V4 |       1.18e-02 
+        V5 |       1.18e-02 
+        V6 |       8.20e-03 
+        V7 |       8.20e-03 
+        V8 |       6.30e-03 
+        V9 |       0.00e+00 
+----------------------------
+Report metrics stage 2, floorplan final...
+
+==========================================================================
+floorplan final report_design_area
+--------------------------------------------------------------------------
+Design area 21246 um^2 50% utilization.
+write_db /workspace/build/baselines/ap5b-post-lsu-v1/physical-5500ps-abc-mapping-probe/results/asap7/rv32_post_lsu_v1/base/2_1_floorplan.odb
+write_sdc -no_timestamp /workspace/build/baselines/ap5b-post-lsu-v1/physical-5500ps-abc-mapping-probe/results/asap7/rv32_post_lsu_v1/base/2_1_floorplan.sdc
+Elapsed time: 53:44.87[h:]min:sec. CPU time: user 2895.01 sys 1195.73 (126%). Peak memory: 1564240KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_1_floorplan             .odb         3224           1527 5b776d498df041cf376b
+2_1_floorplan             .sdc                             ec46e52066d39cacdbb2
