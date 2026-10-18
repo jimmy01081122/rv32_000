@@ -61,6 +61,10 @@ def main():
     live=subprocess.check_output(['docker','exec',args.container,'sha256sum',*wanted],text=True)
     if {line.split(maxsplit=1)[1]:line.split(maxsplit=1)[0] for line in live.splitlines()}!=wanted:
         parser.error('live tool/library hashes differ from the adder audit')
+    platform_manifest=ROOT/'docs/evidence/2026-10-18/post-lsu-baseline-preparation/environment/physical-tool-platform-sha256.txt'
+    platform_command=['docker','exec',args.container,'sha256sum','--strict','--quiet','-c',
+                      '/workspace/'+str(platform_manifest.relative_to(ROOT))]
+    subprocess.check_call(platform_command)
     result_dir=attempt/'results/asap7/rv32_post_lsu_v1/base'
     odb=result_dir/'5_1_grt.odb'
     if not odb.is_file():parser.error('global-route database missing')
@@ -74,6 +78,10 @@ def main():
             'odb_sha256':sha(odb),'report_script_sha256':sha(script),
             'timing_common_sha256':sha(ROOT/'physical/asap7/baseline/timing_common.tcl'),
             'adder_audit_summary_sha256':sha(audit_path),
+            'platform_manifest_sha256':sha(platform_manifest),
+            'platform_files_verified':len(platform_manifest.read_text().splitlines()),
+            'platform_validation_command':platform_command,
+            'platform_validation_before_returncode':0,
             'clock_trials_ps':args.periods_ps,
             'local_image_id':image_id,'records':[],'passed':False}
     summary=destination/'run.json'
@@ -100,6 +108,8 @@ def main():
             or sha(ROOT/'physical/asap7/baseline/timing_common.tcl')!=report['timing_common_sha256']
             or sha(odb)!=report['odb_sha256']):
         parser.exit(1,'analysis inputs changed during collection\n')
+    subprocess.check_call(platform_command)
+    report['platform_validation_after_returncode']=0
     report['collection_completed']=True
     summary.write_text(json.dumps(report,indent=2)+'\n')
 

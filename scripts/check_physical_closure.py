@@ -84,6 +84,11 @@ def review_collection(directory):
     source=directory/'run.json';collection=json.loads(source.read_text())
     if not collection.get('collection_completed'):
         raise ValueError('independent corner collection incomplete')
+    platform_manifest=ROOT/'docs/evidence/2026-10-18/post-lsu-baseline-preparation/environment/physical-tool-platform-sha256.txt'
+    if (collection.get('platform_manifest_sha256')!=sha(platform_manifest)
+            or collection.get('platform_validation_before_returncode')!=0
+            or collection.get('platform_validation_after_returncode')!=0):
+        raise ValueError('tool/complete platform identity proof required before and after analysis')
     periods=collection['clock_trials_ps']
     if not periods or periods!=sorted(set(periods)) or min(periods)<=2200:
         raise ValueError('invalid tested clock set')

@@ -23,6 +23,8 @@ the serialized fixed I/O/uncertainty/load contract. It rejects unresolved
 constraint or electrical reports and negative setup/hold slack. Its result is a
 timing review; global-routing/connectivity review and formal 27-workload
 measurement are still required before freezing the manifest.
+Independent collection verifies the archived 204-file tool/platform checksum
+manifest before and after STA, in addition to the bounded adder-warning audit.
 
 Use a fresh `--label` for each attempt. `--detached --container ID` starts a
 durable worker that records real process status and input identities even when
