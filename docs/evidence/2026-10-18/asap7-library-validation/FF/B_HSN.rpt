@@ -1,0 +1,54 @@
+Startpoint: B (input port clocked by clk)
+Endpoint: HSN (output port clocked by clk)
+Path Group: clk
+Path Type: min
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ input external delay
+   0.00    0.00 ^ B (in)
+  15.85   15.85 v ha/SN (HAxp5_ASAP7_75t_R)
+   0.00   15.85 v HSN (out)
+          15.85   data arrival time
+
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00   clock reconvergence pessimism
+   0.00    0.00   output external delay
+           0.00   data required time
+---------------------------------------------------------
+           0.00   data required time
+         -15.85   data arrival time
+---------------------------------------------------------
+          15.85   slack (MET)
+
+
+Startpoint: B (input port clocked by clk)
+Endpoint: HSN (output port clocked by clk)
+Path Group: clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ input external delay
+   0.00    0.00 ^ B (in)
+  38.08   38.08 v ha/SN (HAxp5_ASAP7_75t_R)
+   0.00   38.08 v HSN (out)
+          38.08   data arrival time
+
+5500.00 5500.00   clock clk (rise edge)
+   0.00 5500.00   clock network delay (ideal)
+   0.00 5500.00   clock reconvergence pessimism
+   0.00 5500.00   output external delay
+        5500.00   data required time
+---------------------------------------------------------
+        5500.00   data required time
+         -38.08   data arrival time
+---------------------------------------------------------
+        5461.92   slack (MET)
+
+

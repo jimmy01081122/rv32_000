@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Legacy equivalence, faster-core fixed-memory tests and invalid timing controls."""
 import hashlib
+import argparse
 import json
 import re
 from pathlib import Path
@@ -10,8 +11,14 @@ ROOT=Path(__file__).resolve().parents[1]
 OUT=ROOT/'build/qualification/memory-time'
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def main():
+ global OUT
+ parser=argparse.ArgumentParser(description=__doc__)
+ parser.add_argument('--sim',type=Path,default=ROOT/'build/sim/rv32_ooo_sim')
+ parser.add_argument('--out',type=Path,default=OUT)
+ args=parser.parse_args();OUT=args.out.resolve()
+ if not OUT.is_relative_to(ROOT/'build'):parser.error('output must be under repository build/')
  OUT.mkdir(parents=True,exist_ok=True);summary=OUT/'summary.json';summary.unlink(missing_ok=True)
- rows=[];sim=ROOT/'build/sim/rv32_ooo_sim';old=ROOT/'build/baselines/ap5b-post-lsu-v1/qualified-reference-sim'
+ rows=[];sim=args.sim.resolve();old=ROOT/'build/baselines/ap5b-post-lsu-v1/qualified-reference-sim'
  timing=['+core-period-ps=5500','+imem-response-ps=5500','+imem-interval-ps=5500','+dmem-response-ps=5500']
  for name in ('rv32i_basic','store_forwarding','lsu_redirect_variable_lat','wrong_path_store','partial_overlap','unresolved_store','fp_basic','fp_fma'):
   elf=ROOT/f'build/tests/{name}.elf';texts={}

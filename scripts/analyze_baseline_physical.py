@@ -7,6 +7,7 @@ import re
 import subprocess
 from baseline_contract import ROOT,sha,load,check_rtl
 from run_baseline_physical import IMAGE
+from audit_asap7_adders import validate as validate_adder_arcs
 
 
 def main():
@@ -14,13 +15,21 @@ def main():
     parser.add_argument('--attempt',type=Path,required=True)
     parser.add_argument('--container',required=True)
     parser.add_argument('--label',default='independent-sta')
+    parser.add_argument('--adder-audit',type=Path,required=True,help='summary.json from audit_asap7_adders.py')
+    parser.add_argument('--periods-ps',nargs='+',type=int,
+                        default=[2500,3000,3500,4000,4500,5000,5500,6000,7000,8000,10000,12000,14000,16000,20000])
     args=parser.parse_args()
     if not re.fullmatch(r'[a-zA-Z0-9_-]+',args.label):parser.error('invalid output label')
+    if args.periods_ps!=sorted(set(args.periods_ps)) or min(args.periods_ps)<=2200:
+        parser.error('clock trials must be unique, increasing and above the fixed 2200 ps I/O budget sum')
     attempt=args.attempt.resolve()
     if not attempt.is_relative_to(ROOT/'build'):parser.error('attempt must be under repository build/')
     implementation=json.loads((attempt/'run.json').read_text())
     if not implementation.get('flow_completed'):parser.error('implementation command has not completed successfully')
-    check_rtl(load())
+    manifest=load()
+    check_rtl(manifest)
+    if implementation['rtl_files_sha256']!=manifest['rtl_files_sha256']:
+        parser.error('implementation RTL identities differ from the frozen baseline')
     for path,key in [('physical/asap7/baseline/config.mk','config_sha256'),
                      ('physical/asap7/baseline/lower_processes.tcl','process_lowering_sha256'),
                      ('build/baseline-setup/rtl_lowered.v','lowered_rtl_sha256')]:
@@ -32,6 +41,24 @@ def main():
     if (not actual['State']['Running'] or actual['Image']!=image_id
             or image_id!=implementation['local_image_id'] or mounts.get('/workspace')!=str(ROOT)):
         parser.error('container/image/source mount differs from implementation')
+    audit_path=args.adder_audit.resolve()
+    audit=json.loads(audit_path.read_text())
+    if (not audit.get('passed') or len(audit['libraries'])!=3 or len(audit['sta_records'])!=30
+            or len(audit['negative_controls'])!=3 or not all(r['rejected'] for r in audit['negative_controls'])):
+        parser.error('incomplete adder model audit')
+    for name,digest in audit['source_sha256'].items():
+        if sha(ROOT/name)!=digest:parser.error('adder audit source changed: '+name)
+    raw=audit_path.parent/'raw-arcs.json'
+    if sha(raw)!=audit['raw_arcs_sha256']:parser.error('adder raw arc audit changed')
+    validate_adder_arcs(json.loads(raw.read_text()))
+    for row in audit['sta_records']:
+        if sha(audit_path.parent/row['corner']/(row['path']+'.rpt'))!=row['sha256']:
+            parser.error('adder STA path evidence changed')
+    tool='/OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad'
+    wanted=dict(audit['libraries']);wanted[tool]=audit['openroad_binary_sha256']
+    live=subprocess.check_output(['docker','exec',args.container,'sha256sum',*wanted],text=True)
+    if {line.split(maxsplit=1)[1]:line.split(maxsplit=1)[0] for line in live.splitlines()}!=wanted:
+        parser.error('live tool/library hashes differ from the adder audit')
     result_dir=attempt/'results/asap7/rv32_post_lsu_v1/base'
     odb=result_dir/'5_1_grt.odb'
     if not odb.is_file():parser.error('global-route database missing')
@@ -43,6 +70,9 @@ def main():
     report={'scope':'independent corner timing collection, pending closure review',
             'implementation_report_sha256':sha(attempt/'run.json'),
             'odb_sha256':sha(odb),'report_script_sha256':sha(script),
+            'timing_common_sha256':sha(ROOT/'physical/asap7/baseline/timing_common.tcl'),
+            'adder_audit_summary_sha256':sha(audit_path),
+            'clock_trials_ps':args.periods_ps,
             'local_image_id':image_id,'records':[],'passed':False}
     summary=destination/'run.json'
     summary.write_text(json.dumps(report,indent=2)+'\n')
@@ -50,6 +80,8 @@ def main():
         out=destination/corner;out.mkdir()
         command=['docker','exec','--user','1000:1000','-w','/workspace',
                  '-e','RV32_CORNER='+corner,'-e','RV32_ODB='+guest(odb),
+                 '-e','RV32_ADDER_AUDIT_VERIFIED=1',
+                 '-e','RV32_PERIODS_PS='+' '.join(map(str,args.periods_ps)),
                  '-e','RV32_REPORT_DIR='+guest(out),args.container,
                  '/OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad',
                  '-no_init','-exit','-threads','2',guest(script)]

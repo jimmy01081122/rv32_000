@@ -1,0 +1,8 @@
+{
+  "status": "library qualification only, no core PPA closure",
+  "tool_parent_digest": "sha256:fd940893eafe2410ed9513441f91e15be5fe9f73a29d68e5655ad62a39ac2e9a",
+  "reproduce_inside_pinned_runtime": "python3 scripts/audit_asap7_adders.py --out build/asap7-adders-fresh",
+  "observed_warning": "STA-1212 timing group from output port; CON -> SN groups only in FAx1/HAxp5",
+  "interpretation": "preserve and document extra output/output warnings; functional input/output coverage is verified independently, no PDK edits or warning suppression",
+  "limits": "does not establish analog characterization quality, OCV, extracted multi-corner RC, or complete Liberty validation"
+}

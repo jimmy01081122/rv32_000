@@ -1,0 +1,54 @@
+Startpoint: A (input port clocked by clk)
+Endpoint: FSN (output port clocked by clk)
+Path Group: clk
+Path Type: min
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ input external delay
+   0.00    0.00 ^ A (in)
+  24.11   24.11 v fa/SN (FAx1_ASAP7_75t_R)
+   0.00   24.11 v FSN (out)
+          24.11   data arrival time
+
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00   clock reconvergence pessimism
+   0.00    0.00   output external delay
+           0.00   data required time
+---------------------------------------------------------
+           0.00   data required time
+         -24.11   data arrival time
+---------------------------------------------------------
+          24.11   slack (MET)
+
+
+Startpoint: A (input port clocked by clk)
+Endpoint: FSN (output port clocked by clk)
+Path Group: clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ input external delay
+   0.00    0.00 ^ A (in)
+  66.37   66.37 v fa/SN (FAx1_ASAP7_75t_R)
+   0.00   66.37 v FSN (out)
+          66.37   data arrival time
+
+5500.00 5500.00   clock clk (rise edge)
+   0.00 5500.00   clock network delay (ideal)
+   0.00 5500.00   clock reconvergence pessimism
+   0.00 5500.00   output external delay
+        5500.00   data required time
+---------------------------------------------------------
+        5500.00   data required time
+         -66.37   data arrival time
+---------------------------------------------------------
+        5433.63   slack (MET)
+
+

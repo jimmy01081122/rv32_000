@@ -1,0 +1,1268 @@
+[
+  {
+    "corner": "TT",
+    "cell": "FAx1_ASAP7_75t_R",
+    "pins": {
+      "CON": {
+        "direction": "output",
+        "function": "(!A * !B) + (!A * !CI) + (!B * !CI)"
+      },
+      "SN": {
+        "direction": "output",
+        "function": "(A * B * !CI) + (A * !B * CI) + (!A * B * CI) + (!A * !B * !CI)"
+      },
+      "A": {
+        "direction": "input",
+        "function": null
+      },
+      "B": {
+        "direction": "input",
+        "function": null
+      },
+      "CI": {
+        "direction": "input",
+        "function": null
+      }
+    },
+    "arcs": [
+      {
+        "to": "CON",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(B * !CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(!B * CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(A * !CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(!A * CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(A * !B)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(!A * B)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "(B * !CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "(!B * CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "non_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(B * CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(!B * !CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "(A * !CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "(!A * CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "non_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(A * CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(!A * !CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "(A * !B)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "(!A * B)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "non_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(A * B)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(!A * !B)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_fall",
+        "sense": "negative_unate",
+        "when": "(A * B * !CI)",
+        "rise": false,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_fall",
+        "sense": "negative_unate",
+        "when": "(A * !B * CI)",
+        "rise": false,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_rise",
+        "sense": "negative_unate",
+        "when": "(A * !B * !CI)",
+        "rise": true,
+        "fall": false
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_fall",
+        "sense": "negative_unate",
+        "when": "(!A * B * CI)",
+        "rise": false,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_rise",
+        "sense": "negative_unate",
+        "when": "(!A * B * !CI)",
+        "rise": true,
+        "fall": false
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_rise",
+        "sense": "negative_unate",
+        "when": "(!A * !B * CI)",
+        "rise": true,
+        "fall": false
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      }
+    ],
+    "library_file": "/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz",
+    "library_sha256": "073ac4b6b08f272b6953b0ad54d1d9743767a7d15a0e2964ed86cf44c3dbe00e"
+  },
+  {
+    "corner": "TT",
+    "cell": "HAxp5_ASAP7_75t_R",
+    "pins": {
+      "CON": {
+        "direction": "output",
+        "function": "(!A) + (!B)"
+      },
+      "SN": {
+        "direction": "output",
+        "function": "(A * B) + (!A * !B)"
+      },
+      "A": {
+        "direction": "input",
+        "function": null
+      },
+      "B": {
+        "direction": "input",
+        "function": null
+      }
+    },
+    "arcs": [
+      {
+        "to": "CON",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "B",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "!B",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "A",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "!A",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_rise",
+        "sense": "negative_unate",
+        "when": "(A * !B)",
+        "rise": true,
+        "fall": false
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_rise",
+        "sense": "negative_unate",
+        "when": "(!A * B)",
+        "rise": true,
+        "fall": false
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      }
+    ],
+    "library_file": "/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz",
+    "library_sha256": "073ac4b6b08f272b6953b0ad54d1d9743767a7d15a0e2964ed86cf44c3dbe00e"
+  },
+  {
+    "corner": "SS",
+    "cell": "FAx1_ASAP7_75t_R",
+    "pins": {
+      "CON": {
+        "direction": "output",
+        "function": "(!A * !B) + (!A * !CI) + (!B * !CI)"
+      },
+      "SN": {
+        "direction": "output",
+        "function": "(A * B * !CI) + (A * !B * CI) + (!A * B * CI) + (!A * !B * !CI)"
+      },
+      "A": {
+        "direction": "input",
+        "function": null
+      },
+      "B": {
+        "direction": "input",
+        "function": null
+      },
+      "CI": {
+        "direction": "input",
+        "function": null
+      }
+    },
+    "arcs": [
+      {
+        "to": "CON",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(B * !CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(!B * CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(A * !CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(!A * CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(A * !B)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(!A * B)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "(B * !CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "(!B * CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "non_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(B * CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(!B * !CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "(A * !CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "(!A * CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "non_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(A * CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(!A * !CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "(A * !B)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "(!A * B)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "non_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(A * B)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(!A * !B)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_fall",
+        "sense": "negative_unate",
+        "when": "(A * B * !CI)",
+        "rise": false,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_fall",
+        "sense": "negative_unate",
+        "when": "(A * !B * CI)",
+        "rise": false,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_rise",
+        "sense": "negative_unate",
+        "when": "(A * !B * !CI)",
+        "rise": true,
+        "fall": false
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_fall",
+        "sense": "negative_unate",
+        "when": "(!A * B * CI)",
+        "rise": false,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_rise",
+        "sense": "negative_unate",
+        "when": "(!A * B * !CI)",
+        "rise": true,
+        "fall": false
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_rise",
+        "sense": "negative_unate",
+        "when": "(!A * !B * CI)",
+        "rise": true,
+        "fall": false
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      }
+    ],
+    "library_file": "/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz",
+    "library_sha256": "71e55ce94cde9d10ad726cf7131e7356501aa1c380ae4e138f47c2f8ca7ca7db"
+  },
+  {
+    "corner": "SS",
+    "cell": "HAxp5_ASAP7_75t_R",
+    "pins": {
+      "CON": {
+        "direction": "output",
+        "function": "(!A) + (!B)"
+      },
+      "SN": {
+        "direction": "output",
+        "function": "(A * B) + (!A * !B)"
+      },
+      "A": {
+        "direction": "input",
+        "function": null
+      },
+      "B": {
+        "direction": "input",
+        "function": null
+      }
+    },
+    "arcs": [
+      {
+        "to": "CON",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "B",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "!B",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "A",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "!A",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_rise",
+        "sense": "negative_unate",
+        "when": "(A * !B)",
+        "rise": true,
+        "fall": false
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_rise",
+        "sense": "negative_unate",
+        "when": "(!A * B)",
+        "rise": true,
+        "fall": false
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      }
+    ],
+    "library_file": "/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz",
+    "library_sha256": "71e55ce94cde9d10ad726cf7131e7356501aa1c380ae4e138f47c2f8ca7ca7db"
+  },
+  {
+    "corner": "FF",
+    "cell": "FAx1_ASAP7_75t_R",
+    "pins": {
+      "CON": {
+        "direction": "output",
+        "function": "(!A * !B) + (!A * !CI) + (!B * !CI)"
+      },
+      "SN": {
+        "direction": "output",
+        "function": "(A * B * !CI) + (A * !B * CI) + (!A * B * CI) + (!A * !B * !CI)"
+      },
+      "A": {
+        "direction": "input",
+        "function": null
+      },
+      "B": {
+        "direction": "input",
+        "function": null
+      },
+      "CI": {
+        "direction": "input",
+        "function": null
+      }
+    },
+    "arcs": [
+      {
+        "to": "CON",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(B * !CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(!B * CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(A * !CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(!A * CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(A * !B)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(!A * B)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "(B * !CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "(!B * CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "non_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(B * CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(!B * !CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "(A * !CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "(!A * CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "non_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(A * CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(!A * !CI)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "(A * !B)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "(!A * B)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "non_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(A * B)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CI",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "(!A * !B)",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_fall",
+        "sense": "negative_unate",
+        "when": "(A * B * !CI)",
+        "rise": false,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_fall",
+        "sense": "negative_unate",
+        "when": "(A * !B * CI)",
+        "rise": false,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_rise",
+        "sense": "negative_unate",
+        "when": "(A * !B * !CI)",
+        "rise": true,
+        "fall": false
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_fall",
+        "sense": "negative_unate",
+        "when": "(!A * B * CI)",
+        "rise": false,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_rise",
+        "sense": "negative_unate",
+        "when": "(!A * B * !CI)",
+        "rise": true,
+        "fall": false
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_rise",
+        "sense": "negative_unate",
+        "when": "(!A * !B * CI)",
+        "rise": true,
+        "fall": false
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      }
+    ],
+    "library_file": "/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz",
+    "library_sha256": "0c93d44fcc6a30182d71031997771ea3fc0d09235201e9252f71daf48a1c7a38"
+  },
+  {
+    "corner": "FF",
+    "cell": "HAxp5_ASAP7_75t_R",
+    "pins": {
+      "CON": {
+        "direction": "output",
+        "function": "(!A) + (!B)"
+      },
+      "SN": {
+        "direction": "output",
+        "function": "(A * B) + (!A * !B)"
+      },
+      "A": {
+        "direction": "input",
+        "function": null
+      },
+      "B": {
+        "direction": "input",
+        "function": null
+      }
+    },
+    "arcs": [
+      {
+        "to": "CON",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "CON",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "B",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "non_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "A",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "!B",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "positive_unate",
+        "when": "A",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "non_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "B",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": "!A",
+        "rise": true,
+        "fall": true
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_rise",
+        "sense": "negative_unate",
+        "when": "(A * !B)",
+        "rise": true,
+        "fall": false
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational_rise",
+        "sense": "negative_unate",
+        "when": "(!A * B)",
+        "rise": true,
+        "fall": false
+      },
+      {
+        "to": "SN",
+        "from": "CON",
+        "type": "combinational",
+        "sense": "negative_unate",
+        "when": null,
+        "rise": true,
+        "fall": true
+      }
+    ],
+    "library_file": "/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz",
+    "library_sha256": "0c93d44fcc6a30182d71031997771ea3fc0d09235201e9252f71daf48a1c7a38"
+  }
+]

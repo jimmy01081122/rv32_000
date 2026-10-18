@@ -21,6 +21,8 @@ def main():
     parser.add_argument('--container', help='reuse a running pinned-image container with the documented mounts')
     parser.add_argument('--label', default='', help='unique attempt suffix; existing logs are never overwritten')
     parser.add_argument('--resume-reason', help='resume a failed attempt with identical hashed build inputs; retain the prior log')
+    parser.add_argument('--adder-mapping',choices=('platform','abc'),default='platform',
+                        help='tool-flow probe: platform full-adder extraction or ordinary ABC gate mapping')
     args = parser.parse_args()
     if args.period_ps <= 2200 or args.jobs < 1:
         parser.error('period must exceed frozen 1100ps input + output budgets; jobs positive')
@@ -79,13 +81,16 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
            'YOSYS_EXE=/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys',
            'RV32_ROOT=/workspace', f'RV32_SDC={guest(sdc)}', f'WORK_HOME={guest(directory)}',
            'DESIGN_CONFIG=/workspace/physical/asap7/baseline/config.mk',
-           f'NUM_CORES={args.jobs}', 'grt']
+           f'NUM_CORES={args.jobs}']
+    if args.adder_mapping=='abc':cmd.append('ADDER_MAP_FILE=')
+    cmd.append('grt')
     report = {'scope': 'global-route research baseline exploration, not detailed-route signoff',
               'period_ps': args.period_ps, 'orfs_commit': commit, 'command': cmd,
               'sdc_sha256': sha(sdc), 'lowered_rtl_sha256': sha(ROOT/'build/baseline-setup/rtl_lowered.v'),
               'rtl_files_sha256': {str(p.relative_to(ROOT)): sha(p) for p in sorted((ROOT/'rtl').rglob('*.sv'))},
               'config_sha256': sha(ROOT/'physical/asap7/baseline/config.mk'), 'passed': False}
     report['local_image_id'] = expected_image
+    report['synthesis_adder_mapping'] = args.adder_mapping
     report['process_lowering_sha256'] = sha(ROOT/'physical/asap7/baseline/lower_processes.tcl')
     report['source_commit'] = subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     report['source_status'] = subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).splitlines()

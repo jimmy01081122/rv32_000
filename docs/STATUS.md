@@ -46,6 +46,10 @@ passes 58 controls and the 18 directed programs. The user selected fixed memory
 time and an ASAP7 RVT global-route research baseline, with TT construction and
 independent SS/FF checks. Pinned physical tools are available and synthesis is
 being restored; 5,500 ps remains an exploration setting, not an achieved clock.
+The bounded [ASAP7 library validation](evidence/2026-10-18/asap7-library-validation/README.md)
+checks 144 adder transitions, 30 independent min/max timing paths and three
+negative controls; known output-port warnings remain documented. This is tool
+qualification, not full-core timing closure.
 The [v1 manifest](../baselines/ap5b-post-lsu-v1/manifest.json) remains preparing,
 with period/area null. No A/B/C optimization has been implemented.
 

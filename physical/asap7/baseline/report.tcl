@@ -1,27 +1,5 @@
-proc save_report {filename script} {
-  sta::redirect_file_begin $filename
-  set code [catch {uplevel 1 $script} result options]
-  sta::redirect_file_end
-  return -options $options $result
-}
-# Inspect the same global-route database at explicitly tested clock periods.
-set platform /OpenROAD-flow-scripts/flow/platforms/asap7
-set suffix $::env(RV32_CORNER)
-if {$suffix ni {TT SS FF}} { error "RV32_CORNER must be TT, SS or FF" }
-# Each corner is analyzed in a fresh OpenSTA process. Cross-corner XOR arcs in
-# this PDK do not all match a shared reference timing graph (STA-1111).
-# Match the five libraries selected by the pinned platform config exactly.
-# A glob also selects experimental FAKE DFF views and a second FF SIMPLE lib.
-foreach template {
-  asap7sc7p5t_AO_RVT_%s_nldm_211120.lib.gz
-  asap7sc7p5t_INVBUF_RVT_%s_nldm_220122.lib.gz
-  asap7sc7p5t_OA_RVT_%s_nldm_211120.lib.gz
-  asap7sc7p5t_SIMPLE_RVT_%s_nldm_211120.lib.gz
-  asap7sc7p5t_SEQ_RVT_%s_nldm_220123.lib
-} {
-  set file $platform/lib/NLDM/[format $template $suffix]
-  read_liberty $file
-}
+# Independent-corner analysis of a saved global-route database.
+source [file join [file dirname [info script]] timing_common.tcl]
 read_db $::env(RV32_ODB)
 if {![grt::have_routes]} { error "database has no restorable global routes" }
 source $platform/setRC.tcl
@@ -43,11 +21,16 @@ foreach inst [$block getInsts] {
     incr standard_cells
   } elseif {[$master isBlock]} { incr macros }
 }
-if {$unsafe_cells} { error "database uses $unsafe_cells cells with STA-1212 library warnings" }
+if {$unsafe_cells && (![info exists ::env(RV32_ADDER_AUDIT_VERIFIED)] || $::env(RV32_ADDER_AUDIT_VERIFIED) ne "1")} {
+  error "adder output-port warning interpretation needs the independent functional/STA audit"
+}
 set metrics [open $directory/clock_trials.json w]
 puts $metrics "\{\"corner\":\"$suffix\",\"global_routes_restored\":true,\"library_warning_cell_instances\":$unsafe_cells,\"standard_cell_area_um2\":$standard_area,\"standard_cell_count\":$standard_cells,\"macro_count\":$macros,\"trials\":\["
 set first 1
-foreach period {5500 6000 7000 8000 10000 12000 14000 16000 20000} {
+set periods {2500 3000 3500 4000 4500 5000 5500 6000 7000 8000 10000 12000 14000 16000 20000}
+if {[info exists ::env(RV32_PERIODS_PS)]} { set periods $::env(RV32_PERIODS_PS) }
+foreach period $periods {
+  if {![string is integer -strict $period] || $period <= 2200} { error "invalid clock trial" }
   create_clock -name core_clk -period $period [get_ports clk]
   set_clock_uncertainty -setup 50 [all_clocks]
   set_clock_uncertainty -hold 25 [all_clocks]

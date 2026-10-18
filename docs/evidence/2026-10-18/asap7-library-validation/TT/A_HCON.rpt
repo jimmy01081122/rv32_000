@@ -1,0 +1,54 @@
+Startpoint: A (input port clocked by clk)
+Endpoint: HCON (output port clocked by clk)
+Path Group: clk
+Path Type: min
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 ^ input external delay
+   0.00    0.00 ^ A (in)
+  22.84   22.84 v ha/CON (HAxp5_ASAP7_75t_R)
+   0.00   22.84 v HCON (out)
+          22.84   data arrival time
+
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00   clock reconvergence pessimism
+   0.00    0.00   output external delay
+           0.00   data required time
+---------------------------------------------------------
+           0.00   data required time
+         -22.84   data arrival time
+---------------------------------------------------------
+          22.84   slack (MET)
+
+
+Startpoint: A (input port clocked by clk)
+Endpoint: HCON (output port clocked by clk)
+Path Group: clk
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock clk (rise edge)
+   0.00    0.00   clock network delay (ideal)
+   0.00    0.00 v input external delay
+   0.00    0.00 v A (in)
+  26.19   26.19 ^ ha/CON (HAxp5_ASAP7_75t_R)
+   0.00   26.19 ^ HCON (out)
+          26.19   data arrival time
+
+5500.00 5500.00   clock clk (rise edge)
+   0.00 5500.00   clock network delay (ideal)
+   0.00 5500.00   clock reconvergence pessimism
+   0.00 5500.00   output external delay
+        5500.00   data required time
+---------------------------------------------------------
+        5500.00   data required time
+         -26.19   data arrival time
+---------------------------------------------------------
+        5473.81   slack (MET)
+
+

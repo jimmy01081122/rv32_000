@@ -68,6 +68,27 @@ database and nominal wire RC. Never derive a claimed clock from slack algebra.
 Require valid setup/hold, complete timing constraints and inspected electrical
 checks before filling the baseline's physical fields.
 
+The pinned SIMPLE libraries also contain CON→SN output-port timing groups in
+FAx1/HAxp5 that OpenSTA warns about (`STA-1212`). The bounded
+[`audit_asap7_adders.py`](../../../scripts/audit_asap7_adders.py) tool checks their
+Boolean functions, all 144 functional input/output transitions, 30 independent
+min/max STA paths and three negative controls. It preserves the original models
+and warnings. The full-core analysis requires that audit and verifies live binary
+and library hashes; this does not validate analog characterization or OCV.
+
+After a completed implementation, collect the three independent corner reports:
+
+```sh
+python3 scripts/analyze_baseline_physical.py --attempt build/baselines/ap5b-post-lsu-v1/physical-5500ps-trial1 \
+  --container ID --adder-audit build/asap7-adders-fresh/summary.json
+```
+
+Collection still leaves `passed: false` pending inspection of constraints,
+setup/hold, electrical checks, route restoration and area. `--adder-mapping abc`
+on the implementation driver is a separately labeled tool-flow probe that skips
+optional platform FA extraction. Its results must not be mixed with platform
+adder mapping or with CPU A/B architecture experiments.
+
 The first direct ORFS synthesis stalled in `proc_dlatch`; diagnostic preprocessing
 attempts also exposed missing memory conversion, cleanup and an incompatible old
 Yosys export command. These failed attempts must remain identified separately

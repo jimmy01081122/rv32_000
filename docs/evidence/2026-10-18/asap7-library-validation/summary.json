@@ -1,0 +1,227 @@
+{
+  "scope": "bounded Boolean/functional-arc and independent-STA path coverage; not analog characterization or core timing closure",
+  "openroad_binary_sha256": "98ee4c877596e8c2a6f1f76113bb401e8ea1eb666d1db92bdce09a8e33ae5569",
+  "passed": true,
+  "coverage": [
+    {
+      "corner": "TT",
+      "cell": "FAx1_ASAP7_75t_R",
+      "truth_states": 8,
+      "covered_transitions": 36,
+      "extra_output_groups": 7
+    },
+    {
+      "corner": "TT",
+      "cell": "HAxp5_ASAP7_75t_R",
+      "truth_states": 4,
+      "covered_transitions": 12,
+      "extra_output_groups": 3
+    },
+    {
+      "corner": "SS",
+      "cell": "FAx1_ASAP7_75t_R",
+      "truth_states": 8,
+      "covered_transitions": 36,
+      "extra_output_groups": 7
+    },
+    {
+      "corner": "SS",
+      "cell": "HAxp5_ASAP7_75t_R",
+      "truth_states": 4,
+      "covered_transitions": 12,
+      "extra_output_groups": 3
+    },
+    {
+      "corner": "FF",
+      "cell": "FAx1_ASAP7_75t_R",
+      "truth_states": 8,
+      "covered_transitions": 36,
+      "extra_output_groups": 7
+    },
+    {
+      "corner": "FF",
+      "cell": "HAxp5_ASAP7_75t_R",
+      "truth_states": 4,
+      "covered_transitions": 12,
+      "extra_output_groups": 3
+    }
+  ],
+  "raw_arcs_sha256": "4cce96baf29ab61cf30f159c0b19970e11a72181ff770c8cc79e40bd966cfe21",
+  "libraries": {
+    "/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz": "073ac4b6b08f272b6953b0ad54d1d9743767a7d15a0e2964ed86cf44c3dbe00e",
+    "/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_SS_nldm_211120.lib.gz": "71e55ce94cde9d10ad726cf7131e7356501aa1c380ae4e138f47c2f8ca7ca7db",
+    "/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_FF_nldm_211120.lib.gz": "0c93d44fcc6a30182d71031997771ea3fc0d09235201e9252f71daf48a1c7a38"
+  },
+  "negative_controls": [
+    {
+      "fault": "missing_arc",
+      "rejected": true
+    },
+    {
+      "fault": "missing_table",
+      "rejected": true
+    },
+    {
+      "fault": "wrong_function",
+      "rejected": true
+    }
+  ],
+  "sta_records": [
+    {
+      "corner": "TT",
+      "path": "A_FCON",
+      "sha256": "965f88da09e6fbe94dfd1e540567303de78c03791af4340d56352242b616763a"
+    },
+    {
+      "corner": "TT",
+      "path": "A_FSN",
+      "sha256": "b18d465b07c418239625646179058224c6b947c460e4da036d8364ee7cdab1d6"
+    },
+    {
+      "corner": "TT",
+      "path": "A_HCON",
+      "sha256": "ce2b04cc73dc426a66b1bcaf640fb3899a94deb888ce231b47a9b2424211555b"
+    },
+    {
+      "corner": "TT",
+      "path": "A_HSN",
+      "sha256": "7a27bfc642c5116fa876e27791c959c7e959775693f45eeea10c084a56e69303"
+    },
+    {
+      "corner": "TT",
+      "path": "B_FCON",
+      "sha256": "7dcb15174d601ef549057a25e1987361c74d9fc5b7306c370ccb0b4cdb188e99"
+    },
+    {
+      "corner": "TT",
+      "path": "B_FSN",
+      "sha256": "08ee1f3833558c611183f5d5ee12a5b7af4701d73812c73f7f7b0f33464138af"
+    },
+    {
+      "corner": "TT",
+      "path": "B_HCON",
+      "sha256": "733da11cfb0d1e829fcbe57ea7cfbe2853da2a1cbe2c5eaf4890772b000b5910"
+    },
+    {
+      "corner": "TT",
+      "path": "B_HSN",
+      "sha256": "bc754bc5b296014c84f82a32581f3321d49720e0e52227d48d01c5f71dc934ef"
+    },
+    {
+      "corner": "TT",
+      "path": "CI_FCON",
+      "sha256": "142b02fd92e372c1d20b3c4df21a41c654ad5f419338d9c848dda562732c9c29"
+    },
+    {
+      "corner": "TT",
+      "path": "CI_FSN",
+      "sha256": "71606b5cb9a1e7713b5662e5b595228aee1746a2c2f63b3d359c809bf1fccc5a"
+    },
+    {
+      "corner": "SS",
+      "path": "A_FCON",
+      "sha256": "3ca818bcf2b76f5015d65219844e243d494c507d22d4b8dfff7539929459015e"
+    },
+    {
+      "corner": "SS",
+      "path": "A_FSN",
+      "sha256": "cae79006f6caf0467bd34ffe80c8a4e6b821d13832f164eaff3a02c7ee6aa731"
+    },
+    {
+      "corner": "SS",
+      "path": "A_HCON",
+      "sha256": "9e9998d963c1f655e133daa7ac17b8024655a1cde25c559fc8c431d53fa45a10"
+    },
+    {
+      "corner": "SS",
+      "path": "A_HSN",
+      "sha256": "54ffb6691661dea637a64853d56c7106c74e055b344dae3d389b834d4b1b5dc9"
+    },
+    {
+      "corner": "SS",
+      "path": "B_FCON",
+      "sha256": "9e4abd381ed298d3e055448970fe22db70265439cf780f2c1e70cc380ee02bec"
+    },
+    {
+      "corner": "SS",
+      "path": "B_FSN",
+      "sha256": "acfa57b0252452c5768adff2f7718027f07396ca30e52670837365775110fd9a"
+    },
+    {
+      "corner": "SS",
+      "path": "B_HCON",
+      "sha256": "3ca387945924f558b8d0b1d5bcaa31edf6479f960e2b6bf2dacbf88621e13a54"
+    },
+    {
+      "corner": "SS",
+      "path": "B_HSN",
+      "sha256": "1b7bfeb8d18e855917a1454a95378e58095615f9df887300b9c3bead2db86966"
+    },
+    {
+      "corner": "SS",
+      "path": "CI_FCON",
+      "sha256": "275ba499ef7778f6b183419b369ea5efb6f874b7606613de1983431b0d2cfa32"
+    },
+    {
+      "corner": "SS",
+      "path": "CI_FSN",
+      "sha256": "9e7941bd4133ee21ba052c43a34c5e5ddecbb0652c9617f268940575c56b57d0"
+    },
+    {
+      "corner": "FF",
+      "path": "A_FCON",
+      "sha256": "be1040272d9685942e959eb6f16f13821902a68d75f93cfb76a573a6d5548a4b"
+    },
+    {
+      "corner": "FF",
+      "path": "A_FSN",
+      "sha256": "2adfd90a9f868c89a3375a274f2ca3c829c2a4afff8fad25f7d372712c6d1019"
+    },
+    {
+      "corner": "FF",
+      "path": "A_HCON",
+      "sha256": "33684d34612664a8d4070a563cbd002c28d55deafe075b6e1c81e11d62176f31"
+    },
+    {
+      "corner": "FF",
+      "path": "A_HSN",
+      "sha256": "3d8e9f262e43a9e25eca4a3f2a78cae3223df69c5452c534301c0d8ea703a117"
+    },
+    {
+      "corner": "FF",
+      "path": "B_FCON",
+      "sha256": "ea4f0d9668a32b3f6dafc48cc3e617169648b66977e4121ac4c94e045173aaf4"
+    },
+    {
+      "corner": "FF",
+      "path": "B_FSN",
+      "sha256": "9994d1eb10b0bd92b5ece2c48de01ea0a764e73e6a0cba2644e75d0e61c00b66"
+    },
+    {
+      "corner": "FF",
+      "path": "B_HCON",
+      "sha256": "ed14490ca5c480838643c089ff34282920fc7938df993723b3a25030f59c77fb"
+    },
+    {
+      "corner": "FF",
+      "path": "B_HSN",
+      "sha256": "249cab65cb95dd6a8e1e7320274776e4addb07b94696883afe9520a39c7fd516"
+    },
+    {
+      "corner": "FF",
+      "path": "CI_FCON",
+      "sha256": "893bd9477f13268c20fe7afbb4ca244bf469c6e76222c10c9173d2c5e078661d"
+    },
+    {
+      "corner": "FF",
+      "path": "CI_FSN",
+      "sha256": "2ffeb80b0005264c473441f05db9cc6b5fc662f8686dd30967d65b017507d401"
+    }
+  ],
+  "source_sha256": {
+    "scripts/audit_asap7_adders.py": "8668c213dd9ec06e5b557be23e6877f57864d361340315e3769210160c5aed2a",
+    "physical/asap7/baseline/adder_audit.tcl": "60578cae1e78a30d99682434eb7f7ad3946337b5e976a545c8b0fb13be1ef314",
+    "physical/asap7/baseline/adder_audit.v": "762dd8315690cab8fd09bb82f698967e3182afb9f30e411591d4ae9da536f86a",
+    "physical/asap7/baseline/timing_common.tcl": "01a70b8acb67b82bb8579ef8a6aa0cf21160b9f8eb2ef32698f4f5b39e9ac2cc"
+  }
+}
