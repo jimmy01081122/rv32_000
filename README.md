@@ -10,8 +10,8 @@ are equally important project objectives. Workload qualification and a fresh
 AP5B baseline precede the next architecture optimization.
 The selected FP32 set has four control/DSP and four matrix/ML kernels with
 equal subgroup weights; its [inputs and numerical contract](docs/FP32_BALANCED_PROPOSAL.md)
-have passed provisional daily numerical qualification; their formal measurement
-contract remains open.
+are frozen in the post-LSU v1 contract; all eight pass formal numerical and
+fixed-time performance measurement.
 
 ## Start here
 
@@ -48,8 +48,10 @@ Integer and FP execution can overlap; sustained retirement IPC is at most one.
 The `LQ_ENTRIES` and PRF-port constants do not fully describe the instantiated
 structures; see the architecture inventory before changing their values.
 
-The current RTL contains AP5B registered load responses. Its physical performance
-has not been re-established in this session. Archived AP5A MHz, area, power and
+The current RTL contains AP5B registered load responses. Its frozen post-LSU
+global-route research baseline is 10 ns (100 MHz), 22,081.1184 µm², with all
+27 formal workloads passing; see the [evidence](docs/evidence/2026-10-18/post-lsu-baseline/README.md).
+Archived AP5A MHz, area, power and
 benchmark numbers are linked from [historical reports](reports/README.md).
 
 ## Reproducible development
@@ -70,22 +72,23 @@ The separate RV32IMF benchmark toolchain can be built with
 `make docker-build-fp`, checked with `make check-fp-env`, and used with
 `make qualify-embench-fp-reference`. The approved 19-workload suite passes native,
 Spike and DUT self-checks in a [clean-commit rerun](docs/evidence/2026-10-17/embench-approved-rerun/README.md).
-The performance and physical baseline contracts remain open; see the
+The post-LSU performance and global-route contracts are frozen; see the
 [qualification status](docs/PROGRESS_REVIEW.md).
 
 `make qualify-fp-balanced-dut JOBS=4` builds and numerically checks the selected
 FP32 4+4 kernels on native, Spike and DUT. All eight provisional daily cases
 pass; [archived results](docs/evidence/2026-10-17/fp32-balanced-qualification/README.md)
-include every output, independent references and source identities. Their formal
-measurement contract remains open.
+include every output, independent references and source identities. The v1
+[contract](baselines/ap5b-post-lsu-v1/manifest.json) freezes their sizes, tolerances
+and ELF bytes; its formal eight-case run also passes.
 
 `make compare-fp-contraction JOBS=4` first checks exact finite FMA results/flags,
 then runs matched off/fast qualifications on the same RTL. The
 [FMA review](docs/FMA_CONTRACTION_REVIEW.md) records the cancellation fix,
 8/8 passes per mode and diagnostic 1.113x cycle speedup from compiler contraction.
 The approved main FP32 policy is `-ffp-contract=fast -fno-fast-math` (also the
-qualifier default); use `--fp-contract off` for sensitivity checks. The remaining
-measurement and physical baseline contracts are open.
+qualifier default); use `--fp-contract off` for sensitivity checks. The post-LSU
+baseline is frozen; CPU architecture experiments await joint selection.
 
 `make profile-fp-bottlenecks JOBS=4` adds read-only FIR/BiCG cycle observations
 and checks that observer on/off runs preserve the qualified output and timing.
@@ -97,7 +100,8 @@ response delays 1/2/4. Its [review](docs/LSU_OPTIMIZATION_REVIEW.md) separates
 compares A/B/C options. The source-locked historical runner rejects newer RTL.
 The [interface fixes](docs/LSU_INTERFACE_FIX.md) close the two defects with 48
 assertion-enabled cases; rerun with `make check-lsu-interface JOBS=4` and
-`python3 scripts/test_lsu_interface.py`. Full-suite performance and PPA targets remain open.
+`python3 scripts/test_lsu_interface.py`. The approved performance/area targets
+await independent CPU candidate experiments.
 
 The simulation and generic-synthesis images are separate. For a proxy/private CA:
 
@@ -143,12 +147,13 @@ make signoff ACT_IMAGE=your-prepared-act4-image
 The existing `signoff` target has legacy acceptance thresholds and does not
 implement the proposed dual-performance milestone. Its ACT4 set excludes F;
 the differential parser does not yet compare trap cause/tval. Full ACT4 and
-physical qualification remain open.
+detailed-route qualification remain open.
 
 The [GitHub workflow](.github/workflows/README.md) runs on pushes to `main` and
 pull requests targeting `main`. The [ASAP7 flow](physical/asap7/README.md) is a
 separate pinned environment. Its portable post-LSU runner and report controls are
-available; full-core physical qualification remains in progress.
+available; the full-core global-route research baseline is qualified. Detailed
+routing, workload power and full architectural coverage remain separate work.
 
 ## License
 

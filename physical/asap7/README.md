@@ -10,8 +10,10 @@ The active post-LSU baseline uses [baseline/config.mk](baseline/config.mk),
 [`scripts/run_baseline_physical.py`](../../scripts/run_baseline_physical.py) and
 independent TT/SS/FF analysis via
 [`scripts/analyze_baseline_physical.py`](../../scripts/analyze_baseline_physical.py).
-The [manifest](../../baselines/ap5b-post-lsu-v1/manifest.json) remains preparing;
-no full-core global-route closure or area baseline has been qualified.
+The [manifest](../../baselines/ap5b-post-lsu-v1/manifest.json) is frozen: 10 ns,
+22,081.1184 µm², with independent TT/SS/FF closure and formal 27/27 passes.
+The [archive](../../docs/evidence/2026-10-18/post-lsu-baseline/README.md) records
+actual adjacent 9.9/10.0 ns trials and routing review. This is global-route research.
 Inside the pinned `rv32ooo-syn:g1` image, create the Verilog input with
 `python3 scripts/lower_baseline_rtl.py --out build/baseline-setup/rtl_lowered.v`.
 The output must not exist; `--compare` can verify a separate fresh reproduction.
@@ -91,7 +93,7 @@ The following items describe the **legacy** flow in this directory:
   estimate, not completed detailed-route extraction or multi-corner closure.
 - The STA helper calls `report_power` without loading workload VCD/SAIF activity.
   Historical power values must retain that measurement limitation.
-- No AP5B physical implementation has been reproduced in this session.
+- These historical scripts are outside the qualified portable post-LSU flow above.
 
 The earlier 1 GHz / CoreMark-per-MHz 0.8 target is retired. The former README's
 `run_asap7_flow.sh`, `parse_asap7_sta.py` and `run_fmax_sweep.py` commands did not
@@ -112,7 +114,7 @@ match the checked-in scripts and are no longer presented as runnable setup.
 The `rv32ooo-syn:g1` image runs generic Yosys synthesis. It does not contain the
 pinned ORFS/ASAP7 environment; generic cells are not mapped standard-cell area.
 
-## Required work before the next physical baseline
+## Reproduction and future candidate requirements
 
 1. Provision the pinned image/platform on the available host and replace legacy
    absolute paths with explicit project/output paths.

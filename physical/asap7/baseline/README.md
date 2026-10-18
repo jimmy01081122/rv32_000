@@ -1,8 +1,10 @@
-# AP5B post-LSU v1 physical preparation
+# AP5B post-LSU v1 physical research baseline
 
 This directory implements the approved **global-route research** boundary.
 It does not establish detailed-route closure. See the input contract in
-`baselines/ap5b-post-lsu-v1/manifest.json`; unmeasured fields remain null.
+`baselines/ap5b-post-lsu-v1/manifest.json`: the frozen result is 10 ns and
+22,081.1184 µm², with all 27 formal workloads passing. The complete raw evidence
+is in `docs/evidence/2026-10-18/post-lsu-baseline/`.
 
 Use the ORFS commit and parent image digest in `../toolchain.lock`.
 The image contains no ORFS git history, so use a separate clean checkout:

@@ -1,8 +1,9 @@
 # 修正後 AP5B 基線 v1
 
 2026-10-18。使用者已核准先固定修正後基線，再共同選擇 A／B 獨立實驗。
-本目錄先鎖定來源與輸入；`manifest.json` 的 physical／measurement 完成前維持 preparing，
-不以舊 AP0／AP5A 報告補入面積或頻率，也不宣稱規劃目標達標。
+本目錄的 `manifest.json` 已凍結：10,000 ps（100 MHz）、22,081.1184 µm²，
+正式 Embench19＋FP32 八項全數通過；[原始證據](../../docs/evidence/2026-10-18/post-lsu-baseline/README.md)
+保留 9.9 ns 失敗／10.0 ns 通過、三 corner 報告及正式量測。尚無候選改善數據。
 固定時間模型的 [27 項準備量測](../../docs/evidence/2026-10-18/post-lsu-baseline-preparation/README.md)
 已在乾淨 `5822071` 完成，全部通過且 ROI cycles 等於原參考；5,500 ps 尚非實體閉合值。
 
@@ -15,8 +16,8 @@
   FP32 採 `fast -fno-fast-math`，off 為敏感度附表。
 - 計時採原 ELF 的 RDCYCLE ROI，包含既有計時入口開銷，不做事後扣除。
   deterministic 模擬不以主機執行秒數當 CPU 效能。
-- 記憶體：1 MiB，I／D 獨立通道，**固定實際時間**。以基線實際通過的 period
-  校準原先一拍的 I latency、I initiation interval 及 D latency。候選提頻時 ps 不變；
+- 記憶體：1 MiB，I／D 獨立通道，**固定實際時間**。以基線實測通過的 10,000 ps
+  校準原先一拍的 I latency、I initiation interval 及 D latency，各固定 10,000 ps。候選提頻時 ps 不變；
   response 於到期後第一個 core edge 取樣，量化誤差另記錄。
   這是研究記憶體模型，未宣稱量得真實 SRAM 延遲。
 - 延遲附表只改 D response 為基準時間的 2／4 倍，I timing 不變；不併入主分數。
@@ -37,7 +38,8 @@
 報告工具的 [49 項資格控制](../../docs/evidence/2026-10-18/physical-report-validation/README.md)
 已通過。`check_physical_closure.py` 另核對報告雜湊、四類路徑、實際掃描的 period，
 以及序列化 SDC 的最大／最小 I/O delay、uncertainty、slew、load 與未核准例外。
-最終仍須查核繞線／連接狀態，並在通過的 period 重跑正式 27 項量測。
+本次全設計繞線審查與該 period 的正式 27 項均已完成；
+候選必須通過相同審查。Global-route 檢查不替代 detailed-route DRC／LVS。
 
 兩個主集合各自驗收 ≥1.20× 執行時間加速、標準元件面積 ≤1.10×。
 個別案例及兩個 FP32 子群分別可見；沒有另外增加未核准的退步門檻。

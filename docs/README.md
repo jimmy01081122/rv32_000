@@ -12,7 +12,7 @@ signoff label applies only to the source/configuration and checks in that record
 | [Status](STATUS.md) | Evidence and unresolved implementation/verification gaps |
 | [Architecture](../architecture_spec.md) | Implemented structures and architectural obligations |
 | [Micro-operations](../uop_spec.md) | Current packet/schema reference |
-| [Workloads](WORKLOADS.md) | Approved main suites and targets; detailed measurement contract remains provisional |
+| [Workloads](WORKLOADS.md) | Approved main suites, targets and frozen v1 measurement contract |
 | [Balanced FP32 proposal](FP32_BALANCED_PROPOSAL.md) | Approved control/DSP and matrix/ML selection and weights; source and numerical qualification |
 | [Initial workload qualification](WORKLOAD_QUALIFICATION_2026-10-16.md) | Embench library blockers and PolyBench FP32 source/resource probes |
 | [Approved Embench rerun](evidence/2026-10-17/embench-approved-rerun/README.md) | Clean-commit 19/19 native/Spike/DUT checks, diagnostic cycles, raw logs and hashes |
@@ -22,6 +22,7 @@ signoff label applies only to the source/configuration and checks in that record
 | [FIR/BiCG bottleneck review](FMA_BOTTLENECK_REVIEW.md) | Approved fast default, instruction contraction and measured load/store retirement waits |
 | [FMA contraction review](FMA_CONTRACTION_REVIEW.md) | Off/fast policy, matched cycle/error data, finite FMA correctness fix and regression evidence |
 | [Progress and baseline review](PROGRESS_REVIEW.md) | Updated FP toolchain evidence, honest progress gates and discussion proposals |
+| [Frozen post-LSU baseline](evidence/2026-10-18/post-lsu-baseline/README.md) | Actual 10 ns TT/SS/FF closure, cell area, fixed-time memory and formal 27/27 evidence |
 | [Session handoff](SESSION_HANDOFF.md) | Bring-up measurements, tool images and local evidence locations |
 | [CI workflow](../.github/workflows/README.md) | Existing jobs, prerequisites and limits |
 | [Physical flow](../physical/asap7/README.md) | ASAP7 setup status and current research limitations |

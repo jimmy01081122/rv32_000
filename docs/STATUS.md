@@ -7,7 +7,10 @@ The documentation cleanup changes no RTL behavior or executable acceptance thres
 FP32 compiler contraction is now approved as `fast` with `-fno-fast-math`;
 the daily qualifier defaults to fast and retains explicit off comparisons.
 The post-LSU v1 workload identities and fixed-absolute-time memory policy are
-recorded; the achieved physical period, calibrated memory ps and area remain open.
+frozen in [AP5B v1](../baselines/ap5b-post-lsu-v1/manifest.json). The
+[formal baseline](evidence/2026-10-18/post-lsu-baseline/README.md) passes 27/27 at
+10 ns (100 MHz), with 22,081.1184 µm² cell area and fixed 10 ns I/D memory time.
+TT/SS/FF closure is qualified at global-route research scope; A/B/C are unimplemented.
 
 ## Evidence available
 
@@ -37,7 +40,7 @@ at `ec0baa3` passes 48/48 assertion-enabled cases, directed and Spike comparison
 18/18 each, finite FMA checks, FP32 fast 8/8 and Embench 19/19. Original probes
 also turn green; historical failed evidence remains intact. Nominal workload
 ELFs/results/cycles match the prior qualification. This is a functional reference
-point; fresh physical qualification remains open.
+point; its later global-route physical qualification is archived above.
 
 The [post-LSU baseline preparation](evidence/2026-10-18/post-lsu-baseline-preparation/README.md)
 at clean `5822071` now passes all 27 workloads with absolute-time memory,
@@ -64,7 +67,8 @@ The [saved-route report controls](evidence/2026-10-18/physical-report-validation
 pass 49/49 on a four-cell sequential fixture: three independent corners, explicit
 ps units, all four path groups, numerical/report agreement, real setup/hold and
 constraint/electrical failures, and rejection of unrouted or unaudited inputs.
-This qualifies reporting only; the full-core implementation remains in progress.
+This fixture qualifies reporting only; whole-core closure is established by the
+separate formal baseline evidence above.
 The complete baseline/worker/timing-review control target now passes 20 tests,
 including frozen FP32 fixture hashes, dimensions and tolerances. The
 [incomplete physical probes](evidence/2026-10-18/physical-development-attempts/README.md)
@@ -78,15 +82,18 @@ retry reuses the verified CTS checkpoint with that optional pass disabled.
 That retry now [completes global routing](evidence/2026-10-18/global-route-initial-review/README.md)
 with unchanged inputs and exit 0. At 14 ns, independent TT/SS/FF setup and hold
 slacks are positive and constraint coverage passes, but SS has 541 slew
-violations and FF has 30. The review correctly rejects closure. A TT-only
-incremental ECO is running from the saved route solution with a 30% slew
-optimizer margin and 50 ps hold repair margin; independent acceptance limits
-remain unchanged. The manifest still has null period/area.
+violations and FF has 30. The review correctly rejects closure. A 30% TT slew-margin probe
+left 171 SS violations. [Paired pin diagnosis](evidence/2026-10-18/global-route-slew-diagnosis/README.md)
+then motivated a clean TT 45% slew-margin / 50 ps hold-target repair from the
+original route. The final whole-design route has zero overflow; TT/SS/FF all
+pass at 10 ns, while SS setup fails at 9.9 ns. Independent limits are unchanged.
+The final area includes all clock/repair cells; see the formal baseline above.
 The separate [assertion-enabled fixed-time controls](evidence/2026-10-18/fixed-time-assertions/README.md)
 also pass 58/58 plus the scheduler unit test; all 12 fault traces match the
 normal-build preparation evidence. The scored simulator remains unchanged.
-The [v1 manifest](../baselines/ap5b-post-lsu-v1/manifest.json) remains preparing,
-with period/area null. No A/B/C optimization has been implemented.
+The [v1 manifest](../baselines/ap5b-post-lsu-v1/manifest.json) is frozen after
+formal 27/27 measurement at clean `9769123`; source state and scored simulator
+remain unchanged. No A/B/C optimization has been implemented.
 
 ## Current implementation drift
 
@@ -146,7 +153,7 @@ with period/area null. No A/B/C optimization has been implemented.
    positive/negative controls pass. The later post-LSU manifest freezes sizes,
    tolerances and ELF bytes, includes timer overhead without subtraction, and
    records retired-SP stack headroom in all 27 preparation runs. Absolute memory
-   ps still awaits the qualified physical period.
+   time is now calibrated to the qualified 10,000 ps period in the formal run.
    A [matched contraction experiment](FMA_CONTRACTION_REVIEW.md) at clean commit
    `581ee86f1bd55bc6eff7cc123c660ab94446eb6f` now passes all eight cases in both
    off and fast modes, with diagnostic equal-group cycle ratio 1.113x. Its finite
@@ -155,7 +162,7 @@ with period/area null. No A/B/C optimization has been implemented.
    finite FMA result/flag cases pass the integer oracle, Spike and DUT. Post-fix
    directed and commit-diff checks pass 18/18 each; Embench passes 19/19 native,
    Spike and DUT. This is finite-input coverage, not complete NaN/Inf, trap or
-   RV32F conformance. Physical results must be refreshed for the changed datapath;
+   RV32F conformance. The final global-route baseline includes these datapath fixes;
    compiler gains do not establish the architecture or area planning targets.
    The [instruction/wait diagnosis](FMA_BOTTLENECK_REVIEW.md) at `5065e7f` adopts
    the approved fast default and observes unchanged RTL. FIR/BiCG instruction
@@ -168,7 +175,7 @@ with period/area null. No A/B/C optimization has been implemented.
    ORFS/ASAP7, explicit inputs and durable job records. TT-only construction is
    active; independent TT/SS/FF reporting and failure controls are qualified.
    Full-core global-route completion, routing review, corner setup/hold/electrical
-   closure and the formal 27-workload rerun remain open. Historical host-specific
+   closure and the formal 27-workload rerun are now archived and pass. Historical host-specific
    scripts and FF-only STA are outside this baseline. Detailed routing is a later
    milestone.
 7. **Power:** establish and record workload switching activity before treating
@@ -186,8 +193,9 @@ limitations remain visible rather than being silently changed during doc cleanup
 - Its 26-iteration CoreMark reporting run declares a 1 MHz clock. That convention
   must not be represented as a ≥10-second measurement at an independently claimed
   ASIC frequency. Review the complete official reporting rules before publishing.
-- Embench acceptance still uses the 14-workload subset; no PolyBench runner or
-  independent FP32 performance gate has been added.
+- Legacy Embench acceptance still uses the 14-workload subset. The separate
+  post-LSU measurement runner covers all 19 plus the balanced FP32 eight; the
+  legacy `signoff` target has not been converted to the dual-family experiment gate.
 - The CI `signoff-gate` summarizes configured jobs; neither it nor generic
   synthesis establishes physical closure or full RV32IMF conformance.
 - The revised CI workflow has been statically checked locally but not executed
@@ -197,6 +205,7 @@ limitations remain visible rather than being silently changed during doc cleanup
 The general embedded and FP32 goals have equal priority. The user approved
 planning targets of at least 1.20x speedup for each category and at most 1.10x
 baseline standard-cell area on 2026-10-17. Workload identities and the fixed-time
-policy are recorded; the physical clock, area and formal measurement remain open.
+policy, 10 ns physical clock, 22,081.1184 µm² area and formal 27/27 measurement
+are frozen in AP5B v1.
 No measured CPU improvement is claimed.
 Document cleanup does not waive old failures.

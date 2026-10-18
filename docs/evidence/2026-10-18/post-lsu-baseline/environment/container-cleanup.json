@@ -1,0 +1,66 @@
+{
+  "scope": "cleanup of this session owned development container after every physical/STA/formal measurement finished",
+  "reason": "PID1 retained an old paused Yosys/make probe; completed evidence and all workspace outputs persist on the bind mount",
+  "container": "7ebf37267636",
+  "old_probe": "build/baselines/ap5b-post-lsu-v1/physical-5500ps",
+  "old_probe_result_policy": "cleanup does not invent a missing synthesis or Make exit status; original run record and logs remain unchanged",
+  "started_utc": "2026-10-18T21:02:19.727546+00:00",
+  "free_bytes_before": 1202720768,
+  "commands": [
+    {
+      "command": [
+        "docker",
+        "stop",
+        "--time",
+        "5",
+        "7ebf37267636"
+      ],
+      "returncode": 0,
+      "stdout": "Flag --time has been deprecated, use --timeout instead\n7ebf37267636\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "rm",
+        "7ebf37267636"
+      ],
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Error response from daemon: removal of container 7ebf37267636 is already in progress\n"
+    },
+    {
+      "command": [
+        "docker",
+        "ps",
+        "-a",
+        "-q",
+        "--no-trunc",
+        "--filter",
+        "id=7ebf37267636"
+      ],
+      "returncode": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "image",
+        "inspect",
+        "rv32ooo-orfs:8359fde-flat",
+        "--format",
+        "{{.Id}}"
+      ],
+      "returncode": 0,
+      "stdout": "sha256:92a37abacbbf91494f9a8078b45fe1f6688a533cf5c87d02599d28c5fe229b33\n",
+      "stderr": ""
+    }
+  ],
+  "result": "container absent, pinned image retained",
+  "removal_note": "stop initiated daemon removal; explicit rm reported removal already in progress; subsequent docker ps verifies absence",
+  "retained_physical_image_id": "sha256:92a37abacbbf91494f9a8078b45fe1f6688a533cf5c87d02599d28c5fe229b33",
+  "finished_utc": "2026-10-18T21:03:21.099450+00:00",
+  "free_bytes_after": 10145853440,
+  "completed": true
+}

@@ -1,139 +1,85 @@
-# 固定工作負載與量測契約草案
+# 固定工作負載與量測契約
 
-更新：2026-10-18。已確認：一般嵌入式與 FP32 效能同等重要，兩者都需要改善。
-FP32 內部也確認採控制／訊號處理與矩陣／ML 均衡方向。
-已確認：FP32 的 4+4 項及兩子群各 50% 權重。
-已核准：完整 Embench-IoT 1.0 的 19 項作一般嵌入式主集合，保留上游數值語意。
-已核准：一般嵌入式與 FP32 各 ≥1.20 倍、標準元件面積 ≤1.10 倍，作為規劃目標。
-已核准：FP32 主設定採 `-ffp-contract=fast -fno-fast-math`，off 保留敏感度對照。
-待確認：正式資料規模／容差、其餘編譯與記憶體條件、基線與其他驗收規則。
-功能資格入口已涵蓋兩個主集合；正式效能 runner 與比較契約仍未完成。
+更新：2026-10-18。修正後 AP5B v1 已凍結；
+[manifest](../baselines/ap5b-post-lsu-v1/manifest.json)是來源、ELF、fixture／尺寸／容差、
+記憶體與實體條件的機器可讀契約，[正式證據](evidence/2026-10-18/post-lsu-baseline/README.md)
+保存全部 27 項原始結果。兩個主集合各自驗收，不混成單一總分。
 
-初步證據見[2026-10-16 資格檢查](WORKLOAD_QUALIFICATION_2026-10-16.md)：
-缺少的五項 Embench 通過主機自我檢查，但目標連結受工具鏈函式庫阻礙；
-四項 PolyBench 的 MINI／SMALL 已完成主機執行及 RISC-V object 編譯，
-尚未完成裸機執行與數值驗收。
-新建的獨立 FP 工具鏈已讓[全部 19 項通過建置與 Spike 自我檢查](PROGRESS_REVIEW.md)；
-`minver` 的 FP store 旁路錯誤已修正，完整 19 項也通過 DUT 自我檢查。
-核准集合後已從乾淨 commit 重跑，主機／Spike／DUT 各 19/19 通過；
-[本輪證據](evidence/2026-10-17/embench-approved-rerun/README.md)保留每項週期及原始記錄。
-量測契約與實體結果仍待確認，集合效能基線未成立。
+## 主集合與輔助測試
 
-## 已選主集合與輔助測試
-
-| 集合 | 角色 | 目前狀態 |
+| 集合 | 角色 | v1 狀態 |
 | --- | --- | --- |
-| Embench-IoT 1.0 全部 19 項 | 一般嵌入式主目標 | FP 資格腳本已建置並在主機／Spike／DUT 驗證 19 項；現有效能 runner 仍只跑 14 項 |
-| 控制／DSP、矩陣／ML 均衡 FP32 子集 | 浮點主目標 | 已選 4+4 項、子群各 50%；暫定日常資料通過主機／Spike／DUT 8/8 數值資格，正式量測契約待定 |
-| CoreMark 1.0 | 歷史對照、快速檢查與獨立附表 | 已有 port 與 runner；短跑屬開發量測 |
-| 專案微型測試 | 瓶頸歸因、危險情境與優化假設 | 部分已存在；不併入應用總分 |
+| Embench-IoT 1.0 完整 19 項 | 一般嵌入式主目標 | 原始資料、精度、暖機與迭代不變；固定 ELF，正式 19/19 通過 |
+| scalar FP32 DSP 四項＋矩陣／ML 四項 | 浮點主目標 | 兩群各 50%；原 fixture／容差與 ELF 固定，正式 8/8、3,629 筆數值通過 |
+| CoreMark 1.0 | 歷史對照、快速檢查與獨立附表 | 不併入主分數；正式報告須另符合上游執行規則 |
+| 專案微型／六案例 LSU 測試 | 歸因、危險情境與優化假設 | 不代替完整集合，不將等待計數直接換算可省週期 |
 
-兩個主集合各自計算加速比及幾何平均，不把所有程式混成單一總分。
-CoreMark 不作為 FP32 效能代理；正確性測試與效能驗收各自保留。
+Embench 版本為 `embench-1.0`，SHA
+`0466a18e4f6b47e19598d7c6ba72916d54b68f65`；
+[上游](https://github.com/embench/embench-iot)、[固定來源](../software/embench/embench-iot)。
+完整集合為 `aha-mont64`、`crc32`、`cubic`、`edn`、`huffbench`、`matmult-int`、
+`minver`、`nbody`、`nettle-aes`、`nettle-sha256`、`nsichneu`、`picojpeg`、
+`qrduino`、`sglib-combined`、`slre`、`st`、`statemate`、`ud`、`wikisort`。
+保留上游數值語意與其中的軟體 double／函式庫成本，不把單一程式改寫成 FP32。
+舊 14 項 runner 與舊工具鏈分數不作本次加速比的分母。
 
-另有[六案例 LSU 研究](LSU_OPTIMIZATION_REVIEW.md)：四個 Embench 代表與 FIR／BiCG
-在模擬器延遲 1／2／4 下的 18 個診斷案例通過。它保留既有 ELF／資料及 FP32 fast，
-不替代或縮小兩個主集合，也不以延遲敏感度當成 CPU 改善。獨立 ready／error 負測
-歷史失敗另列；後續[介面修復](LSU_INTERFACE_FIX.md)已通過定向及全集合功能回歸。正式記憶體契約仍未凍結。
+FP32 來源為固定 CMSIS-DSP、KissFFT、PolyBench/C。集合為 FIR、IIR biquad、
+複數 FFT、PID，以及 GEMM、BiCG、Cholesky、線性 SVM；
+[來源與獨立參考方法](FP32_BALANCED_PROPOSAL.md)保留資格沿革。
+FIR／IIR 分段狀態、PID 軌跡、FFT 複數輸出、矩陣輸出／重建及 SVM 標籤
+都納入核對。這是專案選定的 scalar FP32 集合，不宣稱完整上游 benchmark 分數。
+現有日常 fixture 已成為 v1 契約；擴大資料、改容差或新增集合須先共同討論，
+並替基線與候選重建同一份新契約，不能單方面更換。
 
-## 已核准的 Embench 19 項
+## 編譯、計時與記憶體
 
-版本：`embench-1.0`，SHA `0466a18e4f6b47e19598d7c6ba72916d54b68f65`。
-[上游專案](https://github.com/embench/embench-iot)；
-[固定版本來源](../software/embench/embench-iot)。
+- 裸機工具鏈固定 xPack GCC 15.2.0／newlib 4.5.0，ISA／ABI
+  `rv32imf_zicsr / ilp32f`；完整命令在
+  [build-contract.json](../baselines/ap5b-post-lsu-v1/build-contract.json)。主比較直接
+  使用凍結 ELF bytes，避免重編譯差異冒充 CPU 改善。
+- FP32 主設定為 `-ffp-contract=fast -fno-fast-math`；off 僅作獨立敏感度。
+  [先前 off／fast 1.113×](FMA_CONTRACTION_REVIEW.md)是編譯器診斷收益，
+  不計入未來 CPU 架構加速。
+- 沿用原 ELF 的 RDCYCLE ROI，包含既有計時入口開銷，不事後扣除。
+  deterministic 模擬以 DUT cycles 計效能；主機模擬 wall time 只反映流程成本。
+- 1 MiB RAM、I／D 獨立通道。基線 core period **10,000 ps**，I response、
+  I initiation interval、D response 各固定 **10,000 ps**；候選提頻時 ps 不變。
+  取樣在到期後第一個 core edge，量化誤差另記錄。這是研究模型，未量得真實 SRAM。
+- 主場景無 random extra delay 或 fault injection。延遲附表只把 D response
+  改為基準的 2／4 倍，I timing 不變，不併入主分數。
+- 原始結果、ELF hash、數值／checksum、記憶體交易與延遲 audit、ROI profile、
+  退休 SP stack headroom 均保留。退休 SP 是診斷，不是瞬間 stack 峰值的形式證明。
 
-舊效能 runner 的 14 項：`aha-mont64`、`crc32`、`edn`、`huffbench`、`matmult-int`、
-`nettle-aes`、`nettle-sha256`、`nsichneu`、`picojpeg`、`qrduino`、
-`sglib-combined`、`slre`、`statemate`、`ud`。
+## 實體與加速比
 
-完整集合另含以下五項，已通過主機／Spike／DUT 功能資格檢查；
-舊效能 runner 尚未整合這五項：
+ASAP7 RVT、TT-only 建置、TT／SS／FF 獨立分析；global-route estimated
+parasitics，共用平台 nominal wire RC。I/O delay、slew、load、uncertainty
+固定為 manifest 的絕對值，不隨試驗 period 放寬。全核心面積含 PRF／SQ、
+commit trace 與 clock／repair cells，外部 RAM 不含在內。
 
-| 項目 | 資格確認重點 |
-| --- | --- |
-| `minver` | 主要為單精度矩陣反解；確認 FP 指令、結果與數值容差 |
-| `wikisort` | 排序與資料搬移，含 `sqrt` 函式庫依賴 |
-| `cubic` | 含 double/long double 及數學函式庫依賴 |
-| `nbody` | double 數值模擬及 `sqrt` |
-| `st` | double 統計計算及數學函式庫依賴 |
+基線 **10 ns（100 MHz）、22,081.1184 µm²**；9.9 ns 在 SS setup 失敗，
+10 ns 三 corner 全通過。候選須使用同一工具／模型、mapping／backend 政策、
+修復餘裕、路由階段、時序網格與面積邊界。不得沿用不同 RTL 的 synthesis cache。
+Detailed-route DRC／LVS、OCV、多 corner RC 抽取及活動量功耗仍是後續工作。
 
-RV32F 不提供 double 硬體運算。完整 Embench 成績包含軟體浮點/函式庫成本，
-因此應稱為一般嵌入式集合，而非純整數或純 FPU 集合。保留上游數值語意，
-不把 double 改成 float 後沿用原集合名稱。
+每項 `time = ROI cycles × qualified core period`；週期效率另報
+`cycles_baseline / cycles_candidate`，正式系統時間加速為
+`time_baseline / time_candidate`。Embench19 等權取幾何平均；FP32 的 DSP 與
+矩陣／ML 各自取幾何平均，再以兩群各 50% 合併，子群結果各自可見。
 
-目前 [runner](../scripts/run_embench.py) 使用 `rv32im_zicsr`、`ilp32`，
-預設 `-O3`。是否改採允許 F 的設定，必須在建置所有候選程式及檢查反組譯後
-共同凍結；一旦更換，AP5B 與候選 RTL 都用同一套新設定重新量測。
-新[資格腳本](../scripts/qualify_embench_candidates.py)已以
-`rv32imf_zicsr / ilp32f` 建置，19 項的主機／Spike／DUT 自我檢查均通過，
-但未改動舊效能 runner 或驗收門檻；編譯與量測契約仍須共同確認。
-歷史 14 項分數與新的 19 項分數不可直接相除當作架構加速比。
+已核准規劃目標：**兩個主集合各 ≥1.20×、標準元件面積 ≤1.10×**；
+面積對應上限為 **24,289.23024 µm²**。功能失敗、缺項、超時、hash 不符或
+時序未閉合使完整集合結果無效，不能縮小分母或以一般嵌入式改善掩蓋 FP32 未達標。
+沒有另加未核准的子群最低改善或個別退步門檻。尚無候選架構的達標宣稱。
 
-## FP32 候選清單
+## 擴充與覆蓋邊界
 
-使用者已確認控制／訊號處理與矩陣／ML 兩者均衡。
-已選以下 4+4 項，兩個子群各占 50%；資料大小與數值契約尚未凍結。
+既有 [Embench 資格](evidence/2026-10-17/embench-approved-rerun/README.md)、
+[FP32 資格](evidence/2026-10-17/fp32-balanced-qualification/README.md)及
+[LSU 介面修復](LSU_INTERFACE_FIX.md)的功能證據各保留其來源與分母。
+本輪正式 DUT 量測不代表重新執行全部 Spike，或完整 RV32F rounding／flags、
+NaN／Inf、trap 架構覆蓋。未解驗證項目見 [STATUS.md](STATUS.md)。
 
-| 子群 | 候選 | 預期觀察行為 |
-| --- | --- | --- |
-| 控制／DSP | FIR、IIR biquad、複數 FFT、PID | 乘加、濾波／控制狀態、蝶形與短相依鏈 |
-| 矩陣／ML | GEMM、BiCG、Cholesky、線性 SVM | 矩陣重用、除法／平方根及分類推論 |
-
-來源為 CMSIS-DSP、KissFFT 及 PolyBench/C；可用 `make fetch-fp-sources`
-下載並核對[固定來源](FP32_BALANCED_PROPOSAL.md)。固定版本、初始尺寸、
-參考方法與評分公式見[均衡集合](FP32_BALANCED_PROPOSAL.md)。
-新增來源的 9 個 translation units 均通過主機及 RV32 object 編譯；
-八項均已有[暫定裸機資格結果](FP32_BALANCED_PROPOSAL.md)，主機、Spike、DUT
-各 8/8 通過；主機與 DUT 每次各核對 3,629 筆輸出／狀態，包含串流分段、
-Cholesky 重建及上游 SVM 標籤。用 `make qualify-fp-balanced-dut` 重跑。
-正式尺寸與容差仍待共同審查，這不是集合效能分數。
-[同條件 FMA 對照](FMA_CONTRACTION_REVIEW.md)已完成：off／fast 各 8/8 通過，
-診斷等權週期加速比 1.113×。使用者已核准 fast 作主設定，qualifier 預設亦為 fast；
-將來基線與 CPU 候選須使用相同政策，不把本輪編譯收益計入架構改善。
-[後續指令與等待觀測](FMA_BOTTLENECK_REVIEW.md)確認 FIR／BiCG 指令減少完全來自
-融合；預設 fast 入口也已 8/8 通過，完整量測契約及第一項 CPU 方案仍待共同審查。
-原有 `jacobi-2d` 初檢仍有效，保留作 stencil／記憶體診斷候選。
-
-資格確認須固定支援 FP32 的版本與設定，檢查 ELF 實際指令與函式庫呼叫，
-避免量到非預期的軟體 double。完整輸出須與參考結果比較；浮點容差、
-乘加融合規則、捨入/例外需求應在看到優化結果前訂好。
-候選方案為小資料集供日常回歸、另一固定資料集供里程碑驗收，兩者分開報告。
-報告名稱明列「專案選定的 scalar FP32 集合」，不宣稱完整上游套件分數。
-
-## 必須凍結的條件
-
-1. Benchmark SHA、來源修改、輸入資料/種子、資料大小、暖機及迭代次數。
-2. GCC、libc/libm/libgcc 版本、ISA、ABI、全部編譯/連結選項與 ELF 雜湊。
-3. 計時區間、計時器、結果/CRC/浮點容差檢查，以及超時與失敗的處理方式。
-4. 記憶體容量、服務延遲、頻寬、背壓與隨機種子；先驗證模型參數的握手意義。
-5. RTL SHA、核心配置、實體工具/PDK、角落、I/O 預算及通過時序的頻率。
-
-現有模擬 RAM 為 1 MiB，資料延遲參數預設為 1、隨機額外延遲預設為 0。
-這是模擬環境，不能當作已實作 SRAM。核心提頻時，固定 cycle 延遲等於讓
-記憶體服務速度同步改變；須明列此假設，或使用固定時間/獨立時脈的系統模型。
-延遲敏感度場景分別報告，主成績採哪個場景待共同確認。
-
-## 指標與規劃目標
-
-每個工作負載保留結果正確性、計時週期、退休指令、IPC、程式大小及原始記錄。
-FP32 分別計算控制／DSP 及矩陣／ML 的幾何平均，再以兩群各 50%
-合併；兩群結果各自可見，子群最低改善門檻待共同審查。
-每週期效率用 `cycles_baseline / cycles_candidate` 比較。
-估算吞吐使用 `time = cycles / closed_frequency`，再對各程式的
-`time_baseline / time_candidate` 取等權幾何平均；只有記憶體與實體條件符合
-已凍結的比較契約時，才能合併週期與頻率。主機模擬時間另列為流程成本。
-
-已核准的規劃目標為：兩個主集合各自 ≥1.20 倍、標準元件面積 ≤1.10 倍。
-個別程式退步超過 5% 進入共同審查仍為提案；絕對頻率與能耗目標待基線後討論。
-正式達標判定須先固定完整集合及量測契約，目前沒有可比較的效能與面積基線。
-不允許用通過的子集自動縮小分母，或以整數進步掩蓋浮點未達標。
-
-## 資格確認及擴充
-
-先驗證所有候選程式的建置、執行成本與結果，再審查代表性、凍結契約。
-任何未完成項目須明列，未通過正確性檢查的量測不納入有效效能成績。
-CoreMark 正式報告須符合其[執行與報告規則](https://github.com/eembc/coremark/blob/main/README.md)，
-包括宣告時脈下的執行時間與記憶體條件；固定 26 次迭代不是普遍適用的門檻。
-
-CoreMark-PRO 可列後續候選，需要評估裸機 port、記憶體需求與執行成本。
-本階段不要求安裝新硬體或商用工具，也尚未增加這個集合。
+CoreMark-PRO、較大 FP32 資料與 stencil 可在未來另立契約；本階段未增加。
+CoreMark 正式報告須符合[上游規則](https://github.com/eembc/coremark/blob/main/README.md)，
+固定 26 次迭代不保證在任意 ASIC 頻率達到要求的執行時間。
