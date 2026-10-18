@@ -37,6 +37,9 @@ def main():
                      ('build/baseline-setup/rtl_lowered.v','lowered_rtl_sha256')]:
         if sha(ROOT/path)!=implementation[key]:parser.error('implementation input changed: '+path)
     if 'post_route_eco' in implementation:
+        if (not implementation['post_route_eco'].get('final_full_route_recheck')
+                or 'RV32_GRT_FULL_ROUTE_COMPLETE' not in (attempt/'make.log').read_text()):
+            parser.error('post-route ECO needs a completed whole-design route recheck')
         for name,key in [('repair.tcl','script_sha256'),('eco.mk','makefile_sha256')]:
             if sha(ROOT/'physical/asap7/baseline'/name)!=implementation['post_route_eco'][key]:
                 parser.error('post-route ECO source changed: '+name)

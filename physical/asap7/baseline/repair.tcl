@@ -31,6 +31,14 @@ check_placement -verbose
 global_route -end_incremental -congestion_iterations 30 -verbose
 estimate_parasitics -global_routing
 if {![grt::have_routes]} { error "ECO lost global routes" }
+# Incremental summaries describe the modified nets. Rebuild the final routing
+# solution for every net so the saved checkpoint has a whole-design check.
+puts "RV32_GRT_FINAL_FULL_ROUTE_BEGIN"
+global_route -congestion_iterations 30 -verbose
+estimate_parasitics -global_routing
+if {![grt::have_routes]} { error "final full routing has no routes" }
+puts "RV32_GRT_FULL_ROUTE_COMPLETE"
+check_antennas -report_file $::env(REPORTS_DIR)/grt_eco_antennas.rpt
 write_guides $::env(RESULTS_DIR)/route.guide
 orfs_write_db $::env(RESULTS_DIR)/5_1_grt.odb
 orfs_write_sdc $::env(RESULTS_DIR)/5_1_grt.sdc

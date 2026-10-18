@@ -66,6 +66,10 @@ These optimizer margins preserve the independent acceptance constraints. The
 Makefile/Tcl and incoming checkpoint are hashed by the durable worker. All three
 corners must be collected and reviewed again after this stage; the initial v4
 run passed setup/hold but failed SS/FF slew, so it remains unqualified.
+The ECO concludes with a fresh whole-design global route and antenna-model
+report. Incremental demand tables describe modified nets; the final full-route
+table is used for whole-design congestion review. Analysis requires the explicit
+full-route completion marker as well as the hashed final checkpoint.
 
 The following items describe the **legacy** flow in this directory:
 

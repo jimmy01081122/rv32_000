@@ -150,6 +150,7 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
                               'odb_sha256':sha(odb),'sdc_sha256':sha(input_sdc)}
         report['post_route_eco']={'construction_corner':'TT','slew_margin_percent':args.eco_slew_margin,
                                   'hold_margin_ps':args.eco_hold_margin_ps,
+                                  'final_full_route_recheck':True,
                                   'script_sha256':sha(ROOT/'physical/asap7/baseline/repair.tcl'),
                                   'makefile_sha256':sha(ROOT/'physical/asap7/baseline/eco.mk'),
                                   'independent_acceptance_constraints':'unchanged'}
