@@ -641,16 +641,13 @@ module rv32_ooo_core
   // =========================================================================
 `ifndef SYNTHESIS
   always_ff @(posedge clk) begin
-    if (!rst && flush_valid) begin
-      // On any flush event, INT EX0 stage must be invalidated immediately
-      assert (!int_ex0_valid_q || (int_issue_valid && ex0_in_ready))
-        else $error("[AP1A Assertion Failed] Flushed INT EX0 entry was not invalidated.");
-      // On any flush event, FP EX0 stage must be invalidated immediately
-      assert (!fp_ex0_valid_q || (fp_issue_valid && fp_ex0_in_ready))
-        else $error("[AP3A1 Assertion Failed] Flushed FP EX0 entry was not invalidated.");
-    end
+    // Sequential registers clear on the flush edge; sample the resulting state
+    // at the following edge, rather than testing the old pre-flush state.
     if (!rst && $past(!rst && flush_valid)) begin
-      // On cycle following flush, completion registers must be deasserted
+      assert (!int_ex0_valid_q)
+        else $error("[AP1A Assertion Failed] Flushed INT EX0 entry was not invalidated.");
+      assert (!fp_ex0_valid_q)
+        else $error("[AP3A1 Assertion Failed] Flushed FP EX0 entry was not invalidated.");
       assert (!fp_cmp_q.valid)
         else $error("[AP3A2 Assertion Failed] Flushed FP completion register produced valid output.");
     end

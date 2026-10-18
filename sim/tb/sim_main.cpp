@@ -5,6 +5,7 @@
 #include <fstream>
 #include <deque>
 #include <cstdlib>
+#include <stdexcept>
 #include <verilated.h>
 #include <verilated_vcd_c.h>
 
@@ -12,6 +13,10 @@
 #include "sim_mem.h"
 #include "fp_roi_profile.h"
 #include "core_roi_profile.h"
+
+// Verilator 4.x assertion diagnostics call this legacy simulation-time hook.
+static uint64_t sim_time = 0;
+double sc_time_stamp() { return static_cast<double>(sim_time); }
 
 struct SimConfig {
     std::string elf_file;
@@ -22,6 +27,9 @@ struct SimConfig {
     uint64_t no_retire_limit = 10000;
     int dmem_latency = 1;
     int dmem_rand_delay = 0;
+    unsigned dmem_ready_period = 1;
+    bool fault_store = false, fault_load = false;
+    uint32_t fault_addr = 0;
     bool enable_vcd = false;
     bool enable_trace = false;
     bool profile_fp_roi = false;
@@ -49,6 +57,13 @@ void parse_args(int argc, char** argv, SimConfig& config) {
             config.no_retire_limit = std::stoull(arg.substr(arg.find('=') + 1));
         } else if (arg.rfind("+dmem-latency=", 0) == 0 || arg.rfind("--dmem-latency=", 0) == 0) {
             config.dmem_latency = std::stoi(arg.substr(arg.find('=') + 1));
+        } else if (arg.rfind("+dmem-ready-period=", 0) == 0) {
+            config.dmem_ready_period = std::stoul(arg.substr(arg.find('=') + 1));
+            if (config.dmem_ready_period == 0) throw std::invalid_argument("ready period must be positive");
+        } else if (arg.rfind("+dmem-fault-store=", 0) == 0 || arg.rfind("+dmem-fault-load=", 0) == 0) {
+            config.fault_store = arg.rfind("+dmem-fault-store=", 0) == 0;
+            config.fault_load = !config.fault_store;
+            config.fault_addr = std::stoul(arg.substr(arg.find('=') + 1), nullptr, 0);
         } else if (arg.rfind("+dmem-rand-delay=", 0) == 0 || arg.rfind("--dmem-rand-delay=", 0) == 0) {
             config.dmem_rand_delay = std::stoi(arg.substr(arg.find('=') + 1));
         }
@@ -93,7 +108,6 @@ int main(int argc, char** argv) {
         std::cout << "[Simulator] Commit trace logging enabled: " << config.trace_file << std::endl;
     }
 
-    uint64_t sim_time = 0;
     uint64_t cycles = 0;
     uint64_t retired_insns = 0;
     uint64_t last_retire_cycle = 0;
@@ -123,10 +137,12 @@ int main(int argc, char** argv) {
     for (int i = 0; i < 10; ++i) {
         top->clk = 0;
         top->eval();
-        if (tfp) tfp->dump(sim_time++);
+        if (tfp) tfp->dump(sim_time);
+        ++sim_time;
         top->clk = 1;
         top->eval();
-        if (tfp) tfp->dump(sim_time++);
+        if (tfp) tfp->dump(sim_time);
+        ++sim_time;
     }
     top->rst = 0;
 
@@ -137,9 +153,12 @@ int main(int argc, char** argv) {
     struct DMemQueueEntry {
         uint32_t data;
         int delay;
+        bool error;
     };
     std::deque<DMemQueueEntry> dmem_q;
 
+    bool fault_issued = false;
+    uint64_t fault_responses = 0, blocked_load_cycles = 0, blocked_store_cycles = 0;
     bool exit_pending = false;
     int exit_drain_cycles = 0;
 
@@ -165,14 +184,15 @@ int main(int argc, char** argv) {
         top->imem_rsp_rdata = imem_pipe_data;
         top->imem_rsp_error = 0;
 
-        top->dmem_req_ready = dmem_q.empty() ? 1 : 0;
+        top->dmem_req_ready = dmem_q.empty() && cycles % config.dmem_ready_period == 0 ? 1 : 0;
         bool dmem_rsp_drive = (!dmem_q.empty() && dmem_q.front().delay <= 0);
         top->dmem_rsp_valid = dmem_rsp_drive ? 1 : 0;
         top->dmem_rsp_rdata = dmem_rsp_drive ? dmem_q.front().data : 0;
-        top->dmem_rsp_error = 0;
+        top->dmem_rsp_error = dmem_rsp_drive && dmem_q.front().error;
 
         top->eval();
-        if (tfp) tfp->dump(sim_time++);
+        if (tfp) tfp->dump(sim_time);
+        ++sim_time;
 
         if (core_profile_out.is_open() && fp_roi.active) core_roi.sample(CoreRoi::read(*top));
 
@@ -181,8 +201,14 @@ int main(int argc, char** argv) {
         uint32_t next_imem_data = imem_accepted ? memory.read32(top->imem_req_addr) : 0;
         bool next_imem_valid = imem_accepted;
 
+        if (top->dmem_req_valid && !top->dmem_req_ready && dmem_q.empty()) {
+            if (top->dmem_req_wen) ++blocked_store_cycles;
+            else ++blocked_load_cycles;
+        }
+
         // D-memory response handshake
         if (top->dmem_rsp_valid && top->dmem_rsp_ready) {
+            if (dmem_q.front().error) ++fault_responses;
             dmem_q.pop_front();
         }
 
@@ -190,7 +216,14 @@ int main(int argc, char** argv) {
         bool dmem_accepted = (top->dmem_req_valid && top->dmem_req_ready);
         if (dmem_accepted) {
             DMemQueueEntry entry;
-            if (top->dmem_req_wen) {
+            entry.error = !fault_issued && top->dmem_req_addr == config.fault_addr &&
+                ((config.fault_store && top->dmem_req_wen) || (config.fault_load && !top->dmem_req_wen));
+            if (entry.error) {
+                fault_issued = true;
+                entry.data = 0;
+                std::cout << "[Dmem environment] injected " << (top->dmem_req_wen ? "store" : "load")
+                          << " fault addr=0x" << std::hex << top->dmem_req_addr << std::dec << std::endl;
+            } else if (top->dmem_req_wen) {
                 memory.write32(top->dmem_req_addr, top->dmem_req_wdata, top->dmem_req_byte_en);
                 entry.data = 0;
             } else {
@@ -207,7 +240,8 @@ int main(int argc, char** argv) {
         // --- Rising Edge (Clock High) ---
         top->clk = 1;
         top->eval();
-        if (tfp) tfp->dump(sim_time++);
+        if (tfp) tfp->dump(sim_time);
+        ++sim_time;
 
         for (auto& entry : dmem_q) {
             if (entry.delay > 0) entry.delay--;
@@ -286,6 +320,12 @@ int main(int argc, char** argv) {
         trace_out.close();
     }
     if (core_profile_out.is_open()) core_roi.write(core_profile_out);
+
+    if (config.dmem_ready_period != 1 || config.fault_store || config.fault_load) {
+        std::cout << "DMEM ENV blocked_load_cycles=" << blocked_load_cycles
+                  << " blocked_store_cycles=" << blocked_store_cycles
+                  << " fault_requests=" << fault_issued << " fault_responses=" << fault_responses << std::endl;
+    }
 
     double ipc = (cycles > 0) ? (static_cast<double>(retired_insns) / cycles) : 0.0;
 

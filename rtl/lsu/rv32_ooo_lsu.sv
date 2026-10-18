@@ -1,5 +1,5 @@
 // rv32_ooo_lsu.sv — Load/Store Unit
-// 16-entry store queue, single in-flight data transaction and load-response buffer.
+// 16-entry store queue, single in-flight data transaction and registered response buffer.
 // Implements store forwarding and conservative ordering; no LQ array is allocated.
 // AP5B: Registered Load Response & LSU Timing Decoupling
 // Architecture Spec §20–§22 | Uop Spec §21–§22
@@ -158,10 +158,11 @@ module rv32_ooo_lsu
   exec_req_t           in_flight_load_req;
   logic [SQ_IDX_W-1:0] in_flight_sq_idx;
 
-  // Registered load response buffer (1 entry) — eliminates external-response combinational path
+  // Registered load / store-fault response buffer (1 entry) — eliminates external-response combinational path
   logic         rsp_buf_valid;
   logic [31:0]  rsp_buf_rdata;
   logic         rsp_buf_error;
+  logic         rsp_buf_is_store;
   rob_tag_t     rsp_buf_rob_tag;
   renamed_dst_t rsp_buf_dst;
   logic [31:0]  rsp_buf_addr;
@@ -171,9 +172,10 @@ module rv32_ooo_lsu
 
   assign dmem_pending.valid    = in_flight_valid || rsp_buf_valid;
   assign dmem_pending.rob_tag  = in_flight_valid ? in_flight_rob_tag : rsp_buf_rob_tag;
-  assign dmem_pending.lq_valid = (in_flight_valid && !in_flight_is_store) || rsp_buf_valid;
+  assign dmem_pending.lq_valid = (in_flight_valid && !in_flight_is_store) || (rsp_buf_valid && !rsp_buf_is_store);
   assign dmem_pending.lq_tag   = '0;
-  assign dmem_pending.sq_valid = in_flight_valid && in_flight_is_store;
+  assign dmem_pending.sq_valid = (in_flight_valid && in_flight_is_store) ||
+                                 (rsp_buf_valid && rsp_buf_is_store);
   assign dmem_pending.sq_tag   = '0;
 
   // Buffer-aware ready: can accept response whenever response buffer is empty
@@ -336,7 +338,9 @@ module rv32_ooo_lsu
     (agu_req.uop.mem.is_load  && (
       (agu_misaligned && lsu_can_accept_misalign) ||
       (effective_fwd_valid && lsu_can_accept_fwd) ||
-      can_issue_load
+      // External loads are consumed only when the request is accepted.
+      // Keep request valid independent of ready to avoid a ready/valid loop.
+      (can_issue_load && dmem_req_ready)
     ))
   );
 
@@ -412,7 +416,7 @@ module rv32_ooo_lsu
                                                rsp_buf_load_ext);
       if (rsp_buf_error) begin
         ld_cmp.exception.valid = 1'b1;
-        ld_cmp.exception.cause = EXC_LOAD_ACCESS_FAULT;
+        ld_cmp.exception.cause = rsp_buf_is_store ? EXC_STORE_ACCESS_FAULT : EXC_LOAD_ACCESS_FAULT;
         ld_cmp.exception.tval  = rsp_buf_addr;
       end
     end
@@ -448,7 +452,7 @@ module rv32_ooo_lsu
       if (sq[retire_sq_idx].exception.valid) begin
         // Misaligned store traps without writing memory
         sq_retire_ack = 1'b1;
-      end else if (sq[retire_sq_idx].rsp_done || (in_flight_valid && in_flight_is_store && (in_flight_sq_idx == retire_sq_idx) && dmem_rsp_valid && dmem_rsp_ready)) begin
+      end else if (sq[retire_sq_idx].rsp_done || (in_flight_valid && in_flight_is_store && (in_flight_sq_idx == retire_sq_idx) && dmem_rsp_valid && dmem_rsp_ready && !dmem_rsp_error)) begin
         sq_retire_ack = 1'b1;
       end
     end
@@ -471,6 +475,7 @@ module rv32_ooo_lsu
       rsp_buf_valid       <= 1'b0;
       rsp_buf_rdata       <= 32'd0;
       rsp_buf_error       <= 1'b0;
+      rsp_buf_is_store    <= 1'b0;
       rsp_buf_rob_tag     <= '0;
       rsp_buf_dst         <= '0;
       rsp_buf_addr        <= 32'd0;
@@ -597,11 +602,27 @@ module rv32_ooo_lsu
         in_flight_valid  <= 1'b0;
         in_flight_killed <= 1'b0;
         if (in_flight_is_store) begin
-          sq[in_flight_sq_idx] <= '0; // Deallocate completed store immediately upon response
+          // The response owns the tag after SQ deallocation. On error, do not
+          // acknowledge retirement: complete an exception through the registered
+          // response buffer first so the ROB observes it before deciding to retire.
+          sq[in_flight_sq_idx] <= '0;
+          if (dmem_rsp_error) begin
+            rsp_buf_valid    <= 1'b1;
+            rsp_buf_is_store <= 1'b1;
+            rsp_buf_error    <= 1'b1;
+            rsp_buf_rob_tag  <= in_flight_rob_tag;
+            rsp_buf_addr     <= in_flight_addr;
+            rsp_buf_dst      <= '0;
+            rsp_buf_domain   <= REG_NONE;
+            rsp_buf_rdata    <= '0;
+            rsp_buf_size     <= MEM_WORD;
+            rsp_buf_load_ext <= LOAD_UNSIGNED;
+          end
         end else begin
           // External load response
           if (!kill_in_flight) begin
             rsp_buf_valid    <= 1'b1;
+            rsp_buf_is_store <= 1'b0;
             rsp_buf_rdata    <= dmem_rsp_rdata;
             rsp_buf_error    <= dmem_rsp_error;
             rsp_buf_rob_tag  <= in_flight_rob_tag;
@@ -681,6 +702,24 @@ module rv32_ooo_lsu
         else $error("[AP5B SVA Violation] ld_cmp result_phys mismatch vs buffered transaction!");
       assert (ld_cmp.result_domain == rsp_buf_domain)
         else $error("[AP5B SVA Violation] ld_cmp result_domain mismatch vs buffered transaction!");
+    end
+  end
+
+  // An external load must remain at the AGU until its request handshakes.
+  always_ff @(posedge clk) begin
+    if (!rst && can_issue_load && !dmem_req_ready) begin
+      assert (!lsu_ready)
+        else $error("[LSU] Load consumed without external request handshake!");
+    end
+    if (!rst && in_flight_valid && in_flight_is_store &&
+        dmem_rsp_valid && dmem_rsp_ready && dmem_rsp_error) begin
+      assert (!sq_retire_ack)
+        else $error("[LSU] Faulting store acknowledged for retirement!");
+    end
+    if (!rst && rsp_buf_valid && rsp_buf_is_store) begin
+      assert (rsp_buf_error && !ld_cmp.result_valid &&
+              ld_cmp.exception.valid && ld_cmp.exception.cause == EXC_STORE_ACCESS_FAULT)
+        else $error("[LSU] Store fault lost exception or produced a register result!");
     end
   end
 
