@@ -1,0 +1,75 @@
+{
+  "scope": "four-cell ORFS API fixture, eight cells after repair; not full-core CPU closure",
+  "flow_returncode": 0,
+  "pinned_orfs_commit": "8359fde81991e6118b15b8a93fcde606b577794d",
+  "physical_image_id": "sha256:92a37abacbbf91494f9a8078b45fe1f6688a533cf5c87d02599d28c5fe229b33",
+  "make_overrides": {
+    "DESIGN_NAME": "report_audit",
+    "CORNERS": "typical",
+    "CORNER": "TC",
+    "OPT_POST_GRT_WNS": 0,
+    "REPORT_CLOCK_SKEW": 0,
+    "ADDER_MAP_FILE": "",
+    "NUM_CORES": 2
+  },
+  "target": "do-5_1_grt",
+  "source_state_note": "fixture Make run at 29fa1c2 with the unrelated physical-runner CTS-cache patch uncommitted; not claimed as clean CPU measurement",
+  "source_sha256": {
+    "physical/asap7/baseline/config.mk": "be157001e0234853911d3eaf5c326c5e0ab30d19fd60a3102d400d74ca6e861b",
+    "physical/asap7/baseline/report.tcl": "c22e08c5c83f8a9a693fe569eecf7c0aaa72e045b731fe69e0b4d6ac81f1427e",
+    "physical/asap7/baseline/timing_common.tcl": "01a70b8acb67b82bb8579ef8a6aa0cf21160b9f8eb2ef32698f4f5b39e9ac2cc",
+    "physical/asap7/baseline/report_audit.v": "5261af1910a6890920649b9b9f918c87cc7883e349d6783e95012cc8a102ad40",
+    "scripts/check_physical_closure.py": "170a5abc90b2f6dad76d2fa0a81a5b6601b897865862b867d784e888fc1048b5"
+  },
+  "corner_reports": {
+    "TT": {
+      "corner": "TT",
+      "global_routes_restored": true,
+      "library_warning_cell_instances": 2,
+      "standard_cell_area_um2": 1.21014,
+      "standard_cell_count": 8,
+      "register_count": 2,
+      "macro_count": 0,
+      "trials": [
+        {
+          "period_ps": 5500,
+          "setup_slack_ps": 3170.0138196746266,
+          "hold_slack_ps": 16.831036631722107
+        }
+      ]
+    },
+    "SS": {
+      "corner": "SS",
+      "global_routes_restored": true,
+      "library_warning_cell_instances": 2,
+      "standard_cell_area_um2": 1.21014,
+      "standard_cell_count": 8,
+      "register_count": 2,
+      "macro_count": 0,
+      "trials": [
+        {
+          "period_ps": 5500,
+          "setup_slack_ps": 3130.124394418874,
+          "hold_slack_ps": 36.591660403592094
+        }
+      ]
+    },
+    "FF": {
+      "corner": "FF",
+      "global_routes_restored": true,
+      "library_warning_cell_instances": 2,
+      "standard_cell_area_um2": 1.21014,
+      "standard_cell_count": 8,
+      "register_count": 2,
+      "macro_count": 0,
+      "trials": [
+        {
+          "period_ps": 5500,
+          "setup_slack_ps": 3192.2025150888417,
+          "hold_slack_ps": 3.7160899506167593
+        }
+      ]
+    }
+  },
+  "passed": true
+}

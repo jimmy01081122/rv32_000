@@ -1,0 +1,49 @@
+{
+  "records": [
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "scripts/run_baseline_physical.py",
+        "--period-ps",
+        "15000",
+        "--jobs",
+        "2",
+        "--label",
+        "cts-negative-period",
+        "--adder-mapping",
+        "abc",
+        "--container",
+        "7ebf37267636",
+        "--cts-from",
+        "build/baselines/ap5b-post-lsu-v1/physical-14000ps-tt-abc-v3",
+        "--detached"
+      ],
+      "returncode": 2,
+      "expected": "cached CTS input changed: period_ps",
+      "passed": true
+    },
+    {
+      "command": [
+        "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "scripts/run_baseline_physical.py",
+        "--period-ps",
+        "14000",
+        "--jobs",
+        "2",
+        "--label",
+        "cts-negative-mapping",
+        "--adder-mapping",
+        "platform",
+        "--container",
+        "7ebf37267636",
+        "--cts-from",
+        "build/baselines/ap5b-post-lsu-v1/physical-14000ps-tt-abc-v3",
+        "--detached"
+      ],
+      "returncode": 2,
+      "expected": "cached CTS input changed: synthesis_adder_mapping",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

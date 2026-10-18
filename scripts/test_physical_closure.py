@@ -8,6 +8,7 @@ import unittest
 from check_physical_closure import review_corner, worst_slack, check_constraints
 
 EVIDENCE=Path(__file__).resolve().parents[1]/'docs/evidence/2026-10-18/physical-report-validation'
+REPAIRED=EVIDENCE.parent/'global-route-api-validation'
 
 
 class Closure(unittest.TestCase):
@@ -23,6 +24,12 @@ class Closure(unittest.TestCase):
             result=review_corner(EVIDENCE/corner,corner,[2300,5500])
             self.assertTrue(all(not row['passed'] for row in result['trials']))
             self.assertTrue(all('hold violation' in row['problems'] for row in result['trials']))
+
+    def test_repaired_actual_three_corner_reports_pass(self):
+        for corner in ('TT','SS','FF'):
+            result=review_corner(REPAIRED/corner,corner,[5500])
+            self.assertTrue(result['trials'][0]['passed'])
+            self.assertEqual(result['standard_cell_count'],8)
 
     def test_actual_constraint_and_load_failures_block_trial(self):
         shutil.copy2(EVIDENCE/'negative/missing-input-delay.rpt',self.corner/'check_setup_5500.rpt')
