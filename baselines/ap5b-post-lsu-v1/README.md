@@ -3,6 +3,8 @@
 2026-10-18。使用者已核准先固定修正後基線，再共同選擇 A／B 獨立實驗。
 本目錄先鎖定來源與輸入；`manifest.json` 的 physical／measurement 完成前維持 preparing，
 不以舊 AP0／AP5A 報告補入面積或頻率，也不宣稱規劃目標達標。
+固定時間模型的 [27 項準備量測](../../docs/evidence/2026-10-18/post-lsu-baseline-preparation/README.md)
+已在乾淨 `5822071` 完成，全部通過且 ROI cycles 等於原參考；5,500 ps 尚非實體閉合值。
 
 - CPU：`71c24f5`，含 FMA、FP store 與 LSU 介面修復；18 個 RTL 檔案逐一鎖 hash。
   A／B／C 尚未實作。
@@ -21,6 +23,7 @@
 - 實體採 ASAP7 RVT、TT 建置、SS／FF 時序核對與 global-route 寄生估算。
   wire RC 沿用平台 nominal 模型，不宣稱多 corner 詳細抽取或 detailed-route closure。
   I/O delay、slew、load 與 uncertainty 為固定絕對值，不隨掃描 period 改變。
+  I/O 最大 delay 為 1,100 ps，最小為 0 ps；最終每個 corner 各自執行 STA。
 - 面積邊界是完整核心，包括 PRF／SQ／commit trace；外部 RAM 不含在核心面積內。
   比較 global-route 同階段的標準元件實例面積，包含 clock／repair cells。
 - 功能失敗、缺項、hash 不符、超時或不完整量測均使完整集合無效；不得縮小分母。

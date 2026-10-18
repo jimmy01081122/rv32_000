@@ -20,6 +20,7 @@ def main():
     parser.add_argument('--jobs', type=int, default=2)
     parser.add_argument('--container', help='reuse a running pinned-image container with the documented mounts')
     parser.add_argument('--label', default='', help='unique attempt suffix; existing logs are never overwritten')
+    parser.add_argument('--resume-reason', help='resume a failed attempt with identical hashed build inputs; retain the prior log')
     args = parser.parse_args()
     if args.period_ps <= 2200 or args.jobs < 1:
         parser.error('period must exceed frozen 1100ps input + output budgets; jobs positive')
@@ -31,12 +32,17 @@ def main():
         parser.exit(1, 'ORFS checkout must be the pinned clean revision\n')
     suffix = f'-{args.label}' if args.label else ''
     directory = ROOT / f'build/baselines/ap5b-post-lsu-v1/physical-{args.period_ps}ps{suffix}'
-    if (directory/'run.json').exists():
+    previous = None
+    if args.resume_reason:
+        if not (directory/'run.json').exists():parser.error('resume requires an existing failed attempt')
+        previous = json.loads((directory/'run.json').read_text())
+        if not previous.get('returncode'):parser.error('only a finished failed attempt may be resumed')
+    elif (directory/'run.json').exists():
         parser.exit(1, 'attempt already exists; choose a fresh --label\n')
     directory.mkdir(parents=True, exist_ok=True)
     sdc = directory / 'constraint.sdc'
     # Absolute I/O/uncertainty/load remain unchanged across period trials.
-    sdc.write_text(f'''create_clock -name core_clk -period {args.period_ps} [get_ports clk]
+    constraint = f'''create_clock -name core_clk -period {args.period_ps} [get_ports clk]
 set_clock_uncertainty -setup 50 [all_clocks]
 set_clock_uncertainty -hold 25 [all_clocks]
 set_input_transition 20 [all_inputs]
@@ -49,7 +55,10 @@ group_path -name in2reg -from [all_inputs -no_clocks] -to [all_registers]
 group_path -name reg2out -from [all_registers] -to [all_outputs]
 group_path -name reg2reg -from [all_registers] -to [all_registers]
 group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
-''')
+'''
+    if not sdc.exists() or sdc.read_text()!=constraint:
+        if previous:parser.error('resume constraint differs from the failed attempt')
+        sdc.write_text(constraint)
     def guest(path):
         return '/workspace/' + str(path.relative_to(ROOT))
     expected_image = subprocess.check_output(['docker','image','inspect',IMAGE,'--format','{{.Id}}'], text=True).strip()
@@ -80,6 +89,16 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
     report['process_lowering_sha256'] = sha(ROOT/'physical/asap7/baseline/lower_processes.tcl')
     report['source_commit'] = subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     report['source_status'] = subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).splitlines()
+    if previous:
+        for field in ('period_ps','orfs_commit','command','sdc_sha256','lowered_rtl_sha256',
+                      'rtl_files_sha256','config_sha256','local_image_id','process_lowering_sha256'):
+            if previous[field]!=report[field]:parser.error('resume input changed: '+field)
+        history=previous.pop('previous_attempts',[])
+        prior_log=directory/f'make-attempt{len(history)+1}.log'
+        if prior_log.exists():parser.error('prior log already exists; refusing overwrite')
+        (directory/'make.log').rename(prior_log)
+        previous.update(log=str(prior_log.relative_to(ROOT)),resume_reason=args.resume_reason)
+        history.append(previous);report['previous_attempts']=history
     summary = directory/'run.json';summary.write_text(json.dumps(report,indent=2)+'\n')
     with (directory/'make.log').open('w') as log:
         result = subprocess.run(cmd, stdout=log, stderr=subprocess.STDOUT)

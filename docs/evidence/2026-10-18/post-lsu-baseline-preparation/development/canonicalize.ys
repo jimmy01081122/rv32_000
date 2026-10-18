@@ -1,0 +1,23 @@
+read_verilog build/baseline-setup/rtl_lowered.v
+hierarchy -check -top rv32_ooo_core
+proc_clean
+proc_rmdead
+proc_init
+proc_arst
+proc_mux
+opt_expr
+opt_clean
+proc_dff
+proc_clean
+flatten
+memory
+opt_expr
+opt_clean
+techmap
+opt_expr
+opt_clean
+clean
+check -assert
+stat
+write_rtlil build/baseline-setup/canonical.rtlil
+write_verilog -noattr build/baseline-setup/canonical.v

@@ -9,7 +9,7 @@ The image contains no ORFS git history, so use a separate clean checkout:
 
 ```sh
 git clone --filter=blob:none --no-checkout https://github.com/The-OpenROAD-Project/OpenROAD-flow-scripts.git build/baseline-setup/ORFS
-git -C build/baseline-setup/ORFS sparse-checkout set flow/scripts flow/util
+git -C build/baseline-setup/ORFS sparse-checkout set flow/scripts flow/util flow/platforms/common
 git -C build/baseline-setup/ORFS checkout --detach 8359fde81991e6118b15b8a93fcde606b577794d
 ```
 
@@ -43,6 +43,9 @@ python3 scripts/run_baseline_physical.py --period-ps 5500 --jobs 2 --label trial
 
 `5500` is an exploration constraint, not an achieved period. Each attempt has
 its own output directory and refuses to overwrite an existing `run.json`.
+After correcting an infrastructure dependency, `--resume-reason TEXT` may resume
+a finished failed attempt only when all recorded build input hashes still match;
+the prior run record and log are retained as a separate attempt.
 To avoid another VFS filesystem copy, `--container ID` can reuse a running
 container with the exact image and `/workspace` plus `/orfs-source` mounts;
 the driver verifies these before executing. Read-only ORFS source, image platform
@@ -58,7 +61,9 @@ delays are explicitly 0 ps, with no false paths.
 TT libraries drive construction, with TT/SS/FF timing views. The upstream platform
 temperature labels disagree with its Liberty headers: the actual RVT libraries
 are TT 0.70 V/25°C, SS 0.63 V/100°C and FF 0.77 V/0°C. Use library contents as
-evidence. `report.tcl` evaluates explicit clock trials on the same global-route
+evidence. Final STA runs in a fresh process for each corner to avoid mismatching
+the PDK's conditional and non-unate XOR arcs in a shared timing graph.
+`report.tcl` evaluates explicit clock trials on the same global-route
 database and nominal wire RC. Never derive a claimed clock from slack algebra.
 Require valid setup/hold, complete timing constraints and inspected electrical
 checks before filling the baseline's physical fields.

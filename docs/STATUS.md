@@ -6,7 +6,8 @@ The documentation cleanup changes no RTL behavior or executable acceptance thres
 
 FP32 compiler contraction is now approved as `fast` with `-fno-fast-math`;
 the daily qualifier defaults to fast and retains explicit off comparisons.
-Formal data/timing/memory and physical contracts remain open.
+The post-LSU v1 workload identities and fixed-absolute-time memory policy are
+recorded; the achieved physical period, calibrated memory ps and area remain open.
 
 ## Evidence available
 
@@ -36,7 +37,17 @@ at `ec0baa3` passes 48/48 assertion-enabled cases, directed and Spike comparison
 18/18 each, finite FMA checks, FP32 fast 8/8 and Embench 19/19. Original probes
 also turn green; historical failed evidence remains intact. Nominal workload
 ELFs/results/cycles match the prior qualification. This is a functional reference
-point; formal timing/memory and fresh physical qualification remain open.
+point; fresh physical qualification remains open.
+
+The [post-LSU baseline preparation](evidence/2026-10-18/post-lsu-baseline-preparation/README.md)
+at clean `5822071` now passes all 27 workloads with absolute-time memory,
+unchanged ROI cycles and 3,629 independently checked FP32 values. The new model
+passes 58 controls and the 18 directed programs. The user selected fixed memory
+time and an ASAP7 RVT global-route research baseline, with TT construction and
+independent SS/FF checks. Pinned physical tools are available and synthesis is
+being restored; 5,500 ps remains an exploration setting, not an achieved clock.
+The [v1 manifest](../baselines/ap5b-post-lsu-v1/manifest.json) remains preparing,
+with period/area null. No A/B/C optimization has been implemented.
 
 ## Current implementation drift
 
