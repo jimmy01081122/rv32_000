@@ -12,6 +12,12 @@ independent TT/SS/FF analysis via
 [`scripts/analyze_baseline_physical.py`](../../scripts/analyze_baseline_physical.py).
 The [manifest](../../baselines/ap5b-post-lsu-v1/manifest.json) remains preparing;
 no full-core global-route closure or area baseline has been qualified.
+After independent analysis, `scripts/check_physical_closure.py --analysis build/.../LABEL`
+reviews only actually tested clock periods, report hashes, four path groups and
+the serialized fixed I/O/uncertainty/load contract. It rejects unresolved
+constraint or electrical reports and negative setup/hold slack. Its result is a
+timing review; global-routing/connectivity review and formal 27-workload
+measurement are still required before freezing the manifest.
 
 Use a fresh `--label` for each attempt. `--detached --container ID` starts a
 durable worker that records real process status and input identities even when

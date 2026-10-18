@@ -33,5 +33,11 @@
 量測全 27 項，保留 cycle partition、數值及退休 SP 的 stack headroom 診斷。
 `--preparation` 輸出明確不能當成已完成的實體基線。
 
+實體步驟採獨立的建置、STA collection 與時序審查；單一命令退出 0 不會完成基線。
+報告工具的 [49 項資格控制](../../docs/evidence/2026-10-18/physical-report-validation/README.md)
+已通過。`check_physical_closure.py` 另核對報告雜湊、四類路徑、實際掃描的 period，
+以及序列化 SDC 的最大／最小 I/O delay、uncertainty、slew、load 與未核准例外。
+最終仍須查核繞線／連接狀態，並在通過的 period 重跑正式 27 項量測。
+
 兩個主集合各自驗收 ≥1.20× 執行時間加速、標準元件面積 ≤1.10×。
 個別案例及兩個 FP32 子群分別可見；沒有另外增加未核准的退步門檻。

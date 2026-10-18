@@ -29,8 +29,8 @@
 
 ```bash
 python3 scripts/audit_physical_reports.py --container ID --out build/physical-report-audit-fresh
-sha256sum -c docs/evidence/2026-10-18/physical-report-validation/SHA256SUMS
+(cd docs/evidence/2026-10-18/physical-report-validation && sha256sum -c SHA256SUMS)
 ```
 
-核對 SHA256SUMS 時請先切到本目錄。`summary.json` 另記錄原始輸出 hashes；
+`summary.json` 另記錄原始輸出 hashes；
 完整核心分析仍須獨立核對約束涵蓋、所有 corner、電氣限制與繞線狀態。
