@@ -1,0 +1,1751 @@
+{
+  "scope": "Exact existing qualified target commands and identities; no new software tuning",
+  "embench": [
+    {
+      "benchmark": "aha-mont64",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/aha-mont64",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/aha-mont64/mont64.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "646339be04ace2ff6291544862b423f2ea96dfe4dced3313a2abad477d3aff80",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/aha-mont64-rv32imf-zicsr-ilp32f.attributes.log"
+      }
+    },
+    {
+      "benchmark": "crc32",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/crc32",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/crc32/crc_32.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "f9301202f690efdcb5051e6b280c79d8aa2961cad46969cadd050fa904ee05ca",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/crc32-rv32imf-zicsr-ilp32f.attributes.log"
+      }
+    },
+    {
+      "benchmark": "cubic",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/cubic",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/cubic/basicmath_small.c",
+          "software/embench/embench-iot/src/cubic/libcubic.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "19c60cec9bfb2baf24390771eb58565a057371d6708c0528b63dfc43d137af97",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/cubic-rv32imf-zicsr-ilp32f.attributes.log"
+      }
+    },
+    {
+      "benchmark": "edn",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/edn",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/edn/libedn.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "896e38b739b9013db07719be16af254e744b2c234451cf9ced4bbdbc2d6de265",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/edn-rv32imf-zicsr-ilp32f.attributes.log"
+      }
+    },
+    {
+      "benchmark": "huffbench",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/huffbench",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/huffbench/libhuffbench.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "a11e08cd4b67943abc867ee6a5f21f02913c15d4957c5c5ac46db16f7ae0b4a6",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/huffbench-rv32imf-zicsr-ilp32f.attributes.log"
+      }
+    },
+    {
+      "benchmark": "matmult-int",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/matmult-int",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/matmult-int/matmult-int.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "a68d3088aa484d21d87d2b5892039df135c22d192f019fab483a62a9df515a02",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/matmult-int-rv32imf-zicsr-ilp32f.attributes.log"
+      }
+    },
+    {
+      "benchmark": "minver",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/minver",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/minver/libminver.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "18aacebbf740134d2a42b5550224155b171250ebf3456c087030258ac1e66aff",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/minver-rv32imf-zicsr-ilp32f.attributes.log"
+      }
+    },
+    {
+      "benchmark": "nbody",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/nbody",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/nbody/nbody.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "ad6739f77c7f1c54740a8d23d6d8e1ae214f9762851834307d2007045917a9f1",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nbody-rv32imf-zicsr-ilp32f.attributes.log"
+      }
+    },
+    {
+      "benchmark": "nettle-aes",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/nettle-aes",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/nettle-aes/nettle-aes.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "8f0a391fe5e947776ec30e3712d37970c4d8c3f40cc5adbb8591e5643c1210fd",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-aes-rv32imf-zicsr-ilp32f.attributes.log"
+      }
+    },
+    {
+      "benchmark": "nettle-sha256",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/nettle-sha256",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/nettle-sha256/nettle-sha256.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "dd21a0328aff4b858aa9eca8577c0a8a0d92b916fa308c87b559a355d78efe6d",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nettle-sha256-rv32imf-zicsr-ilp32f.attributes.log"
+      }
+    },
+    {
+      "benchmark": "nsichneu",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/nsichneu",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/nsichneu/libnsichneu.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "1bdf7a8f3fff68ae4cd3eb308633d879ae46a02ef868765f667902b10aef4a66",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/nsichneu-rv32imf-zicsr-ilp32f.attributes.log"
+      }
+    },
+    {
+      "benchmark": "picojpeg",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/picojpeg",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/picojpeg/libpicojpeg.c",
+          "software/embench/embench-iot/src/picojpeg/picojpeg_test.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "721fa0ec08a47a4affcfc3251e8bee579dd8784b0c0be6f09e8981a19b11455e",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/picojpeg-rv32imf-zicsr-ilp32f.attributes.log"
+      }
+    },
+    {
+      "benchmark": "qrduino",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/qrduino",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/qrduino/qrencode.c",
+          "software/embench/embench-iot/src/qrduino/qrframe.c",
+          "software/embench/embench-iot/src/qrduino/qrtest.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "e6d28953f0cbf52f35ace14aee266a5acd2566859bce0e0a086a76da211de6ac",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/qrduino-rv32imf-zicsr-ilp32f.attributes.log"
+      }
+    },
+    {
+      "benchmark": "sglib-combined",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/sglib-combined",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/sglib-combined/combined.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "3b69ad94081db32fe7d92537f25ee82118a6fbe07feee7c83cd262a87327aee6",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/sglib-combined-rv32imf-zicsr-ilp32f.attributes.log"
+      }
+    },
+    {
+      "benchmark": "slre",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/slre",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/slre/libslre.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "e3b81e869126d7cc252c4aa482515f51e14f81945a0daa2a7d9392250ccb8769",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/slre-rv32imf-zicsr-ilp32f.attributes.log"
+      }
+    },
+    {
+      "benchmark": "st",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/st",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/st/libst.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "4836e2d559e258a0af8ff49fdfa87b00a1c6b440a28dda2413536c015deef167",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/st-rv32imf-zicsr-ilp32f.attributes.log"
+      }
+    },
+    {
+      "benchmark": "statemate",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/statemate",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/statemate/libstatemate.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "89817da7b119f2d38d64fd49847161968a27319c45071cf7b92986c71017a52e",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/statemate-rv32imf-zicsr-ilp32f.attributes.log"
+      }
+    },
+    {
+      "benchmark": "ud",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/ud",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/ud/libud.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "34a2c84b2c1e37427638a7bc10aa0e3ec9118661dbad7083f1596b0c1fc2bfe7",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/ud-rv32imf-zicsr-ilp32f.attributes.log"
+      }
+    },
+    {
+      "benchmark": "wikisort",
+      "profile": "rv32imf-zicsr-ilp32f",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-std=gnu11",
+          "-O3",
+          "-DWARMUP_HEAT=1",
+          "-DCPU_MHZ=1",
+          "-Isoftware/embench/embench-iot/support",
+          "-Isoftware/embench/embench-iot/src/wikisort",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/embench",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/libc.c",
+          "software/embench/fail_syscalls.c",
+          "software/embench/boardsupport.c",
+          "software/embench/embench-iot/support/beebsc.c",
+          "software/embench/embench-iot/support/main.c",
+          "software/embench/embench-iot/src/wikisort/libwikisort.c",
+          "-o",
+          "/workspace/build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.build.log"
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.strip.log"
+      },
+      "elf_sha256": "7ed46e9144605bbbe601030d821055443c72ed60e9760cc9627cc1b24f70c6d6",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/embench-fp-full/wikisort-rv32imf-zicsr-ilp32f.attributes.log"
+      }
+    }
+  ],
+  "fp32": [
+    {
+      "name": "fir",
+      "target_build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=fast",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=0",
+          "-I/workspace/build/qualification/fp-balanced/baremetal-contract-fast/fir",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/fail_syscalls.c",
+          "software/fp_bench/balanced.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/FilteringFunctions/arm_fir_f32.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/FilteringFunctions/arm_fir_init_f32.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/fir/rv32.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/fir/target-build.log",
+        "log_sha256": "8b758e614b9f214747483fe521b13b127147a708169bc47b3f87605cf37d3231",
+        "wall_seconds": 0.16936648699993384
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/fir/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/fir/strip.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.0014212060004865634
+      },
+      "elf_sha256": "5f10e8af6146a6241196a33800a585dd320cf718f9ceca4777193993630fc531",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/fir/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/fir/attributes.log",
+        "log_sha256": "71a9da634afed4a8d12587e655496488e04af2b3bcd38ea15e271a4506af9d09",
+        "wall_seconds": 0.0009583109995219274
+      },
+      "fixture_sha256": "7bc00de30cd7d6e1e6f59782271cd4fe2b9663c716d616d5309a80e2f60be2d5"
+    },
+    {
+      "name": "iir",
+      "target_build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=fast",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=1",
+          "-I/workspace/build/qualification/fp-balanced/baremetal-contract-fast/iir",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/fail_syscalls.c",
+          "software/fp_bench/balanced.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/FilteringFunctions/arm_biquad_cascade_df2T_f32.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/FilteringFunctions/arm_biquad_cascade_df2T_init_f32.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/iir/rv32.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/iir/target-build.log",
+        "log_sha256": "f8769262c5eac9d680e3bb24cad604262e1dc1b737ee33ab2152ca57bebbb447",
+        "wall_seconds": 0.1642020239996782
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/iir/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/iir/strip.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.001407566000125371
+      },
+      "elf_sha256": "1c6e106298136dd718ba116bf159dc30fc1c9dea906f0fb2430df4340d61a1dd",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/iir/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/iir/attributes.log",
+        "log_sha256": "d8823d57818d293dc833f87a10c8a03cfc4d34545fee5657b449962cee566213",
+        "wall_seconds": 0.0008891560000847676
+      },
+      "fixture_sha256": "401924e8b575e87f6c3a7f760e2a8326770772da42239ee5aff48101c6abafea"
+    },
+    {
+      "name": "fft",
+      "target_build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=fast",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=2",
+          "-I/workspace/build/qualification/fp-balanced/baremetal-contract-fast/fft",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-I/workspace/build/qualification/fp-balanced/kissfft",
+          "-DNDEBUG",
+          "-DKISS_FFT_MALLOC=fp_fft_malloc",
+          "-DKISS_FFT_FREE=fp_fft_free",
+          "-include",
+          "software/fp_bench/fft_alloc_guard.h",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/fail_syscalls.c",
+          "software/fp_bench/balanced.c",
+          "/workspace/build/qualification/fp-balanced/kissfft/kiss_fft.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/fft/rv32.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/fft/target-build.log",
+        "log_sha256": "7e2e8da4a5499365e14b4a05a669577152da323ffaeb0ed1112caf4f8045a708",
+        "wall_seconds": 0.7115873290003947
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/fft/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/fft/strip.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.0022334880004564184
+      },
+      "elf_sha256": "fb91c70cb5fa040f01f2e7fcd56fd50427fb4defaf81134a73cc814543d7102b",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/fft/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/fft/attributes.log",
+        "log_sha256": "51b491bf233e0a5f26b72f11932f05e1d90720e5862edd202a6aa846cc09b347",
+        "wall_seconds": 0.0012075549993824097
+      },
+      "fixture_sha256": "a00e27408849f441313bef45afbedf6153e1de47f22d5da342c32efa7faf9f87"
+    },
+    {
+      "name": "pid",
+      "target_build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=fast",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=3",
+          "-I/workspace/build/qualification/fp-balanced/baremetal-contract-fast/pid",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/fail_syscalls.c",
+          "software/fp_bench/balanced.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/ControllerFunctions/arm_pid_init_f32.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/pid/rv32.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/pid/target-build.log",
+        "log_sha256": "f23ce5483d4fd36db926115e647103ea19b9552e536edc9517208f5ecc15259e",
+        "wall_seconds": 0.14084835700032272
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/pid/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/pid/strip.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.0016615829999864218
+      },
+      "elf_sha256": "22bc6dfaf2603e5348eee853165184f0b9c39af8b239f1cecfdce23b443aa583",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/pid/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/pid/attributes.log",
+        "log_sha256": "4ca18a77df3b9de3465430082aa99cb0ea755f2921227b7ef3dc8aefb9beecf5",
+        "wall_seconds": 0.0013143759997547022
+      },
+      "fixture_sha256": "086d757924622c1d4636413dce5635530a241ec901a4a352403c19d37cf795bd"
+    },
+    {
+      "name": "gemm",
+      "target_build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=fast",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=4",
+          "-I/workspace/build/qualification/fp-balanced/baremetal-contract-fast/gemm",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-DMINI_DATASET",
+          "-DDATA_TYPE_IS_FLOAT",
+          "-DPOLYBENCH_STACK_ARRAYS",
+          "-I/workspace/build/qualification/polybench-c-4.2.1-beta/utilities",
+          "-I/workspace/build/qualification/polybench-c-4.2.1-beta/linear-algebra/blas/gemm",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/fail_syscalls.c",
+          "software/fp_bench/balanced.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/gemm/rv32.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/gemm/target-build.log",
+        "log_sha256": "f855783a43c6aba17dfe02e23a494ce7a1945db61eab062ce0b60be9012e455a",
+        "wall_seconds": 0.15038768900012656
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/gemm/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/gemm/strip.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.0016493289995196392
+      },
+      "elf_sha256": "9a16655c43124ba4d274e7705236c3fee508332bda9721c423f5ae8e9db83092",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/gemm/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/gemm/attributes.log",
+        "log_sha256": "06998446d61dfb6903612491a690fa0a000fb59050115e342e6246000e7e11d2",
+        "wall_seconds": 0.0009074340005099657
+      },
+      "fixture_sha256": "39ab803bc2400bc3eba86219392bab5c33f0921736e9adeba92b8eb6b956a6a6"
+    },
+    {
+      "name": "bicg",
+      "target_build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=fast",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=5",
+          "-I/workspace/build/qualification/fp-balanced/baremetal-contract-fast/bicg",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-DMINI_DATASET",
+          "-DDATA_TYPE_IS_FLOAT",
+          "-DPOLYBENCH_STACK_ARRAYS",
+          "-I/workspace/build/qualification/polybench-c-4.2.1-beta/utilities",
+          "-I/workspace/build/qualification/polybench-c-4.2.1-beta/linear-algebra/kernels/bicg",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/fail_syscalls.c",
+          "software/fp_bench/balanced.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/bicg/rv32.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/bicg/target-build.log",
+        "log_sha256": "1e356de22b1b635a39eea6f11308d3195e9ceb61c2cc6afdf10caf303196871c",
+        "wall_seconds": 0.13912137399984204
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/bicg/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/bicg/strip.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.0023073889997249353
+      },
+      "elf_sha256": "35c46dd5c424f24982c05034680abd9a9a38ca0c48657e560ccd97471a84a38f",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/bicg/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/bicg/attributes.log",
+        "log_sha256": "e21e274f2cebc31d2758e713949149935f96bd2b120b9d6d1cdc23d266d2e19f",
+        "wall_seconds": 0.0012472349999370635
+      },
+      "fixture_sha256": "bc13451e5ee70f8b9ff2bc33e8f158cab00a1f1ded5a01f1dba9310759ae9db9"
+    },
+    {
+      "name": "cholesky",
+      "target_build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=fast",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=6",
+          "-I/workspace/build/qualification/fp-balanced/baremetal-contract-fast/cholesky",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-DMINI_DATASET",
+          "-DDATA_TYPE_IS_FLOAT",
+          "-DPOLYBENCH_STACK_ARRAYS",
+          "-I/workspace/build/qualification/polybench-c-4.2.1-beta/utilities",
+          "-I/workspace/build/qualification/polybench-c-4.2.1-beta/linear-algebra/solvers/cholesky",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/fail_syscalls.c",
+          "software/fp_bench/balanced.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/cholesky/rv32.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/cholesky/target-build.log",
+        "log_sha256": "cac276f58e8ab293e1fb2b09162c2ca6d2c7838e59e4b5096369271e7ca45314",
+        "wall_seconds": 0.1588657090005654
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/cholesky/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/cholesky/strip.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.0016727749998608488
+      },
+      "elf_sha256": "d3d004ba777fe92ccf0d85d2cdedad7eddc9ede16f630501dace9ddf3e9d383d",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/cholesky/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/cholesky/attributes.log",
+        "log_sha256": "9624fd5091c0884a6848fd4fc84d1dd94702de8137bdf053c0da45160fb50aad",
+        "wall_seconds": 0.0011783320005633868
+      },
+      "fixture_sha256": "c902e3b0ea8c5db9b0e34bc9be472c9c2b44401dd92bd1044fe1a49b9448fcf0"
+    },
+    {
+      "name": "svm",
+      "target_build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-std=gnu11",
+          "-O3",
+          "-fno-fast-math",
+          "-ffp-contract=fast",
+          "-ffunction-sections",
+          "-fdata-sections",
+          "-fstack-usage",
+          "-D__GNUC_PYTHON__",
+          "-DFP_CASE=7",
+          "-I/workspace/build/qualification/fp-balanced/baremetal-contract-fast/svm",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/Include",
+          "-I/workspace/build/qualification/fp-balanced/CMSIS-DSP/PrivateInclude",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/include",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/embench/fail_syscalls.c",
+          "software/fp_bench/balanced.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/SVMFunctions/arm_svm_linear_predict_f32.c",
+          "/workspace/build/qualification/fp-balanced/CMSIS-DSP/Source/SVMFunctions/arm_svm_linear_init_f32.c",
+          "-Wl,--gc-sections",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/svm/rv32.elf",
+          "-Wl,--start-group",
+          "-lm",
+          "-lc",
+          "-lgcc",
+          "-Wl,--end-group"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/svm/target-build.log",
+        "log_sha256": "84f30c18df41c77192265d1bc8e92e073ae1266494d3b6cb21a0ed98c6349e96",
+        "wall_seconds": 0.1724689060001765
+      },
+      "strip": {
+        "command": [
+          "riscv-none-elf-strip",
+          "--strip-unneeded",
+          "--keep-symbol=tohost",
+          "--keep-symbol=fromhost",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/svm/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/svm/strip.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.001352303000203392
+      },
+      "elf_sha256": "cce4a937dd64b388e6fea04ae59d426e9311dd321c4af21e6b0dee90f3c4e759",
+      "attributes": {
+        "command": [
+          "riscv-none-elf-readelf",
+          "-h",
+          "-A",
+          "/workspace/build/qualification/fp-balanced/baremetal-contract-fast/svm/rv32.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/baremetal-contract-fast/svm/attributes.log",
+        "log_sha256": "dbb43bec59d0caaa11e9f710e8edb584115c7006918f0c59c66947fcb697e89c",
+        "wall_seconds": 0.0009422459997949773
+      },
+      "fixture_sha256": "665e371ba951908d8d535174a79c27f66036a18070a96374f92e4ab3fe17d078"
+    }
+  ]
+}

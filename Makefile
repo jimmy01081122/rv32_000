@@ -116,6 +116,14 @@ qualify-fp-balanced-reference: check-fp-env check-fp-sources ## Numerically prob
 qualify-fp-balanced-dut: check-fp-env check-fp-sources sim-build ## Also validate every FP32 output on the DUT
 	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/qualify_fp_balanced.py --run-dut'
 
+# Baseline contract checks do not require the physical tools.
+.PHONY: check-baseline-contract check-memory-time
+check-baseline-contract: ## Verify the complete frozen 19+8 input/RTL contract
+	python3 scripts/test_baseline_contract.py
+
+check-memory-time: check-lsu-interface ## Check absolute-time memory and unchanged legacy behavior
+	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/test_fixed_time_memory.py && python3 scripts/check_memory_time.py'
+
 .PHONY: check-lsu-interface
 check-lsu-interface: check-fp-env sim-build compile-tests ## Check request backpressure and precise load/store access faults with assertions
 	$(DOCKER_RUN) $(FP_IMAGE) -c 'SIM_BUILD_DIR=build/sim-assert SIM_ASSERTIONS=1 bash scripts/build_sim.sh $(JOBS)'

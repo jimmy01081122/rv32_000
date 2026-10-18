@@ -13,6 +13,7 @@
 #include "sim_mem.h"
 #include "fp_roi_profile.h"
 #include "core_roi_profile.h"
+#include "fixed_time_memory.h"
 
 // Verilator 4.x assertion diagnostics call this legacy simulation-time hook.
 static uint64_t sim_time = 0;
@@ -23,6 +24,10 @@ struct SimConfig {
     std::string vcd_file;
     std::string trace_file;
     std::string core_profile_file;
+    std::string memory_audit_file;
+    uint64_t core_period_ps = 0, imem_response_ps = 0, imem_interval_ps = 0, dmem_response_ps = 0;
+    bool fixed_time() const { return core_period_ps != 0; }
+    bool legacy_delay_selected = false;
     uint64_t max_cycles = 1000000;
     uint64_t no_retire_limit = 10000;
     int dmem_latency = 1;
@@ -35,6 +40,14 @@ struct SimConfig {
     bool profile_fp_roi = false;
 };
 
+uint64_t positive_ps(const std::string& value) {
+    if (value.empty() || value.find_first_not_of("0123456789") != std::string::npos)
+        throw std::invalid_argument("physical timing must be a positive integer ps value");
+    uint64_t result = std::stoull(value);
+    if (!result) throw std::invalid_argument("physical timing must be positive");
+    return result;
+}
+
 void parse_args(int argc, char** argv, SimConfig& config) {
     for (int i = 1; i < argc; ++i) {
         std::string arg = argv[i];
@@ -46,6 +59,16 @@ void parse_args(int argc, char** argv, SimConfig& config) {
         } else if (arg.rfind("+trace=", 0) == 0 || arg.rfind("--trace=", 0) == 0) {
             config.trace_file = arg.substr(arg.find('=') + 1);
             config.enable_trace = true;
+        } else if (arg.rfind("+memory-audit=", 0) == 0) {
+            config.memory_audit_file = arg.substr(arg.find('=') + 1);
+        } else if (arg.rfind("+core-period-ps=", 0) == 0) {
+            config.core_period_ps = positive_ps(arg.substr(arg.find('=') + 1));
+        } else if (arg.rfind("+imem-response-ps=", 0) == 0) {
+            config.imem_response_ps = positive_ps(arg.substr(arg.find('=') + 1));
+        } else if (arg.rfind("+imem-interval-ps=", 0) == 0) {
+            config.imem_interval_ps = positive_ps(arg.substr(arg.find('=') + 1));
+        } else if (arg.rfind("+dmem-response-ps=", 0) == 0) {
+            config.dmem_response_ps = positive_ps(arg.substr(arg.find('=') + 1));
         } else if (arg == "+profile-fp-roi") {
             config.profile_fp_roi = true;
         } else if (arg.rfind("+profile-core-roi=", 0) == 0) {
@@ -56,6 +79,7 @@ void parse_args(int argc, char** argv, SimConfig& config) {
         } else if (arg.rfind("+no-retire-max=", 0) == 0) {
             config.no_retire_limit = std::stoull(arg.substr(arg.find('=') + 1));
         } else if (arg.rfind("+dmem-latency=", 0) == 0 || arg.rfind("--dmem-latency=", 0) == 0) {
+            config.legacy_delay_selected = true;
             config.dmem_latency = std::stoi(arg.substr(arg.find('=') + 1));
         } else if (arg.rfind("+dmem-ready-period=", 0) == 0) {
             config.dmem_ready_period = std::stoul(arg.substr(arg.find('=') + 1));
@@ -65,6 +89,7 @@ void parse_args(int argc, char** argv, SimConfig& config) {
             config.fault_load = !config.fault_store;
             config.fault_addr = std::stoul(arg.substr(arg.find('=') + 1), nullptr, 0);
         } else if (arg.rfind("+dmem-rand-delay=", 0) == 0 || arg.rfind("--dmem-rand-delay=", 0) == 0) {
+            config.legacy_delay_selected = true;
             config.dmem_rand_delay = std::stoi(arg.substr(arg.find('=') + 1));
         }
     }
@@ -74,7 +99,19 @@ int main(int argc, char** argv) {
     Verilated::commandArgs(argc, argv);
 
     SimConfig config;
-    parse_args(argc, argv, config);
+    try {
+        parse_args(argc, argv, config);
+        bool any_time = config.core_period_ps || config.imem_response_ps || config.imem_interval_ps || config.dmem_response_ps;
+        if (any_time && !(config.core_period_ps && config.imem_response_ps && config.imem_interval_ps && config.dmem_response_ps))
+            throw std::invalid_argument("fixed time requires core-period, imem-response, imem-interval and dmem-response in ps");
+        if (any_time && config.legacy_delay_selected)
+            throw std::invalid_argument("fixed physical time cannot be mixed with cycle latency/random delay options");
+        if (any_time && config.max_cycles > UINT64_MAX / config.core_period_ps)
+            throw std::invalid_argument("physical simulation duration overflow");
+    } catch (const std::exception& e) {
+        std::cerr << "Invalid simulator arguments: " << e.what() << std::endl;
+        return 2;
+    }
 
     if (config.elf_file.empty()) {
         std::cout << "Usage: " << argv[0] << " +elf=<path.elf> [+vcd=<path.vcd>] [+trace=<path.log>] [+max-cycles=N]" << std::endl;
@@ -156,6 +193,12 @@ int main(int argc, char** argv) {
         bool error;
     };
     std::deque<DMemQueueEntry> dmem_q;
+    FixedTimePort timed_i(config.fixed_time() ? config.imem_response_ps : 1,
+                          config.fixed_time() ? config.imem_interval_ps : 1, 4);
+    FixedTimePort timed_d(config.fixed_time() ? config.dmem_response_ps : 1,
+                          config.fixed_time() ? config.dmem_response_ps : 1, 1);
+    uint32_t minimum_sp = SimMemory::RAM_BASE + SimMemory::RAM_SIZE;
+    bool stack_seen = false;
 
     bool fault_issued = false;
     uint64_t fault_responses = 0, blocked_load_cycles = 0, blocked_store_cycles = 0;
@@ -178,17 +221,20 @@ int main(int argc, char** argv) {
         // --- Falling Edge (Clock Low) ---
         top->clk = 0;
 
-        // Drive response and ready to core
-        top->imem_req_ready = 1;
-        top->imem_rsp_valid = imem_pipe_valid ? 1 : 0;
-        top->imem_rsp_rdata = imem_pipe_data;
+        // Drive response and ready to core. Fixed-time ports retain accepted
+        // transactions across redirects and never return data before due_ps.
+        const uint64_t now_ps = config.fixed_time() ? cycles * config.core_period_ps : 0;
+        top->imem_req_ready = config.fixed_time() ? timed_i.ready(now_ps) : 1;
+        top->imem_rsp_valid = config.fixed_time() ? timed_i.valid(now_ps) : imem_pipe_valid;
+        top->imem_rsp_rdata = config.fixed_time() ? (timed_i.valid(now_ps) ? timed_i.front().data : 0) : imem_pipe_data;
         top->imem_rsp_error = 0;
 
-        top->dmem_req_ready = dmem_q.empty() && cycles % config.dmem_ready_period == 0 ? 1 : 0;
-        bool dmem_rsp_drive = (!dmem_q.empty() && dmem_q.front().delay <= 0);
+        const bool dmem_idle = config.fixed_time() ? timed_d.empty() : dmem_q.empty();
+        top->dmem_req_ready = (config.fixed_time() ? timed_d.ready(now_ps) : dmem_q.empty()) && cycles % config.dmem_ready_period == 0;
+        bool dmem_rsp_drive = config.fixed_time() ? timed_d.valid(now_ps) : (!dmem_q.empty() && dmem_q.front().delay <= 0);
         top->dmem_rsp_valid = dmem_rsp_drive ? 1 : 0;
-        top->dmem_rsp_rdata = dmem_rsp_drive ? dmem_q.front().data : 0;
-        top->dmem_rsp_error = dmem_rsp_drive && dmem_q.front().error;
+        top->dmem_rsp_rdata = dmem_rsp_drive ? (config.fixed_time() ? timed_d.front().data : dmem_q.front().data) : 0;
+        top->dmem_rsp_error = dmem_rsp_drive && (config.fixed_time() ? timed_d.front().error : dmem_q.front().error);
 
         top->eval();
         if (tfp) tfp->dump(sim_time);
@@ -200,16 +246,21 @@ int main(int argc, char** argv) {
         bool imem_accepted = (top->imem_req_valid && top->imem_req_ready);
         uint32_t next_imem_data = imem_accepted ? memory.read32(top->imem_req_addr) : 0;
         bool next_imem_valid = imem_accepted;
+        if (config.fixed_time()) {
+            if (top->imem_rsp_valid && top->imem_rsp_ready) timed_i.consume(now_ps);
+            if (imem_accepted) timed_i.accept(now_ps, next_imem_data);
+        }
 
-        if (top->dmem_req_valid && !top->dmem_req_ready && dmem_q.empty()) {
+        if (top->dmem_req_valid && !top->dmem_req_ready && dmem_idle) {
             if (top->dmem_req_wen) ++blocked_store_cycles;
             else ++blocked_load_cycles;
         }
 
         // D-memory response handshake
         if (top->dmem_rsp_valid && top->dmem_rsp_ready) {
-            if (dmem_q.front().error) ++fault_responses;
-            dmem_q.pop_front();
+            if (top->dmem_rsp_error) ++fault_responses;
+            if (config.fixed_time()) timed_d.consume(now_ps);
+            else dmem_q.pop_front();
         }
 
         // D-memory request handshake
@@ -234,7 +285,8 @@ int main(int argc, char** argv) {
                 lat += (std::rand() % (config.dmem_rand_delay + 1));
             }
             entry.delay = lat;
-            dmem_q.push_back(entry);
+            if (config.fixed_time()) timed_d.accept(now_ps, entry.data, entry.error);
+            else dmem_q.push_back(entry);
         }
 
         // --- Rising Edge (Clock High) ---
@@ -267,6 +319,10 @@ int main(int argc, char** argv) {
             bool     int_dst_valid = (top->commit_trace[6] >> 21) & 1;
             uint32_t int_dst_arch  = (top->commit_trace[6] >> 16) & 0x1F;
             uint32_t int_dst_data  = ((top->commit_trace[6] & 0xFFFF) << 16) | ((top->commit_trace[5] >> 16) & 0xFFFF);
+            if (int_dst_valid && int_dst_arch == 2) {
+                stack_seen = true;
+                minimum_sp = std::min(minimum_sp, int_dst_data);
+            }
             bool     fp_dst_valid  = (top->commit_trace[5] >> 15) & 1;
             uint32_t fp_dst_arch   = (top->commit_trace[5] >> 10) & 0x1F;
             uint32_t fp_dst_data   = ((top->commit_trace[5] & 0x3FF) << 22) | ((top->commit_trace[4] >> 10) & 0x3FFFFF);
@@ -325,6 +381,28 @@ int main(int argc, char** argv) {
         std::cout << "DMEM ENV blocked_load_cycles=" << blocked_load_cycles
                   << " blocked_store_cycles=" << blocked_store_cycles
                   << " fault_requests=" << fault_issued << " fault_responses=" << fault_responses << std::endl;
+    }
+
+    if (!config.memory_audit_file.empty()) {
+        std::ofstream audit(config.memory_audit_file);
+        if (!audit) { std::cerr << "Cannot open memory audit" << std::endl; return 2; }
+        audit << "{\n  \"fixed_time\": " << (config.fixed_time() ? "true" : "false")
+              << ",\n  \"core_period_ps\": " << config.core_period_ps
+              << ",\n  \"imem_response_ps\": " << config.imem_response_ps
+              << ",\n  \"imem_interval_ps\": " << config.imem_interval_ps
+              << ",\n  \"dmem_response_ps\": " << config.dmem_response_ps
+              << ",\n  \"imem_requests\": " << timed_i.requests << ",\n  \"imem_responses\": " << timed_i.responses
+              << ",\n  \"dmem_requests\": " << timed_d.requests << ",\n  \"dmem_responses\": " << timed_d.responses
+              << ",\n  \"imem_min_response_ps\": " << (timed_i.responses ? timed_i.min_response_ps : 0)
+              << ",\n  \"imem_max_response_ps\": " << timed_i.max_response_ps
+              << ",\n  \"dmem_min_response_ps\": " << (timed_d.responses ? timed_d.min_response_ps : 0)
+              << ",\n  \"dmem_max_response_ps\": " << timed_d.max_response_ps
+              << ",\n  \"imem_max_handoff_ps\": " << timed_i.max_handoff_ps
+              << ",\n  \"dmem_max_handoff_ps\": " << timed_d.max_handoff_ps
+              << ",\n  \"stack_pointer_seen\": " << (stack_seen ? "true" : "false")
+              << ",\n  \"minimum_retired_sp\": " << minimum_sp
+              << ",\n  \"maximum_stack_bytes_from_sp\": " << (stack_seen ? SimMemory::RAM_BASE + SimMemory::RAM_SIZE - minimum_sp : 0)
+              << "\n}\n";
     }
 
     double ipc = (cycles > 0) ? (static_cast<double>(retired_insns) / cycles) : 0.0;
