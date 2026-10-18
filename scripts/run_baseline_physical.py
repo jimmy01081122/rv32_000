@@ -27,12 +27,17 @@ def main():
     parser.add_argument('--detached',action='store_true',help='durable worker in an existing container; does not depend on a tool session')
     parser.add_argument('--synthesis-from',type=Path,help='reuse a completed, identity-checked synthesis stage from another attempt')
     parser.add_argument('--cts-from',type=Path,help='restart global routing from a completed, identity-checked TT CTS stage')
+    parser.add_argument('--grt-from',type=Path,help='incrementally repair a completed, identity-checked TT global-route stage')
+    parser.add_argument('--eco-slew-margin',type=int,default=30,help='TT ECO slew margin percent; independent corner limits stay unchanged')
+    parser.add_argument('--eco-hold-margin-ps',type=int,default=50,help='TT ECO hold repair margin ps; independent corner uncertainty stays unchanged')
     args = parser.parse_args()
     if args.period_ps <= 2200 or args.jobs < 1:
         parser.error('period must exceed frozen 1100ps input + output budgets; jobs positive')
     if args.detached and not args.container:parser.error('--detached requires --container')
     if args.detached and args.resume_reason:parser.error('use a fresh label for detached attempts; synthesis stages can be reused')
     if args.cts_from and (args.synthesis_from or args.resume_reason):parser.error('--cts-from requires its own fresh attempt')
+    if args.grt_from and (args.cts_from or args.synthesis_from or args.resume_reason):parser.error('--grt-from requires its own fresh attempt')
+    if not 0<=args.eco_slew_margin<100 or args.eco_hold_margin_ps<0:parser.error('invalid ECO margins')
     if args.label and not re.fullmatch(r'[a-zA-Z0-9_-]+', args.label):
         parser.error('label may contain letters, digits, underscore and hyphen only')
     source = ROOT / 'build/baseline-setup/ORFS'
@@ -81,7 +86,8 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
                 or mounts.get('/workspace') != str(ROOT) or mounts.get('/orfs-source') != str(source)):
             parser.exit(1, 'container image, state or source mounts do not match the pinned setup\n')
         prefix = ['docker','exec','--user','1000:1000','-w','/workspace',args.container,'/bin/bash']
-    cmd = prefix + ['-c', 'exec make -f /orfs-source/flow/Makefile "$@"', 'baseline-orfs',
+    makefile='/workspace/physical/asap7/baseline/eco.mk' if args.grt_from else '/orfs-source/flow/Makefile'
+    cmd = prefix + ['-c', f'exec make -f {makefile} "$@"', 'baseline-orfs',
            'FLOW_HOME=/orfs-source/flow', 'PLATFORM_DIR=/OpenROAD-flow-scripts/flow/platforms/asap7',
            'PLATFORMS_DIR=/OpenROAD-flow-scripts/flow/platforms',
            'OPENROAD_EXE=/OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad',
@@ -102,7 +108,9 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
            # ORFS WNS pass. Ordinary global-route setup/hold repair stays enabled.
            'OPT_POST_GRT_WNS=0']
     if args.adder_mapping=='abc':cmd.append('ADDER_MAP_FILE=')
-    cmd.append('grt')
+    if args.grt_from:
+        cmd.extend([f'SLEW_MARGIN={args.eco_slew_margin}',f'HOLD_SLACK_MARGIN={args.eco_hold_margin_ps}'])
+    cmd.append('baseline-grt-eco' if args.grt_from else 'grt')
     report = {'scope': 'global-route research baseline exploration, not detailed-route signoff',
               'period_ps': args.period_ps, 'orfs_commit': commit, 'command': cmd,
               'sdc_sha256': sha(sdc), 'lowered_rtl_sha256': sha(ROOT/'build/baseline-setup/rtl_lowered.v'),
@@ -118,6 +126,35 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
     report['source_commit'] = subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip()
     report['source_status'] = subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).splitlines()
     cts_inputs=[]
+    if args.grt_from:
+        from check_physical_closure import check_constraints
+        cache=args.grt_from.resolve()
+        if not cache.is_relative_to(ROOT/'build'):parser.error('GRT source must be under build/')
+        prior=json.loads((cache/'run.json').read_text())
+        for field in ('orfs_commit','lowered_rtl_sha256','rtl_files_sha256','config_sha256',
+                      'local_image_id','process_lowering_sha256','period_ps','synthesis_adder_mapping'):
+            if prior[field]!=report[field]:parser.error('cached global-route input changed: '+field)
+        if (prior.get('construction_timing_corners')!=['TT'] or not prior.get('input_identities_unchanged')
+                or not prior.get('flow_completed') or prior.get('returncode')!=0):
+            parser.error('ECO requires a completed unchanged TT global-route attempt')
+        relative=Path('asap7/rv32_post_lsu_v1/base')
+        odb=cache/'results'/relative/'5_1_grt.odb';input_sdc=odb.with_suffix('.sdc')
+        check_constraints(input_sdc.read_text(),args.period_ps)
+        target=directory/'results'/relative;target.mkdir(parents=True,exist_ok=True)
+        for source_file in (odb,input_sdc):
+            output=target/('5_0_grt_input'+source_file.suffix)
+            if output.exists():parser.error('ECO destination already exists')
+            shutil.copy2(source_file,output);cts_inputs.append(output)
+        report['cached_grt']={'source':str(cache.relative_to(ROOT)),
+                              'source_report_sha256':sha(cache/'run.json'),
+                              'odb_sha256':sha(odb),'sdc_sha256':sha(input_sdc)}
+        report['post_route_eco']={'construction_corner':'TT','slew_margin_percent':args.eco_slew_margin,
+                                  'hold_margin_ps':args.eco_hold_margin_ps,
+                                  'script_sha256':sha(ROOT/'physical/asap7/baseline/repair.tcl'),
+                                  'makefile_sha256':sha(ROOT/'physical/asap7/baseline/eco.mk'),
+                                  'independent_acceptance_constraints':'unchanged'}
+        for key in ('cached_synthesis','cached_cts'):
+            if key in prior:report[key]=prior[key]
     if args.cts_from:
         from check_physical_closure import check_constraints
         cache=args.cts_from.resolve()
@@ -170,7 +207,7 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
                                    'source_report_sha256':sha(cache/'run.json'),
                                    'netlist':str(netlist.relative_to(ROOT)),'netlist_sha256':sha(netlist),
                                    'log':str(synth_log.relative_to(ROOT)),'log_sha256':sha(synth_log)}
-    worker_command=['make','-f','/orfs-source/flow/Makefile',*cmd[cmd.index('baseline-orfs')+1:]]
+    worker_command=['make','-f',makefile,*cmd[cmd.index('baseline-orfs')+1:]]
     if args.detached:
         inputs={guest(ROOT/name):value for name,value in report['rtl_files_sha256'].items()}
         for path in (sdc,ROOT/'physical/asap7/baseline/config.mk',ROOT/'physical/asap7/baseline/lower_processes.tcl',
@@ -178,6 +215,9 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
             inputs[guest(path)]=sha(path)
         if args.synthesis_from:inputs[guest(netlist)]=sha(netlist)
         for path in cts_inputs:inputs[guest(path)]=sha(path)
+        if args.grt_from:
+            for path in (ROOT/'physical/asap7/baseline/eco.mk',ROOT/'physical/asap7/baseline/repair.tcl'):
+                inputs[guest(path)]=sha(path)
         spec=directory/'job.json'
         spec.write_text(json.dumps({'report':guest(directory/'run.json'),'log':guest(directory/'make.log'),
                                     'command':worker_command,'cwd':'/workspace','inputs':inputs},indent=2)+'\n')

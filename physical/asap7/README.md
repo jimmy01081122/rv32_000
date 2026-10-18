@@ -58,6 +58,14 @@ period, mapping policy and hashed inputs. It checks the completed stage log,
 database copy identity and the serialized I/O/clock contract, then starts
 `do-5_1_grt` in a fresh output directory. A later failure in the source attempt
 remains a failure. Mismatched periods or mapping policies are rejected.
+When independent corners expose electrical gaps, `--grt-from build/...` starts
+an explicit TT-only post-route ECO from immutable incoming DB/SDC files. It
+reuses the pinned ORFS environment and existing routes, repairs slew with a
+30% optimizer margin and hold with 50 ps, legalizes and incrementally reroutes.
+These optimizer margins preserve the independent acceptance constraints. The
+Makefile/Tcl and incoming checkpoint are hashed by the durable worker. All three
+corners must be collected and reviewed again after this stage; the initial v4
+run passed setup/hold but failed SS/FF slew, so it remains unqualified.
 
 The following items describe the **legacy** flow in this directory:
 

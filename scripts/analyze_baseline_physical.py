@@ -36,6 +36,10 @@ def main():
                      ('physical/asap7/baseline/lower_processes.tcl','process_lowering_sha256'),
                      ('build/baseline-setup/rtl_lowered.v','lowered_rtl_sha256')]:
         if sha(ROOT/path)!=implementation[key]:parser.error('implementation input changed: '+path)
+    if 'post_route_eco' in implementation:
+        for name,key in [('repair.tcl','script_sha256'),('eco.mk','makefile_sha256')]:
+            if sha(ROOT/'physical/asap7/baseline'/name)!=implementation['post_route_eco'][key]:
+                parser.error('post-route ECO source changed: '+name)
     if sha(attempt/'constraint.sdc')!=implementation['sdc_sha256']:parser.error('implementation SDC changed')
     image_id=subprocess.check_output(['docker','image','inspect',IMAGE,'--format','{{.Id}}'],text=True).strip()
     actual=json.loads(subprocess.check_output(['docker','inspect',args.container],text=True))[0]
