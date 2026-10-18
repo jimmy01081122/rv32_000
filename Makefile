@@ -127,6 +127,10 @@ compare-fp-contraction: check-fma-finite check-fp-sources ## Matched off/fast FP
 profile-fp-bottlenecks: compare-fp-contraction ## Diagnose FIR/BiCG instruction removal and retirement gaps
 	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/profile_fp_bottlenecks.py'
 
+.PHONY: profile-lsu-candidates
+profile-lsu-candidates: check-fp-env sim-build ## Profile six qualified cases at response delays 1/2/4 before LSU selection
+	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/profile_lsu_candidates.py'
+
 .PHONY: summarize-embench-fp-dut
 summarize-embench-fp-dut: ## Check complete DUT evidence and list each workload's diagnostic cycles
 	python3 scripts/summarize_embench_fp_dut.py
