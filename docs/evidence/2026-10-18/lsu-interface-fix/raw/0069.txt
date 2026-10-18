@@ -1,0 +1,16 @@
+[SimMemory] Loaded segment to 0x80000000 (filesz: 0x250, memsz: 0x250)
+[SimMemory] Found 'tohost' symbol at 0x80000240
+[SimMemory] ELF loaded successfully. Entry PC = 0x80000000
+[Simulator] Starting simulation run...
+[
+[Simulator] ERROR: Watchdog timeout! No instruction retired for 10000 cycles. (Current cycle: 10126)
+DMEM ENV blocked_load_cycles=1 blocked_store_cycles=10 fault_requests=0 fault_responses=0
+
+================ Simulation Summary ================
+  ELF binary     : build/tests/partial_overlap.elf
+  Cycles         : 10126
+  Retired insns  : 64
+  IPC            : 0.0063
+  Exit status    : TIMEOUT / HALTED
+====================================================
+

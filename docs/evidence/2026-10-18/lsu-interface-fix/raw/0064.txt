@@ -1,0 +1,16 @@
+[SimMemory] Loaded segment to 0x80000000 (filesz: 0x390, memsz: 0x390)
+[SimMemory] Found 'tohost' symbol at 0x80000380
+[SimMemory] ELF loaded successfully. Entry PC = 0x80000000
+[Simulator] Starting simulation run...
+R
+[Simulator] ERROR: Watchdog timeout! No instruction retired for 10000 cycles. (Current cycle: 10079)
+DMEM ENV blocked_load_cycles=1 blocked_store_cycles=1 fault_requests=0 fault_responses=0
+
+================ Simulation Summary ================
+  ELF binary     : build/tests/rv32i_basic.elf
+  Cycles         : 10079
+  Retired insns  : 49
+  IPC            : 0.0049
+  Exit status    : TIMEOUT / HALTED
+====================================================
+

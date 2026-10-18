@@ -1,0 +1,174 @@
+{
+  "scope": "LSU interface correctness qualification, no optimization or physical signoff",
+  "started_utc": "2026-10-18T09:06:12.496869+00:00",
+  "start": {
+    "commit": "ec0baa398a02a7dbe1981208aee792c4ea3b71e6",
+    "status": ""
+  },
+  "steps": [
+    {
+      "command": [
+        "make",
+        "lint",
+        "JOBS=4"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/lsu-fix-run/0-lint.log",
+      "log_sha256": "4b538b30e81e42b03ea77f4cc254b42f3f96969475b183356a1012b574df1594",
+      "seconds": 7.2617657599994345
+    },
+    {
+      "command": [
+        "make",
+        "check-lsu-interface",
+        "JOBS=4"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/lsu-fix-run/1-check-lsu-interface.log",
+      "log_sha256": "ed7177f1214f4774ba91d04fb275e0722e89c4d1a5f70795d612fcdc82b317d8",
+      "seconds": 47.96586108500014
+    },
+    {
+      "command": [
+        "make",
+        "test",
+        "JOBS=4"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/lsu-fix-run/2-test.log",
+      "log_sha256": "70be26caeeccd2468dd690618cbb5209749a39f74a1259d47c7b85b6451fb189",
+      "seconds": 8.264513942000121
+    },
+    {
+      "command": [
+        "make",
+        "diff-test",
+        "JOBS=4"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/lsu-fix-run/3-diff-test.log",
+      "log_sha256": "d0256fa903c0c3700f32ee2cee433255ff8e268779aabeb1c1f3ae9bf015dbdd",
+      "seconds": 9.426697332000003
+    },
+    {
+      "command": [
+        "make",
+        "check-fma-finite",
+        "JOBS=4"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/lsu-fix-run/4-check-fma-finite.log",
+      "log_sha256": "a26a3337fa2d9723c8278180c39ae9dc48da49035eb26ee156a9f2eb06580d34",
+      "seconds": 15.93001853900023
+    },
+    {
+      "command": [
+        "make",
+        "qualify-fp-balanced-dut",
+        "JOBS=4"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/lsu-fix-run/5-qualify-fp-balanced-dut.log",
+      "log_sha256": "dc54ae49c830588593a142fb87fbbe47c259fa8b006d4c33c7b67908dbfb5bc7",
+      "seconds": 77.05392616899917
+    },
+    {
+      "command": [
+        "make",
+        "qualify-embench-fp-dut",
+        "JOBS=4"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/lsu-fix-run/6-qualify-embench-fp-dut.log",
+      "log_sha256": "e31de9a354c57f424e36e22cd7052434d486b8dca682bc3d4b999640f8f72fc1",
+      "seconds": 1127.9208442189993
+    },
+    {
+      "command": [
+        "make",
+        "summarize-embench-fp-dut",
+        "JOBS=4"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/lsu-fix-run/7-summarize-embench-fp-dut.log",
+      "log_sha256": "e4a63be26ad37257fd930f0d9c79d0a4b174c1f61a6afe49e3e1c83172c31fc3",
+      "seconds": 0.06585830800031545
+    },
+    {
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_fp*.py"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/lsu-fix-run/8--m.log",
+      "log_sha256": "5b2b5ea9111172196c7541126fdb8c4583ebf35f00bf4dd969e57faa405b1c13",
+      "seconds": 0.16442431899849907
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/test_lsu_candidates.py"
+      ],
+      "returncode": 0,
+      "log": "build/qualification/lsu-fix-run/9-scripts-test_lsu_candidates.py.log",
+      "log_sha256": "83166b089fbcb82fac63f22522fa6ae99bb5e46368cd35d756277fd463dd6346",
+      "seconds": 0.11442806200102495
+    }
+  ],
+  "images": {
+    "rv32ooo-sim:g1": "sha256:0d80d39df2f24dc60a77387242f781edc1cc67f53865719981e01b5b5a989d26",
+    "rv32ooo-fp:p1": "sha256:2140263677b3a378d5cab75a3d0d4fd285ddb38a1a5a1f81f5cf97db024a02d5"
+  },
+  "source_sha256": {
+    "Makefile": "5f882c4e3861e7b380c631e76b6c91788a771ac900e3808d8b25a42ec487d8e8",
+    "rtl/core/rv32_ooo_core.sv": "81c116be3845d05c63ab6ffa31efdf5fee9e7374a6902ef0d54555e8a13fcb1c",
+    "rtl/csr/rv32_ooo_csr.sv": "68c911e9e956761b3ffdb86fec2b82e94b5fc7632953dca308c30658e70f176e",
+    "rtl/execute/fp/rv32_ooo_fp_divsqrt.sv": "0c5e80032fd016aa60557d3e3908f07732c9230c50cea3519e1106b2f7715b3f",
+    "rtl/execute/fp/rv32_ooo_fp_execute.sv": "ee83a69dfbd7b2c9d141ebe14e1c40605ca43ce0f5f490d324113bcb9465c63b",
+    "rtl/execute/fp/rv32_ooo_fp_simple.sv": "bff3232ceafd3da96d85729ad630745b14cd47e398a32e35d11c25fe38547f4b",
+    "rtl/execute/int/rv32_ooo_divider.sv": "b8ca86ee486d8976ccf07f25adb4955a3945d348a7f5b1350fb8b6edbec91de6",
+    "rtl/execute/int/rv32_ooo_int_execute.sv": "dde3fee3c0031150f9cf45b9b1d6f2e665868be754ec70566d95c77dff7bb632",
+    "rtl/execute/int/rv32_ooo_multiplier.sv": "09afa5a87fbd59873a4cfc5f78a48492e928cc7b16f372dd51d71af96703a1d8",
+    "rtl/frontend/rv32_ooo_frontend.sv": "c0e222d798dc8c18d5e75bd25a7c9cf0d7b053f91c49650d27c0b8bb49f2dd4d",
+    "rtl/issue/rv32_ooo_fp_iq.sv": "7968fa7b3ce4b51b54e4ba21e41b1b5bc4989ac68b405c7a2a7e3e3394e43ca2",
+    "rtl/issue/rv32_ooo_int_iq.sv": "c12029eec5fca025da55c95d6c0207f6472f9eb653a3a1020d1543f78aa9d349",
+    "rtl/lsu/rv32_ooo_lsu.sv": "a3bd7ce933b33088c2fda9b9ff4b13dc9c7b0a5ac7ec6972b832b7dc02e612b0",
+    "rtl/pkg/rv32_ooo_params.sv": "3fc72080a0387a5424badf665656399ecc48e1c9170bedecb0aea16bd7602523",
+    "rtl/pkg/rv32_ooo_types.sv": "01be8e3b4c3959d9284e105412e415d77a6702db7de86eb1505d6fd428ee6759",
+    "rtl/rename/rv32_ooo_fp_prf.sv": "452daf771a3c83fc24693a54b6ce46da762a1942b5ca56eac5440e948bb83603",
+    "rtl/rename/rv32_ooo_int_prf.sv": "69261b57971908d2765555c540ba4292a169024a222983143fdf4785f0fe2406",
+    "rtl/rename/rv32_ooo_rename.sv": "1eb31d73eb54785c3e816eda35381e5b9d362b378ad0f118ac125d753063d574",
+    "rtl/rob/rv32_ooo_rob.sv": "94e4874dfcb3274fd5d0759776acde8dae373988151b4470698fa847c0a78555",
+    "scripts/build_sim.sh": "756ae61178e57fe216a17967393b30b62905be4abc44b9b4c74f0b25bf0f434e",
+    "scripts/check_lsu_interface.py": "f719ed94eabf9961799d9e24d061fbb059f4c9f5e1409d1ae69e2ea11e9313fc",
+    "sim/tb/core_roi_profile.h": "296aa8ccaca4d56e442b8d2d4cc45e9bc79e75cb3a42b285cdc776259261c247",
+    "sim/tb/fp_roi_profile.h": "b8fe3395a5c8c00b17104a1337ed3eecebff41abc41aa739757bf77485cea09b",
+    "sim/tb/sim_main.cpp": "660a18b650b27116aab0f3108f810293de2a2589a0581062d05e72296aa20910",
+    "sim/tb/sim_mem.cpp": "846764c8816b5c0fbbdb8b497188e5fdff24f180da22d58852edb3348bce0c1a",
+    "sim/tb/sim_mem.h": "d111f9f8381f76db15f8200852756a5e0a3e77d1f31c44ebb4c63c79dc6a075d",
+    "sim/tb/tb_completion_collisions.cpp": "580df68024fa4d637f188fbbac5fcf823c176e7dba1c7193c0d23bfbb676efdf",
+    "sim/tb/test_core_roi_profile.cpp": "216ae368994be6f9eab262ffbd70690baf437f29f518d11e8f47e06d3bb60407",
+    "sim/tb/test_fp_roi_profile.cpp": "291812712061b6da6737c8ef0a52cba6461cd298f3c78a70bbe2957a985e7ccb",
+    "software/interface/lsu_fault.S": "cd9fa07d048dc8021236a06e401e73f43b2e03c55c6d27b0cdb0693174a83add"
+  },
+  "orchestrator_recovery": {
+    "reason": "The runner tried to use a script path as a log filename for its final step. All prior nine commands completed successfully. The filename was sanitized and the remaining command run on the same unchanged clean source. No workload failures were retried.",
+    "interrupted_runner_log": "build/lsu-fix-qualification.log"
+  },
+  "end": {
+    "commit": "ec0baa398a02a7dbe1981208aee792c4ea3b71e6",
+    "status": ""
+  },
+  "finished_utc": "2026-10-18T09:28:12.386872+00:00",
+  "simulators": {
+    "build/sim/rv32_ooo_sim": "4c5e38a317567fe54aee51545d2e04bf6be47f0f76bea4bbf5c04a413630b84f",
+    "build/sim-assert/rv32_ooo_sim": "66ddf9b8d5d1303fe04926af0b4090d3828a942f9ab87d908dea081576643258"
+  },
+  "passed": true
+}

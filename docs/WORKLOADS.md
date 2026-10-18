@@ -34,7 +34,7 @@ CoreMark 不作為 FP32 效能代理；正確性測試與效能驗收各自保�
 另有[六案例 LSU 研究](LSU_OPTIMIZATION_REVIEW.md)：四個 Embench 代表與 FIR／BiCG
 在模擬器延遲 1／2／4 下的 18 個診斷案例通過。它保留既有 ELF／資料及 FP32 fast，
 不替代或縮小兩個主集合，也不以延遲敏感度當成 CPU 改善。獨立 ready／error 負測
-失敗另列為正確性前置缺口；正式記憶體契約仍未凍結。
+歷史失敗另列；後續[介面修復](LSU_INTERFACE_FIX.md)已通過定向及全集合功能回歸。正式記憶體契約仍未凍結。
 
 ## 已核准的 Embench 19 項
 

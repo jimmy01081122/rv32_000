@@ -1,0 +1,17 @@
+[SimMemory] Loaded segment to 0x80000000 (filesz: 0x130, memsz: 0x140)
+[SimMemory] ELF loaded successfully. Entry PC = 0x80000000
+[Simulator] Commit trace logging enabled: build/qualification/lsu-interface-before-exact/sh-ready1-delay4.trace
+[Simulator] Starting simulation run...
+[Dmem environment] injected store fault addr=0x80000128
+
+[SimMemory] SIM_EXIT received with code: 1 (FAIL)
+DMEM ENV blocked_load_cycles=0 blocked_store_cycles=0 fault_requests=1 fault_responses=1
+
+================ Simulation Summary ================
+  ELF binary     : build/qualification/lsu-interface/sh.elf
+  Cycles         : 79
+  Retired insns  : 34
+  IPC            : 0.4304
+  Exit status    : FAIL
+====================================================
+

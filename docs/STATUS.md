@@ -28,13 +28,15 @@ configuration, and must not be merged into this run's pass counts.
 The [LSU selection study](LSU_OPTIMIZATION_REVIEW.md), clean source `3513c0c`,
 now passes 18/18 fixed case/delay combinations (four Embench representatives and
 FIR/BiCG at delays 1/2/4), nominal observer invariance for all six cases, and 25
-Python controls. RTL and simulator binary are unchanged. It emits no subset
-score or CPU improvement claim. Separate environment probes reproduce two open
-failures on both `store_forwarding` and `rv32i_basic`: independent request-ready
-throttling causes a watchdog, while one store-error response produces no cause-7
-trap. Normal diagnostic controls match the baseline byte-for-byte. These negative
-cases remain failed and must be addressed before candidate acceptance/new baseline;
-the normal 18/18 count does not establish interface conformance.
+Python controls. That study changed neither RTL nor the simulator binary and
+emits no subset score or CPU improvement claim. Its separate environment probes
+found two defects: a backpressured load could be lost and a store-error response
+could retire without cause 7. The subsequent [interface fix](LSU_INTERFACE_FIX.md)
+at `ec0baa3` passes 48/48 assertion-enabled cases, directed and Spike comparisons
+18/18 each, finite FMA checks, FP32 fast 8/8 and Embench 19/19. Original probes
+also turn green; historical failed evidence remains intact. Nominal workload
+ELFs/results/cycles match the prior qualification. This is a functional reference
+point; formal timing/memory and fresh physical qualification remain open.
 
 ## Current implementation drift
 
@@ -50,9 +52,11 @@ the normal 18/18 count does not establish interface conformance.
 
 ## Qualification gaps
 
-1. **AP5B unit validation:** the dedicated SV testbench uses timing constructs
-   outside the pinned Verilator 4.038 C++ flow. Select a separately pinned capable
-   simulator or a C++ harness. The normal build also omits `--assert`.
+1. **AP5B unit validation:** the targeted C++ interface flow now runs 48 cases with
+   `--assert` in `build/sim-assert`, including backpressure and precise faults.
+   The dedicated timed SV testbench still needs a separately pinned capable
+   simulator; the normal simulation build omits `--assert`. Targeted passes do not
+   establish complete AP5B/ISA coverage.
 2. **Architectural tests:** provision a real Sail 0.13.1 ACT4 environment and run
    fresh generation. The existing configuration covers I/M/Zicsr/Zifencei/Zmmul;
    its historical 58-test set has no F coverage.

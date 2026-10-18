@@ -9,7 +9,7 @@
 | --- | --- | --- |
 | 1. 現行文件與歷史資料整理 | 規格與報告已校正／封存，連結及流程檢查完成 | 完成 |
 | 2. 固定工作負載資格 | Embench 19/19 與 FP32 暫定日常資料 8/8 主機、Spike、DUT 通過；FP32 每次逐筆核對 3,629 筆結果，正式資料與契約未凍結 | 日常數值資格完成；量測資格進行中 |
-| 3. 驗證基礎 | FP store 與 FMA 精度修正後，18/18 定向及 commit 比對、Embench 19/19、3,400 個有限 FMA 結果／旗標案例通過；ACT4／完整 FP 覆蓋仍缺；新增 ready 節流／store error 負測失敗待修 | 進行中 |
+| 3. 驗證基礎 | FP store 與 FMA 精度修正後，18/18 定向及 commit 比對、Embench 19/19、3,400 個有限 FMA 結果／旗標案例通過；ACT4／完整 FP 覆蓋仍缺；ready／store-error 修復後新增 48/48 assertion cases，全集合功能回歸通過 | 進行中 |
 | 4. AP5B 雙類效能與實體基線 | FMA 已核准 fast；正式尺寸、計時／記憶體契約及新鮮實體量測未齊 | 尚未成立 |
 | 5. 目標與第一項 CPU 方案 | 兩類各 ≥1.20 倍、面積 ≤1.10 倍已核准為規劃目標；第一項 CPU 方案尚未選定 | 部分完成 |
 | 6. 優化驗收 | 須對同條件 AP5B 基線驗證正確性、兩類效能及面積 | 未開始 |
@@ -172,7 +172,7 @@ crc32、matmult-int、wikisort、minver、FIR、BiCG，使用相同合格 ELF �
 
 獨立 ready／error 環境探針則各在兩個定向 ELF 重現失敗：blocked load 時
 上游仍消耗；一次 store error response 未產生 store access fault。
-這些維持紅燈，不與正常環境 PASS 相抵。建議先關閉兩項缺口，再建立新基線，
+上述為修復前結果；後續[介面修復](LSU_INTERFACE_FIX.md)通過 48/48 assertion cases、原探針及全集合功能回歸，保留歷史紅燈。正式新基線仍須建立；再考慮
 以 A（回應消耗／下一請求重疊）先實驗、B（head-store marking 同拍授權）獨立對照；
 C（已暫存 completion 的頭端轉送）另評時序。具體選擇與 PPA 條件仍須共同審查。
 

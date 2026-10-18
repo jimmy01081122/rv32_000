@@ -1,0 +1,18 @@
+[SimMemory] Loaded segment to 0x80000000 (filesz: 0x150, memsz: 0x150)
+[SimMemory] Found 'tohost' symbol at 0x80000140
+[SimMemory] ELF loaded successfully. Entry PC = 0x80000000
+[Simulator] Starting simulation run...
+RV32OOO Bare-Metal Smoke Test
+
+[SimMemory] TOHOST exit (0x1) received. Exit code: 0 (PASS)
+
+[SimMemory] SIM_EXIT received with code: 0 (PASS)
+
+================ Simulation Summary ================
+  ELF binary     : build/tests/hello.elf
+  Cycles         : 292
+  Retired insns  : 178
+  IPC            : 0.6096
+  Exit status    : PASS (0)
+====================================================
+

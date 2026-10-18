@@ -1,0 +1,86 @@
+docker run --rm --user 1000:1000 -v /workspace/rv32_000:/workspace -w /workspace rv32ooo-sim:g1 -c "\
+  bash scripts/compile_tests.sh \
+  "
+=== Compiling Bare-Metal Tests ===
+  [CC]  software/directed/matmul.c -> build/tests/matmul.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/matmul.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/matmul.elf, .bin, .dis generated
+  [CC]  software/directed/rv32m_divider_stress.c -> build/tests/rv32m_divider_stress.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/rv32m_divider_stress.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/rv32m_divider_stress.elf, .bin, .dis generated
+  [CC]  software/directed/fp_matmul.c -> build/tests/fp_matmul.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/fp_matmul.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/fp_matmul.elf, .bin, .dis generated
+  [CC]  software/directed/wrong_path_store.c -> build/tests/wrong_path_store.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/wrong_path_store.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/wrong_path_store.elf, .bin, .dis generated
+  [CC]  software/directed/hello.c -> build/tests/hello.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/hello.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/hello.elf, .bin, .dis generated
+  [CC]  software/directed/rv32i_basic.c -> build/tests/rv32i_basic.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/rv32i_basic.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/rv32i_basic.elf, .bin, .dis generated
+  [CC]  software/directed/rv32_csr.c -> build/tests/rv32_csr.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/rv32_csr.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/rv32_csr.elf, .bin, .dis generated
+  [CC]  software/directed/rv32m_muldiv.c -> build/tests/rv32m_muldiv.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/rv32m_muldiv.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/rv32m_muldiv.elf, .bin, .dis generated
+  [CC]  software/directed/partial_overlap.c -> build/tests/partial_overlap.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/partial_overlap.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/partial_overlap.elf, .bin, .dis generated
+  [CC]  software/directed/lsu_redirect_variable_lat.c -> build/tests/lsu_redirect_variable_lat.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/lsu_redirect_variable_lat.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/lsu_redirect_variable_lat.elf, .bin, .dis generated
+  [CC]  software/directed/unresolved_store.c -> build/tests/unresolved_store.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/unresolved_store.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/unresolved_store.elf, .bin, .dis generated
+  [CC]  software/directed/rv32m_completion_collisions.c -> build/tests/rv32m_completion_collisions.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/rv32m_completion_collisions.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/rv32m_completion_collisions.elf, .bin, .dis generated
+  [CC]  software/directed/store_forwarding.c -> build/tests/store_forwarding.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/store_forwarding.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/store_forwarding.elf, .bin, .dis generated
+  [CC]  software/directed/fp_fma.c -> build/tests/fp_fma.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/fp_fma.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/fp_fma.elf, .bin, .dis generated
+  [CC]  software/directed/fibonacci.c -> build/tests/fibonacci.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/fibonacci.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/fibonacci.elf, .bin, .dis generated
+  [CC]  software/directed/fp_basic.c -> build/tests/fp_basic.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/fp_basic.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/fp_basic.elf, .bin, .dis generated
+  [CC]  software/directed/fp_edge_cases.c -> build/tests/fp_edge_cases.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/fp_edge_cases.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/fp_edge_cases.elf, .bin, .dis generated
+  [CC]  software/directed/qsort.c -> build/tests/qsort.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/qsort.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/qsort.elf, .bin, .dis generated
+=== Compilation Complete ===
+docker run --rm --user 1000:1000 -v /workspace/rv32_000:/workspace -w /workspace rv32ooo-sim:g1 -c "\
+  bash scripts/run_all_tests.sh \
+  "
+============================================================
+      RV32 Out-of-Order Core — Test Regression Suite        
+============================================================
+  Testing [fibonacci] ... [0;32m[PASS][0m
+  Testing [fp_basic] ... [0;32m[PASS][0m
+  Testing [fp_edge_cases] ... [0;32m[PASS][0m
+  Testing [fp_fma] ... [0;32m[PASS][0m
+  Testing [fp_matmul] ... [0;32m[PASS][0m
+  Testing [hello] ... [0;32m[PASS][0m
+  Testing [lsu_redirect_variable_lat] ... [0;32m[PASS][0m
+  Testing [matmul] ... [0;32m[PASS][0m
+  Testing [partial_overlap] ... [0;32m[PASS][0m
+  Testing [qsort] ... [0;32m[PASS][0m
+  Testing [rv32_csr] ... [0;32m[PASS][0m
+  Testing [rv32i_basic] ... [0;32m[PASS][0m
+  Testing [rv32m_completion_collisions] ... [0;32m[PASS][0m
+  Testing [rv32m_divider_stress] ... [0;32m[PASS][0m
+  Testing [rv32m_muldiv] ... [0;32m[PASS][0m
+  Testing [store_forwarding] ... [0;32m[PASS][0m
+  Testing [unresolved_store] ... [0;32m[PASS][0m
+  Testing [wrong_path_store] ... [0;32m[PASS][0m
+============================================================
+ Regression Summary: 18 / 18 passed (0 failed)
+============================================================

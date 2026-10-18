@@ -128,7 +128,7 @@ FP IQ entry 的有效數、ready mask 與 ROB 所有權／PC／指令也逐週�
 
 使用者核准後的[LSU 審查稿](LSU_OPTIMIZATION_REVIEW.md)已補上四個 Embench
 代表與 FIR／BiCG 的三種延遲觀測，正常研究 18/18 通過；同時保留獨立 ready／store
-error 探針的失敗。A／B／C 已列出具體範圍，須先關閉正確性缺口，再共同選實驗。
+error 探針的歷史失敗。後續[介面修復](LSU_INTERFACE_FIX.md)已通過定向及全集合功能回歸；A／B／C 尚未實作，仍待共同選實驗。
 兩類各 ≥1.20×、面積 ≤1.10× 的目標與正式 AP5B 基線仍須在相同契約下驗收。
 
 重跑：

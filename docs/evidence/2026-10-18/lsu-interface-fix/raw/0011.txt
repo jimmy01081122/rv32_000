@@ -1,0 +1,20 @@
+[SimMemory] Loaded segment to 0x80000000 (filesz: 0x410, memsz: 0x410)
+[SimMemory] Found 'tohost' symbol at 0x80000400
+[SimMemory] ELF loaded successfully. Entry PC = 0x80000000
+[Simulator] Starting simulation run...
+[TEST] Starting store_forwarding test...
+[PASS] Store-to-load forwarding verified across all data sizes.
+
+[SimMemory] TOHOST exit (0x1) received. Exit code: 0 (PASS)
+
+[SimMemory] SIM_EXIT received with code: 0 (PASS)
+DMEM ENV blocked_load_cycles=315 blocked_store_cycles=243 fault_requests=0 fault_responses=0
+
+================ Simulation Summary ================
+  ELF binary     : build/tests/store_forwarding.elf
+  Cycles         : 2013
+  Retired insns  : 560
+  IPC            : 0.2782
+  Exit status    : PASS (0)
+====================================================
+

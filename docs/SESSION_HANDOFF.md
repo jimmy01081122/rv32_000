@@ -143,10 +143,10 @@ Publishing this maintenance branch does not constitute AP5B architectural or phy
 
 ## Outstanding work
 
-1. Complete AP5B validation before architecture optimization: its dedicated SV
-   testbench uses timed constructs unsupported by the pinned Verilator 4.038
-   execution flow; the default C++ build also omits `--assert`. Use a separately pinned timing-capable simulator or a C++
-   harness; do not silently upgrade the canonical simulator.
+1. Complete AP5B validation before architecture optimization. The subsequent
+   [interface fix](LSU_INTERFACE_FIX.md) adds 48 passing C++ cases under `--assert`
+   on Verilator 4.038. The timed SV bench still needs a separately pinned capable
+   simulator; the default build omits `--assert`, and complete coverage remains open.
 2. Provision and test a complete ACT4 image for fresh Sail generation. The base
    development images intentionally fail `make check-signoff-env` until then.
    The revised GitHub workflow has not been executed on GitHub in this session.

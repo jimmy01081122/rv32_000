@@ -1,0 +1,172 @@
+docker run --rm --user 1000:1000 -v /workspace/rv32_000:/workspace -w /workspace rv32ooo-fp:p1 -c 'set -eu; \
+  test "$(riscv-none-elf-gcc -march=rv32imf_zicsr -mabi=ilp32f -print-multi-directory)" = rv32imf_zicsr/ilp32f; \
+  test -f "$(riscv-none-elf-gcc -march=rv32imf_zicsr -mabi=ilp32f -print-file-name=libm.a)"; \
+  riscv-none-elf-gcc --version | head -1'
+riscv-none-elf-gcc (xPack GNU RISC-V Embedded GCC x86_64) 15.2.0
+docker run --rm --user 1000:1000 -v /workspace/rv32_000:/workspace -w /workspace rv32ooo-sim:g1 -c "bash scripts/build_sim.sh 4"
+make: Entering directory '/workspace/build/sim'
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o sim_main.o /workspace/sim/tb/sim_main.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core.o Vrv32_ooo_core.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core__1.o Vrv32_ooo_core__1.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core__2.o Vrv32_ooo_core__2.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core__3.o Vrv32_ooo_core__3.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core__4.o Vrv32_ooo_core__4.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core__5.o Vrv32_ooo_core__5.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core__6.o Vrv32_ooo_core__6.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core__7.o Vrv32_ooo_core__7.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core__8.o Vrv32_ooo_core__8.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core__9.o Vrv32_ooo_core__9.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core__Trace.o Vrv32_ooo_core__Trace.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2   -c -o Vrv32_ooo_core__Slow.o Vrv32_ooo_core__Slow.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2   -c -o Vrv32_ooo_core__1__Slow.o Vrv32_ooo_core__1__Slow.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2   -c -o Vrv32_ooo_core__2__Slow.o Vrv32_ooo_core__2__Slow.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2   -c -o Vrv32_ooo_core__3__Slow.o Vrv32_ooo_core__3__Slow.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2   -c -o Vrv32_ooo_core__4__Slow.o Vrv32_ooo_core__4__Slow.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2   -c -o Vrv32_ooo_core__5__Slow.o Vrv32_ooo_core__5__Slow.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2   -c -o Vrv32_ooo_core__6__Slow.o Vrv32_ooo_core__6__Slow.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2   -c -o Vrv32_ooo_core__Syms.o Vrv32_ooo_core__Syms.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2   -c -o Vrv32_ooo_core__Trace__Slow.o Vrv32_ooo_core__Trace__Slow.cpp
+ar -cr Vrv32_ooo_core__ALL.a Vrv32_ooo_core.o Vrv32_ooo_core__1.o Vrv32_ooo_core__2.o Vrv32_ooo_core__3.o Vrv32_ooo_core__4.o Vrv32_ooo_core__5.o Vrv32_ooo_core__6.o Vrv32_ooo_core__7.o Vrv32_ooo_core__8.o Vrv32_ooo_core__9.o Vrv32_ooo_core__Trace.o Vrv32_ooo_core__Slow.o Vrv32_ooo_core__1__Slow.o Vrv32_ooo_core__2__Slow.o Vrv32_ooo_core__3__Slow.o Vrv32_ooo_core__4__Slow.o Vrv32_ooo_core__5__Slow.o Vrv32_ooo_core__6__Slow.o Vrv32_ooo_core__Syms.o Vrv32_ooo_core__Trace__Slow.o
+ranlib Vrv32_ooo_core__ALL.a
+g++    sim_main.o sim_mem.o verilated.o verilated_vcd_c.o Vrv32_ooo_core__ALL.a      -o rv32_ooo_sim
+make: Leaving directory '/workspace/build/sim'
+docker run --rm --user 1000:1000 -v /workspace/rv32_000:/workspace -w /workspace rv32ooo-sim:g1 -c "\
+  bash scripts/compile_tests.sh \
+  "
+=== Compiling Bare-Metal Tests ===
+  [CC]  software/directed/matmul.c -> build/tests/matmul.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/matmul.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/matmul.elf, .bin, .dis generated
+  [CC]  software/directed/rv32m_divider_stress.c -> build/tests/rv32m_divider_stress.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/rv32m_divider_stress.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/rv32m_divider_stress.elf, .bin, .dis generated
+  [CC]  software/directed/fp_matmul.c -> build/tests/fp_matmul.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/fp_matmul.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/fp_matmul.elf, .bin, .dis generated
+  [CC]  software/directed/wrong_path_store.c -> build/tests/wrong_path_store.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/wrong_path_store.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/wrong_path_store.elf, .bin, .dis generated
+  [CC]  software/directed/hello.c -> build/tests/hello.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/hello.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/hello.elf, .bin, .dis generated
+  [CC]  software/directed/rv32i_basic.c -> build/tests/rv32i_basic.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/rv32i_basic.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/rv32i_basic.elf, .bin, .dis generated
+  [CC]  software/directed/rv32_csr.c -> build/tests/rv32_csr.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/rv32_csr.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/rv32_csr.elf, .bin, .dis generated
+  [CC]  software/directed/rv32m_muldiv.c -> build/tests/rv32m_muldiv.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/rv32m_muldiv.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/rv32m_muldiv.elf, .bin, .dis generated
+  [CC]  software/directed/partial_overlap.c -> build/tests/partial_overlap.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/partial_overlap.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/partial_overlap.elf, .bin, .dis generated
+  [CC]  software/directed/lsu_redirect_variable_lat.c -> build/tests/lsu_redirect_variable_lat.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/lsu_redirect_variable_lat.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/lsu_redirect_variable_lat.elf, .bin, .dis generated
+  [CC]  software/directed/unresolved_store.c -> build/tests/unresolved_store.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/unresolved_store.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/unresolved_store.elf, .bin, .dis generated
+  [CC]  software/directed/rv32m_completion_collisions.c -> build/tests/rv32m_completion_collisions.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/rv32m_completion_collisions.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/rv32m_completion_collisions.elf, .bin, .dis generated
+  [CC]  software/directed/store_forwarding.c -> build/tests/store_forwarding.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/store_forwarding.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/store_forwarding.elf, .bin, .dis generated
+  [CC]  software/directed/fp_fma.c -> build/tests/fp_fma.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/fp_fma.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/fp_fma.elf, .bin, .dis generated
+  [CC]  software/directed/fibonacci.c -> build/tests/fibonacci.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/fibonacci.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/fibonacci.elf, .bin, .dis generated
+  [CC]  software/directed/fp_basic.c -> build/tests/fp_basic.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/fp_basic.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/fp_basic.elf, .bin, .dis generated
+  [CC]  software/directed/fp_edge_cases.c -> build/tests/fp_edge_cases.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/fp_edge_cases.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/fp_edge_cases.elf, .bin, .dis generated
+  [CC]  software/directed/qsort.c -> build/tests/qsort.elf
+/opt/riscv32-gcc/riscv32-unknown-elf/bin/ld: warning: build/tests/qsort.elf has a LOAD segment with RWX permissions
+  [OK]  build/tests/qsort.elf, .bin, .dis generated
+=== Compilation Complete ===
+docker run --rm --user 1000:1000 -v /workspace/rv32_000:/workspace -w /workspace rv32ooo-fp:p1 -c 'SIM_BUILD_DIR=build/sim-assert SIM_ASSERTIONS=1 bash scripts/build_sim.sh 4'
+make: Entering directory '/workspace/build/sim-assert'
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o sim_main.o /workspace/sim/tb/sim_main.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core.o Vrv32_ooo_core.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core__1.o Vrv32_ooo_core__1.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core__2.o Vrv32_ooo_core__2.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core__3.o Vrv32_ooo_core__3.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core__4.o Vrv32_ooo_core__4.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core__5.o Vrv32_ooo_core__5.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core__6.o Vrv32_ooo_core__6.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core__7.o Vrv32_ooo_core__7.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core__8.o Vrv32_ooo_core__8.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core__9.o Vrv32_ooo_core__9.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2  -Os -c -o Vrv32_ooo_core__Trace.o Vrv32_ooo_core__Trace.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2   -c -o Vrv32_ooo_core__Slow.o Vrv32_ooo_core__Slow.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2   -c -o Vrv32_ooo_core__1__Slow.o Vrv32_ooo_core__1__Slow.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2   -c -o Vrv32_ooo_core__2__Slow.o Vrv32_ooo_core__2__Slow.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2   -c -o Vrv32_ooo_core__3__Slow.o Vrv32_ooo_core__3__Slow.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2   -c -o Vrv32_ooo_core__4__Slow.o Vrv32_ooo_core__4__Slow.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2   -c -o Vrv32_ooo_core__5__Slow.o Vrv32_ooo_core__5__Slow.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2   -c -o Vrv32_ooo_core__6__Slow.o Vrv32_ooo_core__6__Slow.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2   -c -o Vrv32_ooo_core__Syms.o Vrv32_ooo_core__Syms.cpp
+g++  -I.  -MMD -I/usr/share/verilator/include -I/usr/share/verilator/include/vltstd -DVM_COVERAGE=0 -DVM_SC=0 -DVM_TRACE=1 -faligned-new -fcf-protection=none -Wno-bool-operation -Wno-sign-compare -Wno-uninitialized -Wno-unused-but-set-variable -Wno-unused-parameter -Wno-unused-variable -Wno-shadow     -I/workspace/sim/tb -O2   -c -o Vrv32_ooo_core__Trace__Slow.o Vrv32_ooo_core__Trace__Slow.cpp
+ar -cr Vrv32_ooo_core__ALL.a Vrv32_ooo_core.o Vrv32_ooo_core__1.o Vrv32_ooo_core__2.o Vrv32_ooo_core__3.o Vrv32_ooo_core__4.o Vrv32_ooo_core__5.o Vrv32_ooo_core__6.o Vrv32_ooo_core__7.o Vrv32_ooo_core__8.o Vrv32_ooo_core__9.o Vrv32_ooo_core__Trace.o Vrv32_ooo_core__Slow.o Vrv32_ooo_core__1__Slow.o Vrv32_ooo_core__2__Slow.o Vrv32_ooo_core__3__Slow.o Vrv32_ooo_core__4__Slow.o Vrv32_ooo_core__5__Slow.o Vrv32_ooo_core__6__Slow.o Vrv32_ooo_core__Syms.o Vrv32_ooo_core__Trace__Slow.o
+ranlib Vrv32_ooo_core__ALL.a
+g++    sim_main.o sim_mem.o verilated.o verilated_vcd_c.o Vrv32_ooo_core__ALL.a      -o rv32_ooo_sim
+make: Leaving directory '/workspace/build/sim-assert'
+docker run --rm --user 1000:1000 -v /workspace/rv32_000:/workspace -w /workspace rv32ooo-fp:p1 -c 'python3 scripts/test_lsu_interface.py && python3 scripts/check_lsu_interface.py'
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.041s
+
+OK
+store_forwarding-ready4-delay1 PASS
+store_forwarding-ready4-delay4 PASS
+rv32i_basic-ready4-delay1 PASS
+rv32i_basic-ready4-delay4 PASS
+lsu_redirect_variable_lat-ready4-delay1 PASS
+lsu_redirect_variable_lat-ready4-delay4 PASS
+partial_overlap-ready4-delay1 PASS
+partial_overlap-ready4-delay4 PASS
+unresolved_store-ready4-delay1 PASS
+unresolved_store-ready4-delay4 PASS
+wrong_path_store-ready4-delay1 PASS
+wrong_path_store-ready4-delay4 PASS
+sw-ready1-delay1 PASS
+sw-ready1-delay2 PASS
+sw-ready1-delay4 PASS
+sw-ready4-delay1 PASS
+sw-ready4-delay2 PASS
+sw-ready4-delay4 PASS
+sb-ready1-delay1 PASS
+sb-ready1-delay2 PASS
+sb-ready1-delay4 PASS
+sb-ready4-delay1 PASS
+sb-ready4-delay2 PASS
+sb-ready4-delay4 PASS
+sh-ready1-delay1 PASS
+sh-ready1-delay2 PASS
+sh-ready1-delay4 PASS
+sh-ready4-delay1 PASS
+sh-ready4-delay2 PASS
+sh-ready4-delay4 PASS
+fsw-ready1-delay1 PASS
+fsw-ready1-delay2 PASS
+fsw-ready1-delay4 PASS
+fsw-ready4-delay1 PASS
+fsw-ready4-delay2 PASS
+fsw-ready4-delay4 PASS
+lw-ready1-delay1 PASS
+lw-ready1-delay2 PASS
+lw-ready1-delay4 PASS
+lw-ready4-delay1 PASS
+lw-ready4-delay2 PASS
+lw-ready4-delay4 PASS
+flw-ready1-delay1 PASS
+flw-ready1-delay2 PASS
+flw-ready1-delay4 PASS
+flw-ready4-delay1 PASS
+flw-ready4-delay2 PASS
+flw-ready4-delay4 PASS

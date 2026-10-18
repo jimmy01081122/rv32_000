@@ -1,0 +1,324 @@
+{
+  "scope": "Default environment behavioral/timing invariance after correctness fix; no speedup claim",
+  "fp32": [
+    {
+      "name": "fir",
+      "cycles": 74311,
+      "checks": {
+        "roi_cycles": true,
+        "checksum": true,
+        "checked_values": true,
+        "elf_matches": true,
+        "fixture_matches": true
+      }
+    },
+    {
+      "name": "iir",
+      "cycles": 13523,
+      "checks": {
+        "roi_cycles": true,
+        "checksum": true,
+        "checked_values": true,
+        "elf_matches": true,
+        "fixture_matches": true
+      }
+    },
+    {
+      "name": "fft",
+      "cycles": 40867,
+      "checks": {
+        "roi_cycles": true,
+        "checksum": true,
+        "checked_values": true,
+        "elf_matches": true,
+        "fixture_matches": true
+      }
+    },
+    {
+      "name": "pid",
+      "cycles": 7248,
+      "checks": {
+        "roi_cycles": true,
+        "checksum": true,
+        "checked_values": true,
+        "elf_matches": true,
+        "fixture_matches": true
+      }
+    },
+    {
+      "name": "gemm",
+      "cycles": 133275,
+      "checks": {
+        "roi_cycles": true,
+        "checksum": true,
+        "checked_values": true,
+        "elf_matches": true,
+        "fixture_matches": true
+      }
+    },
+    {
+      "name": "bicg",
+      "cycles": 23927,
+      "checks": {
+        "roi_cycles": true,
+        "checksum": true,
+        "checked_values": true,
+        "elf_matches": true,
+        "fixture_matches": true
+      }
+    },
+    {
+      "name": "cholesky",
+      "cycles": 194161,
+      "checks": {
+        "roi_cycles": true,
+        "checksum": true,
+        "checked_values": true,
+        "elf_matches": true,
+        "fixture_matches": true
+      }
+    },
+    {
+      "name": "svm",
+      "cycles": 43392,
+      "checks": {
+        "roi_cycles": true,
+        "checksum": true,
+        "checked_values": true,
+        "elf_matches": true,
+        "fixture_matches": true
+      }
+    }
+  ],
+  "embench": [
+    {
+      "name": "aha-mont64",
+      "metrics": {
+        "roi_cycles": 5356670,
+        "total_cycles": 5752944,
+        "retired_insns": 4755592
+      },
+      "checks": {
+        "elf_matches": true,
+        "metrics_match": true
+      }
+    },
+    {
+      "name": "crc32",
+      "metrics": {
+        "roi_cycles": 5402220,
+        "total_cycles": 5814937,
+        "retired_insns": 4284543
+      },
+      "checks": {
+        "elf_matches": true,
+        "metrics_match": true
+      }
+    },
+    {
+      "name": "cubic",
+      "metrics": {
+        "roi_cycles": 14490894,
+        "total_cycles": 16335900,
+        "retired_insns": 8802170
+      },
+      "checks": {
+        "elf_matches": true,
+        "metrics_match": true
+      }
+    },
+    {
+      "name": "edn",
+      "metrics": {
+        "roi_cycles": 4754496,
+        "total_cycles": 5213665,
+        "retired_insns": 3689712
+      },
+      "checks": {
+        "elf_matches": true,
+        "metrics_match": true
+      }
+    },
+    {
+      "name": "huffbench",
+      "metrics": {
+        "roi_cycles": 3377028,
+        "total_cycles": 4095415,
+        "retired_insns": 2480602
+      },
+      "checks": {
+        "elf_matches": true,
+        "metrics_match": true
+      }
+    },
+    {
+      "name": "matmult-int",
+      "metrics": {
+        "roi_cycles": 4193163,
+        "total_cycles": 4728299,
+        "retired_insns": 3288946
+      },
+      "checks": {
+        "elf_matches": true,
+        "metrics_match": true
+      }
+    },
+    {
+      "name": "minver",
+      "metrics": {
+        "roi_cycles": 878777,
+        "total_cycles": 1277458,
+        "retired_insns": 605025
+      },
+      "checks": {
+        "elf_matches": true,
+        "metrics_match": true
+      }
+    },
+    {
+      "name": "nbody",
+      "metrics": {
+        "roi_cycles": 5893151,
+        "total_cycles": 12183892,
+        "retired_insns": 7114240
+      },
+      "checks": {
+        "elf_matches": true,
+        "metrics_match": true
+      }
+    },
+    {
+      "name": "nettle-aes",
+      "metrics": {
+        "roi_cycles": 5203513,
+        "total_cycles": 5671413,
+        "retired_insns": 4498586
+      },
+      "checks": {
+        "elf_matches": true,
+        "metrics_match": true
+      }
+    },
+    {
+      "name": "nettle-sha256",
+      "metrics": {
+        "roi_cycles": 4307562,
+        "total_cycles": 4711146,
+        "retired_insns": 4088517
+      },
+      "checks": {
+        "elf_matches": true,
+        "metrics_match": true
+      }
+    },
+    {
+      "name": "nsichneu",
+      "metrics": {
+        "roi_cycles": 7298679,
+        "total_cycles": 7698957,
+        "retired_insns": 2501421
+      },
+      "checks": {
+        "elf_matches": true,
+        "metrics_match": true
+      }
+    },
+    {
+      "name": "picojpeg",
+      "metrics": {
+        "roi_cycles": 5300988,
+        "total_cycles": 6584095,
+        "retired_insns": 4140911
+      },
+      "checks": {
+        "elf_matches": true,
+        "metrics_match": true
+      }
+    },
+    {
+      "name": "qrduino",
+      "metrics": {
+        "roi_cycles": 4524180,
+        "total_cycles": 5835898,
+        "retired_insns": 3585635
+      },
+      "checks": {
+        "elf_matches": true,
+        "metrics_match": true
+      }
+    },
+    {
+      "name": "sglib-combined",
+      "metrics": {
+        "roi_cycles": 4526268,
+        "total_cycles": 5099923,
+        "retired_insns": 2541914
+      },
+      "checks": {
+        "elf_matches": true,
+        "metrics_match": true
+      }
+    },
+    {
+      "name": "slre",
+      "metrics": {
+        "roi_cycles": 4902163,
+        "total_cycles": 5341009,
+        "retired_insns": 2676047
+      },
+      "checks": {
+        "elf_matches": true,
+        "metrics_match": true
+      }
+    },
+    {
+      "name": "st",
+      "metrics": {
+        "roi_cycles": 7165107,
+        "total_cycles": 8121281,
+        "retired_insns": 4558175
+      },
+      "checks": {
+        "elf_matches": true,
+        "metrics_match": true
+      }
+    },
+    {
+      "name": "statemate",
+      "metrics": {
+        "roi_cycles": 3368567,
+        "total_cycles": 3765771,
+        "retired_insns": 1815910
+      },
+      "checks": {
+        "elf_matches": true,
+        "metrics_match": true
+      }
+    },
+    {
+      "name": "ud",
+      "metrics": {
+        "roi_cycles": 2775897,
+        "total_cycles": 3175709,
+        "retired_insns": 1080074
+      },
+      "checks": {
+        "elf_matches": true,
+        "metrics_match": true
+      }
+    },
+    {
+      "name": "wikisort",
+      "metrics": {
+        "roi_cycles": 2173042,
+        "total_cycles": 4773477,
+        "retired_insns": 2415802
+      },
+      "checks": {
+        "elf_matches": true,
+        "metrics_match": true
+      }
+    }
+  ],
+  "passed": true
+}

@@ -1,6 +1,6 @@
 # RV32 OoO architecture: implementation and requirements
 
-Version 0.3 — 2026-10-16. Status: AP5B implementation inventory; qualification open.
+Version 0.4 — 2026-10-18. Status: AP5B implementation inventory; qualification open.
 
 This document distinguishes observed RTL structure from required architectural
 behavior. Describing an implementation does not certify its correctness.
@@ -89,10 +89,19 @@ external transaction. In AP5B, a valid response buffer also blocks new data requ
 
 The LSU checks older stores, forwards from a fully covering older store, and
 stalls on unresolved or partial-overlap dependencies. Stores require ROB-head
-authorization. The current simulation model updates memory on accepted store
-requests; bus-error behavior and externally visible store semantics need their
-own tests. Data request latency parameters describe the C++ model, not a measured
-SRAM or interconnect.
+authorization. External loads advance upstream only on a data request handshake;
+internal forwarding/misalignment uses its own buffered acceptance path. Successful
+stores acknowledge retirement on the response handshake. A store error suppresses
+that acknowledgement and transfers tag/address ownership to the AP5B response
+buffer for a cause-7 exception completion before ROB trap entry; it writes no PRF
+result. Load errors retain cause 5. `mtval` preserves the original byte address.
+
+The default simulation model updates memory on accepted stores. Optional ready
+throttling and one-shot address-selected load/store faults support the
+[interface checks](docs/LSU_INTERFACE_FIX.md); injected failed writes do not update
+RAM. The historical write-before-error harness is replayed separately. The CPU
+does not undo an externally completed write. Data latency parameters describe the
+C++ model, not a measured SRAM or interconnect.
 
 ## CSR and floating-point qualification
 

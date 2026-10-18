@@ -1,0 +1,18 @@
+RUN ['make', 'lint', 'JOBS=4']
+RUN ['make', 'check-lsu-interface', 'JOBS=4']
+RUN ['make', 'test', 'JOBS=4']
+RUN ['make', 'diff-test', 'JOBS=4']
+RUN ['make', 'check-fma-finite', 'JOBS=4']
+RUN ['make', 'qualify-fp-balanced-dut', 'JOBS=4']
+RUN ['make', 'qualify-embench-fp-dut', 'JOBS=4']
+RUN ['make', 'summarize-embench-fp-dut', 'JOBS=4']
+RUN ['python3', '-m', 'unittest', 'discover', '-s', 'scripts', '-p', 'test_fp*.py']
+RUN ['python3', 'scripts/test_lsu_candidates.py']
+Traceback (most recent call last):
+  File "/workspace/rv32_000/build/qualification/run-lsu-fix.py", line 16, in <module>
+    with log.open('w') as stream:result=subprocess.run(cmd,stdout=stream,stderr=subprocess.STDOUT,timeout=3600)
+         ^^^^^^^^^^^^^
+  File "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'build/qualification/lsu-fix-run/9-scripts/test_lsu_candidates.py.log'

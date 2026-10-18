@@ -1,0 +1,22 @@
+[SimMemory] Loaded segment to 0x80000000 (filesz: 0x410, memsz: 0x410)
+[SimMemory] Found 'tohost' symbol at 0x80000400
+[SimMemory] ELF loaded successfully. Entry PC = 0x80000000
+[Simulator] Starting simulation run...
+[Diagnostic] STORE error response at address 0x800003d8 cycle 55
+[Simulator] TRAP encountered at cycle 58 PC=0x8000009c insn=0x2a023 cause=0x7 tval=0x800003d8
+[TEST] Starting store_forwarding test...
+[PASS] Store-to-load forwarding verified across all data sizes.
+
+[SimMemory] TOHOST exit (0x1) received. Exit code: 0 (PASS)
+
+[SimMemory] SIM_EXIT received with code: 0 (PASS)
+[Diagnostic] stalled_load_cycles=0 store_error_responses=1
+
+================ Simulation Summary ================
+  ELF binary     : /workspace/build/tests/store_forwarding.elf
+  Cycles         : 930
+  Retired insns  : 599
+  IPC            : 0.6441
+  Exit status    : PASS (0)
+====================================================
+

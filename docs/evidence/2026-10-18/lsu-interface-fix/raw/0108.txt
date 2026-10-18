@@ -1,0 +1,16 @@
+[SimMemory] Loaded segment to 0x80000000 (filesz: 0x12c, memsz: 0x140)
+[SimMemory] ELF loaded successfully. Entry PC = 0x80000000
+[Simulator] Commit trace logging enabled: build/qualification/lsu-interface-before-exact/lw-ready4-delay4.trace
+[Simulator] Starting simulation run...
+
+[Simulator] ERROR: Watchdog timeout! No instruction retired for 10000 cycles. (Current cycle: 10043)
+DMEM ENV blocked_load_cycles=2 blocked_store_cycles=0 fault_requests=0 fault_responses=0
+
+================ Simulation Summary ================
+  ELF binary     : build/qualification/lsu-interface/lw.elf
+  Cycles         : 10043
+  Retired insns  : 24
+  IPC            : 0.0024
+  Exit status    : TIMEOUT / HALTED
+====================================================
+

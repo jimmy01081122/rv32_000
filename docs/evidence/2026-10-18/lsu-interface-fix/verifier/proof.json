@@ -1,0 +1,148 @@
+{
+  "scope": "Verification-only follow-up: stale-summary guard and deterministic STT_FILE metadata; CPU/model identical to full qualification",
+  "start": {
+    "commit": "e686edd8f222788093072d8130a81f9ac4d3eb5e",
+    "status": ""
+  },
+  "end": {
+    "commit": "e686edd8f222788093072d8130a81f9ac4d3eb5e",
+    "status": ""
+  },
+  "functional_qualification_commit": "ec0baa398a02a7dbe1981208aee792c4ea3b71e6",
+  "rtl_sim_diff_empty": true,
+  "simulators": {
+    "build/sim/rv32_ooo_sim": "4c5e38a317567fe54aee51545d2e04bf6be47f0f76bea4bbf5c04a413630b84f",
+    "build/sim-assert/rv32_ooo_sim": "66ddf9b8d5d1303fe04926af0b4090d3828a942f9ab87d908dea081576643258"
+  },
+  "interface_cases": 48,
+  "interface_passed": true,
+  "fixture_identity": [
+    {
+      "name": "sw",
+      "compile_command": [
+        "riscv-none-elf-gcc",
+        "-march=rv32imf_zicsr",
+        "-mabi=ilp32f",
+        "-nostdlib",
+        "-nostartfiles",
+        "-Wl,--no-relax",
+        "-Tsoftware/linker/link.ld",
+        "-DCASE=0",
+        "software/interface/lsu_fault.S",
+        "-o",
+        "build/qualification/lsu-determinism/sw.elf"
+      ],
+      "elf_sha256": "bf39cd463c7c0a8fc77724aa275cb7177ef9690e9963d4acf6f8decf7435fc7c",
+      "repeat_elf_sha256": "bf39cd463c7c0a8fc77724aa275cb7177ef9690e9963d4acf6f8decf7435fc7c",
+      "repeat_elf_equal": true,
+      "loadable_payload_sha256": "2b90f9e2102fd4c00e69d2c1dacda49e3fbe5ab116493ab3a0a5face691c93a8",
+      "prior_payload_equal": true
+    },
+    {
+      "name": "sb",
+      "compile_command": [
+        "riscv-none-elf-gcc",
+        "-march=rv32imf_zicsr",
+        "-mabi=ilp32f",
+        "-nostdlib",
+        "-nostartfiles",
+        "-Wl,--no-relax",
+        "-Tsoftware/linker/link.ld",
+        "-DCASE=1",
+        "software/interface/lsu_fault.S",
+        "-o",
+        "build/qualification/lsu-determinism/sb.elf"
+      ],
+      "elf_sha256": "8d887f11e694757ed6a36fe6cb433334e921ea320796894f951cd419d0087eb7",
+      "repeat_elf_sha256": "8d887f11e694757ed6a36fe6cb433334e921ea320796894f951cd419d0087eb7",
+      "repeat_elf_equal": true,
+      "loadable_payload_sha256": "f3558af790d72049196fa89c0b3d7f9b5109f89cb44a0659014faee0a4e7e264",
+      "prior_payload_equal": true
+    },
+    {
+      "name": "sh",
+      "compile_command": [
+        "riscv-none-elf-gcc",
+        "-march=rv32imf_zicsr",
+        "-mabi=ilp32f",
+        "-nostdlib",
+        "-nostartfiles",
+        "-Wl,--no-relax",
+        "-Tsoftware/linker/link.ld",
+        "-DCASE=2",
+        "software/interface/lsu_fault.S",
+        "-o",
+        "build/qualification/lsu-determinism/sh.elf"
+      ],
+      "elf_sha256": "87a47d681b9443b028b536285f59f9638a22b9b7942d511aee4daa5778a111db",
+      "repeat_elf_sha256": "87a47d681b9443b028b536285f59f9638a22b9b7942d511aee4daa5778a111db",
+      "repeat_elf_equal": true,
+      "loadable_payload_sha256": "4e9558ea8a26f424b65316eb3897e78d0ea79965dcdb7bc109a5a86bf292ee9c",
+      "prior_payload_equal": true
+    },
+    {
+      "name": "fsw",
+      "compile_command": [
+        "riscv-none-elf-gcc",
+        "-march=rv32imf_zicsr",
+        "-mabi=ilp32f",
+        "-nostdlib",
+        "-nostartfiles",
+        "-Wl,--no-relax",
+        "-Tsoftware/linker/link.ld",
+        "-DCASE=3",
+        "software/interface/lsu_fault.S",
+        "-o",
+        "build/qualification/lsu-determinism/fsw.elf"
+      ],
+      "elf_sha256": "d580ab01ad8cf6aa8b0ad8b998cd720bce3309f0975b686051ec29a9ea015f2f",
+      "repeat_elf_sha256": "d580ab01ad8cf6aa8b0ad8b998cd720bce3309f0975b686051ec29a9ea015f2f",
+      "repeat_elf_equal": true,
+      "loadable_payload_sha256": "030bde9efde060997f0c24afce2ac3917e513c9e6b7938285fa08e6cfa7c0a11",
+      "prior_payload_equal": true
+    },
+    {
+      "name": "lw",
+      "compile_command": [
+        "riscv-none-elf-gcc",
+        "-march=rv32imf_zicsr",
+        "-mabi=ilp32f",
+        "-nostdlib",
+        "-nostartfiles",
+        "-Wl,--no-relax",
+        "-Tsoftware/linker/link.ld",
+        "-DCASE=4",
+        "software/interface/lsu_fault.S",
+        "-o",
+        "build/qualification/lsu-determinism/lw.elf"
+      ],
+      "elf_sha256": "70ecbc3c1ef0e4dd354d75d2ac5415db60114cd530ff5917074c85425c02481a",
+      "repeat_elf_sha256": "70ecbc3c1ef0e4dd354d75d2ac5415db60114cd530ff5917074c85425c02481a",
+      "repeat_elf_equal": true,
+      "loadable_payload_sha256": "398d6891322e3f847505f471222314fa1757530ea1fdca1952a1dbbd80901a6e",
+      "prior_payload_equal": true
+    },
+    {
+      "name": "flw",
+      "compile_command": [
+        "riscv-none-elf-gcc",
+        "-march=rv32imf_zicsr",
+        "-mabi=ilp32f",
+        "-nostdlib",
+        "-nostartfiles",
+        "-Wl,--no-relax",
+        "-Tsoftware/linker/link.ld",
+        "-DCASE=5",
+        "software/interface/lsu_fault.S",
+        "-o",
+        "build/qualification/lsu-determinism/flw.elf"
+      ],
+      "elf_sha256": "3f43f87231395412252d4107788ed072e62965cf13a5c90e707fd25a67ab6d45",
+      "repeat_elf_sha256": "3f43f87231395412252d4107788ed072e62965cf13a5c90e707fd25a67ab6d45",
+      "repeat_elf_equal": true,
+      "loadable_payload_sha256": "41c057a8e84562986328e9e38052027ad4b3ba7e51c2600ddde533acfb16821d",
+      "prior_payload_equal": true
+    }
+  ],
+  "passed": true
+}

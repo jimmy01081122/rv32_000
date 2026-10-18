@@ -1,0 +1,84 @@
+{
+  "scope": "Default environment stdout invariance against prior model/harness and current assertion build",
+  "records": [
+    {
+      "name": "store_forwarding",
+      "passed": true,
+      "logs": [
+        {
+          "mode": "old-control",
+          "command": [
+            "build/qualification/lsu-review/diagnostics/diagnostic-sim",
+            "+elf=/workspace/build/tests/store_forwarding.elf",
+            "+max-cycles=100000"
+          ],
+          "returncode": 0,
+          "log": "build/qualification/lsu-fix-controls/store_forwarding-old-control.log",
+          "log_sha256": "08c1d866142a03df63ce452a3e05748dc28a20f9e925b4f608b0c12dafee6381"
+        },
+        {
+          "mode": "new-control",
+          "command": [
+            "build/sim/rv32_ooo_sim",
+            "+elf=/workspace/build/tests/store_forwarding.elf",
+            "+max-cycles=100000"
+          ],
+          "returncode": 0,
+          "log": "build/qualification/lsu-fix-controls/store_forwarding-new-control.log",
+          "log_sha256": "08c1d866142a03df63ce452a3e05748dc28a20f9e925b4f608b0c12dafee6381"
+        },
+        {
+          "mode": "assert-control",
+          "command": [
+            "build/sim-assert/rv32_ooo_sim",
+            "+elf=/workspace/build/tests/store_forwarding.elf",
+            "+max-cycles=100000"
+          ],
+          "returncode": 0,
+          "log": "build/qualification/lsu-fix-controls/store_forwarding-assert-control.log",
+          "log_sha256": "08c1d866142a03df63ce452a3e05748dc28a20f9e925b4f608b0c12dafee6381"
+        }
+      ]
+    },
+    {
+      "name": "rv32i_basic",
+      "passed": true,
+      "logs": [
+        {
+          "mode": "old-control",
+          "command": [
+            "build/qualification/lsu-review/diagnostics/diagnostic-sim",
+            "+elf=/workspace/build/tests/rv32i_basic.elf",
+            "+max-cycles=100000"
+          ],
+          "returncode": 0,
+          "log": "build/qualification/lsu-fix-controls/rv32i_basic-old-control.log",
+          "log_sha256": "3f3e429392f92d423d7cb4a210f31c53cd06f7138269c52806deea42fbf35361"
+        },
+        {
+          "mode": "new-control",
+          "command": [
+            "build/sim/rv32_ooo_sim",
+            "+elf=/workspace/build/tests/rv32i_basic.elf",
+            "+max-cycles=100000"
+          ],
+          "returncode": 0,
+          "log": "build/qualification/lsu-fix-controls/rv32i_basic-new-control.log",
+          "log_sha256": "3f3e429392f92d423d7cb4a210f31c53cd06f7138269c52806deea42fbf35361"
+        },
+        {
+          "mode": "assert-control",
+          "command": [
+            "build/sim-assert/rv32_ooo_sim",
+            "+elf=/workspace/build/tests/rv32i_basic.elf",
+            "+max-cycles=100000"
+          ],
+          "returncode": 0,
+          "log": "build/qualification/lsu-fix-controls/rv32i_basic-assert-control.log",
+          "log_sha256": "3f3e429392f92d423d7cb4a210f31c53cd06f7138269c52806deea42fbf35361"
+        }
+      ]
+    }
+  ],
+  "passed": true
+}

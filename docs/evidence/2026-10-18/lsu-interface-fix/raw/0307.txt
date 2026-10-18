@@ -1,0 +1,12 @@
+F
+======================================================================
+FAIL: test_compiler_failure_removes_old_pass (__main__.InterfaceEvidenceGuard.test_compiler_failure_removes_old_pass)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "<string>", line 35, in test_compiler_failure_removes_old_pass
+AssertionError: True is not false : stale PASS survived aborted qualification
+
+----------------------------------------------------------------------
+Ran 1 test in 0.044s
+
+FAILED (failures=1)

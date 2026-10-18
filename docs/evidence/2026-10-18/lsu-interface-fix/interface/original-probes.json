@@ -1,0 +1,83 @@
+{
+  "scope": "Replay original environment-only probes; original programs have no dedicated fault handler, so this checks trap observation only. Handled-fault recovery is separately qualified. Request-time write is preserved by this historical harness.",
+  "source_sha256": "a762b29370847f68f4a698197d609762d50cfb5c3903e370b97c173950189720",
+  "build_command": [
+    "g++",
+    "-std=c++17",
+    "-Os",
+    "-Ibuild/sim",
+    "-Isim/tb",
+    "-I/usr/share/verilator/include",
+    "-I/usr/share/verilator/include/vltstd",
+    "-DVM_TRACE=1",
+    "-DVM_COVERAGE=0",
+    "-DVM_SC=0",
+    "build/qualification/lsu-interface-original/diagnostic-main.cpp",
+    "build/sim/sim_mem.o",
+    "build/sim/verilated.o",
+    "build/sim/verilated_vcd_c.o",
+    "build/sim/Vrv32_ooo_core__ALL.a",
+    "-o",
+    "build/qualification/lsu-interface-original/diagnostic-sim"
+  ],
+  "simulator_sha256": "dad22e4d95baccadc9a3a2b7202381144ee11cf4ab80d5a82c34bca0a92f914a",
+  "records": [
+    {
+      "name": "store_forwarding",
+      "mode": "ready",
+      "command": [
+        "build/qualification/lsu-interface-original/diagnostic-sim",
+        "+elf=/workspace/build/tests/store_forwarding.elf",
+        "+diagnostic-ready-stall",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "build/qualification/lsu-interface-original/store_forwarding-ready.log",
+      "log_sha256": "070d01dc852e59919ccbc20d8d5199c25d2588ab2bf30b599236fa1e546ddfdf"
+    },
+    {
+      "name": "store_forwarding",
+      "mode": "store_error",
+      "command": [
+        "build/qualification/lsu-interface-original/diagnostic-sim",
+        "+elf=/workspace/build/tests/store_forwarding.elf",
+        "+diagnostic-store-error",
+        "+max-cycles=1000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "build/qualification/lsu-interface-original/store_forwarding-store_error.log",
+      "log_sha256": "84f3ef3fc886722708f8fdf76fb213de43a9ecf6548586ba94a26b3993b557d9"
+    },
+    {
+      "name": "rv32i_basic",
+      "mode": "ready",
+      "command": [
+        "build/qualification/lsu-interface-original/diagnostic-sim",
+        "+elf=/workspace/build/tests/rv32i_basic.elf",
+        "+diagnostic-ready-stall",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "build/qualification/lsu-interface-original/rv32i_basic-ready.log",
+      "log_sha256": "107cdeeca5f2e6200bf1f8e7905502f296acc141a3864321292949c915dff656"
+    },
+    {
+      "name": "rv32i_basic",
+      "mode": "store_error",
+      "command": [
+        "build/qualification/lsu-interface-original/diagnostic-sim",
+        "+elf=/workspace/build/tests/rv32i_basic.elf",
+        "+diagnostic-store-error",
+        "+max-cycles=1000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "build/qualification/lsu-interface-original/rv32i_basic-store_error.log",
+      "log_sha256": "72c23936627119d94ea27b2fe2e259d9eac97b5e38a2e48e46602decb9d69d0f"
+    }
+  ],
+  "passed": true
+}
