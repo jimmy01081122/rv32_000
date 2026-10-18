@@ -1,0 +1,6 @@
+{
+  "scope": "Environment-only fault/ready probes against unchanged baseline RTL; independent from normal-response performance study",
+  "base_source_sha256": "d82d68385d087300dd3b8cd6b08bc7ab616a7e44b98f51a46c46be67bd00c82d",
+  "diagnostic_source_sha256": "a762b29370847f68f4a698197d609762d50cfb5c3903e370b97c173950189720",
+  "fault_model": "One RAM store response sets error; request-time RAM write behavior is preserved. Ready probe throttles independent request-ready to one of four cycles. Flags are disabled for normal control."
+}

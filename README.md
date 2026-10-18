@@ -22,6 +22,7 @@ contract remains open.
 | [Architecture](architecture_spec.md) | Current implementation inventory and architectural requirements |
 | [Micro-operations](uop_spec.md) | Implemented packet types and their limitations |
 | [Workloads](docs/WORKLOADS.md) | Approved suites and planning targets; open measurement contracts |
+| [LSU candidate review](docs/LSU_OPTIMIZATION_REVIEW.md) | Fixed six-case memory sensitivity, interface failures, and concrete hardware options |
 | [FIR/BiCG bottleneck review](docs/FMA_BOTTLENECK_REVIEW.md) | Dynamic instruction savings, load-response/store-retirement waits and observer validation |
 | [FMA contraction review](docs/FMA_CONTRACTION_REVIEW.md) | Matched off/fast cycles, numerical differences and corrected finite FMA checks |
 | [Progress and baseline review](docs/PROGRESS_REVIEW.md) | Evidence gates, current blockers and decisions for discussion |
@@ -89,6 +90,10 @@ measurement and physical baseline contracts are open.
 and checks that observer on/off runs preserve the qualified output and timing.
 The [wait analysis](docs/FMA_BOTTLENECK_REVIEW.md) accounts for the removed
 instructions and exposed retirement gaps; no RTL optimization is included.
+`make profile-lsu-candidates JOBS=4` uses the six already-qualified inputs at
+response delays 1/2/4. Its [review](docs/LSU_OPTIMIZATION_REVIEW.md) separates
+18/18 normal-response passes from two reproduced interface defects, and compares
+A/B/C options. Full-suite performance and PPA targets remain open.
 
 The simulation and generic-synthesis images are separate. For a proxy/private CA:
 

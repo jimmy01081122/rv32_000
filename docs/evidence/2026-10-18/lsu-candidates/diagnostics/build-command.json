@@ -1,0 +1,36 @@
+{
+  "command": [
+    "g++",
+    "-std=c++17",
+    "-Os",
+    "-Ibuild/sim",
+    "-Isim/tb",
+    "-I/usr/share/verilator/include",
+    "-I/usr/share/verilator/include/vltstd",
+    "-DVM_TRACE=1",
+    "-DVM_COVERAGE=0",
+    "-DVM_SC=0",
+    "build/qualification/lsu-review/diagnostics/diagnostic-main.cpp",
+    "build/sim/sim_mem.o",
+    "build/sim/verilated.o",
+    "build/sim/verilated_vcd_c.o",
+    "build/sim/Vrv32_ooo_core__ALL.a",
+    "-o",
+    "build/qualification/lsu-review/diagnostics/diagnostic-sim"
+  ],
+  "image": "rv32ooo-fp:p1",
+  "model_inputs": {
+    "build/sim/sim_mem.o": "00828714fa27263ac6bdbf83d3518d980fd388791173aa2bd104b71ec3dd5f35",
+    "build/sim/verilated.o": "d03e3416bbde522babff7c03ea7274cb0a6db937e81db09c06ff2a4c38c797a3",
+    "build/sim/verilated_vcd_c.o": "e5e1e717b9a9e05c2640c3d4d1625045e6e5ea82cac804208652065a4468d50f",
+    "build/sim/Vrv32_ooo_core__ALL.a": "513adbabfca6109a776595bc825b25fb269cd4dfeec9211ec8949526432489e0",
+    "build/sim/Vrv32_ooo_core.h": "d6f3de8db8ff398d6944045b67c0f04fedb1d45a3f5bc45a2a6efc8324c38f53"
+  },
+  "run_script_sha256": "dfe7f0be3c1eb42f5af296dec68abf9111984f76a21131b53b960f27512d75f2",
+  "collector_command": [
+    "python3",
+    "build/qualification/lsu-review/diagnostics/run-probes.py"
+  ],
+  "collector_returncode": 1,
+  "diagnostic_finished_at_utc": "2026-10-18T02:18:02.435852+00:00"
+}

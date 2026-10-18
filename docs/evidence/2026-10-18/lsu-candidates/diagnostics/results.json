@@ -1,0 +1,138 @@
+{
+  "scope": "Separate environment fault diagnostics, not passing ISA tests or performance measurements",
+  "baseline_simulator_sha256": "b374695241f220068a85872991e761e2623f357bbdf57841495590cff8ce237a",
+  "diagnostic_simulator_sha256": "21b85ef78b33f074313466b3e78587c29056e56b1dbf7ba0a1973c7b10423056",
+  "records": [
+    {
+      "name": "store_forwarding",
+      "elf_sha256": "15b4cc2a87c31a9e4363c387267ffc69db1fa1ca0000abc961b0ac811bbf7050",
+      "records": {
+        "baseline": {
+          "command": [
+            "/workspace/build/sim/rv32_ooo_sim",
+            "+elf=/workspace/build/tests/store_forwarding.elf",
+            "+max-cycles=100000"
+          ],
+          "returncode": 0,
+          "log": "build/qualification/lsu-review/diagnostics/store_forwarding-baseline.log",
+          "log_sha256": "08c1d866142a03df63ce452a3e05748dc28a20f9e925b4f608b0c12dafee6381",
+          "store_fault_delivered": false,
+          "watchdog": false,
+          "store_access_trap": false,
+          "upstream_accepts_blocked_load": false
+        },
+        "control": {
+          "command": [
+            "/workspace/build/qualification/lsu-review/diagnostics/diagnostic-sim",
+            "+elf=/workspace/build/tests/store_forwarding.elf",
+            "+max-cycles=100000"
+          ],
+          "returncode": 0,
+          "log": "build/qualification/lsu-review/diagnostics/store_forwarding-control.log",
+          "log_sha256": "08c1d866142a03df63ce452a3e05748dc28a20f9e925b4f608b0c12dafee6381",
+          "store_fault_delivered": false,
+          "watchdog": false,
+          "store_access_trap": false,
+          "upstream_accepts_blocked_load": false
+        },
+        "ready": {
+          "command": [
+            "/workspace/build/qualification/lsu-review/diagnostics/diagnostic-sim",
+            "+elf=/workspace/build/tests/store_forwarding.elf",
+            "+max-cycles=100000",
+            "+diagnostic-ready-stall"
+          ],
+          "returncode": 1,
+          "log": "build/qualification/lsu-review/diagnostics/store_forwarding-ready.log",
+          "log_sha256": "e4aa176251a5bec63e3bf8dea3d34edc1f2aeefb35387b59d3b7d813c6215ae6",
+          "store_fault_delivered": false,
+          "watchdog": true,
+          "store_access_trap": false,
+          "upstream_accepts_blocked_load": true
+        },
+        "store_error": {
+          "command": [
+            "/workspace/build/qualification/lsu-review/diagnostics/diagnostic-sim",
+            "+elf=/workspace/build/tests/store_forwarding.elf",
+            "+max-cycles=100000",
+            "+diagnostic-store-error"
+          ],
+          "returncode": 0,
+          "log": "build/qualification/lsu-review/diagnostics/store_forwarding-store_error.log",
+          "log_sha256": "72e4f00f1b6cef9be373e1e8333bf7813e8bf6d698f3b05b98188a35cd54daca",
+          "store_fault_delivered": true,
+          "watchdog": false,
+          "store_access_trap": false,
+          "upstream_accepts_blocked_load": false
+        }
+      },
+      "control_matches_baseline": true
+    },
+    {
+      "name": "rv32i_basic",
+      "elf_sha256": "c1f67331c0c06c9fd947764cd2b3cf802c32d0448e1342c9e4336df47c387740",
+      "records": {
+        "baseline": {
+          "command": [
+            "/workspace/build/sim/rv32_ooo_sim",
+            "+elf=/workspace/build/tests/rv32i_basic.elf",
+            "+max-cycles=100000"
+          ],
+          "returncode": 0,
+          "log": "build/qualification/lsu-review/diagnostics/rv32i_basic-baseline.log",
+          "log_sha256": "3f3e429392f92d423d7cb4a210f31c53cd06f7138269c52806deea42fbf35361",
+          "store_fault_delivered": false,
+          "watchdog": false,
+          "store_access_trap": false,
+          "upstream_accepts_blocked_load": false
+        },
+        "control": {
+          "command": [
+            "/workspace/build/qualification/lsu-review/diagnostics/diagnostic-sim",
+            "+elf=/workspace/build/tests/rv32i_basic.elf",
+            "+max-cycles=100000"
+          ],
+          "returncode": 0,
+          "log": "build/qualification/lsu-review/diagnostics/rv32i_basic-control.log",
+          "log_sha256": "3f3e429392f92d423d7cb4a210f31c53cd06f7138269c52806deea42fbf35361",
+          "store_fault_delivered": false,
+          "watchdog": false,
+          "store_access_trap": false,
+          "upstream_accepts_blocked_load": false
+        },
+        "ready": {
+          "command": [
+            "/workspace/build/qualification/lsu-review/diagnostics/diagnostic-sim",
+            "+elf=/workspace/build/tests/rv32i_basic.elf",
+            "+max-cycles=100000",
+            "+diagnostic-ready-stall"
+          ],
+          "returncode": 1,
+          "log": "build/qualification/lsu-review/diagnostics/rv32i_basic-ready.log",
+          "log_sha256": "ad77ecba8907208f55020bed9b15a56652e59db247f512a8364d5207a3704ec0",
+          "store_fault_delivered": false,
+          "watchdog": true,
+          "store_access_trap": false,
+          "upstream_accepts_blocked_load": true
+        },
+        "store_error": {
+          "command": [
+            "/workspace/build/qualification/lsu-review/diagnostics/diagnostic-sim",
+            "+elf=/workspace/build/tests/rv32i_basic.elf",
+            "+max-cycles=100000",
+            "+diagnostic-store-error"
+          ],
+          "returncode": 0,
+          "log": "build/qualification/lsu-review/diagnostics/rv32i_basic-store_error.log",
+          "log_sha256": "2641d01558dccf1f0619abf67f0763444fa4fc3d2437a463a3581a7016a79dcf",
+          "store_fault_delivered": true,
+          "watchdog": false,
+          "store_access_trap": false,
+          "upstream_accepts_blocked_load": false
+        }
+      },
+      "control_matches_baseline": true
+    }
+  ],
+  "environment_contract_passed": false
+}

@@ -25,6 +25,17 @@ signoff. The session did not run the full 14-workload Embench subset, full ACT4,
 or AP5B physical implementation. Earlier result files have their own source and
 configuration, and must not be merged into this run's pass counts.
 
+The [LSU selection study](LSU_OPTIMIZATION_REVIEW.md), clean source `3513c0c`,
+now passes 18/18 fixed case/delay combinations (four Embench representatives and
+FIR/BiCG at delays 1/2/4), nominal observer invariance for all six cases, and 25
+Python controls. RTL and simulator binary are unchanged. It emits no subset
+score or CPU improvement claim. Separate environment probes reproduce two open
+failures on both `store_forwarding` and `rv32i_basic`: independent request-ready
+throttling causes a watchdog, while one store-error response produces no cause-7
+trap. Normal diagnostic controls match the baseline byte-for-byte. These negative
+cases remain failed and must be addressed before candidate acceptance/new baseline;
+the normal 18/18 count does not establish interface conformance.
+
 ## Current implementation drift
 
 | Topic | Current finding | Follow-up |

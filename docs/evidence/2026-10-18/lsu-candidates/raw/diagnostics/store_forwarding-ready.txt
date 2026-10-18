@@ -1,0 +1,17 @@
+[SimMemory] Loaded segment to 0x80000000 (filesz: 0x410, memsz: 0x410)
+[SimMemory] Found 'tohost' symbol at 0x80000400
+[SimMemory] ELF loaded successfully. Entry PC = 0x80000000
+[Simulator] Starting simulation run...
+[Diagnostic] blocked load addr=0x800002a0 lsu_ready=1 ex0_advance=1
+[
+[Simulator] ERROR: Watchdog timeout! No instruction retired for 10000 cycles. (Current cycle: 10139)
+[Diagnostic] stalled_load_cycles=1 store_error_responses=0
+
+================ Simulation Summary ================
+  ELF binary     : /workspace/build/tests/store_forwarding.elf
+  Cycles         : 10139
+  Retired insns  : 80
+  IPC            : 0.0079
+  Exit status    : TIMEOUT / HALTED
+====================================================
+

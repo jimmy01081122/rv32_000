@@ -1,0 +1,64 @@
+{
+  "scope": "Fixed six-workload, three-delay LSU diagnostic; no RTL changes or candidate performance claims",
+  "source_commit": "3513c0cc8528796e0900e8040fee6a6c4bbf05dc",
+  "source_tree": "5f8f39b2b9729e1ecbb9985a138f764a5b3a4364",
+  "started_at_utc": "2026-10-18T02:02:20.833012+00:00",
+  "started_at_taipei": "2026-10-18T10:02:20.833170+08:00",
+  "working_tree_clean_at_start": true,
+  "rtl_sim_unchanged_from": "5065e7f32f4201a7c4e7af77c1b7eb6cdda0b1c7",
+  "simulator_sha256_at_start": "b374695241f220068a85872991e761e2623f357bbdf57841495590cff8ce237a",
+  "image_ids": {
+    "rv32ooo-fp:p1": "sha256:2140263677b3a378d5cab75a3d0d4fd285ddb38a1a5a1f81f5cf97db024a02d5",
+    "rv32ooo-sim:g1": "sha256:0d80d39df2f24dc60a77387242f781edc1cc67f53865719981e01b5b5a989d26"
+  },
+  "phases": [
+    {
+      "name": "fp-controls",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_fp*.py"
+      ],
+      "started_at_utc": "2026-10-18T02:02:20.860522+00:00",
+      "returncode": 0,
+      "finished_at_utc": "2026-10-18T02:02:20.969763+00:00",
+      "log": "build/qualification/lsu-review/fp-controls.log",
+      "log_sha256": "5b2b5ea9111172196c7541126fdb8c4583ebf35f00bf4dd969e57faa405b1c13"
+    },
+    {
+      "name": "lsu-controls",
+      "command": [
+        "python3",
+        "scripts/test_lsu_candidates.py"
+      ],
+      "started_at_utc": "2026-10-18T02:02:20.970380+00:00",
+      "returncode": 0,
+      "finished_at_utc": "2026-10-18T02:02:21.036676+00:00",
+      "log": "build/qualification/lsu-review/lsu-controls.log",
+      "log_sha256": "83166b089fbcb82fac63f22522fa6ae99bb5e46368cd35d756277fd463dd6346"
+    },
+    {
+      "name": "study",
+      "command": [
+        "make",
+        "profile-lsu-candidates",
+        "JOBS=4"
+      ],
+      "started_at_utc": "2026-10-18T02:02:21.037254+00:00",
+      "returncode": 0,
+      "finished_at_utc": "2026-10-18T02:15:13.590589+00:00",
+      "log": "build/qualification/lsu-review/study.log",
+      "log_sha256": "6137f3b2f4349945450cf1e3fecb8e678387f9d1e9bf7c4d231bff50eff02833"
+    }
+  ],
+  "finished_at_utc": "2026-10-18T02:15:13.593164+00:00",
+  "finished_at_taipei": "2026-10-18T10:15:13.593263+08:00",
+  "working_tree_clean_at_end": true,
+  "simulator_sha256_at_end": "b374695241f220068a85872991e761e2623f357bbdf57841495590cff8ce237a",
+  "simulator_binary_unchanged": true
+}

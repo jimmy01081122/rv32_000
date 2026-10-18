@@ -1,8 +1,8 @@
 # LSU 第一輪優化方案審查
 
 2026-10-18。使用者已核准把 LSU 列為第一優先候選，補一般嵌入式觀測、
-記憶體延遲敏感度及具體方案比較，再共同選擇實作。本文件先記錄研究條件與
-候選結構；尚未選定方案或修改 RTL。兩類各 ≥1.20×、面積 ≤1.10× 目標不變。
+記憶體延遲敏感度及具體方案比較，再共同選擇實作。本文件保留事前固定的研究條件並補入結果及候選結構；
+尚未選定方案或修改 RTL。兩類各 ≥1.20×、面積 ≤1.10× 目標不變。
 
 ## 先固定研究分母與條件
 
@@ -30,6 +30,64 @@ RAM 為 1 MiB，隨機額外延遲為 0，模擬器設定回應延遲分別為 1
 任一缺項、程式失敗、超時、指令工作量改變或觀測不一致，研究完整性不通過。
 Embench 沿用上游自我檢查；FP32 仍逐筆核對既有獨立參考及原容差。
 
+## 已完成的診斷結果
+
+乾淨來源 `3513c0c`，正常回應研究 **18/18 通過**；各案例在三種延遲下的
+退休指令分類相同。六個 nominal 案例的觀測開／關及既有資格輸出相符，
+trace／packed-layout mismatch 全為零。18 項既有與 7 項新 Python 控制通過。
+模擬器 binary 與前輪完全相同，RTL／sim source 也未改動。
+[封存](evidence/2026-10-18/lsu-candidates/README.md)含事前 protocol 快照、每一案原始
+profile／stdout、工具／來源／ELF 身分，以及分開列出的負向環境診斷。
+
+| 案例 | latency 1 cycles | latency 2 cycles | latency 4 cycles | latency 4／1 slowdown |
+| --- | ---: | ---: | ---: | ---: |
+| crc32 | 5,402,220 | 5,576,480 | 6,098,416 | 1.129× |
+| matmult-int | 4,193,163 | 4,651,344 | 5,647,095 | 1.347× |
+| wikisort | 2,173,042 | 2,325,955 | 2,662,195 | 1.225× |
+| minver | 878,777 | 947,093 | 1,143,155 | 1.301× |
+| fir | 74,311 | 83,810 | 109,737 | 1.477× |
+| bicg | 23,927 | 28,880 | 39,075 | 1.633× |
+
+這個 slowdown 比較外部回應變慢的影響，沒有量測 A／B／C，也不能反向換算其收益。
+例如 `crc32` 與 `BiCG` 的敏感度差異大，不能用單一 FP 個例代替一般嵌入式。
+
+nominal 條件下的兩種互斥等待位置如下；百分比各以該案 ROI cycles 為分母：
+
+| 案例 | store ack 等待 | 頭端 load 自身回應已暫存的等待 | SQ marking 節拍 |
+| --- | ---: | ---: | ---: |
+| crc32 | 348,516（6.45%） | 174,256（3.23%） | 174,258 |
+| matmult-int | 147,318（3.51%） | 55,210（1.32%） | 73,613 |
+| wikisort | 209,444（9.64%） | 38,160（1.76%） | 89,561 |
+| minver | 149,878（17.06%） | 19,992（2.27%） | 56,624 |
+| fir | 1,088（1.46%） | 8,453（11.38%） | 543 |
+| bicg | 6,460（27.00%） | 211（0.88%） | 1,676 |
+
+SQ marking 是 store ack 等待的子分類，不能再次相加。其他等待亦很重要：
+`minver` 頭端 FDIV 未完成占 185,937 cycles；`matmult-int` 的整數／相依頭端等待
+占 793,554 cycles。頭端 opcode 只定位等待位置，不等同功能單元本身的耗時；
+後者也可能仍在等 load 或其他依賴。這支持分別實驗 A、B，不能據此保證集合 ≥1.20×。
+
+## 正確性前置項：兩個隔離負向探針為紅燈
+
+將環境變更放在獨立 C++ harness，重用相同 Verilated RTL model；正常模式的
+`store_forwarding` 與 `rv32i_basic` 完整 stdout 都與基準逐 byte 相同。
+下列負測不混入上面的 18/18 正常研究分母：
+
+| 探針 | 環境改動 | 兩個定向 ELF 的實際結果 | 結論 |
+| --- | --- | --- | --- |
+| 獨立 request-ready 節流 | 空閒時每 4 cycles 開放一次 ready，仍保證持續有接受機會 | 2/2 watchdog；記錄到 blocked load 時 `lsu_ready=1`、`ex0_advance=1` | load 的上游消耗未等外部 request handshake，請求可遺失 |
+| 一次 RAM store error response | request-time RAM 寫入行為保持不變，只把一個 store response 的 error 設為 1 | 2/2 確認送出 error，程式仍正常退出，沒有 cause 7 trap | store response error 未轉為 store access fault |
+
+[原始負測與控制](evidence/2026-10-18/lsu-candidates/diagnostics/results.json)保留非零退出與
+未發生的 trap，`environment_contract_passed=false`。這些是以前未覆蓋的介面缺口，
+不表示正常延遲研究失敗，也不能把正常 PASS 當成介面正確性已成立。
+
+優先修正方向為：外部 load 的 AGU 消耗只在請求真正被接受時前進，等待期間保持
+請求身份；內部 forwarding／misalign 仍依各自接受條件處理。store error 則須以
+正確 tag／位址回報 cause 7，禁止在錯誤送往 ROB 前先走正常 ack／退休，並確保
+SQ／pending 只清除一次。這兩項應有獨立正確性提交及紅燈轉綠回歸，作為新基線的前置。
+目前尚未修改它們。
+
 ## 三個具體硬體候選
 
 下列 A／B／C 是待審查的設計選項，目前沒有任何候選 RTL 或效能／PPA 數據。
@@ -43,8 +101,21 @@ Embench 沿用上游自我檢查；FP32 仍逐筆核對既有獨立參考及原�
 A 針對 `!rsp_buf_valid` 強制產生的請求轉換空拍；B 針對 store marking 的固定節拍；
 C 針對回應已暫存但 ROB `completed` 還未更新的可見等待。等待計數只是暴露位置，
 不能把計數直接換成可省週期，或把 A、B、C 的效益相加。
-先做 A／B 各自與基線比較，若都值得，再檢查 A+B 交互作用；C 須另外審查時序預算。
-正式實作順序須待本輪跨工作負載結果與使用者共同決定。
+建議順序是先關閉上述正確性缺口並固定新基線，**A 作第一個效能實驗、B 獨立對照**，
+之後才評估 A+B；C 的資料／例外 mux 與 completion-to-retire 路徑風險較高，列後續。
+A 可同時影響讀／寫交錯，B 有明確的 marking 節拍目標，但相依與外部交易可能遮住收益。
+具體方案仍交由使用者共同選定，這裡沒有先實作任何一項。
+
+A 還須正式更新 AP5B 契約：現行架構文字及 LSU assertions 2／6 禁止任何
+`rsp_buf_valid` 時接受新請求。新不變條件應是「已有外部 in-flight 時仍禁止；
+若本拍 response buffer 將被消耗且舊 metadata 已完成交付，才可接受下一請求」。
+不能只刪除原 assertion；應加入交接／未消耗禁止／flush／error 的對應檢查。
+目前一般模擬建置未開 `--assert`，候選的驗證模式也須明確開啟並記錄。
+
+在連續獨立請求、無其他瓶頸的理想介面時序下，A 預期能把最短 request 間隔
+從 `delay+2` 改為 `delay+1`，latency 1 即 3→2 cycles；B 最多先針對一個
+head-store marking 節拍提出消除假設。這是設計推導，須以候選波形確認，
+不是本輪量到的 CPU 加速比，也不能當成集合收益預測。
 
 ## 接受候選前的共同門檻
 
@@ -58,9 +129,7 @@ C 針對回應已暫存但 ROB `completed` 還未更新的可見等待。等待�
 4. **效能**：完整 19 項與八項集合分別驗收；診斷六項只用來解釋機制。
    若實體頻率改變，需按已凍結的記憶體時間契約重新算系統時間。
 
-現行 source review 亦發現：LSU 的 store response 分支直接清除 SQ，沒有像 load
-分支一樣把 `dmem_rsp_error` 轉成 exception。這是既有驗證／錯誤回應契約缺口；
-本輪正常回應的模擬無法覆蓋它。候選不能把「正常 RAM 都 PASS」當成完整錯誤語意正確。
+上述 ready／store-error 缺口須納入基線資格；不能用「正常 RAM 都 PASS」替代。
 本輪不提出 store 在回應前退休的 committed-store buffer，避免先改動尚未界定的錯誤模型。
 
 ## 重現診斷
@@ -77,4 +146,6 @@ make profile-lsu-candidates JOBS=4
 
 上面兩個 qualify 命令只在需要建立／重新驗證輸入時使用；研究會核對 ELF 與
 已封存資格記錄的雜湊，不能默默接受不同的輸入。
-完整研究結果與可審查證據完成後補入本文件。
+獨立環境探針的完整 C++ source、build command、模型物件雜湊與執行腳本也在封存中；
+它們使用另一個 executable，不替換正式模擬器。前輪 Embench19／FP32 八項的主機與
+Spike 證據透過相同 ELF 身分沿用，本輪未重跑完整主集合或主機／Spike。
