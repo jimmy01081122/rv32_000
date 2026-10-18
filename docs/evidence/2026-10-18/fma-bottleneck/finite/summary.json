@@ -1,0 +1,121 @@
+{
+  "scope": "Finite operands only; exact value and all five fflags bits, four FMA opcodes, five rounding modes",
+  "vector_count": 3400,
+  "simulator_sha256": "b374695241f220068a85872991e761e2623f357bbdf57841495590cff8ce237a",
+  "fp_execute_sha256": "ee83a69dfbd7b2c9d141ebe14e1c40605ca43ce0f5f490d324113bcb9465c63b",
+  "repository_commit": "5065e7f32f4201a7c4e7af77c1b7eb6cdda0b1c7",
+  "oracle_sha256": "f608030fa262c465f3c867db682f3cd36fdd45fc5673bb6350c1899f5161852c",
+  "records": [
+    {
+      "name": "rounding",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-std=gnu11",
+          "-O3",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/include",
+          "-I/workspace/build/qualification/fp-balanced/fma-finite",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/fp_bench/fma_rounding_probe.c",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/fma-finite/rounding.elf",
+          "-lgcc"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-finite/rounding-build.log",
+        "log_sha256": "2fd0818dc352c71b8d4ad69cef910d40f3f0638dfde1befcc522e63c30bbe8c0",
+        "wall_seconds": 0.08171218099960242
+      },
+      "elf_sha256": "37c4db1b1c94340b4b7839175595592bb47ce0c38eedb325981917a04001ae76",
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/fp-balanced/fma-finite/rounding.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-finite/rounding-spike.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.005462915999942197
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-finite/rounding.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-finite/rounding-dut.log",
+        "log_sha256": "94bc09d574399d297b8aa0b62742168433c13b020007c71323f414763c929679",
+        "wall_seconds": 0.023500710999996954
+      },
+      "dut_self_check": true,
+      "passed": true
+    },
+    {
+      "name": "finite",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-std=gnu11",
+          "-O3",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/include",
+          "-I/workspace/build/qualification/fp-balanced/fma-finite",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/fp_bench/fma_exact_vectors.c",
+          "-o",
+          "/workspace/build/qualification/fp-balanced/fma-finite/finite.elf",
+          "-lgcc"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-finite/finite-build.log",
+        "log_sha256": "dee80342dd6c0e5e19cf5c0a0d4223e61af0c30d3e8cca2c1e5539a8027e81d8",
+        "wall_seconds": 0.0945374770003582
+      },
+      "elf_sha256": "46d7551f06f1bbc65ba511bc427373b67d3848abcd4d088d6b47fb36473c519f",
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/qualification/fp-balanced/fma-finite/finite.elf"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-finite/finite-spike.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.01010141000006115
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-finite/finite.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-finite/finite-dut.log",
+        "log_sha256": "9ed6c400bf11eb67d564923fbfa73b60875707e69461805b64eb5af101875b5c",
+        "wall_seconds": 1.7579667489999338
+      },
+      "dut_self_check": true,
+      "passed": true
+    }
+  ],
+  "all_passed": true
+}

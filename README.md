@@ -22,6 +22,7 @@ contract remains open.
 | [Architecture](architecture_spec.md) | Current implementation inventory and architectural requirements |
 | [Micro-operations](uop_spec.md) | Implemented packet types and their limitations |
 | [Workloads](docs/WORKLOADS.md) | Approved suites and planning targets; open measurement contracts |
+| [FIR/BiCG bottleneck review](docs/FMA_BOTTLENECK_REVIEW.md) | Dynamic instruction savings, load-response/store-retirement waits and observer validation |
 | [FMA contraction review](docs/FMA_CONTRACTION_REVIEW.md) | Matched off/fast cycles, numerical differences and corrected finite FMA checks |
 | [Progress and baseline review](docs/PROGRESS_REVIEW.md) | Evidence gates, current blockers and decisions for discussion |
 | [Session handoff](docs/SESSION_HANDOFF.md) | Environment bring-up evidence and reproduction details |
@@ -83,6 +84,11 @@ then runs matched off/fast qualifications on the same RTL. The
 The approved main FP32 policy is `-ffp-contract=fast -fno-fast-math` (also the
 qualifier default); use `--fp-contract off` for sensitivity checks. The remaining
 measurement and physical baseline contracts are open.
+
+`make profile-fp-bottlenecks JOBS=4` adds read-only FIR/BiCG cycle observations
+and checks that observer on/off runs preserve the qualified output and timing.
+The [wait analysis](docs/FMA_BOTTLENECK_REVIEW.md) accounts for the removed
+instructions and exposed retirement gaps; no RTL optimization is included.
 
 The simulation and generic-synthesis images are separate. For a proxy/private CA:
 

@@ -1,0 +1,136 @@
+{
+  "scope": "Approved fast default and read-only FIR/BiCG off/fast wait diagnosis; no RTL change",
+  "source_commit": "5065e7f32f4201a7c4e7af77c1b7eb6cdda0b1c7",
+  "source_tree": "8fb557b8a593833e0b5ecde3237ef111ab424243",
+  "started_at_utc": "2026-10-18T01:40:40.338892+00:00",
+  "started_at_taipei": "2026-10-18T09:40:40.339278+08:00",
+  "working_tree_clean_at_start": true,
+  "rtl_unchanged_from": "581ee86f1bd55bc6eff7cc123c660ab94446eb6f",
+  "image_ids": {
+    "rv32ooo-fp:p1": "sha256:2140263677b3a378d5cab75a3d0d4fd285ddb38a1a5a1f81f5cf97db024a02d5",
+    "rv32ooo-sim:g1": "sha256:0d80d39df2f24dc60a77387242f781edc1cc67f53865719981e01b5b5a989d26"
+  },
+  "pre_observer_simulator_sha256": "ff7ae35345e422e93c73a54c3fe0e849b460d56e1234596c50d9625767b0ce7c",
+  "phases": [
+    {
+      "name": "lint-build",
+      "command": [
+        "make",
+        "lint",
+        "sim-build",
+        "JOBS=4"
+      ],
+      "started_at_utc": "2026-10-18T01:40:40.368628+00:00",
+      "returncode": 0,
+      "finished_at_utc": "2026-10-18T01:41:08.967498+00:00",
+      "log": "build/qualification/fp-balanced/fma-bottleneck/lint-build.log",
+      "log_sha256": "aeb764677e63e31bd4344e1ff7596d4d4b015b4430ffd0d74150efc8b9a05f5d"
+    },
+    {
+      "name": "cpp-controls",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/workspace/rv32_000:/workspace",
+        "-w",
+        "/workspace",
+        "rv32ooo-fp:p1",
+        "-c",
+        "g++ -std=c++17 -Wall -Wextra -Werror -Isim/tb sim/tb/test_core_roi_profile.cpp -o build/qualification/fp-balanced/fma-bottleneck/profile-unit && build/qualification/fp-balanced/fma-bottleneck/profile-unit && g++ -std=c++17 -Wall -Wextra -Werror -Isim/tb sim/tb/test_fp_roi_profile.cpp -o build/qualification/fp-balanced/fma-bottleneck/fp-profile-unit && build/qualification/fp-balanced/fma-bottleneck/fp-profile-unit"
+      ],
+      "started_at_utc": "2026-10-18T01:41:08.967923+00:00",
+      "returncode": 0,
+      "finished_at_utc": "2026-10-18T01:41:15.980877+00:00",
+      "log": "build/qualification/fp-balanced/fma-bottleneck/cpp-controls.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "python-controls",
+      "command": [
+        "python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "scripts",
+        "-p",
+        "test_fp*.py"
+      ],
+      "started_at_utc": "2026-10-18T01:41:15.981262+00:00",
+      "returncode": 0,
+      "finished_at_utc": "2026-10-18T01:41:16.087228+00:00",
+      "log": "build/qualification/fp-balanced/fma-bottleneck/python-controls.log",
+      "log_sha256": "5b2b5ea9111172196c7541126fdb8c4583ebf35f00bf4dd969e57faa405b1c13"
+    },
+    {
+      "name": "paired-qualification",
+      "command": [
+        "make",
+        "compare-fp-contraction",
+        "JOBS=4"
+      ],
+      "started_at_utc": "2026-10-18T01:41:16.087668+00:00",
+      "returncode": 0,
+      "finished_at_utc": "2026-10-18T01:43:39.491191+00:00",
+      "log": "build/qualification/fp-balanced/fma-bottleneck/paired-qualification.log",
+      "log_sha256": "8fba51ae3ddae943a90e502fd706026345750c75865944166b416a67603496ec"
+    },
+    {
+      "name": "core-observation",
+      "command": [
+        "docker",
+        "run",
+        "--rm",
+        "--user",
+        "1000:1000",
+        "-v",
+        "/workspace/rv32_000:/workspace",
+        "-w",
+        "/workspace",
+        "rv32ooo-fp:p1",
+        "-c",
+        "python3 scripts/profile_fp_bottlenecks.py --baseline-simulator build/qualification/fp-balanced/fma-bottleneck/simulator-before-observer"
+      ],
+      "started_at_utc": "2026-10-18T01:43:39.491654+00:00",
+      "returncode": 0,
+      "finished_at_utc": "2026-10-18T01:44:13.403786+00:00",
+      "log": "build/qualification/fp-balanced/fma-bottleneck/core-observation.log",
+      "log_sha256": "faac3ac791a9a4def1de586e6454424d74ceb5c986f75b40ffa9081a638aba2d"
+    },
+    {
+      "name": "default-fast",
+      "command": [
+        "make",
+        "qualify-fp-balanced-dut",
+        "JOBS=4"
+      ],
+      "started_at_utc": "2026-10-18T01:44:13.404230+00:00",
+      "returncode": 0,
+      "finished_at_utc": "2026-10-18T01:45:25.202402+00:00",
+      "log": "build/qualification/fp-balanced/fma-bottleneck/default-fast.log",
+      "log_sha256": "dc54ae49c830588593a142fb87fbbe47c259fa8b006d4c33c7b67908dbfb5bc7"
+    },
+    {
+      "name": "directed-diff",
+      "command": [
+        "make",
+        "test",
+        "diff-test",
+        "JOBS=4"
+      ],
+      "started_at_utc": "2026-10-18T01:45:25.202809+00:00",
+      "returncode": 0,
+      "finished_at_utc": "2026-10-18T01:45:37.081969+00:00",
+      "log": "build/qualification/fp-balanced/fma-bottleneck/directed-diff.log",
+      "log_sha256": "d2e83e9a1a947e3423c00664f5ee61bb199daf6762e0650436afe6e4677c591a"
+    }
+  ],
+  "finished_at_utc": "2026-10-18T01:45:37.082407+00:00",
+  "finished_at_taipei": "2026-10-18T09:45:37.082414+08:00",
+  "working_tree_clean_at_end": true,
+  "simulator_sha256": "b374695241f220068a85872991e761e2623f357bbdf57841495590cff8ce237a"
+}

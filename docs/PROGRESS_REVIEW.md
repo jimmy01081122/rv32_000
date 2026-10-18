@@ -156,7 +156,10 @@ FP flag 比較，量測契約與實體基線仍未成立，也尚未驗證 1.20 
 這不是完整 FP ISA 證明，亦沒有量測新面積或 MHz。
 
 後續使用者已核准 fast 作 FP32 主設定，qualifier 預設改為 fast，off 保留附表。
-先補 FIR／BiCG 的相依、停頓與功能單元統計，再共同排序 CPU 結構方案；
+[後續觀測](FMA_BOTTLENECK_REVIEW.md)已確認 FIR／BiCG 省下的指令全是乘加融合，
+暴露的 AP5B load response／store ack 等待解釋了週期改善有限；四組觀測開／關及
+舊模型輸出一致，default fast 8/8、18 項 Python 控制、定向／比對各 18/18 通過。
+優先將 LSU 完成／喚醒及 store 退休重疊列入共同設計審查；
 此編譯器收益不能當成 ≥1.20× 架構目標的進度。正式 AP5B 基線須含修正後的新 PPA。
 
 ## 何時才可稱為可信 AP5B 基線

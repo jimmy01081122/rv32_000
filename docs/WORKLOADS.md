@@ -85,6 +85,8 @@ Cholesky 重建及上游 SVM 標籤。用 `make qualify-fp-balanced-dut` 重跑�
 [同條件 FMA 對照](FMA_CONTRACTION_REVIEW.md)已完成：off／fast 各 8/8 通過，
 診斷等權週期加速比 1.113×。使用者已核准 fast 作主設定，qualifier 預設亦為 fast；
 將來基線與 CPU 候選須使用相同政策，不把本輪編譯收益計入架構改善。
+[後續指令與等待觀測](FMA_BOTTLENECK_REVIEW.md)確認 FIR／BiCG 指令減少完全來自
+融合；預設 fast 入口也已 8/8 通過，完整量測契約及第一項 CPU 方案仍待共同審查。
 原有 `jacobi-2d` 初檢仍有效，保留作 stencil／記憶體診斷候選。
 
 資格確認須固定支援 FP32 的版本與設定，檢查 ELF 實際指令與函式庫呼叫，

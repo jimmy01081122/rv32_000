@@ -1,0 +1,119 @@
+{
+  "all_passed": true,
+  "scope": "All 16 DUT stdout files and executed ELFs match the prior qualification",
+  "previous_archive": "../fma-contraction",
+  "records": [
+    {
+      "name": "fir",
+      "mode": "off",
+      "elf_sha256": "ba78979d45035232be13c4c5e114d5b782a0caf58eb3d2d5b1183d8621c4ba36",
+      "dut_stdout_sha256": "6243a6ded9d95eb7132a772aee71c0455cd5e7985267798dbce81a79100a1174",
+      "byte_identical_to_prior": true
+    },
+    {
+      "name": "iir",
+      "mode": "off",
+      "elf_sha256": "ef2f66cc52c4fb4e8c1d01698c2c5e034cf4dac2a184bfe5381f2d708db07359",
+      "dut_stdout_sha256": "400e6704ad3fc71de1d9b37af2fa1976125f49398f6e045c8b3a264bb947fb46",
+      "byte_identical_to_prior": true
+    },
+    {
+      "name": "fft",
+      "mode": "off",
+      "elf_sha256": "7c4761ad6c9138d2ea03d1092a2cdbadf5eab661cf6047fd65638ae36545a323",
+      "dut_stdout_sha256": "f36a0e63c72bac6087340a483fe4ccc8d68a22e667be277dde99ceb5d181bf14",
+      "byte_identical_to_prior": true
+    },
+    {
+      "name": "pid",
+      "mode": "off",
+      "elf_sha256": "f7ce0725df3f4237f35b19e198cdb17bdbcb5a3220b0772149b322b948079f0f",
+      "dut_stdout_sha256": "1979867fd544d74f4a879332e9df648b7d11351b20047801f99f8e5c1490703a",
+      "byte_identical_to_prior": true
+    },
+    {
+      "name": "gemm",
+      "mode": "off",
+      "elf_sha256": "b16c6f8971a61af764ae1279a34a5cede55c7ff3b98ddf2f9f3e079c4973bb40",
+      "dut_stdout_sha256": "f88986bb4c43c48ad7556cb2dacc63c1996cf5acce38b9058904d1e659e6a469",
+      "byte_identical_to_prior": true
+    },
+    {
+      "name": "bicg",
+      "mode": "off",
+      "elf_sha256": "84ba91db9de30c7b213821399c6b00ea6c64315b5207fd941d00111af02bde17",
+      "dut_stdout_sha256": "4b10563a433d6f4aa9c495cc849459064bfc4f42d44c1e75a8d1f4c1218c7134",
+      "byte_identical_to_prior": true
+    },
+    {
+      "name": "cholesky",
+      "mode": "off",
+      "elf_sha256": "61920374e48bf74c127dc6083981d0258570f3c6a5d87bda3424aa18cd1479cb",
+      "dut_stdout_sha256": "e5b1e3f4b5bfcc7069b8e989f05bcae617ff54c5420b93544dd909c2814569ec",
+      "byte_identical_to_prior": true
+    },
+    {
+      "name": "svm",
+      "mode": "off",
+      "elf_sha256": "71ae5ab453fa69a26ee68b38641f6097e529c40fa88b6efdcd76b32cd7907e3c",
+      "dut_stdout_sha256": "6078af71ba86796b5d2fd5c5045d580f85d3c7604e0e9ae6e5483c4c3e497845",
+      "byte_identical_to_prior": true
+    },
+    {
+      "name": "fir",
+      "mode": "fast",
+      "elf_sha256": "5f10e8af6146a6241196a33800a585dd320cf718f9ceca4777193993630fc531",
+      "dut_stdout_sha256": "acceadc698dbe2fa7e0a40c5649dcc4e662d975d7102ddc1d9c55e26d2b8d522",
+      "byte_identical_to_prior": true
+    },
+    {
+      "name": "iir",
+      "mode": "fast",
+      "elf_sha256": "1c6e106298136dd718ba116bf159dc30fc1c9dea906f0fb2430df4340d61a1dd",
+      "dut_stdout_sha256": "b561e710becb0715d0830e99b3e60c988e19c503b9ee3bc3d748993d2ee6281a",
+      "byte_identical_to_prior": true
+    },
+    {
+      "name": "fft",
+      "mode": "fast",
+      "elf_sha256": "fb91c70cb5fa040f01f2e7fcd56fd50427fb4defaf81134a73cc814543d7102b",
+      "dut_stdout_sha256": "3e5e607500ccf5232f0e32e4ec4e4c4ffd316428e420d939104a6b4ec0b84b7d",
+      "byte_identical_to_prior": true
+    },
+    {
+      "name": "pid",
+      "mode": "fast",
+      "elf_sha256": "22bc6dfaf2603e5348eee853165184f0b9c39af8b239f1cecfdce23b443aa583",
+      "dut_stdout_sha256": "9016cba54399f30439a1109ec94637092ec198c981ef1bafdec3c18f7834387b",
+      "byte_identical_to_prior": true
+    },
+    {
+      "name": "gemm",
+      "mode": "fast",
+      "elf_sha256": "9a16655c43124ba4d274e7705236c3fee508332bda9721c423f5ae8e9db83092",
+      "dut_stdout_sha256": "63874b261d3ec4cbcfb5971fe19833b36033b656e75bb68e26be23fd35207074",
+      "byte_identical_to_prior": true
+    },
+    {
+      "name": "bicg",
+      "mode": "fast",
+      "elf_sha256": "35c46dd5c424f24982c05034680abd9a9a38ca0c48657e560ccd97471a84a38f",
+      "dut_stdout_sha256": "e74beddfc63a55e539e158314aea33e1912565a84e7ff920f9342c793cfede76",
+      "byte_identical_to_prior": true
+    },
+    {
+      "name": "cholesky",
+      "mode": "fast",
+      "elf_sha256": "d3d004ba777fe92ccf0d85d2cdedad7eddc9ede16f630501dace9ddf3e9d383d",
+      "dut_stdout_sha256": "baacda89d273d8c7489dff26504a0842c52f9ff6fb438300eb78bd6854c1eeb5",
+      "byte_identical_to_prior": true
+    },
+    {
+      "name": "svm",
+      "mode": "fast",
+      "elf_sha256": "cce4a937dd64b388e6fea04ae59d426e9311dd321c4af21e6b0dee90f3c4e759",
+      "dut_stdout_sha256": "d429726561d8bc1718862ee89d2dc2a45771ef57072ef45f090dfc90a9f386a3",
+      "byte_identical_to_prior": true
+    }
+  ]
+}

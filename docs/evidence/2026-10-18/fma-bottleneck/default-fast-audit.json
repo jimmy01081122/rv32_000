@@ -1,0 +1,74 @@
+{
+  "source_commit": "5065e7f32f4201a7c4e7af77c1b7eb6cdda0b1c7",
+  "default_contract": "fast",
+  "fast_math": false,
+  "all_passed": true,
+  "default_summary_sha256": "1da5ecc0e0307fd4e9b1e8a201a98965ca6e6f49fe7660978ba23ffe9369edef",
+  "explicit_summary_sha256": "f74a721ba526b9802e6c57b8d93225eacf70b838a373812420884fd3862b0488",
+  "records": [
+    {
+      "name": "fir",
+      "elf_sha256": "5f10e8af6146a6241196a33800a585dd320cf718f9ceca4777193993630fc531",
+      "fixture_sha256": "7bc00de30cd7d6e1e6f59782271cd4fe2b9663c716d616d5309a80e2f60be2d5",
+      "roi_cycles": 74311,
+      "numeric_checksum": "fccef1fd",
+      "identical_to_explicit_fast": true
+    },
+    {
+      "name": "iir",
+      "elf_sha256": "1c6e106298136dd718ba116bf159dc30fc1c9dea906f0fb2430df4340d61a1dd",
+      "fixture_sha256": "401924e8b575e87f6c3a7f760e2a8326770772da42239ee5aff48101c6abafea",
+      "roi_cycles": 13523,
+      "numeric_checksum": "fee8b5ed",
+      "identical_to_explicit_fast": true
+    },
+    {
+      "name": "fft",
+      "elf_sha256": "fb91c70cb5fa040f01f2e7fcd56fd50427fb4defaf81134a73cc814543d7102b",
+      "fixture_sha256": "a00e27408849f441313bef45afbedf6153e1de47f22d5da342c32efa7faf9f87",
+      "roi_cycles": 40867,
+      "numeric_checksum": "c60690be",
+      "identical_to_explicit_fast": true
+    },
+    {
+      "name": "pid",
+      "elf_sha256": "22bc6dfaf2603e5348eee853165184f0b9c39af8b239f1cecfdce23b443aa583",
+      "fixture_sha256": "086d757924622c1d4636413dce5635530a241ec901a4a352403c19d37cf795bd",
+      "roi_cycles": 7248,
+      "numeric_checksum": "c5957fb7",
+      "identical_to_explicit_fast": true
+    },
+    {
+      "name": "gemm",
+      "elf_sha256": "9a16655c43124ba4d274e7705236c3fee508332bda9721c423f5ae8e9db83092",
+      "fixture_sha256": "39ab803bc2400bc3eba86219392bab5c33f0921736e9adeba92b8eb6b956a6a6",
+      "roi_cycles": 133275,
+      "numeric_checksum": "7159f884",
+      "identical_to_explicit_fast": true
+    },
+    {
+      "name": "bicg",
+      "elf_sha256": "35c46dd5c424f24982c05034680abd9a9a38ca0c48657e560ccd97471a84a38f",
+      "fixture_sha256": "bc13451e5ee70f8b9ff2bc33e8f158cab00a1f1ded5a01f1dba9310759ae9db9",
+      "roi_cycles": 23927,
+      "numeric_checksum": "a9945cbb",
+      "identical_to_explicit_fast": true
+    },
+    {
+      "name": "cholesky",
+      "elf_sha256": "d3d004ba777fe92ccf0d85d2cdedad7eddc9ede16f630501dace9ddf3e9d383d",
+      "fixture_sha256": "c902e3b0ea8c5db9b0e34bc9be472c9c2b44401dd92bd1044fe1a49b9448fcf0",
+      "roi_cycles": 194161,
+      "numeric_checksum": "b727bb8d",
+      "identical_to_explicit_fast": true
+    },
+    {
+      "name": "svm",
+      "elf_sha256": "cce4a937dd64b388e6fea04ae59d426e9311dd321c4af21e6b0dee90f3c4e759",
+      "fixture_sha256": "665e371ba951908d8d535174a79c27f66036a18070a96374f92e4ab3fe17d078",
+      "roi_cycles": 43392,
+      "numeric_checksum": "28464095",
+      "identical_to_explicit_fast": true
+    }
+  ]
+}

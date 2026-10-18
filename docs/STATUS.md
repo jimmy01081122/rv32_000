@@ -77,7 +77,7 @@ configuration, and must not be merged into this run's pass counts.
    `df97854c719014df862d6d6df450d02fe0cee756`. Each native/DUT run emits 3,629
    values independently checked against host-double references. Streaming states,
    Cholesky reconstruction and pinned upstream SVM labels pass; six checker
-   positive/negative controls pass. Formal sizes, tolerances, FMA policy,
+   positive/negative controls pass. Formal sizes and tolerances,
    timer overhead, stack high-water and memory/physical contracts remain open.
    A [matched contraction experiment](FMA_CONTRACTION_REVIEW.md) at clean commit
    `581ee86f1bd55bc6eff7cc123c660ab94446eb6f` now passes all eight cases in both
@@ -89,6 +89,13 @@ configuration, and must not be merged into this run's pass counts.
    Spike and DUT. This is finite-input coverage, not complete NaN/Inf, trap or
    RV32F conformance. Physical results must be refreshed for the changed datapath;
    compiler gains do not establish the architecture or area planning targets.
+   The [instruction/wait diagnosis](FMA_BOTTLENECK_REVIEW.md) at `5065e7f` adopts
+   the approved fast default and observes unchanged RTL. FIR/BiCG instruction
+   savings come entirely from FMUL+FADD contraction. Exposed load-response and
+   store-ack waits account for the limited cycle gains. All 16 paired DUT stdout
+   files/ELFs match the previous qualification; four observer on/off/old-model
+   replays, 8/8 implicit-fast cases, 18 Python controls and 18/18 directed/diff
+   checks pass. No CPU structure optimization or new physical result is claimed.
 6. **Physical results:** port hardcoded host paths, provision pinned ORFS/ASAP7,
    audit measurement units, synthesis boundary, constraints, corners and parasitic
    stage, then reproduce AP5B results. Current config skips detailed routing;

@@ -1,0 +1,1870 @@
+{
+  "scope": "Read-only FIR/BiCG instruction and cycle diagnosis, no RTL optimization or PPA score",
+  "repository_commit": "5065e7f32f4201a7c4e7af77c1b7eb6cdda0b1c7",
+  "working_tree_clean": true,
+  "simulator_sha256": "b374695241f220068a85872991e761e2623f357bbdf57841495590cff8ce237a",
+  "rtl_sha256": {
+    "rtl/core/rv32_ooo_core.sv": "26a61234966434ed0eebfbdd9d157f7a0ac38e7936f7041a9145ec0c4703596a",
+    "rtl/csr/rv32_ooo_csr.sv": "68c911e9e956761b3ffdb86fec2b82e94b5fc7632953dca308c30658e70f176e",
+    "rtl/execute/fp/rv32_ooo_fp_divsqrt.sv": "0c5e80032fd016aa60557d3e3908f07732c9230c50cea3519e1106b2f7715b3f",
+    "rtl/execute/fp/rv32_ooo_fp_execute.sv": "ee83a69dfbd7b2c9d141ebe14e1c40605ca43ce0f5f490d324113bcb9465c63b",
+    "rtl/execute/fp/rv32_ooo_fp_simple.sv": "bff3232ceafd3da96d85729ad630745b14cd47e398a32e35d11c25fe38547f4b",
+    "rtl/execute/int/rv32_ooo_divider.sv": "b8ca86ee486d8976ccf07f25adb4955a3945d348a7f5b1350fb8b6edbec91de6",
+    "rtl/execute/int/rv32_ooo_int_execute.sv": "dde3fee3c0031150f9cf45b9b1d6f2e665868be754ec70566d95c77dff7bb632",
+    "rtl/execute/int/rv32_ooo_multiplier.sv": "09afa5a87fbd59873a4cfc5f78a48492e928cc7b16f372dd51d71af96703a1d8",
+    "rtl/frontend/rv32_ooo_frontend.sv": "c0e222d798dc8c18d5e75bd25a7c9cf0d7b053f91c49650d27c0b8bb49f2dd4d",
+    "rtl/issue/rv32_ooo_fp_iq.sv": "7968fa7b3ce4b51b54e4ba21e41b1b5bc4989ac68b405c7a2a7e3e3394e43ca2",
+    "rtl/issue/rv32_ooo_int_iq.sv": "c12029eec5fca025da55c95d6c0207f6472f9eb653a3a1020d1543f78aa9d349",
+    "rtl/lsu/rv32_ooo_lsu.sv": "a77c7309cda97f04fc303dab29975e06fced5012486036b6d9f5a63354674e0a",
+    "rtl/pkg/rv32_ooo_params.sv": "3fc72080a0387a5424badf665656399ecc48e1c9170bedecb0aea16bd7602523",
+    "rtl/pkg/rv32_ooo_types.sv": "01be8e3b4c3959d9284e105412e415d77a6702db7de86eb1505d6fd428ee6759",
+    "rtl/rename/rv32_ooo_fp_prf.sv": "452daf771a3c83fc24693a54b6ce46da762a1942b5ca56eac5440e948bb83603",
+    "rtl/rename/rv32_ooo_int_prf.sv": "69261b57971908d2765555c540ba4292a169024a222983143fdf4785f0fe2406",
+    "rtl/rename/rv32_ooo_rename.sv": "1eb31d73eb54785c3e816eda35381e5b9d362b378ad0f118ac125d753063d574",
+    "rtl/rob/rv32_ooo_rob.sv": "94e4874dfcb3274fd5d0759776acde8dae373988151b4470698fa847c0a78555"
+  },
+  "comparison_sha256": {
+    "off": "95493e3a1127c6d60248a726136b608983922c43d8d0e93453312dea859c436b",
+    "fast": "f74a721ba526b9802e6c57b8d93225eacf70b838a373812420884fd3862b0488"
+  },
+  "source_sha256": {
+    "scripts/profile_fp_bottlenecks.py": "1d3fa70d4f8a4569abdec491da85c34c7f9856eb514d36d2a8e7c35071e03b1a",
+    "sim/tb/core_roi_profile.h": "296aa8ccaca4d56e442b8d2d4cc45e9bc79e75cb3a42b285cdc776259261c247",
+    "sim/tb/sim_main.cpp": "d82d68385d087300dd3b8cd6b08bc7ab616a7e44b98f51a46c46be67bd00c82d",
+    "rtl/pkg/rv32_ooo_types.sv": "01be8e3b4c3959d9284e105412e415d77a6702db7de86eb1505d6fd428ee6759"
+  },
+  "memory_model": {
+    "ram_bytes": 1048576,
+    "dmem_latency_cycles": 1,
+    "random_extra_delay_cycles": 0
+  },
+  "records": [
+    {
+      "name": "fir",
+      "mode": "off",
+      "elf_sha256": "ba78979d45035232be13c4c5e114d5b782a0caf58eb3d2d5b1183d8621c4ba36",
+      "fixture_sha256": "7bc00de30cd7d6e1e6f59782271cd4fe2b9663c716d616d5309a80e2f60be2d5",
+      "observed": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/off/fir/rv32.elf",
+          "+max-cycles=25000000",
+          "+profile-core-roi=/workspace/build/qualification/fp-balanced/fma-bottleneck/fir/off/core-profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-bottleneck/fir/off/observed.log",
+        "log_sha256": "6243a6ded9d95eb7132a772aee71c0455cd5e7985267798dbce81a79100a1174",
+        "wall_seconds": 3.9087762290000683
+      },
+      "problems": [],
+      "profile": {
+        "scope": "Commit-delimited ROI; opening marker excluded, closing marker included; overlapping events are not a causal cycle partition",
+        "cycles": 75326,
+        "trace_mismatches": 0,
+        "layout_mismatches": 0,
+        "cycle_partition": {
+          "head_wait_branch": 1,
+          "head_wait_fadd": 511,
+          "head_wait_fp_load": 1797,
+          "head_wait_int_load": 6,
+          "head_wait_integer_other": 518,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 517,
+          "retired_body": 69329,
+          "retired_marker": 1,
+          "rob_empty": 1552,
+          "store_ack_wait": 1088
+        },
+        "overlapping_events": {
+          "decode_empty": 1034,
+          "dmem_pending": 17731,
+          "dmem_read_accepted": 17188,
+          "dmem_write_accepted": 543,
+          "flush": 517,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_head_wait_not_in_iq": 511,
+          "fp_iq_issue": 16640,
+          "fp_iq_nonempty_no_ready": 41986,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 16384,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 61,
+          "rob_full": 53
+        },
+        "retired_classes": {
+          "branch": 8737,
+          "fadd": 8192,
+          "fmul": 8192,
+          "fp_load": 16671,
+          "fp_other": 256,
+          "fp_store": 543,
+          "int_load": 3,
+          "integer_other": 26732,
+          "jump": 3
+        },
+        "store_ack_wait_phases": {
+          "load_response_buffer": 1,
+          "mark_pending": 543,
+          "other_inflight": 1,
+          "request_ready": 543
+        },
+        "load_head_wait_phases": {
+          "before_external_request_or_forward": 516,
+          "own_external_inflight": 515,
+          "own_response_buffer": 772
+        },
+        "pcs": [
+          {
+            "pc": "800001a4",
+            "insn": "80002637",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 2
+          },
+          {
+            "pc": "800001a8",
+            "insn": "800015b7",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001ac",
+            "insn": "80002537",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001b0",
+            "insn": "b5c60613",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001b4",
+            "insn": "2d058593",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001b8",
+            "insn": "b5050513",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001bc",
+            "insn": "10000693",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001c0",
+            "insn": "4540006f",
+            "kind": "jump",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000228",
+            "insn": "f7dff0ef",
+            "kind": "jump",
+            "retired": 1,
+            "head_wait": 2
+          },
+          {
+            "pc": "8000022c",
+            "insn": "c00027f3",
+            "kind": "marker",
+            "retired": 0,
+            "head_wait": 2
+          },
+          {
+            "pc": "80000614",
+            "insn": "00452303",
+            "kind": "int_load",
+            "retired": 1,
+            "head_wait": 4
+          },
+          {
+            "pc": "80000618",
+            "insn": "00055803",
+            "kind": "int_load",
+            "retired": 1,
+            "head_wait": 2
+          },
+          {
+            "pc": "8000061c",
+            "insn": "0a068063",
+            "kind": "branch",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000620",
+            "insn": "00281893",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000624",
+            "insn": "00852f03",
+            "kind": "int_load",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000628",
+            "insn": "ffc88893",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "8000062c",
+            "insn": "011308b3",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 1
+          },
+          {
+            "pc": "80000630",
+            "insn": "00068e13",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000634",
+            "insn": "00030e93",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000638",
+            "insn": "0005a787",
+            "kind": "fp_load",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "8000063c",
+            "insn": "00458593",
+            "kind": "integer_other",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000640",
+            "insn": "00488893",
+            "kind": "integer_other",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000644",
+            "insn": "fef8ae27",
+            "kind": "fp_store",
+            "retired": 256,
+            "head_wait": 512
+          },
+          {
+            "pc": "80000648",
+            "insn": "f0000753",
+            "kind": "fp_other",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "8000064c",
+            "insn": "02080863",
+            "kind": "branch",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000650",
+            "insn": "00080513",
+            "kind": "integer_other",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000654",
+            "insn": "000f0713",
+            "kind": "integer_other",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000658",
+            "insn": "000e8793",
+            "kind": "integer_other",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "8000065c",
+            "insn": "0007a787",
+            "kind": "fp_load",
+            "retired": 8192,
+            "head_wait": 1025
+          },
+          {
+            "pc": "80000660",
+            "insn": "00072687",
+            "kind": "fp_load",
+            "retired": 8192,
+            "head_wait": 767
+          },
+          {
+            "pc": "80000664",
+            "insn": "fff50513",
+            "kind": "integer_other",
+            "retired": 8192,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000668",
+            "insn": "00478793",
+            "kind": "integer_other",
+            "retired": 8192,
+            "head_wait": 0
+          },
+          {
+            "pc": "8000066c",
+            "insn": "10d7f7d3",
+            "kind": "fmul",
+            "retired": 8192,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000670",
+            "insn": "00470713",
+            "kind": "integer_other",
+            "retired": 8192,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000674",
+            "insn": "00f77753",
+            "kind": "fadd",
+            "retired": 8192,
+            "head_wait": 511
+          },
+          {
+            "pc": "80000678",
+            "insn": "fe0512e3",
+            "kind": "branch",
+            "retired": 8192,
+            "head_wait": 0
+          },
+          {
+            "pc": "8000067c",
+            "insn": "fffe0e13",
+            "kind": "integer_other",
+            "retired": 256,
+            "head_wait": 512
+          },
+          {
+            "pc": "80000680",
+            "insn": "00e62027",
+            "kind": "fp_store",
+            "retired": 256,
+            "head_wait": 512
+          },
+          {
+            "pc": "80000684",
+            "insn": "00460613",
+            "kind": "integer_other",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000688",
+            "insn": "004e8e93",
+            "kind": "integer_other",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "8000068c",
+            "insn": "fa0e16e3",
+            "kind": "branch",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000690",
+            "insn": "00269713",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 2
+          },
+          {
+            "pc": "80000694",
+            "insn": "00e30733",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 1
+          },
+          {
+            "pc": "80000698",
+            "insn": "fff80793",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "8000069c",
+            "insn": "00078e63",
+            "kind": "branch",
+            "retired": 1,
+            "head_wait": 1
+          },
+          {
+            "pc": "800006a0",
+            "insn": "00072787",
+            "kind": "fp_load",
+            "retired": 31,
+            "head_wait": 5
+          },
+          {
+            "pc": "800006a4",
+            "insn": "fff78793",
+            "kind": "integer_other",
+            "retired": 31,
+            "head_wait": 0
+          },
+          {
+            "pc": "800006a8",
+            "insn": "00470713",
+            "kind": "integer_other",
+            "retired": 31,
+            "head_wait": 0
+          },
+          {
+            "pc": "800006ac",
+            "insn": "00f32027",
+            "kind": "fp_store",
+            "retired": 31,
+            "head_wait": 64
+          },
+          {
+            "pc": "800006b0",
+            "insn": "00430313",
+            "kind": "integer_other",
+            "retired": 31,
+            "head_wait": 0
+          },
+          {
+            "pc": "800006b4",
+            "insn": "fe0796e3",
+            "kind": "branch",
+            "retired": 31,
+            "head_wait": 0
+          },
+          {
+            "pc": "800006b8",
+            "insn": "00008067",
+            "kind": "jump",
+            "retired": 1,
+            "head_wait": 2
+          }
+        ]
+      },
+      "profile_sha256": "32a56b4649198716898fcc3f6d2386007e2797d41cf6c86b80131cb627d6d5bc",
+      "numeric": {
+        "passed": true,
+        "checked_values": 574,
+        "failed_indices": [],
+        "checksum": "fccef1fd",
+        "checksum_verified": true,
+        "roi_cycles": 75326,
+        "max_absolute_error": 0.0,
+        "max_tolerance_fraction": 0.0,
+        "streaming_matches_whole_block_bits": true
+      },
+      "observer_stdout_matches_qualified_run": true,
+      "unobserved": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/off/fir/rv32.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-bottleneck/fir/off/unobserved.log",
+        "log_sha256": "301278a903cc41e2991f830eadd8a36f4c0ff03d6d743e3ca56816f46af008ef",
+        "wall_seconds": 3.814123784000003
+      },
+      "unobserved_stdout_matches": true,
+      "baseline_simulator_sha256": "ff7ae35345e422e93c73a54c3fe0e849b460d56e1234596c50d9625767b0ce7c",
+      "baseline": {
+        "command": [
+          "/workspace/build/qualification/fp-balanced/fma-bottleneck/simulator-before-observer",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/off/fir/rv32.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-bottleneck/fir/off/baseline.log",
+        "log_sha256": "301278a903cc41e2991f830eadd8a36f4c0ff03d6d743e3ca56816f46af008ef",
+        "wall_seconds": 3.7183060489996933
+      },
+      "baseline_stdout_matches": true,
+      "passed": true
+    },
+    {
+      "name": "fir",
+      "mode": "fast",
+      "elf_sha256": "5f10e8af6146a6241196a33800a585dd320cf718f9ceca4777193993630fc531",
+      "fixture_sha256": "7bc00de30cd7d6e1e6f59782271cd4fe2b9663c716d616d5309a80e2f60be2d5",
+      "observed": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/fast/fir/rv32.elf",
+          "+max-cycles=25000000",
+          "+profile-core-roi=/workspace/build/qualification/fp-balanced/fma-bottleneck/fir/fast/core-profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-bottleneck/fir/fast/observed.log",
+        "log_sha256": "acceadc698dbe2fa7e0a40c5649dcc4e662d975d7102ddc1d9c55e26d2b8d522",
+        "wall_seconds": 4.045030736000172
+      },
+      "problems": [],
+      "profile": {
+        "scope": "Commit-delimited ROI; opening marker excluded, closing marker included; overlapping events are not a causal cycle partition",
+        "cycles": 74311,
+        "trace_mismatches": 0,
+        "layout_mismatches": 0,
+        "cycle_partition": {
+          "head_wait_branch": 1,
+          "head_wait_fp_load": 9481,
+          "head_wait_int_load": 6,
+          "head_wait_integer_other": 518,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 518,
+          "retired_body": 61137,
+          "retired_marker": 1,
+          "rob_empty": 1555,
+          "store_ack_wait": 1088
+        },
+        "overlapping_events": {
+          "decode_empty": 1036,
+          "dmem_pending": 17476,
+          "dmem_read_accepted": 16933,
+          "dmem_write_accepted": 543,
+          "flush": 518,
+          "fma_src01_wait_entry_cycles": 60418,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 8448,
+          "fp_iq_nonempty_no_ready": 53762,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 8192,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 6717,
+          "rob_full": 53
+        },
+        "retired_classes": {
+          "branch": 8737,
+          "fma": 8192,
+          "fp_load": 16671,
+          "fp_other": 256,
+          "fp_store": 543,
+          "int_load": 3,
+          "integer_other": 26732,
+          "jump": 3
+        },
+        "store_ack_wait_phases": {
+          "load_response_buffer": 1,
+          "mark_pending": 543,
+          "other_inflight": 1,
+          "request_ready": 543
+        },
+        "load_head_wait_phases": {
+          "before_external_request_or_forward": 518,
+          "own_external_inflight": 516,
+          "own_response_buffer": 8453
+        },
+        "pcs": [
+          {
+            "pc": "800001a4",
+            "insn": "80002637",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 2
+          },
+          {
+            "pc": "800001a8",
+            "insn": "800015b7",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001ac",
+            "insn": "80002537",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001b0",
+            "insn": "b5460613",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001b4",
+            "insn": "2c858593",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001b8",
+            "insn": "b4850513",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001bc",
+            "insn": "10000693",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001c0",
+            "insn": "4500006f",
+            "kind": "jump",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000228",
+            "insn": "f7dff0ef",
+            "kind": "jump",
+            "retired": 1,
+            "head_wait": 2
+          },
+          {
+            "pc": "8000022c",
+            "insn": "c00027f3",
+            "kind": "marker",
+            "retired": 0,
+            "head_wait": 2
+          },
+          {
+            "pc": "80000610",
+            "insn": "00452303",
+            "kind": "int_load",
+            "retired": 1,
+            "head_wait": 4
+          },
+          {
+            "pc": "80000614",
+            "insn": "00055803",
+            "kind": "int_load",
+            "retired": 1,
+            "head_wait": 2
+          },
+          {
+            "pc": "80000618",
+            "insn": "08068e63",
+            "kind": "branch",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "8000061c",
+            "insn": "00281893",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000620",
+            "insn": "00852f03",
+            "kind": "int_load",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000624",
+            "insn": "ffc88893",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000628",
+            "insn": "011308b3",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 1
+          },
+          {
+            "pc": "8000062c",
+            "insn": "00068e13",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000630",
+            "insn": "00030e93",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000634",
+            "insn": "0005a787",
+            "kind": "fp_load",
+            "retired": 256,
+            "head_wait": 4
+          },
+          {
+            "pc": "80000638",
+            "insn": "00458593",
+            "kind": "integer_other",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "8000063c",
+            "insn": "00488893",
+            "kind": "integer_other",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000640",
+            "insn": "fef8ae27",
+            "kind": "fp_store",
+            "retired": 256,
+            "head_wait": 512
+          },
+          {
+            "pc": "80000644",
+            "insn": "f00007d3",
+            "kind": "fp_other",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000648",
+            "insn": "02080663",
+            "kind": "branch",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "8000064c",
+            "insn": "00080513",
+            "kind": "integer_other",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000650",
+            "insn": "000f0713",
+            "kind": "integer_other",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000654",
+            "insn": "000e8793",
+            "kind": "integer_other",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000658",
+            "insn": "0007a687",
+            "kind": "fp_load",
+            "retired": 8192,
+            "head_wait": 1025
+          },
+          {
+            "pc": "8000065c",
+            "insn": "00072707",
+            "kind": "fp_load",
+            "retired": 8192,
+            "head_wait": 8447
+          },
+          {
+            "pc": "80000660",
+            "insn": "fff50513",
+            "kind": "integer_other",
+            "retired": 8192,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000664",
+            "insn": "00478793",
+            "kind": "integer_other",
+            "retired": 8192,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000668",
+            "insn": "00470713",
+            "kind": "integer_other",
+            "retired": 8192,
+            "head_wait": 0
+          },
+          {
+            "pc": "8000066c",
+            "insn": "78e6f7c3",
+            "kind": "fma",
+            "retired": 8192,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000670",
+            "insn": "fe0514e3",
+            "kind": "branch",
+            "retired": 8192,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000674",
+            "insn": "fffe0e13",
+            "kind": "integer_other",
+            "retired": 256,
+            "head_wait": 512
+          },
+          {
+            "pc": "80000678",
+            "insn": "00f62027",
+            "kind": "fp_store",
+            "retired": 256,
+            "head_wait": 512
+          },
+          {
+            "pc": "8000067c",
+            "insn": "00460613",
+            "kind": "integer_other",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000680",
+            "insn": "004e8e93",
+            "kind": "integer_other",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000684",
+            "insn": "fa0e18e3",
+            "kind": "branch",
+            "retired": 256,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000688",
+            "insn": "00269713",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 2
+          },
+          {
+            "pc": "8000068c",
+            "insn": "00e30733",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 1
+          },
+          {
+            "pc": "80000690",
+            "insn": "fff80793",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000694",
+            "insn": "00078e63",
+            "kind": "branch",
+            "retired": 1,
+            "head_wait": 1
+          },
+          {
+            "pc": "80000698",
+            "insn": "00072787",
+            "kind": "fp_load",
+            "retired": 31,
+            "head_wait": 5
+          },
+          {
+            "pc": "8000069c",
+            "insn": "fff78793",
+            "kind": "integer_other",
+            "retired": 31,
+            "head_wait": 0
+          },
+          {
+            "pc": "800006a0",
+            "insn": "00470713",
+            "kind": "integer_other",
+            "retired": 31,
+            "head_wait": 0
+          },
+          {
+            "pc": "800006a4",
+            "insn": "00f32027",
+            "kind": "fp_store",
+            "retired": 31,
+            "head_wait": 64
+          },
+          {
+            "pc": "800006a8",
+            "insn": "00430313",
+            "kind": "integer_other",
+            "retired": 31,
+            "head_wait": 0
+          },
+          {
+            "pc": "800006ac",
+            "insn": "fe0796e3",
+            "kind": "branch",
+            "retired": 31,
+            "head_wait": 0
+          },
+          {
+            "pc": "800006b0",
+            "insn": "00008067",
+            "kind": "jump",
+            "retired": 1,
+            "head_wait": 2
+          }
+        ]
+      },
+      "profile_sha256": "33a38b761801dc87b1cbc1975d0f747afd22155bc86123ad0e2f1c40118558cd",
+      "numeric": {
+        "passed": true,
+        "checked_values": 574,
+        "failed_indices": [],
+        "checksum": "fccef1fd",
+        "checksum_verified": true,
+        "roi_cycles": 74311,
+        "max_absolute_error": 0.0,
+        "max_tolerance_fraction": 0.0,
+        "streaming_matches_whole_block_bits": true
+      },
+      "observer_stdout_matches_qualified_run": true,
+      "unobserved": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/fast/fir/rv32.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-bottleneck/fir/fast/unobserved.log",
+        "log_sha256": "04cb1b7bbaa389b9ea4ba46d343650abad1378e9397dd2ce6e9055741ebbbe5a",
+        "wall_seconds": 3.9593979900000704
+      },
+      "unobserved_stdout_matches": true,
+      "baseline_simulator_sha256": "ff7ae35345e422e93c73a54c3fe0e849b460d56e1234596c50d9625767b0ce7c",
+      "baseline": {
+        "command": [
+          "/workspace/build/qualification/fp-balanced/fma-bottleneck/simulator-before-observer",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/fast/fir/rv32.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-bottleneck/fir/fast/baseline.log",
+        "log_sha256": "04cb1b7bbaa389b9ea4ba46d343650abad1378e9397dd2ce6e9055741ebbbe5a",
+        "wall_seconds": 4.0064006160000645
+      },
+      "baseline_stdout_matches": true,
+      "passed": true
+    },
+    {
+      "name": "bicg",
+      "mode": "off",
+      "elf_sha256": "84ba91db9de30c7b213821399c6b00ea6c64315b5207fd941d00111af02bde17",
+      "fixture_sha256": "bc13451e5ee70f8b9ff2bc33e8f158cab00a1f1ded5a01f1dba9310759ae9db9",
+      "observed": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/off/bicg/rv32.elf",
+          "+max-cycles=25000000",
+          "+profile-core-roi=/workspace/build/qualification/fp-balanced/fma-bottleneck/bicg/off/core-profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-bottleneck/bicg/off/observed.log",
+        "log_sha256": "4b10563a433d6f4aa9c495cc849459064bfc4f42d44c1e75a8d1f4c1218c7134",
+        "wall_seconds": 0.7693371899999875
+      },
+      "problems": [],
+      "profile": {
+        "scope": "Commit-delimited ROI; opening marker excluded, closing marker included; overlapping events are not a causal cycle partition",
+        "cycles": 24053,
+        "trace_mismatches": 0,
+        "layout_mismatches": 0,
+        "cycle_partition": {
+          "head_wait_fp_load": 505,
+          "head_wait_fp_store": 84,
+          "head_wait_int_store": 3,
+          "head_wait_integer_other": 7,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 88,
+          "retired_body": 19700,
+          "retired_marker": 1,
+          "rob_empty": 265,
+          "store_ack_wait": 3394
+        },
+        "overlapping_events": {
+          "decode_empty": 176,
+          "dmem_pending": 6590,
+          "dmem_read_accepted": 4914,
+          "dmem_write_accepted": 1676,
+          "flush": 88,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 6551,
+          "fp_iq_nonempty_no_ready": 15960,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 6468,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 2972,
+          "rob_full": 2957
+        },
+        "retired_classes": {
+          "branch": 1676,
+          "fadd": 3192,
+          "fmul": 3192,
+          "fp_load": 4830,
+          "fp_other": 42,
+          "fp_store": 1638,
+          "int_store": 38,
+          "integer_other": 5090,
+          "jump": 2
+        },
+        "store_ack_wait_phases": {
+          "load_response_buffer": 42,
+          "mark_pending": 1676,
+          "request_ready": 1676
+        },
+        "load_head_wait_phases": {
+          "before_external_request_or_forward": 84,
+          "own_external_inflight": 210,
+          "own_response_buffer": 211
+        },
+        "pcs": [
+          {
+            "pc": "800001a4",
+            "insn": "800028b7",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 2
+          },
+          {
+            "pc": "800001a8",
+            "insn": "3ec88893",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 1
+          },
+          {
+            "pc": "800001ac",
+            "insn": "09888613",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 1
+          },
+          {
+            "pc": "800001b0",
+            "insn": "00088793",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001b4",
+            "insn": "0007a023",
+            "kind": "int_store",
+            "retired": 38,
+            "head_wait": 79
+          },
+          {
+            "pc": "800001b8",
+            "insn": "00478793",
+            "kind": "integer_other",
+            "retired": 38,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001bc",
+            "insn": "fef61ce3",
+            "kind": "branch",
+            "retired": 38,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001c0",
+            "insn": "800025b7",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 2
+          },
+          {
+            "pc": "800001c4",
+            "insn": "48458593",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 1
+          },
+          {
+            "pc": "800001c8",
+            "insn": "80002837",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001cc",
+            "insn": "80002537",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001d0",
+            "insn": "0a858e13",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001d4",
+            "insn": "34480813",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001d8",
+            "insn": "5c450513",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001dc",
+            "insn": "80002337",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001e0",
+            "insn": "0005a507",
+            "kind": "fp_load",
+            "retired": 42,
+            "head_wait": 2
+          },
+          {
+            "pc": "800001e4",
+            "insn": "f00006d3",
+            "kind": "fp_other",
+            "retired": 42,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001e8",
+            "insn": "52c30693",
+            "kind": "integer_other",
+            "retired": 42,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001ec",
+            "insn": "00050713",
+            "kind": "integer_other",
+            "retired": 42,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001f0",
+            "insn": "00088793",
+            "kind": "integer_other",
+            "retired": 42,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001f4",
+            "insn": "00072787",
+            "kind": "fp_load",
+            "retired": 1596,
+            "head_wait": 168
+          },
+          {
+            "pc": "800001f8",
+            "insn": "0007a707",
+            "kind": "fp_load",
+            "retired": 1596,
+            "head_wait": 167
+          },
+          {
+            "pc": "800001fc",
+            "insn": "0006a587",
+            "kind": "fp_load",
+            "retired": 1596,
+            "head_wait": 168
+          },
+          {
+            "pc": "80000200",
+            "insn": "10f57653",
+            "kind": "fmul",
+            "retired": 1596,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000204",
+            "insn": "00478793",
+            "kind": "integer_other",
+            "retired": 1596,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000208",
+            "insn": "10b7f7d3",
+            "kind": "fmul",
+            "retired": 1596,
+            "head_wait": 0
+          },
+          {
+            "pc": "8000020c",
+            "insn": "00470713",
+            "kind": "integer_other",
+            "retired": 1596,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000210",
+            "insn": "00468693",
+            "kind": "integer_other",
+            "retired": 1596,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000214",
+            "insn": "00c77753",
+            "kind": "fadd",
+            "retired": 1596,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000218",
+            "insn": "00f6f6d3",
+            "kind": "fadd",
+            "retired": 1596,
+            "head_wait": 0
+          },
+          {
+            "pc": "8000021c",
+            "insn": "fee7ae27",
+            "kind": "fp_store",
+            "retired": 1596,
+            "head_wait": 3234
+          },
+          {
+            "pc": "80000220",
+            "insn": "fcf61ae3",
+            "kind": "branch",
+            "retired": 1596,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000224",
+            "insn": "00d82027",
+            "kind": "fp_store",
+            "retired": 42,
+            "head_wait": 168
+          },
+          {
+            "pc": "80000228",
+            "insn": "00458593",
+            "kind": "integer_other",
+            "retired": 42,
+            "head_wait": 0
+          },
+          {
+            "pc": "8000022c",
+            "insn": "00480813",
+            "kind": "integer_other",
+            "retired": 42,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000230",
+            "insn": "09850513",
+            "kind": "integer_other",
+            "retired": 42,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000234",
+            "insn": "fabe16e3",
+            "kind": "branch",
+            "retired": 42,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000238",
+            "insn": "00008067",
+            "kind": "jump",
+            "retired": 1,
+            "head_wait": 2
+          },
+          {
+            "pc": "800002c8",
+            "insn": "eddff0ef",
+            "kind": "jump",
+            "retired": 1,
+            "head_wait": 2
+          },
+          {
+            "pc": "800002cc",
+            "insn": "c00027f3",
+            "kind": "marker",
+            "retired": 0,
+            "head_wait": 2
+          }
+        ]
+      },
+      "profile_sha256": "982a6f0214dccf93c5cd7760a6d3b5abdb8503c874805733c752219ae8f17c07",
+      "numeric": {
+        "passed": true,
+        "checked_values": 80,
+        "failed_indices": [],
+        "checksum": "042846fa",
+        "checksum_verified": true,
+        "roi_cycles": 24053,
+        "max_absolute_error": 1.9710629199920504e-06,
+        "max_tolerance_fraction": 0.016831848597752545
+      },
+      "observer_stdout_matches_qualified_run": true,
+      "unobserved": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/off/bicg/rv32.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-bottleneck/bicg/off/unobserved.log",
+        "log_sha256": "a6a230babe2e91d741781ac58a438791549effbdc373d84578d7fa1f9aa06052",
+        "wall_seconds": 0.737607990000015
+      },
+      "unobserved_stdout_matches": true,
+      "baseline_simulator_sha256": "ff7ae35345e422e93c73a54c3fe0e849b460d56e1234596c50d9625767b0ce7c",
+      "baseline": {
+        "command": [
+          "/workspace/build/qualification/fp-balanced/fma-bottleneck/simulator-before-observer",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/off/bicg/rv32.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-bottleneck/bicg/off/baseline.log",
+        "log_sha256": "a6a230babe2e91d741781ac58a438791549effbdc373d84578d7fa1f9aa06052",
+        "wall_seconds": 0.7613561339999251
+      },
+      "baseline_stdout_matches": true,
+      "passed": true
+    },
+    {
+      "name": "bicg",
+      "mode": "fast",
+      "elf_sha256": "35c46dd5c424f24982c05034680abd9a9a38ca0c48657e560ccd97471a84a38f",
+      "fixture_sha256": "bc13451e5ee70f8b9ff2bc33e8f158cab00a1f1ded5a01f1dba9310759ae9db9",
+      "observed": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/fast/bicg/rv32.elf",
+          "+max-cycles=25000000",
+          "+profile-core-roi=/workspace/build/qualification/fp-balanced/fma-bottleneck/bicg/fast/core-profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-bottleneck/bicg/fast/observed.log",
+        "log_sha256": "e74beddfc63a55e539e158314aea33e1912565a84e7ff920f9342c793cfede76",
+        "wall_seconds": 0.7722442570002386
+      },
+      "problems": [],
+      "profile": {
+        "scope": "Commit-delimited ROI; opening marker excluded, closing marker included; overlapping events are not a causal cycle partition",
+        "cycles": 23927,
+        "trace_mismatches": 0,
+        "layout_mismatches": 0,
+        "cycle_partition": {
+          "head_wait_fp_load": 505,
+          "head_wait_fp_store": 84,
+          "head_wait_int_store": 3,
+          "head_wait_integer_other": 7,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 88,
+          "retired_body": 16508,
+          "retired_marker": 1,
+          "rob_empty": 265,
+          "store_ack_wait": 6460
+        },
+        "overlapping_events": {
+          "decode_empty": 176,
+          "dmem_pending": 6590,
+          "dmem_read_accepted": 4914,
+          "dmem_write_accepted": 1676,
+          "flush": 88,
+          "fma_src01_wait_entry_cycles": 29526,
+          "fma_src2_only_entry_cycles": 4914,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 3317,
+          "fp_iq_nonempty_no_ready": 18858,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 3234,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 6122,
+          "rob_full": 59
+        },
+        "retired_classes": {
+          "branch": 1676,
+          "fma": 3192,
+          "fp_load": 4830,
+          "fp_other": 42,
+          "fp_store": 1638,
+          "int_store": 38,
+          "integer_other": 5090,
+          "jump": 2
+        },
+        "store_ack_wait_phases": {
+          "load_response_buffer": 1554,
+          "mark_pending": 1676,
+          "other_inflight": 1554,
+          "request_ready": 1676
+        },
+        "load_head_wait_phases": {
+          "before_external_request_or_forward": 84,
+          "own_external_inflight": 210,
+          "own_response_buffer": 211
+        },
+        "pcs": [
+          {
+            "pc": "800001a4",
+            "insn": "800028b7",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 2
+          },
+          {
+            "pc": "800001a8",
+            "insn": "3e088893",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 1
+          },
+          {
+            "pc": "800001ac",
+            "insn": "09888613",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 1
+          },
+          {
+            "pc": "800001b0",
+            "insn": "00088793",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001b4",
+            "insn": "0007a023",
+            "kind": "int_store",
+            "retired": 38,
+            "head_wait": 79
+          },
+          {
+            "pc": "800001b8",
+            "insn": "00478793",
+            "kind": "integer_other",
+            "retired": 38,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001bc",
+            "insn": "fef61ce3",
+            "kind": "branch",
+            "retired": 38,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001c0",
+            "insn": "800025b7",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 2
+          },
+          {
+            "pc": "800001c4",
+            "insn": "47858593",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 1
+          },
+          {
+            "pc": "800001c8",
+            "insn": "80002837",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001cc",
+            "insn": "80002537",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001d0",
+            "insn": "0a858e13",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001d4",
+            "insn": "33880813",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001d8",
+            "insn": "5b850513",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001dc",
+            "insn": "80002337",
+            "kind": "integer_other",
+            "retired": 1,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001e0",
+            "insn": "0005a587",
+            "kind": "fp_load",
+            "retired": 42,
+            "head_wait": 2
+          },
+          {
+            "pc": "800001e4",
+            "insn": "f00006d3",
+            "kind": "fp_other",
+            "retired": 42,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001e8",
+            "insn": "52030693",
+            "kind": "integer_other",
+            "retired": 42,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001ec",
+            "insn": "00050713",
+            "kind": "integer_other",
+            "retired": 42,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001f0",
+            "insn": "00088793",
+            "kind": "integer_other",
+            "retired": 42,
+            "head_wait": 0
+          },
+          {
+            "pc": "800001f4",
+            "insn": "00072707",
+            "kind": "fp_load",
+            "retired": 1596,
+            "head_wait": 168
+          },
+          {
+            "pc": "800001f8",
+            "insn": "0007a787",
+            "kind": "fp_load",
+            "retired": 1596,
+            "head_wait": 167
+          },
+          {
+            "pc": "800001fc",
+            "insn": "0006a607",
+            "kind": "fp_load",
+            "retired": 1596,
+            "head_wait": 168
+          },
+          {
+            "pc": "80000200",
+            "insn": "00478793",
+            "kind": "integer_other",
+            "retired": 1596,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000204",
+            "insn": "78e5f7c3",
+            "kind": "fma",
+            "retired": 1596,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000208",
+            "insn": "68c776c3",
+            "kind": "fma",
+            "retired": 1596,
+            "head_wait": 0
+          },
+          {
+            "pc": "8000020c",
+            "insn": "00470713",
+            "kind": "integer_other",
+            "retired": 1596,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000210",
+            "insn": "00468693",
+            "kind": "integer_other",
+            "retired": 1596,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000214",
+            "insn": "fef7ae27",
+            "kind": "fp_store",
+            "retired": 1596,
+            "head_wait": 6300
+          },
+          {
+            "pc": "80000218",
+            "insn": "fcf61ee3",
+            "kind": "branch",
+            "retired": 1596,
+            "head_wait": 0
+          },
+          {
+            "pc": "8000021c",
+            "insn": "00d82027",
+            "kind": "fp_store",
+            "retired": 42,
+            "head_wait": 168
+          },
+          {
+            "pc": "80000220",
+            "insn": "00458593",
+            "kind": "integer_other",
+            "retired": 42,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000224",
+            "insn": "00480813",
+            "kind": "integer_other",
+            "retired": 42,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000228",
+            "insn": "09850513",
+            "kind": "integer_other",
+            "retired": 42,
+            "head_wait": 0
+          },
+          {
+            "pc": "8000022c",
+            "insn": "fabe1ae3",
+            "kind": "branch",
+            "retired": 42,
+            "head_wait": 0
+          },
+          {
+            "pc": "80000230",
+            "insn": "00008067",
+            "kind": "jump",
+            "retired": 1,
+            "head_wait": 2
+          },
+          {
+            "pc": "800002c0",
+            "insn": "ee5ff0ef",
+            "kind": "jump",
+            "retired": 1,
+            "head_wait": 2
+          },
+          {
+            "pc": "800002c4",
+            "insn": "c00027f3",
+            "kind": "marker",
+            "retired": 0,
+            "head_wait": 2
+          }
+        ]
+      },
+      "profile_sha256": "9731c779354bb200698650cd9698f9e61c364aa1d6098587991d020a4e8a53fb",
+      "numeric": {
+        "passed": true,
+        "checked_values": 80,
+        "failed_indices": [],
+        "checksum": "a9945cbb",
+        "checksum_verified": true,
+        "roi_cycles": 23927,
+        "max_absolute_error": 1.75951965530885e-06,
+        "max_tolerance_fraction": 0.015568917713687243
+      },
+      "observer_stdout_matches_qualified_run": true,
+      "unobserved": {
+        "command": [
+          "/workspace/build/sim/rv32_ooo_sim",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/fast/bicg/rv32.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-bottleneck/bicg/fast/unobserved.log",
+        "log_sha256": "29b2782c0333bc400ecce7e750a8dcc63c0d1b839cf880542ed46cb88a355aca",
+        "wall_seconds": 0.751149365999936
+      },
+      "unobserved_stdout_matches": true,
+      "baseline_simulator_sha256": "ff7ae35345e422e93c73a54c3fe0e849b460d56e1234596c50d9625767b0ce7c",
+      "baseline": {
+        "command": [
+          "/workspace/build/qualification/fp-balanced/fma-bottleneck/simulator-before-observer",
+          "+elf=/workspace/build/qualification/fp-balanced/fma-comparison/fast/bicg/rv32.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/qualification/fp-balanced/fma-bottleneck/bicg/fast/baseline.log",
+        "log_sha256": "29b2782c0333bc400ecce7e750a8dcc63c0d1b839cf880542ed46cb88a355aca",
+        "wall_seconds": 0.7987181109997437
+      },
+      "baseline_stdout_matches": true,
+      "passed": true
+    }
+  ],
+  "results": {
+    "fir": {
+      "retired_removed": 8192,
+      "cycles_saved": 1015,
+      "additional_no_retire_cycles": 7177,
+      "instruction_delta_fast_minus_off": {
+        "branch": 0,
+        "fadd": -8192,
+        "fma": 8192,
+        "fmul": -8192,
+        "fp_load": 0,
+        "fp_other": 0,
+        "fp_store": 0,
+        "int_load": 0,
+        "integer_other": 0,
+        "jump": 0
+      },
+      "cycle_partition_delta_fast_minus_off": {
+        "head_wait_branch": 0,
+        "head_wait_fadd": -511,
+        "head_wait_fp_load": 7684,
+        "head_wait_int_load": 0,
+        "head_wait_integer_other": 0,
+        "head_wait_jump": 0,
+        "head_wait_marker": 0,
+        "recovery": 1,
+        "retired_body": -8192,
+        "retired_marker": 0,
+        "rob_empty": 3,
+        "store_ack_wait": 0
+      },
+      "store_wait_delta_fast_minus_off": {
+        "load_response_buffer": 0,
+        "mark_pending": 0,
+        "other_inflight": 0,
+        "request_ready": 0
+      },
+      "load_wait_delta_fast_minus_off": {
+        "before_external_request_or_forward": 2,
+        "own_external_inflight": 1,
+        "own_response_buffer": 7681
+      }
+    },
+    "bicg": {
+      "retired_removed": 3192,
+      "cycles_saved": 126,
+      "additional_no_retire_cycles": 3066,
+      "instruction_delta_fast_minus_off": {
+        "branch": 0,
+        "fadd": -3192,
+        "fma": 3192,
+        "fmul": -3192,
+        "fp_load": 0,
+        "fp_other": 0,
+        "fp_store": 0,
+        "int_store": 0,
+        "integer_other": 0,
+        "jump": 0
+      },
+      "cycle_partition_delta_fast_minus_off": {
+        "head_wait_fp_load": 0,
+        "head_wait_fp_store": 0,
+        "head_wait_int_store": 0,
+        "head_wait_integer_other": 0,
+        "head_wait_jump": 0,
+        "head_wait_marker": 0,
+        "recovery": 0,
+        "retired_body": -3192,
+        "retired_marker": 0,
+        "rob_empty": 0,
+        "store_ack_wait": 3066
+      },
+      "store_wait_delta_fast_minus_off": {
+        "load_response_buffer": 1512,
+        "mark_pending": 0,
+        "other_inflight": 1554,
+        "request_ready": 0
+      },
+      "load_wait_delta_fast_minus_off": {
+        "before_external_request_or_forward": 0,
+        "own_external_inflight": 0,
+        "own_response_buffer": 0
+      }
+    }
+  },
+  "all_passed": true,
+  "working_tree_clean_at_end": true
+}
