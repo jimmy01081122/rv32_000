@@ -14,6 +14,13 @@ OUT=ROOT/'build/baselines/ap5b-post-lsu-v1/measurement'
 def state():return {'commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),'status':subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).strip()}
 def check_result(row,text,audit,core_ps,memory_ps,elf,profile):
     problems=[]
+    if not audit['fixed_time'] or any(audit[k]!=v for k,v in {
+        'core_period_ps':core_ps,'imem_response_ps':memory_ps,
+        'imem_interval_ps':memory_ps,'dmem_response_ps':memory_ps}.items()):
+        problems.append('memory audit configuration differs from the contract')
+    for port in ('imem','dmem'):
+        if not 0<audit[port+'_responses']<=audit[port+'_requests']:
+            problems.append(port+' transaction audit inconsistent or empty')
     if 'Exit status    : PASS (0)' not in text or 'TRAP encountered' in text:problems.append('program failure/unexpected trap')
     if row['family']=='fp32':
         class Output:
@@ -37,7 +44,13 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--period-ps',type=int,required=True,help='actual checked baseline period, or explicitly labeled preparation timing')
     parser.add_argument('--preparation',action='store_true',help='model qualification only; cannot freeze physical baseline')
-    args=parser.parse_args();OUT.mkdir(parents=True,exist_ok=True);destination=OUT/'summary.json';destination.unlink(missing_ok=True)
+    parser.add_argument('--label',default='',help='unique attempt suffix; existing measurements are never overwritten')
+    args=parser.parse_args()
+    if args.label and not re.fullmatch(r'[a-zA-Z0-9_-]+',args.label):parser.error('invalid attempt label')
+    global OUT
+    if args.label:OUT=OUT.with_name(OUT.name+'-'+args.label)
+    OUT.mkdir(parents=True,exist_ok=True);destination=OUT/'summary.json'
+    if destination.exists():parser.exit(1,'measurement already exists; choose a fresh --label\n')
     manifest=load();rows=validate(manifest);check_rtl(manifest);start=state()
     if start['status']:raise SystemExit('baseline measurement requires a clean worktree')
     if args.period_ps<=0:parser.error('positive ps period required')

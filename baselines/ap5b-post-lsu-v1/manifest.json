@@ -66,7 +66,7 @@
     "missing_or_failed_cases": "invalidate complete family score; do not reduce denominator"
   },
   "physical": {
-    "status": "provisioning",
+    "status": "implementation_in_progress",
     "pinned_orfs_commit": "8359fde81991e6118b15b8a93fcde606b577794d",
     "pinned_parent_image_digest": "sha256:fd940893eafe2410ed9513441f91e15be5fe9f73a29d68e5655ad62a39ac2e9a",
     "platform": "asap7",
@@ -88,7 +88,24 @@
       "output_load_ff": 2,
       "setup_uncertainty_ps": 50,
       "hold_uncertainty_ps": 25,
-      "period_scaling": false
+      "period_scaling": false,
+      "input_delay_min_ps": 0,
+      "output_delay_min_ps": 0,
+      "delay_ps_fields_mean": "maximum setup budget; explicit minimum hold delays are zero"
+    },
+    "library_operating_conditions": {
+      "TT": {
+        "voltage_v": 0.7,
+        "temperature_c": 25
+      },
+      "SS": {
+        "voltage_v": 0.63,
+        "temperature_c": 100
+      },
+      "FF": {
+        "voltage_v": 0.77,
+        "temperature_c": 0
+      }
     }
   },
   "qualification_evidence": "docs/evidence/2026-10-18/lsu-interface-fix",
