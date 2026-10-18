@@ -1,0 +1,10 @@
+Traceback (most recent call last):
+  File "/workspace/rv32_000/scripts/audit_physical_reports.py", line 109, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/rv32_000/scripts/audit_physical_reports.py", line 92, in main
+    control('missing input constraint detected','A' in (dest/'missing-input-delay.rpt').read_text()
+  File "/workspace/rv32_000/scripts/audit_physical_reports.py", line 49, in control
+    if not condition:raise RuntimeError('report control failed: '+name)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: report control failed: missing input constraint detected

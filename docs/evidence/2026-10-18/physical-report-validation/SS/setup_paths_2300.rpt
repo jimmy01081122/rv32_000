@@ -1,0 +1,231 @@
+Startpoint: B (input port clocked by core_clk)
+Endpoint: HSN (output port clocked by core_clk)
+Path Group: in2out
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+1100.00 1100.00 v input external delay
+   0.00 1100.00 v B (in)
+  79.96 1179.96 v ha/SN (HAxp5_ASAP7_75t_R)
+   0.00 1179.96 v HSN (out)
+        1179.96   data arrival time
+
+2300.00 2300.00   clock core_clk (rise edge)
+   0.00 2300.00   clock network delay (propagated)
+ -50.00 2250.00   clock uncertainty
+   0.00 2250.00   clock reconvergence pessimism
+-1100.00 1150.00   output external delay
+        1150.00   data required time
+---------------------------------------------------------
+        1150.00   data required time
+        -1179.96   data arrival time
+---------------------------------------------------------
+         -29.96   slack (VIOLATED)
+
+
+Startpoint: B (input port clocked by core_clk)
+Endpoint: FCON (output port clocked by core_clk)
+Path Group: in2out
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+1100.00 1100.00 v input external delay
+   0.00 1100.00 v B (in)
+  52.57 1152.57 ^ fa/CON (FAx1_ASAP7_75t_R)
+   0.00 1152.57 ^ FCON (out)
+        1152.57   data arrival time
+
+2300.00 2300.00   clock core_clk (rise edge)
+   0.00 2300.00   clock network delay (propagated)
+ -50.00 2250.00   clock uncertainty
+   0.00 2250.00   clock reconvergence pessimism
+-1100.00 1150.00   output external delay
+        1150.00   data required time
+---------------------------------------------------------
+        1150.00   data required time
+        -1152.57   data arrival time
+---------------------------------------------------------
+          -2.57   slack (VIOLATED)
+
+
+Startpoint: B (input port clocked by core_clk)
+Endpoint: HCON (output port clocked by core_clk)
+Path Group: in2out
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+1100.00 1100.00 v input external delay
+   0.00 1100.00 v B (in)
+  36.46 1136.46 ^ ha/CON (HAxp5_ASAP7_75t_R)
+   0.00 1136.46 ^ HCON (out)
+        1136.46   data arrival time
+
+2300.00 2300.00   clock core_clk (rise edge)
+   0.00 2300.00   clock network delay (propagated)
+ -50.00 2250.00   clock uncertainty
+   0.00 2250.00   clock reconvergence pessimism
+-1100.00 1150.00   output external delay
+        1150.00   data required time
+---------------------------------------------------------
+        1150.00   data required time
+        -1136.46   data arrival time
+---------------------------------------------------------
+          13.54   slack (MET)
+
+
+Startpoint: B (input port clocked by core_clk)
+Endpoint: ff0 (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: in2reg
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+1100.00 1100.00 ^ input external delay
+   0.00 1100.00 ^ B (in)
+  39.14 1139.14 v fa/CON (FAx1_ASAP7_75t_R)
+  32.62 1171.76 ^ fa/SN (FAx1_ASAP7_75t_R)
+   0.10 1171.86 ^ ff0/D (DFFHQNx1_ASAP7_75t_R)
+        1171.86   data arrival time
+
+2300.00 2300.00   clock core_clk (rise edge)
+   0.00 2300.00   clock source latency
+   0.00 2300.00 ^ clk (in)
+   0.07 2300.07 ^ ff0/CLK (DFFHQNx1_ASAP7_75t_R)
+ -50.00 2250.07   clock uncertainty
+   0.00 2250.07   clock reconvergence pessimism
+ -25.66 2224.41   library setup time
+        2224.41   data required time
+---------------------------------------------------------
+        2224.41   data required time
+        -1171.86   data arrival time
+---------------------------------------------------------
+        1052.55   slack (MET)
+
+
+Startpoint: ff0 (rising edge-triggered flip-flop clocked by core_clk)
+Endpoint: HSN (output port clocked by core_clk)
+Path Group: reg2out
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock source latency
+   0.00    0.00 ^ clk (in)
+   0.09    0.09 ^ ff0/CLK (DFFHQNx1_ASAP7_75t_R)
+  87.99   88.08 v ff0/QN (DFFHQNx1_ASAP7_75t_R)
+  90.09  178.16 v ha/SN (HAxp5_ASAP7_75t_R)
+   0.00  178.16 v HSN (out)
+         178.16   data arrival time
+
+2300.00 2300.00   clock core_clk (rise edge)
+   0.00 2300.00   clock network delay (propagated)
+ -50.00 2250.00   clock uncertainty
+   0.00 2250.00   clock reconvergence pessimism
+-1100.00 1150.00   output external delay
+        1150.00   data required time
+---------------------------------------------------------
+        1150.00   data required time
+        -178.16   data arrival time
+---------------------------------------------------------
+         971.84   slack (MET)
+
+
+Startpoint: ff0 (rising edge-triggered flip-flop clocked by core_clk)
+Endpoint: HCON (output port clocked by core_clk)
+Path Group: reg2out
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock source latency
+   0.00    0.00 ^ clk (in)
+   0.09    0.09 ^ ff0/CLK (DFFHQNx1_ASAP7_75t_R)
+  87.99   88.08 v ff0/QN (DFFHQNx1_ASAP7_75t_R)
+  47.29  135.37 ^ ha/CON (HAxp5_ASAP7_75t_R)
+   0.00  135.37 ^ HCON (out)
+         135.37   data arrival time
+
+2300.00 2300.00   clock core_clk (rise edge)
+   0.00 2300.00   clock network delay (propagated)
+ -50.00 2250.00   clock uncertainty
+   0.00 2250.00   clock reconvergence pessimism
+-1100.00 1150.00   output external delay
+        1150.00   data required time
+---------------------------------------------------------
+        1150.00   data required time
+        -135.37   data arrival time
+---------------------------------------------------------
+        1014.63   slack (MET)
+
+
+Startpoint: ff1 (rising edge-triggered flip-flop clocked by core_clk)
+Endpoint: Q (output port clocked by core_clk)
+Path Group: reg2out
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock source latency
+   0.00    0.00 ^ clk (in)
+   0.08    0.08 ^ ff1/CLK (DFFHQNx1_ASAP7_75t_R)
+  87.85   87.93 v ff1/QN (DFFHQNx1_ASAP7_75t_R)
+   0.00   87.93 v Q (out)
+          87.93   data arrival time
+
+2300.00 2300.00   clock core_clk (rise edge)
+   0.00 2300.00   clock network delay (propagated)
+ -50.00 2250.00   clock uncertainty
+   0.00 2250.00   clock reconvergence pessimism
+-1100.00 1150.00   output external delay
+        1150.00   data required time
+---------------------------------------------------------
+        1150.00   data required time
+         -87.93   data arrival time
+---------------------------------------------------------
+        1062.07   slack (MET)
+
+
+Startpoint: ff0 (rising edge-triggered flip-flop clocked by core_clk)
+Endpoint: ff1 (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: reg2reg
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock source latency
+   0.00    0.00 ^ clk (in)
+   0.09    0.09 ^ ff0/CLK (DFFHQNx1_ASAP7_75t_R)
+  87.21   87.30 ^ ff0/QN (DFFHQNx1_ASAP7_75t_R)
+   0.19   87.49 ^ ff1/D (DFFHQNx1_ASAP7_75t_R)
+          87.49   data arrival time
+
+2300.00 2300.00   clock core_clk (rise edge)
+   0.00 2300.00   clock source latency
+   0.00 2300.00 ^ clk (in)
+   0.06 2300.06 ^ ff1/CLK (DFFHQNx1_ASAP7_75t_R)
+ -50.00 2250.06   clock uncertainty
+   0.00 2250.06   clock reconvergence pessimism
+ -22.83 2227.23   library setup time
+        2227.23   data required time
+---------------------------------------------------------
+        2227.23   data required time
+         -87.49   data arrival time
+---------------------------------------------------------
+        2139.75   slack (MET)
+
+

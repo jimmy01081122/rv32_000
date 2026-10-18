@@ -25,7 +25,8 @@ if {$unsafe_cells && (![info exists ::env(RV32_ADDER_AUDIT_VERIFIED)] || $::env(
   error "adder output-port warning interpretation needs the independent functional/STA audit"
 }
 set metrics [open $directory/clock_trials.json w]
-puts $metrics "\{\"corner\":\"$suffix\",\"global_routes_restored\":true,\"library_warning_cell_instances\":$unsafe_cells,\"standard_cell_area_um2\":$standard_area,\"standard_cell_count\":$standard_cells,\"macro_count\":$macros,\"trials\":\["
+set registers [llength [all_registers]]
+puts $metrics "\{\"corner\":\"$suffix\",\"global_routes_restored\":true,\"library_warning_cell_instances\":$unsafe_cells,\"standard_cell_area_um2\":$standard_area,\"standard_cell_count\":$standard_cells,\"register_count\":$registers,\"macro_count\":$macros,\"trials\":\["
 set first 1
 set periods {2500 3000 3500 4000 4500 5000 5500 6000 7000 8000 10000 12000 14000 16000 20000}
 if {[info exists ::env(RV32_PERIODS_PS)]} { set periods $::env(RV32_PERIODS_PS) }
@@ -36,26 +37,28 @@ foreach period $periods {
   set_clock_uncertainty -hold 25 [all_clocks]
   set_input_transition 20 [all_inputs]
   set_input_delay -max 1100 -clock core_clk [all_inputs -no_clocks]
-set_input_delay -min 0 -clock core_clk [all_inputs -no_clocks]
+  set_input_delay -min 0 -clock core_clk [all_inputs -no_clocks]
   set_output_delay -max 1100 -clock core_clk [all_outputs]
-set_output_delay -min 0 -clock core_clk [all_outputs]
+  set_output_delay -min 0 -clock core_clk [all_outputs]
   set_load 2 [all_outputs]
   set_propagated_clock [all_clocks]
   group_path -name in2reg -from [all_inputs -no_clocks] -to [all_registers]
   group_path -name reg2out -from [all_registers] -to [all_outputs]
   group_path -name reg2reg -from [all_registers] -to [all_registers]
   group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
+  if {[llength [all_clocks]] != 1} { error "expected exactly one core clock" }
+  write_sdc $directory/constraints_${period}.sdc
   save_report $directory/check_setup_${period}.rpt {check_setup -verbose}
   save_report $directory/setup_${period}.rpt {report_worst_slack -max}
   save_report $directory/hold_${period}.rpt {report_worst_slack -min}
   save_report $directory/setup_paths_${period}.rpt {report_checks -path_delay max -group_path_count 5 -format full_clock_expanded}
   save_report $directory/hold_paths_${period}.rpt {report_checks -path_delay min -group_path_count 5 -format full_clock_expanded}
-  save_report $directory/electrical_${period}.rpt {report_check_types -max_slew -max_capacitance -violators}
+  save_report $directory/electrical_${period}.rpt {report_check_types -max_slew -max_capacitance -min_pulse_width -min_period -violators}
   set setup [sta::worst_slack -max]
   set hold [sta::worst_slack -min]
   if {!$first} { puts $metrics , }
   set first 0
-  puts -nonewline $metrics "\{\"period_ps\":$period,\"setup_slack_library_units\":$setup,\"hold_slack_library_units\":$hold\}"
+  puts -nonewline $metrics "\{\"period_ps\":$period,\"setup_slack_ps\":$setup,\"hold_slack_ps\":$hold\}"
 }
 puts $metrics "\]\}"
 close $metrics

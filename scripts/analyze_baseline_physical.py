@@ -88,10 +88,16 @@ def main():
         with (out/'sta.log').open('w') as log:
             result=subprocess.run(command,stdout=log,stderr=subprocess.STDOUT)
         report['records'].append({'corner':corner,'command':command,'returncode':result.returncode,
-                                  'log_sha256':sha(out/'sta.log')})
+                                  'log_sha256':sha(out/'sta.log'),
+                                  'outputs_sha256':{str(p.relative_to(out)):sha(p)
+                                                    for p in sorted(out.iterdir()) if p.is_file()}})
         summary.write_text(json.dumps(report,indent=2)+'\n')
         print(corner,'STA returncode',result.returncode,flush=True)
         if result.returncode:raise SystemExit(result.returncode)
+    if (sha(script)!=report['report_script_sha256']
+            or sha(ROOT/'physical/asap7/baseline/timing_common.tcl')!=report['timing_common_sha256']
+            or sha(odb)!=report['odb_sha256']):
+        parser.exit(1,'analysis inputs changed during collection\n')
     report['collection_completed']=True
     summary.write_text(json.dumps(report,indent=2)+'\n')
 

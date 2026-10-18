@@ -1,0 +1,37 @@
+OpenROAD 26Q1-2900-gdf79404cd8 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+global_placement [-skip_initial_place] [-force_center_initial_place]
+   [-skip_nesterov_place] [-timing_driven] [-routability_driven]
+   [-disable_timing_driven] [-disable_routability_driven] [-incremental]
+   [-skip_io] [-bin_grid_count grid_count] [-density target_density]
+   [-init_density_penalty init_density_penalty]
+   [-init_wirelength_coef init_wirelength_coef] [-min_phi_coef min_phi_coef]
+   [-max_phi_coef max_phi_coef] [-reference_hpwl reference_hpwl]
+   [-overflow overflow] [-initial_place_max_iter initial_place_max_iter]
+   [-initial_place_max_fanout initial_place_max_fanout] [-routability_use_grt]
+   [-routability_target_rc_metric routability_target_rc_metric]
+   [-routability_check_overflow routability_check_overflow]
+   [-routability_snapshot_overflow routability_snapshot_overflow]
+   [-routability_max_density routability_max_density]
+   [-routability_inflation_ratio_coef routability_inflation_ratio_coef]
+   [-routability_max_inflation_ratio routability_max_inflation_ratio]
+   [-routability_rc_coefficients routability_rc_coefficients]
+   [-keep_resize_below_overflow keep_resize_below_overflow]
+   [-timing_driven_net_reweight_overflow timing_driven_net_reweight_overflow]
+   [-timing_driven_net_weight_max timing_driven_net_weight_max]
+   [-timing_driven_nets_percentage timing_driven_nets_percentage]
+   [-pad_left pad_left] [-pad_right pad_right] [-disable_revert_if_diverge]
+   [-disable_pin_density_adjust] [-enable_routing_congestion] 
+
+set_global_routing_random [-seed seed]
+   [-capacities_perturbation_percentage percent] [-perturbation_amount value] 
+                                                 
+global_route [-guide_file out_file] [-congestion_iterations iterations]
+   [-congestion_report_file file_name] [-congestion_report_iter_step steps]
+   [-grid_origin origin] [-critical_nets_percentage percent]
+   [-skip_large_fanout_nets fanout] [-allow_congestion] [-verbose]
+   [-start_incremental] [-end_incremental] [-use_cugr] [-resistance_aware]
+   [-infinite_cap] 
+

@@ -1,0 +1,13 @@
+{
+  "source_commit_before_commit": "dc67522e1a1bf0926347f544d4ada51829ca6f08",
+  "source_status": [
+    " M physical/asap7/baseline/report.tcl",
+    " M scripts/analyze_baseline_physical.py",
+    "?? docs/evidence/2026-10-18/physical-report-validation/",
+    "?? physical/asap7/baseline/report_audit.tcl",
+    "?? physical/asap7/baseline/report_audit.v",
+    "?? scripts/audit_physical_reports.py"
+  ],
+  "scope": "tool report qualification only; frozen CPU RTL unchanged; active full-core implementation not included",
+  "failed_control_note": "v1 omitted -clock core_clk in unset_input_delay, so the existing clock-specific constraint was retained. v1 correctly failed its expected-failure check. v2 names the clock, removes the actual constraint and detects it."
+}

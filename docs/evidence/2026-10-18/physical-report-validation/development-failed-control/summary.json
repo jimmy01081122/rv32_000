@@ -1,0 +1,339 @@
+{
+  "scope": "four-cell report qualification, not CPU closure",
+  "local_image_id": "sha256:92a37abacbbf91494f9a8078b45fe1f6688a533cf5c87d02599d28c5fe229b33",
+  "source_sha256": {
+    "physical/asap7/baseline/timing_common.tcl": "01a70b8acb67b82bb8579ef8a6aa0cf21160b9f8eb2ef32698f4f5b39e9ac2cc",
+    "physical/asap7/baseline/report.tcl": "c22e08c5c83f8a9a693fe569eecf7c0aaa72e045b731fe69e0b4d6ac81f1427e",
+    "physical/asap7/baseline/report_audit.tcl": "b07fa54aff9b5c04d315d2b61daf6fec3770f494a7d9963ae07ff050feea7fdd",
+    "physical/asap7/baseline/report_audit.v": "5261af1910a6890920649b9b9f918c87cc7883e349d6783e95012cc8a102ad40",
+    "scripts/audit_physical_reports.py": "29c0fc625c88c9cbffbec3be2cb4a0df62e48585a4b561303ab644d627d77377"
+  },
+  "commands": [
+    {
+      "name": "build",
+      "command": [
+        "docker",
+        "exec",
+        "--user",
+        "1000:1000",
+        "-w",
+        "/workspace",
+        "-e",
+        "RV32_CORNER=TT",
+        "-e",
+        "RV32_AUDIT_DIR=/workspace/build/baseline-setup/physical-report-controls-v1",
+        "7ebf37267636",
+        "/OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad",
+        "-no_init",
+        "-exit",
+        "-threads",
+        "2",
+        "/workspace/physical/asap7/baseline/report_audit.tcl"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "TT",
+      "command": [
+        "docker",
+        "exec",
+        "--user",
+        "1000:1000",
+        "-w",
+        "/workspace",
+        "-e",
+        "RV32_CORNER=TT",
+        "-e",
+        "RV32_ODB=/workspace/build/baseline-setup/physical-report-controls-v1/routed.odb",
+        "-e",
+        "RV32_REPORT_DIR=/workspace/build/baseline-setup/physical-report-controls-v1/TT",
+        "-e",
+        "RV32_PERIODS_PS=2300 5500",
+        "-e",
+        "RV32_ADDER_AUDIT_VERIFIED=1",
+        "7ebf37267636",
+        "/OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad",
+        "-no_init",
+        "-exit",
+        "-threads",
+        "2",
+        "/workspace/physical/asap7/baseline/report.tcl"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "SS",
+      "command": [
+        "docker",
+        "exec",
+        "--user",
+        "1000:1000",
+        "-w",
+        "/workspace",
+        "-e",
+        "RV32_CORNER=SS",
+        "-e",
+        "RV32_ODB=/workspace/build/baseline-setup/physical-report-controls-v1/routed.odb",
+        "-e",
+        "RV32_REPORT_DIR=/workspace/build/baseline-setup/physical-report-controls-v1/SS",
+        "-e",
+        "RV32_PERIODS_PS=2300 5500",
+        "-e",
+        "RV32_ADDER_AUDIT_VERIFIED=1",
+        "7ebf37267636",
+        "/OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad",
+        "-no_init",
+        "-exit",
+        "-threads",
+        "2",
+        "/workspace/physical/asap7/baseline/report.tcl"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "FF",
+      "command": [
+        "docker",
+        "exec",
+        "--user",
+        "1000:1000",
+        "-w",
+        "/workspace",
+        "-e",
+        "RV32_CORNER=FF",
+        "-e",
+        "RV32_ODB=/workspace/build/baseline-setup/physical-report-controls-v1/routed.odb",
+        "-e",
+        "RV32_REPORT_DIR=/workspace/build/baseline-setup/physical-report-controls-v1/FF",
+        "-e",
+        "RV32_PERIODS_PS=2300 5500",
+        "-e",
+        "RV32_ADDER_AUDIT_VERIFIED=1",
+        "7ebf37267636",
+        "/OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad",
+        "-no_init",
+        "-exit",
+        "-threads",
+        "2",
+        "/workspace/physical/asap7/baseline/report.tcl"
+      ],
+      "returncode": 0
+    },
+    {
+      "name": "negative",
+      "command": [
+        "docker",
+        "exec",
+        "--user",
+        "1000:1000",
+        "-w",
+        "/workspace",
+        "-e",
+        "RV32_CORNER=TT",
+        "-e",
+        "RV32_ODB=/workspace/build/baseline-setup/physical-report-controls-v1/routed.odb",
+        "-e",
+        "RV32_REPORT_DIR=/workspace/build/baseline-setup/physical-report-controls-v1/negative",
+        "-e",
+        "RV32_PERIODS_PS=5500",
+        "-e",
+        "RV32_ADDER_AUDIT_VERIFIED=1",
+        "7ebf37267636",
+        "/OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad",
+        "-no_init",
+        "-exit",
+        "-threads",
+        "2",
+        "/workspace/build/baseline-setup/physical-report-controls-v1/negative.tcl"
+      ],
+      "returncode": 0
+    }
+  ],
+  "controls": [
+    {
+      "name": "fixture global route completed",
+      "passed": true
+    },
+    {
+      "name": "TT saved-route reports completed",
+      "passed": true
+    },
+    {
+      "name": "TT area, storage and restored routes",
+      "passed": true
+    },
+    {
+      "name": "TT explicit ps units",
+      "passed": true
+    },
+    {
+      "name": "TT 2300 setup numerical/report agreement",
+      "passed": true
+    },
+    {
+      "name": "TT 2300 hold numerical/report agreement",
+      "passed": true
+    },
+    {
+      "name": "TT 2300 setup four path groups",
+      "passed": true
+    },
+    {
+      "name": "TT 2300 hold four path groups",
+      "passed": true
+    },
+    {
+      "name": "TT 2300 complete constraints",
+      "passed": true
+    },
+    {
+      "name": "TT 5500 setup numerical/report agreement",
+      "passed": true
+    },
+    {
+      "name": "TT 5500 hold numerical/report agreement",
+      "passed": true
+    },
+    {
+      "name": "TT 5500 setup four path groups",
+      "passed": true
+    },
+    {
+      "name": "TT 5500 hold four path groups",
+      "passed": true
+    },
+    {
+      "name": "TT 5500 complete constraints",
+      "passed": true
+    },
+    {
+      "name": "real setup violation detected",
+      "passed": true
+    },
+    {
+      "name": "TT real hold violation detected",
+      "passed": true
+    },
+    {
+      "name": "SS saved-route reports completed",
+      "passed": true
+    },
+    {
+      "name": "SS area, storage and restored routes",
+      "passed": true
+    },
+    {
+      "name": "SS explicit ps units",
+      "passed": true
+    },
+    {
+      "name": "SS 2300 setup numerical/report agreement",
+      "passed": true
+    },
+    {
+      "name": "SS 2300 hold numerical/report agreement",
+      "passed": true
+    },
+    {
+      "name": "SS 2300 setup four path groups",
+      "passed": true
+    },
+    {
+      "name": "SS 2300 hold four path groups",
+      "passed": true
+    },
+    {
+      "name": "SS 2300 complete constraints",
+      "passed": true
+    },
+    {
+      "name": "SS 5500 setup numerical/report agreement",
+      "passed": true
+    },
+    {
+      "name": "SS 5500 hold numerical/report agreement",
+      "passed": true
+    },
+    {
+      "name": "SS 5500 setup four path groups",
+      "passed": true
+    },
+    {
+      "name": "SS 5500 hold four path groups",
+      "passed": true
+    },
+    {
+      "name": "SS 5500 complete constraints",
+      "passed": true
+    },
+    {
+      "name": "SS real hold violation detected",
+      "passed": true
+    },
+    {
+      "name": "FF saved-route reports completed",
+      "passed": true
+    },
+    {
+      "name": "FF area, storage and restored routes",
+      "passed": true
+    },
+    {
+      "name": "FF explicit ps units",
+      "passed": true
+    },
+    {
+      "name": "FF 2300 setup numerical/report agreement",
+      "passed": true
+    },
+    {
+      "name": "FF 2300 hold numerical/report agreement",
+      "passed": true
+    },
+    {
+      "name": "FF 2300 setup four path groups",
+      "passed": true
+    },
+    {
+      "name": "FF 2300 hold four path groups",
+      "passed": true
+    },
+    {
+      "name": "FF 2300 complete constraints",
+      "passed": true
+    },
+    {
+      "name": "FF 5500 setup numerical/report agreement",
+      "passed": true
+    },
+    {
+      "name": "FF 5500 hold numerical/report agreement",
+      "passed": true
+    },
+    {
+      "name": "FF 5500 setup four path groups",
+      "passed": true
+    },
+    {
+      "name": "FF 5500 hold four path groups",
+      "passed": true
+    },
+    {
+      "name": "FF 5500 complete constraints",
+      "passed": true
+    },
+    {
+      "name": "FF real hold violation detected",
+      "passed": true
+    },
+    {
+      "name": "real constraint/electrical control completed",
+      "passed": true
+    },
+    {
+      "name": "missing input constraint detected",
+      "passed": false
+    }
+  ],
+  "passed": false
+}

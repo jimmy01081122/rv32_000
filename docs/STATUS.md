@@ -56,6 +56,11 @@ The bounded [ASAP7 library validation](evidence/2026-10-18/asap7-library-validat
 checks 144 adder transitions, 30 independent min/max timing paths and three
 negative controls; known output-port warnings remain documented. This is tool
 qualification, not full-core timing closure.
+The [saved-route report controls](evidence/2026-10-18/physical-report-validation/README.md)
+pass 49/49 on a four-cell sequential fixture: three independent corners, explicit
+ps units, all four path groups, numerical/report agreement, real setup/hold and
+constraint/electrical failures, and rejection of unrouted or unaudited inputs.
+This qualifies reporting only; the full-core implementation remains in progress.
 The separate [assertion-enabled fixed-time controls](evidence/2026-10-18/fixed-time-assertions/README.md)
 also pass 58/58 plus the scheduler unit test; all 12 fault traces match the
 normal-build preparation evidence. The scored simulator remains unchanged.
