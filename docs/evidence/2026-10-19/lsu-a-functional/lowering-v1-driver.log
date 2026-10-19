@@ -1,0 +1,20 @@
+Traceback (most recent call last):
+  File "/workspace/scripts/lower_baseline_rtl.py", line 61, in <module>
+    if __name__=='__main__':main()
+  File "/workspace/scripts/lower_baseline_rtl.py", line 25, in main
+    experiment,manifest=load_experiment(args.experiment)
+  File "/workspace/scripts/experiment_contract.py", line 58, in load_experiment
+    return contract,validate_experiment(contract)
+  File "/workspace/scripts/experiment_contract.py", line 29, in validate_experiment
+    or sha(MANIFEST)!=reference_sha(str(MANIFEST.relative_to(ROOT)))):
+  File "/workspace/scripts/experiment_contract.py", line 19, in reference_sha
+    return hashlib.sha256(subprocess.check_output(['git','show',BASELINE_COMMIT+':'+name],cwd=ROOT)).hexdigest()
+  File "/usr/lib/python3.10/subprocess.py", line 421, in check_output
+    return run(*popenargs, stdout=PIPE, timeout=timeout, check=True,
+  File "/usr/lib/python3.10/subprocess.py", line 503, in run
+    with Popen(*popenargs, **kwargs) as process:
+  File "/usr/lib/python3.10/subprocess.py", line 971, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+  File "/usr/lib/python3.10/subprocess.py", line 1863, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: 'git'

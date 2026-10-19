@@ -1,6 +1,6 @@
 # Current project status
 
-Updated 2026-10-18. Initial documentation-cleanup baseline: maintenance commit `1b266ed0b17aaec2dc598e5128fc57ab9edf56bb`;
+Updated 2026-10-19. Initial documentation-cleanup baseline: maintenance commit `1b266ed0b17aaec2dc598e5128fc57ab9edf56bb`;
 incoming RTL revision: `0d79df58e65c2e1034e40f7f586a463fd8602ff1`.
 The documentation cleanup changes no RTL behavior or executable acceptance thresholds.
 
@@ -11,8 +11,19 @@ frozen in [AP5B v1](../baselines/ap5b-post-lsu-v1/manifest.json). The
 [formal baseline](evidence/2026-10-18/post-lsu-baseline/README.md) passes 27/27 at
 10 ns (100 MHz), with 22,081.1184 µm² cell area and fixed 10 ns I/D memory time.
 TT/SS/FF closure is qualified at global-route research scope. The approved
-[isolated LSU A experiment](../experiments/lsu-a-v1/README.md) now has an initial
-implementation and is under qualification; B remains an independent planned control, C later.
+[isolated LSU A experiment](../experiments/lsu-a-v1/README.md) passes clean-source
+functional qualification and all 27 common-clock measurements; physical qualification
+is running. B remains an independent planned control, C later.
+
+The [A functional milestone](evidence/2026-10-19/lsu-a-functional/README.md) at
+clean `39bc12d` includes 40 positive LSU pin-driven cases and an original-RTL
+negative timing control, 18 directed and 18 Spike cases, 48 assertion-enabled
+interface cases, 58 fixed-time controls and 3,400 finite FMA checks. All 27 frozen
+workloads pass, including 3,629 FP32 outputs and unchanged retired instruction
+classes; the 151-input durable job finishes with unchanged hashes. At common
+100 MHz and fixed 10 ns memory, Embench GM is 1.045830× and FP32 GM 1.078255×
+(DSP 1.051614×, matrix/ML 1.105571×). These are cycle diagnostics pending actual
+TT/SS/FF timing and area qualification, not completed planning-target acceptance.
 
 ## Evidence available
 

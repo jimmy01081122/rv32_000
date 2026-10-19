@@ -89,7 +89,10 @@ then runs matched off/fast qualifications on the same RTL. The
 The approved main FP32 policy is `-ffp-contract=fast -fno-fast-math` (also the
 qualifier default); use `--fp-contract off` for sensitivity checks. The post-LSU
 baseline is frozen; the approved [LSU A experiment](experiments/lsu-a-v1/README.md)
-is under qualification, with B planned as an independent comparison.
+passes clean-source functional qualification and all 27 common-clock cases:
+Embench 1.045830× and FP32 1.078255× at 100 MHz with fixed 10 ns memory.
+Its [raw evidence](docs/evidence/2026-10-19/lsu-a-functional/README.md) is archived;
+candidate physical timing/area qualification is running. B remains an independent comparison.
 
 `make profile-fp-bottlenecks JOBS=4` adds read-only FIR/BiCG cycle observations
 and checks that observer on/off runs preserve the qualified output and timing.

@@ -1,0 +1,25 @@
+PASS load-load-int
+PASS load-load-int-backpressure
+PASS load-load-int-wrap
+PASS load-load-int-wrap-backpressure
+PASS load-load-fp
+PASS load-load-fp-backpressure
+PASS load-load-fp-wrap
+PASS load-load-fp-wrap-backpressure
+PASS load-error
+PASS flush
+PASS recovery
+PASS store-marking-unchanged-and-error
+PASS load-to-marked-store-priority
+PASS registered-forwarding-priority
+PASS registered-misalign-priority
+PASS late-response-after-flush
+STREAM requests=16 cycles=33 expected_interval=2
+PASS ideal-stream-3-to-2
+STREAM requests=128 cycles=555 expected_interval=2
+PASS random-stream-305419896
+STREAM requests=128 cycles=545 expected_interval=2
+PASS random-stream-703710
+STREAM requests=128 cycles=569 expected_interval=2
+PASS random-stream-4027388468
+ALL 20 LSU HANDOFF CASES PASS overlap=1

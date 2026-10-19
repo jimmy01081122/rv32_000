@@ -1,0 +1,383 @@
+{
+  "scope": "targeted regression, not complete ISA/F coverage or performance qualification",
+  "start": {
+    "commit": "39bc12d87f80af2520a72f3a75adb3151a55f4c8",
+    "status": ""
+  },
+  "experiment_manifest_sha256": "a1782d1b5ac12cb7dbfba2900c9542693dad846b9af6f2e00f8e74d5fa0c758e",
+  "build_summary_sha256": "6eb6f13883a5348f09c2a15f88a5efe27c85fde80458412dd8dec813f8eb8a30",
+  "records": [
+    {
+      "name": "directed-fibonacci",
+      "elf_sha256": "1f5346de973d03984b274b5e831e0ab4b350c821e4e08badafb792e750ef18bc",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/tests/fibonacci.elf",
+          "+max-cycles=1000000"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/fibonacci.log",
+        "log_sha256": "2d7790a79c97d1fad9303a32d110a56f2e8b722adb50ae64c9ff5c2d3b5edc39",
+        "wall_seconds": 0.0891092829997433
+      },
+      "passed": true
+    },
+    {
+      "name": "directed-fp_basic",
+      "elf_sha256": "0abd1bc548574715f9cab00dc84cfdbd034c3d382c102871cd86a2936e8c80a4",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/tests/fp_basic.elf",
+          "+max-cycles=1000000"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/fp_basic.log",
+        "log_sha256": "dffa2995994d5a85e89d52ffe0cae5ac9d157249e266f75beba0c74b85df84e5",
+        "wall_seconds": 0.011516803999711556
+      },
+      "passed": true
+    },
+    {
+      "name": "directed-fp_edge_cases",
+      "elf_sha256": "cd163718071747765a211c00b32ad6e4a1b3a90d4a7e3187d00841cc8a3942d0",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/tests/fp_edge_cases.elf",
+          "+max-cycles=1000000"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/fp_edge_cases.log",
+        "log_sha256": "00b452213717965f90d05fd992dc16bbe4b411ac0bdc6d747ec12e995a1a0ab5",
+        "wall_seconds": 0.01191157800030851
+      },
+      "passed": true
+    },
+    {
+      "name": "directed-fp_fma",
+      "elf_sha256": "e9cabfdcb9fabf446d361473eb70ed163b99f7088e3cf08742033dd8e2580a95",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/tests/fp_fma.elf",
+          "+max-cycles=1000000"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/fp_fma.log",
+        "log_sha256": "60a5a45155b87321990f2aacfe5aaa8abff892a332afce5fcbed58e19b26e51d",
+        "wall_seconds": 0.01007045799997286
+      },
+      "passed": true
+    },
+    {
+      "name": "directed-fp_matmul",
+      "elf_sha256": "8720da4db9e9d6752a5a8b0c6c6dacf20ced5f4d0e642726a385d5303a25b3fb",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/tests/fp_matmul.elf",
+          "+max-cycles=1000000"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/fp_matmul.log",
+        "log_sha256": "8c7e28688ccb5cda35509f4a457cefa7d29e25a046521a6488f3f1b0256519ca",
+        "wall_seconds": 0.011373637999895436
+      },
+      "passed": true
+    },
+    {
+      "name": "directed-hello",
+      "elf_sha256": "c7aa0e188bdbb8a734eab3720dfeecb207f7930aca3362ada0a9599ac6c922f0",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/tests/hello.elf",
+          "+max-cycles=1000000"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/hello.log",
+        "log_sha256": "73c159a86aa73ba22689ade0ebb558d22700ee4b8e65e99325c43e9042380758",
+        "wall_seconds": 0.006469041999935143
+      },
+      "passed": true
+    },
+    {
+      "name": "directed-lsu_redirect_variable_lat",
+      "elf_sha256": "905825fb1ea0ea07fd2fb1a0d5503cb8d2781feb708efe2577b48c9a0d50d67e",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/tests/lsu_redirect_variable_lat.elf",
+          "+max-cycles=1000000"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/lsu_redirect_variable_lat.log",
+        "log_sha256": "24abb22c5e49978fb08fd1bc4ece667e7b6c1ae9acb16fbc81d56d07a4f72d4e",
+        "wall_seconds": 0.07347141999980522
+      },
+      "passed": true
+    },
+    {
+      "name": "directed-matmul",
+      "elf_sha256": "1fbd25dbf8d4a6c8a4af9e86c0bc2ba5eb519b72197700109dd418e609f28825",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/tests/matmul.elf",
+          "+max-cycles=1000000"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/matmul.log",
+        "log_sha256": "2c37869091bf5dc8ad18fa7b76e5dbf0f2c413574d868146a88973ff40d77395",
+        "wall_seconds": 0.019889559000148438
+      },
+      "passed": true
+    },
+    {
+      "name": "directed-partial_overlap",
+      "elf_sha256": "e306fada1499539dff7fae85bd51e7cba834d3b9acec09b98a82f9bcc0ad09d6",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/tests/partial_overlap.elf",
+          "+max-cycles=1000000"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/partial_overlap.log",
+        "log_sha256": "089647b6ea675a3cfee6325439fb3fe8abbadaeeedba8220c2b1f3191dbee745",
+        "wall_seconds": 0.009302302999913081
+      },
+      "passed": true
+    },
+    {
+      "name": "directed-qsort",
+      "elf_sha256": "c53a5ce046db489cec38508c85a2e53b3991ab71b6f566537361ed17b25d16a6",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/tests/qsort.elf",
+          "+max-cycles=1000000"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/qsort.log",
+        "log_sha256": "5c7938d33ef8e22c0bd0c92c24dfc371e91f8622cb905e0a11cfddaa245cb894",
+        "wall_seconds": 0.04153342699964924
+      },
+      "passed": true
+    },
+    {
+      "name": "directed-rv32_csr",
+      "elf_sha256": "5856806aea50b8291b5badfe469098da3f0143a5bddbaac13913fdc49bef8117",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/tests/rv32_csr.elf",
+          "+max-cycles=1000000"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/rv32_csr.log",
+        "log_sha256": "239bbff080531d6ee4e30c00732d99debad7d9745056a78168fca84141daca90",
+        "wall_seconds": 0.00833571800012578
+      },
+      "passed": true
+    },
+    {
+      "name": "directed-rv32i_basic",
+      "elf_sha256": "ed5fa1c8512e474859ec1eae41b6ca8b6803b63ebb0108f4c23ab25b6e28410e",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/tests/rv32i_basic.elf",
+          "+max-cycles=1000000"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/rv32i_basic.log",
+        "log_sha256": "dbac9ffb87d93b47664b70cd2888a191616306a7adbc159e8631341c85f0d805",
+        "wall_seconds": 0.007868767000218213
+      },
+      "passed": true
+    },
+    {
+      "name": "directed-rv32m_completion_collisions",
+      "elf_sha256": "5f5f448e5034be3629807073831505570d79358afd453fffdd0743b8f1989f4c",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/tests/rv32m_completion_collisions.elf",
+          "+max-cycles=1000000"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/rv32m_completion_collisions.log",
+        "log_sha256": "836b284ddddf5b0fa841fc89069fa348b28f6c732e17be8c08793e83ae7c36e8",
+        "wall_seconds": 0.047903843999847595
+      },
+      "passed": true
+    },
+    {
+      "name": "directed-rv32m_divider_stress",
+      "elf_sha256": "54c5671e6e1e0216f70da61e584de2c7d216edace0e7b3a2dd515aac6ba21e38",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/tests/rv32m_divider_stress.elf",
+          "+max-cycles=1000000"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/rv32m_divider_stress.log",
+        "log_sha256": "685e73ca212ecc05248cbe303f72bcb92d886870fa17d80a47039d783e8b3e9c",
+        "wall_seconds": 0.015190246000202023
+      },
+      "passed": true
+    },
+    {
+      "name": "directed-rv32m_muldiv",
+      "elf_sha256": "edc02f595765cacc5ece9bc265220a5d026f8b0f0d71babb52b31c555a2eafd1",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/tests/rv32m_muldiv.elf",
+          "+max-cycles=1000000"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/rv32m_muldiv.log",
+        "log_sha256": "6cce3fb7b72d85661cdef23728ec0d4000ebdb4b6604d6c3e1c79eefc47ef485",
+        "wall_seconds": 0.00985538400027508
+      },
+      "passed": true
+    },
+    {
+      "name": "directed-store_forwarding",
+      "elf_sha256": "4dd7ec9e67705a760bbfd159c245eaa08727f1cf0637d6e4d74ff4b596ad8dc9",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/tests/store_forwarding.elf",
+          "+max-cycles=1000000"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/store_forwarding.log",
+        "log_sha256": "37238d616699b5826b5438df81497ac421dd8e2b265a3222f1b1cd2d0f51ff9c",
+        "wall_seconds": 0.012053121000008105
+      },
+      "passed": true
+    },
+    {
+      "name": "directed-unresolved_store",
+      "elf_sha256": "1663863bdaa0eef1515e43c9e69946bf6cefb820c29f246219369925d2165109",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/tests/unresolved_store.elf",
+          "+max-cycles=1000000"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/unresolved_store.log",
+        "log_sha256": "1c2e69534048ee18c85cb3dd7975366685caa2eda34917c0503d7c35253393f9",
+        "wall_seconds": 0.012758641999880638
+      },
+      "passed": true
+    },
+    {
+      "name": "directed-wrong_path_store",
+      "elf_sha256": "467dbc5e80e7eafb41e3a752ef957dd26a8e411acdff6ab6fa845db2714b8986",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/tests/wrong_path_store.elf",
+          "+max-cycles=1000000"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/wrong_path_store.log",
+        "log_sha256": "d59faf96b42e3c048e0ee3ab111255380200fef6a3d38ced930ca6fff987995a",
+        "wall_seconds": 0.010738192000189883
+      },
+      "passed": true
+    },
+    {
+      "name": "spike",
+      "execution": {
+        "command": [
+          "python3",
+          "scripts/run_spike_diff.py",
+          "--sim",
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "--out",
+          "/workspace/build/experiments/lsu-a-v1/qualification-clean-v1/spike",
+          "--json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/spike-driver.log",
+        "log_sha256": "3e4a81a0deaeae26c01519b1062ea12c82f9db4d928c0c2ba9d6eefc977d413e",
+        "wall_seconds": 0.8249856150000596
+      },
+      "summary_sha256": "f78605b8428801948ed5cb8bc59b3c9650cfa3dccb311caf099a182063c8c304",
+      "passed": true
+    },
+    {
+      "name": "interface",
+      "execution": {
+        "command": [
+          "python3",
+          "scripts/check_lsu_interface.py",
+          "--sim",
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+          "--out",
+          "/workspace/build/experiments/lsu-a-v1/qualification-clean-v1/interface"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/interface-driver.log",
+        "log_sha256": "062608e60432c97cfdf2fa02c0756b5b30cd9b84166f64e9abd3dfb9ed4b649f",
+        "wall_seconds": 0.8577838380001594
+      },
+      "summary_sha256": "0e20b00dd5cabe47c462ffd8a0d5c136a79c22e8d489e2da1ada43a5ad9f9bc4",
+      "passed": true
+    },
+    {
+      "name": "memory",
+      "execution": {
+        "command": [
+          "python3",
+          "scripts/check_memory_time.py",
+          "--sim",
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+          "--reference-sim",
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "--out",
+          "/workspace/build/experiments/lsu-a-v1/qualification-clean-v1/memory"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/memory-driver.log",
+        "log_sha256": "f9fda83e5869a8244c1eae22bb7ef53d566aa5f16e4f01fe3158ff3035c0aad9",
+        "wall_seconds": 0.7520033999999214
+      },
+      "summary_sha256": "1beee717ea6a21dad93d899e99c0123ae71ab4944c0160f9dc22e6b454a92b6a",
+      "passed": true
+    },
+    {
+      "name": "fma",
+      "execution": {
+        "command": [
+          "python3",
+          "scripts/check_fma_finite.py",
+          "--sim",
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "--out",
+          "/workspace/build/experiments/lsu-a-v1/qualification-clean-v1/fma"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/qualification-clean-v1/fma-driver.log",
+        "log_sha256": "c127dea2a13cd8d96a87d271c6d583068bf9a15439dda636975c27f318335757",
+        "wall_seconds": 2.173317112999939
+      },
+      "summary_sha256": "1b3e58328f0d3a39c6f4f7653e01bb5b1e91da3bb29596ea567ea97bea92799a",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "end": {
+    "commit": "39bc12d87f80af2520a72f3a75adb3151a55f4c8",
+    "status": ""
+  }
+}

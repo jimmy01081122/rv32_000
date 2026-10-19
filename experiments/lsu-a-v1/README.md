@@ -2,7 +2,10 @@
 
 2026-10-19。使用者核准 A 先實驗、B 另作獨立對照。來源基線為
 `58a4159da0372b3286758be1e6c1b50f9f28cc27`，凍結契約維持不變。
-本實驗目前 implementing，尚無已資格確認的 CPU 改善。
+本實驗已完成[功能與完整同頻量測](../../docs/evidence/2026-10-19/lsu-a-functional/README.md)：
+乾淨 `39bc12d` 的 27/27 通過，FP32 3,629 筆數值符合原容差。
+100 MHz、記憶體固定 10 ns 下，Embench GM 為 1.045830×、FP32 為 1.078255×；
+實體 synthesis 正在執行，面積／合格頻率尚待量測，尚未完成 CPU 改善驗收。
 
 唯一功能 RTL 變更是 LSU 的請求排除條件：舊 response buffer 本拍確實
 交付、無 error、沒有 external in-flight、沒有 flush，才可接受下一個已就緒
