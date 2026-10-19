@@ -130,6 +130,7 @@ check-experiment-contract: ## Verify authorized candidate scope without weakenin
 	python3 scripts/test_baseline_measurement.py
 	python3 scripts/test_physical_job.py
 	python3 scripts/test_physical_closure.py
+	python3 scripts/test_cpu_experiment_review.py
 
 check-memory-time: check-lsu-interface ## Check absolute-time memory and unchanged legacy behavior
 	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/test_fixed_time_memory.py && python3 scripts/check_memory_time.py'

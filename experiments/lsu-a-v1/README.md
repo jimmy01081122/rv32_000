@@ -25,6 +25,9 @@ store response 後退休與 B 的原 SQ marking 節拍。Flush／fault 採保守
 4. 使用原 ELF bytes，CPU period 與記憶體服務 ps 分開。I response、I
    initiation interval、D response 永遠固定 10,000 ps；同頻率診斷先採
    10,000 ps CPU，不提前宣稱實體執行時間加速。主比較須用實測閉合 period。
+   固定記憶體的取樣可能使提頻反而多等一拍；預先保留 100 MHz 與最快合格網格點
+   兩組完整 27 項並列，兩者若不同都須有各自的三 corner 資格與完整量測。
+   不混用兩個集合的操作點；正式操作點仍待共同討論。
 5. 相同 pinned ORFS／ASAP7 RVT、TT-only、普通 ABC 5,500 ps mapping、
    14,000 ps backend、TT 45% slew／50 ps hold ECO 及最終全設計 global route。
    TT／SS／FF 各用新 process 審查；100 ps 網格與固定 I/O／RC／面積邊界不變。

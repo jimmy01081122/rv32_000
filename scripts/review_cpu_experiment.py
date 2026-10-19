@@ -16,7 +16,22 @@ def geomean(values):
     return math.exp(sum(math.log(v) for v in values)/len(values))
 
 
-def review(experiment_path,measurement,analysis):
+def qualified_period(physical,periods,measured,reference,grid,comparison_point):
+    """Bind each report to an actually qualified point; keep both clocks visible."""
+    fastest=physical['smallest_tested_passing_period_ps']
+    if not physical['passed'] or fastest is None or measured not in physical['qualified_periods_ps']:
+        raise ValueError('measurement clock is not independently qualified')
+    if any(p%grid for p in periods) or fastest-grid not in periods:
+        raise ValueError('actual grid and adjacent lower timing trial required')
+    if comparison_point=='fastest':
+        if measured!=fastest:raise ValueError('remeasure at the actual smallest tested passing candidate period')
+    elif comparison_point=='common-clock':
+        if measured!=reference:raise ValueError('common-clock comparison requires the frozen reference clock')
+    else:raise ValueError('unknown comparison point')
+    return measured
+
+
+def review(experiment_path,measurement,analysis,comparison_point='fastest'):
     experiment,baseline=load_experiment(experiment_path)
     report=json.loads((measurement/'summary.json').read_text())
     physical=review_collection(analysis)
@@ -27,12 +42,9 @@ def review(experiment_path,measurement,analysis):
             or implementation.get('experiment_manifest_sha256')!=digest
             or implementation['rtl_files_sha256']!=experiment['candidate_rtl_files_sha256']):
         raise ValueError('measurement/physical/candidate identities differ')
-    period=physical['smallest_tested_passing_period_ps']
-    if not physical['passed'] or period!=report['core_period_ps']:
-        raise ValueError('remeasure at the actual smallest tested passing candidate period')
-    if any(p%100 for p in collection['clock_trials_ps']):raise ValueError('physical clock grid changed')
-    if (period-baseline['physical']['period_grid_ps']) not in collection['clock_trials_ps']:
-        raise ValueError('adjacent lower actual timing trial required')
+    period=qualified_period(physical,collection['clock_trials_ps'],report['core_period_ps'],
+                            baseline['memory']['reference_core_period_ps'],
+                            baseline['physical']['period_grid_ps'],comparison_point)
     if report['memory_ps']!=10000 or not report['passed'] or report['start']!=report['end'] or report['start']['status']:
         raise ValueError('clean-source complete fixed-memory measurement required')
     if sha(ROOT/'scripts/measure_post_lsu_baseline.py')!=report['result_checker_sha256']:
@@ -90,6 +102,8 @@ def review(experiment_path,measurement,analysis):
             'experiment_id':experiment['experiment_id'],'experiment_manifest_sha256':digest,
             'measurement_summary_sha256':sha(measurement/'summary.json'),'physical_review':physical,
             'reviewer_sha256':sha(Path(__file__)),'core_period_ps':period,'memory_ps':10000,
+            'comparison_point':comparison_point,
+            'fastest_qualified_period_ps':physical['smallest_tested_passing_period_ps'],
             'standard_cell_area_um2':area,'area_ratio':ratio,'embench_time_geomean_speedup':embedded,
             'fp32_time_geomean_speedup':fp,'fp32_subgroup_speedup':groups,'planning_targets':targets,
             'all_planning_targets_met':all(targets.values()),'records':results,'passed':True}
@@ -100,10 +114,12 @@ def main():
     p.add_argument('--experiment',type=Path,required=True)
     p.add_argument('--measurement',type=Path,required=True)
     p.add_argument('--analysis',type=Path,required=True)
+    p.add_argument('--comparison-point',choices=['fastest','common-clock'],default='fastest',
+                   help='default fastest actual qualified grid point; common-clock must also pass all corners')
     p.add_argument('--out',type=Path,required=True)
     args=p.parse_args();out=args.out.resolve()
     if not out.is_relative_to(ROOT/'build') or out.exists():p.error('fresh output under build required')
-    try:result=review(args.experiment,args.measurement.resolve(),args.analysis.resolve())
+    try:result=review(args.experiment,args.measurement.resolve(),args.analysis.resolve(),args.comparison_point)
     except (ValueError,KeyError,OSError,TypeError) as error:result={'passed':False,'error':str(error)}
     out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(result,indent=2,allow_nan=False)+'\n')
     print(json.dumps({k:v for k,v in result.items() if k not in ['records','physical_review']},indent=2),flush=True)
