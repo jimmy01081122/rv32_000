@@ -169,6 +169,7 @@ module rv32_ooo_lsu
   mem_size_e    rsp_buf_size;
   load_ext_e    rsp_buf_load_ext;
   reg_domain_e  rsp_buf_domain;
+  logic         rsp_buf_ack;
 
   assign dmem_pending.valid    = in_flight_valid || rsp_buf_valid;
   assign dmem_pending.rob_tag  = in_flight_valid ? in_flight_rob_tag : rsp_buf_rob_tag;
@@ -318,14 +319,19 @@ module rv32_ooo_lsu
 
   wire effective_fwd_valid = fwd_valid && !load_stall_unresolved && !load_stall_partial;
 
+  // Experiment A: a successful registered response can hand off ownership on
+  // the same edge as the next request. Faulting/unconsumed responses retain
+  // the original exclusion. The external response register and single external
+  // in-flight limit are unchanged; rsp_buf_ack does not depend on request ready.
+  wire response_slot_available = !rsp_buf_valid || (rsp_buf_ack && !rsp_buf_error);
+
   // Can load issue to external D-memory?
-  // AP5B: Also requires !rsp_buf_valid to prevent external request when response buffer is occupied
   wire can_issue_load = agu_valid && agu_req.uop.mem.is_load && !agu_misaligned &&
                         !effective_fwd_valid && !load_stall_unresolved && !load_stall_partial &&
-                        !in_flight_valid && !rsp_buf_valid && !sq_has_send && !flush_valid && (core_state == CORE_RUN);
+                        !in_flight_valid && response_slot_available && !sq_has_send && !flush_valid && (core_state == CORE_RUN);
 
   // Can retired store issue to external D-memory?
-  wire can_issue_store = sq_has_send && !in_flight_valid && !rsp_buf_valid && !flush_valid && (core_state == CORE_RUN);
+  wire can_issue_store = sq_has_send && !in_flight_valid && response_slot_available && !flush_valid && (core_state == CORE_RUN);
 
   wire sq_full = !sq_has_free;
 
@@ -386,7 +392,6 @@ module rv32_ooo_lsu
   exec_req_t   misalign_reg_req;
   logic [31:0] misalign_reg_addr;
 
-  logic rsp_buf_ack;
   logic fwd_reg_ack;
   logic misalign_reg_ack;
 
@@ -664,8 +669,8 @@ module rv32_ooo_lsu
     if (!rst && dmem_req_valid && dmem_req_ready) begin
       assert (!in_flight_valid)
         else $error("[AP5B SVA Violation] New request dispatched while in_flight_valid already asserted!");
-      assert (!rsp_buf_valid)
-        else $error("[AP5B SVA Violation] New request dispatched while rsp_buf_valid already asserted!");
+      assert (!rsp_buf_valid || (rsp_buf_ack && !rsp_buf_error && ld_cmp.valid))
+        else $error("[LSU A] Request aliases an unconsumed or faulting response!");
     end
   end
 
@@ -725,9 +730,23 @@ module rv32_ooo_lsu
 
   // Assertion 6: new request cannot alias an unconsumed old response
   always_ff @(posedge clk) begin
-    if (!rst && (in_flight_valid || rsp_buf_valid)) begin
+    if (!rst && (in_flight_valid || (rsp_buf_valid && (!rsp_buf_ack || rsp_buf_error)))) begin
       assert (!(dmem_req_valid && dmem_req_ready))
         else $error("[AP5B SVA Violation] Request accepted while transaction pending or response unconsumed!");
+    end
+  end
+
+  // A handoff must consume the old response and track exactly the new request.
+  // Check state on the following edge, before any new response is registered.
+  always_ff @(posedge clk) begin
+    if (!rst && $past(!rst && rsp_buf_valid && dmem_req_valid && dmem_req_ready)) begin
+      assert (in_flight_valid && !rsp_buf_valid && dmem_pending.valid)
+        else $error("[LSU A] Handoff lost a request or retained the old response!");
+      assert (in_flight_rob_tag == $past(dmem_req_wen ? sq[send_sq_idx].rob_tag : agu_req.uop.rob_tag))
+        else $error("[LSU A] New in-flight tag differs from accepted handoff request!");
+      assert (in_flight_addr[31:2] == $past(dmem_req_addr[31:2]) &&
+              dmem_pending.rob_tag == in_flight_rob_tag)
+        else $error("[LSU A] Handoff address or pending ownership mismatch!");
     end
   end
 `endif

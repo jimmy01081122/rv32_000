@@ -10,7 +10,9 @@ The post-LSU v1 workload identities and fixed-absolute-time memory policy are
 frozen in [AP5B v1](../baselines/ap5b-post-lsu-v1/manifest.json). The
 [formal baseline](evidence/2026-10-18/post-lsu-baseline/README.md) passes 27/27 at
 10 ns (100 MHz), with 22,081.1184 µm² cell area and fixed 10 ns I/D memory time.
-TT/SS/FF closure is qualified at global-route research scope; A/B/C are unimplemented.
+TT/SS/FF closure is qualified at global-route research scope. The approved
+[isolated LSU A experiment](../experiments/lsu-a-v1/README.md) now has an initial
+implementation and is under qualification; B remains an independent planned control, C later.
 
 ## Evidence available
 
@@ -93,7 +95,7 @@ also pass 58/58 plus the scheduler unit test; all 12 fault traces match the
 normal-build preparation evidence. The scored simulator remains unchanged.
 The [v1 manifest](../baselines/ap5b-post-lsu-v1/manifest.json) is frozen after
 formal 27/27 measurement at clean `9769123`; source state and scored simulator
-remain unchanged. No A/B/C optimization has been implemented.
+remain unchanged. A is under isolated qualification; the frozen baseline contains no A/B/C.
 
 ## Current implementation drift
 

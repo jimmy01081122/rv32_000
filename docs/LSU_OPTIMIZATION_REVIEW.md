@@ -2,7 +2,7 @@
 
 2026-10-18。使用者已核准把 LSU 列為第一優先候選，補一般嵌入式觀測、
 記憶體延遲敏感度及具體方案比較，再共同選擇實作。本文件保留事前固定的研究條件並補入結果及候選結構；
-尚未選定 A／B／C 效能方案；後續[介面修復](LSU_INTERFACE_FIX.md)已獨立完成。兩類各 ≥1.20×、面積 ≤1.10× 目標不變。
+後續使用者已核准先 A、B 獨立對照；[A 實驗](../experiments/lsu-a-v1/README.md)正資格確認；後續[介面修復](LSU_INTERFACE_FIX.md)已獨立完成。兩類各 ≥1.20×、面積 ≤1.10× 目標不變。
 
 ## 先固定研究分母與條件
 
@@ -85,11 +85,12 @@ SQ marking 是 store ack 等待的子分類，不能再次相加。其他等待�
 優先修正方向為：外部 load 的 AGU 消耗只在請求真正被接受時前進，等待期間保持
 請求身份；內部 forwarding／misalign 仍依各自接受條件處理。store error 則須以
 正確 tag／位址回報 cause 7，禁止在錯誤送往 ROB 前先走正常 ack／退休，並確保
-SQ／pending 只清除一次。後續已由 `ec0baa3` 的[介面修復](LSU_INTERFACE_FIX.md)完成：48/48 assertion cases、原探針重播及全工作負載功能回歸通過；歷史負測封存維持原樣。正式新基線仍待量測與 PPA 契約。
+SQ／pending 只清除一次。後續已由 `ec0baa3` 的[介面修復](LSU_INTERFACE_FIX.md)完成：48/48 assertion cases、原探針重播及全工作負載功能回歸通過；歷史負測封存維持原樣。後續[修正後基線](evidence/2026-10-18/post-lsu-baseline/README.md)已在 10 ns／22,081.1184 µm² 凍結，正式 27/27 通過。
 
 ## 三個具體硬體候選
 
-下列 A／B／C 是待審查的設計選項，目前沒有任何候選 RTL 或效能／PPA 數據。
+A 初版已在獨立分支實作；B 計畫從相同基線獨立比較，C 列後續。
+尚無完成資格的候選執行時間／PPA 結果；下表仍是設計假設。
 
 | 方案 | 實際改動範圍 | 結構與 PPA 代價 | 主要正確性／時序議題 |
 | --- | --- | --- | --- |
@@ -100,12 +101,13 @@ SQ／pending 只清除一次。後續已由 `ec0baa3` 的[介面修復](LSU_INTE
 A 針對 `!rsp_buf_valid` 強制產生的請求轉換空拍；B 針對 store marking 的固定節拍；
 C 針對回應已暫存但 ROB `completed` 還未更新的可見等待。等待計數只是暴露位置，
 不能把計數直接換成可省週期，或把 A、B、C 的效益相加。
-介面修復後，建議先固定新基線，**A 作第一個效能實驗、B 獨立對照**，
+介面修復與基線凍結後，已核准 **A 作第一個效能實驗、B 獨立對照**，
 之後才評估 A+B；C 的資料／例外 mux 與 completion-to-retire 路徑風險較高，列後續。
 A 可同時影響讀／寫交錯，B 有明確的 marking 節拍目標，但相依與外部交易可能遮住收益。
-具體方案仍交由使用者共同選定，這裡沒有先實作任何一項。
+A 首版只對無錯誤且確定被消耗的 response buffer 開放重疊；error／flush 保守排除，
+B marking 與單一外部 outstanding 不變。
 
-A 還須正式更新 AP5B 契約：現行架構文字及 LSU assertions 2／6 禁止任何
+A 已在實驗分支更新 AP5B 契約與 assertions：凍結基線原 assertions 2／6 禁止任何
 `rsp_buf_valid` 時接受新請求。新不變條件應是「已有外部 in-flight 時仍禁止；
 若本拍 response buffer 將被消耗且舊 metadata 已完成交付，才可接受下一請求」。
 不能只刪除原 assertion；應加入交接／未消耗禁止／flush／error 的對應檢查。

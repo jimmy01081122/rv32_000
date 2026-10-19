@@ -30,7 +30,35 @@ def main():
     parser.add_argument('--grt-from',type=Path,help='incrementally repair a completed, identity-checked TT global-route stage')
     parser.add_argument('--eco-slew-margin',type=int,default=45,help='TT ECO slew margin percent; independent corner limits stay unchanged')
     parser.add_argument('--eco-hold-margin-ps',type=int,default=50,help='TT ECO hold repair margin ps; independent corner uncertainty stays unchanged')
+    parser.add_argument('--experiment',type=Path,help='explicit frozen candidate input contract')
+    parser.add_argument('--output-root',type=Path,help='fresh attempts under this build/ directory')
+    parser.add_argument('--lowered-rtl',type=Path,default=ROOT/'build/baseline-setup/rtl_lowered.v')
+    parser.add_argument('--stage',choices=['synthesis','global-route'],default='global-route')
     args = parser.parse_args()
+    from baseline_contract import load,check_rtl
+    baseline=load()
+    if args.experiment:
+        from experiment_contract import load_experiment
+        experiment,baseline=load_experiment(args.experiment)
+        if not args.output_root:parser.error('candidate needs an explicit separate --output-root')
+        physical=baseline['physical']
+        wanted_period=physical['synthesis_mapping_period_ps'] if args.stage=='synthesis' else physical['construction_period_ps']
+        if (args.period_ps!=wanted_period or args.jobs!=2 or args.adder_mapping!=physical['synthesis_adder_mapping']
+                or args.eco_slew_margin!=physical['post_route_eco']['slew_margin_percent']
+                or args.eco_hold_margin_ps!=physical['post_route_eco']['hold_margin_ps']):
+            parser.error('candidate mapping/backend period, jobs, adder policy or ECO margin differs from frozen flow')
+    else:check_rtl(baseline)
+    if args.stage=='synthesis' and (args.synthesis_from or args.cts_from or args.grt_from):
+        parser.error('fresh synthesis cannot import a previous stage')
+    lowered=args.lowered_rtl.resolve()
+    if not lowered.is_relative_to(ROOT/'build'):parser.error('lowered RTL must be under build/')
+    if args.experiment:
+        lowering=json.loads(lowered.with_suffix('.lowering.json').read_text())
+        if (not lowering.get('passed') or not lowering.get('input_identities_unchanged')
+                or lowering['rtl_files_sha256']!=experiment['candidate_rtl_files_sha256']
+                or lowering.get('experiment_manifest_sha256')!=sha(args.experiment)
+                or lowering['lowered_rtl_sha256']!=sha(lowered)):
+            parser.error('candidate lowered RTL lacks matching successful input proof')
     if args.period_ps <= 2200 or args.jobs < 1:
         parser.error('period must exceed frozen 1100ps input + output budgets; jobs positive')
     if args.detached and not args.container:parser.error('--detached requires --container')
@@ -45,7 +73,9 @@ def main():
     if commit != ORFS_SHA or subprocess.check_output(['git', '-C', str(source), 'status', '--porcelain']):
         parser.exit(1, 'ORFS checkout must be the pinned clean revision\n')
     suffix = f'-{args.label}' if args.label else ''
-    directory = ROOT / f'build/baselines/ap5b-post-lsu-v1/physical-{args.period_ps}ps{suffix}'
+    output_root=(args.output_root or ROOT/'build/baselines/ap5b-post-lsu-v1').resolve()
+    if not output_root.is_relative_to(ROOT/'build'):parser.error('output root must be under build/')
+    directory = output_root / f'physical-{args.period_ps}ps{suffix}'
     previous = None
     if args.resume_reason:
         if not (directory/'run.json').exists():parser.error('resume requires an existing failed attempt')
@@ -108,15 +138,21 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
            # ORFS WNS pass. Ordinary global-route setup/hold repair stays enabled.
            'OPT_POST_GRT_WNS=0']
     if args.adder_mapping=='abc':cmd.append('ADDER_MAP_FILE=')
+    if lowered!=ROOT/'build/baseline-setup/rtl_lowered.v':cmd.append('VERILOG_FILES='+guest(lowered))
     if args.grt_from:
         cmd.extend([f'SLEW_MARGIN={args.eco_slew_margin}',f'HOLD_SLACK_MARGIN={args.eco_hold_margin_ps}'])
-    cmd.append('baseline-grt-eco' if args.grt_from else 'grt')
+    cmd.append('baseline-grt-eco' if args.grt_from else ('synth' if args.stage=='synthesis' else 'grt'))
     report = {'scope': 'global-route research baseline exploration, not detailed-route signoff',
               'period_ps': args.period_ps, 'orfs_commit': commit, 'command': cmd,
-              'sdc_sha256': sha(sdc), 'lowered_rtl_sha256': sha(ROOT/'build/baseline-setup/rtl_lowered.v'),
+              'sdc_sha256': sha(sdc), 'lowered_rtl_sha256': sha(lowered),
               'rtl_files_sha256': {str(p.relative_to(ROOT)): sha(p) for p in sorted((ROOT/'rtl').rglob('*.sv'))},
               'config_sha256': sha(ROOT/'physical/asap7/baseline/config.mk'), 'passed': False}
     report['local_image_id'] = expected_image
+    report['lowered_rtl_path']=str(lowered.relative_to(ROOT))
+    report['requested_stage']=args.stage
+    if args.experiment:
+        report.update(scope='isolated LSU A physical experiment; not a baseline replacement or detailed-route signoff',
+                      experiment_id=experiment['experiment_id'],experiment_manifest_sha256=sha(args.experiment))
     report['placement_seed_policy'] = 'pinned-tool default; GPL_RANDOM_SEED= overrides config seed (unsupported flag)'
     report['construction_timing_corners'] = ['TT']
     report['clock_skew_summary_policy'] = 'ORFS summaries disabled; independent propagated-clock setup/hold checks and expanded paths required'
@@ -131,6 +167,8 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
         cache=args.grt_from.resolve()
         if not cache.is_relative_to(ROOT/'build'):parser.error('GRT source must be under build/')
         prior=json.loads((cache/'run.json').read_text())
+        if prior.get('experiment_manifest_sha256')!=report.get('experiment_manifest_sha256'):
+            parser.error('cached stage belongs to a different experiment contract')
         for field in ('orfs_commit','lowered_rtl_sha256','rtl_files_sha256','config_sha256',
                       'local_image_id','process_lowering_sha256','period_ps','synthesis_adder_mapping'):
             if prior[field]!=report[field]:parser.error('cached global-route input changed: '+field)
@@ -161,6 +199,8 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
         cache=args.cts_from.resolve()
         if not cache.is_relative_to(ROOT/'build'):parser.error('CTS source must be under build/')
         prior=json.loads((cache/'run.json').read_text())
+        if prior.get('experiment_manifest_sha256')!=report.get('experiment_manifest_sha256'):
+            parser.error('cached stage belongs to a different experiment contract')
         for field in ('orfs_commit','lowered_rtl_sha256','rtl_files_sha256','config_sha256',
                       'local_image_id','process_lowering_sha256','period_ps','synthesis_adder_mapping'):
             if prior[field]!=report[field]:parser.error('cached CTS input changed: '+field)
@@ -192,6 +232,8 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
         cache=args.synthesis_from.resolve()
         if not cache.is_relative_to(ROOT/'build'):parser.error('synthesis source must be under build/')
         prior=json.loads((cache/'run.json').read_text())
+        if prior.get('experiment_manifest_sha256')!=report.get('experiment_manifest_sha256'):
+            parser.error('cached stage belongs to a different experiment contract')
         for field in ('orfs_commit','lowered_rtl_sha256','rtl_files_sha256','config_sha256',
                       'local_image_id','process_lowering_sha256'):
             if prior[field]!=report[field]:parser.error('cached synthesis input changed: '+field)
@@ -212,8 +254,11 @@ group_path -name in2out -from [all_inputs -no_clocks] -to [all_outputs]
     if args.detached:
         inputs={guest(ROOT/name):value for name,value in report['rtl_files_sha256'].items()}
         for path in (sdc,ROOT/'physical/asap7/baseline/config.mk',ROOT/'physical/asap7/baseline/lower_processes.tcl',
-                     ROOT/'build/baseline-setup/rtl_lowered.v',ROOT/'scripts/run_physical_job.py'):
+                     lowered,ROOT/'scripts/run_physical_job.py'):
             inputs[guest(path)]=sha(path)
+        if args.experiment:
+            for path in (args.experiment.resolve(),ROOT/'baselines/ap5b-post-lsu-v1/manifest.json'):
+                inputs[guest(path)]=sha(path)
         if args.synthesis_from:inputs[guest(netlist)]=sha(netlist)
         for path in cts_inputs:inputs[guest(path)]=sha(path)
         if args.grt_from:

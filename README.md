@@ -88,7 +88,8 @@ then runs matched off/fast qualifications on the same RTL. The
 8/8 passes per mode and diagnostic 1.113x cycle speedup from compiler contraction.
 The approved main FP32 policy is `-ffp-contract=fast -fno-fast-math` (also the
 qualifier default); use `--fp-contract off` for sensitivity checks. The post-LSU
-baseline is frozen; CPU architecture experiments await joint selection.
+baseline is frozen; the approved [LSU A experiment](experiments/lsu-a-v1/README.md)
+is under qualification, with B planned as an independent comparison.
 
 `make profile-fp-bottlenecks JOBS=4` adds read-only FIR/BiCG cycle observations
 and checks that observer on/off runs preserve the qualified output and timing.

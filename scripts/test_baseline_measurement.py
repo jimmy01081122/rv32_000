@@ -31,6 +31,13 @@ class Measurement(unittest.TestCase):
             def problems(a=audit,p=profile,t=text):
                 return check_result(row,t,a,5500,5500,elf,p)['problems']
             self.assertEqual(problems(),[])
+            # A candidate may change ROI cycles only through an explicit caller
+            # choice; the baseline caller retains exact-cycle rejection.
+            candidate=copy.deepcopy(profile);candidate.update(cycles=40,cycle_partition={'retire':30,'wait':10})
+            candidate_text=text.replace('cycles: 41','cycles: 40')
+            self.assertTrue(problems(p=candidate,t=candidate_text))
+            self.assertEqual(check_result(row,candidate_text,audit,5500,5500,elf,candidate,
+                                          require_reference_cycles=False)['problems'],[])
             for key,value in [('fixed_time',False),('core_period_ps',3000),
                               ('dmem_response_ps',1),('imem_interval_ps',1),
                               ('imem_responses',21),('dmem_responses',0),

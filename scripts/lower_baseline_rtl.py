@@ -13,12 +13,17 @@ def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--out',type=Path,required=True)
     parser.add_argument('--compare',type=Path,help='existing lowered RTL to verify without overwriting it')
+    parser.add_argument('--experiment',type=Path,help='explicit frozen candidate contract; baseline default remains strict')
     args=parser.parse_args()
     out=args.out.resolve()
     if not out.is_relative_to(ROOT/'build'):parser.error('output must be under build/')
     summary=out.with_suffix('.lowering.json');log=out.with_suffix('.lowering.log')
     if any(p.exists() for p in (out,summary,log)):parser.error('choose fresh output paths')
-    manifest=load();check_rtl(manifest)
+    manifest=load()
+    if args.experiment:
+        from experiment_contract import load_experiment
+        experiment,manifest=load_experiment(args.experiment)
+    else:check_rtl(manifest)
     tool=shutil.which('sv2v')
     if not tool:parser.error('sv2v missing; use rv32ooo-syn:g1')
     version=subprocess.check_output([tool,'--numeric-version'],text=True).strip()
@@ -34,6 +39,8 @@ def main():
             'manifest_sha256':sha(MANIFEST),'filelist_sha256':sha(filelist),
             'rtl_files_sha256':inputs,'sv2v_version':version,'sv2v_binary_sha256':sha(Path(tool)),
             'wrapper_sha256':sha(Path(__file__)),'passed':False}
+    if args.experiment:
+        report.update(experiment_id=experiment['experiment_id'],experiment_manifest_sha256=sha(args.experiment))
     summary.write_text(json.dumps(report,indent=2)+'\n')
     with out.open('wb') as output,log.open('wb') as errors:
         result=subprocess.run(command,cwd=ROOT,stdout=output,stderr=errors)
