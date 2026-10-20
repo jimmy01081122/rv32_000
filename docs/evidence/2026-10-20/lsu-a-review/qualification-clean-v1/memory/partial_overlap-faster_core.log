@@ -1,0 +1,19 @@
+[SimMemory] Loaded segment to 0x80000000 (filesz: 0x250, memsz: 0x250)
+[SimMemory] Found 'tohost' symbol at 0x80000240
+[SimMemory] ELF loaded successfully. Entry PC = 0x80000000
+[Simulator] Starting simulation run...
+[TEST] Starting partial_overlap test...
+[PASS] Partial byte overlap load verified.
+
+[SimMemory] TOHOST exit (0x1) received. Exit code: 0 (PASS)
+
+[SimMemory] SIM_EXIT received with code: 0 (PASS)
+
+================ Simulation Summary ================
+  ELF binary     : /workspace/build/tests/partial_overlap.elf
+  Cycles         : 929
+  Retired insns  : 423
+  IPC            : 0.4553
+  Exit status    : PASS (0)
+====================================================
+

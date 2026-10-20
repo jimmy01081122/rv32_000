@@ -1,0 +1,912 @@
+{
+  "scope": "functional/cycle measurement; system-time/area qualification requires matching independent physical review",
+  "experiment_id": "lsu-a-v1",
+  "experiment_manifest_sha256": "a1782d1b5ac12cb7dbfba2900c9542693dad846b9af6f2e00f8e74d5fa0c758e",
+  "build_summary_sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+  "baseline_summary_sha256": "0dac120d0295ea3ceac26141195f2863d1625a9503a5f478bc2fc3038023bef7",
+  "wrapper_sha256": "f17d52a35597d5f0f280cbd8e5875263bed5db6f4d31a5402a34cfe2e994457d",
+  "result_checker_sha256": "c269db5b01a10a729f995ca127a3450dfbe622f0ada1c543d4e2e060916df4bf",
+  "start": {
+    "commit": "39bc12d87f80af2520a72f3a75adb3151a55f4c8",
+    "status": ""
+  },
+  "started_utc": "2026-10-19T16:30:53.566325+00:00",
+  "core_period_ps": 10000,
+  "memory_ps": 10000,
+  "simulator_sha256": "ddb1b9dddbc87363c28c3a0d682676774b5696af13515dea3deb2a99f0dddeea",
+  "physical_qualification_pending": true,
+  "records": [
+    {
+      "family": "fp32",
+      "name": "fir",
+      "elf_sha256": "5f10e8af6146a6241196a33800a585dd320cf718f9ceca4777193993630fc531",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/fir/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/fir/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/fir/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/fir/dut.log",
+        "log_sha256": "9bdda9dab5ac92729a460997a661546ce75d548793085b7a19b20d477f293dce",
+        "wall_seconds": 4.228390090000175
+      },
+      "passed": true,
+      "cycles": 66117,
+      "numeric": {
+        "passed": true,
+        "checked_values": 574,
+        "failed_indices": [],
+        "checksum": "fccef1fd",
+        "checksum_verified": true,
+        "roi_cycles": 66117,
+        "max_absolute_error": 0.0,
+        "max_tolerance_fraction": 0.0,
+        "streaming_matches_whole_block_bits": true
+      },
+      "static_image_end": 2147493008,
+      "stack_headroom_bytes": 1039104,
+      "problems": [],
+      "profile_sha256": "a6732b8b32dacd0cdd8e2a0da3be65657b11580cd3576dc37afdb2b78437625f",
+      "memory_audit_sha256": "1d0224a92c242475f2050a513ef16f09448bf59ed44bff0498cd976929532fa9"
+    },
+    {
+      "family": "fp32",
+      "name": "iir",
+      "elf_sha256": "1c6e106298136dd718ba116bf159dc30fc1c9dea906f0fb2430df4340d61a1dd",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/iir/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/iir/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/iir/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/iir/dut.log",
+        "log_sha256": "3ec376d8b013ad5f3955e49cf91212a0be2b7c9e7907464b7f748360f50629cf",
+        "wall_seconds": 2.730698846999985
+      },
+      "passed": true,
+      "cycles": 13496,
+      "numeric": {
+        "passed": true,
+        "checked_values": 528,
+        "failed_indices": [],
+        "checksum": "fee8b5ed",
+        "checksum_verified": true,
+        "roi_cycles": 13496,
+        "max_absolute_error": 6.7621778801485455e-09,
+        "max_tolerance_fraction": 0.003302075140977658,
+        "streaming_matches_whole_block_bits": true
+      },
+      "static_image_end": 2147491408,
+      "stack_headroom_bytes": 1040704,
+      "problems": [],
+      "profile_sha256": "dfa11df90118e477587dc5a6e46a5f942df0ed8c7dd6e1ac6173ff4ff52f3716",
+      "memory_audit_sha256": "a3da1f9b365fa545b2e72e77dab3841d73f8f6a1ff76cbfbc010b9a9dbc2a43b"
+    },
+    {
+      "family": "fp32",
+      "name": "fft",
+      "elf_sha256": "fb91c70cb5fa040f01f2e7fcd56fd50427fb4defaf81134a73cc814543d7102b",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/fft/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/fft/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/fft/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/fft/dut.log",
+        "log_sha256": "73bd8a8cc81e03edc9905f796f4605e36ef9d5287d3395f8f92cec732bb8702d",
+        "wall_seconds": 37.88351498400016
+      },
+      "passed": true,
+      "cycles": 37663,
+      "numeric": {
+        "passed": true,
+        "checked_values": 512,
+        "failed_indices": [],
+        "checksum": "c60690be",
+        "checksum_verified": true,
+        "roi_cycles": 37663,
+        "max_absolute_error": 3.6661736482201945e-06,
+        "max_tolerance_fraction": 0.05977733854629219
+      },
+      "static_image_end": 2147548112,
+      "stack_headroom_bytes": 983712,
+      "problems": [],
+      "profile_sha256": "d10fef8246f9f074a6a42b5ad1beb641e067f23267ba68f7e938a0b127454b1e",
+      "memory_audit_sha256": "dfa2de5446c4053f9c56bc71fa57529c5f8067ff180e039edc6040635f06906f"
+    },
+    {
+      "family": "fp32",
+      "name": "pid",
+      "elf_sha256": "22bc6dfaf2603e5348eee853165184f0b9c39af8b239f1cecfdce23b443aa583",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/pid/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/pid/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/pid/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/pid/dut.log",
+        "log_sha256": "630137c6e8e1d53e0f78acf06afdc86103f2cb171ad1e03d53425587889d142e",
+        "wall_seconds": 2.4836179300000367
+      },
+      "passed": true,
+      "cycles": 7242,
+      "numeric": {
+        "passed": true,
+        "checked_values": 515,
+        "failed_indices": [],
+        "checksum": "c5957fb7",
+        "checksum_verified": true,
+        "roi_cycles": 7242,
+        "max_absolute_error": 0.0,
+        "max_tolerance_fraction": 0.0
+      },
+      "static_image_end": 2147492112,
+      "stack_headroom_bytes": 1040000,
+      "problems": [],
+      "profile_sha256": "354906e5884aaf2833f9a422d7c696b73c58d468d1d6200432fb5b46d282b77a",
+      "memory_audit_sha256": "c368452378d7eb51d1fe48acb6421090459919130556f532b8b82e51116500ae"
+    },
+    {
+      "family": "fp32",
+      "name": "gemm",
+      "elf_sha256": "9a16655c43124ba4d274e7705236c3fee508332bda9721c423f5ae8e9db83092",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/gemm/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/gemm/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/gemm/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/gemm/dut.log",
+        "log_sha256": "37e05c6b83e323568c115509a6b93a532f629cd4dd64e2b214fb538b4233bde7",
+        "wall_seconds": 4.001078047000192
+      },
+      "passed": true,
+      "cycles": 123175,
+      "numeric": {
+        "passed": true,
+        "checked_values": 500,
+        "failed_indices": [],
+        "checksum": "7159f884",
+        "checksum_verified": true,
+        "roi_cycles": 123175,
+        "max_absolute_error": 2.477392552435731e-06,
+        "max_tolerance_fraction": 0.02635152614177249
+      },
+      "static_image_end": 2147504528,
+      "stack_headroom_bytes": 1027600,
+      "problems": [],
+      "profile_sha256": "75a6f4e497bb368729c806c09b4534545d335be183ab9446a8a9cab00996358b",
+      "memory_audit_sha256": "e2c61cc792ea0b87c9597ef605555930153a8674e709a919277d609660bcc022"
+    },
+    {
+      "family": "fp32",
+      "name": "bicg",
+      "elf_sha256": "35c46dd5c424f24982c05034680abd9a9a38ca0c48657e560ccd97471a84a38f",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/bicg/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/bicg/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/bicg/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/bicg/dut.log",
+        "log_sha256": "75ec3b7879a0c10703e31a11ff05fc8269f23356587a79ef61cc58bfbac9ca46",
+        "wall_seconds": 0.8656495269997322
+      },
+      "passed": true,
+      "cycles": 20693,
+      "numeric": {
+        "passed": true,
+        "checked_values": 80,
+        "failed_indices": [],
+        "checksum": "a9945cbb",
+        "checksum_verified": true,
+        "roi_cycles": 20693,
+        "max_absolute_error": 1.75951965530885e-06,
+        "max_tolerance_fraction": 0.015568917713687243
+      },
+      "static_image_end": 2147500048,
+      "stack_headroom_bytes": 1032080,
+      "problems": [],
+      "profile_sha256": "d9387b40441df4c58ba3227252d801025b741cdd8986e8a61d9d5bded1ea371e",
+      "memory_audit_sha256": "e78752d78ff05af788b2b184614fb54822dea6f3d35a8fe21a87b1857a4e2651"
+    },
+    {
+      "family": "fp32",
+      "name": "cholesky",
+      "elf_sha256": "d3d004ba777fe92ccf0d85d2cdedad7eddc9ede16f630501dace9ddf3e9d383d",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/cholesky/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/cholesky/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/cholesky/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/cholesky/dut.log",
+        "log_sha256": "e5efd43d5dbea17abe68d674f8445fb2d57010dc43117192465b65c431a97760",
+        "wall_seconds": 5.977267503999883
+      },
+      "passed": true,
+      "cycles": 183250,
+      "numeric": {
+        "passed": true,
+        "checked_values": 820,
+        "failed_indices": [],
+        "checksum": "b727bb8d",
+        "checksum_verified": true,
+        "roi_cycles": 183250,
+        "max_absolute_error": 5.423974051010916e-07,
+        "max_tolerance_fraction": 0.002308073677897338,
+        "reconstruction_relative_inf_residual": 5.581309968605261e-08,
+        "positive_diagonal": true
+      },
+      "static_image_end": 2147506320,
+      "stack_headroom_bytes": 1025728,
+      "problems": [],
+      "profile_sha256": "a7e0e3c917debddfcc5de062c8e323e8f3b75b312bca28008aab1b3ff5e99c2f",
+      "memory_audit_sha256": "95dc589d16e4ff348cfd243cca24c1ae0ad307fd76e3657b72cfdfeb3b5851d4"
+    },
+    {
+      "family": "fp32",
+      "name": "svm",
+      "elf_sha256": "cce4a937dd64b388e6fea04ae59d426e9311dd321c4af21e6b0dee90f3c4e759",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/svm/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/svm/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/svm/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/svm/dut.log",
+        "log_sha256": "32818e7f2077fe99e5f7f3b7258e5ac2f9a19aa2e34e6ddb023e40af0fc5fe54",
+        "wall_seconds": 0.9195526429998608
+      },
+      "passed": true,
+      "cycles": 38501,
+      "numeric": {
+        "passed": true,
+        "checked_values": 100,
+        "failed_indices": [],
+        "checksum": "28464095",
+        "checksum_verified": true,
+        "roi_cycles": 38501,
+        "max_absolute_error": 0.0,
+        "max_tolerance_fraction": null
+      },
+      "static_image_end": 2147491216,
+      "stack_headroom_bytes": 1040880,
+      "problems": [],
+      "profile_sha256": "42d3eacafea675c8c679819f56cb80cba8f850e54112646c89f315c5fb05d135",
+      "memory_audit_sha256": "e7d503bec418c0d3c33186340c9a3f73699f43f491834c630a15a2a8c82db64a"
+    },
+    {
+      "family": "embench",
+      "name": "aha-mont64",
+      "elf_sha256": "646339be04ace2ff6291544862b423f2ea96dfe4dced3313a2abad477d3aff80",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/aha-mont64/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/aha-mont64/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/aha-mont64/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/aha-mont64/dut.log",
+        "log_sha256": "e66fa8237e25d8077a089c100af83e66c0e56c312aeb72a45b68b6e71c44723d",
+        "wall_seconds": 63.4257311639999
+      },
+      "passed": true,
+      "cycles": 5354540,
+      "numeric": null,
+      "static_image_end": 2147751760,
+      "stack_headroom_bytes": 780320,
+      "problems": [],
+      "profile_sha256": "1ff29d4a9161c7e5458e4c9ad37d017c72660a5615165ef85402a611037246a2",
+      "memory_audit_sha256": "2b5d6d342470075e2f9919f0bbe90eb9a387e875b90c9e8c464e12046b3d10a3"
+    },
+    {
+      "family": "embench",
+      "name": "crc32",
+      "elf_sha256": "f9301202f690efdcb5051e6b280c79d8aa2961cad46969cadd050fa904ee05ca",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/crc32/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/crc32/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/crc32/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/crc32/dut.log",
+        "log_sha256": "bdee13e4cf920f32dc9632d21c5b4b65a44aa82a8576abb5039d7a0f9148909c",
+        "wall_seconds": 58.2807642329999
+      },
+      "passed": true,
+      "cycles": 5054736,
+      "numeric": null,
+      "static_image_end": 2147750160,
+      "stack_headroom_bytes": 782000,
+      "problems": [],
+      "profile_sha256": "a7732921b7c7c715d04e317ed6da5b87da8262777e567fdce83db51720179baa",
+      "memory_audit_sha256": "870935e652a4a869db29293fb651e0556abc5094f48f4c63d1cf753b8e290bf6"
+    },
+    {
+      "family": "embench",
+      "name": "cubic",
+      "elf_sha256": "19c60cec9bfb2baf24390771eb58565a057371d6708c0528b63dfc43d137af97",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/cubic/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/cubic/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/cubic/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/cubic/dut.log",
+        "log_sha256": "7d9e884d16eddf1754425d7b5ac52cb7d17c6dd2ee057f541e642f64d2ce9d2c",
+        "wall_seconds": 184.64261841899952
+      },
+      "passed": true,
+      "cycles": 14160446,
+      "numeric": null,
+      "static_image_end": 2147834576,
+      "stack_headroom_bytes": 696496,
+      "problems": [],
+      "profile_sha256": "469abde87985048fb5e8c4b8efed1380ea57d8d40f423cf1a2e777e8da2e7555",
+      "memory_audit_sha256": "f5140131b6edcd9b8249befd057111dd8d7d72bfa374712b377807c2b7f04707"
+    },
+    {
+      "family": "embench",
+      "name": "edn",
+      "elf_sha256": "896e38b739b9013db07719be16af254e744b2c234451cf9ced4bbdbc2d6de265",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/edn/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/edn/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/edn/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/edn/dut.log",
+        "log_sha256": "d56e48041d500b4a112c0341f5da9645a2162b6ef8a0795d62b47ef0f6a0a35a",
+        "wall_seconds": 52.443415339999774
+      },
+      "passed": true,
+      "cycles": 4256669,
+      "numeric": null,
+      "static_image_end": 2147755408,
+      "stack_headroom_bytes": 775840,
+      "problems": [],
+      "profile_sha256": "d7bfa59da308a98980a62c142255e21ce12381a206b7ccd056187f1963727d9e",
+      "memory_audit_sha256": "d680b3f1101eb81e72560a2b81a0e3faac6b5c969d4842da2e7214cf5fae42bf"
+    },
+    {
+      "family": "embench",
+      "name": "huffbench",
+      "elf_sha256": "a11e08cd4b67943abc867ee6a5f21f02913c15d4957c5c5ac46db16f7ae0b4a6",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/huffbench/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/huffbench/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/huffbench/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/huffbench/dut.log",
+        "log_sha256": "366031c5a80b45d77af55765cfdcaea81389bc349c82805b9385a666c8597d0d",
+        "wall_seconds": 44.370720441999765
+      },
+      "passed": true,
+      "cycles": 3306646,
+      "numeric": null,
+      "static_image_end": 2147761680,
+      "stack_headroom_bytes": 762704,
+      "problems": [],
+      "profile_sha256": "b95c9b398dea55e717c92d3763bc1a7db2f2ec0a6fa7c7e3d6961df3435a4f1a",
+      "memory_audit_sha256": "b73071595cec6da107d13eddb611aa391690df8440583d496a31bfb274b4ff67"
+    },
+    {
+      "family": "embench",
+      "name": "matmult-int",
+      "elf_sha256": "a68d3088aa484d21d87d2b5892039df135c22d192f019fab483a62a9df515a02",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/matmult-int/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/matmult-int/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/matmult-int/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/matmult-int/dut.log",
+        "log_sha256": "367b0521a4c09e782b57b79d663fdacf3713acce559f7d0f304425fe092b3a54",
+        "wall_seconds": 46.631008927999574
+      },
+      "passed": true,
+      "cycles": 3825063,
+      "numeric": null,
+      "static_image_end": 2147759568,
+      "stack_headroom_bytes": 771008,
+      "problems": [],
+      "profile_sha256": "d71f164c08193be3a4e089bc55105494ae5afef65eb75ac1b05f97de69383f21",
+      "memory_audit_sha256": "f3b5a6586fcc5c2af4581fc2c889cf1f91b0933c8654cc601388e2c543172b2c"
+    },
+    {
+      "family": "embench",
+      "name": "minver",
+      "elf_sha256": "18aacebbf740134d2a42b5550224155b171250ebf3456c087030258ac1e66aff",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/minver/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/minver/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/minver/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/minver/dut.log",
+        "log_sha256": "aa37d8da06426d5160d3ab356925ad4b150468d24d9d1376c89540c4ebbaa3fc",
+        "wall_seconds": 14.638817216999996
+      },
+      "passed": true,
+      "cycles": 858801,
+      "numeric": null,
+      "static_image_end": 2147760720,
+      "stack_headroom_bytes": 769376,
+      "problems": [],
+      "profile_sha256": "0b233aca1b36fbc436e702ad6a8b7b98f82f7b54e4a0259b4acc2df5d4f80023",
+      "memory_audit_sha256": "70e46dc97f5332787b2da5582796c54e1bc84fac621c13957fb0f309eda72d43"
+    },
+    {
+      "family": "embench",
+      "name": "nbody",
+      "elf_sha256": "ad6739f77c7f1c54740a8d23d6d8e1ae214f9762851834307d2007045917a9f1",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/nbody/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/nbody/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/nbody/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/nbody/dut.log",
+        "log_sha256": "38e2bbe7f2ced49bb5d252a57f2535214ebb20c287cb669d14e793fe29a7006c",
+        "wall_seconds": 134.60610831199938
+      },
+      "passed": true,
+      "cycles": 5821267,
+      "numeric": null,
+      "static_image_end": 2147782096,
+      "stack_headroom_bytes": 749808,
+      "problems": [],
+      "profile_sha256": "641fd952f41ff90b921441a5c380b4c79aac83ba4c3e277f793994c0b90721b0",
+      "memory_audit_sha256": "581ef515c8eb555c75f6f1c424cd3159363d380988a1111edc877b270e4e78d7"
+    },
+    {
+      "family": "embench",
+      "name": "nettle-aes",
+      "elf_sha256": "8f0a391fe5e947776ec30e3712d37970c4d8c3f40cc5adbb8591e5643c1210fd",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/nettle-aes/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/nettle-aes/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/nettle-aes/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/nettle-aes/dut.log",
+        "log_sha256": "49f81dd8caa2f67c8346b8424afd1090e885b63157b7ae654effc096a9fce9d8",
+        "wall_seconds": 62.585090233999836
+      },
+      "passed": true,
+      "cycles": 4797126,
+      "numeric": null,
+      "static_image_end": 2147766224,
+      "stack_headroom_bytes": 765872,
+      "problems": [],
+      "profile_sha256": "6d11ef36a40213d7a438458241c4af0506584271acecc191e159e99147480ae5",
+      "memory_audit_sha256": "44b47214ebcaf8305c240004774ee56c35543338ab0a13d24c57d0f6c830fc74"
+    },
+    {
+      "family": "embench",
+      "name": "nettle-sha256",
+      "elf_sha256": "dd21a0328aff4b858aa9eca8577c0a8a0d92b916fa308c87b559a355d78efe6d",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/nettle-sha256/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/nettle-sha256/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/nettle-sha256/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/nettle-sha256/dut.log",
+        "log_sha256": "e08c4148be13b4cd4a2f6dde5f1eecba1923cd2fbdb416dc9b9617241ce78aaa",
+        "wall_seconds": 52.09992165800031
+      },
+      "passed": true,
+      "cycles": 4200675,
+      "numeric": null,
+      "static_image_end": 2147758160,
+      "stack_headroom_bytes": 773680,
+      "problems": [],
+      "profile_sha256": "6e8155ed839921a1f031cd01c879543474492c7a4186a4cfca2e7300b14e82f3",
+      "memory_audit_sha256": "47e49bf0769419c0139ad983ad1ef21f60a7b45a90c0ab05d71c0102428e70f9"
+    },
+    {
+      "family": "embench",
+      "name": "nsichneu",
+      "elf_sha256": "1bdf7a8f3fff68ae4cd3eb308633d879ae46a02ef868765f667902b10aef4a66",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/nsichneu/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/nsichneu/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/nsichneu/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/nsichneu/dut.log",
+        "log_sha256": "db9b7193281135a84f2331b32ce34028f232ed7fdb1a771f259b68cecf0b5da1",
+        "wall_seconds": 80.64434279800025
+      },
+      "passed": true,
+      "cycles": 6913377,
+      "numeric": null,
+      "static_image_end": 2147768400,
+      "stack_headroom_bytes": 763760,
+      "problems": [],
+      "profile_sha256": "0af74e6a945b258f5404986311ec758929d761ba698a9374d90f3a90997b6cb2",
+      "memory_audit_sha256": "13dc2fbd7b5a6bed81936bc0c0396540d0f70e94b32860bc6fd0eb8a3d6c215e"
+    },
+    {
+      "family": "embench",
+      "name": "picojpeg",
+      "elf_sha256": "721fa0ec08a47a4affcfc3251e8bee579dd8784b0c0be6f09e8981a19b11455e",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/picojpeg/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/picojpeg/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/picojpeg/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/picojpeg/dut.log",
+        "log_sha256": "6878087cb275be844a26c051cef953e17313283d166303a255d7d1df2929b216",
+        "wall_seconds": 71.82817948800039
+      },
+      "passed": true,
+      "cycles": 5064804,
+      "numeric": null,
+      "static_image_end": 2147771024,
+      "stack_headroom_bytes": 760848,
+      "problems": [],
+      "profile_sha256": "d4b7098fb34273c766dbdbe994f3e45b679060965e17ab8b7638e5444b544b2d",
+      "memory_audit_sha256": "7b00c49f80ef4420c574f1050a00801a7c0c4785d2fa117bf05f0fe7f966f87d"
+    },
+    {
+      "family": "embench",
+      "name": "qrduino",
+      "elf_sha256": "e6d28953f0cbf52f35ace14aee266a5acd2566859bce0e0a086a76da211de6ac",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/qrduino/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/qrduino/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/qrduino/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/qrduino/dut.log",
+        "log_sha256": "9564371a3c0aa5740418f5c522d2179a2a2588f90c2b9303f288346152fe107b",
+        "wall_seconds": 62.26681753699995
+      },
+      "passed": true,
+      "cycles": 4377993,
+      "numeric": null,
+      "static_image_end": 2147779920,
+      "stack_headroom_bytes": 752064,
+      "problems": [],
+      "profile_sha256": "041d2ca5d1379ebd63e57a04350d8cd2832ca9c4bf38d53d21a98a54717d5778",
+      "memory_audit_sha256": "1bbeea0f7a7f22a8c49dd5d31f6e40d631a4c5c2500b9058345783e83215e208"
+    },
+    {
+      "family": "embench",
+      "name": "sglib-combined",
+      "elf_sha256": "3b69ad94081db32fe7d92537f25ee82118a6fbe07feee7c83cd262a87327aee6",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/sglib-combined/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/sglib-combined/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/sglib-combined/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/sglib-combined/dut.log",
+        "log_sha256": "514365e8501831482a15e3a2fdf49696abc3e64c2d26e817c1dfa407b67a0183",
+        "wall_seconds": 57.77281126300022
+      },
+      "passed": true,
+      "cycles": 4332256,
+      "numeric": null,
+      "static_image_end": 2147774160,
+      "stack_headroom_bytes": 756688,
+      "problems": [],
+      "profile_sha256": "17ae0c7e2a34c76788b52382960ac2d532a31817dc4575e0946c2ca850a61975",
+      "memory_audit_sha256": "a62e2e083f3eba1adf6cd741891093aea59f1a108c977a1b62d767d6639b3e2f"
+    },
+    {
+      "family": "embench",
+      "name": "slre",
+      "elf_sha256": "e3b81e869126d7cc252c4aa482515f51e14f81945a0daa2a7d9392250ccb8769",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/slre/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/slre/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/slre/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/slre/dut.log",
+        "log_sha256": "d336d5c1863c1f0259a45a5c052a2d4953a4ad8f1aff839eb8667e7d2c5b3a73",
+        "wall_seconds": 59.787340235000556
+      },
+      "passed": true,
+      "cycles": 4664230,
+      "numeric": null,
+      "static_image_end": 2147753808,
+      "stack_headroom_bytes": 775344,
+      "problems": [],
+      "profile_sha256": "e17cd4006a87039864343f2099398a93a0a3f9a3f2e2edc65b8ac057a3c308d7",
+      "memory_audit_sha256": "d829c5f00509aa5b0c4bbb6b17c2186d13f4c091d2fd980cc442b36568ff5be7"
+    },
+    {
+      "family": "embench",
+      "name": "st",
+      "elf_sha256": "4836e2d559e258a0af8ff49fdfa87b00a1c6b440a28dda2413536c015deef167",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/st/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/st/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/st/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/st/dut.log",
+        "log_sha256": "991f8513b5a865e6cfc0096b9ca3dce728cdcfcef8425027c074119f22f2bccd",
+        "wall_seconds": 92.21091824999985
+      },
+      "passed": true,
+      "cycles": 7092839,
+      "numeric": null,
+      "static_image_end": 2147782416,
+      "stack_headroom_bytes": 749536,
+      "problems": [],
+      "profile_sha256": "e255d63043b27713495f01ea1423f90dc2dff8344820bec4f330919d49bbfab3",
+      "memory_audit_sha256": "b7222ce8b570d13433d4316d153baf90d57016e8be02be652ce20588df248e6a"
+    },
+    {
+      "family": "embench",
+      "name": "statemate",
+      "elf_sha256": "89817da7b119f2d38d64fd49847161968a27319c45071cf7b92986c71017a52e",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/statemate/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/statemate/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/statemate/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/statemate/dut.log",
+        "log_sha256": "a0695d450df69ad36716306fff09c16290a19dae510462bbc481c304202a3ac0",
+        "wall_seconds": 41.03844262599978
+      },
+      "passed": true,
+      "cycles": 3100457,
+      "numeric": null,
+      "static_image_end": 2147756496,
+      "stack_headroom_bytes": 775536,
+      "problems": [],
+      "profile_sha256": "eac8de1932d24b883bdee55a3d2244ea92cff6992e7d80e7d65ef660a0868437",
+      "memory_audit_sha256": "9b49be92a86a85b8cb915bc1a813c23c62a55726978f6dde9e225893f286ce0a"
+    },
+    {
+      "family": "embench",
+      "name": "ud",
+      "elf_sha256": "34a2c84b2c1e37427638a7bc10aa0e3ec9118661dbad7083f1596b0c1fc2bfe7",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/ud/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/ud/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/ud/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/ud/dut.log",
+        "log_sha256": "bea4ad442c81bfb7bf57b94bad674de1784042ac3ab2371222406cf11b7985a2",
+        "wall_seconds": 34.57574381900031
+      },
+      "passed": true,
+      "cycles": 2616256,
+      "numeric": null,
+      "static_image_end": 2147754512,
+      "stack_headroom_bytes": 777568,
+      "problems": [],
+      "profile_sha256": "fc3eb90280a5691acd1e9013ce188e8c46eacb0b9cbaedb6ff3b29a9b3f6fd17",
+      "memory_audit_sha256": "d1716c3552ebf672ff55ab891d16186b0634da94e7979af6edf97225cdfb6733"
+    },
+    {
+      "family": "embench",
+      "name": "wikisort",
+      "elf_sha256": "7ed46e9144605bbbe601030d821055443c72ed60e9760cc9627cc1b24f70c6d6",
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/wikisort/input.elf",
+          "+max-cycles=100000000",
+          "+core-period-ps=10000",
+          "+imem-response-ps=10000",
+          "+imem-interval-ps=10000",
+          "+dmem-response-ps=10000",
+          "+memory-audit=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/wikisort/memory.json",
+          "+profile-core-roi=/workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/wikisort/profile.json"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/wikisort/dut.log",
+        "log_sha256": "5c2d38696a2ca74e51dcfafd5c074e8a3a47191163f13e6993a89514987e39f7",
+        "wall_seconds": 50.99963590600055
+      },
+      "passed": true,
+      "cycles": 2134990,
+      "numeric": null,
+      "static_image_end": 2147798672,
+      "stack_headroom_bytes": 728944,
+      "problems": [],
+      "profile_sha256": "7d3d584dd1536a74e9869aa274aa67b1ef6cf8996c0b35f5cbcedbe81b36672c",
+      "memory_audit_sha256": "fb763465f5050d1c1f3010d8d2f9cdf9b970fdd6b2fce032f01ac043215789d3"
+    }
+  ],
+  "passed": true,
+  "end": {
+    "commit": "39bc12d87f80af2520a72f3a75adb3151a55f4c8",
+    "status": ""
+  },
+  "finished_utc": "2026-10-19T16:52:57.707361+00:00"
+}

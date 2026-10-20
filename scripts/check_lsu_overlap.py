@@ -26,7 +26,7 @@ def main():
     sources=['rtl/pkg/rv32_ooo_params.sv','rtl/pkg/rv32_ooo_types.sv',
              'verification/unit/lsu_overlap_top.sv','verification/unit/test_lsu_overlap.cpp',
              'rtl/lsu/rv32_ooo_lsu.sv','scripts/check_lsu_overlap.py']
-    report={'scope':'20 pin-driven LSU cases per RTL plus original-RTL negative timing control; not CPU benchmark speedup',
+    report={'scope':'35 pin-driven LSU cases per RTL plus original-RTL negative timing control; not CPU benchmark speedup',
             'baseline_commit':BASELINE,'baseline_lsu_sha256':sha(original),
             'verilator_version':version,'source_sha256':{p:sha(ROOT/p) for p in sources},
             'builds':[],'records':[],'passed':False}
@@ -53,9 +53,9 @@ def main():
             execution=run([str(binary),str(mode),str(trace)],log,30)
             text=log.read_text()
             passed=(execution['returncode']!=0 and 'buffer-consume request availability differs' in text) if negative else (
-                execution['returncode']==0 and text.count('PASS ')==21 and
-                'ALL 20 LSU HANDOFF CASES PASS' in text)
-            # 20 case PASS lines plus the final ALL ... PASS line.
+                execution['returncode']==0 and text.count('PASS ')==36 and
+                'ALL 35 LSU HANDOFF CASES PASS' in text)
+            # 35 case PASS lines plus the final ALL ... PASS line.
             row={'name':label,'negative_control':negative,'execution':execution,
                  'trace_sha256':sha(trace),'passed':passed}
             report['records'].append(row);save();print(label,passed,flush=True)

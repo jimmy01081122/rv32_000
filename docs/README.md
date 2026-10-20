@@ -25,6 +25,7 @@ signoff label applies only to the source/configuration and checks in that record
 | [Frozen post-LSU baseline](evidence/2026-10-18/post-lsu-baseline/README.md) | Actual 10 ns TT/SS/FF closure, cell area, fixed-time memory and formal 27/27 evidence |
 | [LSU A functional milestone](evidence/2026-10-19/lsu-a-functional/README.md) | Clean-source interface qualification and original full common-clock measurement |
 | [LSU A physical and operating-point review](evidence/2026-10-20/lsu-a-physical/README.md) | Actual timing grid, area and complete 27-case comparison at both qualified clocks |
+| [LSU A verification review](LSU_A_VERIFICATION_REVIEW.md) | Build/functional provenance and per-PC admission fixes, expanded unit cases and unchanged full-denominator results |
 | [Session handoff](SESSION_HANDOFF.md) | Bring-up measurements, tool images and local evidence locations |
 | [CI workflow](../.github/workflows/README.md) | Existing jobs, prerequisites and limits |
 | [Physical flow](../physical/asap7/README.md) | ASAP7 setup status and current research limitations |

@@ -1,0 +1,18 @@
+[SimMemory] Loaded segment to 0x80000000 (filesz: 0x130, memsz: 0x140)
+[SimMemory] ELF loaded successfully. Entry PC = 0x80000000
+[Simulator] Commit trace logging enabled: /workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh-ready4-delay2.trace
+[Simulator] Starting simulation run...
+[Dmem environment] injected store fault addr=0x80000128
+[Simulator] TRAP encountered at cycle 53 PC=0x80000064 insn=0xa49023 cause=0x7 tval=0x8000012a
+
+[SimMemory] SIM_EXIT received with code: 0 (PASS)
+DMEM ENV blocked_load_cycles=6 blocked_store_cycles=4 fault_requests=1 fault_responses=1
+
+================ Simulation Summary ================
+  ELF binary     : /workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh.elf
+  Cycles         : 175
+  Retired insns  : 68
+  IPC            : 0.3886
+  Exit status    : PASS (0)
+====================================================
+

@@ -34,6 +34,16 @@ budget; neither operating point reaches both 1.20× goals. Recommend discussing
 100 MHz for A before the already-approved independent B experiment; no formal
 operating point or replacement baseline has been selected.
 
+The subsequent [A verification review](LSU_A_VERIFICATION_REVIEW.md) reruns the
+clean-source directed/Spike/interface/fixed-time/FMA regression and passes 35 LSU
+unit cases on each of baseline and A, plus the original-RTL negative control.
+It fixes two reviewer omissions: build/functional executable provenance was not
+bound to measurements, and per-PC retired work was only checked offline.
+All four real-data negative controls now reject; 30 contract/review controls pass.
+Both complete operating points pass the strengthened review with unchanged scores.
+CPU RTL, scored simulator and physical inputs remain unchanged; B is on hold for
+this result review.
+
 ## Evidence available
 
 The [session handoff](SESSION_HANDOFF.md) records the bring-up environment and

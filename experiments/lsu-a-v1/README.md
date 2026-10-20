@@ -12,6 +12,12 @@ FP32 0.700275×。固定 10 ns memory 跨兩拍取樣使提頻退步；兩個點
 各 1.20× 目標。建議先審查 100 MHz 操作點，B 保持獨立；正式操作點與
 是否保留 A 待共同討論，凍結基線不變。
 
+後續[驗證與審查](../../docs/LSU_A_VERIFICATION_REVIEW.md)完成 baseline／A 各 35
+項單元測試及乾淨來源定向回歸，修正 reviewer 的建置資格與逐 PC 工作量漏檢。
+四個實際負向案例及 30 項控制通過，兩操作點成績不變；CPU RTL 未改動。
+現行 `review_cpu_experiment.py` 必須明確提供 `--build-summary` 與
+`--qualification-summary`；完整重播命令與證據還原條件見審查文件。
+
 唯一功能 RTL 變更是 LSU 的請求排除條件：舊 response buffer 本拍確實
 交付、無 error、沒有 external in-flight、沒有 flush，才可接受下一個已就緒
 請求。保留一筆 external outstanding、原 response register、16-slot SQ、

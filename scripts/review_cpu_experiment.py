@@ -9,6 +9,7 @@ from baseline_contract import ROOT,sha
 from experiment_contract import load_experiment
 from check_physical_closure import review_collection
 from measure_post_lsu_baseline import check_result
+from experiment_provenance import review_provenance, measurement_command, retired_work
 
 
 def geomean(values):
@@ -31,9 +32,10 @@ def qualified_period(physical,periods,measured,reference,grid,comparison_point):
     return measured
 
 
-def review(experiment_path,measurement,analysis,comparison_point='fastest'):
+def review(experiment_path,measurement,analysis,comparison_point='fastest',*,build_summary=None,qualification_summary=None):
     experiment,baseline=load_experiment(experiment_path)
     report=json.loads((measurement/'summary.json').read_text())
+    provenance,normal=review_provenance(experiment_path,experiment,report,build_summary,qualification_summary)
     physical=review_collection(analysis)
     collection=json.loads((analysis/'run.json').read_text())
     implementation=json.loads((analysis.parent/'run.json').read_text())
@@ -76,6 +78,7 @@ def review(experiment_path,measurement,analysis,comparison_point='fastest'):
     results=[];checked=0
     for row,record in zip(rows,records):
         directory=measurement/row['family']/row['name'];profile=directory/'profile.json';audit=directory/'memory.json'
+        measurement_command(record,normal,directory,period)
         if (not record['passed'] or record['execution']['returncode']!=0 or sha(directory/'input.elf')!=row['elf_sha256']
                 or sha(directory/'dut.log')!=record['execution']['log_sha256'] or sha(profile)!=record['profile_sha256']
                 or sha(audit)!=record['memory_audit_sha256']):raise ValueError('measurement raw evidence changed')
@@ -84,7 +87,9 @@ def review(experiment_path,measurement,analysis,comparison_point='fastest'):
                             directory/'input.elf',counters,require_reference_cycles=False)
         previous=reference/row['family']/row['name']/'profile.json'
         if sha(previous)!=old[row['family'],row['name']]['profile_sha256']:raise ValueError('reference profile changed')
-        if result['problems'] or counters['retired_classes']!=json.loads(previous.read_text())['retired_classes']:
+        original=json.loads(previous.read_text())
+        if (result['problems'] or counters['retired_classes']!=original['retired_classes'] or
+                retired_work(counters)!=retired_work(original)):
             raise ValueError('candidate numerical/memory/work equivalence failed')
         if result['numeric']:checked+=result['numeric']['checked_values']
         before=row['reference_cycles']*10000;after=result['cycles']*period
@@ -101,6 +106,7 @@ def review(experiment_path,measurement,analysis,comparison_point='fastest'):
     return {'scope':'qualified isolated CPU experiment at global-route research boundary; no detailed-route or full-ISA signoff',
             'experiment_id':experiment['experiment_id'],'experiment_manifest_sha256':digest,
             'measurement_summary_sha256':sha(measurement/'summary.json'),'physical_review':physical,
+            'functional_provenance':provenance,'per_pc_retired_work_matches':True,
             'reviewer_sha256':sha(Path(__file__)),'core_period_ps':period,'memory_ps':10000,
             'comparison_point':comparison_point,
             'fastest_qualified_period_ps':physical['smallest_tested_passing_period_ps'],
@@ -114,12 +120,15 @@ def main():
     p.add_argument('--experiment',type=Path,required=True)
     p.add_argument('--measurement',type=Path,required=True)
     p.add_argument('--analysis',type=Path,required=True)
+    p.add_argument('--build-summary',type=Path,required=True,help='actual clean normal/assert build proof and executable identities')
+    p.add_argument('--qualification-summary',type=Path,required=True,help='complete directed/Spike/interface/memory/FMA qualification bound to that build')
     p.add_argument('--comparison-point',choices=['fastest','common-clock'],default='fastest',
                    help='default fastest actual qualified grid point; common-clock must also pass all corners')
     p.add_argument('--out',type=Path,required=True)
     args=p.parse_args();out=args.out.resolve()
     if not out.is_relative_to(ROOT/'build') or out.exists():p.error('fresh output under build required')
-    try:result=review(args.experiment,args.measurement.resolve(),args.analysis.resolve(),args.comparison_point)
+    try:result=review(args.experiment,args.measurement.resolve(),args.analysis.resolve(),args.comparison_point,
+                      build_summary=args.build_summary,qualification_summary=args.qualification_summary)
     except (ValueError,KeyError,OSError,TypeError) as error:result={'passed':False,'error':str(error)}
     out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(result,indent=2,allow_nan=False)+'\n')
     print(json.dumps({k:v for k,v in result.items() if k not in ['records','physical_review']},indent=2),flush=True)

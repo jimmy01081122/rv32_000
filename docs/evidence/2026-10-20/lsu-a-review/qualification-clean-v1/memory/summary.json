@@ -1,0 +1,832 @@
+{
+  "scope": "Fixed-physical-time model qualification; no physical frequency claim",
+  "simulator_sha256": "c4e188e573b289fe383ad17bb807b74b28b126d90508965c7c21ec62ad7737a9",
+  "reference_simulator_sha256": "ddb1b9dddbc87363c28c3a0d682676774b5696af13515dea3deb2a99f0dddeea",
+  "records": [
+    {
+      "name": "rv32i_basic",
+      "mode": "old",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/rv32i_basic.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/rv32i_basic-old.log",
+      "log_sha256": "dbac9ffb87d93b47664b70cd2888a191616306a7adbc159e8631341c85f0d805"
+    },
+    {
+      "name": "rv32i_basic",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/rv32i_basic.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/rv32i_basic-legacy.log",
+      "log_sha256": "dbac9ffb87d93b47664b70cd2888a191616306a7adbc159e8631341c85f0d805"
+    },
+    {
+      "name": "rv32i_basic",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/rv32i_basic.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/rv32i_basic-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/rv32i_basic-fixed.log",
+      "log_sha256": "dbac9ffb87d93b47664b70cd2888a191616306a7adbc159e8631341c85f0d805"
+    },
+    {
+      "name": "rv32i_basic",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/rv32i_basic.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/rv32i_basic-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/rv32i_basic-faster_core.log",
+      "log_sha256": "e05a527517c9f19ce38a327c05dcb581acc35231c540242e9522a47962ab1541"
+    },
+    {
+      "name": "rv32i_basic",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "store_forwarding",
+      "mode": "old",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/store_forwarding.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/store_forwarding-old.log",
+      "log_sha256": "37238d616699b5826b5438df81497ac421dd8e2b265a3222f1b1cd2d0f51ff9c"
+    },
+    {
+      "name": "store_forwarding",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/store_forwarding.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/store_forwarding-legacy.log",
+      "log_sha256": "37238d616699b5826b5438df81497ac421dd8e2b265a3222f1b1cd2d0f51ff9c"
+    },
+    {
+      "name": "store_forwarding",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/store_forwarding.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/store_forwarding-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/store_forwarding-fixed.log",
+      "log_sha256": "37238d616699b5826b5438df81497ac421dd8e2b265a3222f1b1cd2d0f51ff9c"
+    },
+    {
+      "name": "store_forwarding",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/store_forwarding.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/store_forwarding-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/store_forwarding-faster_core.log",
+      "log_sha256": "0465fe654899c343d4fd10dc174c84c7709798884b19b3cea077d1c4c5d5fe8a"
+    },
+    {
+      "name": "store_forwarding",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "lsu_redirect_variable_lat",
+      "mode": "old",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/lsu_redirect_variable_lat.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/lsu_redirect_variable_lat-old.log",
+      "log_sha256": "24abb22c5e49978fb08fd1bc4ece667e7b6c1ae9acb16fbc81d56d07a4f72d4e"
+    },
+    {
+      "name": "lsu_redirect_variable_lat",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/lsu_redirect_variable_lat.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/lsu_redirect_variable_lat-legacy.log",
+      "log_sha256": "24abb22c5e49978fb08fd1bc4ece667e7b6c1ae9acb16fbc81d56d07a4f72d4e"
+    },
+    {
+      "name": "lsu_redirect_variable_lat",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/lsu_redirect_variable_lat.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/lsu_redirect_variable_lat-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/lsu_redirect_variable_lat-fixed.log",
+      "log_sha256": "24abb22c5e49978fb08fd1bc4ece667e7b6c1ae9acb16fbc81d56d07a4f72d4e"
+    },
+    {
+      "name": "lsu_redirect_variable_lat",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/lsu_redirect_variable_lat.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/lsu_redirect_variable_lat-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/lsu_redirect_variable_lat-faster_core.log",
+      "log_sha256": "f69156306756ec2ebd4dd4f0111d533e8ac1e7dc84a912220dc5e2a286955513"
+    },
+    {
+      "name": "lsu_redirect_variable_lat",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "wrong_path_store",
+      "mode": "old",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/wrong_path_store.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/wrong_path_store-old.log",
+      "log_sha256": "d59faf96b42e3c048e0ee3ab111255380200fef6a3d38ced930ca6fff987995a"
+    },
+    {
+      "name": "wrong_path_store",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/wrong_path_store.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/wrong_path_store-legacy.log",
+      "log_sha256": "d59faf96b42e3c048e0ee3ab111255380200fef6a3d38ced930ca6fff987995a"
+    },
+    {
+      "name": "wrong_path_store",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/wrong_path_store.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/wrong_path_store-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/wrong_path_store-fixed.log",
+      "log_sha256": "d59faf96b42e3c048e0ee3ab111255380200fef6a3d38ced930ca6fff987995a"
+    },
+    {
+      "name": "wrong_path_store",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/wrong_path_store.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/wrong_path_store-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/wrong_path_store-faster_core.log",
+      "log_sha256": "535c44c67bb8442be1a0077043fa46ef9741ad5d175826aa806b6f13f8a9e0c8"
+    },
+    {
+      "name": "wrong_path_store",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "partial_overlap",
+      "mode": "old",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/partial_overlap.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/partial_overlap-old.log",
+      "log_sha256": "089647b6ea675a3cfee6325439fb3fe8abbadaeeedba8220c2b1f3191dbee745"
+    },
+    {
+      "name": "partial_overlap",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/partial_overlap.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/partial_overlap-legacy.log",
+      "log_sha256": "089647b6ea675a3cfee6325439fb3fe8abbadaeeedba8220c2b1f3191dbee745"
+    },
+    {
+      "name": "partial_overlap",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/partial_overlap.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/partial_overlap-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/partial_overlap-fixed.log",
+      "log_sha256": "089647b6ea675a3cfee6325439fb3fe8abbadaeeedba8220c2b1f3191dbee745"
+    },
+    {
+      "name": "partial_overlap",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/partial_overlap.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/partial_overlap-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/partial_overlap-faster_core.log",
+      "log_sha256": "55e1914336876061a54532e1dea1ac48ad5b93a9d5f03419f62fa201d7be9c35"
+    },
+    {
+      "name": "partial_overlap",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "unresolved_store",
+      "mode": "old",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/unresolved_store.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/unresolved_store-old.log",
+      "log_sha256": "1c2e69534048ee18c85cb3dd7975366685caa2eda34917c0503d7c35253393f9"
+    },
+    {
+      "name": "unresolved_store",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/unresolved_store.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/unresolved_store-legacy.log",
+      "log_sha256": "1c2e69534048ee18c85cb3dd7975366685caa2eda34917c0503d7c35253393f9"
+    },
+    {
+      "name": "unresolved_store",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/unresolved_store.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/unresolved_store-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/unresolved_store-fixed.log",
+      "log_sha256": "1c2e69534048ee18c85cb3dd7975366685caa2eda34917c0503d7c35253393f9"
+    },
+    {
+      "name": "unresolved_store",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/unresolved_store.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/unresolved_store-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/unresolved_store-faster_core.log",
+      "log_sha256": "bb9dcdb54420d43752f86e6890cb02884185b89168e67533da42c31c94d26bbf"
+    },
+    {
+      "name": "unresolved_store",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "fp_basic",
+      "mode": "old",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_basic.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fp_basic-old.log",
+      "log_sha256": "dffa2995994d5a85e89d52ffe0cae5ac9d157249e266f75beba0c74b85df84e5"
+    },
+    {
+      "name": "fp_basic",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_basic.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fp_basic-legacy.log",
+      "log_sha256": "dffa2995994d5a85e89d52ffe0cae5ac9d157249e266f75beba0c74b85df84e5"
+    },
+    {
+      "name": "fp_basic",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_basic.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fp_basic-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fp_basic-fixed.log",
+      "log_sha256": "dffa2995994d5a85e89d52ffe0cae5ac9d157249e266f75beba0c74b85df84e5"
+    },
+    {
+      "name": "fp_basic",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_basic.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fp_basic-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fp_basic-faster_core.log",
+      "log_sha256": "3b859aaca1f4c1b3c75480d8907360ad629c3d57a9a8e35582520f8232f6b47e"
+    },
+    {
+      "name": "fp_basic",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "fp_fma",
+      "mode": "old",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_fma.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fp_fma-old.log",
+      "log_sha256": "60a5a45155b87321990f2aacfe5aaa8abff892a332afce5fcbed58e19b26e51d"
+    },
+    {
+      "name": "fp_fma",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_fma.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fp_fma-legacy.log",
+      "log_sha256": "60a5a45155b87321990f2aacfe5aaa8abff892a332afce5fcbed58e19b26e51d"
+    },
+    {
+      "name": "fp_fma",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_fma.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fp_fma-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fp_fma-fixed.log",
+      "log_sha256": "60a5a45155b87321990f2aacfe5aaa8abff892a332afce5fcbed58e19b26e51d"
+    },
+    {
+      "name": "fp_fma",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_fma.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fp_fma-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fp_fma-faster_core.log",
+      "log_sha256": "b7e1e8532e0f5d0dfda1c2644ae816dd8f8f3fd148eacca222310c2ab2712808"
+    },
+    {
+      "name": "fp_fma",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "zero",
+      "mode": "reject_invalid",
+      "passed": true,
+      "returncode": 2
+    },
+    {
+      "name": "negative",
+      "mode": "reject_invalid",
+      "passed": true,
+      "returncode": 2
+    },
+    {
+      "name": "junk",
+      "mode": "reject_invalid",
+      "passed": true,
+      "returncode": 2
+    },
+    {
+      "name": "partial",
+      "mode": "reject_invalid",
+      "passed": true,
+      "returncode": 2
+    },
+    {
+      "name": "mixed",
+      "mode": "reject_invalid",
+      "passed": true,
+      "returncode": 2
+    },
+    {
+      "name": "overflow",
+      "mode": "reject_invalid",
+      "passed": true,
+      "returncode": 2
+    },
+    {
+      "name": "sw",
+      "mode": "fixed_fault_core5500",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/sw.elf",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000124",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-sw-5500.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "bf39cd463c7c0a8fc77724aa275cb7177ef9690e9963d4acf6f8decf7435fc7c",
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-sw-5500.log",
+      "log_sha256": "a1aea5c008075071fe952d5cc44ff5c1010522a1a04ee03da04c174f5ee28c09",
+      "trace": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-sw-5500.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "sw",
+      "mode": "fixed_fault_core3000",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/sw.elf",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000124",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-sw-3000.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "bf39cd463c7c0a8fc77724aa275cb7177ef9690e9963d4acf6f8decf7435fc7c",
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-sw-3000.log",
+      "log_sha256": "2ab4e43923115cb8054ec4839c901948fe5b9f251066d54b89e543c65a7eace1",
+      "trace": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-sw-3000.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "sb",
+      "mode": "fixed_fault_core5500",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/sb.elf",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000128",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-sb-5500.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "8d887f11e694757ed6a36fe6cb433334e921ea320796894f951cd419d0087eb7",
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-sb-5500.log",
+      "log_sha256": "060b905b6a59f5eac1ba971dd7e44f8a709c41cb1d23900f8fb2065d577dc58e",
+      "trace": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-sb-5500.trace",
+      "trace_sha256": "ebb34de54ec80adbb823437a51831be1d83e5ad562308bc2a0091a9daaf6a0d2"
+    },
+    {
+      "name": "sb",
+      "mode": "fixed_fault_core3000",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/sb.elf",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000128",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-sb-3000.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "8d887f11e694757ed6a36fe6cb433334e921ea320796894f951cd419d0087eb7",
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-sb-3000.log",
+      "log_sha256": "02ddd01f8f045c26a182e57598218d1e1d7ec5a771cf53051d10b1d18d39d6cf",
+      "trace": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-sb-3000.trace",
+      "trace_sha256": "ebb34de54ec80adbb823437a51831be1d83e5ad562308bc2a0091a9daaf6a0d2"
+    },
+    {
+      "name": "sh",
+      "mode": "fixed_fault_core5500",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/sh.elf",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000128",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-sh-5500.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "87a47d681b9443b028b536285f59f9638a22b9b7942d511aee4daa5778a111db",
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-sh-5500.log",
+      "log_sha256": "ad91c03d1a9fd3a2a26c3289f9edb97300ff3ee2617af1f1ebd749b415b83dac",
+      "trace": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-sh-5500.trace",
+      "trace_sha256": "0b6a43cc0fa2838cad77e2294f1a563edc41e1a7b2d85c0395fb76495c0ea0de"
+    },
+    {
+      "name": "sh",
+      "mode": "fixed_fault_core3000",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/sh.elf",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000128",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-sh-3000.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "87a47d681b9443b028b536285f59f9638a22b9b7942d511aee4daa5778a111db",
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-sh-3000.log",
+      "log_sha256": "9a09894f1d59eefb390128981feec02f09ab36a660162bc9866bc951a02df59c",
+      "trace": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-sh-3000.trace",
+      "trace_sha256": "0b6a43cc0fa2838cad77e2294f1a563edc41e1a7b2d85c0395fb76495c0ea0de"
+    },
+    {
+      "name": "fsw",
+      "mode": "fixed_fault_core5500",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/fsw.elf",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000124",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-fsw-5500.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "d580ab01ad8cf6aa8b0ad8b998cd720bce3309f0975b686051ec29a9ea015f2f",
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-fsw-5500.log",
+      "log_sha256": "21809f59b5bb0a1667b4815a4486ed2729467b9be7d331aed6af07e4671adba9",
+      "trace": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-fsw-5500.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "fsw",
+      "mode": "fixed_fault_core3000",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/fsw.elf",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000124",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-fsw-3000.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "d580ab01ad8cf6aa8b0ad8b998cd720bce3309f0975b686051ec29a9ea015f2f",
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-fsw-3000.log",
+      "log_sha256": "7ea17a864b49be563ff01efe5892c470323d283d2a99226ddb64ba5e2c0be86d",
+      "trace": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-fsw-3000.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "lw",
+      "mode": "fixed_fault_core5500",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/lw.elf",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-load=0x80000124",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-lw-5500.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "70ecbc3c1ef0e4dd354d75d2ac5415db60114cd530ff5917074c85425c02481a",
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-lw-5500.log",
+      "log_sha256": "61f9e1fd9d8d1fe7324f1e410fd9841ed161e9e908cfbd8dffdcd2fbec0e1b96",
+      "trace": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-lw-5500.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    },
+    {
+      "name": "lw",
+      "mode": "fixed_fault_core3000",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/lw.elf",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-load=0x80000124",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-lw-3000.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "70ecbc3c1ef0e4dd354d75d2ac5415db60114cd530ff5917074c85425c02481a",
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-lw-3000.log",
+      "log_sha256": "6f87ed6379d53996c4f13f3b1103b82a5dc686b912dd6b98c87e10728535bf75",
+      "trace": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-lw-3000.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    },
+    {
+      "name": "flw",
+      "mode": "fixed_fault_core5500",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/flw.elf",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-load=0x80000124",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-flw-5500.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "3f43f87231395412252d4107788ed072e62965cf13a5c90e707fd25a67ab6d45",
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-flw-5500.log",
+      "log_sha256": "3f5f9010d7b5c2fe899df7f5d454c42a068b1065e3ebed6d0efa4ab28d477fad",
+      "trace": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-flw-5500.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    },
+    {
+      "name": "flw",
+      "mode": "fixed_fault_core3000",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/flw.elf",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-load=0x80000124",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-flw-3000.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "3f43f87231395412252d4107788ed072e62965cf13a5c90e707fd25a67ab6d45",
+      "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-flw-3000.log",
+      "log_sha256": "fc3e380c6260e5df43cf0c4fa8cab0c83619e18899647c040f624c5c3d52d7b3",
+      "trace": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/memory/fault-flw-3000.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,15 @@
+{
+  "scope": "Failed container startup before any verification executed; source and old results unchanged.",
+  "container_id": "3a0ae056e8ee2d9ec7dd4de947fa4041a2285beee26f5b01248e6e05e2e3ca8f",
+  "image_id": "sha256:2140263677b3a378d5cab75a3d0d4fd285ddb38a1a5a1f81f5cf97db024a02d5",
+  "entrypoint": [
+    "/bin/bash"
+  ],
+  "command": [
+    "/bin/sleep",
+    "infinity"
+  ],
+  "exit_code": 126,
+  "log": "/bin/sleep: /bin/sleep: cannot execute binary file",
+  "resolution": "Remove only this exited owned container, then explicitly override entrypoint to /bin/sleep."
+}

@@ -152,6 +152,78 @@ static void killed_inflight() {
     f.response(); require(!f.t.cmp_valid && !f.t.buffer_valid && !f.t.external_inflight,
                           "killed response escaped"); f.load(20); f.accepted(20); pass();
 }
+static void subword_handoff(unsigned size, unsigned offset, bool unsigned_load) {
+    test_name="subword-handoff-"+std::to_string(size)+"-"+std::to_string(offset)+
+              (unsigned_load?"-unsigned":"-signed");
+    Fixture f; const uint32_t word=0x80ff7f01U;
+    f.load(100,0x1100+offset); f.t.agu_size=size; f.t.agu_unsigned=unsigned_load; f.settle();
+    require(f.t.req_valid && f.t.ready && f.t.req_addr==0x1100 &&
+            f.t.req_mask==((size==0?1U:3U)<<offset),"subword request mask/address wrong");
+    f.tick(); f.t.agu_valid=0; f.response(word);
+    uint32_t shifted=word>>(offset*8), expected;
+    if (size==0) expected=unsigned_load?uint32_t(uint8_t(shifted)):uint32_t(int32_t(int8_t(shifted)));
+    else expected=unsigned_load?uint32_t(uint16_t(shifted)):uint32_t(int32_t(int16_t(shifted)));
+    // The next instruction changes size, extension, address and register domain.
+    f.load(101,0x1120,true,31); f.t.agu_unsigned=1; f.settle();
+    require(f.t.cmp_valid && f.t.cmp_seq==100 && !f.t.cmp_fp &&
+            f.t.cmp_dst==7 && f.t.cmp_data==expected && !f.t.cmp_error,
+            "next request contaminated buffered subword metadata");
+    require(bool(f.t.req_valid)==overlap,"subword handoff availability wrong");
+    if (!overlap) f.tick();
+    f.accepted(101); f.response(0x12345678);
+    require(f.t.cmp_valid && f.t.cmp_seq==101 && f.t.cmp_fp &&
+            f.t.cmp_dst==31 && f.t.cmp_data==0x12345678,"subword-to-FP handoff lost new metadata");
+    f.tick(); f.tick();
+    require(f.completions[100]==1 && f.completions[101]==1,"subword handoff duplicated/lost completion"); pass();
+}
+static void flush_after_handoff() {
+    test_name="flush-immediately-after-handoff"; Fixture f;
+    f.buffered_load(4095); f.load(0,0x1004,true,19);
+    if (!overlap) f.tick();
+    f.accepted(0); f.t.flush_valid=1; f.t.flush_seq=4095; f.settle();
+    require(!f.t.req_valid && f.t.pending_valid && f.t.pending_seq==0,
+            "flush lost newly accepted physical transaction");
+    f.tick(); f.t.flush_valid=0; f.response(0xdeadbeef,true);
+    require(!f.t.cmp_valid && !f.t.buffer_valid && !f.t.external_inflight,
+            "killed handoff response or fault escaped");
+    f.load(1,0x1008); f.accepted(1); f.response(0x2468ace0); f.tick();
+    require(f.completions[4095]==1 && f.completions[0]==0 && f.completions[1]==1,
+            "flush-after-handoff completion ownership wrong"); pass();
+}
+static void fault_after_handoff() {
+    test_name="new-load-fault-after-handoff"; Fixture f;
+    f.buffered_load(10); f.load(11,0x1010,true,19);
+    if (!overlap) f.tick();
+    f.accepted(11); f.response(0,true); f.load(12,0x1020);
+    require(f.t.cmp_valid && f.t.cmp_seq==11 && f.t.cmp_error &&
+            f.t.cmp_cause==5 && f.t.cmp_tval==0x1010 && !f.t.req_valid,
+            "new handoff fault identity/exclusion wrong");
+    f.tick(); f.accepted(12); f.response(0x13579bdf); f.tick();
+    require(f.completions[10]==1 && f.completions[11]==1 && f.completions[12]==1,
+            "fault-after-handoff lost/duplicated completion"); pass();
+}
+static void store_handoff_backpressure() {
+    test_name="marked-store-handoff-backpressure"; Fixture f;
+    f.store(5); f.tick(); f.load(10); f.tick();
+    f.t.agu_valid=0; f.t.retire_valid=1; f.t.retire_seq=5; f.response();
+    f.load(11,0x1004); f.t.req_ready=0; f.settle();
+    require(bool(f.t.req_valid)==overlap && !f.t.ready,"store handoff admission wrong");
+    f.tick();
+    for (unsigned i=0;i<3;++i) {
+        require(f.t.req_valid && f.t.req_write && f.t.req_addr==0x2000 &&
+                f.t.req_mask==15 && f.t.req_data==0x12345678 && !f.t.ready,
+                "backpressured store request changed or consumed younger load");
+        f.tick();
+    }
+    f.t.req_ready=1; f.settle();
+    require(!f.t.ready,"store acceptance consumed younger AGU load");
+    f.accepted(5,true); f.t.rsp_valid=1; f.settle();
+    require(f.t.retire_ack,"backpressured store success was not acknowledged");
+    f.tick(); f.t.rsp_valid=0; f.settle();
+    f.load(11,0x1004); f.accepted(11); f.response(0x87654321); f.tick();
+    require(f.completions[10]==1 && f.completions[11]==1 && f.completions[5]==0,
+            "store handoff produced duplicate/lost load completion"); pass();
+}
 static uint32_t data_for(unsigned index) { return 0x9e3779b9U*(index+1); }
 static void stream(bool random, unsigned seed) {
     test_name=random?"random-stream-"+std::to_string(seed):"ideal-stream-3-to-2";
@@ -199,7 +271,12 @@ int main(int argc,char**argv) {
         store_marking_and_error(); load_store_priority(); internal_completion(false);
         internal_completion(true); killed_inflight(); stream(false,1);
         for (unsigned seed:{0x12345678U,0x000abcdeU,0xf00d1234U}) stream(true,seed);
-        std::cout<<"ALL 20 LSU HANDOFF CASES PASS overlap="<<overlap<<'\n';
+        for (bool unsigned_load:{false,true}) {
+            for (unsigned offset=0;offset<4;++offset) subword_handoff(0,offset,unsigned_load);
+            for (unsigned offset:{0U,2U}) subword_handoff(1,offset,unsigned_load);
+        }
+        flush_after_handoff(); fault_after_handoff(); store_handoff_backpressure();
+        std::cout<<"ALL 35 LSU HANDOFF CASES PASS overlap="<<overlap<<'\n';
     } catch (const std::exception& e) { std::cerr<<"FAIL "<<e.what()<<'\n'; return 1; }
     return 0;
 }
