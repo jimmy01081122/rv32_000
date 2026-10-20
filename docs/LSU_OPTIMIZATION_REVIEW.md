@@ -2,7 +2,7 @@
 
 2026-10-18。使用者已核准把 LSU 列為第一優先候選，補一般嵌入式觀測、
 記憶體延遲敏感度及具體方案比較，再共同選擇實作。本文件保留事前固定的研究條件並補入結果及候選結構；
-後續使用者已核准先 A、B 獨立對照；[A 實驗](../experiments/lsu-a-v1/README.md)已完成正確性與同頻全量測，實體資格執行中；[介面修復](LSU_INTERFACE_FIX.md)已獨立完成。兩類各 ≥1.20×、面積 ≤1.10× 目標不變。
+後續使用者已核准先 A、B 獨立對照；[A 實驗](../experiments/lsu-a-v1/README.md)已完成正確性、雙操作點與[實體研究資格](evidence/2026-10-20/lsu-a-physical/README.md)；[介面修復](LSU_INTERFACE_FIX.md)已獨立完成。兩類各 ≥1.20×、面積 ≤1.10× 目標不變。
 
 ## 先固定研究分母與條件
 
@@ -90,17 +90,21 @@ SQ／pending 只清除一次。後續已由 `ec0baa3` 的[介面修復](LSU_INTE
 ## 三個具體硬體候選
 
 A 初版已在獨立分支實作；B 計畫從相同基線獨立比較，C 列後續。
-尚無完成實體資格的候選執行時間／PPA 結果；下表保留事前設計假設。
+A 的執行時間／PPA 結果如下；B／C 欄位仍保留事前設計假設。
 
 A 的[乾淨 39bc12d 完整同頻量測](evidence/2026-10-19/lsu-a-functional/README.md)
 已通過 27/27 與原 3,629 筆 FP32 數值。100 MHz、記憶體固定 10 ns 時，
 Embench GM 1.045830×、FP32 GM 1.078255×；DSP 1.051614×、矩陣／ML 1.105571×。
 獨立單元測試實測最短請求間隔由 3→2 拍，completion 延遲仍為 2 拍。
-這個同頻結果仍須確認相應 clock 的實體資格；B 尚未實作，不預加其收益。
+100 MHz 現已通過獨立三 corner 審查；面積 22,162.24152 µm²（1.003674×）。
+最短已測通過點 101.01 MHz 的完整 27 項為 Embench 0.726601×、FP32 0.700275×。
+固定 10 ns memory 在 9.9 ns core 下跨兩拍取樣，故小幅提頻反而退步。
+兩個點均未達兩類各 1.20×；建議以 100 MHz 作 A 的操作點審查，再做 B 獨立對照。
+這是單次固定流程的研究結果，尚未量測重跑變異；B 尚未實作，不預加其收益。
 
 | 方案 | 實際改動範圍 | 結構與 PPA 代價 | 主要正確性／時序議題 |
 | --- | --- | --- | --- |
-| A：回應暫存消耗與下一請求重疊 | 保留 AP5B register；當既有 `rsp_buf_valid` 且本拍確定 `rsp_buf_ack` 時，允許下一個已就緒請求送出 | 維持一筆外部 outstanding、一個 load response slot；增加控制與 ready 扇出，實際面積／頻率待量測 | 同拍消耗與新請求的 tag／destination 所有權、flush／error 優先序、request 穩定性；不得形成 ready 組合迴路 |
+| A：回應暫存消耗與下一請求重疊 | 保留 AP5B register；當既有 `rsp_buf_valid` 且本拍確定 `rsp_buf_ack` 時，允許下一個已就緒請求送出 | 維持一筆外部 outstanding、一個 load response slot；實測面積 1.003674×、最短已測通過 9.9 ns；操作點收益見上文 | 同拍消耗與新請求的 tag／destination 所有權、flush／error 優先序、request 穩定性；不得形成 ready 組合迴路 |
 | B：頭端 store 資格判定與 SQ marking 同拍 | 對已完成、無例外、位於 ROB 頭端且 SQ 完整匹配的 store，允許在更新 `retired` 的同拍成為送出候選 | 保留 16-slot SQ、現行 store 回應後退休及單一 outstanding；增加 head-to-request 控制路徑 | 必須精確匹配 tag、地址／資料有效；不能把分支／trap／flush 後錯誤路徑 store 送出；MMIO 與 store ack 語意維持 |
 | C：已暫存 load completion 的 ROB 頭端轉送 | 僅對現有已註冊 completion 做頭端 ready／結果／例外前瞻；先保留其餘執行單元與 IQ 喚醒節拍 | 保留外部 response register；增加頭端結果／例外 mux 與 tag 比對，內部關鍵路徑風險較高 | 資料與 access fault 必須一起轉送；避免重複退休、舊 completion 或錯誤域目的寫入；重新量測 completion-to-retire 時序 |
 

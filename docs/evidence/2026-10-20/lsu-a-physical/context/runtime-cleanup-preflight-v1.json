@@ -1,0 +1,13 @@
+{
+  "scope": "Failed read-only cleanup preflight; no stop/remove action reached. Retained separately from successful cleanup.",
+  "command": [
+    "docker",
+    "top",
+    "rv32-lsu-a-physical",
+    "-eo",
+    "comm"
+  ],
+  "returncode": 1,
+  "error": "Error response from daemon: Couldn't find PID field in ps output",
+  "resolution": "Include pid,comm fields, then require the only command to be sleep before cleanup."
+}

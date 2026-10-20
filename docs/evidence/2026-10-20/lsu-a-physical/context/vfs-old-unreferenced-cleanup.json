@@ -1,0 +1,28 @@
+{
+  "scope": "clear only an old unreferenced VFS private rootfs; all live image cache-id/container mount-id/init-id references checked before deletion; no tool image or registered container removed",
+  "orphan_id": "62a2b5fd074e09fc8abeaafde6ede14c59f1bdaa9583af19b731e20a42cc72d9",
+  "started_utc": "2026-10-19T16:57:53.707298+00:00",
+  "free_before_bytes": 1991839744,
+  "command": [
+    "docker",
+    "run",
+    "--rm",
+    "--pull=never",
+    "--network",
+    "none",
+    "--user",
+    "0:0",
+    "--mount",
+    "type=bind,source=/var/lib/docker/image/vfs/layerdb,target=/layerdb,readonly",
+    "--mount",
+    "type=bind,source=/var/lib/docker/vfs/dir/62a2b5fd074e09fc8abeaafde6ede14c59f1bdaa9583af19b731e20a42cc72d9,target=/owned-orphan",
+    "ubuntu:22.04",
+    "/bin/bash",
+    "-euc",
+    "orphan_id=62a2b5fd074e09fc8abeaafde6ede14c59f1bdaa9583af19b731e20a42cc72d9\nrefs=$(find /layerdb -type f \\( -name cache-id -o -name mount-id -o -name init-id \\) -exec grep -Fxq \"$orphan_id\" {} \\; -print)\nif test -n \"$refs\"; then exit 42; fi\ntest -d /owned-orphan\ntest ! -L /owned-orphan\ndu -sk /owned-orphan\nfind /owned-orphan -mindepth 1 -maxdepth 1 -exec rm -rf -- {} +\ndu -sk /owned-orphan\n"
+  ],
+  "returncode": 0,
+  "output": "590308\t/owned-orphan\n4\t/owned-orphan\n",
+  "free_after_bytes": 2596311040,
+  "finished_utc": "2026-10-19T16:57:55.230752+00:00"
+}

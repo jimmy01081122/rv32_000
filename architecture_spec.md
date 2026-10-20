@@ -1,6 +1,6 @@
 # RV32 OoO architecture: implementation and requirements
 
-Version 0.5 — 2026-10-19. Status: AP5B baseline frozen; isolated LSU A experiment under qualification.
+Version 0.6 — 2026-10-20. Status: AP5B baseline frozen; isolated LSU A qualified at global-route research scope, project performance targets unmet.
 
 This document distinguishes observed RTL structure from required architectural
 behavior. Describing an implementation does not certify its correctness.

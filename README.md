@@ -92,7 +92,12 @@ baseline is frozen; the approved [LSU A experiment](experiments/lsu-a-v1/README.
 passes clean-source functional qualification and all 27 common-clock cases:
 Embench 1.045830× and FP32 1.078255× at 100 MHz with fixed 10 ns memory.
 Its [raw evidence](docs/evidence/2026-10-19/lsu-a-functional/README.md) is archived;
-candidate physical timing/area qualification is running. B remains an independent comparison.
+[physical qualification](docs/evidence/2026-10-20/lsu-a-physical/README.md) now passes at 100 MHz and
+101.01 MHz, with 22,162.24152 µm² cell area (1.003674× baseline). The complete
+101.01 MHz run yields Embench 0.726601× and FP32 0.700275×: fixed 10 ns memory
+is sampled after two cycles at that clock. Neither point reaches both 1.20×
+goals. The 100 MHz point is recommended for discussion; the baseline is unchanged
+and B remains an independent comparison.
 
 `make profile-fp-bottlenecks JOBS=4` adds read-only FIR/BiCG cycle observations
 and checks that observer on/off runs preserve the qualified output and timing.

@@ -1,0 +1,107 @@
+{
+  "scope": "tested global-route timing trials only; routing review and formal measurement still required",
+  "analysis_report_sha256": "69d4fd4b7eea499c05998a437bae4db78598cf991cf59976f545bbbc01575a0e",
+  "implementation_report_sha256": "355494216fdd018505ced3558f7cc1b7d183b4fb3465f289fa65770b2034d132",
+  "checker_sha256": "170a5abc90b2f6dad76d2fa0a81a5b6601b897865862b867d784e888fc1048b5",
+  "records": [
+    {
+      "corner": "TT",
+      "standard_cell_area_um2": 22162.24152000313,
+      "standard_cell_count": 181582,
+      "register_count": 18147,
+      "library_warning_cell_instances": 0,
+      "trials": [
+        {
+          "period_ps": 9800,
+          "setup_slack_ps": 2834.89810537838,
+          "hold_slack_ps": 48.80362800069216,
+          "problems": [],
+          "passed": true
+        },
+        {
+          "period_ps": 9900,
+          "setup_slack_ps": 2934.8981140519973,
+          "hold_slack_ps": 48.80362800069216,
+          "problems": [],
+          "passed": true
+        },
+        {
+          "period_ps": 10000,
+          "setup_slack_ps": 3034.898122725615,
+          "hold_slack_ps": 48.80362800069216,
+          "problems": [],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "corner": "SS",
+      "standard_cell_area_um2": 22162.24152000313,
+      "standard_cell_count": 181582,
+      "register_count": 18147,
+      "library_warning_cell_instances": 0,
+      "trials": [
+        {
+          "period_ps": 9800,
+          "setup_slack_ps": -49.31344241563714,
+          "hold_slack_ps": 84.64773360545362,
+          "problems": [
+            "setup violation"
+          ],
+          "passed": false
+        },
+        {
+          "period_ps": 9900,
+          "setup_slack_ps": 50.68656625798027,
+          "hold_slack_ps": 84.64773360545362,
+          "problems": [],
+          "passed": true
+        },
+        {
+          "period_ps": 10000,
+          "setup_slack_ps": 150.68657493159768,
+          "hold_slack_ps": 84.64773360545362,
+          "problems": [],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "corner": "FF",
+      "standard_cell_area_um2": 22162.24152000313,
+      "standard_cell_count": 181582,
+      "register_count": 18147,
+      "library_warning_cell_instances": 0,
+      "trials": [
+        {
+          "period_ps": 9800,
+          "setup_slack_ps": 4421.5382643137455,
+          "hold_slack_ps": 14.31815782774456,
+          "problems": [],
+          "passed": true
+        },
+        {
+          "period_ps": 9900,
+          "setup_slack_ps": 4521.538272987363,
+          "hold_slack_ps": 14.31815782774456,
+          "problems": [],
+          "passed": true
+        },
+        {
+          "period_ps": 10000,
+          "setup_slack_ps": 4621.538281660981,
+          "hold_slack_ps": 14.31815782774456,
+          "problems": [],
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "qualified_periods_ps": [
+    9900,
+    10000
+  ],
+  "smallest_tested_passing_period_ps": 9900,
+  "standard_cell_area_um2": 22162.24152000313,
+  "passed": true
+}

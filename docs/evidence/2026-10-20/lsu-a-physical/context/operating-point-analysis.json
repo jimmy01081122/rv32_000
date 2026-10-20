@@ -1,0 +1,2820 @@
+{
+  "scope": "Two complete qualified research operating points; no primary point selection, no ordered-trace or full-ISA proof.",
+  "script_sha256": "57cfde38b538484d68f270a34bc04dd39b716a1e18bb4b587a13a08a905ebda5",
+  "baseline_manifest_sha256": "60f59b3cc705560885e2101046d810cf3548fef277c1c1e5820826ef25485fb6",
+  "baseline_summary_sha256": "0dac120d0295ea3ceac26141195f2863d1625a9503a5f478bc2fc3038023bef7",
+  "operating_points": [
+    {
+      "comparison_point": "common-clock",
+      "core_period_ps": 10000,
+      "memory_ps": 10000,
+      "embench_time_geomean_speedup": 1.045829647956348,
+      "fp32_time_geomean_speedup": 1.0782550613286763,
+      "fp32_subgroup_speedup": {
+        "dsp": 1.0516140118036785,
+        "matrix_ml": 1.1055710215260568
+      },
+      "standard_cell_area_um2": 22162.24152000313,
+      "area_ratio": 1.0036738682583708,
+      "planning_targets": {
+        "embench_geomean_ge_1_20": false,
+        "fp32_geomean_ge_1_20": false,
+        "area_ratio_le_1_10": true
+      },
+      "all_planning_targets_met": false,
+      "review_sha256": "6575660eb827a63a2061464170beabfc67ee33d943114b15a0467b43843a329d",
+      "measurement_summary_sha256": "5de23abc1efa4c617c872d3f1dedd707bad8d99a27f24ce0790d984aecda919e",
+      "records": [
+        {
+          "family": "fp32",
+          "name": "fir",
+          "group": "dsp",
+          "baseline_cycles": 74311,
+          "candidate_cycles": 66117,
+          "baseline_time_ps": 743110000,
+          "candidate_time_ps": 661170000,
+          "time_speedup": 1.1239318178380748,
+          "cycle_speedup": 1.1239318178380748,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 50,
+          "baseline_profile_sha256": "33a38b761801dc87b1cbc1975d0f747afd22155bc86123ad0e2f1c40118558cd",
+          "candidate_profile_sha256": "a6732b8b32dacd0cdd8e2a0da3be65657b11580cd3576dc37afdb2b78437625f",
+          "memory_audit_sha256": "1d0224a92c242475f2050a513ef16f09448bf59ed44bff0498cd976929532fa9",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 1,
+            "head_wait_fp_load": 1289,
+            "head_wait_int_load": 5,
+            "head_wait_integer_other": 518,
+            "head_wait_jump": 4,
+            "head_wait_marker": 2,
+            "recovery": 518,
+            "retired_body": 61137,
+            "retired_marker": 1,
+            "rob_empty": 1555,
+            "store_ack_wait": 1087
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 518,
+            "own_external_inflight": 259,
+            "own_response_buffer": 517
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 1,
+            "mark_pending": 543,
+            "other_inflight": 1,
+            "request_ready": 542
+          }
+        },
+        {
+          "family": "fp32",
+          "name": "iir",
+          "group": "dsp",
+          "baseline_cycles": 13523,
+          "candidate_cycles": 13496,
+          "baseline_time_ps": 135230000,
+          "candidate_time_ps": 134960000,
+          "time_speedup": 1.0020005927682276,
+          "cycle_speedup": 1.0020005927682276,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 42,
+          "baseline_profile_sha256": "2daedeb87c5d05f567a66b77acc81e1bffc3714838450d273027733fd27a6d53",
+          "candidate_profile_sha256": "dfa11df90118e477587dc5a6e46a5f942df0ed8c7dd6e1ac6173ff4ff52f3716",
+          "memory_audit_sha256": "a3da1f9b365fa545b2e72e77dab3841d73f8f6a1ff76cbfbc010b9a9dbc2a43b",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_fp_load": 25,
+            "head_wait_fp_store": 8,
+            "head_wait_int_load": 6,
+            "head_wait_integer_other": 2,
+            "head_wait_jump": 4,
+            "head_wait_marker": 2,
+            "recovery": 9,
+            "retired_body": 11347,
+            "retired_marker": 1,
+            "rob_empty": 28,
+            "store_ack_wait": 2064
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 6,
+            "own_external_inflight": 3,
+            "own_response_buffer": 22
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 4,
+            "mark_pending": 1032,
+            "request_ready": 1028
+          }
+        },
+        {
+          "family": "fp32",
+          "name": "fft",
+          "group": "dsp",
+          "baseline_cycles": 40867,
+          "candidate_cycles": 37663,
+          "baseline_time_ps": 408670000,
+          "candidate_time_ps": 376630000,
+          "time_speedup": 1.0850702280752993,
+          "cycle_speedup": 1.0850702280752993,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 229,
+          "baseline_profile_sha256": "fbfdf6744e5d6f694590e935de3c3c5d1a44de64a33c928b35da5ff3276fc778",
+          "candidate_profile_sha256": "d10fef8246f9f074a6a42b5ad1beb641e067f23267ba68f7e938a0b127454b1e",
+          "memory_audit_sha256": "dfa2de5446c4053f9c56bc71fa57529c5f8067ff180e039edc6040635f06906f",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 20,
+            "head_wait_fp_load": 1130,
+            "head_wait_int_load": 1480,
+            "head_wait_int_store": 38,
+            "head_wait_integer_other": 264,
+            "head_wait_jump": 74,
+            "head_wait_marker": 2,
+            "recovery": 315,
+            "retired_body": 23800,
+            "retired_marker": 1,
+            "rob_empty": 945,
+            "store_ack_wait": 9594
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 275,
+            "own_external_inflight": 279,
+            "own_response_buffer": 2056
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 1404,
+            "mark_pending": 4127,
+            "other_inflight": 1340,
+            "request_ready": 2723
+          }
+        },
+        {
+          "family": "fp32",
+          "name": "pid",
+          "group": "dsp",
+          "baseline_cycles": 7248,
+          "candidate_cycles": 7242,
+          "baseline_time_ps": 72480000,
+          "candidate_time_ps": 72420000,
+          "time_speedup": 1.0008285004142503,
+          "cycle_speedup": 1.0008285004142503,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 31,
+          "baseline_profile_sha256": "5ec7675d89421ea824f01f192ab1172dfe075f75901269662ba64e4c088df1a9",
+          "candidate_profile_sha256": "354906e5884aaf2833f9a422d7c696b73c58d468d1d6200432fb5b46d282b77a",
+          "memory_audit_sha256": "c368452378d7eb51d1fe48acb6421090459919130556f532b8b82e51116500ae",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_fadd": 2,
+            "head_wait_fma": 3,
+            "head_wait_fmul": 5,
+            "head_wait_fp_load": 7,
+            "head_wait_fp_other": 3,
+            "head_wait_fp_store": 4,
+            "head_wait_integer_other": 4,
+            "head_wait_jump": 2,
+            "head_wait_marker": 2,
+            "recovery": 4,
+            "retired_body": 5651,
+            "retired_marker": 1,
+            "rob_empty": 13,
+            "store_ack_wait": 1541
+          },
+          "load_head_wait_phases": {
+            "own_response_buffer": 7
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 511,
+            "mark_pending": 515,
+            "other_inflight": 511,
+            "request_ready": 4
+          }
+        },
+        {
+          "family": "fp32",
+          "name": "gemm",
+          "group": "matrix_ml",
+          "baseline_cycles": 133275,
+          "candidate_cycles": 123175,
+          "baseline_time_ps": 1332750000,
+          "candidate_time_ps": 1231750000,
+          "time_speedup": 1.0819971585143089,
+          "cycle_speedup": 1.0819971585143089,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 50,
+          "baseline_profile_sha256": "aa0b3be800689edfbaeb2500195f0ab8a288b0aa96314cefd4ad3d91d9e6aafe",
+          "candidate_profile_sha256": "75a6f4e497bb368729c806c09b4534545d335be183ab9446a8a9cab00996358b",
+          "memory_audit_sha256": "e2c61cc792ea0b87c9597ef605555930153a8674e709a919277d609660bcc022",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_fmul": 21,
+            "head_wait_fp_load": 16007,
+            "head_wait_fp_store": 21,
+            "head_wait_integer_other": 684,
+            "head_wait_jump": 4,
+            "head_wait_marker": 2,
+            "recovery": 365,
+            "retired_body": 80976,
+            "retired_marker": 1,
+            "rob_empty": 1095,
+            "store_ack_wait": 23999
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 82,
+            "own_external_inflight": 322,
+            "own_response_buffer": 15603
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 7999,
+            "mark_pending": 8000,
+            "other_inflight": 7999,
+            "request_ready": 1
+          }
+        },
+        {
+          "family": "fp32",
+          "name": "bicg",
+          "group": "matrix_ml",
+          "baseline_cycles": 23927,
+          "candidate_cycles": 20693,
+          "baseline_time_ps": 239270000,
+          "candidate_time_ps": 206930000,
+          "time_speedup": 1.1562847339680085,
+          "cycle_speedup": 1.1562847339680085,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 37,
+          "baseline_profile_sha256": "9731c779354bb200698650cd9698f9e61c364aa1d6098587991d020a4e8a53fb",
+          "candidate_profile_sha256": "d9387b40441df4c58ba3227252d801025b741cdd8986e8a61d9d5bded1ea371e",
+          "memory_audit_sha256": "e78752d78ff05af788b2b184614fb54822dea6f3d35a8fe21a87b1857a4e2651",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_fp_load": 337,
+            "head_wait_fp_store": 84,
+            "head_wait_int_store": 3,
+            "head_wait_integer_other": 7,
+            "head_wait_jump": 4,
+            "head_wait_marker": 2,
+            "recovery": 88,
+            "retired_body": 16508,
+            "retired_marker": 1,
+            "rob_empty": 265,
+            "store_ack_wait": 3394
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 84,
+            "own_external_inflight": 43,
+            "own_response_buffer": 210
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 1554,
+            "mark_pending": 1676,
+            "other_inflight": 42,
+            "request_ready": 122
+          }
+        },
+        {
+          "family": "fp32",
+          "name": "cholesky",
+          "group": "matrix_ml",
+          "baseline_cycles": 194161,
+          "candidate_cycles": 183250,
+          "baseline_time_ps": 1941610000,
+          "candidate_time_ps": 1832500000,
+          "time_speedup": 1.0595416098226467,
+          "cycle_speedup": 1.0595416098226467,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 157,
+          "baseline_profile_sha256": "48594aca4cea7aa7eb2887bf7db54df2ee54047364f60af05bcfa7750dadcd0e",
+          "candidate_profile_sha256": "a7e0e3c917debddfcc5de062c8e323e8f3b75b312bca28008aab1b3ff5e99c2f",
+          "memory_audit_sha256": "95dc589d16e4ff348cfd243cca24c1ae0ad307fd76e3657b72cfdfeb3b5851d4",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 124,
+            "head_wait_fdiv": 20762,
+            "head_wait_fma": 40,
+            "head_wait_fp_load": 15367,
+            "head_wait_fp_other": 89,
+            "head_wait_fp_store": 123,
+            "head_wait_fsub": 35,
+            "head_wait_int_store": 1,
+            "head_wait_integer_other": 618,
+            "head_wait_jump": 2,
+            "head_wait_marker": 2,
+            "recovery": 1798,
+            "retired_body": 105025,
+            "retired_marker": 1,
+            "rob_empty": 5394,
+            "store_ack_wait": 33869
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 3001,
+            "own_external_inflight": 1556,
+            "own_response_buffer": 10810
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 10737,
+            "mark_pending": 11568,
+            "other_inflight": 10733,
+            "request_ready": 831
+          }
+        },
+        {
+          "family": "fp32",
+          "name": "svm",
+          "group": "matrix_ml",
+          "baseline_cycles": 43392,
+          "candidate_cycles": 38501,
+          "baseline_time_ps": 433920000,
+          "candidate_time_ps": 385010000,
+          "time_speedup": 1.1270356614113919,
+          "cycle_speedup": 1.1270356614113919,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 62,
+          "baseline_profile_sha256": "45430d9e9fa0f59d9e6040e8b6ae5e59c3fa5763cc6eb045c5c06c581732e744",
+          "candidate_profile_sha256": "42d3eacafea675c8c679819f56cb80cba8f850e54112646c89f315c5fb05d135",
+          "memory_audit_sha256": "e7d503bec418c0d3c33186340c9a3f73699f43f491834c630a15a2a8c82db64a",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_fma": 400,
+            "head_wait_fp_load": 3608,
+            "head_wait_fp_other": 306,
+            "head_wait_int_load": 416,
+            "head_wait_int_store": 101,
+            "head_wait_integer_other": 304,
+            "head_wait_jump": 2,
+            "head_wait_marker": 2,
+            "recovery": 907,
+            "retired_body": 29522,
+            "retired_marker": 1,
+            "rob_empty": 2721,
+            "store_ack_wait": 211
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 1704,
+            "own_external_inflight": 903,
+            "own_response_buffer": 1417
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 1,
+            "mark_pending": 105,
+            "other_inflight": 1,
+            "request_ready": 104
+          }
+        },
+        {
+          "family": "embench",
+          "name": "aha-mont64",
+          "group": null,
+          "baseline_cycles": 5356670,
+          "candidate_cycles": 5354540,
+          "baseline_time_ps": 53566700000,
+          "candidate_time_ps": 53545400000,
+          "time_speedup": 1.0003977932744923,
+          "cycle_speedup": 1.0003977932744923,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 493,
+          "baseline_profile_sha256": "25b2fa4c1352004c64ff532f415bfaa63b146b3d3ba714efd4db68997e004a4b",
+          "candidate_profile_sha256": "1ff29d4a9161c7e5458e4c9ad37d017c72660a5615165ef85402a611037246a2",
+          "memory_audit_sha256": "2b5d6d342470075e2f9919f0bbe90eb9a387e875b90c9e8c464e12046b3d10a3",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 101095,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 11424,
+            "head_wait_int_store": 849,
+            "head_wait_integer_other": 294427,
+            "head_wait_jump": 4,
+            "head_wait_marker": 2,
+            "recovery": 112526,
+            "retired_body": 4491085,
+            "retired_marker": 1,
+            "rob_empty": 337581,
+            "store_ack_wait": 5542
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 4228,
+            "own_external_inflight": 2116,
+            "own_response_buffer": 5080
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 426,
+            "mark_pending": 2558,
+            "other_inflight": 426,
+            "request_ready": 2132
+          }
+        },
+        {
+          "family": "embench",
+          "name": "crc32",
+          "group": null,
+          "baseline_cycles": 5402220,
+          "candidate_cycles": 5054736,
+          "baseline_time_ps": 54022200000,
+          "candidate_time_ps": 50547360000,
+          "time_speedup": 1.068744243022781,
+          "cycle_speedup": 1.068744243022781,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 64,
+          "baseline_profile_sha256": "828ea261bc74bf2d42caac5d207356e8477fb2835f0c0adc89eae99776e2a6e5",
+          "candidate_profile_sha256": "a7732921b7c7c715d04e317ed6da5b87da8262777e567fdce83db51720179baa",
+          "memory_audit_sha256": "870935e652a4a869db29293fb651e0556abc5094f48f4c63d1cf753b8e290bf6",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 172,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 522759,
+            "head_wait_int_store": 514,
+            "head_wait_integer_other": 175623,
+            "head_wait_jump": 344,
+            "head_wait_marker": 2,
+            "recovery": 349,
+            "retired_body": 4005402,
+            "retired_marker": 1,
+            "rob_empty": 1050,
+            "store_ack_wait": 348516
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 174253,
+            "own_external_inflight": 174252,
+            "own_response_buffer": 174254
+          },
+          "store_ack_wait_phases": {
+            "mark_pending": 174258,
+            "request_ready": 174258
+          }
+        },
+        {
+          "family": "embench",
+          "name": "cubic",
+          "group": null,
+          "baseline_cycles": 14490894,
+          "candidate_cycles": 14160446,
+          "baseline_time_ps": 144908940000,
+          "candidate_time_ps": 141604460000,
+          "time_speedup": 1.0233359881461361,
+          "cycle_speedup": 1.0233359881461361,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 6881,
+          "baseline_profile_sha256": "50e001776b54bf3dfa4ab7dcca557c5127ee85903601b67ce52428d0fbabc750",
+          "candidate_profile_sha256": "469abde87985048fb5e8c4b8efed1380ea57d8d40f423cf1a2e777e8da2e7555",
+          "memory_audit_sha256": "f5140131b6edcd9b8249befd057111dd8d7d72bfa374712b377807c2b7f04707",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 235322,
+            "head_wait_csr_system": 132064,
+            "head_wait_int_load": 661792,
+            "head_wait_int_store": 82515,
+            "head_wait_integer_other": 2206407,
+            "head_wait_jump": 12052,
+            "head_wait_marker": 2,
+            "recovery": 474916,
+            "retired_body": 7762231,
+            "retired_marker": 1,
+            "rob_empty": 1478651,
+            "store_ack_wait": 1114493
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 148843,
+            "own_external_inflight": 144333,
+            "own_response_buffer": 368616
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 108460,
+            "mark_pending": 512776,
+            "other_inflight": 88941,
+            "request_ready": 404316
+          }
+        },
+        {
+          "family": "embench",
+          "name": "edn",
+          "group": null,
+          "baseline_cycles": 4754496,
+          "candidate_cycles": 4256669,
+          "baseline_time_ps": 47544960000,
+          "candidate_time_ps": 42566690000,
+          "time_speedup": 1.1169522459932872,
+          "cycle_speedup": 1.1169522459932872,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 515,
+          "baseline_profile_sha256": "993c4a29855bc624c1abb1dcd8dea24f046daf4bfd9ce42b8e4d88ef438bc37b",
+          "candidate_profile_sha256": "d7bfa59da308a98980a62c142255e21ce12381a206b7ccd056187f1963727d9e",
+          "memory_audit_sha256": "d680b3f1101eb81e72560a2b81a0e3faac6b5c969d4842da2e7214cf5fae42bf",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 89,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 109378,
+            "head_wait_int_store": 38023,
+            "head_wait_integer_other": 414393,
+            "head_wait_jump": 176,
+            "head_wait_marker": 2,
+            "recovery": 19411,
+            "retired_body": 3381065,
+            "retired_marker": 1,
+            "rob_empty": 58236,
+            "store_ack_wait": 235891
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 19927,
+            "own_external_inflight": 11748,
+            "own_response_buffer": 77703
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 57508,
+            "mark_pending": 91193,
+            "other_inflight": 53505,
+            "request_ready": 33685
+          }
+        },
+        {
+          "family": "embench",
+          "name": "huffbench",
+          "group": null,
+          "baseline_cycles": 3377028,
+          "candidate_cycles": 3306646,
+          "baseline_time_ps": 33770280000,
+          "candidate_time_ps": 33066460000,
+          "time_speedup": 1.0212850120635835,
+          "cycle_speedup": 1.0212850120635835,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 590,
+          "baseline_profile_sha256": "776cdce24904e4439191c74045961c251c15851ccc58eb949f3f987138c3d6c8",
+          "candidate_profile_sha256": "b95c9b398dea55e717c92d3763bc1a7db2f2ec0a6fa7c7e3d6961df3435a4f1a",
+          "memory_audit_sha256": "b73071595cec6da107d13eddb611aa391690df8440583d496a31bfb274b4ff67",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 99686,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 227930,
+            "head_wait_int_store": 11029,
+            "head_wait_integer_other": 184640,
+            "head_wait_jump": 46,
+            "head_wait_marker": 2,
+            "recovery": 97599,
+            "retired_body": 2022301,
+            "retired_marker": 1,
+            "rob_empty": 292800,
+            "store_ack_wait": 370608
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 71986,
+            "own_external_inflight": 70160,
+            "own_response_buffer": 85784
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 68816,
+            "mark_pending": 181938,
+            "other_inflight": 6732,
+            "request_ready": 113122
+          }
+        },
+        {
+          "family": "embench",
+          "name": "matmult-int",
+          "group": null,
+          "baseline_cycles": 4193163,
+          "candidate_cycles": 3825063,
+          "baseline_time_ps": 41931630000,
+          "candidate_time_ps": 38250630000,
+          "time_speedup": 1.0962337090918504,
+          "cycle_speedup": 1.0962337090918504,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 108,
+          "baseline_profile_sha256": "163c0237a3a517b19fa1667109e8d0536be32f4aa3e862da82b6bdff343c6f7c",
+          "candidate_profile_sha256": "d71f164c08193be3a4e089bc55105494ae5afef65eb75ac1b05f97de69383f21",
+          "memory_audit_sha256": "f3b5a6586fcc5c2af4581fc2c889cf1f91b0933c8654cc601388e2c543172b2c",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 418,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 92937,
+            "head_wait_int_store": 37727,
+            "head_wait_integer_other": 462354,
+            "head_wait_jump": 2,
+            "head_wait_marker": 2,
+            "recovery": 38005,
+            "retired_body": 2932369,
+            "retired_marker": 1,
+            "rob_empty": 114018,
+            "store_ack_wait": 147226
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 36804,
+            "own_external_inflight": 18402,
+            "own_response_buffer": 37731
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 92,
+            "mark_pending": 73613,
+            "request_ready": 73521
+          }
+        },
+        {
+          "family": "embench",
+          "name": "minver",
+          "group": null,
+          "baseline_cycles": 878777,
+          "candidate_cycles": 858801,
+          "baseline_time_ps": 8787770000,
+          "candidate_time_ps": 8588010000,
+          "time_speedup": 1.0232603362129293,
+          "cycle_speedup": 1.0232603362129293,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 357,
+          "baseline_profile_sha256": "4a4d506d39396cc5b2dc6f2372d5aa1092c502fd4597465f05ce22508825fb41",
+          "candidate_profile_sha256": "0b233aca1b36fbc436e702ad6a8b7b98f82f7b54e4a0259b4acc2df5d4f80023",
+          "memory_audit_sha256": "70e46dc97f5332787b2da5582796c54e1bc84fac621c13957fb0f309eda72d43",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 18879,
+            "head_wait_csr_system": 4,
+            "head_wait_fdiv": 194261,
+            "head_wait_fma": 4995,
+            "head_wait_fmul": 1665,
+            "head_wait_fp_load": 41081,
+            "head_wait_fp_other": 24420,
+            "head_wait_fp_store": 2775,
+            "head_wait_int_load": 5562,
+            "head_wait_int_store": 559,
+            "head_wait_integer_other": 18329,
+            "head_wait_jump": 2226,
+            "head_wait_marker": 2,
+            "recovery": 19437,
+            "retired_body": 340273,
+            "retired_marker": 1,
+            "rob_empty": 58314,
+            "store_ack_wait": 126018
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 14991,
+            "own_external_inflight": 12768,
+            "own_response_buffer": 18884
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 23303,
+            "mark_pending": 56624,
+            "other_inflight": 12770,
+            "request_ready": 33321
+          }
+        },
+        {
+          "family": "embench",
+          "name": "nbody",
+          "group": null,
+          "baseline_cycles": 5893151,
+          "candidate_cycles": 5821267,
+          "baseline_time_ps": 58931510000,
+          "candidate_time_ps": 58212670000,
+          "time_speedup": 1.012348514507237,
+          "cycle_speedup": 1.012348514507237,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 1862,
+          "baseline_profile_sha256": "1e15eb41f51d1f7a30ad90af6a395201a7438612cdf78d96407c6ee1284405c3",
+          "candidate_profile_sha256": "641fd952f41ff90b921441a5c380b4c79aac83ba4c3e277f793994c0b90721b0",
+          "memory_audit_sha256": "581ef515c8eb555c75f6f1c424cd3159363d380988a1111edc877b270e4e78d7",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 132637,
+            "head_wait_csr_system": 68768,
+            "head_wait_int_load": 195549,
+            "head_wait_int_store": 19545,
+            "head_wait_integer_other": 926196,
+            "head_wait_jump": 3319,
+            "head_wait_marker": 2,
+            "recovery": 214643,
+            "retired_body": 3424506,
+            "retired_marker": 1,
+            "rob_empty": 672591,
+            "store_ack_wait": 163510
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 54300,
+            "own_external_inflight": 38240,
+            "own_response_buffer": 103009
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 3624,
+            "mark_pending": 80444,
+            "other_inflight": 2622,
+            "request_ready": 76820
+          }
+        },
+        {
+          "family": "embench",
+          "name": "nettle-aes",
+          "group": null,
+          "baseline_cycles": 5203513,
+          "candidate_cycles": 4797126,
+          "baseline_time_ps": 52035130000,
+          "candidate_time_ps": 47971260000,
+          "time_speedup": 1.084714681248731,
+          "cycle_speedup": 1.084714681248731,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 1003,
+          "baseline_profile_sha256": "eb0e770748345567be6913735efb2f6ed4245e05dc7dd681edec0b1c5aabc5c4",
+          "candidate_profile_sha256": "6d11ef36a40213d7a438458241c4af0506584271acecc191e159e99147480ae5",
+          "memory_audit_sha256": "44b47214ebcaf8305c240004774ee56c35543338ab0a13d24c57d0f6c830fc74",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 9206,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 306005,
+            "head_wait_int_store": 4918,
+            "head_wait_integer_other": 121283,
+            "head_wait_jump": 472,
+            "head_wait_marker": 2,
+            "recovery": 10147,
+            "retired_body": 4177417,
+            "retired_marker": 1,
+            "rob_empty": 30444,
+            "store_ack_wait": 137227
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 4448,
+            "own_external_inflight": 14976,
+            "own_response_buffer": 286581
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 24804,
+            "mark_pending": 59916,
+            "other_inflight": 17395,
+            "request_ready": 35112
+          }
+        },
+        {
+          "family": "embench",
+          "name": "nettle-sha256",
+          "group": null,
+          "baseline_cycles": 4307562,
+          "candidate_cycles": 4200675,
+          "baseline_time_ps": 43075620000,
+          "candidate_time_ps": 42006750000,
+          "time_speedup": 1.0254451963077362,
+          "cycle_speedup": 1.0254451963077362,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 1840,
+          "baseline_profile_sha256": "ae27590ed54b995c7c65492fb5456874aa747c52fd21681e417e3a444f3bd8f3",
+          "candidate_profile_sha256": "6e8155ed839921a1f031cd01c879543474492c7a4186a4cfca2e7300b14e82f3",
+          "memory_audit_sha256": "47e49bf0769419c0139ad983ad1ef21f60a7b45a90c0ab05d71c0102428e70f9",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 6189,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 41831,
+            "head_wait_int_store": 2857,
+            "head_wait_integer_other": 27096,
+            "head_wait_jump": 2,
+            "head_wait_marker": 2,
+            "recovery": 12369,
+            "retired_body": 3817632,
+            "retired_marker": 1,
+            "rob_empty": 37110,
+            "store_ack_wait": 255582
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 6656,
+            "own_external_inflight": 3803,
+            "own_response_buffer": 31372
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 37048,
+            "mark_pending": 112590,
+            "other_inflight": 30402,
+            "request_ready": 75542
+          }
+        },
+        {
+          "family": "embench",
+          "name": "nsichneu",
+          "group": null,
+          "baseline_cycles": 7298679,
+          "candidate_cycles": 6913377,
+          "baseline_time_ps": 72986790000,
+          "candidate_time_ps": 69133770000,
+          "time_speedup": 1.0557328205882595,
+          "cycle_speedup": 1.0557328205882595,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 1849,
+          "baseline_profile_sha256": "995c333189fc41e3360c4511f6775cb74ce1a91d58937119e7b34e6af46745c5",
+          "candidate_profile_sha256": "0af74e6a945b258f5404986311ec758929d761ba698a9374d90f3a90997b6cb2",
+          "memory_audit_sha256": "13dc2fbd7b5a6bed81936bc0c0396540d0f70e94b32860bc6fd0eb8a3d6c215e",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 875247,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 2098857,
+            "head_wait_int_store": 2463,
+            "head_wait_integer_other": 2467,
+            "head_wait_jump": 2,
+            "head_wait_marker": 2,
+            "recovery": 422237,
+            "retired_body": 2236759,
+            "retired_marker": 1,
+            "rob_empty": 1266714,
+            "store_ack_wait": 8624
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 839542,
+            "own_external_inflight": 419772,
+            "own_response_buffer": 839543
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 1230,
+            "mark_pending": 3697,
+            "other_inflight": 1230,
+            "request_ready": 2467
+          }
+        },
+        {
+          "family": "embench",
+          "name": "picojpeg",
+          "group": null,
+          "baseline_cycles": 5300988,
+          "candidate_cycles": 5064804,
+          "baseline_time_ps": 53009880000,
+          "candidate_time_ps": 50648040000,
+          "time_speedup": 1.0466324067032011,
+          "cycle_speedup": 1.0466324067032011,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 2033,
+          "baseline_profile_sha256": "006763252613ebf3005cdb8878b5a3ff30429528cd547124173c065a125238ea",
+          "candidate_profile_sha256": "d4b7098fb34273c766dbdbe994f3e45b679060965e17ab8b7638e5444b544b2d",
+          "memory_audit_sha256": "7b00c49f80ef4420c574f1050a00801a7c0c4785d2fa117bf05f0fe7f966f87d",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 13490,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 148221,
+            "head_wait_int_store": 12923,
+            "head_wait_integer_other": 268792,
+            "head_wait_jump": 9074,
+            "head_wait_marker": 2,
+            "recovery": 48380,
+            "retired_body": 3321047,
+            "retired_marker": 1,
+            "rob_empty": 145143,
+            "store_ack_wait": 1097727
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 30680,
+            "own_external_inflight": 30026,
+            "own_response_buffer": 87515
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 255235,
+            "mark_pending": 445924,
+            "other_inflight": 205879,
+            "request_ready": 190689
+          }
+        },
+        {
+          "family": "embench",
+          "name": "qrduino",
+          "group": null,
+          "baseline_cycles": 4524180,
+          "candidate_cycles": 4377993,
+          "baseline_time_ps": 45241800000,
+          "candidate_time_ps": 43779930000,
+          "time_speedup": 1.0333913279441058,
+          "cycle_speedup": 1.0333913279441058,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 4126,
+          "baseline_profile_sha256": "9a8911b9e447155151a2c7090eb26786ef6d01a8a4fe82cda612b71cf316f0e2",
+          "candidate_profile_sha256": "041d2ca5d1379ebd63e57a04350d8cd2832ca9c4bf38d53d21a98a54717d5778",
+          "memory_audit_sha256": "1bbeea0f7a7f22a8c49dd5d31f6e40d631a4c5c2500b9058345783e83215e208",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 176019,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 333693,
+            "head_wait_int_store": 25570,
+            "head_wait_integer_other": 439057,
+            "head_wait_jump": 8292,
+            "head_wait_marker": 2,
+            "recovery": 114429,
+            "retired_body": 2762062,
+            "retired_marker": 1,
+            "rob_empty": 343290,
+            "store_ack_wait": 175574
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 74087,
+            "own_external_inflight": 81502,
+            "own_response_buffer": 178104
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 58110,
+            "mark_pending": 66897,
+            "other_inflight": 41780,
+            "request_ready": 8787
+          }
+        },
+        {
+          "family": "embench",
+          "name": "sglib-combined",
+          "group": null,
+          "baseline_cycles": 4526268,
+          "candidate_cycles": 4332256,
+          "baseline_time_ps": 45262680000,
+          "candidate_time_ps": 43322560000,
+          "time_speedup": 1.044783133776028,
+          "cycle_speedup": 1.044783133776028,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 1039,
+          "baseline_profile_sha256": "50dab83c0e3144e5a21ab035907211383e0fb69018b90f6a416e7c690f40152b",
+          "candidate_profile_sha256": "17ae0c7e2a34c76788b52382960ac2d532a31817dc4575e0946c2ca850a61975",
+          "memory_audit_sha256": "a62e2e083f3eba1adf6cd741891093aea59f1a108c977a1b62d767d6639b3e2f",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 175767,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 633317,
+            "head_wait_int_store": 41706,
+            "head_wait_integer_other": 147181,
+            "head_wait_jump": 3482,
+            "head_wait_marker": 2,
+            "recovery": 147120,
+            "retired_body": 2189708,
+            "retired_marker": 1,
+            "rob_empty": 441363,
+            "store_ack_wait": 552605
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 162081,
+            "own_external_inflight": 168201,
+            "own_response_buffer": 303035
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 62496,
+            "mark_pending": 249680,
+            "other_inflight": 53245,
+            "request_ready": 187184
+          }
+        },
+        {
+          "family": "embench",
+          "name": "slre",
+          "group": null,
+          "baseline_cycles": 4902163,
+          "candidate_cycles": 4664230,
+          "baseline_time_ps": 49021630000,
+          "candidate_time_ps": 46642300000,
+          "time_speedup": 1.0510122785540164,
+          "cycle_speedup": 1.0510122785540164,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 623,
+          "baseline_profile_sha256": "8c2607dfb6b0880ab8579f7e64131283102bfb9f7fad42f0ffa3fc1f1ed260a6",
+          "candidate_profile_sha256": "e17cd4006a87039864343f2099398a93a0a3f9a3f2e2edc65b8ac057a3c308d7",
+          "memory_audit_sha256": "d829c5f00509aa5b0c4bbb6b17c2186d13f4c091d2fd980cc442b36568ff5be7",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 168194,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 616667,
+            "head_wait_int_store": 7373,
+            "head_wait_integer_other": 236506,
+            "head_wait_jump": 884,
+            "head_wait_marker": 2,
+            "recovery": 165997,
+            "retired_body": 2391546,
+            "retired_marker": 1,
+            "rob_empty": 497994,
+            "store_ack_wait": 579062
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 167970,
+            "own_external_inflight": 131780,
+            "own_response_buffer": 316917
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 27391,
+            "mark_pending": 277540,
+            "other_inflight": 23982,
+            "request_ready": 250149
+          }
+        },
+        {
+          "family": "embench",
+          "name": "st",
+          "group": null,
+          "baseline_cycles": 7165107,
+          "candidate_cycles": 7092839,
+          "baseline_time_ps": 71651070000,
+          "candidate_time_ps": 70928390000,
+          "time_speedup": 1.0101888679554125,
+          "cycle_speedup": 1.0101888679554125,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 1496,
+          "baseline_profile_sha256": "f3ca0cf393688a7f64e85aac6abff87ef2deb8403d3867b880f1748e33f974ec",
+          "candidate_profile_sha256": "e255d63043b27713495f01ea1423f90dc2dff8344820bec4f330919d49bbfab3",
+          "memory_audit_sha256": "b7222ce8b570d13433d4316d153baf90d57016e8be02be652ce20588df248e6a",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 149513,
+            "head_wait_csr_system": 95164,
+            "head_wait_int_load": 256070,
+            "head_wait_int_store": 28137,
+            "head_wait_integer_other": 1439293,
+            "head_wait_jump": 3421,
+            "head_wait_marker": 2,
+            "recovery": 212799,
+            "retired_body": 3986450,
+            "retired_marker": 1,
+            "rob_empty": 682964,
+            "store_ack_wait": 239025
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 79589,
+            "own_external_inflight": 50365,
+            "own_response_buffer": 126116
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 2964,
+            "mark_pending": 118063,
+            "other_inflight": 2899,
+            "request_ready": 115099
+          }
+        },
+        {
+          "family": "embench",
+          "name": "statemate",
+          "group": null,
+          "baseline_cycles": 3368567,
+          "candidate_cycles": 3100457,
+          "baseline_time_ps": 33685670000,
+          "candidate_time_ps": 31004570000,
+          "time_speedup": 1.086474348781486,
+          "cycle_speedup": 1.086474348781486,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 523,
+          "baseline_profile_sha256": "9262ad03aa0f22fe8e4db76c3068a877636b791e7990259ca194a131bbc4db57",
+          "candidate_profile_sha256": "eac8de1932d24b883bdee55a3d2244ea92cff6992e7d80e7d65ef660a0868437",
+          "memory_audit_sha256": "9b49be92a86a85b8cb915bc1a813c23c62a55726978f6dde9e225893f286ce0a",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 20629,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 179748,
+            "head_wait_int_store": 7864,
+            "head_wait_integer_other": 59923,
+            "head_wait_jump": 7860,
+            "head_wait_marker": 2,
+            "recovery": 42246,
+            "retired_body": 1551623,
+            "retired_marker": 1,
+            "rob_empty": 126741,
+            "store_ack_wait": 1103816
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 38309,
+            "own_external_inflight": 34379,
+            "own_response_buffer": 107060
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 174805,
+            "mark_pending": 494946,
+            "other_inflight": 113924,
+            "request_ready": 320141
+          }
+        },
+        {
+          "family": "embench",
+          "name": "ud",
+          "group": null,
+          "baseline_cycles": 2775897,
+          "candidate_cycles": 2616256,
+          "baseline_time_ps": 27758970000,
+          "candidate_time_ps": 26162560000,
+          "time_speedup": 1.0610188758286652,
+          "cycle_speedup": 1.0610188758286652,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 507,
+          "baseline_profile_sha256": "a93e1b87151595a037335a7d2a849315b8d650f1dad203e5842f8aec94485ab8",
+          "candidate_profile_sha256": "fc3eb90280a5691acd1e9013ce188e8c46eacb0b9cbaedb6ff3b29a9b3f6fd17",
+          "memory_audit_sha256": "d1716c3552ebf672ff55ab891d16186b0634da94e7979af6edf97225cdfb6733",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 2,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 181813,
+            "head_wait_int_store": 42868,
+            "head_wait_integer_other": 1135144,
+            "head_wait_jump": 4,
+            "head_wait_marker": 2,
+            "recovery": 34002,
+            "retired_body": 814428,
+            "retired_marker": 1,
+            "rob_empty": 102009,
+            "store_ack_wait": 305979
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 29562,
+            "own_external_inflight": 32518,
+            "own_response_buffer": 119733
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 51735,
+            "mark_pending": 131556,
+            "other_inflight": 42867,
+            "request_ready": 79821
+          }
+        },
+        {
+          "family": "embench",
+          "name": "wikisort",
+          "group": null,
+          "baseline_cycles": 2173042,
+          "candidate_cycles": 2134990,
+          "baseline_time_ps": 21730420000,
+          "candidate_time_ps": 21349900000,
+          "time_speedup": 1.0178230342999264,
+          "cycle_speedup": 1.0178230342999264,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 1585,
+          "baseline_profile_sha256": "17f9e963c482f88451577c38e8291cbf37477f6a43e7023d9cb0a6c03405d848",
+          "candidate_profile_sha256": "7d3d584dd1536a74e9869aa274aa67b1ef6cf8996c0b35f5cbcedbe81b36672c",
+          "memory_audit_sha256": "fb763465f5050d1c1f3010d8d2f9cdf9b970fdd6b2fce032f01ac043215789d3",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 10000,
+            "imem_max_response_ps": 10000,
+            "dmem_min_response_ps": 10000,
+            "dmem_max_response_ps": 10000
+          },
+          "cycle_partition": {
+            "head_wait_branch": 28740,
+            "head_wait_csr_system": 15672,
+            "head_wait_int_load": 72455,
+            "head_wait_int_store": 12347,
+            "head_wait_integer_other": 493445,
+            "head_wait_jump": 7273,
+            "head_wait_marker": 2,
+            "recovery": 61940,
+            "retired_body": 1064027,
+            "retired_marker": 1,
+            "rob_empty": 192017,
+            "store_ack_wait": 187071
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 19345,
+            "own_external_inflight": 16678,
+            "own_response_buffer": 36432
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 26111,
+            "mark_pending": 89561,
+            "other_inflight": 7949,
+            "request_ready": 63450
+          }
+        }
+      ],
+      "all_27_per_pc_work_maps_match": true
+    },
+    {
+      "comparison_point": "fastest",
+      "core_period_ps": 9900,
+      "memory_ps": 10000,
+      "embench_time_geomean_speedup": 0.7266014195044225,
+      "fp32_time_geomean_speedup": 0.700275341184508,
+      "fp32_subgroup_speedup": {
+        "dsp": 0.6535856692858949,
+        "matrix_ml": 0.7503003454877957
+      },
+      "standard_cell_area_um2": 22162.24152000313,
+      "area_ratio": 1.0036738682583708,
+      "planning_targets": {
+        "embench_geomean_ge_1_20": false,
+        "fp32_geomean_ge_1_20": false,
+        "area_ratio_le_1_10": true
+      },
+      "all_planning_targets_met": false,
+      "review_sha256": "f35bd4be8410a3185d76e5cbf864688a1e08bd0bd244ff655b4a7c56d8d51196",
+      "measurement_summary_sha256": "5e234a3b3be9350cb5293bee5f5a8e834fe4f0e2e60172758ae85a39612c7969",
+      "records": [
+        {
+          "family": "fp32",
+          "name": "fir",
+          "group": "dsp",
+          "baseline_cycles": 74311,
+          "candidate_cycles": 125393,
+          "baseline_time_ps": 743110000,
+          "candidate_time_ps": 1241390700,
+          "time_speedup": 0.5986108966339123,
+          "cycle_speedup": 0.5926247876675732,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 50,
+          "baseline_profile_sha256": "33a38b761801dc87b1cbc1975d0f747afd22155bc86123ad0e2f1c40118558cd",
+          "candidate_profile_sha256": "c39f31c7ec0b0eea54542d50a2dbe7c1b89de0ece72bd932c12a67c5fcd7e34b",
+          "memory_audit_sha256": "ba61c9424b2f84b3d5c69f984ef4f57887b8a8658faa1a9ce763d6660ecd50bb",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 1,
+            "head_wait_fma": 8192,
+            "head_wait_fp_load": 50529,
+            "head_wait_fp_store": 256,
+            "head_wait_int_load": 10,
+            "head_wait_integer_other": 1036,
+            "head_wait_jump": 5,
+            "head_wait_marker": 2,
+            "recovery": 519,
+            "retired_body": 61137,
+            "retired_marker": 1,
+            "rob_empty": 2076,
+            "store_ack_wait": 1629
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 8710,
+            "own_external_inflight": 25155,
+            "own_response_buffer": 16674
+          },
+          "store_ack_wait_phases": {
+            "mark_pending": 543,
+            "request_ready": 543,
+            "response_pending": 543
+          }
+        },
+        {
+          "family": "fp32",
+          "name": "iir",
+          "group": "dsp",
+          "baseline_cycles": 13523,
+          "candidate_cycles": 22777,
+          "baseline_time_ps": 135230000,
+          "candidate_time_ps": 225492300,
+          "time_speedup": 0.5997100566183413,
+          "cycle_speedup": 0.5937129560521579,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 42,
+          "baseline_profile_sha256": "2daedeb87c5d05f567a66b77acc81e1bffc3714838450d273027733fd27a6d53",
+          "candidate_profile_sha256": "f1dacdbd7f3cb05423784067da46c5bc007cde5b76692f472db4c5fe4d4e44e4",
+          "memory_audit_sha256": "5339e3e6a821639e8545adf5046bb8d200f8e9c2676647a1459fcedf2ca00deb",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_fma": 2043,
+            "head_wait_fmul": 2048,
+            "head_wait_fp_load": 4145,
+            "head_wait_fp_store": 8,
+            "head_wait_int_load": 9,
+            "head_wait_integer_other": 8,
+            "head_wait_jump": 5,
+            "head_wait_marker": 2,
+            "recovery": 13,
+            "retired_body": 11347,
+            "retired_marker": 1,
+            "rob_empty": 52,
+            "store_ack_wait": 3096
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 1030,
+            "own_external_inflight": 2074,
+            "own_response_buffer": 1050
+          },
+          "store_ack_wait_phases": {
+            "mark_pending": 1032,
+            "request_ready": 1032,
+            "response_pending": 1032
+          }
+        },
+        {
+          "family": "fp32",
+          "name": "fft",
+          "group": "dsp",
+          "baseline_cycles": 40867,
+          "candidate_cycles": 52375,
+          "baseline_time_ps": 408670000,
+          "candidate_time_ps": 518512500,
+          "time_speedup": 0.788158433981823,
+          "cycle_speedup": 0.7802768496420047,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 229,
+          "baseline_profile_sha256": "fbfdf6744e5d6f694590e935de3c3c5d1a44de64a33c928b35da5ff3276fc778",
+          "candidate_profile_sha256": "39d5a8d7cbdcd7ce76c55df39bcba8f1db4d1d70aada39c34c3ec674e07d81b6",
+          "memory_audit_sha256": "87dc878ce01b5276aa2647714d22e86d7094df84ba67dbfca9dcf109ac6f05b4",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 255,
+            "head_wait_fadd": 256,
+            "head_wait_fma": 512,
+            "head_wait_fp_load": 7303,
+            "head_wait_fsub": 768,
+            "head_wait_int_load": 2820,
+            "head_wait_int_store": 54,
+            "head_wait_integer_other": 1410,
+            "head_wait_jump": 76,
+            "head_wait_marker": 2,
+            "recovery": 333,
+            "retired_body": 23800,
+            "retired_marker": 1,
+            "rob_empty": 1332,
+            "store_ack_wait": 13453
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 528,
+            "own_external_inflight": 5004,
+            "own_response_buffer": 4591
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 856,
+            "mark_pending": 4127,
+            "other_inflight": 1072,
+            "request_ready": 3271,
+            "response_pending": 4127
+          }
+        },
+        {
+          "family": "fp32",
+          "name": "pid",
+          "group": "dsp",
+          "baseline_cycles": 7248,
+          "candidate_cycles": 11352,
+          "baseline_time_ps": 72480000,
+          "candidate_time_ps": 112384800,
+          "time_speedup": 0.6449270719883827,
+          "cycle_speedup": 0.638477801268499,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 31,
+          "baseline_profile_sha256": "5ec7675d89421ea824f01f192ab1172dfe075f75901269662ba64e4c088df1a9",
+          "candidate_profile_sha256": "571331efee261aa4155475a5cd5bfabaef56b1f702c8ca3bb3446d350852a8bc",
+          "memory_audit_sha256": "593ce519a9c4e6baba6136833f02980ccbda7c410953a5d01c1be582697e2aa3",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_fadd": 512,
+            "head_wait_fma": 1536,
+            "head_wait_fmul": 515,
+            "head_wait_fp_load": 1039,
+            "head_wait_fp_other": 3,
+            "head_wait_fp_store": 514,
+            "head_wait_integer_other": 7,
+            "head_wait_jump": 2,
+            "head_wait_marker": 2,
+            "recovery": 5,
+            "retired_body": 5651,
+            "retired_marker": 1,
+            "rob_empty": 20,
+            "store_ack_wait": 1545
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 1,
+            "own_external_inflight": 520,
+            "own_response_buffer": 518
+          },
+          "store_ack_wait_phases": {
+            "mark_pending": 515,
+            "request_ready": 515,
+            "response_pending": 515
+          }
+        },
+        {
+          "family": "fp32",
+          "name": "gemm",
+          "group": "matrix_ml",
+          "baseline_cycles": 133275,
+          "candidate_cycles": 168079,
+          "baseline_time_ps": 1332750000,
+          "candidate_time_ps": 1663982100,
+          "time_speedup": 0.8009401062667681,
+          "cycle_speedup": 0.7929307052041005,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 50,
+          "baseline_profile_sha256": "aa0b3be800689edfbaeb2500195f0ab8a288b0aa96314cefd4ad3d91d9e6aafe",
+          "candidate_profile_sha256": "be5e77ce869402a585370ecae1ca27c4cf0947328fd8268512652af7841915bb",
+          "memory_audit_sha256": "f59bcc332ea9ed553ecae705b6350130440f5010748bf1486c5868587b5c86e1",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 320,
+            "head_wait_fma": 600,
+            "head_wait_fmul": 60,
+            "head_wait_fp_load": 55468,
+            "head_wait_fp_store": 660,
+            "head_wait_integer_other": 1688,
+            "head_wait_jump": 4,
+            "head_wait_marker": 2,
+            "recovery": 684,
+            "retired_body": 80976,
+            "retired_marker": 1,
+            "rob_empty": 2736,
+            "store_ack_wait": 24880
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 1282,
+            "own_external_inflight": 31024,
+            "own_response_buffer": 23162
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 460,
+            "mark_pending": 8000,
+            "other_inflight": 880,
+            "request_ready": 7540,
+            "response_pending": 8000
+          }
+        },
+        {
+          "family": "fp32",
+          "name": "bicg",
+          "group": "matrix_ml",
+          "baseline_cycles": 23927,
+          "candidate_cycles": 33729,
+          "baseline_time_ps": 239270000,
+          "candidate_time_ps": 333917100,
+          "time_speedup": 0.7165550970585214,
+          "cycle_speedup": 0.7093895460879363,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 37,
+          "baseline_profile_sha256": "9731c779354bb200698650cd9698f9e61c364aa1d6098587991d020a4e8a53fb",
+          "candidate_profile_sha256": "1633b0e03e4776b7c59ee0308825005dbcf61f62c38b66bb8f567c145a65ae24",
+          "memory_audit_sha256": "7799492d6c3752aab6759c5f8dc6249e19c062b9d23b28d6f641d11e7f1f89e6",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 42,
+            "head_wait_fp_load": 11467,
+            "head_wait_fp_store": 168,
+            "head_wait_int_store": 3,
+            "head_wait_integer_other": 56,
+            "head_wait_jump": 4,
+            "head_wait_marker": 2,
+            "recovery": 90,
+            "retired_body": 16508,
+            "retired_marker": 1,
+            "rob_empty": 360,
+            "store_ack_wait": 5028
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 169,
+            "own_external_inflight": 6468,
+            "own_response_buffer": 4830
+          },
+          "store_ack_wait_phases": {
+            "mark_pending": 1676,
+            "request_ready": 1676,
+            "response_pending": 1676
+          }
+        },
+        {
+          "family": "fp32",
+          "name": "cholesky",
+          "group": "matrix_ml",
+          "baseline_cycles": 194161,
+          "candidate_cycles": 238395,
+          "baseline_time_ps": 1941610000,
+          "candidate_time_ps": 2360110500,
+          "time_speedup": 0.8226775822572714,
+          "cycle_speedup": 0.8144508064346987,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 157,
+          "baseline_profile_sha256": "48594aca4cea7aa7eb2887bf7db54df2ee54047364f60af05bcfa7750dadcd0e",
+          "candidate_profile_sha256": "1cd45161efdf451939b64015138c780a2b9f18e7bee82e0b836b1bb058aa0fa3",
+          "memory_audit_sha256": "413389bbd30b3abc42cd238eae199670554d0c5bc1c2f458339d39020050f860",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 2391,
+            "head_wait_fdiv": 21782,
+            "head_wait_fma": 76,
+            "head_wait_fp_load": 51988,
+            "head_wait_fp_other": 434,
+            "head_wait_fp_store": 869,
+            "head_wait_int_load": 136,
+            "head_wait_int_store": 1,
+            "head_wait_integer_other": 8496,
+            "head_wait_jump": 45,
+            "head_wait_marker": 2,
+            "recovery": 1770,
+            "retired_body": 105025,
+            "retired_marker": 1,
+            "rob_empty": 7080,
+            "store_ack_wait": 38299
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 3078,
+            "own_external_inflight": 29560,
+            "own_response_buffer": 19486
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 2183,
+            "mark_pending": 11568,
+            "other_inflight": 3595,
+            "request_ready": 9385,
+            "response_pending": 11568
+          }
+        },
+        {
+          "family": "fp32",
+          "name": "svm",
+          "group": "matrix_ml",
+          "baseline_cycles": 43392,
+          "candidate_cycles": 65300,
+          "baseline_time_ps": 433920000,
+          "candidate_time_ps": 646470000,
+          "time_speedup": 0.6712144415054063,
+          "cycle_speedup": 0.6645022970903522,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 62,
+          "baseline_profile_sha256": "45430d9e9fa0f59d9e6040e8b6ae5e59c3fa5763cc6eb045c5c06c581732e744",
+          "candidate_profile_sha256": "ba7d7f4df63c163a77dc49782074dd1dc77767b6c2084ae7403b2dcc17f3bc2c",
+          "memory_audit_sha256": "112ad67afeed4e00e67bf0ea940becd8250c78178acf427f74c72c69f72df02c",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 1,
+            "head_wait_fma": 400,
+            "head_wait_fp_load": 26600,
+            "head_wait_fp_other": 800,
+            "head_wait_int_load": 1814,
+            "head_wait_int_store": 101,
+            "head_wait_integer_other": 610,
+            "head_wait_jump": 102,
+            "head_wait_marker": 2,
+            "recovery": 1006,
+            "retired_body": 29522,
+            "retired_marker": 1,
+            "rob_empty": 4024,
+            "store_ack_wait": 317
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 5503,
+            "own_external_inflight": 13806,
+            "own_response_buffer": 9105
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 1,
+            "mark_pending": 105,
+            "other_inflight": 2,
+            "request_ready": 104,
+            "response_pending": 105
+          }
+        },
+        {
+          "family": "embench",
+          "name": "aha-mont64",
+          "group": null,
+          "baseline_cycles": 5356670,
+          "candidate_cycles": 9662429,
+          "baseline_time_ps": 53566700000,
+          "candidate_time_ps": 95658047100,
+          "time_speedup": 0.5599811163194863,
+          "cycle_speedup": 0.5543813051562915,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 493,
+          "baseline_profile_sha256": "25b2fa4c1352004c64ff532f415bfaa63b146b3d3ba714efd4db68997e004a4b",
+          "candidate_profile_sha256": "e9b07e21443a935f6e3ccb90b27c5d625ba8852625fffc0dfaaff4ea7837dcf3",
+          "memory_audit_sha256": "6dfa75900e2bff4623a92191a40dfda761e3ce04db394830933aaf34691cc16a",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 508446,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 18210,
+            "head_wait_int_store": 850,
+            "head_wait_integer_other": 4062503,
+            "head_wait_jump": 5080,
+            "head_wait_marker": 2,
+            "recovery": 113374,
+            "retired_body": 4491085,
+            "retired_marker": 1,
+            "rob_empty": 453499,
+            "store_ack_wait": 9375
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 4229,
+            "own_external_inflight": 8048,
+            "own_response_buffer": 5933
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 852,
+            "mark_pending": 2558,
+            "other_inflight": 1701,
+            "request_ready": 1706,
+            "response_pending": 2558
+          }
+        },
+        {
+          "family": "embench",
+          "name": "crc32",
+          "group": null,
+          "baseline_cycles": 5402220,
+          "candidate_cycles": 8012928,
+          "baseline_time_ps": 54022200000,
+          "candidate_time_ps": 79327987200,
+          "time_speedup": 0.6809979920932622,
+          "cycle_speedup": 0.6741880121723295,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 64,
+          "baseline_profile_sha256": "828ea261bc74bf2d42caac5d207356e8477fb2835f0c0adc89eae99776e2a6e5",
+          "candidate_profile_sha256": "e13b698f28363e887a262c107a9799a176deb61b80091f4e9751dec5563a7e60",
+          "memory_audit_sha256": "f05eae7b3f41f2a2f0af3031bc19ee25760cec705cc243935aa63a9b663c5553",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 174252,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 1392653,
+            "head_wait_int_store": 174254,
+            "head_wait_integer_other": 1567410,
+            "head_wait_jump": 174423,
+            "head_wait_marker": 2,
+            "recovery": 350,
+            "retired_body": 4005402,
+            "retired_marker": 1,
+            "rob_empty": 1403,
+            "store_ack_wait": 522774
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 348162,
+            "own_external_inflight": 696326,
+            "own_response_buffer": 348165
+          },
+          "store_ack_wait_phases": {
+            "mark_pending": 174258,
+            "request_ready": 174258,
+            "response_pending": 174258
+          }
+        },
+        {
+          "family": "embench",
+          "name": "cubic",
+          "group": null,
+          "baseline_cycles": 14490894,
+          "candidate_cycles": 19982172,
+          "baseline_time_ps": 144908940000,
+          "candidate_time_ps": 197823502800,
+          "time_speedup": 0.732516298361693,
+          "cycle_speedup": 0.725191135378076,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 6881,
+          "baseline_profile_sha256": "50e001776b54bf3dfa4ab7dcca557c5127ee85903601b67ce52428d0fbabc750",
+          "candidate_profile_sha256": "7e9d69eb469089c508c3d05b95d39d7dc7e00812b072fccd84e1c1773f1bda22",
+          "memory_audit_sha256": "0e80a492f914e3f158fc1e354127394bd9e78277913287cdcdba27c85e395073",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 700482,
+            "head_wait_csr_system": 132064,
+            "head_wait_int_load": 1429618,
+            "head_wait_int_store": 141104,
+            "head_wait_integer_other": 5604931,
+            "head_wait_jump": 124591,
+            "head_wait_marker": 2,
+            "recovery": 479994,
+            "retired_body": 7762231,
+            "retired_marker": 1,
+            "rob_empty": 1972819,
+            "store_ack_wait": 1634335
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 258354,
+            "own_external_inflight": 685884,
+            "own_response_buffer": 485380
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 55570,
+            "mark_pending": 512776,
+            "other_inflight": 96007,
+            "request_ready": 457206,
+            "response_pending": 512776
+          }
+        },
+        {
+          "family": "embench",
+          "name": "edn",
+          "group": null,
+          "baseline_cycles": 4754496,
+          "candidate_cycles": 6985140,
+          "baseline_time_ps": 47544960000,
+          "candidate_time_ps": 69152886000,
+          "time_speedup": 0.6875339953273968,
+          "cycle_speedup": 0.6806586553741227,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 515,
+          "baseline_profile_sha256": "993c4a29855bc624c1abb1dcd8dea24f046daf4bfd9ce42b8e4d88ef438bc37b",
+          "candidate_profile_sha256": "a06e92b889c9f35a79b565470565e62cd7900a77f7378f0e616a41cf208ec206",
+          "memory_audit_sha256": "32ee4984bc2cfd6c1cf0f3bf013aced8171a3b5c8cd4b7f72a43f83d2db9de7b",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 4440,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 1817646,
+            "head_wait_int_store": 44811,
+            "head_wait_integer_other": 1310325,
+            "head_wait_jump": 263,
+            "head_wait_marker": 2,
+            "recovery": 19413,
+            "retired_body": 3381065,
+            "retired_marker": 1,
+            "rob_empty": 77655,
+            "store_ack_wait": 329515
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 104318,
+            "own_external_inflight": 870542,
+            "own_response_buffer": 842786
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 30708,
+            "mark_pending": 91193,
+            "other_inflight": 55936,
+            "request_ready": 60485,
+            "response_pending": 91193
+          }
+        },
+        {
+          "family": "embench",
+          "name": "huffbench",
+          "group": null,
+          "baseline_cycles": 3377028,
+          "candidate_cycles": 4685662,
+          "baseline_time_ps": 33770280000,
+          "candidate_time_ps": 46388053800,
+          "time_speedup": 0.7279951891407007,
+          "cycle_speedup": 0.7207152372492936,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 590,
+          "baseline_profile_sha256": "776cdce24904e4439191c74045961c251c15851ccc58eb949f3f987138c3d6c8",
+          "candidate_profile_sha256": "ced81dc7d20a7dd982b5f111b0275c2b2b52de007b047d03ff64b2ef225062a7",
+          "memory_audit_sha256": "ed90fe86a6ff852797c6a91cb2e2344ce8f77a8e4553c7dbcb3d0dd9bfffa5ad",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 294837,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 854210,
+            "head_wait_int_store": 15845,
+            "head_wait_integer_other": 420423,
+            "head_wait_jump": 20967,
+            "head_wait_marker": 2,
+            "recovery": 99523,
+            "retired_body": 2022301,
+            "retired_marker": 1,
+            "rob_empty": 398095,
+            "store_ack_wait": 559454
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 183284,
+            "own_external_inflight": 359367,
+            "own_response_buffer": 311559
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 6820,
+            "mark_pending": 181938,
+            "other_inflight": 13640,
+            "request_ready": 175118,
+            "response_pending": 181938
+          }
+        },
+        {
+          "family": "embench",
+          "name": "matmult-int",
+          "group": null,
+          "baseline_cycles": 4193163,
+          "candidate_cycles": 6173306,
+          "baseline_time_ps": 41931630000,
+          "candidate_time_ps": 61115729400,
+          "time_speedup": 0.6861020953469958,
+          "cycle_speedup": 0.6792410743935259,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 108,
+          "baseline_profile_sha256": "163c0237a3a517b19fa1667109e8d0536be32f4aa3e862da82b6bdff343c6f7c",
+          "candidate_profile_sha256": "82b3201cfbc7a9be38eedf4c597f888ccdaf4cda2b6856fbe772a1cc84f588a5",
+          "memory_audit_sha256": "fcecfcbcf0a680daa965ebd9eba1ad8edaa295562d1643b5e3e71f9db108919b",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 1522,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 1565682,
+            "head_wait_int_store": 56126,
+            "head_wait_integer_other": 1128614,
+            "head_wait_jump": 185,
+            "head_wait_marker": 2,
+            "recovery": 39019,
+            "retired_body": 2932369,
+            "retired_marker": 1,
+            "rob_empty": 156079,
+            "store_ack_wait": 293703
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 55480,
+            "own_external_inflight": 773732,
+            "own_response_buffer": 736470
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 36432,
+            "mark_pending": 73613,
+            "other_inflight": 72864,
+            "request_ready": 37181,
+            "response_pending": 73613
+          }
+        },
+        {
+          "family": "embench",
+          "name": "minver",
+          "group": null,
+          "baseline_cycles": 878777,
+          "candidate_cycles": 1080838,
+          "baseline_time_ps": 8787770000,
+          "candidate_time_ps": 10700296200,
+          "time_speedup": 0.82126418145322,
+          "cycle_speedup": 0.8130515396386877,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 357,
+          "baseline_profile_sha256": "4a4d506d39396cc5b2dc6f2372d5aa1092c502fd4597465f05ce22508825fb41",
+          "candidate_profile_sha256": "c815decbadc66f9389c11f380b25a2ca53006d10a6596e8a7b1c54daf671f76a",
+          "memory_audit_sha256": "604400ce46140c5623bf519d9406d2b0f02b1ae407c67974874493708ddfd11a",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 23320,
+            "head_wait_csr_system": 4,
+            "head_wait_fdiv": 184276,
+            "head_wait_fma": 11100,
+            "head_wait_fmul": 1665,
+            "head_wait_fp_load": 79938,
+            "head_wait_fp_other": 31632,
+            "head_wait_fp_store": 2221,
+            "head_wait_int_load": 39978,
+            "head_wait_int_store": 1114,
+            "head_wait_integer_other": 38325,
+            "head_wait_jump": 3888,
+            "head_wait_marker": 2,
+            "recovery": 21653,
+            "retired_body": 340273,
+            "retired_marker": 1,
+            "rob_empty": 86615,
+            "store_ack_wait": 214833
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 23315,
+            "own_external_inflight": 59957,
+            "own_response_buffer": 36644
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 26089,
+            "mark_pending": 56624,
+            "other_inflight": 44961,
+            "request_ready": 30535,
+            "response_pending": 56624
+          }
+        },
+        {
+          "family": "embench",
+          "name": "nbody",
+          "group": null,
+          "baseline_cycles": 5893151,
+          "candidate_cycles": 8545370,
+          "baseline_time_ps": 58931510000,
+          "candidate_time_ps": 84599163000,
+          "time_speedup": 0.6965968445810746,
+          "cycle_speedup": 0.6896308761352639,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 1862,
+          "baseline_profile_sha256": "1e15eb41f51d1f7a30ad90af6a395201a7438612cdf78d96407c6ee1284405c3",
+          "candidate_profile_sha256": "232eef45cc878e80aa3ae5a2e827f3ee062b15c015526061241ccd5358c5b1c1",
+          "memory_audit_sha256": "8a8815c8425a86e5e10fe4d1bb6d30db8b5d5da20b4c113fa94d1a41488fafa3",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 452049,
+            "head_wait_csr_system": 68768,
+            "head_wait_int_load": 340722,
+            "head_wait_int_store": 22554,
+            "head_wait_integer_other": 2807888,
+            "head_wait_jump": 77211,
+            "head_wait_marker": 2,
+            "recovery": 215530,
+            "retired_body": 3424506,
+            "retired_marker": 1,
+            "rob_empty": 889783,
+            "store_ack_wait": 246356
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 68041,
+            "own_external_inflight": 157566,
+            "own_response_buffer": 115115
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 3016,
+            "mark_pending": 80444,
+            "other_inflight": 5024,
+            "request_ready": 77428,
+            "response_pending": 80444
+          }
+        },
+        {
+          "family": "embench",
+          "name": "nettle-aes",
+          "group": null,
+          "baseline_cycles": 5203513,
+          "candidate_cycles": 8532971,
+          "baseline_time_ps": 52035130000,
+          "candidate_time_ps": 84476412900,
+          "time_speedup": 0.6159722958596411,
+          "cycle_speedup": 0.6098125729010446,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 1003,
+          "baseline_profile_sha256": "eb0e770748345567be6913735efb2f6ed4245e05dc7dd681edec0b1c5aabc5c4",
+          "candidate_profile_sha256": "e37e016e355203721307b50b9813428e473fc1da32d105728e788d088d6a50e5",
+          "memory_audit_sha256": "484d801d050d45ff4e643b3f3cf05c79827a80c02331bf10515fd54812045d7a",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 49456,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 2041979,
+            "head_wait_int_store": 13418,
+            "head_wait_integer_other": 1990476,
+            "head_wait_jump": 1174,
+            "head_wait_marker": 2,
+            "recovery": 10149,
+            "retired_body": 4177417,
+            "retired_marker": 1,
+            "rob_empty": 40599,
+            "store_ack_wait": 208296
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 279632,
+            "own_external_inflight": 1030622,
+            "own_response_buffer": 731725
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 15756,
+            "mark_pending": 59916,
+            "other_inflight": 28548,
+            "request_ready": 44160,
+            "response_pending": 59916
+          }
+        },
+        {
+          "family": "embench",
+          "name": "nettle-sha256",
+          "group": null,
+          "baseline_cycles": 4307562,
+          "candidate_cycles": 7797891,
+          "baseline_time_ps": 43075620000,
+          "candidate_time_ps": 77199120900,
+          "time_speedup": 0.5579807062284825,
+          "cycle_speedup": 0.5524008991661976,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 1840,
+          "baseline_profile_sha256": "ae27590ed54b995c7c65492fb5456874aa747c52fd21681e417e3a444f3bd8f3",
+          "candidate_profile_sha256": "a987644f5d21ebc967f3a87e519aca43742bbbd391e58da0ef12c63933533a5c",
+          "memory_audit_sha256": "29432be63f427167f383e5829c2b7165cd219848bbdb6132b6f8438d1e492c80",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 15212,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 631317,
+            "head_wait_int_store": 19482,
+            "head_wait_integer_other": 2836731,
+            "head_wait_jump": 5703,
+            "head_wait_marker": 2,
+            "recovery": 15216,
+            "retired_body": 3817632,
+            "retired_marker": 1,
+            "rob_empty": 60867,
+            "store_ack_wait": 395724
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 112104,
+            "own_external_inflight": 313996,
+            "own_response_buffer": 205217
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 32777,
+            "mark_pending": 112590,
+            "other_inflight": 57954,
+            "request_ready": 79813,
+            "response_pending": 112590
+          }
+        },
+        {
+          "family": "embench",
+          "name": "nsichneu",
+          "group": null,
+          "baseline_cycles": 7298679,
+          "candidate_cycles": 8455848,
+          "baseline_time_ps": 72986790000,
+          "candidate_time_ps": 83712895200,
+          "time_speedup": 0.8718703352168854,
+          "cycle_speedup": 0.8631516318647166,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 1849,
+          "baseline_profile_sha256": "995c333189fc41e3360c4511f6775cb74ce1a91d58937119e7b34e6af46745c5",
+          "candidate_profile_sha256": "d0c8a4ffd48d10204111b75f3ed0e1481f29ae16e1b195ae5c508eb664b9b350",
+          "memory_audit_sha256": "fddaa5f4578e4e2d9a16fa1b455224709019a26f6dd9b5c2bd52cab5d3409ce2",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 766917,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 3322474,
+            "head_wait_int_store": 2465,
+            "head_wait_integer_other": 2477,
+            "head_wait_jump": 3,
+            "head_wait_marker": 2,
+            "recovery": 422238,
+            "retired_body": 2236759,
+            "retired_marker": 1,
+            "rob_empty": 1688955,
+            "store_ack_wait": 13553
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 839544,
+            "own_external_inflight": 1297476,
+            "own_response_buffer": 1185454
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 1231,
+            "mark_pending": 3697,
+            "other_inflight": 2462,
+            "request_ready": 2466,
+            "response_pending": 3697
+          }
+        },
+        {
+          "family": "embench",
+          "name": "picojpeg",
+          "group": null,
+          "baseline_cycles": 5300988,
+          "candidate_cycles": 7178562,
+          "baseline_time_ps": 53009880000,
+          "candidate_time_ps": 71067763800,
+          "time_speedup": 0.7459061206594487,
+          "cycle_speedup": 0.7384470594528542,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 2033,
+          "baseline_profile_sha256": "006763252613ebf3005cdb8878b5a3ff30429528cd547124173c065a125238ea",
+          "candidate_profile_sha256": "b4cd1355210a7761119e746b93a49650425c2399b221a14dfd7d5cff8de1b08a",
+          "memory_audit_sha256": "ebface4f35e281fa16c96374ef6c90ac178b9cb4b30ef46cb403d0e3af13087b",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 99308,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 787207,
+            "head_wait_int_store": 102297,
+            "head_wait_integer_other": 1011132,
+            "head_wait_jump": 61706,
+            "head_wait_marker": 2,
+            "recovery": 50039,
+            "retired_body": 3321047,
+            "retired_marker": 1,
+            "rob_empty": 200159,
+            "store_ack_wait": 1545660
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 88209,
+            "own_external_inflight": 374961,
+            "own_response_buffer": 324037
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 144270,
+            "mark_pending": 445924,
+            "other_inflight": 207888,
+            "request_ready": 301654,
+            "response_pending": 445924
+          }
+        },
+        {
+          "family": "embench",
+          "name": "qrduino",
+          "group": null,
+          "baseline_cycles": 4524180,
+          "candidate_cycles": 6369911,
+          "baseline_time_ps": 45241800000,
+          "candidate_time_ps": 63062118900,
+          "time_speedup": 0.7174164266782986,
+          "cycle_speedup": 0.7102422624115157,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 4126,
+          "baseline_profile_sha256": "9a8911b9e447155151a2c7090eb26786ef6d01a8a4fe82cda612b71cf316f0e2",
+          "candidate_profile_sha256": "f25abefbeda19c7918f952bcf1d29abf2e63b720d072ce4d7a53fbdf1ee32f5a",
+          "memory_audit_sha256": "8adaaface9857ea64d6f8e7ed7cd473f4d7e3110b9cae4a05255d482467ae966",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 329602,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 1470853,
+            "head_wait_int_store": 47369,
+            "head_wait_integer_other": 931342,
+            "head_wait_jump": 22407,
+            "head_wait_marker": 2,
+            "recovery": 115534,
+            "retired_body": 2762062,
+            "retired_marker": 1,
+            "rob_empty": 462139,
+            "store_ack_wait": 228596
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 267278,
+            "own_external_inflight": 733711,
+            "own_response_buffer": 469864
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 13985,
+            "mark_pending": 66897,
+            "other_inflight": 27905,
+            "request_ready": 52912,
+            "response_pending": 66897
+          }
+        },
+        {
+          "family": "embench",
+          "name": "sglib-combined",
+          "group": null,
+          "baseline_cycles": 4526268,
+          "candidate_cycles": 5859963,
+          "baseline_time_ps": 45262680000,
+          "candidate_time_ps": 58013633700,
+          "time_speedup": 0.7802076359164518,
+          "cycle_speedup": 0.7724055595572873,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 1039,
+          "baseline_profile_sha256": "50dab83c0e3144e5a21ab035907211383e0fb69018b90f6a416e7c690f40152b",
+          "candidate_profile_sha256": "afbf42f8b738c76dd4fbf7a0753b9d631016c17352d00c57d35c963b300b4786",
+          "memory_audit_sha256": "aa2483b68e1941c5890dca4e2d23d5464d7784735e16f91ddb5d112754fb2598",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 274284,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 1422827,
+            "head_wait_int_store": 80972,
+            "head_wait_integer_other": 320945,
+            "head_wait_jump": 21694,
+            "head_wait_marker": 2,
+            "recovery": 149529,
+            "retired_body": 2189708,
+            "retired_marker": 1,
+            "rob_empty": 598119,
+            "store_ack_wait": 801878
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 260770,
+            "own_external_inflight": 700567,
+            "own_response_buffer": 461490
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 29000,
+            "mark_pending": 249680,
+            "other_inflight": 52838,
+            "request_ready": 220680,
+            "response_pending": 249680
+          }
+        },
+        {
+          "family": "embench",
+          "name": "slre",
+          "group": null,
+          "baseline_cycles": 4902163,
+          "candidate_cycles": 6271141,
+          "baseline_time_ps": 49021630000,
+          "candidate_time_ps": 62084295900,
+          "time_speedup": 0.7895979053859254,
+          "cycle_speedup": 0.7817019263320663,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 623,
+          "baseline_profile_sha256": "8c2607dfb6b0880ab8579f7e64131283102bfb9f7fad42f0ffa3fc1f1ed260a6",
+          "candidate_profile_sha256": "8c9387dfb3ec497244059b5aa610fbb6ea3525b00f1edcae4079e16b50e772de",
+          "memory_audit_sha256": "85abaee6a6fa0be755e28895caccf2987f2a4377782eb25aaa75c938dd245061",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 281163,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 1134119,
+            "head_wait_int_store": 24974,
+            "head_wait_integer_other": 634376,
+            "head_wait_jump": 65783,
+            "head_wait_marker": 2,
+            "recovery": 172158,
+            "retired_body": 2391546,
+            "retired_marker": 1,
+            "rob_empty": 688635,
+            "store_ack_wait": 878380
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 208232,
+            "own_external_inflight": 534389,
+            "own_response_buffer": 391498
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 22880,
+            "mark_pending": 277540,
+            "other_inflight": 45760,
+            "request_ready": 254660,
+            "response_pending": 277540
+          }
+        },
+        {
+          "family": "embench",
+          "name": "st",
+          "group": null,
+          "baseline_cycles": 7165107,
+          "candidate_cycles": 10024750,
+          "baseline_time_ps": 71651070000,
+          "candidate_time_ps": 99245025000,
+          "time_speedup": 0.7219613275325388,
+          "cycle_speedup": 0.7147417142572134,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 1496,
+          "baseline_profile_sha256": "f3ca0cf393688a7f64e85aac6abff87ef2deb8403d3867b880f1748e33f974ec",
+          "candidate_profile_sha256": "e4431b05246ceaabe16b04039ef493cd63d25325556754129d0bc757fa63b5cb",
+          "memory_audit_sha256": "e887f8095f6a856d0764c2313ef166bbaaa2419247ff33235b3e78c0a0eda319",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 431834,
+            "head_wait_csr_system": 95164,
+            "head_wait_int_load": 494934,
+            "head_wait_int_store": 43905,
+            "head_wait_integer_other": 3414035,
+            "head_wait_jump": 93862,
+            "head_wait_marker": 2,
+            "recovery": 213091,
+            "retired_body": 3986450,
+            "retired_marker": 1,
+            "rob_empty": 896866,
+            "store_ack_wait": 354606
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 114208,
+            "own_external_inflight": 228987,
+            "own_response_buffer": 151739
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 235,
+            "mark_pending": 118063,
+            "other_inflight": 417,
+            "request_ready": 117828,
+            "response_pending": 118063
+          }
+        },
+        {
+          "family": "embench",
+          "name": "statemate",
+          "group": null,
+          "baseline_cycles": 3368567,
+          "candidate_cycles": 4079514,
+          "baseline_time_ps": 33685670000,
+          "candidate_time_ps": 40387188600,
+          "time_speedup": 0.8340682074612146,
+          "cycle_speedup": 0.8257275253866024,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 523,
+          "baseline_profile_sha256": "9262ad03aa0f22fe8e4db76c3068a877636b791e7990259ca194a131bbc4db57",
+          "candidate_profile_sha256": "bbf7595ec263fbc053236e549b1ba8cbc0c14b1d2458d4dc0405d6c9022fc0c8",
+          "memory_audit_sha256": "609a6130224e2c0baaa9c2684ae4d2831812f78ab41f9283eaed99f7b9129267",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 32415,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 395786,
+            "head_wait_int_store": 11791,
+            "head_wait_integer_other": 89386,
+            "head_wait_jump": 13751,
+            "head_wait_marker": 2,
+            "recovery": 44204,
+            "retired_body": 1551623,
+            "retired_marker": 1,
+            "rob_empty": 176819,
+            "store_ack_wait": 1763732
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 44196,
+            "own_external_inflight": 193473,
+            "own_response_buffer": 158117
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 176762,
+            "mark_pending": 494946,
+            "other_inflight": 278894,
+            "request_ready": 318184,
+            "response_pending": 494946
+          }
+        },
+        {
+          "family": "embench",
+          "name": "ud",
+          "group": null,
+          "baseline_cycles": 2775897,
+          "candidate_cycles": 3050831,
+          "baseline_time_ps": 27758970000,
+          "candidate_time_ps": 30203226900,
+          "time_speedup": 0.9190729881912055,
+          "cycle_speedup": 0.9098822583092935,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 507,
+          "baseline_profile_sha256": "a93e1b87151595a037335a7d2a849315b8d650f1dad203e5842f8aec94485ab8",
+          "candidate_profile_sha256": "7671655a65ce6f7eb3616542e60d157165943bf0fc4af22624a08776428aee04",
+          "memory_audit_sha256": "4a3945621a77111d68464ef841667e4a5f5b1b84d9e0b2633714384a4a55bbd6",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 2,
+            "head_wait_csr_system": 4,
+            "head_wait_int_load": 375456,
+            "head_wait_int_store": 39912,
+            "head_wait_integer_other": 1179484,
+            "head_wait_jump": 4,
+            "head_wait_marker": 2,
+            "recovery": 31046,
+            "retired_body": 814428,
+            "retired_marker": 1,
+            "rob_empty": 124187,
+            "store_ack_wait": 486305
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 35477,
+            "own_external_inflight": 169991,
+            "own_response_buffer": 169988
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 50253,
+            "mark_pending": 131556,
+            "other_inflight": 91637,
+            "request_ready": 81303,
+            "response_pending": 131556
+          }
+        },
+        {
+          "family": "embench",
+          "name": "wikisort",
+          "group": null,
+          "baseline_cycles": 2173042,
+          "candidate_cycles": 2844370,
+          "baseline_time_ps": 21730420000,
+          "candidate_time_ps": 28159263000,
+          "time_speedup": 0.7716970433494655,
+          "cycle_speedup": 0.7639800729159708,
+          "per_pc_insn_kind_retired_counts_match": true,
+          "nonzero_retired_pc_count": 1585,
+          "baseline_profile_sha256": "17f9e963c482f88451577c38e8291cbf37477f6a43e7023d9cb0a6c03405d848",
+          "candidate_profile_sha256": "f7896ceb6b4f176ee6bf75e02052839a688943074a04ca99dcbecc0ad8721528",
+          "memory_audit_sha256": "628ad3d3c0f2c7fbd3813ed73612c5bf291dd1465e0f4706edc3027a5d3a6eab",
+          "sampled_memory": {
+            "imem_response_ps": 10000,
+            "imem_interval_ps": 10000,
+            "dmem_response_ps": 10000,
+            "imem_min_response_ps": 19800,
+            "imem_max_response_ps": 19800,
+            "dmem_min_response_ps": 19800,
+            "dmem_max_response_ps": 19800
+          },
+          "cycle_partition": {
+            "head_wait_branch": 78095,
+            "head_wait_csr_system": 15672,
+            "head_wait_int_load": 179024,
+            "head_wait_int_store": 20841,
+            "head_wait_integer_other": 820017,
+            "head_wait_jump": 26662,
+            "head_wait_marker": 2,
+            "recovery": 61123,
+            "retired_body": 1064027,
+            "retired_marker": 1,
+            "rob_empty": 250654,
+            "store_ack_wait": 328252
+          },
+          "load_head_wait_phases": {
+            "before_external_request_or_forward": 29334,
+            "own_external_inflight": 82979,
+            "own_response_buffer": 66711
+          },
+          "store_ack_wait_phases": {
+            "load_response_buffer": 31464,
+            "mark_pending": 89561,
+            "other_inflight": 59569,
+            "request_ready": 58097,
+            "response_pending": 89561
+          }
+        }
+      ],
+      "all_27_per_pc_work_maps_match": true
+    }
+  ],
+  "remaining_planning_gap_from_common_point": {
+    "scope": "Required further improvement relative to common-clock A; no predicted B benefit.",
+    "embedded_additional_speedup_required": 1.1474144019008408,
+    "fp32_additional_speedup_required": 1.1129092206822604,
+    "remaining_standard_cell_budget_um2": 2126.9887200013036
+  },
+  "native_route_evidence": {
+    "make_log_sha256": "6b7df185af00cfe5045ec798ec2ffe0c579cf67dd7a22fdc6837788ae1758a92",
+    "final_whole_design_route_markers": 1,
+    "final_overflow_h_v_total": [
+      0,
+      0,
+      0
+    ],
+    "final_demand_percent": 29.49,
+    "final_routed_nets": 176228,
+    "final_wirelength_um": 1441320,
+    "eco_placement_failures": [
+      0,
+      0
+    ],
+    "antenna_net_violations": 0,
+    "antenna_pin_violations": 0
+  }
+}

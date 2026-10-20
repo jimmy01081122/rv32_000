@@ -1,0 +1,20 @@
+[SimMemory] Loaded segment to 0x80000000 (filesz: 0x46290, memsz: 0x46290)
+[SimMemory] Found 'tohost' symbol at 0x80046280
+[SimMemory] ELF loaded successfully. Entry PC = 0x80000000
+[Simulator] Starting simulation run...
+
+[Embench] Benchmark executed in cycles: 7178562
+
+[SimMemory] TOHOST exit (0x1) received. Exit code: 0 (PASS)
+
+[SimMemory] SIM_EXIT received with code: 0 (PASS)
+FP ROI cycle_reads=2 retired=3321047 fmadd_s=0 fmsub_s=0 fnmsub_s=0 fnmadd_s=0
+
+================ Simulation Summary ================
+  ELF binary     : /workspace/build/experiments/lsu-a-v1/measurement-9900ps-v1/embench/picojpeg/input.elf
+  Cycles         : 8908148
+  Retired insns  : 4140911
+  IPC            : 0.4648
+  Exit status    : PASS (0)
+====================================================
+

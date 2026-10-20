@@ -1,0 +1,76 @@
+{
+  "scope": "Two complete qualified research operating points; no primary point selection, no ordered-trace or full-ISA proof.",
+  "script_sha256": "57cfde38b538484d68f270a34bc04dd39b716a1e18bb4b587a13a08a905ebda5",
+  "baseline_manifest_sha256": "60f59b3cc705560885e2101046d810cf3548fef277c1c1e5820826ef25485fb6",
+  "baseline_summary_sha256": "0dac120d0295ea3ceac26141195f2863d1625a9503a5f478bc2fc3038023bef7",
+  "operating_points": [
+    {
+      "comparison_point": "common-clock",
+      "core_period_ps": 10000,
+      "memory_ps": 10000,
+      "embench_time_geomean_speedup": 1.045829647956348,
+      "fp32_time_geomean_speedup": 1.0782550613286763,
+      "fp32_subgroup_speedup": {
+        "dsp": 1.0516140118036785,
+        "matrix_ml": 1.1055710215260568
+      },
+      "standard_cell_area_um2": 22162.24152000313,
+      "area_ratio": 1.0036738682583708,
+      "planning_targets": {
+        "embench_geomean_ge_1_20": false,
+        "fp32_geomean_ge_1_20": false,
+        "area_ratio_le_1_10": true
+      },
+      "all_planning_targets_met": false,
+      "review_sha256": "6575660eb827a63a2061464170beabfc67ee33d943114b15a0467b43843a329d",
+      "measurement_summary_sha256": "5de23abc1efa4c617c872d3f1dedd707bad8d99a27f24ce0790d984aecda919e",
+      "all_27_per_pc_work_maps_match": true
+    },
+    {
+      "comparison_point": "fastest",
+      "core_period_ps": 9900,
+      "memory_ps": 10000,
+      "embench_time_geomean_speedup": 0.7266014195044225,
+      "fp32_time_geomean_speedup": 0.700275341184508,
+      "fp32_subgroup_speedup": {
+        "dsp": 0.6535856692858949,
+        "matrix_ml": 0.7503003454877957
+      },
+      "standard_cell_area_um2": 22162.24152000313,
+      "area_ratio": 1.0036738682583708,
+      "planning_targets": {
+        "embench_geomean_ge_1_20": false,
+        "fp32_geomean_ge_1_20": false,
+        "area_ratio_le_1_10": true
+      },
+      "all_planning_targets_met": false,
+      "review_sha256": "f35bd4be8410a3185d76e5cbf864688a1e08bd0bd244ff655b4a7c56d8d51196",
+      "measurement_summary_sha256": "5e234a3b3be9350cb5293bee5f5a8e834fe4f0e2e60172758ae85a39612c7969",
+      "all_27_per_pc_work_maps_match": true
+    }
+  ],
+  "remaining_planning_gap_from_common_point": {
+    "scope": "Required further improvement relative to common-clock A; no predicted B benefit.",
+    "embedded_additional_speedup_required": 1.1474144019008408,
+    "fp32_additional_speedup_required": 1.1129092206822604,
+    "remaining_standard_cell_budget_um2": 2126.9887200013036
+  },
+  "native_route_evidence": {
+    "make_log_sha256": "6b7df185af00cfe5045ec798ec2ffe0c579cf67dd7a22fdc6837788ae1758a92",
+    "final_whole_design_route_markers": 1,
+    "final_overflow_h_v_total": [
+      0,
+      0,
+      0
+    ],
+    "final_demand_percent": 29.49,
+    "final_routed_nets": 176228,
+    "final_wirelength_um": 1441320,
+    "eco_placement_failures": [
+      0,
+      0
+    ],
+    "antenna_net_violations": 0,
+    "antenna_pin_violations": 0
+  }
+}

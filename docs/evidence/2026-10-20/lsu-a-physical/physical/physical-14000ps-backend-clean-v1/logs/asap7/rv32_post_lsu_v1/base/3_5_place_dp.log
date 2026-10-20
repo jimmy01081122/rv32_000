@@ -1,0 +1,106 @@
+OpenROAD 26Q1-2900-gdf79404cd8 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 2 thread(s).
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_db /workspace/build/experiments/lsu-a-v1/physical-14000ps-backend-clean-v1/results/asap7/rv32_post_lsu_v1/base/3_4_place_resized.odb
+read_sdc /workspace/build/experiments/lsu-a-v1/physical-14000ps-backend-clean-v1/results/asap7/rv32_post_lsu_v1/base/2_floorplan.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+detailed_placement
+[INFO DPL-0005] Max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+Movements Summary
+---------------------------------------
+Total cells:                  167509
+Diamond Move Success:         167509 (100.00%)
+Diamond Move Failure:              0
+Rip-up and replace Success:        0 (  0.00% of diamond failures)
+Rip-up and replace Failure:        0
+Total Placement Failures:          0
+---------------------------------------
+Placement Analysis
+---------------------------------
+total displacement      38078.8 u
+average displacement        0.2 u
+max displacement            1.1 u
+original HPWL          811273.5 u
+legalized HPWL         845294.1 u
+delta HPWL                    4 %
+
+improve_placement -max_displacement "5 1"
+Detailed placement improvement.
+[INFO DPL-0401] Setting random seed to 1.
+[INFO DPL-0402] Setting maximum displacement 5 1 to 1350 270 units.
+[INFO DPL-0320] Collected 5113 fixed cells.
+[INFO DPL-0318] Collected 167509 single height cells.
+[INFO DPL-0321] Collected 0 wide cells.
+[INFO DPL-0322] Image (2052, 2160) - (208548, 208440)
+[INFO DPL-0310] Assigned 167509 cells into segments.  Movement in X-direction is 0.000000, movement in Y-direction is 0.000000.
+[INFO DPL-0313] Found 0 cells in wrong regions.
+[INFO DPL-0315] Found 0 row alignment problems.
+[INFO DPL-0314] Found 0 site alignment problems.
+[INFO DPL-0311] Found 0 overlaps between adjacent cells.
+[INFO DPL-0312] Found 0 edge spacing violations and 0 padding violations.
+[INFO DPL-0303] Running algorithm for independent set matching.
+[INFO DPL-0300] Set matching objective is wirelength.
+[INFO DPL-0301] Pass   1 of matching; objective is 8.441110e+08.
+[INFO DPL-0302] End of matching; objective is 8.438190e+08, improvement is 0.03 percent.
+[INFO DPL-0303] Running algorithm for global swaps.
+[INFO DPL-0306] Pass   1 of global swaps; hpwl is 8.362135e+08.
+[INFO DPL-0307] End of global swaps; objective is 8.362135e+08, improvement is 0.90 percent.
+[INFO DPL-0303] Running algorithm for vertical swaps.
+[INFO DPL-0308] Pass   1 of vertical swaps; hpwl is 8.339811e+08.
+[INFO DPL-0309] End of vertical swaps; objective is 8.339811e+08, improvement is 0.27 percent.
+[INFO DPL-0303] Running algorithm for reordering.
+[INFO DPL-0304] Pass   1 of reordering; objective is 8.331456e+08.
+[INFO DPL-0305] End of reordering; objective is 8.331456e+08, improvement is 0.10 percent.
+[INFO DPL-0303] Running algorithm for random improvement.
+[INFO DPL-0324] Random improver is using random generator.
+[INFO DPL-0325] Random improver is using hpwl objective.
+[INFO DPL-0326] Random improver cost string is (a).
+[INFO DPL-0332] End of pass, Generator random called 3350180 times.
+[INFO DPL-0335] Generator random, Cumulative attempts 3350180, swaps 395332, moves 1072342 since last reset.
+[INFO DPL-0333] End of pass, Objective hpwl, Initial cost 8.322042e+08, Scratch cost 8.263526e+08, Incremental cost 8.263526e+08, Mismatch? N
+[INFO DPL-0338] End of pass, Total cost is 8.263526e+08.
+[INFO DPL-0327] Pass   1 of random improver; improvement in cost is 0.70 percent.
+[INFO DPL-0328] End of random improver; improvement is 0.703152 percent.
+[INFO DPL-0380] Cell flipping.
+[INFO DPL-0382] Changed 0 cell orientations for row compatibility.
+[INFO DPL-0383] Performed 54829 cell flips.
+[INFO DPL-0384] End of flipping; objective is 8.146909e+08, improvement is 1.52 percent.
+[INFO DPL-0313] Found 0 cells in wrong regions.
+[INFO DPL-0315] Found 0 row alignment problems.
+[INFO DPL-0314] Found 0 site alignment problems.
+[INFO DPL-0311] Found 0 overlaps between adjacent cells.
+[INFO DPL-0312] Found 0 edge spacing violations and 0 padding violations.
+Detailed Improvement Results
+------------------------------------------
+Original HPWL           845294.1 u (  417286.7,   428007.4)
+Final HPWL              814163.7 u (  398174.1,   415989.6)
+Delta HPWL                  -3.7 % (      -4.6,       -2.8)
+
+Took 65 seconds: improve_placement -max_displacement "5 1"
+optimize_mirroring
+[INFO DPL-0020] Mirrored 15559 instances
+[INFO DPL-0021] HPWL before          814163.7 u
+[INFO DPL-0022] HPWL after           813712.5 u
+[INFO DPL-0023] HPWL delta               -0.1 %
+[INFO FLW-0012] Placement violations .
+estimate_parasitics -placement
+Took 6 seconds: estimate_parasitics -placement
+Report metrics stage 3, detailed place...
+
+==========================================================================
+detailed place report_design_area
+--------------------------------------------------------------------------
+Design area 20758 um^2 49% utilization.
+write_db /workspace/build/experiments/lsu-a-v1/physical-14000ps-backend-clean-v1/results/asap7/rv32_post_lsu_v1/base/3_5_place_dp.odb
+write_sdc -no_timestamp /workspace/build/experiments/lsu-a-v1/physical-14000ps-backend-clean-v1/results/asap7/rv32_post_lsu_v1/base/3_place.sdc
+Elapsed time: 3:30.48[h:]min:sec. CPU time: user 218.47 sys 24.64 (115%). Peak memory: 1451088KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_5_place_dp              .odb          210           1417 a154a2df4814645e87e6

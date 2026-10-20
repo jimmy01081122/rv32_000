@@ -1,6 +1,6 @@
 # Current project status
 
-Updated 2026-10-19. Initial documentation-cleanup baseline: maintenance commit `1b266ed0b17aaec2dc598e5128fc57ab9edf56bb`;
+Updated 2026-10-20. Initial documentation-cleanup baseline: maintenance commit `1b266ed0b17aaec2dc598e5128fc57ab9edf56bb`;
 incoming RTL revision: `0d79df58e65c2e1034e40f7f586a463fd8602ff1`.
 The documentation cleanup changes no RTL behavior or executable acceptance thresholds.
 
@@ -12,8 +12,10 @@ frozen in [AP5B v1](../baselines/ap5b-post-lsu-v1/manifest.json). The
 10 ns (100 MHz), with 22,081.1184 µm² cell area and fixed 10 ns I/D memory time.
 TT/SS/FF closure is qualified at global-route research scope. The approved
 [isolated LSU A experiment](../experiments/lsu-a-v1/README.md) passes clean-source
-functional qualification and all 27 common-clock measurements; physical qualification
-is running. B remains an independent planned control, C later.
+functional qualification and complete 27-case measurement at both independently
+qualified operating points. Its [physical evidence](evidence/2026-10-20/lsu-a-physical/README.md) records
+22,162.24152 µm² (1.003674× baseline), actual 9.8 ns SS setup failure and
+9.9/10.0 ns TT/SS/FF passes. B remains an independent planned control, C later.
 
 The [A functional milestone](evidence/2026-10-19/lsu-a-functional/README.md) at
 clean `39bc12d` includes 40 positive LSU pin-driven cases and an original-RTL
@@ -22,8 +24,15 @@ interface cases, 58 fixed-time controls and 3,400 finite FMA checks. All 27 froz
 workloads pass, including 3,629 FP32 outputs and unchanged retired instruction
 classes; the 151-input durable job finishes with unchanged hashes. At common
 100 MHz and fixed 10 ns memory, Embench GM is 1.045830× and FP32 GM 1.078255×
-(DSP 1.051614×, matrix/ML 1.105571×). These are cycle diagnostics pending actual
-TT/SS/FF timing and area qualification, not completed planning-target acceptance.
+(DSP 1.051614×, matrix/ML 1.105571×). The same 100 MHz result is now physically qualified. The complete 101.01 MHz
+run at clean `70727f5` also passes 27/27 and 3,629 FP32 outputs, with 231 unchanged
+inputs, but yields Embench 0.726601× and FP32 0.700275×. Audits confirm fixed
+10 ns service first becomes visible after 19.8 ns at that clock. Both points
+retain identical per-PC/instruction/kind retired-work counts across all 27
+programs; these count maps are not an ordered trace. Area passes the 1.10×
+budget; neither operating point reaches both 1.20× goals. Recommend discussing
+100 MHz for A before the already-approved independent B experiment; no formal
+operating point or replacement baseline has been selected.
 
 ## Evidence available
 
@@ -106,7 +115,7 @@ also pass 58/58 plus the scheduler unit test; all 12 fault traces match the
 normal-build preparation evidence. The scored simulator remains unchanged.
 The [v1 manifest](../baselines/ap5b-post-lsu-v1/manifest.json) is frozen after
 formal 27/27 measurement at clean `9769123`; source state and scored simulator
-remain unchanged. A is under isolated qualification; the frozen baseline contains no A/B/C.
+remain unchanged. A has completed isolated global-route research qualification; the frozen baseline contains no A/B/C.
 
 ## Current implementation drift
 
@@ -220,5 +229,5 @@ planning targets of at least 1.20x speedup for each category and at most 1.10x
 baseline standard-cell area on 2026-10-17. Workload identities and the fixed-time
 policy, 10 ns physical clock, 22,081.1184 µm² area and formal 27/27 measurement
 are frozen in AP5B v1.
-No measured CPU improvement is claimed.
+A has qualified common-clock CPU gains of 1.045830× / 1.078255×; project performance targets remain unmet.
 Document cleanup does not waive old failures.

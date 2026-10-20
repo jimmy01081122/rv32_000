@@ -1,0 +1,43 @@
+{
+  "scope": "Completed measurement and independent reviews; remove only the verified idle owned container. No images or source/result files deleted.",
+  "started_utc": "2026-10-20T09:21:21.117398+00:00",
+  "container_name": "rv32-lsu-a-physical",
+  "container_id": "054ebe72b3728686b6e7edd14f5daf63972b4037af3afd74ed069c3848949ab0",
+  "image_id": "sha256:92a37abacbbf91494f9a8078b45fe1f6688a533cf5c87d02599d28c5fe229b33",
+  "idle_process_rows": [
+    "706                 sleep"
+  ],
+  "idle_process_commands": [
+    "sleep"
+  ],
+  "measurement_returncode": 0,
+  "measurement_inputs_unchanged": true,
+  "both_operating_point_reviews_passed": true,
+  "free_before_bytes": 1584025600,
+  "commands": [
+    {
+      "command": [
+        "docker",
+        "stop",
+        "--time",
+        "10",
+        "rv32-lsu-a-physical"
+      ],
+      "returncode": 0,
+      "output": "Flag --time has been deprecated, use --timeout instead\nrv32-lsu-a-physical\n"
+    },
+    {
+      "command": [
+        "docker",
+        "rm",
+        "054ebe72b3728686b6e7edd14f5daf63972b4037af3afd74ed069c3848949ab0"
+      ],
+      "returncode": 0,
+      "output": "054ebe72b3728686b6e7edd14f5daf63972b4037af3afd74ed069c3848949ab0\n"
+    }
+  ],
+  "image_retained": true,
+  "free_after_bytes": 10527113216,
+  "finished_utc": "2026-10-20T09:21:35.992664+00:00",
+  "completed": true
+}

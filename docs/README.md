@@ -1,6 +1,6 @@
 # Documentation index
 
-Updated 2026-10-18. Begin with current documents below. A historical PASS or
+Updated 2026-10-20. Begin with current documents below. A historical PASS or
 signoff label applies only to the source/configuration and checks in that record.
 
 ## Current documents
@@ -23,6 +23,8 @@ signoff label applies only to the source/configuration and checks in that record
 | [FMA contraction review](FMA_CONTRACTION_REVIEW.md) | Off/fast policy, matched cycle/error data, finite FMA correctness fix and regression evidence |
 | [Progress and baseline review](PROGRESS_REVIEW.md) | Updated FP toolchain evidence, honest progress gates and discussion proposals |
 | [Frozen post-LSU baseline](evidence/2026-10-18/post-lsu-baseline/README.md) | Actual 10 ns TT/SS/FF closure, cell area, fixed-time memory and formal 27/27 evidence |
+| [LSU A functional milestone](evidence/2026-10-19/lsu-a-functional/README.md) | Clean-source interface qualification and original full common-clock measurement |
+| [LSU A physical and operating-point review](evidence/2026-10-20/lsu-a-physical/README.md) | Actual timing grid, area and complete 27-case comparison at both qualified clocks |
 | [Session handoff](SESSION_HANDOFF.md) | Bring-up measurements, tool images and local evidence locations |
 | [CI workflow](../.github/workflows/README.md) | Existing jobs, prerequisites and limits |
 | [Physical flow](../physical/asap7/README.md) | ASAP7 setup status and current research limitations |
