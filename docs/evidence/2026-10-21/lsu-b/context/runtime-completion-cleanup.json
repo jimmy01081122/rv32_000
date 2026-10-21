@@ -1,0 +1,18 @@
+{
+  "utc": "2026-10-21T03:43:44.248000+00:00",
+  "scope": "all B native jobs ended; timing rejection preserved; remove only idle owned runtime, preserve host bind outputs and pinned images",
+  "container_id": "299987b95527443326077bd3bc65e8f3bf3bacc082ac8b6dfe24cd020a1b1381",
+  "image_id": "sha256:92a37abacbbf91494f9a8078b45fe1f6688a533cf5c87d02599d28c5fe229b33",
+  "idle_processes": "PID                 COMMAND             COMMAND\n13877               sleep               /bin/sleep infinity\n",
+  "platform204_final_check": true,
+  "free_before_bytes": 660484096,
+  "stop_output": "rv32-lsu-b-physical\n",
+  "remove_output": "rv32-lsu-b-physical\n",
+  "free_after_bytes": 8899334144,
+  "pinned_images_retained": {
+    "rv32ooo-orfs:8359fde-flat": "sha256:92a37abacbbf91494f9a8078b45fe1f6688a533cf5c87d02599d28c5fe229b33",
+    "rv32ooo-fp:p1": "sha256:2140263677b3a378d5cab75a3d0d4fd285ddb38a1a5a1f81f5cf97db024a02d5",
+    "rv32ooo-sim:g1": "sha256:0d80d39df2f24dc60a77387242f781edc1cc67f53865719981e01b5b5a989d26",
+    "rv32ooo-syn:g1": "sha256:b56c1e8635d9baabe4d64ecdd9c63d0685da9aa11075b69bc6bd665ca52bea2b"
+  }
+}

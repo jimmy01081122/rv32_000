@@ -1,0 +1,254 @@
+{
+  "scope": "completed independent B v1 experiment at fixed global-route research boundary; physical acceptance FAILED",
+  "utc": "2026-10-21T03:44:50.057075+00:00",
+  "experiment_execution_complete": true,
+  "candidate_status": "rejected by physical timing gate; no baseline promotion",
+  "source_commit": "95ac0dd6451a1799f9f3fe948c7b74c02f5fccd2",
+  "source_status": "",
+  "experiment_manifest_sha256": "dff4339c0f3b4992f0c0fd90089d55ccbef06d27e662ae2d3b298d49dd73a40a",
+  "baseline_commit": "58a4159da0372b3286758be1e6c1b50f9f28cc27",
+  "baseline_manifest_sha256": "60f59b3cc705560885e2101046d810cf3548fef277c1c1e5820826ef25485fb6",
+  "baseline_executable_preserved": true,
+  "unit_cases_per_RTL": 62,
+  "unit_original_RTL_negative_control_passed": true,
+  "directed_and_Spike_cases_each": 18,
+  "interface_cases": 48,
+  "fixed_time_cases": 58,
+  "finite_FMA_vectors": 3400,
+  "contract_tests": 31,
+  "full_common_clock_cases": 27,
+  "FP32_outputs": 3629,
+  "full_functional_measurement_passed": true,
+  "per_pc_work_matches": true,
+  "common_clock_cycle_diagnostics": {
+    "period_ps": 10000,
+    "memory_ps": 10000,
+    "embench_geomean": 1.029458926609211,
+    "fp32_geomean": 1.0095989895859971,
+    "FP32_groups": {
+      "dsp": 1.013839324971106,
+      "matrix_ml": 1.005376389204587
+    },
+    "physical_qualified": false
+  },
+  "native_execution_stages": [
+    {
+      "stage": "physical-5500ps-synth-clean-v1",
+      "started_utc": "2026-10-21T01:53:04.715024+00:00",
+      "finished_utc": "2026-10-21T02:13:18.336164+00:00",
+      "summary_sha256": "97011abafb8ad561b9aaba5f2197f851e196eeb872191e74b38009ec83d257e4",
+      "native_execution_passed": true
+    },
+    {
+      "stage": "physical-14000ps-backend-clean-v1",
+      "started_utc": "2026-10-21T02:13:20.047099+00:00",
+      "finished_utc": "2026-10-21T02:58:07.846280+00:00",
+      "summary_sha256": "4f2b9c7ad9e8940b4fe167b29e9d351531732b03a084731c11ec00d9bb20ae3a",
+      "native_execution_passed": true
+    },
+    {
+      "stage": "physical-14000ps-eco-clean-v1",
+      "started_utc": "2026-10-21T02:58:21.201533+00:00",
+      "finished_utc": "2026-10-21T03:34:29.413099+00:00",
+      "summary_sha256": "6f0833bdc7c7ca0782d9099997eec17b6287c814bb03a1a76f952d2a6e76a78c",
+      "native_execution_passed": true
+    }
+  ],
+  "global_route": {
+    "nets": 174439,
+    "wirelength_um": 1482175,
+    "overflow_H_V_total": [
+      0,
+      0,
+      0
+    ],
+    "ECO_placement_failures": [
+      0,
+      0
+    ],
+    "antenna_net_pin_violations": [
+      0,
+      0
+    ]
+  },
+  "standard_cell_area_um2": 21983.62194000399,
+  "standard_cell_area_ratio": 0.9955846231049593,
+  "measured_area_budget_passed": true,
+  "standard_cell_count": 179774,
+  "physical_register_count": 18162,
+  "timing_collections": [
+    {
+      "name": "initial-14000ps",
+      "review_sha256": "e1b0fda5936b01b74182e6082c9852b5974a1db7b67704b98edee44b0176a5c0",
+      "records": [
+        {
+          "corner": "TT",
+          "standard_cell_area_um2": 21983.62194000399,
+          "standard_cell_count": 179774,
+          "register_count": 18162,
+          "library_warning_cell_instances": 0,
+          "trials": [
+            {
+              "period_ps": 14000,
+              "setup_slack_ps": 5828.408889937433,
+              "hold_slack_ps": 48.85572521633086,
+              "problems": [],
+              "passed": true
+            }
+          ]
+        },
+        {
+          "corner": "SS",
+          "standard_cell_area_um2": 21983.62194000399,
+          "standard_cell_count": 179774,
+          "register_count": 18162,
+          "library_warning_cell_instances": 0,
+          "trials": [
+            {
+              "period_ps": 14000,
+              "setup_slack_ps": 1717.0087642567166,
+              "hold_slack_ps": 85.20928441355288,
+              "problems": [],
+              "passed": true
+            }
+          ]
+        },
+        {
+          "corner": "FF",
+          "standard_cell_area_um2": 21983.62194000399,
+          "standard_cell_count": 179774,
+          "register_count": 18162,
+          "library_warning_cell_instances": 0,
+          "trials": [
+            {
+              "period_ps": 14000,
+              "setup_slack_ps": 8094.051683484088,
+              "hold_slack_ps": -0.3327338418096982,
+              "problems": [
+                "hold violation"
+              ],
+              "passed": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "diagnostic-boundary-v1",
+      "review_sha256": "e9c86ffb605b9a4e8db19b8a8012d5581db625fb6581c815eb1b8bfc690ddbe1",
+      "records": [
+        {
+          "corner": "TT",
+          "standard_cell_area_um2": 21983.62194000399,
+          "standard_cell_count": 179774,
+          "register_count": 18162,
+          "library_warning_cell_instances": 0,
+          "trials": [
+            {
+              "period_ps": 10000,
+              "setup_slack_ps": 1828.4085429927363,
+              "hold_slack_ps": 48.85572521633086,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 12200,
+              "setup_slack_ps": 4028.4087338123195,
+              "hold_slack_ps": 48.85572521633086,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 12300,
+              "setup_slack_ps": 4128.408742485937,
+              "hold_slack_ps": 48.85572521633086,
+              "problems": [],
+              "passed": true
+            }
+          ]
+        },
+        {
+          "corner": "SS",
+          "standard_cell_area_um2": 21983.62194000399,
+          "standard_cell_count": 179774,
+          "register_count": 18162,
+          "library_warning_cell_instances": 0,
+          "trials": [
+            {
+              "period_ps": 10000,
+              "setup_slack_ps": -2282.99158268798,
+              "hold_slack_ps": 85.20928441355288,
+              "problems": [
+                "setup violation"
+              ],
+              "passed": false
+            },
+            {
+              "period_ps": 12200,
+              "setup_slack_ps": -82.99139186839693,
+              "hold_slack_ps": 85.20928441355288,
+              "problems": [
+                "setup violation"
+              ],
+              "passed": false
+            },
+            {
+              "period_ps": 12300,
+              "setup_slack_ps": 17.008616805220477,
+              "hold_slack_ps": 85.20928441355288,
+              "problems": [],
+              "passed": true
+            }
+          ]
+        },
+        {
+          "corner": "FF",
+          "standard_cell_area_um2": 21983.62194000399,
+          "standard_cell_count": 179774,
+          "register_count": 18162,
+          "library_warning_cell_instances": 0,
+          "trials": [
+            {
+              "period_ps": 10000,
+              "setup_slack_ps": 4094.0508924501796,
+              "hold_slack_ps": -0.3327338418096982,
+              "problems": [
+                "hold violation"
+              ],
+              "passed": false
+            },
+            {
+              "period_ps": 12200,
+              "setup_slack_ps": 6294.051083269763,
+              "hold_slack_ps": -0.3327338418096982,
+              "problems": [
+                "hold violation"
+              ],
+              "passed": false
+            },
+            {
+              "period_ps": 12300,
+              "setup_slack_ps": 6394.05109194338,
+              "hold_slack_ps": -0.3327338418096982,
+              "problems": [
+                "hold violation"
+              ],
+              "passed": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "physical_timing_qualified": false,
+  "qualified_period_ps": null,
+  "setup_only_smallest_tested_all_corner_period_ps": 12300,
+  "setup_only_period_is_NOT_a_qualified_operating_point": true,
+  "fastest_qualified_workload_measurement": null,
+  "fastest_measurement_omission_reason": "No independently qualified clock; full27 common-clock data retained as cycle diagnostics only.",
+  "strict_qualified_score_correctly_rejected": true,
+  "planning_targets_demonstrated": false,
+  "interpretation": "B v1 functional mechanism is validated but whole-suite common-clock gains are below targets. Same fixed physical flow fails SS setup at10000 and FF hold atall tested periods. Worst SS setup is FP input-to-completion, not proof of head-store logic causation. FPU RTL is unchanged; a single mapping/placement run cannot establish architecture inevitability.",
+  "next_decision": "Jointly review A/B and decide whether to diagnose B mapping/hold or choose another experiment; no automatic A+B or baseline replacement.",
+  "review_script_sha256": "39fc7860116d8a846f329f99971da3d2a49b30e9b599461b65961491ae43df37"
+}

@@ -1,0 +1,48 @@
+{
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "scripts/check_lsu_marking.py",
+        "--out",
+        "build/experiments/lsu-b-v1/unit-clean-v1"
+      ],
+      "started_utc": "2026-10-21T01:29:39.490985+00:00",
+      "returncode": 0,
+      "finished_utc": "2026-10-21T01:29:44.774277+00:00"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/qualify_cpu_experiment.py",
+        "--experiment",
+        "experiments/lsu-b-v1/manifest.json",
+        "--build-summary",
+        "build/experiments/lsu-b-v1/build-clean-v1/summary.json",
+        "--out",
+        "build/experiments/lsu-b-v1/qualification-clean-v1"
+      ],
+      "started_utc": "2026-10-21T01:29:44.774486+00:00",
+      "returncode": 0,
+      "finished_utc": "2026-10-21T01:29:50.247239+00:00"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/measure_cpu_experiment.py",
+        "--experiment",
+        "experiments/lsu-b-v1/manifest.json",
+        "--build-summary",
+        "build/experiments/lsu-b-v1/build-clean-v1/summary.json",
+        "--out",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1",
+        "--period-ps",
+        "10000"
+      ],
+      "started_utc": "2026-10-21T01:29:50.247469+00:00",
+      "returncode": 0,
+      "finished_utc": "2026-10-21T01:51:33.987917+00:00"
+    }
+  ],
+  "complete": true
+}

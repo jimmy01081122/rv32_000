@@ -1,0 +1,13 @@
+usage: run_baseline_physical.py [-h] [--period-ps PERIOD_PS] [--jobs JOBS]
+                                [--container CONTAINER] [--label LABEL]
+                                [--resume-reason RESUME_REASON]
+                                [--adder-mapping {platform,abc}] [--detached]
+                                [--synthesis-from SYNTHESIS_FROM]
+                                [--cts-from CTS_FROM] [--grt-from GRT_FROM]
+                                [--eco-slew-margin ECO_SLEW_MARGIN]
+                                [--eco-hold-margin-ps ECO_HOLD_MARGIN_PS]
+                                [--experiment EXPERIMENT]
+                                [--output-root OUTPUT_ROOT]
+                                [--lowered-rtl LOWERED_RTL]
+                                [--stage {synthesis,global-route}]
+run_baseline_physical.py: error: candidate mapping/backend period, jobs, adder policy or ECO margin differs from frozen flow

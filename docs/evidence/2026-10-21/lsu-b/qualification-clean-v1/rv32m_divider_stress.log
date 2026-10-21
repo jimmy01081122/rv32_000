@@ -1,0 +1,19 @@
+[SimMemory] Loaded segment to 0x80000000 (filesz: 0x510, memsz: 0x510)
+[SimMemory] Found 'tohost' symbol at 0x80000500
+[SimMemory] ELF loaded successfully. Entry PC = 0x80000000
+[Simulator] Starting simulation run...
+Running rv32m_divider_stress test...
+rv32m_divider_stress PASSED!
+
+[SimMemory] TOHOST exit (0x1) received. Exit code: 0 (PASS)
+
+[SimMemory] SIM_EXIT received with code: 0 (PASS)
+
+================ Simulation Summary ================
+  ELF binary     : /workspace/build/tests/rv32m_divider_stress.elf
+  Cycles         : 1057
+  Retired insns  : 492
+  IPC            : 0.4655
+  Exit status    : PASS (0)
+====================================================
+

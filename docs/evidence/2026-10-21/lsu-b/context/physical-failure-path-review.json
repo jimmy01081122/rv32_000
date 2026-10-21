@@ -1,0 +1,62 @@
+{
+  "scope": "reported paths and fixed-flow area; critical-path location does not prove root cause or architecture inevitability",
+  "records": [
+    {
+      "candidate": "baseline",
+      "corner": "SS",
+      "kind": "setup",
+      "reported_period_ps": 10000,
+      "slack_ps_rounded_report": 30.87,
+      "start": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+      "end": "dmem_req_addr[12] (output port clocked by core_clk)",
+      "group": "reg2out",
+      "original_report": "docs/evidence/2026-10-18/post-lsu-baseline/physical/boundary-9900-10000ps/SS/setup_paths_10000.rpt",
+      "original_sha256": "ad2c4d155a4c0e7e3653e28f0174fbea5ac07d791ff0c0586f8f66bd873494ad",
+      "extracted_path_sha256": "903dd3bf142a11216e001bda79879d63278a65eb3c34d57e6cf480e4f953017d"
+    },
+    {
+      "candidate": "A",
+      "corner": "SS",
+      "kind": "setup",
+      "reported_period_ps": 10000,
+      "slack_ps_rounded_report": 150.69,
+      "start": "int_ex0_req_q[190]$_SDFFE_PP0P_",
+      "end": "dmem_req_addr[26] (output port clocked by core_clk)",
+      "group": "reg2out",
+      "original_report": "docs/evidence/2026-10-20/lsu-a-physical/physical/physical-14000ps-eco-clean-v1/boundary-v1/SS/setup_paths_10000.rpt",
+      "original_sha256": "8a314a161b67fe4743927584564e63c33967ff32850f0a2a835532e6297d6aae",
+      "extracted_path_sha256": "2baa25321795c6af00ff1668f1ba02a22dfaea33de4ea38b342eb9c53c76ae47"
+    },
+    {
+      "candidate": "B",
+      "corner": "SS",
+      "kind": "setup",
+      "reported_period_ps": 14000,
+      "slack_ps_rounded_report": 1717.01,
+      "start": "fp_ex0_req_q[89]$_SDFFE_PP0P_",
+      "end": "u_fp_execute.cmp_data[115]$_SDFFE_PP0P_",
+      "group": "reg2reg",
+      "original_report": "build/experiments/lsu-b-v1/physical-14000ps-eco-clean-v1/initial-14000ps/SS/setup_paths_14000.rpt",
+      "original_sha256": "959fb75f8a94079d3a77bace97afe4548facd16f7bd50ba29d32e31a15b8701c",
+      "extracted_path_sha256": "40b84a12cb3a9db69df521d9835d04e17690d353c127b1f8a260ae0022469961"
+    },
+    {
+      "candidate": "B",
+      "corner": "FF",
+      "kind": "hold",
+      "reported_period_ps": 14000,
+      "slack_ps_rounded_report": -0.33,
+      "start": "dmem_req_ready (input port clocked by core_clk)",
+      "end": "u_lsu.in_flight_is_store$_SDFFE_PP0P_",
+      "group": "in2reg",
+      "original_report": "build/experiments/lsu-b-v1/physical-14000ps-eco-clean-v1/initial-14000ps/FF/hold_paths_14000.rpt",
+      "original_sha256": "1c7c0ca7e521bfab3abcbc33f544adf1cb51c5c02cbf91e153f7d83967916ae5",
+      "extracted_path_sha256": "68473ca271c6a83e2bbd4de4ea3b9a2c0aab8f98d8755e2c66a6c4049d76a750"
+    }
+  ],
+  "B_area_um2": 21983.62194000399,
+  "B_area_ratio": 0.9955846231049593,
+  "area_budget_passed": true,
+  "B_FPU_RTL_unchanged": true,
+  "interpretation": "B SS worst setup is FP operand-register to FP completion-register. B FF worst hold is external dmem_req_ready to LSU tracking-register. Mapping/layout changed under a single fixed flow; do not attribute all timing loss to head-store logic alone."
+}

@@ -1,0 +1,165 @@
+{
+  "scope": "62 pin-driven LSU cases per RTL plus original-RTL negative timing control; not CPU benchmark speedup",
+  "baseline_commit": "58a4159da0372b3286758be1e6c1b50f9f28cc27",
+  "baseline_lsu_sha256": "a3bd7ce933b33088c2fda9b9ff4b13dc9c7b0a5ac7ec6972b832b7dc02e612b0",
+  "verilator_version": "Verilator 4.038 2020-07-11 rev v4.036-114-g0cd4a57ad",
+  "source_sha256": {
+    "rtl/pkg/rv32_ooo_params.sv": "3fc72080a0387a5424badf665656399ecc48e1c9170bedecb0aea16bd7602523",
+    "rtl/pkg/rv32_ooo_types.sv": "01be8e3b4c3959d9284e105412e415d77a6702db7de86eb1505d6fd428ee6759",
+    "verification/unit/lsu_marking_top.sv": "813de23cad929249cc1f4c6a75eac9a436f4a416e46c88a932b3c28bffd388bb",
+    "verification/unit/test_lsu_marking.cpp": "ea9233afbaeb875c3656cfb1e7df9066a5fe6e6c2f10b4305584c22a29e5e2a3",
+    "rtl/lsu/rv32_ooo_lsu.sv": "3632a910cc769aa8a3a1594678420e5b3ec1a77e871811742d48195c761fe92e",
+    "scripts/check_lsu_marking.py": "f1bb513702b15b353dd387f6e3b68e191d725b80ebeb4c84c83a74a28ef4be99"
+  },
+  "builds": [
+    {
+      "rtl": "baseline",
+      "generation": {
+        "command": [
+          "verilator",
+          "--cc",
+          "--exe",
+          "--assert",
+          "-Wall",
+          "-Wno-UNUSED",
+          "-Wno-STMTDLY",
+          "-Wno-PINCONNECTEMPTY",
+          "--top-module",
+          "lsu_marking_top",
+          "--Mdir",
+          "/workspace/build/experiments/lsu-b-v1/unit-clean-v1/baseline",
+          "-o",
+          "lsu_unit",
+          "-CFLAGS",
+          "-O2",
+          "rtl/pkg/rv32_ooo_params.sv",
+          "rtl/pkg/rv32_ooo_types.sv",
+          "/workspace/build/experiments/lsu-b-v1/unit-clean-v1/baseline-rtl/rv32_ooo_lsu.sv",
+          "verification/unit/lsu_marking_top.sv",
+          "/workspace/verification/unit/test_lsu_marking.cpp"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-b-v1/unit-clean-v1/baseline-verilate.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.1284158269991167
+      },
+      "compile": {
+        "command": [
+          "make",
+          "-C",
+          "/workspace/build/experiments/lsu-b-v1/unit-clean-v1/baseline",
+          "-f",
+          "Vlsu_marking_top.mk",
+          "-j2"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-b-v1/unit-clean-v1/baseline-build.log",
+        "log_sha256": "54a6674fa5a19ae491fe553162f12022be8b0dbfa6f113f0e72b5321663a4713",
+        "wall_seconds": 2.313470260000031
+      },
+      "binary_sha256": "825511c9b3613d40c4daac4acf02c2b383a38e567bd4770f81b36a4d67c0ea75"
+    },
+    {
+      "rtl": "candidate",
+      "generation": {
+        "command": [
+          "verilator",
+          "--cc",
+          "--exe",
+          "--assert",
+          "-Wall",
+          "-Wno-UNUSED",
+          "-Wno-STMTDLY",
+          "-Wno-PINCONNECTEMPTY",
+          "--top-module",
+          "lsu_marking_top",
+          "--Mdir",
+          "/workspace/build/experiments/lsu-b-v1/unit-clean-v1/candidate",
+          "-o",
+          "lsu_unit",
+          "-CFLAGS",
+          "-O2",
+          "rtl/pkg/rv32_ooo_params.sv",
+          "rtl/pkg/rv32_ooo_types.sv",
+          "/workspace/rtl/lsu/rv32_ooo_lsu.sv",
+          "verification/unit/lsu_marking_top.sv",
+          "/workspace/verification/unit/test_lsu_marking.cpp"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-b-v1/unit-clean-v1/candidate-verilate.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.1320225359959295
+      },
+      "compile": {
+        "command": [
+          "make",
+          "-C",
+          "/workspace/build/experiments/lsu-b-v1/unit-clean-v1/candidate",
+          "-f",
+          "Vlsu_marking_top.mk",
+          "-j2"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-b-v1/unit-clean-v1/candidate-build.log",
+        "log_sha256": "5dfb51deb36c4653a6660e57c9dcc9059b41cdbcdff198c16d839f202afb8219",
+        "wall_seconds": 2.6128060480041313
+      },
+      "binary_sha256": "ba32a36bf63b6b3a4ea78c1a6424a7e6426f5900bb350cdfcbdbbb92a6ecbee5"
+    }
+  ],
+  "records": [
+    {
+      "name": "baseline",
+      "negative_control": false,
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-b-v1/unit-clean-v1/baseline/lsu_unit",
+          "0",
+          "/workspace/build/experiments/lsu-b-v1/unit-clean-v1/baseline.csv"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-b-v1/unit-clean-v1/baseline.log",
+        "log_sha256": "c74649101c1d8b11e810302a72fb67ade71134af63065943d593c668aba911d7",
+        "wall_seconds": 0.009275007003452629
+      },
+      "trace_sha256": "851595f98f1c28a60a3a8af4747d6a18d9d63b50f4856fb9768eb702a5d84af9",
+      "passed": true
+    },
+    {
+      "name": "baseline-reject-B-timing",
+      "negative_control": true,
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-b-v1/unit-clean-v1/baseline/lsu_unit",
+          "1",
+          "/workspace/build/experiments/lsu-b-v1/unit-clean-v1/baseline-reject-B-timing.csv"
+        ],
+        "returncode": 1,
+        "log": "build/experiments/lsu-b-v1/unit-clean-v1/baseline-reject-B-timing.log",
+        "log_sha256": "c2fe3ef80daa7236f889666f785eb9677766be263fc967b867703f8c70f035c1",
+        "wall_seconds": 0.0017560209962539375
+      },
+      "trace_sha256": "c5066f1f342b790a26b9d7b58b9837cc78fde03c8de0595dcb243adeca6377f6",
+      "passed": true
+    },
+    {
+      "name": "candidate",
+      "negative_control": false,
+      "execution": {
+        "command": [
+          "/workspace/build/experiments/lsu-b-v1/unit-clean-v1/candidate/lsu_unit",
+          "1",
+          "/workspace/build/experiments/lsu-b-v1/unit-clean-v1/candidate.csv"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-b-v1/unit-clean-v1/candidate.log",
+        "log_sha256": "94cecef63fc47736c2aaf25052f8a3b25dcb723b04eb829d9e64b12778f634e9",
+        "wall_seconds": 0.008408273999521043
+      },
+      "trace_sha256": "9f87f6151a7ee61404c05c259a5ac25401fb20956afb3787c4202f4e3ae4f5ca",
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "input_identities_unchanged": true
+}

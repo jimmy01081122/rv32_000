@@ -15,7 +15,7 @@ TT/SS/FF closure is qualified at global-route research scope. The approved
 functional qualification and complete 27-case measurement at both independently
 qualified operating points. Its [physical evidence](evidence/2026-10-20/lsu-a-physical/README.md) records
 22,162.24152 µm² (1.003674× baseline), actual 9.8 ns SS setup failure and
-9.9/10.0 ns TT/SS/FF passes. The user has now resumed the independent [B experiment](../experiments/lsu-b-v1/README.md), C later.
+9.9/10.0 ns TT/SS/FF passes. The independent [B experiment](LSU_B_REVIEW.md) is now complete: functional/cycle qualification passes, physical timing fails; C remains later.
 
 The [A functional milestone](evidence/2026-10-19/lsu-a-functional/README.md) at
 clean `39bc12d` includes 40 positive LSU pin-driven cases and an original-RTL
@@ -30,9 +30,7 @@ inputs, but yields Embench 0.726601× and FP32 0.700275×. Audits confirm fixed
 10 ns service first becomes visible after 19.8 ns at that clock. Both points
 retain identical per-PC/instruction/kind retired-work counts across all 27
 programs; these count maps are not an ordered trace. Area passes the 1.10×
-budget; neither operating point reaches both 1.20× goals. Recommend discussing
-100 MHz for A before the already-approved independent B experiment; no formal
-operating point or replacement baseline has been selected.
+budget; neither operating point reaches both 1.20× goals. Recommend discussing 100 MHz for A alongside the completed B result; no replacement baseline has been selected.
 
 The subsequent [A verification review](LSU_A_VERIFICATION_REVIEW.md) reruns the
 clean-source directed/Spike/interface/fixed-time/FMA regression and passes 35 LSU
@@ -41,10 +39,9 @@ It fixes two reviewer omissions: build/functional executable provenance was not
 bound to measurements, and per-PC retired work was only checked offline.
 All four real-data negative controls now reject; 30 contract/review controls pass.
 Both complete operating points pass the strengthened review with unchanged scores.
-The A review changed no CPU RTL or scored simulator/physical inputs. On 2026-10-21
-the user authorized B: its branch starts at frozen `58a4159`, with only LSU B RTL
-and explicitly shared tooling. Functional and full performance/PPA qualification
-are in progress; no B score is claimed before these gates complete.
+The A review changed no CPU RTL or scored simulator/physical inputs. The completed B branch starts at frozen `58a4159`, with only LSU B RTL and explicitly shared tooling. Clean `95ac0dd` passes baseline/B unit 62 each, directed 18/Spike 18/interface 48/fixed-time 58/FMA 3400, all 27 workloads and FP 3629, with matching per-PC work. The common-clock cycle diagnostics are Embench 1.029459× / FP32 1.009599×, DSP 1.013839× / matrix/ML 1.005376×. PID time increases 13.9763%.
+
+B standard-cell area is 21,983.62194 µm² (0.995585×). Native synthesis/backend/ECO complete rc0 with unchanged inputs and zero final route overflow, but independent timing rejects it: SS setup −2282.992ps at 10000 ps, SS setup −82.991ps at 12200 ps and +17.009ps at 12300 ps; FF hold −0.333ps at all tested periods, including 14000 ps. There is no qualified B clock or accepted system-time score. Strict admission rejects the physical proof; a separate complete functional/raw-data review passes. The [B review](LSU_B_REVIEW.md) and [raw archive](evidence/2026-10-21/lsu-b/README.md) retain failures and the mapping/layout limitation. Subsequent mapping/hold diagnosis or A+B requires joint direction selection; this B version is not promoted.
 
 ## Evidence available
 

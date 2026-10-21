@@ -1,0 +1,29 @@
+{
+  "utc": "2026-10-21T02:18:15.391505+00:00",
+  "container": "rv32-lsu-b-physical",
+  "scope": "private disposable runtime headers/docs only; no tools, libraries, pinned images, host files or native checkpoints removed; no remaining build step compiles C/C++",
+  "platform204_before": true,
+  "platform204_after": true,
+  "removed": [
+    {
+      "private_development_headers_or_documentation": "/usr/include",
+      "logical_bytes": 198160668
+    },
+    {
+      "private_development_headers_or_documentation": "/usr/local/include",
+      "logical_bytes": 170305487
+    },
+    {
+      "private_development_headers_or_documentation": "/opt/or-tools/include",
+      "logical_bytes": 127053258
+    },
+    {
+      "private_development_headers_or_documentation": "/usr/share/doc",
+      "logical_bytes": 19440907
+    },
+    {
+      "private_development_headers_or_documentation": "/usr/local/doc",
+      "logical_bytes": 41158363
+    }
+  ]
+}

@@ -1,0 +1,116 @@
+{
+  "start_commit": "95ac0dd6451a1799f9f3fe948c7b74c02f5fccd2",
+  "start_status": "",
+  "records": [
+    {
+      "name": "clean-contract-controls",
+      "command": [
+        "make",
+        "check-experiment-contract",
+        "CPU_EXPERIMENT=lsu-b-v1"
+      ],
+      "returncode": 0,
+      "negative_control": false,
+      "expected_text": null,
+      "log_sha256": "3e91ea914d8efe6b180267a2e22680ad8c32a4bda0bc5933b59aa883f7cc7be5",
+      "passed": true
+    },
+    {
+      "name": "baseline-rejects-B",
+      "command": [
+        "python3",
+        "scripts/lower_baseline_rtl.py",
+        "--out",
+        "build/experiments/lsu-b-v1/admission-controls/forbidden-baseline.v"
+      ],
+      "returncode": 1,
+      "negative_control": true,
+      "expected_text": "baseline RTL changed",
+      "log_sha256": "1d0cab3ce1ece0a31f578c0cecf05606ee86ae03be373fa94a81887c9cd667a0",
+      "passed": true
+    },
+    {
+      "name": "reject-wrong-mapping",
+      "command": [
+        "python3",
+        "scripts/run_baseline_physical.py",
+        "--experiment",
+        "experiments/lsu-b-v1/manifest.json",
+        "--output-root",
+        "build/experiments/lsu-b-v1/forbidden-physical",
+        "--lowered-rtl",
+        "build/experiments/lsu-b-v1/rtl_lowered.v",
+        "--stage",
+        "synthesis",
+        "--period-ps",
+        "5600",
+        "--adder-mapping",
+        "abc",
+        "--jobs",
+        "2"
+      ],
+      "returncode": 2,
+      "negative_control": true,
+      "expected_text": "differs from frozen flow",
+      "log_sha256": "297a438a0ac94adedaf519d17f016c0fa198292733363af50b60317157bb141a",
+      "passed": true
+    },
+    {
+      "name": "reject-A-build-proof",
+      "command": [
+        "python3",
+        "scripts/review_cpu_experiment.py",
+        "--experiment",
+        "experiments/lsu-b-v1/manifest.json",
+        "--measurement",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1",
+        "--analysis",
+        "build/experiments/lsu-b-v1/physical-14000ps-eco-clean-v1/boundary-v1",
+        "--comparison-point",
+        "common-clock",
+        "--build-summary",
+        "build/experiments/lsu-a-v1/build-clean-v1/summary.json",
+        "--qualification-summary",
+        "build/experiments/lsu-b-v1/qualification-clean-v1/summary.json",
+        "--out",
+        "build/experiments/lsu-b-v1/admission-controls/reject-A-build-proof.json"
+      ],
+      "returncode": 1,
+      "negative_control": true,
+      "expected_text": "build source/experiment/wrapper identity differs",
+      "review_result_sha256": "eea4f57f4a42b0afdf21c71a8265737c7b9efa374dbd790cfe67244af2f5f5fb",
+      "log_sha256": "eea4f57f4a42b0afdf21c71a8265737c7b9efa374dbd790cfe67244af2f5f5fb",
+      "passed": true
+    },
+    {
+      "name": "reject-A-functional-proof",
+      "command": [
+        "python3",
+        "scripts/review_cpu_experiment.py",
+        "--experiment",
+        "experiments/lsu-b-v1/manifest.json",
+        "--measurement",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1",
+        "--analysis",
+        "build/experiments/lsu-b-v1/physical-14000ps-eco-clean-v1/boundary-v1",
+        "--comparison-point",
+        "common-clock",
+        "--build-summary",
+        "build/experiments/lsu-b-v1/build-clean-v1/summary.json",
+        "--qualification-summary",
+        "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/summary.json",
+        "--out",
+        "build/experiments/lsu-b-v1/admission-controls/reject-A-functional-proof.json"
+      ],
+      "returncode": 1,
+      "negative_control": true,
+      "expected_text": "measurement/functional run are not bound to this build proof",
+      "review_result_sha256": "809eab30ed6ddce8c7f22d57c1acb3581dc1faa4cb7b58337645676a3f9c6c93",
+      "log_sha256": "809eab30ed6ddce8c7f22d57c1acb3581dc1faa4cb7b58337645676a3f9c6c93",
+      "passed": true
+    }
+  ],
+  "end_commit": "95ac0dd6451a1799f9f3fe948c7b74c02f5fccd2",
+  "end_status": "",
+  "passed": true
+}

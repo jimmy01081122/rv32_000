@@ -1,0 +1,20 @@
+[SimMemory] Loaded segment to 0x80000000 (filesz: 0x650, memsz: 0x650)
+[SimMemory] Found 'tohost' symbol at 0x80000640
+[SimMemory] ELF loaded successfully. Entry PC = 0x80000000
+[Simulator] Commit trace logging enabled: /workspace/build/experiments/lsu-b-v1/qualification-clean-v1/spike/dut_fp_edge_cases.log
+[Simulator] Starting simulation run...
+Running fp_edge_cases test...
+fp_edge_cases: ALL TESTS PASSED!
+
+[SimMemory] TOHOST exit (0x1) received. Exit code: 0 (PASS)
+
+[SimMemory] SIM_EXIT received with code: 0 (PASS)
+
+================ Simulation Summary ================
+  ELF binary     : build/tests/fp_edge_cases.elf
+  Cycles         : 905
+  Retired insns  : 530
+  IPC            : 0.5856
+  Exit status    : PASS (0)
+====================================================
+

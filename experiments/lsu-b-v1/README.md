@@ -1,6 +1,8 @@
 # LSU B v1：ROB 頭端 store marking 同拍送出
 
-2026-10-21，使用者核准進行 B。獨立分支 `codex/lsu-b-marking` 的父版本為
+2026-10-21，B 獨立實驗已完成：[審查](../../docs/LSU_B_REVIEW.md)與[原始證據](../../docs/evidence/2026-10-21/lsu-b/README.md)已封存。功能／完整同頻 cycle 資料通過；面積0.995585×，但SS setup與FF hold未通過，無完整合格操作點。同頻 cycle GM為Embench 1.029459×／FP32 1.009599×，不作正式PPA通過成績。
+
+下列保留事前固定的設計與驗收條件。使用者核准進行 B。獨立分支 `codex/lsu-b-marking` 的父版本為
 凍結基線 `58a4159da0372b3286758be1e6c1b50f9f28cc27`。沿用 A 已審查的
 量測工具與歷史證據（`bf6702c`），CPU 的其餘 17 個 RTL 檔與模擬／實體
 輸入仍逐檔匹配基線；唯一 RTL 修改為 LSU。沒有合併 A 的 response-buffer overlap。
@@ -32,4 +34,4 @@ store response 才 ack 退休。保留 16-slot SQ、一筆 external outstanding�
    reviewer 綁定 build／functional proof、binary 與完整輸入、實體資格。
    固定目標：Embench 與 FP32 各 ≥1.20×、標準元件面積 ≤1.10×。
 
-尚未產生 B 的正式效能／面積結論；不取代凍結基線，不預先相加 A／B 收益。
+本版已有完整功能／cycle與失敗實體結果；不取代凍結基線，後續調整或組合仍由共同選擇。

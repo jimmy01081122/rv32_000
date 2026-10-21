@@ -1,0 +1,71 @@
+PASS load-load-int
+PASS load-load-int-backpressure
+PASS load-load-int-wrap
+PASS load-load-int-wrap-backpressure
+PASS load-load-fp
+PASS load-load-fp-backpressure
+PASS load-load-fp-wrap
+PASS load-load-fp-wrap-backpressure
+PASS load-error
+PASS flush
+PASS recovery
+PASS store-marking-bypass-and-error
+PASS load-to-marked-store-priority
+PASS registered-forwarding-priority
+PASS registered-misalign-priority
+PASS late-response-after-flush
+STREAM requests=16 cycles=48 expected_interval=3
+PASS ideal-stream-3-to-2
+STREAM requests=128 cycles=1039 expected_interval=3
+PASS random-stream-305419896
+STREAM requests=128 cycles=973 expected_interval=3
+PASS random-stream-703710
+STREAM requests=128 cycles=979 expected_interval=3
+PASS random-stream-4027388468
+PASS subword-handoff-0-0-signed
+PASS subword-handoff-0-1-signed
+PASS subword-handoff-0-2-signed
+PASS subword-handoff-0-3-signed
+PASS subword-handoff-1-0-signed
+PASS subword-handoff-1-2-signed
+PASS subword-handoff-0-0-unsigned
+PASS subword-handoff-0-1-unsigned
+PASS subword-handoff-0-2-unsigned
+PASS subword-handoff-0-3-unsigned
+PASS subword-handoff-1-0-unsigned
+PASS subword-handoff-1-2-unsigned
+PASS flush-immediately-after-handoff
+PASS new-load-fault-after-handoff
+PASS marked-store-handoff-backpressure
+PASS head-payload-0-0-int
+PASS head-payload-0-1-int
+PASS head-payload-0-2-int
+PASS head-payload-0-3-int
+PASS head-payload-1-0-int
+PASS head-payload-1-2-int
+PASS head-payload-2-0-int
+PASS head-payload-0-0-fp
+PASS head-payload-0-1-fp
+PASS head-payload-0-2-fp
+PASS head-payload-0-3-fp
+PASS head-payload-1-0-fp
+PASS head-payload-1-2-fp
+PASS head-payload-2-0-fp
+PASS head-guard-no-valid
+PASS head-guard-wrong-seq
+PASS head-guard-wrong-idx
+PASS head-guard-unresolved
+PASS head-guard-misaligned
+PASS head-guard-flush
+PASS head-guard-recovery
+PASS head-backpressure-and-younger-load
+PASS head-keeps-A-response-buffer-exclusion
+STORE_STREAM requests=16 roi_cycles=32 first_request=0 last_request=30 interval=2
+PASS ideal-store-stream
+STORE_STREAM requests=128 roi_cycles=881 first_request=1 last_request=875 interval=2
+PASS random-store-stream-305419896
+STORE_STREAM requests=128 roi_cycles=904 first_request=1 last_request=895 interval=2
+PASS random-store-stream-703710
+STORE_STREAM requests=128 roi_cycles=845 first_request=2 last_request=839 interval=2
+PASS random-store-stream-4027388468
+ALL 62 LSU MARKING CASES PASS marking=1

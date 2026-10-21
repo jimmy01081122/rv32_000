@@ -1,0 +1,240 @@
+{
+  "scope": "complete functional and common-clock cycle-diagnostic review only; physical acceptance is separate and FAILED",
+  "physical_operating_point_qualified": false,
+  "functional_measurement_passed": true,
+  "experiment_manifest_sha256": "dff4339c0f3b4992f0c0fd90089d55ccbef06d27e662ae2d3b298d49dd73a40a",
+  "measurement_summary_sha256": "7d602c60a551e0674f29ec4ba7db6395faa1b0471ca35b0236b65263ec0c059b",
+  "build_functional_provenance": {
+    "validator_sha256": "7fb6e823b208ddeacc17769b4a573a8bb5755ae5465d80da695b1cb1a3ca0394",
+    "build_summary_sha256": "1100da367ad9990009a0e5110b02dbb0a6a7bfe07e82841094a196b27e3aa79c",
+    "qualification_summary_sha256": "f7801e7130612bec403dfa12b8d72fa39ac46896d90139e145ea7742d3defd0d",
+    "normal_simulator_sha256": "359ea89735e630a3c1f2fcd7795ec9598f35d6fb4e9a8b0f448ba3f6ee2c1144",
+    "assert_simulator_sha256": "da70e3bd5c695a9d4bea54950746537092a2ffdf69d10367c56a1f45a1dfc860",
+    "directed_cases": 18,
+    "spike_cases": 18,
+    "interface_cases": 48,
+    "fixed_time_controls": 58,
+    "finite_fma_values": 3400,
+    "passed": true
+  },
+  "reviewer_sha256": "fcc9fbdc6f2fed5623ad0d1dcc785eb7531e694b24d3f11ae080e99bdeb99e5f",
+  "records": [
+    {
+      "family": "fp32",
+      "name": "fir",
+      "cycles": 74303,
+      "numeric_checked": 574,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "fp32",
+      "name": "iir",
+      "cycles": 12499,
+      "numeric_checked": 528,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "fp32",
+      "name": "fft",
+      "cycles": 36722,
+      "numeric_checked": 512,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "fp32",
+      "name": "pid",
+      "cycles": 8261,
+      "numeric_checked": 515,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "fp32",
+      "name": "gemm",
+      "cycles": 133870,
+      "numeric_checked": 500,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "fp32",
+      "name": "bicg",
+      "cycles": 23720,
+      "numeric_checked": 80,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "fp32",
+      "name": "cholesky",
+      "cycles": 190887,
+      "numeric_checked": 820,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "fp32",
+      "name": "svm",
+      "cycles": 43383,
+      "numeric_checked": 100,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "embench",
+      "name": "aha-mont64",
+      "cycles": 5359621,
+      "numeric_checked": 0,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "embench",
+      "name": "crc32",
+      "cycles": 5402210,
+      "numeric_checked": 0,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "embench",
+      "name": "cubic",
+      "cycles": 14025779,
+      "numeric_checked": 0,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "embench",
+      "name": "edn",
+      "cycles": 4723764,
+      "numeric_checked": 0,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "embench",
+      "name": "huffbench",
+      "cycles": 3217162,
+      "numeric_checked": 0,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "embench",
+      "name": "matmult-int",
+      "cycles": 4138048,
+      "numeric_checked": 0,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "embench",
+      "name": "minver",
+      "cycles": 843225,
+      "numeric_checked": 0,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "embench",
+      "name": "nbody",
+      "cycles": 5823850,
+      "numeric_checked": 0,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "embench",
+      "name": "nettle-aes",
+      "cycles": 5170824,
+      "numeric_checked": 0,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "embench",
+      "name": "nettle-sha256",
+      "cycles": 4247681,
+      "numeric_checked": 0,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "embench",
+      "name": "nsichneu",
+      "cycles": 7302368,
+      "numeric_checked": 0,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "embench",
+      "name": "picojpeg",
+      "cycles": 5105271,
+      "numeric_checked": 0,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "embench",
+      "name": "qrduino",
+      "cycles": 4548795,
+      "numeric_checked": 0,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "embench",
+      "name": "sglib-combined",
+      "cycles": 4351929,
+      "numeric_checked": 0,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "embench",
+      "name": "slre",
+      "cycles": 4580842,
+      "numeric_checked": 0,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "embench",
+      "name": "st",
+      "cycles": 7077473,
+      "numeric_checked": 0,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "embench",
+      "name": "statemate",
+      "cycles": 2826412,
+      "numeric_checked": 0,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "embench",
+      "name": "ud",
+      "cycles": 2725595,
+      "numeric_checked": 0,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    },
+    {
+      "family": "embench",
+      "name": "wikisort",
+      "cycles": 2102321,
+      "numeric_checked": 0,
+      "raw_hashes_and_memory_and_stack_passed": true,
+      "retired_classes_and_per_pc_work_match": true
+    }
+  ],
+  "numeric_values_checked": 3629
+}

@@ -1,0 +1,41 @@
+{
+  "scope": "actual diagnostic timing failure and strict rejection of common-clock qualified score",
+  "records": [
+    {
+      "name": "diagnostic-boundary-review",
+      "command": [
+        "python3",
+        "scripts/check_physical_closure.py",
+        "--analysis",
+        "build/experiments/lsu-b-v1/physical-14000ps-eco-clean-v1/diagnostic-boundary-v1"
+      ],
+      "returncode": 1,
+      "log_sha256": "380d54f77f3764d9da90c3b113579175b910de53e74c955b4914783ac9cb2afc"
+    },
+    {
+      "name": "reject-unqualified-common-clock",
+      "command": [
+        "python3",
+        "scripts/review_cpu_experiment.py",
+        "--experiment",
+        "experiments/lsu-b-v1/manifest.json",
+        "--build-summary",
+        "build/experiments/lsu-b-v1/build-clean-v1/summary.json",
+        "--qualification-summary",
+        "build/experiments/lsu-b-v1/qualification-clean-v1/summary.json",
+        "--measurement",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1",
+        "--analysis",
+        "build/experiments/lsu-b-v1/physical-14000ps-eco-clean-v1/diagnostic-boundary-v1",
+        "--comparison-point",
+        "common-clock",
+        "--out",
+        "build/experiments/lsu-b-v1/review-unqualified-common-clock-v1.json"
+      ],
+      "returncode": 1,
+      "log_sha256": "9205ddac406bd285c9d20b932ded2b9abfddcb3d735c66c1bd35e1cd31cda321"
+    }
+  ],
+  "rejection_control_passed": true,
+  "physical_qualified": false
+}

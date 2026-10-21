@@ -1,0 +1,4176 @@
+{
+  "scope": "complete same-clock diagnostics pending matching physical qualification; overlapping events are not additive saved cycles",
+  "measurement_summary_sha256": "7d602c60a551e0674f29ec4ba7db6395faa1b0471ca35b0236b65263ec0c059b",
+  "script_sha256": "632b84d9993e1fdc4d5f7871aad9b79d9a9073d420f73ea06ac1db863150fa04",
+  "B_embench_common_clock_geomean": 1.029458926609211,
+  "B_fp32_common_clock_geomean": 1.0095989895859971,
+  "B_fp32_groups": {
+    "dsp": 1.013839324971106,
+    "matrix_ml": 1.005376389204587
+  },
+  "records": [
+    {
+      "family": "fp32",
+      "name": "fir",
+      "group": "dsp",
+      "cycles": {
+        "baseline": 74311,
+        "A": 66117,
+        "B": 74303
+      },
+      "B_common_clock_speedup": 1.0001076672543505,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 1,
+          "head_wait_fp_load": 9481,
+          "head_wait_int_load": 6,
+          "head_wait_integer_other": 518,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 518,
+          "retired_body": 61137,
+          "retired_marker": 1,
+          "rob_empty": 1555,
+          "store_ack_wait": 1088
+        },
+        "A": {
+          "head_wait_branch": 1,
+          "head_wait_fp_load": 1289,
+          "head_wait_int_load": 5,
+          "head_wait_integer_other": 518,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 518,
+          "retired_body": 61137,
+          "retired_marker": 1,
+          "rob_empty": 1555,
+          "store_ack_wait": 1087
+        },
+        "B": {
+          "head_wait_branch": 1,
+          "head_wait_fp_load": 10018,
+          "head_wait_int_load": 6,
+          "head_wait_integer_other": 518,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 518,
+          "retired_body": 61137,
+          "retired_marker": 1,
+          "rob_empty": 1555,
+          "store_ack_wait": 543
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 1,
+          "mark_pending": 543,
+          "other_inflight": 1,
+          "request_ready": 543
+        },
+        "A": {
+          "load_response_buffer": 1,
+          "mark_pending": 543,
+          "other_inflight": 1,
+          "request_ready": 542
+        },
+        "B": {
+          "mark_pending": 543
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 518,
+          "own_external_inflight": 516,
+          "own_response_buffer": 8453
+        },
+        "A": {
+          "before_external_request_or_forward": 518,
+          "own_external_inflight": 259,
+          "own_response_buffer": 517
+        },
+        "B": {
+          "before_external_request_or_forward": 518,
+          "own_external_inflight": 771,
+          "own_response_buffer": 8735
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 1036,
+          "dmem_pending": 17476,
+          "dmem_read_accepted": 16933,
+          "dmem_write_accepted": 543,
+          "flush": 518,
+          "fma_src01_wait_entry_cycles": 60418,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 8448,
+          "fp_iq_nonempty_no_ready": 53762,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 8192,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 6717,
+          "rob_full": 53
+        },
+        "A": {
+          "decode_empty": 1036,
+          "dmem_pending": 17732,
+          "dmem_read_accepted": 17189,
+          "dmem_write_accepted": 543,
+          "flush": 518,
+          "fma_src01_wait_entry_cycles": 8449,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 8448,
+          "fp_iq_nonempty_no_ready": 8449,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 8192,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 60,
+          "rob_full": 52
+        },
+        "B": {
+          "decode_empty": 1036,
+          "dmem_pending": 17475,
+          "dmem_read_accepted": 16932,
+          "dmem_write_accepted": 543,
+          "flush": 518,
+          "fma_src01_wait_entry_cycles": 60417,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 8448,
+          "fp_iq_nonempty_no_ready": 53761,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 8192,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 6718,
+          "rob_full": 0
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/fp32/fir/profile.json": "33a38b761801dc87b1cbc1975d0f747afd22155bc86123ad0e2f1c40118558cd",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/fir/profile.json": "a6732b8b32dacd0cdd8e2a0da3be65657b11580cd3576dc37afdb2b78437625f",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/fp32/fir/profile.json": "23afa296161fbce09cc99955a1149ff9c879536cede4618a94593559a9a4d351"
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "iir",
+      "group": "dsp",
+      "cycles": {
+        "baseline": 13523,
+        "A": 13496,
+        "B": 12499
+      },
+      "B_common_clock_speedup": 1.08192655412433,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_fp_load": 46,
+          "head_wait_fp_store": 8,
+          "head_wait_int_load": 8,
+          "head_wait_integer_other": 2,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 9,
+          "retired_body": 11347,
+          "retired_marker": 1,
+          "rob_empty": 28,
+          "store_ack_wait": 2068
+        },
+        "A": {
+          "head_wait_fp_load": 25,
+          "head_wait_fp_store": 8,
+          "head_wait_int_load": 6,
+          "head_wait_integer_other": 2,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 9,
+          "retired_body": 11347,
+          "retired_marker": 1,
+          "rob_empty": 28,
+          "store_ack_wait": 2064
+        },
+        "B": {
+          "head_wait_fp_load": 50,
+          "head_wait_fp_store": 8,
+          "head_wait_int_load": 8,
+          "head_wait_integer_other": 2,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 9,
+          "retired_body": 11347,
+          "retired_marker": 1,
+          "rob_empty": 28,
+          "store_ack_wait": 1040
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 4,
+          "mark_pending": 1032,
+          "request_ready": 1032
+        },
+        "A": {
+          "load_response_buffer": 4,
+          "mark_pending": 1032,
+          "request_ready": 1028
+        },
+        "B": {
+          "load_response_buffer": 4,
+          "mark_pending": 1032,
+          "request_ready": 4
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 6,
+          "own_external_inflight": 24,
+          "own_response_buffer": 24
+        },
+        "A": {
+          "before_external_request_or_forward": 6,
+          "own_external_inflight": 3,
+          "own_response_buffer": 22
+        },
+        "B": {
+          "before_external_request_or_forward": 6,
+          "own_external_inflight": 26,
+          "own_response_buffer": 26
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 18,
+          "dmem_pending": 2092,
+          "dmem_read_accepted": 1060,
+          "dmem_write_accepted": 1032,
+          "flush": 9,
+          "fma_src01_wait_entry_cycles": 160,
+          "fma_src2_only_entry_cycles": 47,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 5140,
+          "fp_iq_nonempty_no_ready": 115,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 5140,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 2061,
+          "rob_full": 2019
+        },
+        "A": {
+          "decode_empty": 18,
+          "dmem_pending": 2092,
+          "dmem_read_accepted": 1060,
+          "dmem_write_accepted": 1032,
+          "flush": 9,
+          "fma_src01_wait_entry_cycles": 99,
+          "fma_src2_only_entry_cycles": 48,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 5140,
+          "fp_iq_nonempty_no_ready": 97,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 5140,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 2034,
+          "rob_full": 2015
+        },
+        "B": {
+          "decode_empty": 18,
+          "dmem_pending": 2091,
+          "dmem_read_accepted": 1059,
+          "dmem_write_accepted": 1032,
+          "flush": 9,
+          "fma_src01_wait_entry_cycles": 172,
+          "fma_src2_only_entry_cycles": 59,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 5140,
+          "fp_iq_nonempty_no_ready": 146,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 5140,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1042,
+          "rob_full": 1000
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/fp32/iir/profile.json": "2daedeb87c5d05f567a66b77acc81e1bffc3714838450d273027733fd27a6d53",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/iir/profile.json": "dfa11df90118e477587dc5a6e46a5f942df0ed8c7dd6e1ac6173ff4ff52f3716",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/fp32/iir/profile.json": "7d5dc0a51c996323b3f71ef39576d1b56decdadd59dbdcef80d028a7f20be073"
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "fft",
+      "group": "dsp",
+      "cycles": {
+        "baseline": 40867,
+        "A": 37663,
+        "B": 36722
+      },
+      "B_common_clock_speedup": 1.1128751157344372,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 20,
+          "head_wait_fp_load": 2106,
+          "head_wait_int_load": 2366,
+          "head_wait_int_store": 38,
+          "head_wait_integer_other": 264,
+          "head_wait_jump": 74,
+          "head_wait_marker": 2,
+          "recovery": 315,
+          "retired_body": 23800,
+          "retired_marker": 1,
+          "rob_empty": 945,
+          "store_ack_wait": 10936
+        },
+        "A": {
+          "head_wait_branch": 20,
+          "head_wait_fp_load": 1130,
+          "head_wait_int_load": 1480,
+          "head_wait_int_store": 38,
+          "head_wait_integer_other": 264,
+          "head_wait_jump": 74,
+          "head_wait_marker": 2,
+          "recovery": 315,
+          "retired_body": 23800,
+          "retired_marker": 1,
+          "rob_empty": 945,
+          "store_ack_wait": 9594
+        },
+        "B": {
+          "head_wait_branch": 20,
+          "head_wait_fp_load": 3446,
+          "head_wait_int_load": 3453,
+          "head_wait_int_store": 38,
+          "head_wait_integer_other": 367,
+          "head_wait_jump": 74,
+          "head_wait_marker": 2,
+          "recovery": 316,
+          "retired_body": 23800,
+          "retired_marker": 1,
+          "rob_empty": 948,
+          "store_ack_wait": 4257
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 1341,
+          "mark_pending": 4127,
+          "other_inflight": 1341,
+          "request_ready": 4127
+        },
+        "A": {
+          "load_response_buffer": 1404,
+          "mark_pending": 4127,
+          "other_inflight": 1340,
+          "request_ready": 2723
+        },
+        "B": {
+          "mark_pending": 4127,
+          "request_ready": 130
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 275,
+          "own_external_inflight": 2056,
+          "own_response_buffer": 2141
+        },
+        "A": {
+          "before_external_request_or_forward": 275,
+          "own_external_inflight": 279,
+          "own_response_buffer": 2056
+        },
+        "B": {
+          "before_external_request_or_forward": 488,
+          "own_external_inflight": 3163,
+          "own_response_buffer": 3248
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 630,
+          "dmem_pending": 10390,
+          "dmem_read_accepted": 6263,
+          "dmem_write_accepted": 4127,
+          "flush": 315,
+          "fma_src01_wait_entry_cycles": 7224,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 7250,
+          "fp_iq_nonempty_no_ready": 3628,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 7229,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 11622,
+          "rob_full": 8762
+        },
+        "A": {
+          "decode_empty": 630,
+          "dmem_pending": 10524,
+          "dmem_read_accepted": 6397,
+          "dmem_write_accepted": 4127,
+          "flush": 315,
+          "fma_src01_wait_entry_cycles": 2918,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 7252,
+          "fp_iq_nonempty_no_ready": 1663,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 7230,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 8425,
+          "rob_full": 7861
+        },
+        "B": {
+          "decode_empty": 632,
+          "dmem_pending": 9982,
+          "dmem_read_accepted": 5855,
+          "dmem_write_accepted": 4127,
+          "flush": 316,
+          "fma_src01_wait_entry_cycles": 9024,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 7168,
+          "fp_iq_nonempty_no_ready": 5720,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 7168,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 7717,
+          "rob_full": 1270
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/fp32/fft/profile.json": "fbfdf6744e5d6f694590e935de3c3c5d1a44de64a33c928b35da5ff3276fc778",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/fft/profile.json": "d10fef8246f9f074a6a42b5ad1beb641e067f23267ba68f7e938a0b127454b1e",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/fp32/fft/profile.json": "dfb20dc173416986a56a5f848e1773491e14b6a2cd71a9a8faee28830d03288e"
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "pid",
+      "group": "dsp",
+      "cycles": {
+        "baseline": 7248,
+        "A": 7242,
+        "B": 8261
+      },
+      "B_common_clock_speedup": 0.8773756203849413,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_fadd": 2,
+          "head_wait_fma": 3,
+          "head_wait_fmul": 5,
+          "head_wait_fp_load": 12,
+          "head_wait_fp_other": 3,
+          "head_wait_fp_store": 4,
+          "head_wait_integer_other": 4,
+          "head_wait_jump": 2,
+          "head_wait_marker": 2,
+          "recovery": 4,
+          "retired_body": 5651,
+          "retired_marker": 1,
+          "rob_empty": 13,
+          "store_ack_wait": 1542
+        },
+        "A": {
+          "head_wait_fadd": 2,
+          "head_wait_fma": 3,
+          "head_wait_fmul": 5,
+          "head_wait_fp_load": 7,
+          "head_wait_fp_other": 3,
+          "head_wait_fp_store": 4,
+          "head_wait_integer_other": 4,
+          "head_wait_jump": 2,
+          "head_wait_marker": 2,
+          "recovery": 4,
+          "retired_body": 5651,
+          "retired_marker": 1,
+          "rob_empty": 13,
+          "store_ack_wait": 1541
+        },
+        "B": {
+          "head_wait_fadd": 512,
+          "head_wait_fma": 1023,
+          "head_wait_fmul": 5,
+          "head_wait_fp_load": 12,
+          "head_wait_fp_other": 3,
+          "head_wait_fp_store": 514,
+          "head_wait_integer_other": 4,
+          "head_wait_jump": 2,
+          "head_wait_marker": 2,
+          "recovery": 4,
+          "retired_body": 5651,
+          "retired_marker": 1,
+          "rob_empty": 13,
+          "store_ack_wait": 515
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 511,
+          "mark_pending": 515,
+          "other_inflight": 1,
+          "request_ready": 515
+        },
+        "A": {
+          "load_response_buffer": 511,
+          "mark_pending": 515,
+          "other_inflight": 511,
+          "request_ready": 4
+        },
+        "B": {
+          "mark_pending": 515
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "own_external_inflight": 5,
+          "own_response_buffer": 7
+        },
+        "A": {
+          "own_response_buffer": 7
+        },
+        "B": {
+          "own_external_inflight": 5,
+          "own_response_buffer": 7
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 8,
+          "dmem_pending": 1035,
+          "dmem_read_accepted": 520,
+          "dmem_write_accepted": 515,
+          "flush": 4,
+          "fma_src01_wait_entry_cycles": 4097,
+          "fma_src2_only_entry_cycles": 5118,
+          "fp_ex0_blocked": 0,
+          "fp_head_wait_not_in_iq": 11,
+          "fp_head_wait_ready_in_iq": 2,
+          "fp_iq_issue": 3078,
+          "fp_iq_nonempty_no_ready": 4106,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 2051,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1543,
+          "rob_full": 3
+        },
+        "A": {
+          "decode_empty": 8,
+          "dmem_pending": 1035,
+          "dmem_read_accepted": 520,
+          "dmem_write_accepted": 515,
+          "flush": 4,
+          "fma_src01_wait_entry_cycles": 4090,
+          "fma_src2_only_entry_cycles": 5114,
+          "fp_ex0_blocked": 0,
+          "fp_head_wait_not_in_iq": 11,
+          "fp_head_wait_ready_in_iq": 2,
+          "fp_iq_issue": 3078,
+          "fp_iq_nonempty_no_ready": 4100,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 2050,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1541,
+          "rob_full": 1
+        },
+        "B": {
+          "decode_empty": 8,
+          "dmem_pending": 1034,
+          "dmem_read_accepted": 519,
+          "dmem_write_accepted": 515,
+          "flush": 4,
+          "fma_src01_wait_entry_cycles": 5118,
+          "fma_src2_only_entry_cycles": 6136,
+          "fp_ex0_blocked": 0,
+          "fp_head_wait_not_in_iq": 1541,
+          "fp_head_wait_ready_in_iq": 2,
+          "fp_iq_issue": 3077,
+          "fp_iq_nonempty_no_ready": 5124,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 2050,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 2558,
+          "rob_full": 1
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/fp32/pid/profile.json": "5ec7675d89421ea824f01f192ab1172dfe075f75901269662ba64e4c088df1a9",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/pid/profile.json": "354906e5884aaf2833f9a422d7c696b73c58d468d1d6200432fb5b46d282b77a",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/fp32/pid/profile.json": "e9f58c6e7eb925a694f0ee41dc5e48cc462961f19cf8c9002f5442db509041f6"
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "gemm",
+      "group": "matrix_ml",
+      "cycles": {
+        "baseline": 133275,
+        "A": 123175,
+        "B": 133870
+      },
+      "B_common_clock_speedup": 0.9955553895570329,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_fmul": 21,
+          "head_wait_fp_load": 25265,
+          "head_wait_fp_store": 21,
+          "head_wait_integer_other": 684,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 645,
+          "retired_body": 80976,
+          "retired_marker": 1,
+          "rob_empty": 1935,
+          "store_ack_wait": 23721
+        },
+        "A": {
+          "head_wait_fmul": 21,
+          "head_wait_fp_load": 16007,
+          "head_wait_fp_store": 21,
+          "head_wait_integer_other": 684,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 365,
+          "retired_body": 80976,
+          "retired_marker": 1,
+          "rob_empty": 1095,
+          "store_ack_wait": 23999
+        },
+        "B": {
+          "head_wait_fmul": 500,
+          "head_wait_fp_load": 26223,
+          "head_wait_fp_store": 500,
+          "head_wait_integer_other": 684,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 645,
+          "retired_body": 80976,
+          "retired_marker": 1,
+          "rob_empty": 1935,
+          "store_ack_wait": 22400
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 7700,
+          "mark_pending": 8000,
+          "other_inflight": 21,
+          "request_ready": 8000
+        },
+        "A": {
+          "load_response_buffer": 7999,
+          "mark_pending": 8000,
+          "other_inflight": 7999,
+          "request_ready": 1
+        },
+        "B": {
+          "load_response_buffer": 7200,
+          "mark_pending": 8000,
+          "request_ready": 7200
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 642,
+          "own_external_inflight": 8701,
+          "own_response_buffer": 15922
+        },
+        "A": {
+          "before_external_request_or_forward": 82,
+          "own_external_inflight": 322,
+          "own_response_buffer": 15603
+        },
+        "B": {
+          "before_external_request_or_forward": 642,
+          "own_external_inflight": 9180,
+          "own_response_buffer": 16401
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 1290,
+          "dmem_pending": 31923,
+          "dmem_read_accepted": 23923,
+          "dmem_write_accepted": 8000,
+          "flush": 645,
+          "fma_src01_wait_entry_cycles": 245940,
+          "fma_src2_only_entry_cycles": 60,
+          "fp_ex0_blocked": 0,
+          "fp_head_wait_not_in_iq": 21,
+          "fp_iq_issue": 16121,
+          "fp_iq_nonempty_no_ready": 107620,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 16121,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 41881,
+          "rob_full": 40676
+        },
+        "A": {
+          "decode_empty": 730,
+          "dmem_pending": 31923,
+          "dmem_read_accepted": 23923,
+          "dmem_write_accepted": 8000,
+          "flush": 365,
+          "fma_src01_wait_entry_cycles": 232467,
+          "fma_src2_only_entry_cycles": 7500,
+          "fp_ex0_blocked": 0,
+          "fp_head_wait_not_in_iq": 21,
+          "fp_iq_issue": 16121,
+          "fp_iq_nonempty_no_ready": 101069,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 16100,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 36155,
+          "rob_full": 36150
+        },
+        "B": {
+          "decode_empty": 1290,
+          "dmem_pending": 31902,
+          "dmem_read_accepted": 23902,
+          "dmem_write_accepted": 8000,
+          "flush": 645,
+          "fma_src01_wait_entry_cycles": 245940,
+          "fma_src2_only_entry_cycles": 60,
+          "fp_ex0_blocked": 0,
+          "fp_head_wait_not_in_iq": 500,
+          "fp_iq_issue": 16100,
+          "fp_iq_nonempty_no_ready": 108256,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 16100,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 42779,
+          "rob_full": 41574
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/fp32/gemm/profile.json": "aa0b3be800689edfbaeb2500195f0ab8a288b0aa96314cefd4ad3d91d9e6aafe",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/gemm/profile.json": "75a6f4e497bb368729c806c09b4534545d335be183ab9446a8a9cab00996358b",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/fp32/gemm/profile.json": "b4b26ffdb4c82733c612ddcc9ff5a123e20b9cf12cfa60321277aa8dffda231a"
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "bicg",
+      "group": "matrix_ml",
+      "cycles": {
+        "baseline": 23927,
+        "A": 20693,
+        "B": 23720
+      },
+      "B_common_clock_speedup": 1.0087268128161888,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_fp_load": 505,
+          "head_wait_fp_store": 84,
+          "head_wait_int_store": 3,
+          "head_wait_integer_other": 7,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 88,
+          "retired_body": 16508,
+          "retired_marker": 1,
+          "rob_empty": 265,
+          "store_ack_wait": 6460
+        },
+        "A": {
+          "head_wait_fp_load": 337,
+          "head_wait_fp_store": 84,
+          "head_wait_int_store": 3,
+          "head_wait_integer_other": 7,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 88,
+          "retired_body": 16508,
+          "retired_marker": 1,
+          "rob_empty": 265,
+          "store_ack_wait": 3394
+        },
+        "B": {
+          "head_wait_fp_load": 5082,
+          "head_wait_fp_store": 84,
+          "head_wait_int_store": 3,
+          "head_wait_integer_other": 7,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 88,
+          "retired_body": 16508,
+          "retired_marker": 1,
+          "rob_empty": 265,
+          "store_ack_wait": 1676
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 1554,
+          "mark_pending": 1676,
+          "other_inflight": 1554,
+          "request_ready": 1676
+        },
+        "A": {
+          "load_response_buffer": 1554,
+          "mark_pending": 1676,
+          "other_inflight": 42,
+          "request_ready": 122
+        },
+        "B": {
+          "mark_pending": 1676
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 84,
+          "own_external_inflight": 210,
+          "own_response_buffer": 211
+        },
+        "A": {
+          "before_external_request_or_forward": 84,
+          "own_external_inflight": 43,
+          "own_response_buffer": 210
+        },
+        "B": {
+          "before_external_request_or_forward": 84,
+          "own_external_inflight": 1722,
+          "own_response_buffer": 3276
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 176,
+          "dmem_pending": 6590,
+          "dmem_read_accepted": 4914,
+          "dmem_write_accepted": 1676,
+          "flush": 88,
+          "fma_src01_wait_entry_cycles": 29526,
+          "fma_src2_only_entry_cycles": 4914,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 3317,
+          "fp_iq_nonempty_no_ready": 18858,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 3234,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 6122,
+          "rob_full": 59
+        },
+        "A": {
+          "decode_empty": 176,
+          "dmem_pending": 6590,
+          "dmem_read_accepted": 4914,
+          "dmem_write_accepted": 1676,
+          "flush": 88,
+          "fma_src01_wait_entry_cycles": 25830,
+          "fma_src2_only_entry_cycles": 3276,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 3317,
+          "fp_iq_nonempty_no_ready": 15456,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 3192,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 2968,
+          "rob_full": 59
+        },
+        "B": {
+          "decode_empty": 176,
+          "dmem_pending": 6548,
+          "dmem_read_accepted": 4872,
+          "dmem_write_accepted": 1676,
+          "flush": 88,
+          "fma_src01_wait_entry_cycles": 29400,
+          "fma_src2_only_entry_cycles": 7938,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 3275,
+          "fp_iq_nonempty_no_ready": 18774,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 3192,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 6003,
+          "rob_full": 0
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/fp32/bicg/profile.json": "9731c779354bb200698650cd9698f9e61c364aa1d6098587991d020a4e8a53fb",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/bicg/profile.json": "d9387b40441df4c58ba3227252d801025b741cdd8986e8a61d9d5bded1ea371e",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/fp32/bicg/profile.json": "10485663bd3107a1e213823249e0fedede12e80bd09664b6b5f2ef8125159e9a"
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "cholesky",
+      "group": "matrix_ml",
+      "cycles": {
+        "baseline": 194161,
+        "A": 183250,
+        "B": 190887
+      },
+      "B_common_clock_speedup": 1.017151508484077,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 130,
+          "head_wait_fdiv": 20761,
+          "head_wait_fma": 40,
+          "head_wait_fp_load": 16245,
+          "head_wait_fp_other": 89,
+          "head_wait_fp_store": 123,
+          "head_wait_fsub": 35,
+          "head_wait_int_load": 6,
+          "head_wait_int_store": 1,
+          "head_wait_integer_other": 616,
+          "head_wait_jump": 2,
+          "head_wait_marker": 2,
+          "recovery": 1796,
+          "retired_body": 105025,
+          "retired_marker": 1,
+          "rob_empty": 5388,
+          "store_ack_wait": 43901
+        },
+        "A": {
+          "head_wait_branch": 124,
+          "head_wait_fdiv": 20762,
+          "head_wait_fma": 40,
+          "head_wait_fp_load": 15367,
+          "head_wait_fp_other": 89,
+          "head_wait_fp_store": 123,
+          "head_wait_fsub": 35,
+          "head_wait_int_store": 1,
+          "head_wait_integer_other": 618,
+          "head_wait_jump": 2,
+          "head_wait_marker": 2,
+          "recovery": 1798,
+          "retired_body": 105025,
+          "retired_marker": 1,
+          "rob_empty": 5394,
+          "store_ack_wait": 33869
+        },
+        "B": {
+          "head_wait_branch": 169,
+          "head_wait_fdiv": 20949,
+          "head_wait_fma": 780,
+          "head_wait_fp_load": 43680,
+          "head_wait_fp_other": 89,
+          "head_wait_fp_store": 863,
+          "head_wait_fsub": 35,
+          "head_wait_int_load": 9,
+          "head_wait_int_store": 1,
+          "head_wait_integer_other": 560,
+          "head_wait_jump": 2,
+          "head_wait_marker": 2,
+          "recovery": 1768,
+          "retired_body": 105025,
+          "retired_marker": 1,
+          "rob_empty": 5304,
+          "store_ack_wait": 11650
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 10736,
+          "mark_pending": 11568,
+          "other_inflight": 10029,
+          "request_ready": 11568
+        },
+        "A": {
+          "load_response_buffer": 10737,
+          "mark_pending": 11568,
+          "other_inflight": 10733,
+          "request_ready": 831
+        },
+        "B": {
+          "load_response_buffer": 41,
+          "mark_pending": 11568,
+          "request_ready": 41
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 3069,
+          "own_external_inflight": 2373,
+          "own_response_buffer": 10809
+        },
+        "A": {
+          "before_external_request_or_forward": 3001,
+          "own_external_inflight": 1556,
+          "own_response_buffer": 10810
+        },
+        "B": {
+          "before_external_request_or_forward": 3069,
+          "own_external_inflight": 19957,
+          "own_response_buffer": 20663
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 3592,
+          "dmem_pending": 35629,
+          "dmem_read_accepted": 24061,
+          "dmem_write_accepted": 11568,
+          "flush": 1796,
+          "fma_src01_wait_entry_cycles": 217831,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_head_wait_not_in_iq": 162,
+          "fp_head_wait_ready_in_iq": 2,
+          "fp_iq_issue": 13315,
+          "fp_iq_nonempty_no_ready": 142638,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 10767,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 59968,
+          "rob_full": 59155
+        },
+        "A": {
+          "decode_empty": 3596,
+          "dmem_pending": 35665,
+          "dmem_read_accepted": 24097,
+          "dmem_write_accepted": 11568,
+          "flush": 1798,
+          "fma_src01_wait_entry_cycles": 194830,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_head_wait_not_in_iq": 162,
+          "fp_head_wait_ready_in_iq": 2,
+          "fp_iq_issue": 12647,
+          "fp_iq_nonempty_no_ready": 129610,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 10730,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 49224,
+          "rob_full": 49182
+        },
+        "B": {
+          "decode_empty": 3536,
+          "dmem_pending": 34116,
+          "dmem_read_accepted": 22548,
+          "dmem_write_accepted": 11568,
+          "flush": 1768,
+          "fma_src01_wait_entry_cycles": 221379,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_head_wait_not_in_iq": 902,
+          "fp_head_wait_ready_in_iq": 2,
+          "fp_iq_issue": 11869,
+          "fp_iq_nonempty_no_ready": 142672,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 10730,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 57250,
+          "rob_full": 55873
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/fp32/cholesky/profile.json": "48594aca4cea7aa7eb2887bf7db54df2ee54047364f60af05bcfa7750dadcd0e",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/cholesky/profile.json": "a7e0e3c917debddfcc5de062c8e323e8f3b75b312bca28008aab1b3ff5e99c2f",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/fp32/cholesky/profile.json": "563b163d1998b398bb7229a6ad620643b21833d3d1abda9eaf2e8ed802f7b426"
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "svm",
+      "group": "matrix_ml",
+      "cycles": {
+        "baseline": 43392,
+        "A": 38501,
+        "B": 43383
+      },
+      "B_common_clock_speedup": 1.0002074545328816,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_fma": 400,
+          "head_wait_fp_load": 7804,
+          "head_wait_fp_other": 600,
+          "head_wait_int_load": 424,
+          "head_wait_int_store": 101,
+          "head_wait_integer_other": 304,
+          "head_wait_jump": 2,
+          "head_wait_marker": 2,
+          "recovery": 1005,
+          "retired_body": 29522,
+          "retired_marker": 1,
+          "rob_empty": 3015,
+          "store_ack_wait": 212
+        },
+        "A": {
+          "head_wait_fma": 400,
+          "head_wait_fp_load": 3608,
+          "head_wait_fp_other": 306,
+          "head_wait_int_load": 416,
+          "head_wait_int_store": 101,
+          "head_wait_integer_other": 304,
+          "head_wait_jump": 2,
+          "head_wait_marker": 2,
+          "recovery": 907,
+          "retired_body": 29522,
+          "retired_marker": 1,
+          "rob_empty": 2721,
+          "store_ack_wait": 211
+        },
+        "B": {
+          "head_wait_fma": 400,
+          "head_wait_fp_load": 7804,
+          "head_wait_fp_other": 600,
+          "head_wait_int_load": 522,
+          "head_wait_int_store": 101,
+          "head_wait_integer_other": 304,
+          "head_wait_jump": 2,
+          "head_wait_marker": 2,
+          "recovery": 1005,
+          "retired_body": 29522,
+          "retired_marker": 1,
+          "rob_empty": 3015,
+          "store_ack_wait": 105
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 1,
+          "mark_pending": 105,
+          "other_inflight": 1,
+          "request_ready": 105
+        },
+        "A": {
+          "load_response_buffer": 1,
+          "mark_pending": 105,
+          "other_inflight": 1,
+          "request_ready": 104
+        },
+        "B": {
+          "mark_pending": 105
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 1704,
+          "own_external_inflight": 1411,
+          "own_response_buffer": 5113
+        },
+        "A": {
+          "before_external_request_or_forward": 1704,
+          "own_external_inflight": 903,
+          "own_response_buffer": 1417
+        },
+        "B": {
+          "before_external_request_or_forward": 1704,
+          "own_external_inflight": 1411,
+          "own_response_buffer": 5211
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 2010,
+          "dmem_pending": 10115,
+          "dmem_read_accepted": 10010,
+          "dmem_write_accepted": 105,
+          "flush": 1005,
+          "fma_src01_wait_entry_cycles": 34011,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_head_wait_not_in_iq": 800,
+          "fp_head_wait_ready_in_iq": 200,
+          "fp_iq_issue": 5702,
+          "fp_iq_nonempty_no_ready": 24508,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 4401,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1404,
+          "rob_full": 1
+        },
+        "A": {
+          "decode_empty": 1814,
+          "dmem_pending": 10516,
+          "dmem_read_accepted": 10411,
+          "dmem_write_accepted": 105,
+          "flush": 907,
+          "fma_src01_wait_entry_cycles": 10810,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_head_wait_not_in_iq": 604,
+          "fp_head_wait_ready_in_iq": 102,
+          "fp_iq_issue": 5500,
+          "fp_iq_nonempty_no_ready": 10707,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 4498,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 5,
+          "rob_full": 0
+        },
+        "B": {
+          "decode_empty": 2010,
+          "dmem_pending": 10112,
+          "dmem_read_accepted": 10007,
+          "dmem_write_accepted": 105,
+          "flush": 1005,
+          "fma_src01_wait_entry_cycles": 34008,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_head_wait_not_in_iq": 800,
+          "fp_head_wait_ready_in_iq": 200,
+          "fp_iq_issue": 5700,
+          "fp_iq_nonempty_no_ready": 24506,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 4400,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1403,
+          "rob_full": 0
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/fp32/svm/profile.json": "45430d9e9fa0f59d9e6040e8b6ae5e59c3fa5763cc6eb045c5c06c581732e744",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/svm/profile.json": "42d3eacafea675c8c679819f56cb80cba8f850e54112646c89f315c5fb05d135",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/fp32/svm/profile.json": "39d9bbb24cdb74777d19c143217f1f47cef3316df31765d20a9f0d064bb01d77"
+      }
+    },
+    {
+      "family": "embench",
+      "name": "aha-mont64",
+      "group": null,
+      "cycles": {
+        "baseline": 5356670,
+        "A": 5354540,
+        "B": 5359621
+      },
+      "B_common_clock_speedup": 0.9994494013662534,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 101095,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 14392,
+          "head_wait_int_store": 849,
+          "head_wait_integer_other": 293163,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 112526,
+          "retired_body": 4491085,
+          "retired_marker": 1,
+          "rob_empty": 337581,
+          "store_ack_wait": 5968
+        },
+        "A": {
+          "head_wait_branch": 101095,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 11424,
+          "head_wait_int_store": 849,
+          "head_wait_integer_other": 294427,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 112526,
+          "retired_body": 4491085,
+          "retired_marker": 1,
+          "rob_empty": 337581,
+          "store_ack_wait": 5542
+        },
+        "B": {
+          "head_wait_branch": 101095,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 18204,
+          "head_wait_int_store": 849,
+          "head_wait_integer_other": 294011,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 112950,
+          "retired_body": 4491085,
+          "retired_marker": 1,
+          "rob_empty": 338853,
+          "store_ack_wait": 2563
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 427,
+          "mark_pending": 2558,
+          "other_inflight": 425,
+          "request_ready": 2558
+        },
+        "A": {
+          "load_response_buffer": 426,
+          "mark_pending": 2558,
+          "other_inflight": 426,
+          "request_ready": 2132
+        },
+        "B": {
+          "load_response_buffer": 2,
+          "mark_pending": 2558,
+          "request_ready": 3
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 4228,
+          "own_external_inflight": 5081,
+          "own_response_buffer": 5083
+        },
+        "A": {
+          "before_external_request_or_forward": 4228,
+          "own_external_inflight": 2116,
+          "own_response_buffer": 5080
+        },
+        "B": {
+          "before_external_request_or_forward": 4652,
+          "own_external_inflight": 6775,
+          "own_response_buffer": 6777
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 225052,
+          "dmem_pending": 9769,
+          "dmem_read_accepted": 7211,
+          "dmem_write_accepted": 2558,
+          "flush": 112526,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 3875,
+          "rob_full": 2139
+        },
+        "A": {
+          "decode_empty": 225052,
+          "dmem_pending": 10192,
+          "dmem_read_accepted": 7634,
+          "dmem_write_accepted": 2558,
+          "flush": 112526,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 3857,
+          "rob_full": 1718
+        },
+        "B": {
+          "decode_empty": 225900,
+          "dmem_pending": 11038,
+          "dmem_read_accepted": 8480,
+          "dmem_write_accepted": 2558,
+          "flush": 112950,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 5129,
+          "rob_full": 1277
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/embench/aha-mont64/profile.json": "25b2fa4c1352004c64ff532f415bfaa63b146b3d3ba714efd4db68997e004a4b",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/aha-mont64/profile.json": "1ff29d4a9161c7e5458e4c9ad37d017c72660a5615165ef85402a611037246a2",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/embench/aha-mont64/profile.json": "2ad3c1e3b1a0c4e46e93d993a14ee9ce18d80de2914ccd8089cf8720be82c038"
+      }
+    },
+    {
+      "family": "embench",
+      "name": "crc32",
+      "group": null,
+      "cycles": {
+        "baseline": 5402220,
+        "A": 5054736,
+        "B": 5402210
+      },
+      "B_common_clock_speedup": 1.0000018510942743,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 172,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 522763,
+          "head_wait_int_store": 174254,
+          "head_wait_integer_other": 349363,
+          "head_wait_jump": 344,
+          "head_wait_marker": 2,
+          "recovery": 349,
+          "retired_body": 4005402,
+          "retired_marker": 1,
+          "rob_empty": 1050,
+          "store_ack_wait": 348516
+        },
+        "A": {
+          "head_wait_branch": 172,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 522759,
+          "head_wait_int_store": 514,
+          "head_wait_integer_other": 175623,
+          "head_wait_jump": 344,
+          "head_wait_marker": 2,
+          "recovery": 349,
+          "retired_body": 4005402,
+          "retired_marker": 1,
+          "rob_empty": 1050,
+          "store_ack_wait": 348516
+        },
+        "B": {
+          "head_wait_branch": 172,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 522932,
+          "head_wait_int_store": 174254,
+          "head_wait_integer_other": 523442,
+          "head_wait_jump": 344,
+          "head_wait_marker": 2,
+          "recovery": 349,
+          "retired_body": 4005402,
+          "retired_marker": 1,
+          "rob_empty": 1050,
+          "store_ack_wait": 174258
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "mark_pending": 174258,
+          "request_ready": 174258
+        },
+        "A": {
+          "mark_pending": 174258,
+          "request_ready": 174258
+        },
+        "B": {
+          "mark_pending": 174258
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 174253,
+          "own_external_inflight": 174254,
+          "own_response_buffer": 174256
+        },
+        "A": {
+          "before_external_request_or_forward": 174253,
+          "own_external_inflight": 174252,
+          "own_response_buffer": 174254
+        },
+        "B": {
+          "before_external_request_or_forward": 174253,
+          "own_external_inflight": 174254,
+          "own_response_buffer": 174425
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 698,
+          "dmem_pending": 522595,
+          "dmem_read_accepted": 348337,
+          "dmem_write_accepted": 174258,
+          "flush": 349,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1390789,
+          "rob_full": 169
+        },
+        "A": {
+          "decode_empty": 698,
+          "dmem_pending": 522595,
+          "dmem_read_accepted": 348337,
+          "dmem_write_accepted": 174258,
+          "flush": 349,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1043139,
+          "rob_full": 169
+        },
+        "B": {
+          "decode_empty": 698,
+          "dmem_pending": 522595,
+          "dmem_read_accepted": 348337,
+          "dmem_write_accepted": 174258,
+          "flush": 349,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1390786,
+          "rob_full": 169
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/embench/crc32/profile.json": "828ea261bc74bf2d42caac5d207356e8477fb2835f0c0adc89eae99776e2a6e5",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/crc32/profile.json": "a7732921b7c7c715d04e317ed6da5b87da8262777e567fdce83db51720179baa",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/embench/crc32/profile.json": "323fd72c341bf716176428053a3f035ea3952f5c1ae912da0881a09005841f4a"
+      }
+    },
+    {
+      "family": "embench",
+      "name": "cubic",
+      "group": null,
+      "cycles": {
+        "baseline": 14490894,
+        "A": 14160446,
+        "B": 14025779
+      },
+      "B_common_clock_speedup": 1.0331614379493645,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 232222,
+          "head_wait_csr_system": 132064,
+          "head_wait_int_load": 886769,
+          "head_wait_int_store": 82715,
+          "head_wait_integer_other": 2210687,
+          "head_wait_jump": 11892,
+          "head_wait_marker": 2,
+          "recovery": 475176,
+          "retired_body": 7762231,
+          "retired_marker": 1,
+          "rob_empty": 1479431,
+          "store_ack_wait": 1217704
+        },
+        "A": {
+          "head_wait_branch": 235322,
+          "head_wait_csr_system": 132064,
+          "head_wait_int_load": 661792,
+          "head_wait_int_store": 82515,
+          "head_wait_integer_other": 2206407,
+          "head_wait_jump": 12052,
+          "head_wait_marker": 2,
+          "recovery": 474916,
+          "retired_body": 7762231,
+          "retired_marker": 1,
+          "rob_empty": 1478651,
+          "store_ack_wait": 1114493
+        },
+        "B": {
+          "head_wait_branch": 244502,
+          "head_wait_csr_system": 132064,
+          "head_wait_int_load": 988692,
+          "head_wait_int_store": 103494,
+          "head_wait_integer_other": 2283974,
+          "head_wait_jump": 11252,
+          "head_wait_marker": 2,
+          "recovery": 478117,
+          "retired_body": 7762231,
+          "retired_marker": 1,
+          "rob_empty": 1488254,
+          "store_ack_wait": 533196
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 102072,
+          "mark_pending": 512776,
+          "other_inflight": 90080,
+          "request_ready": 512776
+        },
+        "A": {
+          "load_response_buffer": 108460,
+          "mark_pending": 512776,
+          "other_inflight": 88941,
+          "request_ready": 404316
+        },
+        "B": {
+          "load_response_buffer": 7455,
+          "mark_pending": 512776,
+          "request_ready": 12965
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 148443,
+          "own_external_inflight": 350938,
+          "own_response_buffer": 387388
+        },
+        "A": {
+          "before_external_request_or_forward": 148843,
+          "own_external_inflight": 144333,
+          "own_response_buffer": 368616
+        },
+        "B": {
+          "before_external_request_or_forward": 160577,
+          "own_external_inflight": 389108,
+          "own_response_buffer": 439007
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 950352,
+          "dmem_pending": 1150536,
+          "dmem_read_accepted": 637760,
+          "dmem_write_accepted": 512776,
+          "flush": 475176,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1856908,
+          "rob_full": 446039
+        },
+        "A": {
+          "decode_empty": 949832,
+          "dmem_pending": 1147856,
+          "dmem_read_accepted": 635080,
+          "dmem_write_accepted": 512776,
+          "flush": 474916,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1628780,
+          "rob_full": 365570
+        },
+        "B": {
+          "decode_empty": 956234,
+          "dmem_pending": 1097181,
+          "dmem_read_accepted": 584405,
+          "dmem_write_accepted": 512776,
+          "flush": 478117,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1525260,
+          "rob_full": 86684
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/embench/cubic/profile.json": "50e001776b54bf3dfa4ab7dcca557c5127ee85903601b67ce52428d0fbabc750",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/cubic/profile.json": "469abde87985048fb5e8c4b8efed1380ea57d8d40f423cf1a2e777e8da2e7555",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/embench/cubic/profile.json": "db86e7f6e552f77c6988580dbc244a18a61809b7cd1f99c2f7cc59a878a705f1"
+      }
+    },
+    {
+      "family": "embench",
+      "name": "edn",
+      "group": null,
+      "cycles": {
+        "baseline": 4754496,
+        "A": 4256669,
+        "B": 4723764
+      },
+      "B_common_clock_speedup": 1.0065058288263342,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 89,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 156802,
+          "head_wait_int_store": 33064,
+          "head_wait_integer_other": 817986,
+          "head_wait_jump": 176,
+          "head_wait_marker": 2,
+          "recovery": 19324,
+          "retired_body": 3381065,
+          "retired_marker": 1,
+          "rob_empty": 57975,
+          "store_ack_wait": 288008
+        },
+        "A": {
+          "head_wait_branch": 89,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 109378,
+          "head_wait_int_store": 38023,
+          "head_wait_integer_other": 414393,
+          "head_wait_jump": 176,
+          "head_wait_marker": 2,
+          "recovery": 19411,
+          "retired_body": 3381065,
+          "retired_marker": 1,
+          "rob_empty": 58236,
+          "store_ack_wait": 235891
+        },
+        "B": {
+          "head_wait_branch": 89,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 284257,
+          "head_wait_int_store": 37414,
+          "head_wait_integer_other": 848088,
+          "head_wait_jump": 176,
+          "head_wait_marker": 2,
+          "recovery": 19324,
+          "retired_body": 3381065,
+          "retired_marker": 1,
+          "rob_empty": 57975,
+          "store_ack_wait": 95369
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 53507,
+          "mark_pending": 91193,
+          "other_inflight": 52115,
+          "request_ready": 91193
+        },
+        "A": {
+          "load_response_buffer": 57508,
+          "mark_pending": 91193,
+          "other_inflight": 53505,
+          "request_ready": 33685
+        },
+        "B": {
+          "load_response_buffer": 1392,
+          "mark_pending": 91193,
+          "request_ready": 2784
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 19927,
+          "own_external_inflight": 59433,
+          "own_response_buffer": 77442
+        },
+        "A": {
+          "before_external_request_or_forward": 19927,
+          "own_external_inflight": 11748,
+          "own_response_buffer": 77703
+        },
+        "B": {
+          "before_external_request_or_forward": 25582,
+          "own_external_inflight": 113373,
+          "own_response_buffer": 145302
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 38648,
+          "dmem_pending": 988615,
+          "dmem_read_accepted": 897422,
+          "dmem_write_accepted": 91193,
+          "flush": 19324,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1089197,
+          "rob_full": 19599
+        },
+        "A": {
+          "decode_empty": 38822,
+          "dmem_pending": 993226,
+          "dmem_read_accepted": 902033,
+          "dmem_write_accepted": 91193,
+          "flush": 19411,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 595546,
+          "rob_full": 37950
+        },
+        "B": {
+          "decode_empty": 38648,
+          "dmem_pending": 987221,
+          "dmem_read_accepted": 896028,
+          "dmem_write_accepted": 91193,
+          "flush": 19324,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1060817,
+          "rob_full": 960
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/embench/edn/profile.json": "993c4a29855bc624c1abb1dcd8dea24f046daf4bfd9ce42b8e4d88ef438bc37b",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/edn/profile.json": "d7bfa59da308a98980a62c142255e21ce12381a206b7ccd056187f1963727d9e",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/embench/edn/profile.json": "69953ffccc5c7a48aeb2ac372863ceb65c1f09508e8d3a83d49dd7539287b932"
+      }
+    },
+    {
+      "family": "embench",
+      "name": "huffbench",
+      "group": null,
+      "cycles": {
+        "baseline": 3377028,
+        "A": 3306646,
+        "B": 3217162
+      },
+      "B_common_clock_speedup": 1.0496916226164552,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 99642,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 228231,
+          "head_wait_int_store": 11062,
+          "head_wait_integer_other": 184673,
+          "head_wait_jump": 46,
+          "head_wait_marker": 2,
+          "recovery": 97643,
+          "retired_body": 2022301,
+          "retired_marker": 1,
+          "rob_empty": 292932,
+          "store_ack_wait": 440491
+        },
+        "A": {
+          "head_wait_branch": 99686,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 227930,
+          "head_wait_int_store": 11029,
+          "head_wait_integer_other": 184640,
+          "head_wait_jump": 46,
+          "head_wait_marker": 2,
+          "recovery": 97599,
+          "retired_body": 2022301,
+          "retired_marker": 1,
+          "rob_empty": 292800,
+          "store_ack_wait": 370608
+        },
+        "B": {
+          "head_wait_branch": 163147,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 256303,
+          "head_wait_int_store": 11172,
+          "head_wait_integer_other": 190525,
+          "head_wait_jump": 46,
+          "head_wait_marker": 2,
+          "recovery": 97875,
+          "retired_body": 2022301,
+          "retired_marker": 1,
+          "rob_empty": 293628,
+          "store_ack_wait": 182158
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 68244,
+          "mark_pending": 181938,
+          "other_inflight": 8371,
+          "request_ready": 181938
+        },
+        "A": {
+          "load_response_buffer": 68816,
+          "mark_pending": 181938,
+          "other_inflight": 6732,
+          "request_ready": 113122
+        },
+        "B": {
+          "load_response_buffer": 99,
+          "mark_pending": 181938,
+          "request_ready": 121
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 73999,
+          "own_external_inflight": 67920,
+          "own_response_buffer": 86312
+        },
+        "A": {
+          "before_external_request_or_forward": 71986,
+          "own_external_inflight": 70160,
+          "own_response_buffer": 85784
+        },
+        "B": {
+          "before_external_request_or_forward": 80291,
+          "own_external_inflight": 80119,
+          "own_response_buffer": 95893
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 195286,
+          "dmem_pending": 521492,
+          "dmem_read_accepted": 339554,
+          "dmem_write_accepted": 181938,
+          "flush": 97643,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 418856,
+          "rob_full": 56881
+        },
+        "A": {
+          "decode_empty": 195198,
+          "dmem_pending": 521735,
+          "dmem_read_accepted": 339797,
+          "dmem_write_accepted": 181938,
+          "flush": 97599,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 348740,
+          "rob_full": 61149
+        },
+        "B": {
+          "decode_empty": 195750,
+          "dmem_pending": 521548,
+          "dmem_read_accepted": 339610,
+          "dmem_write_accepted": 181938,
+          "flush": 97875,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 272915,
+          "rob_full": 1573
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/embench/huffbench/profile.json": "776cdce24904e4439191c74045961c251c15851ccc58eb949f3f987138c3d6c8",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/huffbench/profile.json": "b95c9b398dea55e717c92d3763bc1a7db2f2ec0a6fa7c7e3d6961df3435a4f1a",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/embench/huffbench/profile.json": "584b258219e73bee5abde3b1a74d0a032be3b3f45520241e09e7a9901804543d"
+      }
+    },
+    {
+      "family": "embench",
+      "name": "matmult-int",
+      "group": null,
+      "cycles": {
+        "baseline": 4193163,
+        "A": 3825063,
+        "B": 4138048
+      },
+      "B_common_clock_speedup": 1.0133190818472864,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 418,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 129745,
+          "head_wait_int_store": 37727,
+          "head_wait_integer_other": 793554,
+          "head_wait_jump": 2,
+          "head_wait_marker": 2,
+          "recovery": 38005,
+          "retired_body": 2932369,
+          "retired_marker": 1,
+          "rob_empty": 114018,
+          "store_ack_wait": 147318
+        },
+        "A": {
+          "head_wait_branch": 418,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 92937,
+          "head_wait_int_store": 37727,
+          "head_wait_integer_other": 462354,
+          "head_wait_jump": 2,
+          "head_wait_marker": 2,
+          "recovery": 38005,
+          "retired_body": 2932369,
+          "retired_marker": 1,
+          "rob_empty": 114018,
+          "store_ack_wait": 147226
+        },
+        "B": {
+          "head_wait_branch": 418,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 148145,
+          "head_wait_int_store": 37727,
+          "head_wait_integer_other": 793556,
+          "head_wait_jump": 2,
+          "head_wait_marker": 2,
+          "recovery": 38006,
+          "retired_body": 2932369,
+          "retired_marker": 1,
+          "rob_empty": 114021,
+          "store_ack_wait": 73797
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 92,
+          "mark_pending": 73613,
+          "request_ready": 73613
+        },
+        "A": {
+          "load_response_buffer": 92,
+          "mark_pending": 73613,
+          "request_ready": 73521
+        },
+        "B": {
+          "load_response_buffer": 92,
+          "mark_pending": 73613,
+          "request_ready": 92
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 36804,
+          "own_external_inflight": 37731,
+          "own_response_buffer": 55210
+        },
+        "A": {
+          "before_external_request_or_forward": 36804,
+          "own_external_inflight": 18402,
+          "own_response_buffer": 37731
+        },
+        "B": {
+          "before_external_request_or_forward": 36804,
+          "own_external_inflight": 55210,
+          "own_response_buffer": 56131
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 76010,
+          "dmem_pending": 883315,
+          "dmem_read_accepted": 809702,
+          "dmem_write_accepted": 73613,
+          "flush": 38005,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 698683,
+          "rob_full": 36531
+        },
+        "A": {
+          "decode_empty": 76010,
+          "dmem_pending": 883315,
+          "dmem_read_accepted": 809702,
+          "dmem_write_accepted": 73613,
+          "flush": 38005,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 348983,
+          "rob_full": 36439
+        },
+        "B": {
+          "decode_empty": 76012,
+          "dmem_pending": 883315,
+          "dmem_read_accepted": 809702,
+          "dmem_write_accepted": 73613,
+          "flush": 38006,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 661966,
+          "rob_full": 0
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/embench/matmult-int/profile.json": "163c0237a3a517b19fa1667109e8d0536be32f4aa3e862da82b6bdff343c6f7c",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/matmult-int/profile.json": "d71f164c08193be3a4e089bc55105494ae5afef65eb75ac1b05f97de69383f21",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/embench/matmult-int/profile.json": "0764bf185cc9ad8e732f0f128bacd5716a66ad3c816b159ae1415783987a749d"
+      }
+    },
+    {
+      "family": "embench",
+      "name": "minver",
+      "group": null,
+      "cycles": {
+        "baseline": 878777,
+        "A": 858801,
+        "B": 843225
+      },
+      "B_common_clock_speedup": 1.0421619377983338,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 17769,
+          "head_wait_csr_system": 4,
+          "head_wait_fdiv": 185937,
+          "head_wait_fma": 4994,
+          "head_wait_fmul": 1665,
+          "head_wait_fp_load": 46077,
+          "head_wait_fp_other": 24975,
+          "head_wait_fp_store": 2775,
+          "head_wait_int_load": 5566,
+          "head_wait_int_store": 559,
+          "head_wait_integer_other": 18329,
+          "head_wait_jump": 2226,
+          "head_wait_marker": 2,
+          "recovery": 19436,
+          "retired_body": 340273,
+          "retired_marker": 1,
+          "rob_empty": 58311,
+          "store_ack_wait": 149878
+        },
+        "A": {
+          "head_wait_branch": 18879,
+          "head_wait_csr_system": 4,
+          "head_wait_fdiv": 194261,
+          "head_wait_fma": 4995,
+          "head_wait_fmul": 1665,
+          "head_wait_fp_load": 41081,
+          "head_wait_fp_other": 24420,
+          "head_wait_fp_store": 2775,
+          "head_wait_int_load": 5562,
+          "head_wait_int_store": 559,
+          "head_wait_integer_other": 18329,
+          "head_wait_jump": 2226,
+          "head_wait_marker": 2,
+          "recovery": 19437,
+          "retired_body": 340273,
+          "retired_marker": 1,
+          "rob_empty": 58314,
+          "store_ack_wait": 126018
+        },
+        "B": {
+          "head_wait_branch": 19986,
+          "head_wait_csr_system": 4,
+          "head_wait_fdiv": 203130,
+          "head_wait_fma": 3885,
+          "head_wait_fmul": 1665,
+          "head_wait_fp_load": 58288,
+          "head_wait_fp_other": 27195,
+          "head_wait_fp_store": 2220,
+          "head_wait_int_load": 10561,
+          "head_wait_int_store": 559,
+          "head_wait_integer_other": 19994,
+          "head_wait_jump": 3332,
+          "head_wait_marker": 2,
+          "recovery": 20544,
+          "retired_body": 340273,
+          "retired_marker": 1,
+          "rob_empty": 61635,
+          "store_ack_wait": 69951
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 23304,
+          "mark_pending": 56624,
+          "other_inflight": 13326,
+          "request_ready": 56624
+        },
+        "A": {
+          "load_response_buffer": 23303,
+          "mark_pending": 56624,
+          "other_inflight": 12770,
+          "request_ready": 33321
+        },
+        "B": {
+          "load_response_buffer": 6107,
+          "mark_pending": 56624,
+          "request_ready": 7220
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 16099,
+          "own_external_inflight": 15552,
+          "own_response_buffer": 19992
+        },
+        "A": {
+          "before_external_request_or_forward": 14991,
+          "own_external_inflight": 12768,
+          "own_response_buffer": 18884
+        },
+        "B": {
+          "before_external_request_or_forward": 16655,
+          "own_external_inflight": 23322,
+          "own_response_buffer": 28872
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 38872,
+          "dmem_pending": 135457,
+          "dmem_read_accepted": 78833,
+          "dmem_write_accepted": 56624,
+          "flush": 19436,
+          "fma_src01_wait_entry_cycles": 151512,
+          "fma_src2_only_entry_cycles": 33302,
+          "fp_ex0_blocked": 107672,
+          "fp_head_wait_not_in_iq": 27194,
+          "fp_head_wait_ready_in_iq": 4440,
+          "fp_iq_issue": 76594,
+          "fp_iq_nonempty_no_ready": 269183,
+          "fp_iq_ready_downstream_blocked": 57169,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 23311,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 294733,
+          "rob_full": 217517
+        },
+        "A": {
+          "decode_empty": 38874,
+          "dmem_pending": 136567,
+          "dmem_read_accepted": 79943,
+          "dmem_write_accepted": 56624,
+          "flush": 19437,
+          "fma_src01_wait_entry_cycles": 143178,
+          "fma_src2_only_entry_cycles": 27752,
+          "fp_ex0_blocked": 111002,
+          "fp_head_wait_not_in_iq": 26640,
+          "fp_head_wait_ready_in_iq": 4440,
+          "fp_iq_issue": 77704,
+          "fp_iq_nonempty_no_ready": 258080,
+          "fp_iq_ready_downstream_blocked": 63274,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 23866,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 274747,
+          "rob_full": 201430
+        },
+        "B": {
+          "decode_empty": 41088,
+          "dmem_pending": 128234,
+          "dmem_read_accepted": 71610,
+          "dmem_write_accepted": 56624,
+          "flush": 20544,
+          "fma_src01_wait_entry_cycles": 153707,
+          "fma_src2_only_entry_cycles": 37178,
+          "fp_ex0_blocked": 103785,
+          "fp_head_wait_not_in_iq": 28305,
+          "fp_head_wait_ready_in_iq": 4440,
+          "fp_iq_issue": 74924,
+          "fp_iq_nonempty_no_ready": 280275,
+          "fp_iq_ready_downstream_blocked": 46620,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 22754,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 253112,
+          "rob_full": 158143
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/embench/minver/profile.json": "4a4d506d39396cc5b2dc6f2372d5aa1092c502fd4597465f05ce22508825fb41",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/minver/profile.json": "0b233aca1b36fbc436e702ad6a8b7b98f82f7b54e4a0259b4acc2df5d4f80023",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/embench/minver/profile.json": "9fe92d2922aef368a20675f5ce6bed0d556b725a1c77e8a86988fafadbbfe614"
+      }
+    },
+    {
+      "family": "embench",
+      "name": "nbody",
+      "group": null,
+      "cycles": {
+        "baseline": 5893151,
+        "A": 5821267,
+        "B": 5823850
+      },
+      "B_common_clock_speedup": 1.0118995166427707,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 132637,
+          "head_wait_csr_system": 68768,
+          "head_wait_int_load": 263913,
+          "head_wait_int_store": 19545,
+          "head_wait_integer_other": 926096,
+          "head_wait_jump": 3219,
+          "head_wait_marker": 2,
+          "recovery": 214643,
+          "retired_body": 3424506,
+          "retired_marker": 1,
+          "rob_empty": 672591,
+          "store_ack_wait": 167230
+        },
+        "A": {
+          "head_wait_branch": 132637,
+          "head_wait_csr_system": 68768,
+          "head_wait_int_load": 195549,
+          "head_wait_int_store": 19545,
+          "head_wait_integer_other": 926196,
+          "head_wait_jump": 3319,
+          "head_wait_marker": 2,
+          "recovery": 214643,
+          "retired_body": 3424506,
+          "retired_marker": 1,
+          "rob_empty": 672591,
+          "store_ack_wait": 163510
+        },
+        "B": {
+          "head_wait_branch": 139942,
+          "head_wait_csr_system": 68768,
+          "head_wait_int_load": 264328,
+          "head_wait_int_store": 19651,
+          "head_wait_integer_other": 932936,
+          "head_wait_jump": 3219,
+          "head_wait_marker": 2,
+          "recovery": 214845,
+          "retired_body": 3424506,
+          "retired_marker": 1,
+          "rob_empty": 672997,
+          "store_ack_wait": 82655
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 3722,
+          "mark_pending": 80444,
+          "other_inflight": 2620,
+          "request_ready": 80444
+        },
+        "A": {
+          "load_response_buffer": 3624,
+          "mark_pending": 80444,
+          "other_inflight": 2622,
+          "request_ready": 76820
+        },
+        "B": {
+          "load_response_buffer": 1105,
+          "mark_pending": 80444,
+          "request_ready": 1106
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 54300,
+          "own_external_inflight": 100398,
+          "own_response_buffer": 109215
+        },
+        "A": {
+          "before_external_request_or_forward": 54300,
+          "own_external_inflight": 38240,
+          "own_response_buffer": 103009
+        },
+        "B": {
+          "before_external_request_or_forward": 54501,
+          "own_external_inflight": 100606,
+          "own_response_buffer": 109221
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 429286,
+          "dmem_pending": 207719,
+          "dmem_read_accepted": 127275,
+          "dmem_write_accepted": 80444,
+          "flush": 214643,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 564919,
+          "rob_full": 55519
+        },
+        "A": {
+          "decode_empty": 429286,
+          "dmem_pending": 208421,
+          "dmem_read_accepted": 127977,
+          "dmem_write_accepted": 80444,
+          "flush": 214643,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 523744,
+          "rob_full": 53320
+        },
+        "B": {
+          "decode_empty": 429690,
+          "dmem_pending": 204103,
+          "dmem_read_accepted": 123659,
+          "dmem_write_accepted": 80444,
+          "flush": 214845,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 514062,
+          "rob_full": 30099
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/embench/nbody/profile.json": "1e15eb41f51d1f7a30ad90af6a395201a7438612cdf78d96407c6ee1284405c3",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/nbody/profile.json": "641fd952f41ff90b921441a5c380b4c79aac83ba4c3e277f793994c0b90721b0",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/embench/nbody/profile.json": "f759ab8da39ec14d8933ad252e2d9844e07b440c3e0e67a2eed79791c5f61057"
+      }
+    },
+    {
+      "family": "embench",
+      "name": "nettle-aes",
+      "group": null,
+      "cycles": {
+        "baseline": 5203513,
+        "A": 4797126,
+        "B": 5170824
+      },
+      "B_common_clock_speedup": 1.0063218164068242,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 9206,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 686652,
+          "head_wait_int_store": 4918,
+          "head_wait_integer_other": 120815,
+          "head_wait_jump": 472,
+          "head_wait_marker": 2,
+          "recovery": 10147,
+          "retired_body": 4177417,
+          "retired_marker": 1,
+          "rob_empty": 30444,
+          "store_ack_wait": 163435
+        },
+        "A": {
+          "head_wait_branch": 9206,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 306005,
+          "head_wait_int_store": 4918,
+          "head_wait_integer_other": 121283,
+          "head_wait_jump": 472,
+          "head_wait_marker": 2,
+          "recovery": 10147,
+          "retired_body": 4177417,
+          "retired_marker": 1,
+          "rob_empty": 30444,
+          "store_ack_wait": 137227
+        },
+        "B": {
+          "head_wait_branch": 9206,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 739926,
+          "head_wait_int_store": 4918,
+          "head_wait_integer_other": 125809,
+          "head_wait_jump": 472,
+          "head_wait_marker": 2,
+          "recovery": 10148,
+          "retired_body": 4177417,
+          "retired_marker": 1,
+          "rob_empty": 30447,
+          "store_ack_wait": 72474
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 24804,
+          "mark_pending": 59916,
+          "other_inflight": 18799,
+          "request_ready": 59916
+        },
+        "A": {
+          "load_response_buffer": 24804,
+          "mark_pending": 59916,
+          "other_inflight": 17395,
+          "request_ready": 35112
+        },
+        "B": {
+          "load_response_buffer": 6006,
+          "mark_pending": 59916,
+          "request_ready": 6552
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 5930,
+          "own_external_inflight": 273632,
+          "own_response_buffer": 407090
+        },
+        "A": {
+          "before_external_request_or_forward": 4448,
+          "own_external_inflight": 14976,
+          "own_response_buffer": 286581
+        },
+        "B": {
+          "before_external_request_or_forward": 6710,
+          "own_external_inflight": 299606,
+          "own_response_buffer": 433610
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 20294,
+          "dmem_pending": 841325,
+          "dmem_read_accepted": 781409,
+          "dmem_write_accepted": 59916,
+          "flush": 10147,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 876282,
+          "rob_full": 221219
+        },
+        "A": {
+          "decode_empty": 20294,
+          "dmem_pending": 841793,
+          "dmem_read_accepted": 781877,
+          "dmem_write_accepted": 59916,
+          "flush": 10147,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 468104,
+          "rob_full": 196882
+        },
+        "B": {
+          "decode_empty": 20296,
+          "dmem_pending": 838049,
+          "dmem_read_accepted": 778133,
+          "dmem_write_accepted": 59916,
+          "flush": 10148,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 847413,
+          "rob_full": 130343
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/embench/nettle-aes/profile.json": "eb0e770748345567be6913735efb2f6ed4245e05dc7dd681edec0b1c5aabc5c4",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/nettle-aes/profile.json": "6d11ef36a40213d7a438458241c4af0506584271acecc191e159e99147480ae5",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/embench/nettle-aes/profile.json": "969505ac1e1500e8d56fef146e55209876b4d0505fc7e16527e6769b92810705"
+      }
+    },
+    {
+      "family": "embench",
+      "name": "nettle-sha256",
+      "group": null,
+      "cycles": {
+        "baseline": 4307562,
+        "A": 4200675,
+        "B": 4247681
+      },
+      "B_common_clock_speedup": 1.014097339230512,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 6189,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 110244,
+          "head_wait_int_store": 2857,
+          "head_wait_integer_other": 26146,
+          "head_wait_jump": 2,
+          "head_wait_marker": 2,
+          "recovery": 12369,
+          "retired_body": 3817632,
+          "retired_marker": 1,
+          "rob_empty": 37110,
+          "store_ack_wait": 295006
+        },
+        "A": {
+          "head_wait_branch": 6189,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 41831,
+          "head_wait_int_store": 2857,
+          "head_wait_integer_other": 27096,
+          "head_wait_jump": 2,
+          "head_wait_marker": 2,
+          "recovery": 12369,
+          "retired_body": 3817632,
+          "retired_marker": 1,
+          "rob_empty": 37110,
+          "store_ack_wait": 255582
+        },
+        "B": {
+          "head_wait_branch": 7137,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 200010,
+          "head_wait_int_store": 4757,
+          "head_wait_integer_other": 28047,
+          "head_wait_jump": 2,
+          "head_wait_marker": 2,
+          "recovery": 13318,
+          "retired_body": 3817632,
+          "retired_marker": 1,
+          "rob_empty": 39957,
+          "store_ack_wait": 136814
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 39898,
+          "mark_pending": 112590,
+          "other_inflight": 29928,
+          "request_ready": 112590
+        },
+        "A": {
+          "load_response_buffer": 37048,
+          "mark_pending": 112590,
+          "other_inflight": 30402,
+          "request_ready": 75542
+        },
+        "B": {
+          "load_response_buffer": 11875,
+          "mark_pending": 112590,
+          "request_ready": 12349
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 6656,
+          "own_external_inflight": 43244,
+          "own_response_buffer": 60344
+        },
+        "A": {
+          "before_external_request_or_forward": 6656,
+          "own_external_inflight": 3803,
+          "own_response_buffer": 31372
+        },
+        "B": {
+          "before_external_request_or_forward": 11882,
+          "own_external_inflight": 87414,
+          "own_response_buffer": 100714
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 24738,
+          "dmem_pending": 373862,
+          "dmem_read_accepted": 261272,
+          "dmem_write_accepted": 112590,
+          "flush": 12369,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 328256,
+          "rob_full": 180004
+        },
+        "A": {
+          "decode_empty": 24738,
+          "dmem_pending": 376712,
+          "dmem_read_accepted": 264122,
+          "dmem_write_accepted": 112590,
+          "flush": 12369,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 216620,
+          "rob_full": 140582
+        },
+        "B": {
+          "decode_empty": 26636,
+          "dmem_pending": 375280,
+          "dmem_read_accepted": 262690,
+          "dmem_write_accepted": 112590,
+          "flush": 13318,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 269343,
+          "rob_full": 24208
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/embench/nettle-sha256/profile.json": "ae27590ed54b995c7c65492fb5456874aa747c52fd21681e417e3a444f3bd8f3",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/nettle-sha256/profile.json": "6e8155ed839921a1f031cd01c879543474492c7a4186a4cfca2e7300b14e82f3",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/embench/nettle-sha256/profile.json": "bbaa5ccd53634668448fb659a97a561f5720b5e6760615ccf7a332de3f0c7c72"
+      }
+    },
+    {
+      "family": "embench",
+      "name": "nsichneu",
+      "group": null,
+      "cycles": {
+        "baseline": 7298679,
+        "A": 6913377,
+        "B": 7302368
+      },
+      "B_common_clock_speedup": 0.9994948214058782,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 765687,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 2592489,
+          "head_wait_int_store": 2463,
+          "head_wait_integer_other": 2467,
+          "head_wait_jump": 2,
+          "head_wait_marker": 2,
+          "recovery": 422237,
+          "retired_body": 2236759,
+          "retired_marker": 1,
+          "rob_empty": 1266714,
+          "store_ack_wait": 9854
+        },
+        "A": {
+          "head_wait_branch": 875247,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 2098857,
+          "head_wait_int_store": 2463,
+          "head_wait_integer_other": 2467,
+          "head_wait_jump": 2,
+          "head_wait_marker": 2,
+          "recovery": 422237,
+          "retired_body": 2236759,
+          "retired_marker": 1,
+          "rob_empty": 1266714,
+          "store_ack_wait": 8624
+        },
+        "B": {
+          "head_wait_branch": 769379,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 2598643,
+          "head_wait_int_store": 2463,
+          "head_wait_integer_other": 2467,
+          "head_wait_jump": 2,
+          "head_wait_marker": 2,
+          "recovery": 422237,
+          "retired_body": 2236759,
+          "retired_marker": 1,
+          "rob_empty": 1266714,
+          "store_ack_wait": 3697
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 1230,
+          "mark_pending": 3697,
+          "other_inflight": 1230,
+          "request_ready": 3697
+        },
+        "A": {
+          "load_response_buffer": 1230,
+          "mark_pending": 3697,
+          "other_inflight": 1230,
+          "request_ready": 2467
+        },
+        "B": {
+          "mark_pending": 3697
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 839542,
+          "own_external_inflight": 876473,
+          "own_response_buffer": 876474
+        },
+        "A": {
+          "before_external_request_or_forward": 839542,
+          "own_external_inflight": 419772,
+          "own_response_buffer": 839543
+        },
+        "B": {
+          "before_external_request_or_forward": 840773,
+          "own_external_inflight": 878935,
+          "own_response_buffer": 878935
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 844474,
+          "dmem_pending": 1648314,
+          "dmem_read_accepted": 1644617,
+          "dmem_write_accepted": 3697,
+          "flush": 422237,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 36950,
+          "rob_full": 0
+        },
+        "A": {
+          "decode_empty": 844474,
+          "dmem_pending": 1911749,
+          "dmem_read_accepted": 1908052,
+          "dmem_write_accepted": 3697,
+          "flush": 422237,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 18,
+          "rob_full": 0
+        },
+        "B": {
+          "decode_empty": 844474,
+          "dmem_pending": 1649546,
+          "dmem_read_accepted": 1645849,
+          "dmem_write_accepted": 3697,
+          "flush": 422237,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 41871,
+          "rob_full": 0
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/embench/nsichneu/profile.json": "995c333189fc41e3360c4511f6775cb74ce1a91d58937119e7b34e6af46745c5",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/nsichneu/profile.json": "0af74e6a945b258f5404986311ec758929d761ba698a9374d90f3a90997b6cb2",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/embench/nsichneu/profile.json": "24c6f5dae47b6ffe4c60a20161b5ce44b330e08f29e0e8fc655a0cbeba5fa48c"
+      }
+    },
+    {
+      "family": "embench",
+      "name": "picojpeg",
+      "group": null,
+      "cycles": {
+        "baseline": 5300988,
+        "A": 5064804,
+        "B": 5105271
+      },
+      "B_common_clock_speedup": 1.0383362606999706,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 12703,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 234609,
+          "head_wait_int_store": 13643,
+          "head_wait_integer_other": 262594,
+          "head_wait_jump": 9050,
+          "head_wait_marker": 2,
+          "recovery": 48416,
+          "retired_body": 3321047,
+          "retired_marker": 1,
+          "rob_empty": 145251,
+          "store_ack_wait": 1253668
+        },
+        "A": {
+          "head_wait_branch": 13490,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 148221,
+          "head_wait_int_store": 12923,
+          "head_wait_integer_other": 268792,
+          "head_wait_jump": 9074,
+          "head_wait_marker": 2,
+          "recovery": 48380,
+          "retired_body": 3321047,
+          "retired_marker": 1,
+          "rob_empty": 145143,
+          "store_ack_wait": 1097727
+        },
+        "B": {
+          "head_wait_branch": 13622,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 520522,
+          "head_wait_int_store": 72905,
+          "head_wait_integer_other": 429554,
+          "head_wait_jump": 9086,
+          "head_wait_marker": 2,
+          "recovery": 48373,
+          "retired_body": 3321047,
+          "retired_marker": 1,
+          "rob_empty": 145122,
+          "store_ack_wait": 545033
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 235051,
+          "mark_pending": 445924,
+          "other_inflight": 126769,
+          "request_ready": 445924
+        },
+        "A": {
+          "load_response_buffer": 255235,
+          "mark_pending": 445924,
+          "other_inflight": 205879,
+          "request_ready": 190689
+        },
+        "B": {
+          "load_response_buffer": 48492,
+          "mark_pending": 445924,
+          "request_ready": 50617
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 38912,
+          "own_external_inflight": 84543,
+          "own_response_buffer": 111154
+        },
+        "A": {
+          "before_external_request_or_forward": 30680,
+          "own_external_inflight": 30026,
+          "own_response_buffer": 87515
+        },
+        "B": {
+          "before_external_request_or_forward": 46688,
+          "own_external_inflight": 206215,
+          "own_response_buffer": 267619
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 96832,
+          "dmem_pending": 972020,
+          "dmem_read_accepted": 526096,
+          "dmem_write_accepted": 445924,
+          "flush": 48416,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1321085,
+          "rob_full": 744185
+        },
+        "A": {
+          "decode_empty": 96760,
+          "dmem_pending": 974625,
+          "dmem_read_accepted": 528701,
+          "dmem_write_accepted": 445924,
+          "flush": 48380,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1098244,
+          "rob_full": 656692
+        },
+        "B": {
+          "decode_empty": 96746,
+          "dmem_pending": 954870,
+          "dmem_read_accepted": 508946,
+          "dmem_write_accepted": 445924,
+          "flush": 48373,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1178037,
+          "rob_full": 141312
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/embench/picojpeg/profile.json": "006763252613ebf3005cdb8878b5a3ff30429528cd547124173c065a125238ea",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/picojpeg/profile.json": "d4b7098fb34273c766dbdbe994f3e45b679060965e17ab8b7638e5444b544b2d",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/embench/picojpeg/profile.json": "ce19bc44075b1a8492449ce14f88e71ed6b796d2528b8225bafa617c47dcfdfb"
+      }
+    },
+    {
+      "family": "embench",
+      "name": "qrduino",
+      "group": null,
+      "cycles": {
+        "baseline": 4524180,
+        "A": 4377993,
+        "B": 4548795
+      },
+      "B_common_clock_speedup": 0.9945886767814334,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 172924,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 411010,
+          "head_wait_int_store": 25505,
+          "head_wait_integer_other": 437337,
+          "head_wait_jump": 8292,
+          "head_wait_marker": 2,
+          "recovery": 114719,
+          "retired_body": 2762062,
+          "retired_marker": 1,
+          "rob_empty": 344160,
+          "store_ack_wait": 248164
+        },
+        "A": {
+          "head_wait_branch": 176019,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 333693,
+          "head_wait_int_store": 25570,
+          "head_wait_integer_other": 439057,
+          "head_wait_jump": 8292,
+          "head_wait_marker": 2,
+          "recovery": 114429,
+          "retired_body": 2762062,
+          "retired_marker": 1,
+          "rob_empty": 343290,
+          "store_ack_wait": 175574
+        },
+        "B": {
+          "head_wait_branch": 180437,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 565865,
+          "head_wait_int_store": 25595,
+          "head_wait_integer_other": 451696,
+          "head_wait_jump": 8312,
+          "head_wait_marker": 2,
+          "recovery": 114799,
+          "retired_body": 2762062,
+          "retired_marker": 1,
+          "rob_empty": 344400,
+          "store_ack_wait": 95622
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 63690,
+          "mark_pending": 66897,
+          "other_inflight": 50680,
+          "request_ready": 66897
+        },
+        "A": {
+          "load_response_buffer": 58110,
+          "mark_pending": 66897,
+          "other_inflight": 41780,
+          "request_ready": 8787
+        },
+        "B": {
+          "load_response_buffer": 14170,
+          "mark_pending": 66897,
+          "request_ready": 14555
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 89872,
+          "own_external_inflight": 128629,
+          "own_response_buffer": 192509
+        },
+        "A": {
+          "before_external_request_or_forward": 74087,
+          "own_external_inflight": 81502,
+          "own_response_buffer": 178104
+        },
+        "B": {
+          "before_external_request_or_forward": 129652,
+          "own_external_inflight": 188424,
+          "own_response_buffer": 247789
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 229438,
+          "dmem_pending": 630957,
+          "dmem_read_accepted": 564060,
+          "dmem_write_accepted": 66897,
+          "flush": 114719,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 339805,
+          "rob_full": 138334
+        },
+        "A": {
+          "decode_empty": 228858,
+          "dmem_pending": 626352,
+          "dmem_read_accepted": 559455,
+          "dmem_write_accepted": 66897,
+          "flush": 114429,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 214753,
+          "rob_full": 83009
+        },
+        "B": {
+          "decode_empty": 229598,
+          "dmem_pending": 628600,
+          "dmem_read_accepted": 561703,
+          "dmem_write_accepted": 66897,
+          "flush": 114799,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 362724,
+          "rob_full": 108390
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/embench/qrduino/profile.json": "9a8911b9e447155151a2c7090eb26786ef6d01a8a4fe82cda612b71cf316f0e2",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/qrduino/profile.json": "041d2ca5d1379ebd63e57a04350d8cd2832ca9c4bf38d53d21a98a54717d5778",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/embench/qrduino/profile.json": "479b7adfe4ec1f11a7934f8f16d03fa6a77186b680f272ff0ccfd59f5d6c3795"
+      }
+    },
+    {
+      "family": "embench",
+      "name": "sglib-combined",
+      "group": null,
+      "cycles": {
+        "baseline": 4526268,
+        "A": 4332256,
+        "B": 4351929
+      },
+      "B_common_clock_speedup": 1.0400601664227518,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 174669,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 747390,
+          "head_wait_int_store": 41735,
+          "head_wait_integer_other": 156287,
+          "head_wait_jump": 3598,
+          "head_wait_marker": 2,
+          "recovery": 148399,
+          "retired_body": 2189708,
+          "retired_marker": 1,
+          "rob_empty": 445200,
+          "store_ack_wait": 619275
+        },
+        "A": {
+          "head_wait_branch": 175767,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 633317,
+          "head_wait_int_store": 41706,
+          "head_wait_integer_other": 147181,
+          "head_wait_jump": 3482,
+          "head_wait_marker": 2,
+          "recovery": 147120,
+          "retired_body": 2189708,
+          "retired_marker": 1,
+          "rob_empty": 441363,
+          "store_ack_wait": 552605
+        },
+        "B": {
+          "head_wait_branch": 191692,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 858923,
+          "head_wait_int_store": 43475,
+          "head_wait_integer_other": 191986,
+          "head_wait_jump": 3598,
+          "head_wait_marker": 2,
+          "recovery": 149878,
+          "retired_body": 2189708,
+          "retired_marker": 1,
+          "rob_empty": 449637,
+          "store_ack_wait": 273025
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 64409,
+          "mark_pending": 249680,
+          "other_inflight": 55506,
+          "request_ready": 249680
+        },
+        "A": {
+          "load_response_buffer": 62496,
+          "mark_pending": 249680,
+          "other_inflight": 53245,
+          "request_ready": 187184
+        },
+        "B": {
+          "load_response_buffer": 10005,
+          "mark_pending": 249680,
+          "request_ready": 13340
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 179280,
+          "own_external_inflight": 255157,
+          "own_response_buffer": 312953
+        },
+        "A": {
+          "before_external_request_or_forward": 162081,
+          "own_external_inflight": 168201,
+          "own_response_buffer": 303035
+        },
+        "B": {
+          "before_external_request_or_forward": 197695,
+          "own_external_inflight": 297961,
+          "own_response_buffer": 363267
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 296798,
+          "dmem_pending": 877021,
+          "dmem_read_accepted": 627341,
+          "dmem_write_accepted": 249680,
+          "flush": 148399,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 501962,
+          "rob_full": 193886
+        },
+        "A": {
+          "decode_empty": 294240,
+          "dmem_pending": 892563,
+          "dmem_read_accepted": 642883,
+          "dmem_write_accepted": 249680,
+          "flush": 147120,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 331782,
+          "rob_full": 155173
+        },
+        "B": {
+          "decode_empty": 299756,
+          "dmem_pending": 855706,
+          "dmem_read_accepted": 606026,
+          "dmem_write_accepted": 249680,
+          "flush": 149878,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 403576,
+          "rob_full": 7893
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/embench/sglib-combined/profile.json": "50dab83c0e3144e5a21ab035907211383e0fb69018b90f6a416e7c690f40152b",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/sglib-combined/profile.json": "17ae0c7e2a34c76788b52382960ac2d532a31817dc4575e0946c2ca850a61975",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/embench/sglib-combined/profile.json": "a86c2fae99e59949ae7ad8be303c4cf46c0d8c78c7877f50cad3408c8705ee5f"
+      }
+    },
+    {
+      "family": "embench",
+      "name": "slre",
+      "group": null,
+      "cycles": {
+        "baseline": 4902163,
+        "A": 4664230,
+        "B": 4580842
+      },
+      "B_common_clock_speedup": 1.0701445280147186,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 164232,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 831504,
+          "head_wait_int_store": 7373,
+          "head_wait_integer_other": 235846,
+          "head_wait_jump": 884,
+          "head_wait_marker": 2,
+          "recovery": 166106,
+          "retired_body": 2391546,
+          "retired_marker": 1,
+          "rob_empty": 498321,
+          "store_ack_wait": 606344
+        },
+        "A": {
+          "head_wait_branch": 168194,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 616667,
+          "head_wait_int_store": 7373,
+          "head_wait_integer_other": 236506,
+          "head_wait_jump": 884,
+          "head_wait_marker": 2,
+          "recovery": 165997,
+          "retired_body": 2391546,
+          "retired_marker": 1,
+          "rob_empty": 497994,
+          "store_ack_wait": 579062
+        },
+        "B": {
+          "head_wait_branch": 164562,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 837776,
+          "head_wait_int_store": 7373,
+          "head_wait_integer_other": 236286,
+          "head_wait_jump": 884,
+          "head_wait_marker": 2,
+          "recovery": 164016,
+          "retired_body": 2391546,
+          "retired_marker": 1,
+          "rob_empty": 492051,
+          "store_ack_wait": 286341
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 27282,
+          "mark_pending": 277540,
+          "other_inflight": 23982,
+          "request_ready": 277540
+        },
+        "A": {
+          "load_response_buffer": 27391,
+          "mark_pending": 277540,
+          "other_inflight": 23982,
+          "request_ready": 250149
+        },
+        "B": {
+          "load_response_buffer": 2531,
+          "mark_pending": 277540,
+          "request_ready": 6270
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 181280,
+          "own_external_inflight": 317577,
+          "own_response_buffer": 332647
+        },
+        "A": {
+          "before_external_request_or_forward": 167970,
+          "own_external_inflight": 131780,
+          "own_response_buffer": 316917
+        },
+        "B": {
+          "before_external_request_or_forward": 180840,
+          "own_external_inflight": 319338,
+          "own_response_buffer": 337598
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 332212,
+          "dmem_pending": 775077,
+          "dmem_read_accepted": 497537,
+          "dmem_write_accepted": 277540,
+          "flush": 166106,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 650574,
+          "rob_full": 389518
+        },
+        "A": {
+          "decode_empty": 331994,
+          "dmem_pending": 781787,
+          "dmem_read_accepted": 504247,
+          "dmem_write_accepted": 277540,
+          "flush": 165997,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 442116,
+          "rob_full": 361357
+        },
+        "B": {
+          "decode_empty": 328032,
+          "dmem_pending": 760668,
+          "dmem_read_accepted": 483128,
+          "dmem_write_accepted": 277540,
+          "flush": 164016,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 400423,
+          "rob_full": 111321
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/embench/slre/profile.json": "8c2607dfb6b0880ab8579f7e64131283102bfb9f7fad42f0ffa3fc1f1ed260a6",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/slre/profile.json": "e17cd4006a87039864343f2099398a93a0a3f9a3f2e2edc65b8ac057a3c308d7",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/embench/slre/profile.json": "3659fb716538aece6d80da5b9ab52861adfd59966c09615f50536ae718c22257"
+      }
+    },
+    {
+      "family": "embench",
+      "name": "st",
+      "group": null,
+      "cycles": {
+        "baseline": 7165107,
+        "A": 7092839,
+        "B": 7077473
+      },
+      "B_common_clock_speedup": 1.0123821030472318,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 149513,
+          "head_wait_csr_system": 95164,
+          "head_wait_int_load": 325242,
+          "head_wait_int_store": 28137,
+          "head_wait_integer_other": 1439320,
+          "head_wait_jump": 3421,
+          "head_wait_marker": 2,
+          "recovery": 212825,
+          "retired_body": 3986450,
+          "retired_marker": 1,
+          "rob_empty": 683042,
+          "store_ack_wait": 241990
+        },
+        "A": {
+          "head_wait_branch": 149513,
+          "head_wait_csr_system": 95164,
+          "head_wait_int_load": 256070,
+          "head_wait_int_store": 28137,
+          "head_wait_integer_other": 1439293,
+          "head_wait_jump": 3421,
+          "head_wait_marker": 2,
+          "recovery": 212799,
+          "retired_body": 3986450,
+          "retired_marker": 1,
+          "rob_empty": 682964,
+          "store_ack_wait": 239025
+        },
+        "B": {
+          "head_wait_branch": 157222,
+          "head_wait_csr_system": 95164,
+          "head_wait_int_load": 330613,
+          "head_wait_int_store": 28137,
+          "head_wait_integer_other": 1462353,
+          "head_wait_jump": 3421,
+          "head_wait_marker": 2,
+          "recovery": 212850,
+          "retired_body": 3986450,
+          "retired_marker": 1,
+          "rob_empty": 683091,
+          "store_ack_wait": 118169
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 2965,
+          "mark_pending": 118063,
+          "other_inflight": 2899,
+          "request_ready": 118063
+        },
+        "A": {
+          "load_response_buffer": 2964,
+          "mark_pending": 118063,
+          "other_inflight": 2899,
+          "request_ready": 115099
+        },
+        "B": {
+          "load_response_buffer": 53,
+          "mark_pending": 118063,
+          "request_ready": 53
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 79589,
+          "own_external_inflight": 116443,
+          "own_response_buffer": 129210
+        },
+        "A": {
+          "before_external_request_or_forward": 79589,
+          "own_external_inflight": 50365,
+          "own_response_buffer": 126116
+        },
+        "B": {
+          "before_external_request_or_forward": 79589,
+          "own_external_inflight": 119135,
+          "own_response_buffer": 131889
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 425650,
+          "dmem_pending": 287417,
+          "dmem_read_accepted": 169354,
+          "dmem_write_accepted": 118063,
+          "flush": 212825,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1092140,
+          "rob_full": 95645
+        },
+        "A": {
+          "decode_empty": 425598,
+          "dmem_pending": 287482,
+          "dmem_read_accepted": 169419,
+          "dmem_write_accepted": 118063,
+          "flush": 212799,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1050219,
+          "rob_full": 94201
+        },
+        "B": {
+          "decode_empty": 425700,
+          "dmem_pending": 281738,
+          "dmem_read_accepted": 163675,
+          "dmem_write_accepted": 118063,
+          "flush": 212850,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1048354,
+          "rob_full": 81418
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/embench/st/profile.json": "f3ca0cf393688a7f64e85aac6abff87ef2deb8403d3867b880f1748e33f974ec",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/st/profile.json": "e255d63043b27713495f01ea1423f90dc2dff8344820bec4f330919d49bbfab3",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/embench/st/profile.json": "a8edecaafa3c6dd2a908b1f4b1acc36484dbf7932194df4802a1c065dcbabdc2"
+      }
+    },
+    {
+      "family": "embench",
+      "name": "statemate",
+      "group": null,
+      "cycles": {
+        "baseline": 3368567,
+        "A": 3100457,
+        "B": 2826412
+      },
+      "B_common_clock_speedup": 1.1918173995864723,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 26520,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 257342,
+          "head_wait_int_store": 7864,
+          "head_wait_integer_other": 59923,
+          "head_wait_jump": 7860,
+          "head_wait_marker": 2,
+          "recovery": 42246,
+          "retired_body": 1551623,
+          "retired_marker": 1,
+          "rob_empty": 126741,
+          "store_ack_wait": 1288441
+        },
+        "A": {
+          "head_wait_branch": 20629,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 179748,
+          "head_wait_int_store": 7864,
+          "head_wait_integer_other": 59923,
+          "head_wait_jump": 7860,
+          "head_wait_marker": 2,
+          "recovery": 42246,
+          "retired_body": 1551623,
+          "retired_marker": 1,
+          "rob_empty": 126741,
+          "store_ack_wait": 1103816
+        },
+        "B": {
+          "head_wait_branch": 33395,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 363379,
+          "head_wait_int_store": 7862,
+          "head_wait_integer_other": 56970,
+          "head_wait_jump": 11788,
+          "head_wait_marker": 2,
+          "recovery": 43222,
+          "retired_body": 1551623,
+          "retired_marker": 1,
+          "rob_empty": 129669,
+          "store_ack_wait": 628497
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 170877,
+          "mark_pending": 494946,
+          "other_inflight": 127672,
+          "request_ready": 494946
+        },
+        "A": {
+          "load_response_buffer": 174805,
+          "mark_pending": 494946,
+          "other_inflight": 113924,
+          "request_ready": 320141
+        },
+        "B": {
+          "load_response_buffer": 56956,
+          "mark_pending": 494946,
+          "request_ready": 76595
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 38309,
+          "own_external_inflight": 101170,
+          "own_response_buffer": 117863
+        },
+        "A": {
+          "before_external_request_or_forward": 38309,
+          "own_external_inflight": 34379,
+          "own_response_buffer": 107060
+        },
+        "B": {
+          "before_external_request_or_forward": 39286,
+          "own_external_inflight": 149281,
+          "own_response_buffer": 174812
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 84492,
+          "dmem_pending": 886792,
+          "dmem_read_accepted": 391846,
+          "dmem_write_accepted": 494946,
+          "flush": 42246,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1203979,
+          "rob_full": 1029141
+        },
+        "A": {
+          "decode_empty": 84492,
+          "dmem_pending": 885810,
+          "dmem_read_accepted": 390864,
+          "dmem_write_accepted": 494946,
+          "flush": 42246,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 942743,
+          "rob_full": 873978
+        },
+        "B": {
+          "decode_empty": 86444,
+          "dmem_pending": 846517,
+          "dmem_read_accepted": 351571,
+          "dmem_write_accepted": 494946,
+          "flush": 43222,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 709025,
+          "rob_full": 259239
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/embench/statemate/profile.json": "9262ad03aa0f22fe8e4db76c3068a877636b791e7990259ca194a131bbc4db57",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/statemate/profile.json": "eac8de1932d24b883bdee55a3d2244ea92cff6992e7d80e7d65ef660a0868437",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/embench/statemate/profile.json": "eb128d37072fef2d9d9675004c215e47b2c0ae44abb02f099dca7886b355b65b"
+      }
+    },
+    {
+      "family": "embench",
+      "name": "ud",
+      "group": null,
+      "cycles": {
+        "baseline": 2775897,
+        "A": 2616256,
+        "B": 2725595
+      },
+      "B_common_clock_speedup": 1.0184554198257627,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 2,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 263117,
+          "head_wait_int_store": 42868,
+          "head_wait_integer_other": 1160272,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 32524,
+          "retired_body": 814428,
+          "retired_marker": 1,
+          "rob_empty": 97575,
+          "store_ack_wait": 365100
+        },
+        "A": {
+          "head_wait_branch": 2,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 181813,
+          "head_wait_int_store": 42868,
+          "head_wait_integer_other": 1135144,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 34002,
+          "retired_body": 814428,
+          "retired_marker": 1,
+          "rob_empty": 102009,
+          "store_ack_wait": 305979
+        },
+        "B": {
+          "head_wait_branch": 2,
+          "head_wait_csr_system": 4,
+          "head_wait_int_load": 348844,
+          "head_wait_int_store": 42868,
+          "head_wait_integer_other": 1243009,
+          "head_wait_jump": 4,
+          "head_wait_marker": 2,
+          "recovery": 32524,
+          "retired_body": 814428,
+          "retired_marker": 1,
+          "rob_empty": 97575,
+          "store_ack_wait": 146334
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 53211,
+          "mark_pending": 131556,
+          "other_inflight": 48777,
+          "request_ready": 131556
+        },
+        "A": {
+          "load_response_buffer": 51735,
+          "mark_pending": 131556,
+          "other_inflight": 42867,
+          "request_ready": 79821
+        },
+        "B": {
+          "load_response_buffer": 5911,
+          "mark_pending": 131556,
+          "request_ready": 8867
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 29562,
+          "own_external_inflight": 110865,
+          "own_response_buffer": 122690
+        },
+        "A": {
+          "before_external_request_or_forward": 29562,
+          "own_external_inflight": 32518,
+          "own_response_buffer": 119733
+        },
+        "B": {
+          "before_external_request_or_forward": 44344,
+          "own_external_inflight": 147816,
+          "own_response_buffer": 156684
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 65048,
+          "dmem_pending": 455263,
+          "dmem_read_accepted": 323707,
+          "dmem_write_accepted": 131556,
+          "flush": 32524,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1483996,
+          "rob_full": 385798
+        },
+        "A": {
+          "decode_empty": 68004,
+          "dmem_pending": 468567,
+          "dmem_read_accepted": 337011,
+          "dmem_write_accepted": 131556,
+          "flush": 34002,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1299227,
+          "rob_full": 359198
+        },
+        "B": {
+          "decode_empty": 65048,
+          "dmem_pending": 452297,
+          "dmem_read_accepted": 320741,
+          "dmem_write_accepted": 131556,
+          "flush": 32524,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 1436655,
+          "rob_full": 291174
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/embench/ud/profile.json": "a93e1b87151595a037335a7d2a849315b8d650f1dad203e5842f8aec94485ab8",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/ud/profile.json": "fc3eb90280a5691acd1e9013ce188e8c46eacb0b9cbaedb6ff3b29a9b3f6fd17",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/embench/ud/profile.json": "c97048683f48fa4e6106f5fcc2cf1c27afc0858d16cd62ef8bc68e25eb61b5da"
+      }
+    },
+    {
+      "family": "embench",
+      "name": "wikisort",
+      "group": null,
+      "cycles": {
+        "baseline": 2173042,
+        "A": 2134990,
+        "B": 2102321
+      },
+      "B_common_clock_speedup": 1.0336394870241035,
+      "cycle_partitions": {
+        "baseline": {
+          "head_wait_branch": 28729,
+          "head_wait_csr_system": 15672,
+          "head_wait_int_load": 89110,
+          "head_wait_int_store": 12245,
+          "head_wait_integer_other": 492610,
+          "head_wait_jump": 7273,
+          "head_wait_marker": 2,
+          "recovery": 61933,
+          "retired_body": 1064027,
+          "retired_marker": 1,
+          "rob_empty": 191996,
+          "store_ack_wait": 209444
+        },
+        "A": {
+          "head_wait_branch": 28740,
+          "head_wait_csr_system": 15672,
+          "head_wait_int_load": 72455,
+          "head_wait_int_store": 12347,
+          "head_wait_integer_other": 493445,
+          "head_wait_jump": 7273,
+          "head_wait_marker": 2,
+          "recovery": 61940,
+          "retired_body": 1064027,
+          "retired_marker": 1,
+          "rob_empty": 192017,
+          "store_ack_wait": 187071
+        },
+        "B": {
+          "head_wait_branch": 29500,
+          "head_wait_csr_system": 15672,
+          "head_wait_int_load": 104026,
+          "head_wait_int_store": 12511,
+          "head_wait_integer_other": 498257,
+          "head_wait_jump": 7319,
+          "head_wait_marker": 2,
+          "recovery": 61281,
+          "retired_body": 1064027,
+          "retired_marker": 1,
+          "rob_empty": 190022,
+          "store_ack_wait": 119703
+        }
+      },
+      "store_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 22054,
+          "mark_pending": 89561,
+          "other_inflight": 8268,
+          "request_ready": 89561
+        },
+        "A": {
+          "load_response_buffer": 26111,
+          "mark_pending": 89561,
+          "other_inflight": 7949,
+          "request_ready": 63450
+        },
+        "B": {
+          "load_response_buffer": 14726,
+          "mark_pending": 89561,
+          "request_ready": 15416
+        }
+      },
+      "load_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 19453,
+          "own_external_inflight": 31497,
+          "own_response_buffer": 38160
+        },
+        "A": {
+          "before_external_request_or_forward": 19345,
+          "own_external_inflight": 16678,
+          "own_response_buffer": 36432
+        },
+        "B": {
+          "before_external_request_or_forward": 20197,
+          "own_external_inflight": 40036,
+          "own_response_buffer": 43793
+        }
+      },
+      "overlapping_events": {
+        "baseline": {
+          "decode_empty": 123866,
+          "dmem_pending": 196501,
+          "dmem_read_accepted": 106940,
+          "dmem_write_accepted": 89561,
+          "flush": 61933,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 466442,
+          "rob_full": 129337
+        },
+        "A": {
+          "decode_empty": 123880,
+          "dmem_pending": 196687,
+          "dmem_read_accepted": 107126,
+          "dmem_write_accepted": 89561,
+          "flush": 61940,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 440765,
+          "rob_full": 116431
+        },
+        "B": {
+          "decode_empty": 122562,
+          "dmem_pending": 192184,
+          "dmem_read_accepted": 102623,
+          "dmem_write_accepted": 89561,
+          "flush": 61281,
+          "fma_src01_wait_entry_cycles": 0,
+          "fma_src2_only_entry_cycles": 0,
+          "fp_ex0_blocked": 0,
+          "fp_iq_issue": 0,
+          "fp_iq_nonempty_no_ready": 0,
+          "fp_iq_ready_downstream_blocked": 0,
+          "heavy_completion_blocked": 0,
+          "heavy_issue": 0,
+          "heavy_issue_blocked": 0,
+          "rename_blocked": 432949,
+          "rob_full": 50150
+        }
+      },
+      "per_pc_work_matches": true,
+      "profile_sha256": {
+        "docs/evidence/2026-10-18/post-lsu-baseline/measurement/embench/wikisort/profile.json": "17f9e963c482f88451577c38e8291cbf37477f6a43e7023d9cb0a6c03405d848",
+        "build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/wikisort/profile.json": "7d3d584dd1536a74e9869aa274aa67b1ef6cf8996c0b35f5cbcedbe81b36672c",
+        "build/experiments/lsu-b-v1/measurement-10000ps-v1/embench/wikisort/profile.json": "13f9eb46bcfdc4ebcf0fcb02b604ddb6fad95df7a5328e692385f4e2e7e9660f"
+      }
+    }
+  ],
+  "per_pc_work_matches": true
+}

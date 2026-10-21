@@ -1,0 +1,79 @@
+{
+  "build-clean-v1/summary.json": {
+    "passed": true,
+    "sha256": "1100da367ad9990009a0e5110b02dbb0a6a7bfe07e82841094a196b27e3aa79c"
+  },
+  "qualification-clean-v1/summary.json": {
+    "passed": true,
+    "sha256": "f7801e7130612bec403dfa12b8d72fa39ac46896d90139e145ea7742d3defd0d"
+  },
+  "measurement-10000ps-v1/summary.json": {
+    "passed": true,
+    "sha256": "7d602c60a551e0674f29ec4ba7db6395faa1b0471ca35b0236b65263ec0c059b"
+  },
+  "common_clock_diagnostics_sha256": "4349e13f47e708156daf4a6adccb7313a05c5ea40f9b45f3b983c3a781cdc5b3",
+  "started_utc": "2026-10-21T01:51:58.755624+00:00",
+  "verification_container": {
+    "Id": "c33ee43abb57a8e155db1bd78a6690777bb38f6cdd66298e995fb6845c69572a",
+    "Image": "sha256:2140263677b3a378d5cab75a3d0d4fd285ddb38a1a5a1f81f5cf97db024a02d5",
+    "State": {
+      "Status": "running",
+      "Running": true,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 11831,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-21T01:26:46.37178533Z",
+      "FinishedAt": "0001-01-01T00:00:00Z"
+    },
+    "User": "1000:1000"
+  },
+  "finished_verification_processes": "PID                 COMMAND             COMMAND\n11831               sleep               /bin/sleep infinity\n",
+  "idle_before_stop": "PID                 COMMAND             COMMAND\n11831               sleep               /bin/sleep infinity\n",
+  "verification_removed": true,
+  "free_before_physical_bytes": 10605453312,
+  "image_size_bytes": 4622063780,
+  "physical_container_id": "299987b95527443326077bd3bc65e8f3bf3bacc082ac8b6dfe24cd020a1b1381",
+  "platform204_before_prune": true,
+  "pruned_unused_private_image_directories": {
+    "removed_unused_private_image_directories": [
+      "/OpenROAD-flow-scripts/flow/platforms/gf180",
+      "/OpenROAD-flow-scripts/flow/platforms/ihp-sg13g2",
+      "/OpenROAD-flow-scripts/flow/platforms/nangate45",
+      "/OpenROAD-flow-scripts/flow/platforms/sky130hd",
+      "/OpenROAD-flow-scripts/flow/platforms/sky130hs",
+      "/OpenROAD-flow-scripts/flow/platforms/sky130io",
+      "/OpenROAD-flow-scripts/flow/platforms/sky130ram",
+      "/OpenROAD-flow-scripts/flow/designs"
+    ]
+  },
+  "platform204_after_prune": true,
+  "free_after_physical_prune_bytes": 1662353408,
+  "synthesis_launch_command": [
+    "python3",
+    "scripts/run_baseline_physical.py",
+    "--experiment",
+    "experiments/lsu-b-v1/manifest.json",
+    "--output-root",
+    "build/experiments/lsu-b-v1",
+    "--lowered-rtl",
+    "build/experiments/lsu-b-v1/rtl_lowered.v",
+    "--container",
+    "rv32-lsu-b-physical",
+    "--adder-mapping",
+    "abc",
+    "--jobs",
+    "2",
+    "--detached",
+    "--period-ps",
+    "5500",
+    "--stage",
+    "synthesis",
+    "--label",
+    "synth-clean-v1"
+  ],
+  "finished_utc": "2026-10-21T01:53:04.701713+00:00"
+}

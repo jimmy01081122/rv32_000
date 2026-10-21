@@ -1,0 +1,108 @@
+{
+  "scope": "isolated B fixed baseline physical flow and actual timing-grid collection",
+  "source_commit": "95ac0dd6451a1799f9f3fe948c7b74c02f5fccd2",
+  "script_sha256": "a4bc44b5ca19e6b06df4b4edabffd58ed5b5932a6a02b60e80a4bec3edf3ec4e",
+  "commands": [
+    {
+      "command": [
+        "python3",
+        "scripts/run_baseline_physical.py",
+        "--experiment",
+        "experiments/lsu-b-v1/manifest.json",
+        "--output-root",
+        "build/experiments/lsu-b-v1",
+        "--lowered-rtl",
+        "build/experiments/lsu-b-v1/rtl_lowered.v",
+        "--container",
+        "rv32-lsu-b-physical",
+        "--adder-mapping",
+        "abc",
+        "--jobs",
+        "2",
+        "--detached",
+        "--period-ps",
+        "14000",
+        "--label",
+        "backend-clean-v1",
+        "--synthesis-from",
+        "build/experiments/lsu-b-v1/physical-5500ps-synth-clean-v1"
+      ],
+      "driver_log": "build/experiments/lsu-b-v1/backend-launch-driver.log",
+      "started_utc": "2026-10-21T02:13:19.783748+00:00",
+      "returncode": 0,
+      "finished_utc": "2026-10-21T02:13:20.031684+00:00",
+      "driver_log_sha256": "4b922929ae03f46461f95c79f4be4d3a4117152a68cb647bf7003dffd182533b"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/run_baseline_physical.py",
+        "--experiment",
+        "experiments/lsu-b-v1/manifest.json",
+        "--output-root",
+        "build/experiments/lsu-b-v1",
+        "--lowered-rtl",
+        "build/experiments/lsu-b-v1/rtl_lowered.v",
+        "--container",
+        "rv32-lsu-b-physical",
+        "--adder-mapping",
+        "abc",
+        "--jobs",
+        "2",
+        "--detached",
+        "--period-ps",
+        "14000",
+        "--label",
+        "eco-clean-v1",
+        "--grt-from",
+        "build/experiments/lsu-b-v1/physical-14000ps-backend-clean-v1"
+      ],
+      "driver_log": "build/experiments/lsu-b-v1/eco-launch-driver.log",
+      "started_utc": "2026-10-21T02:58:20.200727+00:00",
+      "returncode": 0,
+      "finished_utc": "2026-10-21T02:58:21.189647+00:00",
+      "driver_log_sha256": "8306009f68a47f281697b154666f108b4010811e24b06ae550053aefcb3267c7"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/analyze_baseline_physical.py",
+        "--experiment",
+        "experiments/lsu-b-v1/manifest.json",
+        "--attempt",
+        "build/experiments/lsu-b-v1/physical-14000ps-eco-clean-v1",
+        "--container",
+        "rv32-lsu-b-physical",
+        "--adder-audit",
+        "build/baseline-setup/asap7-adder-qualification-v2/summary.json",
+        "--label",
+        "initial-14000ps",
+        "--periods-ps",
+        "14000"
+      ],
+      "driver_log": "build/experiments/lsu-b-v1/initial-14000ps-driver.log",
+      "started_utc": "2026-10-21T03:34:36.274841+00:00",
+      "returncode": 0,
+      "finished_utc": "2026-10-21T03:36:38.788022+00:00",
+      "driver_log_sha256": "10938b639eefb89d6790efcf57bb840a5bb4a053a4bb0a3c35809f5a100ebbca"
+    },
+    {
+      "command": [
+        "python3",
+        "scripts/check_physical_closure.py",
+        "--analysis",
+        "build/experiments/lsu-b-v1/physical-14000ps-eco-clean-v1/initial-14000ps"
+      ],
+      "driver_log": "build/experiments/lsu-b-v1/initial-14000ps-review-driver.log",
+      "started_utc": "2026-10-21T03:36:38.788539+00:00",
+      "returncode": 1,
+      "finished_utc": "2026-10-21T03:36:39.855651+00:00",
+      "driver_log_sha256": "2dde5c1c76dd42535834bbf55d132f72629eb4cbd18ee885722bad2c161341b1"
+    }
+  ],
+  "started_utc": "2026-10-21T01:53:04.734316+00:00",
+  "complete": false,
+  "active_attempt": "build/experiments/lsu-b-v1/physical-14000ps-eco-clean-v1",
+  "error": "AssertionError()",
+  "finished_utc": "2026-10-21T03:36:39.856954+00:00"
+}

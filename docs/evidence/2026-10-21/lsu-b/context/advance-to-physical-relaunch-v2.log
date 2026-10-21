@@ -1,0 +1,160 @@
+B common-clock diagnostics 1.029458926609211 1.0095989895859971 {'dsp': 1.013839324971106, 'matrix_ml': 1.005376389204587}
+fp32 fir {'baseline': 74311, 'A': 66117, 'B': 74303} 1.0001076672543505
+fp32 iir {'baseline': 13523, 'A': 13496, 'B': 12499} 1.08192655412433
+fp32 fft {'baseline': 40867, 'A': 37663, 'B': 36722} 1.1128751157344372
+fp32 pid {'baseline': 7248, 'A': 7242, 'B': 8261} 0.8773756203849413
+fp32 gemm {'baseline': 133275, 'A': 123175, 'B': 133870} 0.9955553895570329
+fp32 bicg {'baseline': 23927, 'A': 20693, 'B': 23720} 1.0087268128161888
+fp32 cholesky {'baseline': 194161, 'A': 183250, 'B': 190887} 1.017151508484077
+fp32 svm {'baseline': 43392, 'A': 38501, 'B': 43383} 1.0002074545328816
+embench aha-mont64 {'baseline': 5356670, 'A': 5354540, 'B': 5359621} 0.9994494013662534
+embench crc32 {'baseline': 5402220, 'A': 5054736, 'B': 5402210} 1.0000018510942743
+embench cubic {'baseline': 14490894, 'A': 14160446, 'B': 14025779} 1.0331614379493645
+embench edn {'baseline': 4754496, 'A': 4256669, 'B': 4723764} 1.0065058288263342
+embench huffbench {'baseline': 3377028, 'A': 3306646, 'B': 3217162} 1.0496916226164552
+embench matmult-int {'baseline': 4193163, 'A': 3825063, 'B': 4138048} 1.0133190818472864
+embench minver {'baseline': 878777, 'A': 858801, 'B': 843225} 1.0421619377983338
+embench nbody {'baseline': 5893151, 'A': 5821267, 'B': 5823850} 1.0118995166427707
+embench nettle-aes {'baseline': 5203513, 'A': 4797126, 'B': 5170824} 1.0063218164068242
+embench nettle-sha256 {'baseline': 4307562, 'A': 4200675, 'B': 4247681} 1.014097339230512
+embench nsichneu {'baseline': 7298679, 'A': 6913377, 'B': 7302368} 0.9994948214058782
+embench picojpeg {'baseline': 5300988, 'A': 5064804, 'B': 5105271} 1.0383362606999706
+embench qrduino {'baseline': 4524180, 'A': 4377993, 'B': 4548795} 0.9945886767814334
+embench sglib-combined {'baseline': 4526268, 'A': 4332256, 'B': 4351929} 1.0400601664227518
+embench slre {'baseline': 4902163, 'A': 4664230, 'B': 4580842} 1.0701445280147186
+embench st {'baseline': 7165107, 'A': 7092839, 'B': 7077473} 1.0123821030472318
+embench statemate {'baseline': 3368567, 'A': 3100457, 'B': 2826412} 1.1918173995864723
+embench ud {'baseline': 2775897, 'A': 2616256, 'B': 2725595} 1.0184554198257627
+embench wikisort {'baseline': 2173042, 'A': 2134990, 'B': 2102321} 1.0336394870241035
+
+PID                 COMMAND             COMMAND
+11831               sleep               /bin/sleep infinity
+
+rv32-lsu-b-functional
+
+rv32-lsu-b-functional
+
+299987b95527443326077bd3bc65e8f3bf3bacc082ac8b6dfe24cd020a1b1381
+
+
+{"removed_unused_private_image_directories": ["/OpenROAD-flow-scripts/flow/platforms/gf180", "/OpenROAD-flow-scripts/flow/platforms/ihp-sg13g2", "/OpenROAD-flow-scripts/flow/platforms/nangate45", "/OpenROAD-flow-scripts/flow/platforms/sky130hd", "/OpenROAD-flow-scripts/flow/platforms/sky130hs", "/OpenROAD-flow-scripts/flow/platforms/sky130io", "/OpenROAD-flow-scripts/flow/platforms/sky130ram", "/OpenROAD-flow-scripts/flow/designs"]}
+
+
+detached job submitted; result: /workspace/rv32_000/build/experiments/lsu-b-v1/physical-5500ps-synth-clean-v1/run.json
+
+2026-10-21T01:53:04.734740+00:00 physical-5500ps-synth-clean-v1 running (no log yet)
+2026-10-21T01:54:04.737811+00:00 physical-5500ps-synth-clean-v1 running 14.13. Executing AST frontend in derive mode using pre-parsed AST for module `\rv32_ooo_rename'.
+2026-10-21T01:55:04.739600+00:00 physical-5500ps-synth-clean-v1 running 3.9.20. Executing OPT_DFF pass (perform DFF optimizations).
+2026-10-21T01:56:04.742267+00:00 physical-5500ps-synth-clean-v1 running 3.14. Executing SHARE pass (SAT-based resource sharing).
+2026-10-21T01:57:04.745426+00:00 physical-5500ps-synth-clean-v1 running 3.14. Executing SHARE pass (SAT-based resource sharing).
+2026-10-21T01:58:04.747515+00:00 physical-5500ps-synth-clean-v1 running 3.14. Executing SHARE pass (SAT-based resource sharing).
+2026-10-21T01:59:04.749622+00:00 physical-5500ps-synth-clean-v1 running 4.3.31. Executing OPT_DFF pass (perform DFF optimizations).
+2026-10-21T02:00:04.751908+00:00 physical-5500ps-synth-clean-v1 running 4.5.14. Executing OPT_CLEAN pass (remove unused cells and wires).
+2026-10-21T02:01:04.754542+00:00 physical-5500ps-synth-clean-v1 running 11.1. Extracting gate netlist of module `\rv32_ooo_core' to `<abc-temp-dir>/input.blif'..
+2026-10-21T02:02:04.756790+00:00 physical-5500ps-synth-clean-v1 running 11.1. Extracting gate netlist of module `\rv32_ooo_core' to `<abc-temp-dir>/input.blif'..
+2026-10-21T02:03:04.759030+00:00 physical-5500ps-synth-clean-v1 running 11.1. Extracting gate netlist of module `\rv32_ooo_core' to `<abc-temp-dir>/input.blif'..
+2026-10-21T02:04:04.761355+00:00 physical-5500ps-synth-clean-v1 running 11.1. Extracting gate netlist of module `\rv32_ooo_core' to `<abc-temp-dir>/input.blif'..
+2026-10-21T02:05:04.763352+00:00 physical-5500ps-synth-clean-v1 running 11.1. Extracting gate netlist of module `\rv32_ooo_core' to `<abc-temp-dir>/input.blif'..
+2026-10-21T02:06:04.765701+00:00 physical-5500ps-synth-clean-v1 running 11.1. Extracting gate netlist of module `\rv32_ooo_core' to `<abc-temp-dir>/input.blif'..
+2026-10-21T02:07:04.768091+00:00 physical-5500ps-synth-clean-v1 running 11.1. Extracting gate netlist of module `\rv32_ooo_core' to `<abc-temp-dir>/input.blif'..
+2026-10-21T02:08:04.770624+00:00 physical-5500ps-synth-clean-v1 running 11.1. Extracting gate netlist of module `\rv32_ooo_core' to `<abc-temp-dir>/input.blif'..
+2026-10-21T02:09:04.772812+00:00 physical-5500ps-synth-clean-v1 running 11.1. Extracting gate netlist of module `\rv32_ooo_core' to `<abc-temp-dir>/input.blif'..
+2026-10-21T02:10:04.775663+00:00 physical-5500ps-synth-clean-v1 running 11.1. Extracting gate netlist of module `\rv32_ooo_core' to `<abc-temp-dir>/input.blif'..
+2026-10-21T02:11:04.778326+00:00 physical-5500ps-synth-clean-v1 running 11.1. Extracting gate netlist of module `\rv32_ooo_core' to `<abc-temp-dir>/input.blif'..
+2026-10-21T02:12:04.780660+00:00 physical-5500ps-synth-clean-v1 running 11.1. Extracting gate netlist of module `\rv32_ooo_core' to `<abc-temp-dir>/input.blif'..
+2026-10-21T02:13:04.782930+00:00 physical-5500ps-synth-clean-v1 running 19.2. Executing DEMUXMAP pass.
+2026-10-21T02:13:19.783524+00:00 physical-5500ps-synth-clean-v1 completed with unchanged inputs
+2026-10-21T02:13:19.783955+00:00 launch backend-launch
+2026-10-21T02:13:20.032327+00:00 physical-14000ps-backend-clean-v1 queued (no log yet)
+2026-10-21T02:14:20.034199+00:00 physical-14000ps-backend-clean-v1 running Report metrics stage 2, floorplan final...
+2026-10-21T02:15:20.036375+00:00 physical-14000ps-backend-clean-v1 running       200 |   0.9657 |  2.176887e+05 |  +24.61% |  1.90e-10 |      
+2026-10-21T02:16:20.038455+00:00 physical-14000ps-backend-clean-v1 running        30 |   0.9697 |  1.362385e+05 |   +3.54% |  8.03e-14 |      
+2026-10-21T02:17:20.041760+00:00 physical-14000ps-backend-clean-v1 running         0 |     +0.0% |       0 |       0 |             0 |    158463
+2026-10-21T02:18:20.044334+00:00 physical-14000ps-backend-clean-v1 running         0 |     +0.0% |       0 |       0 |             0 |    158463
+2026-10-21T02:19:20.047053+00:00 physical-14000ps-backend-clean-v1 running         0 |     +0.0% |       0 |       0 |             0 |    158463
+2026-10-21T02:20:20.049269+00:00 physical-14000ps-backend-clean-v1 running     15800 |     -0.1% |     204 |      104 |    142561
+2026-10-21T02:21:20.051348+00:00 physical-14000ps-backend-clean-v1 running [WARNING GRT-0281] Net clk has a large fanout of 18163 terminals.
+2026-10-21T02:22:20.053450+00:00 physical-14000ps-backend-clean-v1 running [INFO RSZ-0038] Inserted 145 buffers in 111 nets.
+2026-10-21T02:23:20.055685+00:00 physical-14000ps-backend-clean-v1 running [INFO GPL-0110] Timing-driven: new target density: 0.5661037
+2026-10-21T02:24:20.058145+00:00 physical-14000ps-backend-clean-v1 running Report metrics stage 3, global place...
+2026-10-21T02:25:20.061383+00:00 physical-14000ps-backend-clean-v1 running    136000 |     +0.0% |       0 |       4 |             4 |     29274
+2026-10-21T02:26:20.064636+00:00 physical-14000ps-backend-clean-v1 running Report metrics stage 3, resizer...
+2026-10-21T02:27:20.067026+00:00 physical-14000ps-backend-clean-v1 running [INFO DPL-0301] Pass   1 of matching; objective is 8.777435e+08.
+2026-10-21T02:28:20.069641+00:00 physical-14000ps-backend-clean-v1 running [INFO DPL-0023] HPWL delta               -0.0 %
+2026-10-21T02:29:20.072246+00:00 physical-14000ps-backend-clean-v1 running Report metrics stage 3, detailed place...
+2026-10-21T02:30:20.074651+00:00 physical-14000ps-backend-clean-v1 running read_sdc /workspace/build/experiments/lsu-b-v1/physical-14000ps-backend-clean-v1/results/asap7/rv32_post_lsu_v1/base/3_place.sdc
+2026-10-21T02:31:20.077330+00:00 physical-14000ps-backend-clean-v1 running repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+2026-10-21T02:32:20.079854+00:00 physical-14000ps-backend-clean-v1 running       290 |       0 |    1095 |            0 |    +0.4% | -395.477 | -259072.125 | u_lsu.rsp_buf_rdata[19]$_SDFFE_PP0P_/D
+2026-10-21T02:33:20.082555+00:00 physical-14000ps-backend-clean-v1 running       300 |       0 |    1120 |            0 |    +0.4% | -395.477 | -206802.953 | u_lsu.rsp_buf_rdata[19]$_SDFFE_PP0P_/D
+2026-10-21T02:34:20.086515+00:00 physical-14000ps-backend-clean-v1 running       330 |       0 |    1220 |            0 |    +0.4% | -395.477 | -24744.979 | u_lsu.rsp_buf_rdata[19]$_SDFFE_PP0P_/D
+2026-10-21T02:35:20.089594+00:00 physical-14000ps-backend-clean-v1 running       360 |       0 |    1239 |            0 |    +0.4% | -395.477 | -13848.174 | u_lsu.rsp_buf_rdata[19]$_SDFFE_PP0P_/D
+2026-10-21T02:36:20.092655+00:00 physical-14000ps-backend-clean-v1 running Report metrics stage 4, cts final...
+2026-10-21T02:37:20.095634+00:00 physical-14000ps-backend-clean-v1 running Report metrics stage 4, cts final...
+2026-10-21T02:38:20.099753+00:00 physical-14000ps-backend-clean-v1 running [INFO DRT-0081]   Complete 292 unique inst patterns.
+2026-10-21T02:39:20.102988+00:00 physical-14000ps-backend-clean-v1 running [INFO DRT-0081]   Complete 292 unique inst patterns.
+2026-10-21T02:40:20.106115+00:00 physical-14000ps-backend-clean-v1 running [INFO DRT-0082]   Complete 10000 groups.
+2026-10-21T02:41:20.109342+00:00 physical-14000ps-backend-clean-v1 running [INFO DRT-0082]   Complete 20000 groups.
+2026-10-21T02:42:20.112457+00:00 physical-14000ps-backend-clean-v1 running [INFO DRT-0082]   Complete 30000 groups.
+2026-10-21T02:43:20.115431+00:00 physical-14000ps-backend-clean-v1 running [INFO DRT-0082]   Complete 40000 groups.
+2026-10-21T02:44:20.118492+00:00 physical-14000ps-backend-clean-v1 running [INFO DRT-0082]   Complete 40000 groups.
+2026-10-21T02:45:20.121978+00:00 physical-14000ps-backend-clean-v1 running [INFO DRT-0082]   Complete 50000 groups.
+2026-10-21T02:46:20.124936+00:00 physical-14000ps-backend-clean-v1 running [INFO DRT-0082]   Complete 60000 groups.
+2026-10-21T02:47:20.127872+00:00 physical-14000ps-backend-clean-v1 running [INFO DRT-0082]   Complete 70000 groups.
+2026-10-21T02:48:20.130758+00:00 physical-14000ps-backend-clean-v1 running [INFO DRT-0082]   Complete 70000 groups.
+2026-10-21T02:49:20.133922+00:00 physical-14000ps-backend-clean-v1 running [INFO DRT-0082]   Complete 80000 groups.
+2026-10-21T02:50:20.137477+00:00 physical-14000ps-backend-clean-v1 running [INFO DRT-0082]   Complete 90000 groups.
+2026-10-21T02:51:20.141290+00:00 physical-14000ps-backend-clean-v1 running [INFO DRT-0082]   Complete 100000 groups.
+2026-10-21T02:52:20.150874+00:00 physical-14000ps-backend-clean-v1 running 
+2026-10-21T02:53:20.154403+00:00 physical-14000ps-backend-clean-v1 running     69000 |     +0.0% |       0 |       5 |             4 |    100364
+2026-10-21T02:54:20.157862+00:00 physical-14000ps-backend-clean-v1 running estimate_parasitics -global_routing
+2026-10-21T02:55:20.161999+00:00 physical-14000ps-backend-clean-v1 running [WARNING GRT-0246] No diode with LEF class CORE ANTENNACELL found.
+2026-10-21T02:56:20.165535+00:00 physical-14000ps-backend-clean-v1 running Report metrics stage 5, global route...
+2026-10-21T02:57:20.168605+00:00 physical-14000ps-backend-clean-v1 running Report metrics stage 5, global route...
+2026-10-21T02:58:20.197781+00:00 physical-14000ps-backend-clean-v1 finished 5_1_grt                   .sdc                             4e53c06a4fdf55078204
+2026-10-21T02:58:20.198395+00:00 physical-14000ps-backend-clean-v1 completed with unchanged inputs
+2026-10-21T02:58:20.202344+00:00 launch eco-launch
+2026-10-21T02:58:21.190567+00:00 physical-14000ps-eco-clean-v1 queued (no log yet)
+2026-10-21T02:59:21.192582+00:00 physical-14000ps-eco-clean-v1 running     69000 |     +0.5% |       0 |     488 |           329 |    100373
+2026-10-21T03:00:21.194519+00:00 physical-14000ps-eco-clean-v1 running    156000 |     +1.4% |       6 |    1205 |           804 |     13373
+2026-10-21T03:01:21.196391+00:00 physical-14000ps-eco-clean-v1 running        10 |       0 |      18 |            0 |    +0.0% |  30.806 |   0.000 | u_frontend.btb[58][43]$_SDFFE_PP1P_/D
+2026-10-21T03:02:21.198451+00:00 physical-14000ps-eco-clean-v1 running       110 |       0 |     204 |            0 |    +0.1% |  34.552 |   0.000 | u_fp_divsqrt.special_res_data[24]$_SDFFE_PP0P_/D
+2026-10-21T03:03:21.200791+00:00 physical-14000ps-eco-clean-v1 running       270 |       0 |     381 |            0 |    +0.1% |  39.437 |   0.000 | u_lsu.sq[2][98]$_DFFE_PP_/D
+2026-10-21T03:04:21.202953+00:00 physical-14000ps-eco-clean-v1 running       450 |       0 |     561 |            0 |    +0.2% |  41.236 |   0.000 | u_lsu.sq[9][78]$_DFFE_PP_/D
+2026-10-21T03:05:21.204943+00:00 physical-14000ps-eco-clean-v1 running       620 |       0 |     731 |            0 |    +0.2% |  42.198 |   0.000 | u_int_execute.alu_fifo_pc[1][23]$_SDFFCE_PN0P_/D
+2026-10-21T03:06:21.207009+00:00 physical-14000ps-eco-clean-v1 running       780 |       0 |     891 |            0 |    +0.3% |  42.875 |   0.000 | u_int_iq.entries[2][214]$_SDFFE_PP0P_/D
+2026-10-21T03:07:21.209032+00:00 physical-14000ps-eco-clean-v1 running       930 |       0 |    1041 |            0 |    +0.4% |  43.418 |   0.000 | u_int_iq.entries[6][229]$_SDFFE_PP0P_/D
+2026-10-21T03:08:21.211136+00:00 physical-14000ps-eco-clean-v1 running      1080 |       0 |    1192 |            0 |    +0.4% |  43.991 |   0.000 | u_frontend.if_queue[0][3]$_DFFE_PP_/D
+2026-10-21T03:09:21.213347+00:00 physical-14000ps-eco-clean-v1 running      1250 |       0 |    1362 |            0 |    +0.5% |  44.546 |   0.000 | u_frontend.iq_mem[7][116]$_DFFE_PP_/D
+2026-10-21T03:10:21.215960+00:00 physical-14000ps-eco-clean-v1 running      1410 |       0 |    1524 |            0 |    +0.5% |  44.956 |   0.000 | u_lsu.sq[7][55]$_DFFE_PP_/D
+2026-10-21T03:11:21.218325+00:00 physical-14000ps-eco-clean-v1 running      1550 |       0 |    1665 |            0 |    +0.6% |  45.287 |   0.000 | u_frontend.btb[37][34]$_DFFE_PP_/D
+2026-10-21T03:12:21.220719+00:00 physical-14000ps-eco-clean-v1 running      1700 |       0 |    1816 |            0 |    +0.6% |  45.577 |   0.000 | u_frontend.if_queue[3][39]$_DFFE_PP_/D
+2026-10-21T03:13:21.223020+00:00 physical-14000ps-eco-clean-v1 running      1860 |       0 |    1979 |            0 |    +0.7% |  45.875 |   0.000 | u_frontend.if_queue[3][5]$_DFFE_PP_/D
+2026-10-21T03:14:21.225419+00:00 physical-14000ps-eco-clean-v1 running      2010 |       0 |    2129 |            0 |    +0.7% |  46.167 |   0.000 | u_lsu.sq[3][53]$_DFFE_PP_/D
+2026-10-21T03:15:21.227827+00:00 physical-14000ps-eco-clean-v1 running      2160 |       0 |    2279 |            0 |    +0.8% |  46.396 |   0.000 | u_frontend.btb[40][2]$_DFFE_PP_/D
+2026-10-21T03:16:21.230189+00:00 physical-14000ps-eco-clean-v1 running      2320 |       0 |    2442 |            0 |    +0.8% |  46.661 |   0.000 | u_frontend.if_queue[3][15]$_DFFE_PP_/D
+2026-10-21T03:17:21.232416+00:00 physical-14000ps-eco-clean-v1 running      2470 |       0 |    2592 |            0 |    +0.9% |  46.852 |   0.000 | u_frontend.btb[30][5]$_DFFE_PP_/D
+2026-10-21T03:18:21.234904+00:00 physical-14000ps-eco-clean-v1 running      2620 |       0 |    2742 |            0 |    +0.9% |  47.071 |   0.000 | u_frontend.if_queue[2][15]$_DFFE_PP_/D
+2026-10-21T03:19:21.237114+00:00 physical-14000ps-eco-clean-v1 running      2770 |       0 |    2893 |            0 |    +1.0% |  47.199 |   0.000 | u_rob.event_counter[22]$_SDFF_PP0_/D
+2026-10-21T03:20:21.239375+00:00 physical-14000ps-eco-clean-v1 running      2920 |       0 |    3043 |            0 |    +1.0% |  47.199 |   0.000 | u_rob.event_counter[22]$_SDFF_PP0_/D
+2026-10-21T03:21:21.241570+00:00 physical-14000ps-eco-clean-v1 running      3050 |       0 |    3174 |            0 |    +1.1% |  47.199 |   0.000 | u_rob.event_counter[22]$_SDFF_PP0_/D
+2026-10-21T03:22:21.243886+00:00 physical-14000ps-eco-clean-v1 running      3200 |       0 |    3323 |            0 |    +1.1% |  47.199 |   0.000 | u_rob.event_counter[22]$_SDFF_PP0_/D
+2026-10-21T03:23:21.246399+00:00 physical-14000ps-eco-clean-v1 running      3350 |       0 |    3474 |            0 |    +1.2% |  47.199 |   0.000 | u_rob.event_counter[22]$_SDFF_PP0_/D
+2026-10-21T03:24:21.248746+00:00 physical-14000ps-eco-clean-v1 running      3480 |       0 |    3603 |            0 |    +1.2% |  47.199 |   0.000 | u_rob.event_counter[22]$_SDFF_PP0_/D
+2026-10-21T03:25:21.251309+00:00 physical-14000ps-eco-clean-v1 running      3620 |       0 |    3743 |            0 |    +1.3% |  47.199 |   0.000 | u_rob.event_counter[22]$_SDFF_PP0_/D
+2026-10-21T03:26:21.253782+00:00 physical-14000ps-eco-clean-v1 running      3760 |       0 |    3884 |            0 |    +1.3% |  47.199 |   0.000 | u_rob.event_counter[22]$_SDFF_PP0_/D
+2026-10-21T03:27:21.256303+00:00 physical-14000ps-eco-clean-v1 running      3900 |       0 |    4024 |            0 |    +1.4% |  47.199 |   0.000 | u_rob.event_counter[22]$_SDFF_PP0_/D
+2026-10-21T03:28:21.258933+00:00 physical-14000ps-eco-clean-v1 running      4040 |       0 |    4166 |            0 |    +1.4% |  47.199 |   0.000 | u_rob.event_counter[22]$_SDFF_PP0_/D
+2026-10-21T03:29:21.261645+00:00 physical-14000ps-eco-clean-v1 running      4170 |       0 |    4296 |            0 |    +1.4% |  47.199 |   0.000 | u_rob.event_counter[22]$_SDFF_PP0_/D
+2026-10-21T03:30:21.264031+00:00 physical-14000ps-eco-clean-v1 running      4310 |       0 |    4433 |            0 |    +1.5% |  47.199 |   0.000 | u_rob.event_counter[22]$_SDFF_PP0_/D
+2026-10-21T03:31:21.266660+00:00 physical-14000ps-eco-clean-v1 running      4450 |       0 |    4571 |            0 |    +1.5% |  47.199 |   0.000 | u_rob.event_counter[22]$_SDFF_PP0_/D
+2026-10-21T03:32:21.269308+00:00 physical-14000ps-eco-clean-v1 running 
+2026-10-21T03:33:21.271704+00:00 physical-14000ps-eco-clean-v1 running RV32_GRT_FULL_ROUTE_COMPLETE
+2026-10-21T03:34:21.273987+00:00 physical-14000ps-eco-clean-v1 running RV32_GRT_FULL_ROUTE_COMPLETE
+2026-10-21T03:34:36.274649+00:00 physical-14000ps-eco-clean-v1 completed with unchanged inputs
+2026-10-21T03:34:36.275046+00:00 launch initial-14000ps
+2026-10-21T03:36:38.788680+00:00 launch initial-14000ps-review
+Traceback (most recent call last):
+  File "/workspace/rv32_000/build/experiments/lsu-b-v1/physical-pipeline.py", line 31, in <module>
+    initial=analyze(eco,'initial-14000ps',[14000]);assert initial['passed']
+                                                          ~~~~~~~^^^^^^^^^^
+AssertionError

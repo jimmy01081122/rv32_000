@@ -1,0 +1,832 @@
+{
+  "scope": "Fixed-physical-time model qualification; no physical frequency claim",
+  "simulator_sha256": "da70e3bd5c695a9d4bea54950746537092a2ffdf69d10367c56a1f45a1dfc860",
+  "reference_simulator_sha256": "359ea89735e630a3c1f2fcd7795ec9598f35d6fb4e9a8b0f448ba3f6ee2c1144",
+  "records": [
+    {
+      "name": "rv32i_basic",
+      "mode": "old",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/rv32i_basic.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/rv32i_basic-old.log",
+      "log_sha256": "43119798c53664b6007d77e469e781d0b4ab62e361dbf3ac01c367c2a87fcffe"
+    },
+    {
+      "name": "rv32i_basic",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/rv32i_basic.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/rv32i_basic-legacy.log",
+      "log_sha256": "43119798c53664b6007d77e469e781d0b4ab62e361dbf3ac01c367c2a87fcffe"
+    },
+    {
+      "name": "rv32i_basic",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/rv32i_basic.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/rv32i_basic-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/rv32i_basic-fixed.log",
+      "log_sha256": "43119798c53664b6007d77e469e781d0b4ab62e361dbf3ac01c367c2a87fcffe"
+    },
+    {
+      "name": "rv32i_basic",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/rv32i_basic.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/rv32i_basic-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/rv32i_basic-faster_core.log",
+      "log_sha256": "8ffd9d31bddfa95b6e5b26a0454dae33704bb8c1d7d8d672fba1db35dff9eaaf"
+    },
+    {
+      "name": "rv32i_basic",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "store_forwarding",
+      "mode": "old",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/store_forwarding.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/store_forwarding-old.log",
+      "log_sha256": "bfa540617b662834f589b68e6d308906660c4ce2e82419fe8292d27d91797c23"
+    },
+    {
+      "name": "store_forwarding",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/store_forwarding.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/store_forwarding-legacy.log",
+      "log_sha256": "bfa540617b662834f589b68e6d308906660c4ce2e82419fe8292d27d91797c23"
+    },
+    {
+      "name": "store_forwarding",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/store_forwarding.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/store_forwarding-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/store_forwarding-fixed.log",
+      "log_sha256": "bfa540617b662834f589b68e6d308906660c4ce2e82419fe8292d27d91797c23"
+    },
+    {
+      "name": "store_forwarding",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/store_forwarding.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/store_forwarding-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/store_forwarding-faster_core.log",
+      "log_sha256": "1cc7f0ffbba3436260e13e653e30c4689bd8a553db2c6c4f8e1c3a3b3f07c586"
+    },
+    {
+      "name": "store_forwarding",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "lsu_redirect_variable_lat",
+      "mode": "old",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/lsu_redirect_variable_lat.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/lsu_redirect_variable_lat-old.log",
+      "log_sha256": "aa754fb2f3056acb86e97c4847fe00f12ca90fa18c8b416a5bb9dcad91f48c44"
+    },
+    {
+      "name": "lsu_redirect_variable_lat",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/lsu_redirect_variable_lat.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/lsu_redirect_variable_lat-legacy.log",
+      "log_sha256": "aa754fb2f3056acb86e97c4847fe00f12ca90fa18c8b416a5bb9dcad91f48c44"
+    },
+    {
+      "name": "lsu_redirect_variable_lat",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/lsu_redirect_variable_lat.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/lsu_redirect_variable_lat-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/lsu_redirect_variable_lat-fixed.log",
+      "log_sha256": "aa754fb2f3056acb86e97c4847fe00f12ca90fa18c8b416a5bb9dcad91f48c44"
+    },
+    {
+      "name": "lsu_redirect_variable_lat",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/lsu_redirect_variable_lat.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/lsu_redirect_variable_lat-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/lsu_redirect_variable_lat-faster_core.log",
+      "log_sha256": "f20d1a15f1dd3715d74ab8149effa952908d70654e5caf4c3ac75294ae2b5a80"
+    },
+    {
+      "name": "lsu_redirect_variable_lat",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "wrong_path_store",
+      "mode": "old",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/wrong_path_store.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/wrong_path_store-old.log",
+      "log_sha256": "4ca9f2ca0e81c4fc482da18a94c8549859b4d1f0fbf9101972e24371a1f908fd"
+    },
+    {
+      "name": "wrong_path_store",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/wrong_path_store.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/wrong_path_store-legacy.log",
+      "log_sha256": "4ca9f2ca0e81c4fc482da18a94c8549859b4d1f0fbf9101972e24371a1f908fd"
+    },
+    {
+      "name": "wrong_path_store",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/wrong_path_store.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/wrong_path_store-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/wrong_path_store-fixed.log",
+      "log_sha256": "4ca9f2ca0e81c4fc482da18a94c8549859b4d1f0fbf9101972e24371a1f908fd"
+    },
+    {
+      "name": "wrong_path_store",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/wrong_path_store.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/wrong_path_store-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/wrong_path_store-faster_core.log",
+      "log_sha256": "0ea14afda8849fbed7db40413fbd9faab247e3445cd4228ac7db3a4a9cd0390c"
+    },
+    {
+      "name": "wrong_path_store",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "partial_overlap",
+      "mode": "old",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/partial_overlap.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/partial_overlap-old.log",
+      "log_sha256": "d38d006f2dcbbe4a7040499aeb65235f44d77ab8008c9958018ffe62e352f5f3"
+    },
+    {
+      "name": "partial_overlap",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/partial_overlap.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/partial_overlap-legacy.log",
+      "log_sha256": "d38d006f2dcbbe4a7040499aeb65235f44d77ab8008c9958018ffe62e352f5f3"
+    },
+    {
+      "name": "partial_overlap",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/partial_overlap.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/partial_overlap-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/partial_overlap-fixed.log",
+      "log_sha256": "d38d006f2dcbbe4a7040499aeb65235f44d77ab8008c9958018ffe62e352f5f3"
+    },
+    {
+      "name": "partial_overlap",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/partial_overlap.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/partial_overlap-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/partial_overlap-faster_core.log",
+      "log_sha256": "6f2f2bda5e72ffd3e487eb5cf1039641125f1fbde334ee759c33946296cc6ac5"
+    },
+    {
+      "name": "partial_overlap",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "unresolved_store",
+      "mode": "old",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/unresolved_store.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/unresolved_store-old.log",
+      "log_sha256": "6e8d6690dd9963314c841977e685585e6378ac53e0ed4a4db28146fde86e40d3"
+    },
+    {
+      "name": "unresolved_store",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/unresolved_store.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/unresolved_store-legacy.log",
+      "log_sha256": "6e8d6690dd9963314c841977e685585e6378ac53e0ed4a4db28146fde86e40d3"
+    },
+    {
+      "name": "unresolved_store",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/unresolved_store.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/unresolved_store-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/unresolved_store-fixed.log",
+      "log_sha256": "6e8d6690dd9963314c841977e685585e6378ac53e0ed4a4db28146fde86e40d3"
+    },
+    {
+      "name": "unresolved_store",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/unresolved_store.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/unresolved_store-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/unresolved_store-faster_core.log",
+      "log_sha256": "ed6646fde76d2f63a99edcacdf4609aadbec6a610518bd6ba3d329ed82aa5306"
+    },
+    {
+      "name": "unresolved_store",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "fp_basic",
+      "mode": "old",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_basic.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fp_basic-old.log",
+      "log_sha256": "047be76b14dc078ee7ecbcd49ecf428cfcb38ea623477d71b368b4d4e9d02613"
+    },
+    {
+      "name": "fp_basic",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_basic.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fp_basic-legacy.log",
+      "log_sha256": "047be76b14dc078ee7ecbcd49ecf428cfcb38ea623477d71b368b4d4e9d02613"
+    },
+    {
+      "name": "fp_basic",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_basic.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/fp_basic-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fp_basic-fixed.log",
+      "log_sha256": "047be76b14dc078ee7ecbcd49ecf428cfcb38ea623477d71b368b4d4e9d02613"
+    },
+    {
+      "name": "fp_basic",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_basic.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/fp_basic-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fp_basic-faster_core.log",
+      "log_sha256": "41eb9a2d6976a96d19b1cc9e8be903b31726609f3cdcfca683a59a3407ec6b82"
+    },
+    {
+      "name": "fp_basic",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "fp_fma",
+      "mode": "old",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_fma.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fp_fma-old.log",
+      "log_sha256": "9474a2447cb8b88782c7e076e04101454bd8268635a4cfa850efcc14234e993d"
+    },
+    {
+      "name": "fp_fma",
+      "mode": "legacy",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_fma.elf",
+        "+max-cycles=1000000"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fp_fma-legacy.log",
+      "log_sha256": "9474a2447cb8b88782c7e076e04101454bd8268635a4cfa850efcc14234e993d"
+    },
+    {
+      "name": "fp_fma",
+      "mode": "fixed",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_fma.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/fp_fma-fixed.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fp_fma-fixed.log",
+      "log_sha256": "9474a2447cb8b88782c7e076e04101454bd8268635a4cfa850efcc14234e993d"
+    },
+    {
+      "name": "fp_fma",
+      "mode": "faster_core",
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/tests/fp_fma.elf",
+        "+max-cycles=1000000",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+memory-audit=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/fp_fma-faster_core.json"
+      ],
+      "passed": true,
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fp_fma-faster_core.log",
+      "log_sha256": "c740d6694bb69bca7e60ea2ab2007d5d31ec3277ed8670e5b376fc0bfdb25595"
+    },
+    {
+      "name": "fp_fma",
+      "mode": "stdout_equivalence",
+      "passed": true
+    },
+    {
+      "name": "zero",
+      "mode": "reject_invalid",
+      "passed": true,
+      "returncode": 2
+    },
+    {
+      "name": "negative",
+      "mode": "reject_invalid",
+      "passed": true,
+      "returncode": 2
+    },
+    {
+      "name": "junk",
+      "mode": "reject_invalid",
+      "passed": true,
+      "returncode": 2
+    },
+    {
+      "name": "partial",
+      "mode": "reject_invalid",
+      "passed": true,
+      "returncode": 2
+    },
+    {
+      "name": "mixed",
+      "mode": "reject_invalid",
+      "passed": true,
+      "returncode": 2
+    },
+    {
+      "name": "overflow",
+      "mode": "reject_invalid",
+      "passed": true,
+      "returncode": 2
+    },
+    {
+      "name": "sw",
+      "mode": "fixed_fault_core5500",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/sw.elf",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000124",
+        "+trace=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-sw-5500.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "bf39cd463c7c0a8fc77724aa275cb7177ef9690e9963d4acf6f8decf7435fc7c",
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-sw-5500.log",
+      "log_sha256": "05149ed030de8d6fcf732b99f087341a7aee4848da3e5cf7afea580298a52a06",
+      "trace": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-sw-5500.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "sw",
+      "mode": "fixed_fault_core3000",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/sw.elf",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000124",
+        "+trace=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-sw-3000.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "bf39cd463c7c0a8fc77724aa275cb7177ef9690e9963d4acf6f8decf7435fc7c",
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-sw-3000.log",
+      "log_sha256": "b69e64d90509851be802553eee46f6378442eb9b15385985f5b1ff57eea2dcb2",
+      "trace": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-sw-3000.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "sb",
+      "mode": "fixed_fault_core5500",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/sb.elf",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000128",
+        "+trace=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-sb-5500.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "8d887f11e694757ed6a36fe6cb433334e921ea320796894f951cd419d0087eb7",
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-sb-5500.log",
+      "log_sha256": "b87c4811c10c785cd29b576ca7a4850cd7686a78b4dd456c30cd3b153e2194cb",
+      "trace": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-sb-5500.trace",
+      "trace_sha256": "ebb34de54ec80adbb823437a51831be1d83e5ad562308bc2a0091a9daaf6a0d2"
+    },
+    {
+      "name": "sb",
+      "mode": "fixed_fault_core3000",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/sb.elf",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000128",
+        "+trace=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-sb-3000.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "8d887f11e694757ed6a36fe6cb433334e921ea320796894f951cd419d0087eb7",
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-sb-3000.log",
+      "log_sha256": "62fd0e161a84fc6cf88e3d2609546f2824d011f3601edd3f4d66bbd42aacab31",
+      "trace": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-sb-3000.trace",
+      "trace_sha256": "ebb34de54ec80adbb823437a51831be1d83e5ad562308bc2a0091a9daaf6a0d2"
+    },
+    {
+      "name": "sh",
+      "mode": "fixed_fault_core5500",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/sh.elf",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000128",
+        "+trace=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-sh-5500.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "87a47d681b9443b028b536285f59f9638a22b9b7942d511aee4daa5778a111db",
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-sh-5500.log",
+      "log_sha256": "01c29a64f9501fa1b72611ddac877bc775da359e33344d3a377efab56148c315",
+      "trace": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-sh-5500.trace",
+      "trace_sha256": "0b6a43cc0fa2838cad77e2294f1a563edc41e1a7b2d85c0395fb76495c0ea0de"
+    },
+    {
+      "name": "sh",
+      "mode": "fixed_fault_core3000",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/sh.elf",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000128",
+        "+trace=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-sh-3000.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "87a47d681b9443b028b536285f59f9638a22b9b7942d511aee4daa5778a111db",
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-sh-3000.log",
+      "log_sha256": "a52d0b52fc4f79514dee69f63db7ce3acc2a269898b3d7ba4b07bab98aa2609f",
+      "trace": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-sh-3000.trace",
+      "trace_sha256": "0b6a43cc0fa2838cad77e2294f1a563edc41e1a7b2d85c0395fb76495c0ea0de"
+    },
+    {
+      "name": "fsw",
+      "mode": "fixed_fault_core5500",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/fsw.elf",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000124",
+        "+trace=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-fsw-5500.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "d580ab01ad8cf6aa8b0ad8b998cd720bce3309f0975b686051ec29a9ea015f2f",
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-fsw-5500.log",
+      "log_sha256": "04164f40fc7824e637e83e517f0d2eb1e9319bcd0ca73be7ddb165d420a962bf",
+      "trace": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-fsw-5500.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "fsw",
+      "mode": "fixed_fault_core3000",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/fsw.elf",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-store=0x80000124",
+        "+trace=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-fsw-3000.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "d580ab01ad8cf6aa8b0ad8b998cd720bce3309f0975b686051ec29a9ea015f2f",
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-fsw-3000.log",
+      "log_sha256": "b376ddc4382aa236c3157f71ead48853426567ee3bc9975daafa7c5355e1a657",
+      "trace": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-fsw-3000.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "lw",
+      "mode": "fixed_fault_core5500",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/lw.elf",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-load=0x80000124",
+        "+trace=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-lw-5500.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "70ecbc3c1ef0e4dd354d75d2ac5415db60114cd530ff5917074c85425c02481a",
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-lw-5500.log",
+      "log_sha256": "e0a44e58f78ad4843c39300bacecdaf87df7e5d4e284b5ca56bb55a60ed0b749",
+      "trace": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-lw-5500.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    },
+    {
+      "name": "lw",
+      "mode": "fixed_fault_core3000",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/lw.elf",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-load=0x80000124",
+        "+trace=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-lw-3000.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "70ecbc3c1ef0e4dd354d75d2ac5415db60114cd530ff5917074c85425c02481a",
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-lw-3000.log",
+      "log_sha256": "fe28dcd989f997aea737dc8de9940558e17d5722a460f42969a9d66e75e64800",
+      "trace": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-lw-3000.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    },
+    {
+      "name": "flw",
+      "mode": "fixed_fault_core5500",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/flw.elf",
+        "+core-period-ps=5500",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-load=0x80000124",
+        "+trace=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-flw-5500.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "3f43f87231395412252d4107788ed072e62965cf13a5c90e707fd25a67ab6d45",
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-flw-5500.log",
+      "log_sha256": "f312e2bbf16b429da0f43751ece6aecbae7a16238048a850ac0566ecfebccb14",
+      "trace": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-flw-5500.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    },
+    {
+      "name": "flw",
+      "mode": "fixed_fault_core3000",
+      "passed": true,
+      "command": [
+        "/workspace/build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/qualification/lsu-interface/flw.elf",
+        "+core-period-ps=3000",
+        "+imem-response-ps=5500",
+        "+imem-interval-ps=5500",
+        "+dmem-response-ps=5500",
+        "+dmem-fault-load=0x80000124",
+        "+trace=/workspace/build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-flw-3000.trace"
+      ],
+      "returncode": 0,
+      "elf_sha256": "3f43f87231395412252d4107788ed072e62965cf13a5c90e707fd25a67ab6d45",
+      "log": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-flw-3000.log",
+      "log_sha256": "4f487ecb97a56d7ca653dd59a194b948dbd37ff7cdaee45e43dff0b43fcc5a3b",
+      "trace": "build/experiments/lsu-b-v1/qualification-clean-v1/memory/fault-flw-3000.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    }
+  ],
+  "passed": true
+}

@@ -1,6 +1,6 @@
 # RV32 OoO architecture: implementation and requirements
 
-Version 0.6 — 2026-10-20. Status: AP5B baseline frozen; isolated LSU A qualified at global-route research scope, project performance targets unmet.
+Version 0.7 — 2026-10-21. Status: AP5B baseline frozen; isolated A research-qualified, current B branch functionally validated but rejected by physical timing; project targets unmet.
 
 This document distinguishes observed RTL structure from required architectural
 behavior. Describing an implementation does not certify its correctness.
@@ -91,7 +91,14 @@ in-flight transaction and no flush. Faulting or unconsumed responses continue
 to block requests. This does not bypass the external response register or
 accept a second external outstanding transaction. `dmem_pending.valid` covers
 the old buffered response before the handoff edge and the new in-flight request
-after it, with the corresponding tag. SQ marking remains the baseline protocol.
+after it, with the corresponding tag. That A variant retains the baseline SQ marking protocol.
+
+The current independent B branch retains the baseline response-buffer exclusion.
+A RUN-state ROB-head store with full tag match, captured address/data, no exception
+and no flush may request in its SQ-marking cycle. Successful response still
+precedes retirement. B has passed functional qualification but has no qualified
+physical operating point; see the [B review](docs/LSU_B_REVIEW.md). The frozen
+baseline includes neither A nor B.
 
 The LSU checks older stores, forwards from a fully covering older store, and
 stalls on unresolved or partial-overlap dependencies. Stores require ROB-head

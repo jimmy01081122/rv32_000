@@ -6,8 +6,7 @@ The execution environment is bare metal. This is an architecture and PPA researc
 project; tape-out is outside the agreed scope.
 
 General embedded performance and single-precision floating-point performance
-are equally important project objectives. Workload qualification and a fresh
-AP5B baseline precede the next architecture optimization.
+are equally important project objectives. Workload qualification and the post-LSU AP5B baseline are frozen for independent architecture experiments.
 The selected FP32 set has four control/DSP and four matrix/ML kernels with
 equal subgroup weights; its [inputs and numerical contract](docs/FP32_BALANCED_PROPOSAL.md)
 are frozen in the post-LSU v1 contract; all eight pass formal numerical and
@@ -97,7 +96,12 @@ Its [raw evidence](docs/evidence/2026-10-19/lsu-a-functional/README.md) is archi
 101.01 MHz run yields Embench 0.726601× and FP32 0.700275×: fixed 10 ns memory
 is sampled after two cycles at that clock. Neither point reaches both 1.20×
 goals. The 100 MHz point is recommended for discussion; the baseline is unchanged
-and B is now running as an [independent baseline-derived experiment](experiments/lsu-b-v1/README.md).
+and the [independent B experiment](docs/LSU_B_REVIEW.md) is complete. Its full
+functional qualification and all 27 common-clock cases pass; physical timing fails.
+B cycle diagnostics are Embench 1.029459× / FP32 1.009599×, with cell area
+21,983.62194 µm² (0.995585×). At 100 MHz, SS setup is −2282.992 ps and FF hold
+is −0.333 ps. B has no qualified operating point; these cycle ratios remain
+unqualified system-time diagnostics.
 
 `make profile-fp-bottlenecks JOBS=4` adds read-only FIR/BiCG cycle observations
 and checks that observer on/off runs preserve the qualified output and timing.
@@ -109,8 +113,7 @@ response delays 1/2/4. Its [review](docs/LSU_OPTIMIZATION_REVIEW.md) separates
 compares A/B/C options. The source-locked historical runner rejects newer RTL.
 The [interface fixes](docs/LSU_INTERFACE_FIX.md) close the two defects with 48
 assertion-enabled cases; rerun with `make check-lsu-interface JOBS=4` and
-`python3 scripts/test_lsu_interface.py`. The approved performance/area targets
-await independent CPU candidate experiments.
+`python3 scripts/test_lsu_interface.py`. The approved performance/area targets remain unmet after the independent A/B studies; subsequent direction is selected jointly.
 
 The simulation and generic-synthesis images are separate. For a proxy/private CA:
 

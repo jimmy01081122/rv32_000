@@ -1,0 +1,62 @@
+{
+  "scope": "tested global-route timing trials only; routing review and formal measurement still required",
+  "analysis_report_sha256": "f10bff481293d779ee4b727a66f221103f0dfb17c71bbead3c96bbe31b7674d8",
+  "implementation_report_sha256": "6f0833bdc7c7ca0782d9099997eec17b6287c814bb03a1a76f952d2a6e76a78c",
+  "checker_sha256": "170a5abc90b2f6dad76d2fa0a81a5b6601b897865862b867d784e888fc1048b5",
+  "records": [
+    {
+      "corner": "TT",
+      "standard_cell_area_um2": 21983.62194000399,
+      "standard_cell_count": 179774,
+      "register_count": 18162,
+      "library_warning_cell_instances": 0,
+      "trials": [
+        {
+          "period_ps": 14000,
+          "setup_slack_ps": 5828.408889937433,
+          "hold_slack_ps": 48.85572521633086,
+          "problems": [],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "corner": "SS",
+      "standard_cell_area_um2": 21983.62194000399,
+      "standard_cell_count": 179774,
+      "register_count": 18162,
+      "library_warning_cell_instances": 0,
+      "trials": [
+        {
+          "period_ps": 14000,
+          "setup_slack_ps": 1717.0087642567166,
+          "hold_slack_ps": 85.20928441355288,
+          "problems": [],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "corner": "FF",
+      "standard_cell_area_um2": 21983.62194000399,
+      "standard_cell_count": 179774,
+      "register_count": 18162,
+      "library_warning_cell_instances": 0,
+      "trials": [
+        {
+          "period_ps": 14000,
+          "setup_slack_ps": 8094.051683484088,
+          "hold_slack_ps": -0.3327338418096982,
+          "problems": [
+            "hold violation"
+          ],
+          "passed": false
+        }
+      ]
+    }
+  ],
+  "qualified_periods_ps": [],
+  "smallest_tested_passing_period_ps": null,
+  "standard_cell_area_um2": 21983.62194000399,
+  "passed": false
+}

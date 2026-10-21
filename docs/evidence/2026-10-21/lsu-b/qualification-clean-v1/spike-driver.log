@@ -1,0 +1,25 @@
+================================================================================
+      RV32 OoO Core — True Architectural Spike Differential Verification       
+================================================================================
+  [PASS] fibonacci              | Cycles: 8372   | Retired: 4384   | IPC: 0.5237 | Diff: MATCH
+  [PASS] fp_basic               | Cycles: 650    | Retired: 378    | IPC: 0.5815 | Diff: MATCH
+  [PASS] fp_edge_cases          | Cycles: 905    | Retired: 530    | IPC: 0.5856 | Diff: MATCH
+  [PASS] fp_fma                 | Cycles: 566    | Retired: 342    | IPC: 0.6042 | Diff: MATCH
+  [PASS] fp_matmul              | Cycles: 812    | Retired: 498    | IPC: 0.6133 | Diff: MATCH
+  [PASS] hello                  | Cycles: 263    | Retired: 178    | IPC: 0.6768 | Diff: MATCH
+  [PASS] lsu_redirect_variable_lat | Cycles: 6884   | Retired: 4085   | IPC: 0.5934 | Diff: MATCH
+  [PASS] matmul                 | Cycles: 1844   | Retired: 1060   | IPC: 0.5748 | Diff: MATCH
+  [PASS] partial_overlap        | Cycles: 597    | Retired: 423    | IPC: 0.7085 | Diff: MATCH
+  [PASS] qsort                  | Cycles: 3759   | Retired: 1968   | IPC: 0.5235 | Diff: MATCH
+  [PASS] rv32_csr               | Cycles: 572    | Retired: 354    | IPC: 0.6189 | Diff: MATCH
+  [PASS] rv32i_basic            | Cycles: 539    | Retired: 352    | IPC: 0.6531 | Diff: MATCH
+  [PASS] rv32m_completion_collisions | Cycles: 4514   | Retired: 2801   | IPC: 0.6205 | Diff: MATCH
+  [PASS] rv32m_divider_stress   | Cycles: 1057   | Retired: 492    | IPC: 0.4655 | Diff: MATCH
+  [PASS] rv32m_muldiv           | Cycles: 723    | Retired: 372    | IPC: 0.5145 | Diff: MATCH
+  [PASS] store_forwarding       | Cycles: 770    | Retired: 560    | IPC: 0.7273 | Diff: MATCH
+  [PASS] unresolved_store       | Cycles: 884    | Retired: 650    | IPC: 0.7353 | Diff: MATCH
+  [PASS] wrong_path_store       | Cycles: 866    | Retired: 532    | IPC: 0.6143 | Diff: MATCH
+================================================================================
+ Verification Signoff: 18 / 18 passed (0 failed)
+================================================================================
+Machine-readable summary written to /workspace/build/experiments/lsu-b-v1/qualification-clean-v1/spike/diff_results.json

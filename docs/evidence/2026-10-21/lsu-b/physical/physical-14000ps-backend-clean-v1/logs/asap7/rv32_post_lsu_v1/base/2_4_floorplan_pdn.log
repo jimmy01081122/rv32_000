@@ -1,0 +1,20 @@
+OpenROAD 26Q1-2900-gdf79404cd8 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 2 thread(s).
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_db /workspace/build/experiments/lsu-b-v1/physical-14000ps-backend-clean-v1/results/asap7/rv32_post_lsu_v1/base/2_3_floorplan_tapcell.odb
+read_sdc /workspace/build/experiments/lsu-b-v1/physical-14000ps-backend-clean-v1/results/asap7/rv32_post_lsu_v1/base/2_1_floorplan.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+[INFO PDN-0001] Inserting grid: top
+Design area 21197 um^2 50% utilization.
+write_db /workspace/build/experiments/lsu-b-v1/physical-14000ps-backend-clean-v1/results/asap7/rv32_post_lsu_v1/base/2_4_floorplan_pdn.odb
+Elapsed time: 0:07.04[h:]min:sec. CPU time: user 4.70 sys 0.20 (69%). Peak memory: 505984KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_4_floorplan_pdn         .odb            7            494 10fb6158c987ab1da313

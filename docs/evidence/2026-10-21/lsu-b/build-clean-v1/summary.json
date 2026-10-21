@@ -1,0 +1,93 @@
+{
+  "scope": "candidate generated-model and runtime build provenance",
+  "start": {
+    "commit": "95ac0dd6451a1799f9f3fe948c7b74c02f5fccd2",
+    "status": ""
+  },
+  "started_utc": "2026-10-21T01:28:20.345717+00:00",
+  "experiment_id": "lsu-b-v1",
+  "experiment_manifest_sha256": "dff4339c0f3b4992f0c0fd90089d55ccbef06d27e662ae2d3b298d49dd73a40a",
+  "wrapper_sha256": "2757307bd34ad69923f5e32b9ad63ee9852921f63146881f0c2716f84c3bd1fd",
+  "source_sha256": {
+    "rtl/pkg/rv32_ooo_params.sv": "3fc72080a0387a5424badf665656399ecc48e1c9170bedecb0aea16bd7602523",
+    "rtl/pkg/rv32_ooo_types.sv": "01be8e3b4c3959d9284e105412e415d77a6702db7de86eb1505d6fd428ee6759",
+    "rtl/rename/rv32_ooo_int_prf.sv": "69261b57971908d2765555c540ba4292a169024a222983143fdf4785f0fe2406",
+    "rtl/rename/rv32_ooo_fp_prf.sv": "452daf771a3c83fc24693a54b6ce46da762a1942b5ca56eac5440e948bb83603",
+    "rtl/frontend/rv32_ooo_frontend.sv": "c0e222d798dc8c18d5e75bd25a7c9cf0d7b053f91c49650d27c0b8bb49f2dd4d",
+    "rtl/rename/rv32_ooo_rename.sv": "1eb31d73eb54785c3e816eda35381e5b9d362b378ad0f118ac125d753063d574",
+    "rtl/rob/rv32_ooo_rob.sv": "94e4874dfcb3274fd5d0759776acde8dae373988151b4470698fa847c0a78555",
+    "rtl/issue/rv32_ooo_int_iq.sv": "c12029eec5fca025da55c95d6c0207f6472f9eb653a3a1020d1543f78aa9d349",
+    "rtl/issue/rv32_ooo_fp_iq.sv": "7968fa7b3ce4b51b54e4ba21e41b1b5bc4989ac68b405c7a2a7e3e3394e43ca2",
+    "rtl/execute/int/rv32_ooo_divider.sv": "b8ca86ee486d8976ccf07f25adb4955a3945d348a7f5b1350fb8b6edbec91de6",
+    "rtl/execute/int/rv32_ooo_multiplier.sv": "09afa5a87fbd59873a4cfc5f78a48492e928cc7b16f372dd51d71af96703a1d8",
+    "rtl/execute/int/rv32_ooo_int_execute.sv": "dde3fee3c0031150f9cf45b9b1d6f2e665868be754ec70566d95c77dff7bb632",
+    "rtl/execute/fp/rv32_ooo_fp_simple.sv": "bff3232ceafd3da96d85729ad630745b14cd47e398a32e35d11c25fe38547f4b",
+    "rtl/execute/fp/rv32_ooo_fp_execute.sv": "ee83a69dfbd7b2c9d141ebe14e1c40605ca43ce0f5f490d324113bcb9465c63b",
+    "rtl/execute/fp/rv32_ooo_fp_divsqrt.sv": "0c5e80032fd016aa60557d3e3908f07732c9230c50cea3519e1106b2f7715b3f",
+    "rtl/lsu/rv32_ooo_lsu.sv": "3632a910cc769aa8a3a1594678420e5b3ec1a77e871811742d48195c761fe92e",
+    "rtl/csr/rv32_ooo_csr.sv": "68c911e9e956761b3ffdb86fec2b82e94b5fc7632953dca308c30658e70f176e",
+    "rtl/core/rv32_ooo_core.sv": "81c116be3845d05c63ab6ffa31efdf5fee9e7374a6902ef0d54555e8a13fcb1c",
+    "scripts/build_sim.sh": "756ae61178e57fe216a17967393b30b62905be4abc44b9b4c74f0b25bf0f434e",
+    "sim/scripts/rv32_ooo_core.f": "ff43021ae54980c7884490e3585cf995a4c8494ac09254c9ee1d31f099a888b9",
+    "sim/tb/sim_main.cpp": "1058b8948ed7a8f3dc48d9b2161bb937a85d6c73caca0fc526799a57604a449c",
+    "sim/tb/sim_mem.cpp": "846764c8816b5c0fbbdb8b497188e5fdff24f180da22d58852edb3348bce0c1a",
+    "sim/tb/core_roi_profile.h": "296aa8ccaca4d56e442b8d2d4cc45e9bc79e75cb3a42b285cdc776259261c247",
+    "sim/tb/fixed_time_memory.h": "26c20dad408b63beec9d70245ba966101cc82e730eb2d294cfb09b21a888b376",
+    "sim/tb/fp_roi_profile.h": "b8fe3395a5c8c00b17104a1337ed3eecebff41abc41aa739757bf77485cea09b",
+    "sim/tb/sim_mem.h": "d111f9f8381f76db15f8200852756a5e0a3e77d1f31c44ebb4c63c79dc6a075d"
+  },
+  "verilator_version": "Verilator 4.038 2020-07-11 rev v4.036-114-g0cd4a57ad",
+  "gxx_version": "g++ (Ubuntu 11.4.0-1ubuntu1~22.04.3) 11.4.0",
+  "executables": {
+    "normal": {
+      "path": "build/experiments/lsu-b-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+      "sha256": "359ea89735e630a3c1f2fcd7795ec9598f35d6fb4e9a8b0f448ba3f6ee2c1144",
+      "verilator_command": "C \"--cc --exe --trace -Wall -Wno-UNUSED -Wno-STMTDLY -f sim/scripts/rv32_ooo_core.f /workspace/sim/tb/sim_main.cpp /workspace/sim/tb/sim_mem.cpp --top-module rv32_ooo_core --Mdir build/experiments/lsu-b-v1/build-clean-v1/sim-normal -o rv32_ooo_sim -CFLAGS -I/workspace/sim/tb -O2\"",
+      "verFiles_sha256": "6918b06281319d2fc6d13df1b5730193e9ab213f8f07d194028d95712b41691f"
+    },
+    "assert": {
+      "path": "build/experiments/lsu-b-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+      "sha256": "da70e3bd5c695a9d4bea54950746537092a2ffdf69d10367c56a1f45a1dfc860",
+      "verilator_command": "C \"--cc --exe --trace --assert -Wall -Wno-UNUSED -Wno-STMTDLY -f sim/scripts/rv32_ooo_core.f /workspace/sim/tb/sim_main.cpp /workspace/sim/tb/sim_mem.cpp --top-module rv32_ooo_core --Mdir build/experiments/lsu-b-v1/build-clean-v1/sim-assert -o rv32_ooo_sim -CFLAGS -I/workspace/sim/tb -O2\"",
+      "verFiles_sha256": "d3bcf693cc18d2303bc416aa2ad4b718185914f9ee54d443aceeab145ee91a7f"
+    }
+  },
+  "records": [
+    {
+      "command": [
+        "env",
+        "SIM_BUILD_DIR=build/experiments/lsu-b-v1/build-clean-v1/sim-normal",
+        "SIM_ASSERTIONS=0",
+        "OBJCACHE=",
+        "bash",
+        "scripts/build_sim.sh",
+        "2"
+      ],
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/build-clean-v1/normal-build.log",
+      "log_sha256": "65f98efa6a6eadcddb711a7484a9da53002d8ac31d57ee91abc2e63184b0c2ad",
+      "wall_seconds": 23.15229609599919
+    },
+    {
+      "command": [
+        "env",
+        "SIM_BUILD_DIR=build/experiments/lsu-b-v1/build-clean-v1/sim-assert",
+        "SIM_ASSERTIONS=1",
+        "OBJCACHE=",
+        "bash",
+        "scripts/build_sim.sh",
+        "2"
+      ],
+      "returncode": 0,
+      "log": "build/experiments/lsu-b-v1/build-clean-v1/assert-build.log",
+      "log_sha256": "f673409369c653d36ce03b3f44cd35299e1b295df0354c124be51ac7f74886f9",
+      "wall_seconds": 38.00134973099921
+    }
+  ],
+  "passed": true,
+  "end": {
+    "commit": "95ac0dd6451a1799f9f3fe948c7b74c02f5fccd2",
+    "status": ""
+  },
+  "finished_utc": "2026-10-21T01:29:21.526118+00:00"
+}
