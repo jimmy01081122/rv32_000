@@ -1,0 +1,121 @@
+{
+  "scope": "Finite operands only; exact value and all five fflags bits, four FMA opcodes, five rounding modes",
+  "vector_count": 3400,
+  "simulator_sha256": "ddb1b9dddbc87363c28c3a0d682676774b5696af13515dea3deb2a99f0dddeea",
+  "fp_execute_sha256": "ee83a69dfbd7b2c9d141ebe14e1c40605ca43ce0f5f490d324113bcb9465c63b",
+  "repository_commit": "38107c819dd5b0324885b47755ef338619bea024",
+  "oracle_sha256": "f608030fa262c465f3c867db682f3cd36fdd45fc5673bb6350c1899f5161852c",
+  "records": [
+    {
+      "name": "rounding",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-std=gnu11",
+          "-O3",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/include",
+          "-I/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/fma",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/fp_bench/fma_rounding_probe.c",
+          "-o",
+          "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/fma/rounding.elf",
+          "-lgcc"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/fma/rounding-build.log",
+        "log_sha256": "d82fd8a80addb6ac2c7fbf21e7e8f20b10976a2afc64fe4e63c3f9bd28b30f6d",
+        "wall_seconds": 0.10907497700009117
+      },
+      "elf_sha256": "ad49d697414f5d360d496c76824df792222bd50b8708463a79e299a0d3d6ae88",
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/fma/rounding.elf"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/fma/rounding-spike.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.005704700999558554
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/fma/rounding.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/fma/rounding-dut.log",
+        "log_sha256": "04f45adefad443da2fe07532f048810c965b5ed4e7e796472fb62762fdefb804",
+        "wall_seconds": 0.03424295200056804
+      },
+      "dut_self_check": true,
+      "passed": true
+    },
+    {
+      "name": "finite",
+      "build": {
+        "command": [
+          "riscv-none-elf-gcc",
+          "-std=gnu11",
+          "-O3",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-march=rv32imf_zicsr",
+          "-mabi=ilp32f",
+          "-ffreestanding",
+          "-nostartfiles",
+          "-nostdlib",
+          "-Isoftware/include",
+          "-I/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/fma",
+          "-Tsoftware/linker/link.ld",
+          "software/crt0/crt0.S",
+          "software/fp_bench/fma_exact_vectors.c",
+          "-o",
+          "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/fma/finite.elf",
+          "-lgcc"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/fma/finite-build.log",
+        "log_sha256": "fac8090e66b754dfa91375cf803ac70bb5201d2f3cf394082149d2150ac877c1",
+        "wall_seconds": 0.548350969999774
+      },
+      "elf_sha256": "5bcb06bee39b0018bf1043f16a1a1a3e9446b2a273a86ff8459fc502f1145550",
+      "spike": {
+        "command": [
+          "spike",
+          "--isa=rv32imf_zicsr",
+          "-m0x80000000:0x100000,0x10000000:0x1000",
+          "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/fma/finite.elf"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/fma/finite-spike.log",
+        "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "wall_seconds": 0.012745400999847334
+      },
+      "dut": {
+        "command": [
+          "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-normal/rv32_ooo_sim",
+          "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/fma/finite.elf",
+          "+max-cycles=25000000"
+        ],
+        "returncode": 0,
+        "log": "build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/fma/finite-dut.log",
+        "log_sha256": "549d2ee827482af6bb1e5fdad25ae3e1eaebc871189843b7027b21ae9f085fb4",
+        "wall_seconds": 1.8459292110001115
+      },
+      "dut_self_check": true,
+      "passed": true
+    }
+  ],
+  "all_passed": true
+}

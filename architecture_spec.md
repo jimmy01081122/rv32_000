@@ -1,6 +1,6 @@
 # RV32 OoO architecture: implementation and requirements
 
-Version 0.4 — 2026-10-18. Status: AP5B implementation inventory; qualification open.
+Version 0.6 — 2026-10-20. Status: AP5B baseline frozen; isolated LSU A qualified at global-route research scope, project performance targets unmet.
 
 This document distinguishes observed RTL structure from required architectural
 behavior. Describing an implementation does not certify its correctness.
@@ -84,8 +84,14 @@ Actual ports are defined by [rv32_ooo_core](rtl/core/rv32_ooo_core.sv):
 Each channel has valid/ready handshaking. The environment contract is one ordered
 response per accepted request; redirects do not cancel accepted bus transactions.
 The frontend tracks up to four instruction requests. The data side admits one
-external transaction. In AP5B, a valid response buffer also blocks new data requests;
-`dmem_pending.valid` covers both the in-flight and buffered-response lifetime.
+external transaction. The frozen AP5B baseline blocks new data requests while a
+response buffer is valid. Experiment A permits a new request on the same edge
+that a successful registered response is consumed, only with no external
+in-flight transaction and no flush. Faulting or unconsumed responses continue
+to block requests. This does not bypass the external response register or
+accept a second external outstanding transaction. `dmem_pending.valid` covers
+the old buffered response before the handoff edge and the new in-flight request
+after it, with the corresponding tag. SQ marking remains the baseline protocol.
 
 The LSU checks older stores, forwards from a fully covering older store, and
 stalls on unresolved or partial-overlap dependencies. Stores require ROB-head

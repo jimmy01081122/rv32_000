@@ -237,7 +237,7 @@ module rv32_ooo_lsu
     retire_sq_idx   = '0;
     retire_sq_match = 1'b0;
     for (int i = 0; i < SQ_SIZE; i++) begin
-      if (sq[i].valid && (sq[i].rob_tag.seq == sq_retire_rob_tag.seq) && !retire_sq_match) begin
+      if (sq[i].valid && (sq[i].rob_tag == sq_retire_rob_tag) && !retire_sq_match) begin
         retire_sq_idx   = SQ_IDX_W'(i);
         retire_sq_match = 1'b1;
       end
@@ -249,14 +249,23 @@ module rv32_ooo_lsu
   assign retire_store_mask = retire_sq_match ? sq[retire_sq_idx].byte_mask : 4'd0;
   assign retire_store_data = retire_sq_match ? sq[retire_sq_idx].data      : 32'd0;
 
-  // Find oldest retired store ready to write to memory
+  // B: a complete ROB-head store may request on the same cycle it is marked.
+  // Address and data are captured together by the AGU; no separate data-ready
+  // bit exists. Keep this independent of external ready and response signals.
+  wire head_store_mark = sq_retire_valid && retire_sq_match &&
+                         sq[retire_sq_idx].addr_valid && !flush_valid &&
+                         (core_state == CORE_RUN);
+  wire head_store_send = head_store_mark && !sq[retire_sq_idx].exception.valid;
+
+  // Select a marked store or the store authorized by the ROB this cycle.
   logic [SQ_IDX_W-1:0] send_sq_idx;
   logic                sq_has_send;
   always_comb begin
     send_sq_idx = '0;
     sq_has_send = 1'b0;
     for (int i = 0; i < SQ_SIZE; i++) begin
-      if (sq[i].valid && sq[i].retired && !sq[i].req_sent && !sq[i].exception.valid && !sq_has_send) begin
+      if (sq[i].valid && (sq[i].retired || (head_store_send && (SQ_IDX_W'(i) == retire_sq_idx))) &&
+          sq[i].addr_valid && !sq[i].req_sent && !sq[i].exception.valid && !sq_has_send) begin
         send_sq_idx = SQ_IDX_W'(i);
         sq_has_send = 1'b1;
       end
@@ -572,7 +581,7 @@ module rv32_ooo_lsu
       end
 
       // ── 7. ROB Store Retirement Marking ────────────────────────────────
-      if (sq_retire_valid && retire_sq_match) begin
+      if (head_store_mark) begin
         sq[retire_sq_idx].retired <= 1'b1;
       end
 
@@ -651,6 +660,23 @@ module rv32_ooo_lsu
   // =========================================================================
 
 `ifndef SYNTHESIS
+  // B bypass changes request eligibility, never the response/retirement order.
+  always_ff @(posedge clk) begin
+    if (!rst && dmem_req_valid && dmem_req_ready && dmem_req_wen && !sq[send_sq_idx].retired) begin
+      assert (head_store_send && (send_sq_idx == retire_sq_idx) &&
+              (sq[send_sq_idx].rob_tag == sq_retire_rob_tag) &&
+              !sq_retire_ack && !in_flight_valid && !rsp_buf_valid)
+        else $error("[LSU B] Unqualified head-store request or early retirement!");
+    end
+    if (!rst && $past(!rst && dmem_req_valid && dmem_req_ready && dmem_req_wen &&
+                     !sq[send_sq_idx].retired)) begin
+      assert (in_flight_valid && in_flight_is_store &&
+              (in_flight_rob_tag == $past(sq_retire_rob_tag)) &&
+              sq[in_flight_sq_idx].retired && sq[in_flight_sq_idx].req_sent)
+        else $error("[LSU B] Accepted head store lost tracking or marking!");
+    end
+  end
+
   // Assertion 1: accepted request remains tracked until response handshake
   always_ff @(posedge clk) begin
     if (!rst && $past(!rst && in_flight_valid && !(dmem_rsp_valid && dmem_rsp_ready))) begin

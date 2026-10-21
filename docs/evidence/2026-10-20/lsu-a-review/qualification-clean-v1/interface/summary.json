@@ -1,0 +1,971 @@
+{
+  "scope": "Interface correctness only; assertions enabled by caller",
+  "simulator": "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+  "simulator_sha256": "c4e188e573b289fe383ad17bb807b74b28b126d90508965c7c21ec62ad7737a9",
+  "source_commit": "38107c819dd5b0324885b47755ef338619bea024",
+  "tracked_dirty": false,
+  "expected_count": 48,
+  "passed": true,
+  "records": [
+    {
+      "name": "store_forwarding-ready4-delay1",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=build/tests/store_forwarding.elf",
+        "+dmem-ready-period=4",
+        "+dmem-latency=1",
+        "+max-cycles=1000000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/store_forwarding-ready4-delay1.log",
+      "log_sha256": "f7db05a1009d19168dd0144ffa66de700345427808ec9dd9c57f768226fff364"
+    },
+    {
+      "name": "store_forwarding-ready4-delay4",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=build/tests/store_forwarding.elf",
+        "+dmem-ready-period=4",
+        "+dmem-latency=4",
+        "+max-cycles=1000000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/store_forwarding-ready4-delay4.log",
+      "log_sha256": "1eb9e193b98d850f0f1b329650f9f3f13d2e915e0d89febc089b5bea9c215322"
+    },
+    {
+      "name": "rv32i_basic-ready4-delay1",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=build/tests/rv32i_basic.elf",
+        "+dmem-ready-period=4",
+        "+dmem-latency=1",
+        "+max-cycles=1000000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/rv32i_basic-ready4-delay1.log",
+      "log_sha256": "f152a3f4631167d5604599de76b7c2452eeebf6b05cfaf1fe39629c4459dfbdb"
+    },
+    {
+      "name": "rv32i_basic-ready4-delay4",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=build/tests/rv32i_basic.elf",
+        "+dmem-ready-period=4",
+        "+dmem-latency=4",
+        "+max-cycles=1000000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/rv32i_basic-ready4-delay4.log",
+      "log_sha256": "dc3e07aa63bf0aee38191dca1bcacf812e2c8f1d4e0b08a842db2b3c530435ad"
+    },
+    {
+      "name": "lsu_redirect_variable_lat-ready4-delay1",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=build/tests/lsu_redirect_variable_lat.elf",
+        "+dmem-ready-period=4",
+        "+dmem-latency=1",
+        "+max-cycles=1000000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lsu_redirect_variable_lat-ready4-delay1.log",
+      "log_sha256": "8a638f46ab7582265f4048082e62c63cae0cefb08cfe3a0966272f78470c8c67"
+    },
+    {
+      "name": "lsu_redirect_variable_lat-ready4-delay4",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=build/tests/lsu_redirect_variable_lat.elf",
+        "+dmem-ready-period=4",
+        "+dmem-latency=4",
+        "+max-cycles=1000000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lsu_redirect_variable_lat-ready4-delay4.log",
+      "log_sha256": "ef9cec9d25bbe6f918d4ef92179a75c93d01e2bd6d4ea0638e9aa7096cb30934"
+    },
+    {
+      "name": "partial_overlap-ready4-delay1",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=build/tests/partial_overlap.elf",
+        "+dmem-ready-period=4",
+        "+dmem-latency=1",
+        "+max-cycles=1000000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/partial_overlap-ready4-delay1.log",
+      "log_sha256": "4c78e6c152986d4436506c9b83a51a1a0787fa73106cf1e785216c6a62f1fee3"
+    },
+    {
+      "name": "partial_overlap-ready4-delay4",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=build/tests/partial_overlap.elf",
+        "+dmem-ready-period=4",
+        "+dmem-latency=4",
+        "+max-cycles=1000000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/partial_overlap-ready4-delay4.log",
+      "log_sha256": "324706b08dfc14ea5de15c30c9796f7ef7bc9a1ad9ad4635cd353d23d2f52789"
+    },
+    {
+      "name": "unresolved_store-ready4-delay1",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=build/tests/unresolved_store.elf",
+        "+dmem-ready-period=4",
+        "+dmem-latency=1",
+        "+max-cycles=1000000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/unresolved_store-ready4-delay1.log",
+      "log_sha256": "7e38b0157d02da2a197fc823e956209e1ae9152e5c953b025663fa4d2affd0de"
+    },
+    {
+      "name": "unresolved_store-ready4-delay4",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=build/tests/unresolved_store.elf",
+        "+dmem-ready-period=4",
+        "+dmem-latency=4",
+        "+max-cycles=1000000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/unresolved_store-ready4-delay4.log",
+      "log_sha256": "d2dcd01eacc829b03d4271a0440e74fe3524e46e27a0f397081054e754225e9c"
+    },
+    {
+      "name": "wrong_path_store-ready4-delay1",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=build/tests/wrong_path_store.elf",
+        "+dmem-ready-period=4",
+        "+dmem-latency=1",
+        "+max-cycles=1000000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/wrong_path_store-ready4-delay1.log",
+      "log_sha256": "d730e8c40cc841d6f4635d2ffcbcb70b9d095a829407afd83b6c819d858d74fc"
+    },
+    {
+      "name": "wrong_path_store-ready4-delay4",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=build/tests/wrong_path_store.elf",
+        "+dmem-ready-period=4",
+        "+dmem-latency=4",
+        "+max-cycles=1000000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/wrong_path_store-ready4-delay4.log",
+      "log_sha256": "543a6ccf6f2620adebc9376e4f0428c76ee7fa5a2b8aaa1cefca7b09d506c2c4"
+    },
+    {
+      "name": "sw-ready1-delay1",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw-ready1-delay1.trace",
+        "+dmem-ready-period=1",
+        "+dmem-latency=1",
+        "+dmem-fault-store=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw-ready1-delay1.log",
+      "log_sha256": "33dcbeea8b3b018b2f7d2ef891a9b4c48d4f573abf0a18979c3fa54500773088",
+      "elf_sha256": "bf39cd463c7c0a8fc77724aa275cb7177ef9690e9963d4acf6f8decf7435fc7c",
+      "expected_pc": 2147483744,
+      "expected_cause": 7,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw-ready1-delay1.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "sw-ready1-delay2",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw-ready1-delay2.trace",
+        "+dmem-ready-period=1",
+        "+dmem-latency=2",
+        "+dmem-fault-store=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw-ready1-delay2.log",
+      "log_sha256": "0c908bbdd5903747bbed3829f2d3a74b40a1fd13f88ecfd0e07c3deb3157be91",
+      "elf_sha256": "bf39cd463c7c0a8fc77724aa275cb7177ef9690e9963d4acf6f8decf7435fc7c",
+      "expected_pc": 2147483744,
+      "expected_cause": 7,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw-ready1-delay2.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "sw-ready1-delay4",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw-ready1-delay4.trace",
+        "+dmem-ready-period=1",
+        "+dmem-latency=4",
+        "+dmem-fault-store=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw-ready1-delay4.log",
+      "log_sha256": "e12ff52f87d045c3ae53d4022320698329f95c68d19b924717ba4f55da3131f0",
+      "elf_sha256": "bf39cd463c7c0a8fc77724aa275cb7177ef9690e9963d4acf6f8decf7435fc7c",
+      "expected_pc": 2147483744,
+      "expected_cause": 7,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw-ready1-delay4.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "sw-ready4-delay1",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw-ready4-delay1.trace",
+        "+dmem-ready-period=4",
+        "+dmem-latency=1",
+        "+dmem-fault-store=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw-ready4-delay1.log",
+      "log_sha256": "b1040f9dc8f7806a016991703a1ae21aae796ede2f15cc24808418420d66d45b",
+      "elf_sha256": "bf39cd463c7c0a8fc77724aa275cb7177ef9690e9963d4acf6f8decf7435fc7c",
+      "expected_pc": 2147483744,
+      "expected_cause": 7,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw-ready4-delay1.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "sw-ready4-delay2",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw-ready4-delay2.trace",
+        "+dmem-ready-period=4",
+        "+dmem-latency=2",
+        "+dmem-fault-store=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw-ready4-delay2.log",
+      "log_sha256": "527ddd74cbd621302cf4b53565f86509c65d417beac380297795ae957ac6e240",
+      "elf_sha256": "bf39cd463c7c0a8fc77724aa275cb7177ef9690e9963d4acf6f8decf7435fc7c",
+      "expected_pc": 2147483744,
+      "expected_cause": 7,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw-ready4-delay2.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "sw-ready4-delay4",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw-ready4-delay4.trace",
+        "+dmem-ready-period=4",
+        "+dmem-latency=4",
+        "+dmem-fault-store=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw-ready4-delay4.log",
+      "log_sha256": "decc7bcf37c7b82b4c3c10ba343e23fa7a0de43f055c34e3b54954b15dab3621",
+      "elf_sha256": "bf39cd463c7c0a8fc77724aa275cb7177ef9690e9963d4acf6f8decf7435fc7c",
+      "expected_pc": 2147483744,
+      "expected_cause": 7,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sw-ready4-delay4.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "sb-ready1-delay1",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb-ready1-delay1.trace",
+        "+dmem-ready-period=1",
+        "+dmem-latency=1",
+        "+dmem-fault-store=0x80000128",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb-ready1-delay1.log",
+      "log_sha256": "76c785f9bfce181932dd8c05f5581b912f3dc2029f5cec5193b3e1fb087c5ccd",
+      "elf_sha256": "8d887f11e694757ed6a36fe6cb433334e921ea320796894f951cd419d0087eb7",
+      "expected_pc": 2147483748,
+      "expected_cause": 7,
+      "expected_tval": 2147483945,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb-ready1-delay1.trace",
+      "trace_sha256": "ebb34de54ec80adbb823437a51831be1d83e5ad562308bc2a0091a9daaf6a0d2"
+    },
+    {
+      "name": "sb-ready1-delay2",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb-ready1-delay2.trace",
+        "+dmem-ready-period=1",
+        "+dmem-latency=2",
+        "+dmem-fault-store=0x80000128",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb-ready1-delay2.log",
+      "log_sha256": "4afecb5a316266dae18be0957c62a681c5003750ca69733afb2d936a5604eed1",
+      "elf_sha256": "8d887f11e694757ed6a36fe6cb433334e921ea320796894f951cd419d0087eb7",
+      "expected_pc": 2147483748,
+      "expected_cause": 7,
+      "expected_tval": 2147483945,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb-ready1-delay2.trace",
+      "trace_sha256": "ebb34de54ec80adbb823437a51831be1d83e5ad562308bc2a0091a9daaf6a0d2"
+    },
+    {
+      "name": "sb-ready1-delay4",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb-ready1-delay4.trace",
+        "+dmem-ready-period=1",
+        "+dmem-latency=4",
+        "+dmem-fault-store=0x80000128",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb-ready1-delay4.log",
+      "log_sha256": "3768d23eaaafe224d021f4ad3d1a023c7d68ee12cbe549ba3e26dc9ba44855de",
+      "elf_sha256": "8d887f11e694757ed6a36fe6cb433334e921ea320796894f951cd419d0087eb7",
+      "expected_pc": 2147483748,
+      "expected_cause": 7,
+      "expected_tval": 2147483945,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb-ready1-delay4.trace",
+      "trace_sha256": "ebb34de54ec80adbb823437a51831be1d83e5ad562308bc2a0091a9daaf6a0d2"
+    },
+    {
+      "name": "sb-ready4-delay1",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb-ready4-delay1.trace",
+        "+dmem-ready-period=4",
+        "+dmem-latency=1",
+        "+dmem-fault-store=0x80000128",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb-ready4-delay1.log",
+      "log_sha256": "3c984dccb3018efd3b8b2b10f9d0922b9871cee776bfebac77453e51bf7a9a3f",
+      "elf_sha256": "8d887f11e694757ed6a36fe6cb433334e921ea320796894f951cd419d0087eb7",
+      "expected_pc": 2147483748,
+      "expected_cause": 7,
+      "expected_tval": 2147483945,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb-ready4-delay1.trace",
+      "trace_sha256": "ebb34de54ec80adbb823437a51831be1d83e5ad562308bc2a0091a9daaf6a0d2"
+    },
+    {
+      "name": "sb-ready4-delay2",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb-ready4-delay2.trace",
+        "+dmem-ready-period=4",
+        "+dmem-latency=2",
+        "+dmem-fault-store=0x80000128",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb-ready4-delay2.log",
+      "log_sha256": "93b5ea08152aa6ace598a1fef421298738c8ef92e649328a5364f7468a7e94a9",
+      "elf_sha256": "8d887f11e694757ed6a36fe6cb433334e921ea320796894f951cd419d0087eb7",
+      "expected_pc": 2147483748,
+      "expected_cause": 7,
+      "expected_tval": 2147483945,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb-ready4-delay2.trace",
+      "trace_sha256": "ebb34de54ec80adbb823437a51831be1d83e5ad562308bc2a0091a9daaf6a0d2"
+    },
+    {
+      "name": "sb-ready4-delay4",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb-ready4-delay4.trace",
+        "+dmem-ready-period=4",
+        "+dmem-latency=4",
+        "+dmem-fault-store=0x80000128",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb-ready4-delay4.log",
+      "log_sha256": "1c0cba22742febaeebc9ab6cca471dcf91af4ded23a46f28a58798b01203d2f2",
+      "elf_sha256": "8d887f11e694757ed6a36fe6cb433334e921ea320796894f951cd419d0087eb7",
+      "expected_pc": 2147483748,
+      "expected_cause": 7,
+      "expected_tval": 2147483945,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sb-ready4-delay4.trace",
+      "trace_sha256": "ebb34de54ec80adbb823437a51831be1d83e5ad562308bc2a0091a9daaf6a0d2"
+    },
+    {
+      "name": "sh-ready1-delay1",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh-ready1-delay1.trace",
+        "+dmem-ready-period=1",
+        "+dmem-latency=1",
+        "+dmem-fault-store=0x80000128",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh-ready1-delay1.log",
+      "log_sha256": "2361637daf0b116d7083b3c46b1d4787d82215d7c7c739af615b9b8bea57ca5e",
+      "elf_sha256": "87a47d681b9443b028b536285f59f9638a22b9b7942d511aee4daa5778a111db",
+      "expected_pc": 2147483748,
+      "expected_cause": 7,
+      "expected_tval": 2147483946,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh-ready1-delay1.trace",
+      "trace_sha256": "0b6a43cc0fa2838cad77e2294f1a563edc41e1a7b2d85c0395fb76495c0ea0de"
+    },
+    {
+      "name": "sh-ready1-delay2",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh-ready1-delay2.trace",
+        "+dmem-ready-period=1",
+        "+dmem-latency=2",
+        "+dmem-fault-store=0x80000128",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh-ready1-delay2.log",
+      "log_sha256": "ee0918bd412f8fb59b1919fb468d17577834a1b00e96e9fb91e85d1f3bb70fd3",
+      "elf_sha256": "87a47d681b9443b028b536285f59f9638a22b9b7942d511aee4daa5778a111db",
+      "expected_pc": 2147483748,
+      "expected_cause": 7,
+      "expected_tval": 2147483946,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh-ready1-delay2.trace",
+      "trace_sha256": "0b6a43cc0fa2838cad77e2294f1a563edc41e1a7b2d85c0395fb76495c0ea0de"
+    },
+    {
+      "name": "sh-ready1-delay4",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh-ready1-delay4.trace",
+        "+dmem-ready-period=1",
+        "+dmem-latency=4",
+        "+dmem-fault-store=0x80000128",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh-ready1-delay4.log",
+      "log_sha256": "21b788e5232e201cd7ca2fcb27aa6e1333d1cf80be2908bc76b1e0a2e6a6ce29",
+      "elf_sha256": "87a47d681b9443b028b536285f59f9638a22b9b7942d511aee4daa5778a111db",
+      "expected_pc": 2147483748,
+      "expected_cause": 7,
+      "expected_tval": 2147483946,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh-ready1-delay4.trace",
+      "trace_sha256": "0b6a43cc0fa2838cad77e2294f1a563edc41e1a7b2d85c0395fb76495c0ea0de"
+    },
+    {
+      "name": "sh-ready4-delay1",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh-ready4-delay1.trace",
+        "+dmem-ready-period=4",
+        "+dmem-latency=1",
+        "+dmem-fault-store=0x80000128",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh-ready4-delay1.log",
+      "log_sha256": "c43061fcb62558bb9ba6c68f8d60da53099900863cce5dd45ce2f69149780f6e",
+      "elf_sha256": "87a47d681b9443b028b536285f59f9638a22b9b7942d511aee4daa5778a111db",
+      "expected_pc": 2147483748,
+      "expected_cause": 7,
+      "expected_tval": 2147483946,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh-ready4-delay1.trace",
+      "trace_sha256": "0b6a43cc0fa2838cad77e2294f1a563edc41e1a7b2d85c0395fb76495c0ea0de"
+    },
+    {
+      "name": "sh-ready4-delay2",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh-ready4-delay2.trace",
+        "+dmem-ready-period=4",
+        "+dmem-latency=2",
+        "+dmem-fault-store=0x80000128",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh-ready4-delay2.log",
+      "log_sha256": "ccf2c02017dcd31ce4434c9a8bd9df9cc8570061ea00339bf0c7b9074a0cde17",
+      "elf_sha256": "87a47d681b9443b028b536285f59f9638a22b9b7942d511aee4daa5778a111db",
+      "expected_pc": 2147483748,
+      "expected_cause": 7,
+      "expected_tval": 2147483946,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh-ready4-delay2.trace",
+      "trace_sha256": "0b6a43cc0fa2838cad77e2294f1a563edc41e1a7b2d85c0395fb76495c0ea0de"
+    },
+    {
+      "name": "sh-ready4-delay4",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh-ready4-delay4.trace",
+        "+dmem-ready-period=4",
+        "+dmem-latency=4",
+        "+dmem-fault-store=0x80000128",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh-ready4-delay4.log",
+      "log_sha256": "48f7722efd768c2d80a20c6b8f7e2886fb795ef0236e6fd994364fefa8522cf6",
+      "elf_sha256": "87a47d681b9443b028b536285f59f9638a22b9b7942d511aee4daa5778a111db",
+      "expected_pc": 2147483748,
+      "expected_cause": 7,
+      "expected_tval": 2147483946,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/sh-ready4-delay4.trace",
+      "trace_sha256": "0b6a43cc0fa2838cad77e2294f1a563edc41e1a7b2d85c0395fb76495c0ea0de"
+    },
+    {
+      "name": "fsw-ready1-delay1",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw-ready1-delay1.trace",
+        "+dmem-ready-period=1",
+        "+dmem-latency=1",
+        "+dmem-fault-store=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw-ready1-delay1.log",
+      "log_sha256": "62d15412637cb16630890365a3df8bf3cf33b000fe440abf2af869b583f5d88b",
+      "elf_sha256": "d580ab01ad8cf6aa8b0ad8b998cd720bce3309f0975b686051ec29a9ea015f2f",
+      "expected_pc": 2147483744,
+      "expected_cause": 7,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw-ready1-delay1.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "fsw-ready1-delay2",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw-ready1-delay2.trace",
+        "+dmem-ready-period=1",
+        "+dmem-latency=2",
+        "+dmem-fault-store=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw-ready1-delay2.log",
+      "log_sha256": "67dbfcdf3fc555bae6e6359bbbe007593337b74a513ad0ef0de985bc701ba10c",
+      "elf_sha256": "d580ab01ad8cf6aa8b0ad8b998cd720bce3309f0975b686051ec29a9ea015f2f",
+      "expected_pc": 2147483744,
+      "expected_cause": 7,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw-ready1-delay2.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "fsw-ready1-delay4",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw-ready1-delay4.trace",
+        "+dmem-ready-period=1",
+        "+dmem-latency=4",
+        "+dmem-fault-store=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw-ready1-delay4.log",
+      "log_sha256": "62e27716cbeeca5a4ad3429f106afa0303b0a1185d456456becac4859879d2b3",
+      "elf_sha256": "d580ab01ad8cf6aa8b0ad8b998cd720bce3309f0975b686051ec29a9ea015f2f",
+      "expected_pc": 2147483744,
+      "expected_cause": 7,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw-ready1-delay4.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "fsw-ready4-delay1",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw-ready4-delay1.trace",
+        "+dmem-ready-period=4",
+        "+dmem-latency=1",
+        "+dmem-fault-store=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw-ready4-delay1.log",
+      "log_sha256": "c1d8cb48f3c53eee6e6aecefa89f9463d9af12717c588c040e934e30d76a524f",
+      "elf_sha256": "d580ab01ad8cf6aa8b0ad8b998cd720bce3309f0975b686051ec29a9ea015f2f",
+      "expected_pc": 2147483744,
+      "expected_cause": 7,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw-ready4-delay1.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "fsw-ready4-delay2",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw-ready4-delay2.trace",
+        "+dmem-ready-period=4",
+        "+dmem-latency=2",
+        "+dmem-fault-store=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw-ready4-delay2.log",
+      "log_sha256": "f2da4a1fbc3feea3e30003db6a0de9646e382e2532a1ec8dccce5a148db54004",
+      "elf_sha256": "d580ab01ad8cf6aa8b0ad8b998cd720bce3309f0975b686051ec29a9ea015f2f",
+      "expected_pc": 2147483744,
+      "expected_cause": 7,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw-ready4-delay2.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "fsw-ready4-delay4",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw-ready4-delay4.trace",
+        "+dmem-ready-period=4",
+        "+dmem-latency=4",
+        "+dmem-fault-store=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw-ready4-delay4.log",
+      "log_sha256": "a4117e288b95d2f357019ba2636bb4280c7385d99d7805d61de8b40488622315",
+      "elf_sha256": "d580ab01ad8cf6aa8b0ad8b998cd720bce3309f0975b686051ec29a9ea015f2f",
+      "expected_pc": 2147483744,
+      "expected_cause": 7,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/fsw-ready4-delay4.trace",
+      "trace_sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "name": "lw-ready1-delay1",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw-ready1-delay1.trace",
+        "+dmem-ready-period=1",
+        "+dmem-latency=1",
+        "+dmem-fault-load=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw-ready1-delay1.log",
+      "log_sha256": "df17f6f5cab088d6a68eba7ada2f5e1f11f35cfffde782bec0f11de8afcf590f",
+      "elf_sha256": "70ecbc3c1ef0e4dd354d75d2ac5415db60114cd530ff5917074c85425c02481a",
+      "expected_pc": 2147483744,
+      "expected_cause": 5,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw-ready1-delay1.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    },
+    {
+      "name": "lw-ready1-delay2",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw-ready1-delay2.trace",
+        "+dmem-ready-period=1",
+        "+dmem-latency=2",
+        "+dmem-fault-load=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw-ready1-delay2.log",
+      "log_sha256": "cb525f2745c64f99b53ea322fb52cbfda7c00b8e7756f262b6ee581a773e0096",
+      "elf_sha256": "70ecbc3c1ef0e4dd354d75d2ac5415db60114cd530ff5917074c85425c02481a",
+      "expected_pc": 2147483744,
+      "expected_cause": 5,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw-ready1-delay2.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    },
+    {
+      "name": "lw-ready1-delay4",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw-ready1-delay4.trace",
+        "+dmem-ready-period=1",
+        "+dmem-latency=4",
+        "+dmem-fault-load=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw-ready1-delay4.log",
+      "log_sha256": "c2a9b6badb7b27b802a9b8a998bad0c17dc34882207005c9e6c077bc29903f9d",
+      "elf_sha256": "70ecbc3c1ef0e4dd354d75d2ac5415db60114cd530ff5917074c85425c02481a",
+      "expected_pc": 2147483744,
+      "expected_cause": 5,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw-ready1-delay4.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    },
+    {
+      "name": "lw-ready4-delay1",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw-ready4-delay1.trace",
+        "+dmem-ready-period=4",
+        "+dmem-latency=1",
+        "+dmem-fault-load=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw-ready4-delay1.log",
+      "log_sha256": "f160444d4f7ac5b9005499cc3a41acc1a6f859079719ab72b482eb0921327b39",
+      "elf_sha256": "70ecbc3c1ef0e4dd354d75d2ac5415db60114cd530ff5917074c85425c02481a",
+      "expected_pc": 2147483744,
+      "expected_cause": 5,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw-ready4-delay1.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    },
+    {
+      "name": "lw-ready4-delay2",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw-ready4-delay2.trace",
+        "+dmem-ready-period=4",
+        "+dmem-latency=2",
+        "+dmem-fault-load=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw-ready4-delay2.log",
+      "log_sha256": "6db011d021ef20da4bfdb0ce80abcb2a42ac92a3f7463a0c013f8bc19222db16",
+      "elf_sha256": "70ecbc3c1ef0e4dd354d75d2ac5415db60114cd530ff5917074c85425c02481a",
+      "expected_pc": 2147483744,
+      "expected_cause": 5,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw-ready4-delay2.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    },
+    {
+      "name": "lw-ready4-delay4",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw-ready4-delay4.trace",
+        "+dmem-ready-period=4",
+        "+dmem-latency=4",
+        "+dmem-fault-load=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw-ready4-delay4.log",
+      "log_sha256": "4a33b093e571d97f25c8cd22b940bcc72ce393950c1ff2d0f56a80c1d7469457",
+      "elf_sha256": "70ecbc3c1ef0e4dd354d75d2ac5415db60114cd530ff5917074c85425c02481a",
+      "expected_pc": 2147483744,
+      "expected_cause": 5,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/lw-ready4-delay4.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    },
+    {
+      "name": "flw-ready1-delay1",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw-ready1-delay1.trace",
+        "+dmem-ready-period=1",
+        "+dmem-latency=1",
+        "+dmem-fault-load=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw-ready1-delay1.log",
+      "log_sha256": "2559ffaf571d6dc49708d8bf0c370441f2f676a173f7922d238e101554eff766",
+      "elf_sha256": "3f43f87231395412252d4107788ed072e62965cf13a5c90e707fd25a67ab6d45",
+      "expected_pc": 2147483744,
+      "expected_cause": 5,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw-ready1-delay1.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    },
+    {
+      "name": "flw-ready1-delay2",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw-ready1-delay2.trace",
+        "+dmem-ready-period=1",
+        "+dmem-latency=2",
+        "+dmem-fault-load=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw-ready1-delay2.log",
+      "log_sha256": "4f5ac746e8195f8ed23e1a02a0264ce157ffe26642f52263f0469daa937a7325",
+      "elf_sha256": "3f43f87231395412252d4107788ed072e62965cf13a5c90e707fd25a67ab6d45",
+      "expected_pc": 2147483744,
+      "expected_cause": 5,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw-ready1-delay2.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    },
+    {
+      "name": "flw-ready1-delay4",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw-ready1-delay4.trace",
+        "+dmem-ready-period=1",
+        "+dmem-latency=4",
+        "+dmem-fault-load=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw-ready1-delay4.log",
+      "log_sha256": "e866afacba1bae64a86e1e256749f387e8d5da26e8b992fe622ee43322b6d5e9",
+      "elf_sha256": "3f43f87231395412252d4107788ed072e62965cf13a5c90e707fd25a67ab6d45",
+      "expected_pc": 2147483744,
+      "expected_cause": 5,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw-ready1-delay4.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    },
+    {
+      "name": "flw-ready4-delay1",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw-ready4-delay1.trace",
+        "+dmem-ready-period=4",
+        "+dmem-latency=1",
+        "+dmem-fault-load=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw-ready4-delay1.log",
+      "log_sha256": "486d08d46516aaeca874c0d3c3e7a5d09863966995f4a94c027d77385487689b",
+      "elf_sha256": "3f43f87231395412252d4107788ed072e62965cf13a5c90e707fd25a67ab6d45",
+      "expected_pc": 2147483744,
+      "expected_cause": 5,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw-ready4-delay1.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    },
+    {
+      "name": "flw-ready4-delay2",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw-ready4-delay2.trace",
+        "+dmem-ready-period=4",
+        "+dmem-latency=2",
+        "+dmem-fault-load=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw-ready4-delay2.log",
+      "log_sha256": "2f6d1ac189c9908aa61accb937c4a3fc615ed83d2e596563e4bfbaada712b097",
+      "elf_sha256": "3f43f87231395412252d4107788ed072e62965cf13a5c90e707fd25a67ab6d45",
+      "expected_pc": 2147483744,
+      "expected_cause": 5,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw-ready4-delay2.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    },
+    {
+      "name": "flw-ready4-delay4",
+      "command": [
+        "/workspace/build/experiments/lsu-a-v1/build-clean-v1/sim-assert/rv32_ooo_sim",
+        "+elf=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw.elf",
+        "+trace=/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw-ready4-delay4.trace",
+        "+dmem-ready-period=4",
+        "+dmem-latency=4",
+        "+dmem-fault-load=0x80000124",
+        "+max-cycles=100000"
+      ],
+      "returncode": 0,
+      "passed": true,
+      "log": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw-ready4-delay4.log",
+      "log_sha256": "6b1e2c80012fce46ec8d355e335ff6c8780b8e79f91d90eeead802ca27dac7e4",
+      "elf_sha256": "3f43f87231395412252d4107788ed072e62965cf13a5c90e707fd25a67ab6d45",
+      "expected_pc": 2147483744,
+      "expected_cause": 5,
+      "expected_tval": 2147483940,
+      "trace": "/workspace/build/experiments/lsu-a-v1/review-v1/qualification-clean-v1/interface/flw-ready4-delay4.trace",
+      "trace_sha256": "c2feccd12d8bfd2d0e4d6dae355016b68f2208c5ae5da5b6c0bae6ffd3cc2bf0"
+    }
+  ]
+}

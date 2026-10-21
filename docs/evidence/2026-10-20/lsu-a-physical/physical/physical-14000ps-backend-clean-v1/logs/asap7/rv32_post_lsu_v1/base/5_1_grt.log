@@ -1,0 +1,465 @@
+OpenROAD 26Q1-2900-gdf79404cd8 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 2 thread(s).
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_db /workspace/build/experiments/lsu-a-v1/physical-14000ps-backend-clean-v1/results/asap7/rv32_post_lsu_v1/base/4_cts.odb
+read_sdc /workspace/build/experiments/lsu-a-v1/physical-14000ps-backend-clean-v1/results/asap7/rv32_post_lsu_v1/base/4_cts.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+pin_access
+[INFO DRT-0149] Reading tech and libs.
+
+Units:                1000
+Number of layers:     21
+Number of macros:     212
+Number of vias:       14
+Number of viarulegen: 11
+
+[INFO DRT-0150] Reading design.
+[WARNING DRT-0120] Large net net18805 has 108 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15595 has 102 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15459 has 127 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15483 has 118 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15482 has 103 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15479 has 117 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15477 has 107 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15488 has 106 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15498 has 105 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15497 has 119 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15517 has 110 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net18784 has 108 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net18878 has 110 pins which may impact routing performance. Consider optimization.
+
+Design:                   rv32_ooo_core
+Die area:                 ( 0 0 ) ( 210583 210583 )
+Number of track patterns: 32
+Number of DEF vias:       0
+Number of components:     176119
+Number of terminals:      523
+Number of snets:          2
+Number of nets:           170765
+
+[INFO DRT-0167] List of default vias:
+  Layer V2
+    default via: VIA23
+  Layer V3
+    default via: VIA34
+  Layer V4
+    default via: VIA45
+  Layer V5
+    default via: VIA56
+  Layer V6
+    default via: VIA67
+  Layer V7
+    default via: VIA78
+  Layer V8
+    default via: VIA89
+  Layer V9
+    default via: VIA9Pad
+[INFO DRT-0162] Library cell analysis.
+[INFO DRT-0163] Instance analysis.
+  Complete 100000 instances.
+[INFO DRT-0164] Number of unique instances = 279.
+[INFO DRT-0168] Init region query.
+[INFO DRT-0018]   Complete 100000 insts.
+[INFO DRT-0024]   Complete Active.
+[INFO DRT-0024]   Complete V0.
+[INFO DRT-0024]   Complete M1.
+[INFO DRT-0024]   Complete V1.
+[INFO DRT-0024]   Complete M2.
+[INFO DRT-0024]   Complete V2.
+[INFO DRT-0024]   Complete M3.
+[INFO DRT-0024]   Complete V3.
+[INFO DRT-0024]   Complete M4.
+[INFO DRT-0024]   Complete V4.
+[INFO DRT-0024]   Complete M5.
+[INFO DRT-0024]   Complete V5.
+[INFO DRT-0024]   Complete M6.
+[INFO DRT-0024]   Complete V6.
+[INFO DRT-0024]   Complete M7.
+[INFO DRT-0024]   Complete V7.
+[INFO DRT-0024]   Complete M8.
+[INFO DRT-0024]   Complete V8.
+[INFO DRT-0024]   Complete M9.
+[INFO DRT-0024]   Complete V9.
+[INFO DRT-0024]   Complete Pad.
+[INFO DRT-0033] Active shape region query size = 0.
+[INFO DRT-0033] V0 shape region query size = 0.
+[INFO DRT-0033] M1 shape region query size = 3081444.
+[INFO DRT-0033] V1 shape region query size = 4551427.
+[INFO DRT-0033] M2 shape region query size = 85838.
+[INFO DRT-0033] V2 shape region query size = 89505.
+[INFO DRT-0033] M3 shape region query size = 89505.
+[INFO DRT-0033] V3 shape region query size = 59670.
+[INFO DRT-0033] M4 shape region query size = 59920.
+[INFO DRT-0033] V4 shape region query size = 59670.
+[INFO DRT-0033] M5 shape region query size = 33226.
+[INFO DRT-0033] V5 shape region query size = 6084.
+[INFO DRT-0033] M6 shape region query size = 3198.
+[INFO DRT-0033] V6 shape region query size = 0.
+[INFO DRT-0033] M7 shape region query size = 0.
+[INFO DRT-0033] V7 shape region query size = 0.
+[INFO DRT-0033] M8 shape region query size = 0.
+[INFO DRT-0033] V8 shape region query size = 0.
+[INFO DRT-0033] M9 shape region query size = 0.
+[INFO DRT-0033] V9 shape region query size = 0.
+[INFO DRT-0033] Pad shape region query size = 0.
+[INFO DRT-0165] Start pin access.
+[INFO DRT-0076]   Complete 1000 pins.
+[INFO DRT-0078]   Complete 1616 pins.
+[INFO DRT-0079]   Complete 100 unique inst patterns.
+[INFO DRT-0079]   Complete 200 unique inst patterns.
+[INFO DRT-0081]   Complete 279 unique inst patterns.
+[INFO DRT-0082]   Complete 10000 groups.
+[INFO DRT-0082]   Complete 20000 groups.
+[INFO DRT-0082]   Complete 30000 groups.
+[INFO DRT-0082]   Complete 40000 groups.
+[INFO DRT-0082]   Complete 50000 groups.
+[INFO DRT-0082]   Complete 60000 groups.
+[INFO DRT-0082]   Complete 70000 groups.
+[INFO DRT-0082]   Complete 80000 groups.
+[INFO DRT-0082]   Complete 90000 groups.
+[INFO DRT-0082]   Complete 100000 groups.
+[INFO DRT-0084]   Complete 110403 groups.
+#scanned instances     = 176119
+#unique  instances     = 279
+#stdCellGenAp          = 7744
+#stdCellValidPlanarAp  = 27
+#stdCellValidViaAp     = 6375
+#stdCellPinNoAp        = 0
+#stdCellPinCnt         = 626346
+#instTermValidViaApCnt = 0
+#macroGenAp            = 0
+#macroValidPlanarAp    = 0
+#macroValidViaAp       = 0
+#macroNoAp             = 0
+[INFO DRT-0166] Complete pin access.
+[INFO DRT-0267] cpu time = 00:30:45, elapsed time = 00:15:25, memory = 1009.45 (MB), peak = 1144.86 (MB)
+Took 929 seconds: pin_access
+set_global_routing_random -seed 1
+global_route -congestion_report_file /workspace/build/experiments/lsu-a-v1/physical-14000ps-backend-clean-v1/reports/asap7/rv32_post_lsu_v1/base/congestion.rpt -congestion_iterations 30 -congestion_report_iter_step 5 -verbose
+[INFO GRT-0020] Min routing layer: M2
+[INFO GRT-0021] Max routing layer: M7
+[INFO GRT-0022] Global adjustment: 0%
+[INFO GRT-0023] Grid origin: (0, 0)
+[INFO GRT-0088] Layer M1      Track-Pitch = 0.0360  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M2      Track-Pitch = 0.0390  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M3      Track-Pitch = 0.0360  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M4      Track-Pitch = 0.0480  line-2-Via Pitch: 0.0480
+[INFO GRT-0088] Layer M5      Track-Pitch = 0.0480  line-2-Via Pitch: 0.0480
+[INFO GRT-0088] Layer M6      Track-Pitch = 0.0640  line-2-Via Pitch: 0.0640
+[INFO GRT-0088] Layer M7      Track-Pitch = 0.0640  line-2-Via Pitch: 0.0640
+[INFO GRT-0003] Macros: 0
+[INFO GRT-0004] Blockages: 54441
+[INFO GRT-0019] Found 1194 clock nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 127
+
+[INFO GRT-0053] Routing resources analysis:
+          Routing      Original      Derated      Resource
+Layer     Direction    Resources     Resources    Reduction (%)
+---------------------------------------------------------------
+M1         Vertical            0             0          0.00%
+M2         Horizontal    1636564       1180453          27.87%
+M3         Vertical      2065801       1534574          25.72%
+M4         Horizontal    1583021       1175159          25.76%
+M5         Vertical      1526691       1131977          25.85%
+M6         Horizontal    1062300        718840          32.33%
+M7         Vertical      1210720        815856          32.61%
+---------------------------------------------------------------
+
+[INFO GRT-0101] Running extra iterations to remove overflow.
+[INFO GRT-0102] Start extra iteration 1/30
+[INFO GRT-0197] Via related to pin nodes: 1180531
+[INFO GRT-0198] Via related Steiner nodes: 54027
+[INFO GRT-0199] Via filling finished.
+[INFO GRT-0111] Final number of vias: 1580947
+[INFO GRT-0112] Final usage 3D: 6669150
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Overflow
+---------------------------------------------------------------------------------------
+M1                   0             0            0.00%             0 /  0 /  0
+M2             1180453        676794           57.33%             0 /  0 /  0
+M3             1534574        780147           50.84%             0 /  0 /  0
+M4             1175159        281894           23.99%             0 /  0 /  0
+M5             1131977        157075           13.88%             0 /  0 /  0
+M6              718840         18281            2.54%             0 /  0 /  0
+M7              815856         12118            1.49%             0 /  0 /  0
+---------------------------------------------------------------------------------------
+Total          6556859       1926309           29.38%             0 /  0 /  0
+
+[INFO GRT-0018] Total wirelength: 1433155 um
+[INFO GRT-0014] Routed nets: 170765
+[INFO GRT-0303] Global routing runtime = 00:00:32
+Took 32 seconds: global_route -congestion_report_file /workspace/build/experiments/lsu-a-v1/physical-14000ps-backend-clean-v1/reports/asap7/rv32_post_lsu_v1/base/congestion.rpt -congestion_iterations 30 -congestion_report_iter_step 5 -verbose
+estimate_parasitics -global_routing
+Took 9 seconds: estimate_parasitics -global_routing
+Perform buffer insertion and gate resizing...
+repair_design -verbose
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |    171599
+     1000 |     +0.0% |       0 |       0 |             0 |    170599
+     2000 |     +0.0% |       0 |       0 |             0 |    169599
+     3000 |     +0.0% |       0 |       0 |             0 |    168599
+     4000 |     +0.0% |       0 |       0 |             0 |    167599
+     5000 |     +0.0% |       0 |       0 |             0 |    166599
+     6000 |     +0.0% |       0 |       0 |             0 |    165599
+     7000 |     +0.0% |       0 |       0 |             0 |    164599
+     8000 |     +0.0% |       0 |       0 |             0 |    163599
+     9000 |     +0.0% |       0 |       0 |             0 |    162599
+    10000 |     +0.0% |       0 |       0 |             0 |    161599
+    11000 |     +0.0% |       0 |       0 |             0 |    160599
+    12000 |     +0.0% |       0 |       0 |             0 |    159599
+    13000 |     +0.0% |       0 |       0 |             0 |    158599
+    14000 |     +0.0% |       0 |       0 |             0 |    157599
+    15000 |     +0.0% |       0 |       0 |             0 |    156599
+    16000 |     +0.0% |       0 |       0 |             0 |    155599
+    17000 |     +0.0% |       0 |       0 |             0 |    154599
+    18000 |     +0.0% |       0 |       0 |             0 |    153599
+    19000 |     +0.0% |       0 |       0 |             0 |    152599
+    20000 |     +0.0% |       0 |       0 |             0 |    151599
+    21000 |     +0.0% |       0 |       0 |             0 |    150599
+    22000 |     +0.0% |       0 |       0 |             0 |    149599
+    23000 |     +0.0% |       0 |       0 |             0 |    148599
+    24000 |     +0.0% |       0 |       0 |             0 |    147599
+    25000 |     +0.0% |       0 |       0 |             0 |    146599
+    26000 |     +0.0% |       0 |       0 |             0 |    145599
+    27000 |     +0.0% |       0 |       0 |             0 |    144599
+    28000 |     +0.0% |       0 |       0 |             0 |    143599
+    29000 |     +0.0% |       0 |       2 |             1 |    142599
+    30000 |     +0.0% |       0 |       2 |             1 |    141599
+    31000 |     +0.0% |       0 |       2 |             1 |    140599
+    32000 |     +0.0% |       0 |       2 |             1 |    139599
+    33000 |     +0.0% |       0 |       2 |             1 |    138599
+    34000 |     +0.0% |       0 |       2 |             1 |    137599
+    35000 |     +0.0% |       0 |       2 |             1 |    136599
+    36000 |     +0.0% |       0 |       2 |             1 |    135599
+    37000 |     +0.0% |       0 |       2 |             1 |    134599
+    38000 |     +0.0% |       0 |       2 |             1 |    133599
+    39000 |     +0.0% |       0 |       2 |             1 |    132599
+    40000 |     +0.0% |       0 |       2 |             1 |    131599
+    41000 |     +0.0% |       0 |       2 |             1 |    130599
+    42000 |     +0.0% |       0 |       2 |             1 |    129599
+    43000 |     +0.0% |       0 |       2 |             1 |    128599
+    44000 |     +0.0% |       0 |       2 |             1 |    127599
+    45000 |     +0.0% |       0 |       2 |             1 |    126599
+    46000 |     +0.0% |       0 |       2 |             1 |    125599
+    47000 |     +0.0% |       0 |       2 |             1 |    124599
+    48000 |     +0.0% |       0 |       2 |             1 |    123599
+    49000 |     +0.0% |       0 |       2 |             1 |    122599
+    50000 |     +0.0% |       0 |       2 |             1 |    121599
+    51000 |     +0.0% |       0 |       2 |             1 |    120599
+    52000 |     +0.0% |       0 |       2 |             1 |    119599
+    53000 |     +0.0% |       0 |       2 |             1 |    118599
+    54000 |     +0.0% |       0 |       2 |             1 |    117599
+    55000 |     +0.0% |       0 |       2 |             1 |    116599
+    56000 |     +0.0% |       0 |       2 |             1 |    115599
+    57000 |     +0.0% |       0 |       2 |             1 |    114599
+    58000 |     +0.0% |       0 |       2 |             1 |    113599
+    59000 |     +0.0% |       0 |       2 |             1 |    112599
+    60000 |     +0.0% |       0 |       2 |             1 |    111599
+    61000 |     +0.0% |       0 |       2 |             1 |    110599
+    62000 |     +0.0% |       0 |       2 |             1 |    109599
+    63000 |     +0.0% |       0 |       2 |             1 |    108599
+    64000 |     +0.0% |       0 |       2 |             1 |    107599
+    65000 |     +0.0% |       0 |       2 |             1 |    106599
+    66000 |     +0.0% |       0 |       2 |             1 |    105599
+    67000 |     +0.0% |       0 |       2 |             1 |    104599
+    68000 |     +0.0% |       0 |       2 |             1 |    103599
+    69000 |     +0.0% |       0 |       2 |             1 |    102599
+    70000 |     +0.0% |       0 |       2 |             1 |    101599
+    71000 |     +0.0% |       0 |       2 |             1 |    100599
+    72000 |     +0.0% |       0 |       2 |             1 |     99599
+    73000 |     +0.0% |       0 |       2 |             1 |     98599
+    74000 |     +0.0% |       0 |       2 |             1 |     97599
+    75000 |     +0.0% |       0 |       2 |             1 |     96599
+    76000 |     +0.0% |       0 |       2 |             1 |     95599
+    77000 |     +0.0% |       0 |       2 |             1 |     94599
+    78000 |     +0.0% |       0 |       2 |             1 |     93599
+    79000 |     +0.0% |       0 |       3 |             2 |     92599
+    80000 |     +0.0% |       0 |       3 |             2 |     91599
+    81000 |     +0.0% |       0 |       3 |             2 |     90599
+    82000 |     +0.0% |       0 |       3 |             2 |     89599
+    83000 |     +0.0% |       0 |       3 |             2 |     88599
+    84000 |     +0.0% |       0 |       3 |             2 |     87599
+    85000 |     +0.0% |       0 |       3 |             2 |     86599
+    86000 |     +0.0% |       0 |       3 |             2 |     85599
+    87000 |     +0.0% |       0 |       3 |             2 |     84599
+    88000 |     +0.0% |       0 |       3 |             2 |     83599
+    89000 |     +0.0% |       0 |       3 |             2 |     82599
+    90000 |     +0.0% |       0 |       3 |             2 |     81599
+    91000 |     +0.0% |       0 |       3 |             2 |     80599
+    92000 |     +0.0% |       0 |       3 |             2 |     79599
+    93000 |     +0.0% |       0 |       3 |             2 |     78599
+    94000 |     +0.0% |       0 |       3 |             2 |     77599
+    95000 |     +0.0% |       0 |       3 |             2 |     76599
+    96000 |     +0.0% |       0 |       3 |             2 |     75599
+    97000 |     +0.0% |       0 |       3 |             2 |     74599
+    98000 |     +0.0% |       0 |       3 |             2 |     73599
+    99000 |     +0.0% |       0 |       3 |             2 |     72599
+   100000 |     +0.0% |       0 |       3 |             2 |     71599
+   101000 |     +0.0% |       0 |       3 |             2 |     70599
+   102000 |     +0.0% |       0 |       3 |             2 |     69599
+   103000 |     +0.0% |       0 |       3 |             2 |     68599
+   104000 |     +0.0% |       0 |       3 |             2 |     67599
+   105000 |     +0.0% |       0 |       3 |             2 |     66599
+   106000 |     +0.0% |       0 |       3 |             2 |     65599
+   107000 |     +0.0% |       0 |       3 |             2 |     64599
+   108000 |     +0.0% |       0 |       3 |             2 |     63599
+   109000 |     +0.0% |       0 |       3 |             2 |     62599
+   110000 |     +0.0% |       0 |       3 |             2 |     61599
+   111000 |     +0.0% |       0 |       3 |             2 |     60599
+   112000 |     +0.0% |       0 |       3 |             2 |     59599
+   113000 |     +0.0% |       0 |       3 |             2 |     58599
+   114000 |     +0.0% |       0 |       3 |             2 |     57599
+   115000 |     +0.0% |       0 |       3 |             2 |     56599
+   116000 |     +0.0% |       0 |       3 |             2 |     55599
+   117000 |     +0.0% |       0 |       3 |             2 |     54599
+   118000 |     +0.0% |       0 |       3 |             2 |     53599
+   119000 |     +0.0% |       0 |       3 |             2 |     52599
+   120000 |     +0.0% |       0 |       3 |             2 |     51599
+   121000 |     +0.0% |       0 |       3 |             2 |     50599
+   122000 |     +0.0% |       0 |       3 |             2 |     49599
+   123000 |     +0.0% |       0 |       3 |             2 |     48599
+   124000 |     +0.0% |       0 |       3 |             2 |     47599
+   125000 |     +0.0% |       0 |       3 |             2 |     46599
+   126000 |     +0.0% |       0 |       3 |             2 |     45599
+   127000 |     +0.0% |       0 |       3 |             2 |     44599
+   128000 |     +0.0% |       0 |       3 |             2 |     43599
+   129000 |     +0.0% |       0 |       3 |             2 |     42599
+   130000 |     +0.0% |       0 |       3 |             2 |     41599
+   131000 |     +0.0% |       0 |       3 |             2 |     40599
+   132000 |     +0.0% |       0 |       3 |             2 |     39599
+   133000 |     +0.0% |       0 |       3 |             2 |     38599
+   134000 |     +0.0% |       0 |       3 |             2 |     37599
+   135000 |     +0.0% |       0 |       3 |             2 |     36599
+   136000 |     +0.0% |       0 |       3 |             2 |     35599
+   137000 |     +0.0% |       0 |       3 |             2 |     34599
+   138000 |     +0.0% |       0 |       3 |             2 |     33599
+   139000 |     +0.0% |       0 |       3 |             2 |     32599
+   140000 |     +0.0% |       0 |       3 |             2 |     31599
+   141000 |     +0.0% |       0 |       3 |             2 |     30599
+   142000 |     +0.0% |       0 |       3 |             2 |     29599
+   143000 |     +0.0% |       0 |       3 |             2 |     28599
+   144000 |     +0.0% |       0 |       3 |             2 |     27599
+   145000 |     +0.0% |       0 |       3 |             2 |     26599
+   146000 |     +0.0% |       0 |       3 |             2 |     25599
+   147000 |     +0.0% |       0 |       3 |             2 |     24599
+   148000 |     +0.0% |       0 |       3 |             2 |     23599
+   149000 |     +0.0% |       0 |       3 |             2 |     22599
+   150000 |     +0.0% |       0 |       3 |             2 |     21599
+   151000 |     +0.0% |       0 |       3 |             2 |     20599
+   152000 |     +0.0% |       0 |       3 |             2 |     19599
+   153000 |     +0.0% |       0 |       3 |             2 |     18599
+   154000 |     +0.0% |       0 |       3 |             2 |     17599
+   155000 |     +0.0% |       0 |       3 |             2 |     16599
+   156000 |     +0.0% |       0 |       3 |             2 |     15599
+   157000 |     +0.0% |       0 |       3 |             2 |     14599
+   158000 |     +0.0% |       0 |       3 |             2 |     13599
+   159000 |     +0.0% |       0 |       3 |             2 |     12599
+   160000 |     +0.0% |       0 |       3 |             2 |     11599
+   161000 |     +0.0% |       0 |       3 |             2 |     10599
+   162000 |     +0.0% |       0 |       3 |             2 |      9599
+   163000 |     +0.0% |       0 |       3 |             2 |      8599
+   164000 |     +0.0% |       0 |       3 |             2 |      7599
+   165000 |     +0.0% |       0 |       3 |             2 |      6599
+   166000 |     +0.0% |       0 |       3 |             2 |      5599
+   167000 |     +0.0% |       0 |       3 |             2 |      4599
+   168000 |     +0.0% |       0 |       3 |             2 |      3599
+   169000 |     +0.0% |       0 |       3 |             2 |      2599
+   170000 |     +0.0% |       0 |       3 |             2 |      1599
+   171000 |     +0.0% |       0 |       3 |             2 |       599
+    final |     +0.0% |       0 |       3 |             2 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0034] Found 2 slew violations.
+[INFO RSZ-0038] Inserted 3 buffers in 2 nets.
+Took 43 seconds: repair_design -verbose
+global_route -start_incremental
+detailed_placement
+[INFO DPL-0005] Max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+Movements Summary
+---------------------------------------
+Total cells:                  171530
+Diamond Move Success:         171530 (100.00%)
+Diamond Move Failure:              0
+Rip-up and replace Success:        0 (  0.00% of diamond failures)
+Rip-up and replace Failure:        0
+Total Placement Failures:          0
+---------------------------------------
+Placement Analysis
+---------------------------------
+total displacement          2.5 u
+average displacement        0.0 u
+max displacement            0.5 u
+original HPWL          851958.8 u
+legalized HPWL         851961.7 u
+delta HPWL                    0 %
+
+global_route -end_incremental -congestion_report_file /workspace/build/experiments/lsu-a-v1/physical-14000ps-backend-clean-v1/reports/asap7/rv32_post_lsu_v1/base/congestion_post_repair_design.rpt
+Repair setup and hold violations...
+estimate_parasitics -global_routing
+Took 8 seconds: estimate_parasitics -global_routing
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
+[INFO RSZ-0098] No setup violations found
+[INFO RSZ-0033] No hold violations found.
+Took 28 seconds: repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+global_route -start_incremental
+detailed_placement
+[INFO DPL-0005] Max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+Movements Summary
+---------------------------------------
+Total cells:                  171530
+Diamond Move Success:         171530 (100.00%)
+Diamond Move Failure:              0
+Rip-up and replace Success:        0 (  0.00% of diamond failures)
+Rip-up and replace Failure:        0
+Total Placement Failures:          0
+---------------------------------------
+Placement Analysis
+---------------------------------
+total displacement          0.0 u
+average displacement        0.0 u
+max displacement            0.0 u
+original HPWL          851961.7 u
+legalized HPWL         851961.7 u
+delta HPWL                    0 %
+
+check_placement -verbose
+global_route -end_incremental -congestion_report_file /workspace/build/experiments/lsu-a-v1/physical-14000ps-backend-clean-v1/reports/asap7/rv32_post_lsu_v1/base/congestion_post_repair_timing.rpt
+estimate_parasitics -global_routing
+Took 9 seconds: estimate_parasitics -global_routing
+global_route -start_incremental
+global_route -end_incremental -congestion_report_file /workspace/build/experiments/lsu-a-v1/physical-14000ps-backend-clean-v1/reports/asap7/rv32_post_lsu_v1/base/congestion_post_recover_power.rpt
+Repair antennas...
+[WARNING GRT-0246] No diode with LEF class CORE ANTENNACELL found.
+[INFO ANT-0002] Found 0 net violations.
+[INFO ANT-0001] Found 0 pin violations.
+Estimate parasitics...
+estimate_parasitics -global_routing
+Took 9 seconds: estimate_parasitics -global_routing
+Report metrics stage 5, global route...
+
+==========================================================================
+global route report_design_area
+--------------------------------------------------------------------------
+Design area 21566 um^2 51% utilization.
+[INFO FLW-0007] clock core_clk period 14000.000000
+[INFO FLW-0008] Clock core_clk period 6620.592
+[INFO FLW-0009] Clock core_clk slack 7030.955
+write_sdc -no_timestamp /workspace/build/experiments/lsu-a-v1/physical-14000ps-backend-clean-v1/results/asap7/rv32_post_lsu_v1/base/updated_clks.sdc
+[INFO FLW-0011] Path endpoint path count 19400
+write_db /workspace/build/experiments/lsu-a-v1/physical-14000ps-backend-clean-v1/results/asap7/rv32_post_lsu_v1/base/5_1_grt.odb
+write_sdc -no_timestamp /workspace/build/experiments/lsu-a-v1/physical-14000ps-backend-clean-v1/results/asap7/rv32_post_lsu_v1/base/5_1_grt.sdc
+Elapsed time: 22:03.96[h:]min:sec. CPU time: user 2357.83 sys 76.59 (183%). Peak memory: 3948740KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+5_1_grt                   .odb         1323           3856 5d2326171161a55b3029
+5_1_grt                   .sdc                             82c4f8cef81db37bb7a7

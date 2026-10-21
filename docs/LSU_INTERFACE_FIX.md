@@ -1,6 +1,6 @@
 # LSU 介面缺口修正與驗證
 
-2026-10-18。功能來源 `ec0baa3`；這是 correctness 修正，A／B／C 效能方案尚未實作。
+2026-10-18 的修復紀錄。功能來源 `ec0baa3`；此提交只包含 correctness 修正，未含 A／B／C 效能方案。
 [封存證據](evidence/2026-10-18/lsu-interface-fix/README.md)保留乾淨來源、工具／模型身分、
 修正前失敗、修正後結果與原始輸出。兩類各 ≥1.20×、標準元件面積 ≤1.10× 的規劃目標不變。
 
@@ -64,6 +64,7 @@ FP32 的 fixture、ELF、checksum、ROI cycles 與修正前相符；Embench 19 �
 該提交沒有改動 RTL／sim／build flags；乾淨來源再次通過 48/48，兩個 simulator binary
 與完整回歸相同。六個 ELF 重建逐 byte 相同，loadable payload 與原測試相同。
 
-這建立介面修復的功能參考點，仍非正式 AP5B 效能／實體基線。正式資料尺寸、計時／記憶體契約、
-完整 ACT4／FP 覆蓋及新鮮 PPA 尚待補齊。舊六案例敏感度 runner 有來源鎖，會拒絕新 RTL；
+此修復建立功能參考點；後續[正式 AP5B v1 基線](evidence/2026-10-18/post-lsu-baseline/README.md)
+已固定資料、計時／記憶體契約，完成 27/27 與 10 ns global-route 研究資格。
+完整 ACT4／FP 覆蓋仍另列缺口。舊六案例敏感度 runner 有來源鎖，會拒絕新 RTL；
 後續量測須另立修正後來源與協議，保留舊研究原始證據，不放寬其鎖定條件。

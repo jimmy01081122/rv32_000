@@ -1,0 +1,26 @@
+{
+  "scope": "qualified isolated CPU experiment at global-route research boundary; no detailed-route or full-ISA signoff",
+  "experiment_id": "lsu-a-v1",
+  "experiment_manifest_sha256": "a1782d1b5ac12cb7dbfba2900c9542693dad846b9af6f2e00f8e74d5fa0c758e",
+  "measurement_summary_sha256": "5e234a3b3be9350cb5293bee5f5a8e834fe4f0e2e60172758ae85a39612c7969",
+  "reviewer_sha256": "fd1bb925b12358bcee3aaac3c2f2e0e5b8064994ea0e0c257de3f9ce824268ad",
+  "core_period_ps": 9900,
+  "memory_ps": 10000,
+  "comparison_point": "fastest",
+  "fastest_qualified_period_ps": 9900,
+  "standard_cell_area_um2": 22162.24152000313,
+  "area_ratio": 1.0036738682583708,
+  "embench_time_geomean_speedup": 0.7266014195044225,
+  "fp32_time_geomean_speedup": 0.700275341184508,
+  "fp32_subgroup_speedup": {
+    "dsp": 0.6535856692858949,
+    "matrix_ml": 0.7503003454877957
+  },
+  "planning_targets": {
+    "embench_geomean_ge_1_20": false,
+    "fp32_geomean_ge_1_20": false,
+    "area_ratio_le_1_10": true
+  },
+  "all_planning_targets_met": false,
+  "passed": true
+}

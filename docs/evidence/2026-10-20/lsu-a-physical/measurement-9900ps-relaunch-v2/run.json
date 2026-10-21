@@ -1,0 +1,31 @@
+{
+  "scope": "complete27 at actual independently qualified9900ps clock, fixed10000ps memory; common10000ps result retained separately",
+  "source_commit": "70727f50db4e77e4904d4d3492979e6a0f4ad2ba",
+  "source_status": [],
+  "pinned_runtime_image_id": "sha256:92a37abacbbf91494f9a8078b45fe1f6688a533cf5c87d02599d28c5fe229b33",
+  "runtime_container_id": "054ebe72b3728686b6e7edd14f5daf63972b4037af3afd74ed069c3848949ab0",
+  "selected_physical_analysis": "build/experiments/lsu-a-v1/physical-14000ps-eco-clean-v1/boundary-v1",
+  "selected_physical_analysis_sha256": "69d4fd4b7eea499c05998a437bae4db78598cf991cf59976f545bbbc01575a0e",
+  "core_period_ps": 9900,
+  "memory_ps": 10000,
+  "job_state": "finished",
+  "passed": false,
+  "relaunch_reason": "Original detached worker never entered: shared parent job.lock already existed from prior completed job. Original queued record/log absence preserved. Dedicated worker directory provides a fresh exclusive lock.",
+  "prior_lock_sha256": "10159baf262b43a92d95db59dae1f72c645127301661e0a3ce4e38b295a97c58",
+  "observed_container_exit": {
+    "finished_utc": "2026-10-20T08:45:22.375722716Z",
+    "exit_code": 255,
+    "oom_killed": false
+  },
+  "relaunch_preflight_utc": "2026-10-20T08:49:11.610011+00:00",
+  "input_count": 231,
+  "preflight_input_mismatches": [],
+  "job_pid": 7,
+  "started_utc": "2026-10-20T08:49:16.422364+00:00",
+  "flow_completed": true,
+  "returncode": 0,
+  "input_mismatches": [],
+  "input_identities_unchanged": true,
+  "finished_utc": "2026-10-20T09:20:09.268890+00:00",
+  "log_sha256": "e0041e7f52e618855184c61faa8f0b4da733e4c8766e3548f5e927c5cb5838cf"
+}

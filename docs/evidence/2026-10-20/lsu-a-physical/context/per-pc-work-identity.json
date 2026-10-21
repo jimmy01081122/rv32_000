@@ -1,0 +1,224 @@
+{
+  "scope": "offline analysis of already completed common-clock raw profiles; PC/insn/kind retirement counts, not an ordered trace or full-ISA proof",
+  "script_sha256": "8f62940bcffefc4a09083c295b1f39e7a151858473bf3c0cfcd263c4a5676b9a",
+  "measurement_summary_sha256": "5de23abc1efa4c617c872d3f1dedd707bad8d99a27f24ce0790d984aecda919e",
+  "records": [
+    {
+      "family": "fp32",
+      "name": "fir",
+      "nonzero_retired_pc_count": 50,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "33a38b761801dc87b1cbc1975d0f747afd22155bc86123ad0e2f1c40118558cd",
+      "candidate_profile_sha256": "a6732b8b32dacd0cdd8e2a0da3be65657b11580cd3576dc37afdb2b78437625f"
+    },
+    {
+      "family": "fp32",
+      "name": "iir",
+      "nonzero_retired_pc_count": 42,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "2daedeb87c5d05f567a66b77acc81e1bffc3714838450d273027733fd27a6d53",
+      "candidate_profile_sha256": "dfa11df90118e477587dc5a6e46a5f942df0ed8c7dd6e1ac6173ff4ff52f3716"
+    },
+    {
+      "family": "fp32",
+      "name": "fft",
+      "nonzero_retired_pc_count": 229,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "fbfdf6744e5d6f694590e935de3c3c5d1a44de64a33c928b35da5ff3276fc778",
+      "candidate_profile_sha256": "d10fef8246f9f074a6a42b5ad1beb641e067f23267ba68f7e938a0b127454b1e"
+    },
+    {
+      "family": "fp32",
+      "name": "pid",
+      "nonzero_retired_pc_count": 31,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "5ec7675d89421ea824f01f192ab1172dfe075f75901269662ba64e4c088df1a9",
+      "candidate_profile_sha256": "354906e5884aaf2833f9a422d7c696b73c58d468d1d6200432fb5b46d282b77a"
+    },
+    {
+      "family": "fp32",
+      "name": "gemm",
+      "nonzero_retired_pc_count": 50,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "aa0b3be800689edfbaeb2500195f0ab8a288b0aa96314cefd4ad3d91d9e6aafe",
+      "candidate_profile_sha256": "75a6f4e497bb368729c806c09b4534545d335be183ab9446a8a9cab00996358b"
+    },
+    {
+      "family": "fp32",
+      "name": "bicg",
+      "nonzero_retired_pc_count": 37,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "9731c779354bb200698650cd9698f9e61c364aa1d6098587991d020a4e8a53fb",
+      "candidate_profile_sha256": "d9387b40441df4c58ba3227252d801025b741cdd8986e8a61d9d5bded1ea371e"
+    },
+    {
+      "family": "fp32",
+      "name": "cholesky",
+      "nonzero_retired_pc_count": 157,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "48594aca4cea7aa7eb2887bf7db54df2ee54047364f60af05bcfa7750dadcd0e",
+      "candidate_profile_sha256": "a7e0e3c917debddfcc5de062c8e323e8f3b75b312bca28008aab1b3ff5e99c2f"
+    },
+    {
+      "family": "fp32",
+      "name": "svm",
+      "nonzero_retired_pc_count": 62,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "45430d9e9fa0f59d9e6040e8b6ae5e59c3fa5763cc6eb045c5c06c581732e744",
+      "candidate_profile_sha256": "42d3eacafea675c8c679819f56cb80cba8f850e54112646c89f315c5fb05d135"
+    },
+    {
+      "family": "embench",
+      "name": "aha-mont64",
+      "nonzero_retired_pc_count": 493,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "25b2fa4c1352004c64ff532f415bfaa63b146b3d3ba714efd4db68997e004a4b",
+      "candidate_profile_sha256": "1ff29d4a9161c7e5458e4c9ad37d017c72660a5615165ef85402a611037246a2"
+    },
+    {
+      "family": "embench",
+      "name": "crc32",
+      "nonzero_retired_pc_count": 64,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "828ea261bc74bf2d42caac5d207356e8477fb2835f0c0adc89eae99776e2a6e5",
+      "candidate_profile_sha256": "a7732921b7c7c715d04e317ed6da5b87da8262777e567fdce83db51720179baa"
+    },
+    {
+      "family": "embench",
+      "name": "cubic",
+      "nonzero_retired_pc_count": 6881,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "50e001776b54bf3dfa4ab7dcca557c5127ee85903601b67ce52428d0fbabc750",
+      "candidate_profile_sha256": "469abde87985048fb5e8c4b8efed1380ea57d8d40f423cf1a2e777e8da2e7555"
+    },
+    {
+      "family": "embench",
+      "name": "edn",
+      "nonzero_retired_pc_count": 515,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "993c4a29855bc624c1abb1dcd8dea24f046daf4bfd9ce42b8e4d88ef438bc37b",
+      "candidate_profile_sha256": "d7bfa59da308a98980a62c142255e21ce12381a206b7ccd056187f1963727d9e"
+    },
+    {
+      "family": "embench",
+      "name": "huffbench",
+      "nonzero_retired_pc_count": 590,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "776cdce24904e4439191c74045961c251c15851ccc58eb949f3f987138c3d6c8",
+      "candidate_profile_sha256": "b95c9b398dea55e717c92d3763bc1a7db2f2ec0a6fa7c7e3d6961df3435a4f1a"
+    },
+    {
+      "family": "embench",
+      "name": "matmult-int",
+      "nonzero_retired_pc_count": 108,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "163c0237a3a517b19fa1667109e8d0536be32f4aa3e862da82b6bdff343c6f7c",
+      "candidate_profile_sha256": "d71f164c08193be3a4e089bc55105494ae5afef65eb75ac1b05f97de69383f21"
+    },
+    {
+      "family": "embench",
+      "name": "minver",
+      "nonzero_retired_pc_count": 357,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "4a4d506d39396cc5b2dc6f2372d5aa1092c502fd4597465f05ce22508825fb41",
+      "candidate_profile_sha256": "0b233aca1b36fbc436e702ad6a8b7b98f82f7b54e4a0259b4acc2df5d4f80023"
+    },
+    {
+      "family": "embench",
+      "name": "nbody",
+      "nonzero_retired_pc_count": 1862,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "1e15eb41f51d1f7a30ad90af6a395201a7438612cdf78d96407c6ee1284405c3",
+      "candidate_profile_sha256": "641fd952f41ff90b921441a5c380b4c79aac83ba4c3e277f793994c0b90721b0"
+    },
+    {
+      "family": "embench",
+      "name": "nettle-aes",
+      "nonzero_retired_pc_count": 1003,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "eb0e770748345567be6913735efb2f6ed4245e05dc7dd681edec0b1c5aabc5c4",
+      "candidate_profile_sha256": "6d11ef36a40213d7a438458241c4af0506584271acecc191e159e99147480ae5"
+    },
+    {
+      "family": "embench",
+      "name": "nettle-sha256",
+      "nonzero_retired_pc_count": 1840,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "ae27590ed54b995c7c65492fb5456874aa747c52fd21681e417e3a444f3bd8f3",
+      "candidate_profile_sha256": "6e8155ed839921a1f031cd01c879543474492c7a4186a4cfca2e7300b14e82f3"
+    },
+    {
+      "family": "embench",
+      "name": "nsichneu",
+      "nonzero_retired_pc_count": 1849,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "995c333189fc41e3360c4511f6775cb74ce1a91d58937119e7b34e6af46745c5",
+      "candidate_profile_sha256": "0af74e6a945b258f5404986311ec758929d761ba698a9374d90f3a90997b6cb2"
+    },
+    {
+      "family": "embench",
+      "name": "picojpeg",
+      "nonzero_retired_pc_count": 2033,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "006763252613ebf3005cdb8878b5a3ff30429528cd547124173c065a125238ea",
+      "candidate_profile_sha256": "d4b7098fb34273c766dbdbe994f3e45b679060965e17ab8b7638e5444b544b2d"
+    },
+    {
+      "family": "embench",
+      "name": "qrduino",
+      "nonzero_retired_pc_count": 4126,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "9a8911b9e447155151a2c7090eb26786ef6d01a8a4fe82cda612b71cf316f0e2",
+      "candidate_profile_sha256": "041d2ca5d1379ebd63e57a04350d8cd2832ca9c4bf38d53d21a98a54717d5778"
+    },
+    {
+      "family": "embench",
+      "name": "sglib-combined",
+      "nonzero_retired_pc_count": 1039,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "50dab83c0e3144e5a21ab035907211383e0fb69018b90f6a416e7c690f40152b",
+      "candidate_profile_sha256": "17ae0c7e2a34c76788b52382960ac2d532a31817dc4575e0946c2ca850a61975"
+    },
+    {
+      "family": "embench",
+      "name": "slre",
+      "nonzero_retired_pc_count": 623,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "8c2607dfb6b0880ab8579f7e64131283102bfb9f7fad42f0ffa3fc1f1ed260a6",
+      "candidate_profile_sha256": "e17cd4006a87039864343f2099398a93a0a3f9a3f2e2edc65b8ac057a3c308d7"
+    },
+    {
+      "family": "embench",
+      "name": "st",
+      "nonzero_retired_pc_count": 1496,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "f3ca0cf393688a7f64e85aac6abff87ef2deb8403d3867b880f1748e33f974ec",
+      "candidate_profile_sha256": "e255d63043b27713495f01ea1423f90dc2dff8344820bec4f330919d49bbfab3"
+    },
+    {
+      "family": "embench",
+      "name": "statemate",
+      "nonzero_retired_pc_count": 523,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "9262ad03aa0f22fe8e4db76c3068a877636b791e7990259ca194a131bbc4db57",
+      "candidate_profile_sha256": "eac8de1932d24b883bdee55a3d2244ea92cff6992e7d80e7d65ef660a0868437"
+    },
+    {
+      "family": "embench",
+      "name": "ud",
+      "nonzero_retired_pc_count": 507,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "a93e1b87151595a037335a7d2a849315b8d650f1dad203e5842f8aec94485ab8",
+      "candidate_profile_sha256": "fc3eb90280a5691acd1e9013ce188e8c46eacb0b9cbaedb6ff3b29a9b3f6fd17"
+    },
+    {
+      "family": "embench",
+      "name": "wikisort",
+      "nonzero_retired_pc_count": 1585,
+      "per_pc_retired_work_matches": true,
+      "baseline_profile_sha256": "17f9e963c482f88451577c38e8291cbf37477f6a43e7023d9cb0a6c03405d848",
+      "candidate_profile_sha256": "7d3d584dd1536a74e9869aa274aa67b1ef6cf8996c0b35f5cbcedbe81b36672c"
+    }
+  ],
+  "all_27_match": true
+}

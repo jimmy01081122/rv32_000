@@ -16,6 +16,7 @@ def main():
     parser.add_argument('--container',required=True)
     parser.add_argument('--label',default='independent-sta')
     parser.add_argument('--adder-audit',type=Path,required=True,help='summary.json from audit_asap7_adders.py')
+    parser.add_argument('--experiment',type=Path,help='explicit candidate contract; absent means immutable baseline RTL')
     parser.add_argument('--periods-ps',nargs='+',type=int,
                         default=[2500,3000,3500,4000,4500,5000,5500,6000,7000,8000,10000,12000,14000,16000,20000])
     args=parser.parse_args()
@@ -29,12 +30,23 @@ def main():
     if implementation.get('construction_timing_corners')!=['TT']:
         parser.error('implementation must use the agreed TT-only construction view')
     manifest=load()
-    check_rtl(manifest)
-    if implementation['rtl_files_sha256']!=manifest['rtl_files_sha256']:
+    expected_rtl=manifest['rtl_files_sha256']
+    if args.experiment:
+        from experiment_contract import load_experiment
+        experiment,manifest=load_experiment(args.experiment)
+        expected_rtl=experiment['candidate_rtl_files_sha256']
+        if any(p%manifest['physical']['period_grid_ps'] for p in args.periods_ps):
+            parser.error('candidate timing trials must use the frozen 100 ps grid')
+        if implementation.get('experiment_manifest_sha256')!=sha(args.experiment):
+            parser.error('implementation candidate contract differs')
+    else:
+        check_rtl(manifest)
+        if implementation.get('experiment_id'):parser.error('candidate implementation requires explicit --experiment')
+    if implementation['rtl_files_sha256']!=expected_rtl:
         parser.error('implementation RTL identities differ from the frozen baseline')
     for path,key in [('physical/asap7/baseline/config.mk','config_sha256'),
                      ('physical/asap7/baseline/lower_processes.tcl','process_lowering_sha256'),
-                     ('build/baseline-setup/rtl_lowered.v','lowered_rtl_sha256')]:
+                     (implementation.get('lowered_rtl_path','build/baseline-setup/rtl_lowered.v'),'lowered_rtl_sha256')]:
         if sha(ROOT/path)!=implementation[key]:parser.error('implementation input changed: '+path)
     if 'post_route_eco' in implementation:
         if (not implementation['post_route_eco'].get('final_full_route_recheck')
@@ -91,6 +103,8 @@ def main():
             'platform_validation_before_returncode':0,
             'clock_trials_ps':args.periods_ps,
             'local_image_id':image_id,'records':[],'passed':False}
+    if args.experiment:
+        report.update(experiment_id=experiment['experiment_id'],experiment_manifest_sha256=sha(args.experiment))
     summary=destination/'run.json'
     summary.write_text(json.dumps(report,indent=2)+'\n')
     for corner in ('TT','SS','FF'):

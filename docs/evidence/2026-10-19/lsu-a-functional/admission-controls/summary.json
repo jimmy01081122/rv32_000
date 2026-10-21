@@ -1,0 +1,56 @@
+{
+  "scope": "real CLI admission controls",
+  "records": [
+    {
+      "name": "baseline-rejects-A-lowering",
+      "command": [
+        "python3",
+        "scripts/lower_baseline_rtl.py",
+        "--out",
+        "build/experiments/lsu-a-v1/should-not-exist.v"
+      ],
+      "returncode": 1,
+      "expected": "baseline RTL changed",
+      "passed": true
+    },
+    {
+      "name": "candidate-rejects-memory-override",
+      "command": [
+        "python3",
+        "scripts/measure_cpu_experiment.py",
+        "--experiment",
+        "experiments/lsu-a-v1/manifest.json",
+        "--build-summary",
+        "unused",
+        "--out",
+        "build/experiments/lsu-a-v1/should-not-exist",
+        "--period-ps",
+        "10000",
+        "--memory-ps",
+        "9999"
+      ],
+      "returncode": 2,
+      "expected": "unrecognized arguments",
+      "passed": true
+    },
+    {
+      "name": "candidate-rejects-mapping-policy",
+      "command": [
+        "python3",
+        "scripts/run_baseline_physical.py",
+        "--experiment",
+        "experiments/lsu-a-v1/manifest.json",
+        "--output-root",
+        "build/experiments/lsu-a-v1",
+        "--period-ps",
+        "14000",
+        "--adder-mapping",
+        "platform"
+      ],
+      "returncode": 2,
+      "expected": "differs from frozen flow",
+      "passed": true
+    }
+  ],
+  "passed": true
+}

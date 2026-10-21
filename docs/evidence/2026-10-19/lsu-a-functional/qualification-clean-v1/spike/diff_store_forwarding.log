@@ -1,0 +1,20 @@
+[SimMemory] Loaded segment to 0x80000000 (filesz: 0x410, memsz: 0x410)
+[SimMemory] Found 'tohost' symbol at 0x80000400
+[SimMemory] ELF loaded successfully. Entry PC = 0x80000000
+[Simulator] Commit trace logging enabled: /workspace/build/experiments/lsu-a-v1/qualification-clean-v1/spike/dut_store_forwarding.log
+[Simulator] Starting simulation run...
+[TEST] Starting store_forwarding test...
+[PASS] Store-to-load forwarding verified across all data sizes.
+
+[SimMemory] TOHOST exit (0x1) received. Exit code: 0 (PASS)
+
+[SimMemory] SIM_EXIT received with code: 0 (PASS)
+
+================ Simulation Summary ================
+  ELF binary     : build/tests/store_forwarding.elf
+  Cycles         : 874
+  Retired insns  : 560
+  IPC            : 0.6407
+  Exit status    : PASS (0)
+====================================================
+

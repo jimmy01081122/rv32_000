@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/workspace/scripts/run_physical_job.py", line 66, in <module>
+    raise SystemExit(execute(Path(sys.argv[1])))
+  File "/workspace/scripts/run_physical_job.py", line 32, in execute
+    with lock_path.open('x') as lock:
+  File "/usr/lib/python3.10/pathlib.py", line 1119, in open
+    return self._accessor.open(self, mode, buffering, encoding, errors,
+FileExistsError: [Errno 17] File exists: '/workspace/build/experiments/lsu-a-v1/job.lock'

@@ -1,0 +1,20 @@
+[SimMemory] Loaded segment to 0x80000000 (filesz: 0x48550, memsz: 0x48550)
+[SimMemory] Found 'tohost' symbol at 0x80048540
+[SimMemory] ELF loaded successfully. Entry PC = 0x80000000
+[Simulator] Starting simulation run...
+
+[Embench] Benchmark executed in cycles: 4377993
+
+[SimMemory] TOHOST exit (0x1) received. Exit code: 0 (PASS)
+
+[SimMemory] SIM_EXIT received with code: 0 (PASS)
+FP ROI cycle_reads=2 retired=2762062 fmadd_s=0 fmsub_s=0 fnmsub_s=0 fnmadd_s=0
+
+================ Simulation Summary ================
+  ELF binary     : /workspace/build/experiments/lsu-a-v1/measurement-10000ps-v1/embench/qrduino/input.elf
+  Cycles         : 5660432
+  Retired insns  : 3585635
+  IPC            : 0.6335
+  Exit status    : PASS (0)
+====================================================
+

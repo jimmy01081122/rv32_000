@@ -1,0 +1,2701 @@
+{
+  "scope": "complete common-100MHz cycle/mechanism diagnosis; physical qualification pending; not an operating-point decision",
+  "measurement_summary_sha256": "5de23abc1efa4c617c872d3f1dedd707bad8d99a27f24ce0790d984aecda919e",
+  "baseline_manifest_sha256": "60f59b3cc705560885e2101046d810cf3548fef277c1c1e5820826ef25485fb6",
+  "script_sha256": "934d2e25228e517aa8837a2f210df0d4749344eee210ca71dbe33512663fcdef",
+  "core_period_ps": 10000,
+  "memory_ps": 10000,
+  "embench_cycle_geomean_speedup": 1.045829647956348,
+  "fp32_cycle_geomean_speedup": 1.0782550613286763,
+  "fp32_subgroup": {
+    "dsp": 1.0516140118036785,
+    "matrix_ml": 1.1055710215260568
+  },
+  "records": [
+    {
+      "family": "fp32",
+      "name": "fir",
+      "group": "dsp",
+      "baseline_cycles": 74311,
+      "candidate_cycles": 66117,
+      "cycle_speedup": 1.1239318178380748,
+      "baseline_profile_sha256": "33a38b761801dc87b1cbc1975d0f747afd22155bc86123ad0e2f1c40118558cd",
+      "candidate_profile_sha256": "a6732b8b32dacd0cdd8e2a0da3be65657b11580cd3576dc37afdb2b78437625f",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "head_wait_fp_load": {
+          "baseline": 9481,
+          "candidate": 1289,
+          "delta": -8192
+        },
+        "head_wait_int_load": {
+          "baseline": 6,
+          "candidate": 5,
+          "delta": -1
+        },
+        "head_wait_integer_other": {
+          "baseline": 518,
+          "candidate": 518,
+          "delta": 0
+        },
+        "head_wait_jump": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 518,
+          "candidate": 518,
+          "delta": 0
+        },
+        "retired_body": {
+          "baseline": 61137,
+          "candidate": 61137,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 1555,
+          "candidate": 1555,
+          "delta": 0
+        },
+        "store_ack_wait": {
+          "baseline": 1088,
+          "candidate": 1087,
+          "delta": -1
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 1,
+          "mark_pending": 543,
+          "other_inflight": 1,
+          "request_ready": 543
+        },
+        "candidate": {
+          "load_response_buffer": 1,
+          "mark_pending": 543,
+          "other_inflight": 1,
+          "request_ready": 542
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 518,
+          "own_external_inflight": 516,
+          "own_response_buffer": 8453
+        },
+        "candidate": {
+          "before_external_request_or_forward": 518,
+          "own_external_inflight": 259,
+          "own_response_buffer": 517
+        }
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "iir",
+      "group": "dsp",
+      "baseline_cycles": 13523,
+      "candidate_cycles": 13496,
+      "cycle_speedup": 1.0020005927682276,
+      "baseline_profile_sha256": "2daedeb87c5d05f567a66b77acc81e1bffc3714838450d273027733fd27a6d53",
+      "candidate_profile_sha256": "dfa11df90118e477587dc5a6e46a5f942df0ed8c7dd6e1ac6173ff4ff52f3716",
+      "cycle_partition": {
+        "head_wait_fp_load": {
+          "baseline": 46,
+          "candidate": 25,
+          "delta": -21
+        },
+        "head_wait_fp_store": {
+          "baseline": 8,
+          "candidate": 8,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 8,
+          "candidate": 6,
+          "delta": -2
+        },
+        "head_wait_integer_other": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "head_wait_jump": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 9,
+          "candidate": 9,
+          "delta": 0
+        },
+        "retired_body": {
+          "baseline": 11347,
+          "candidate": 11347,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 28,
+          "candidate": 28,
+          "delta": 0
+        },
+        "store_ack_wait": {
+          "baseline": 2068,
+          "candidate": 2064,
+          "delta": -4
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 4,
+          "mark_pending": 1032,
+          "request_ready": 1032
+        },
+        "candidate": {
+          "load_response_buffer": 4,
+          "mark_pending": 1032,
+          "request_ready": 1028
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 6,
+          "own_external_inflight": 24,
+          "own_response_buffer": 24
+        },
+        "candidate": {
+          "before_external_request_or_forward": 6,
+          "own_external_inflight": 3,
+          "own_response_buffer": 22
+        }
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "fft",
+      "group": "dsp",
+      "baseline_cycles": 40867,
+      "candidate_cycles": 37663,
+      "cycle_speedup": 1.0850702280752993,
+      "baseline_profile_sha256": "fbfdf6744e5d6f694590e935de3c3c5d1a44de64a33c928b35da5ff3276fc778",
+      "candidate_profile_sha256": "d10fef8246f9f074a6a42b5ad1beb641e067f23267ba68f7e938a0b127454b1e",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 20,
+          "candidate": 20,
+          "delta": 0
+        },
+        "head_wait_fp_load": {
+          "baseline": 2106,
+          "candidate": 1130,
+          "delta": -976
+        },
+        "head_wait_int_load": {
+          "baseline": 2366,
+          "candidate": 1480,
+          "delta": -886
+        },
+        "head_wait_int_store": {
+          "baseline": 38,
+          "candidate": 38,
+          "delta": 0
+        },
+        "head_wait_integer_other": {
+          "baseline": 264,
+          "candidate": 264,
+          "delta": 0
+        },
+        "head_wait_jump": {
+          "baseline": 74,
+          "candidate": 74,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 315,
+          "candidate": 315,
+          "delta": 0
+        },
+        "retired_body": {
+          "baseline": 23800,
+          "candidate": 23800,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 945,
+          "candidate": 945,
+          "delta": 0
+        },
+        "store_ack_wait": {
+          "baseline": 10936,
+          "candidate": 9594,
+          "delta": -1342
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 1341,
+          "mark_pending": 4127,
+          "other_inflight": 1341,
+          "request_ready": 4127
+        },
+        "candidate": {
+          "load_response_buffer": 1404,
+          "mark_pending": 4127,
+          "other_inflight": 1340,
+          "request_ready": 2723
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 275,
+          "own_external_inflight": 2056,
+          "own_response_buffer": 2141
+        },
+        "candidate": {
+          "before_external_request_or_forward": 275,
+          "own_external_inflight": 279,
+          "own_response_buffer": 2056
+        }
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "pid",
+      "group": "dsp",
+      "baseline_cycles": 7248,
+      "candidate_cycles": 7242,
+      "cycle_speedup": 1.0008285004142503,
+      "baseline_profile_sha256": "5ec7675d89421ea824f01f192ab1172dfe075f75901269662ba64e4c088df1a9",
+      "candidate_profile_sha256": "354906e5884aaf2833f9a422d7c696b73c58d468d1d6200432fb5b46d282b77a",
+      "cycle_partition": {
+        "head_wait_fadd": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "head_wait_fma": {
+          "baseline": 3,
+          "candidate": 3,
+          "delta": 0
+        },
+        "head_wait_fmul": {
+          "baseline": 5,
+          "candidate": 5,
+          "delta": 0
+        },
+        "head_wait_fp_load": {
+          "baseline": 12,
+          "candidate": 7,
+          "delta": -5
+        },
+        "head_wait_fp_other": {
+          "baseline": 3,
+          "candidate": 3,
+          "delta": 0
+        },
+        "head_wait_fp_store": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_integer_other": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_jump": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "retired_body": {
+          "baseline": 5651,
+          "candidate": 5651,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 13,
+          "candidate": 13,
+          "delta": 0
+        },
+        "store_ack_wait": {
+          "baseline": 1542,
+          "candidate": 1541,
+          "delta": -1
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 511,
+          "mark_pending": 515,
+          "other_inflight": 1,
+          "request_ready": 515
+        },
+        "candidate": {
+          "load_response_buffer": 511,
+          "mark_pending": 515,
+          "other_inflight": 511,
+          "request_ready": 4
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "own_external_inflight": 5,
+          "own_response_buffer": 7
+        },
+        "candidate": {
+          "own_response_buffer": 7
+        }
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "gemm",
+      "group": "matrix_ml",
+      "baseline_cycles": 133275,
+      "candidate_cycles": 123175,
+      "cycle_speedup": 1.0819971585143089,
+      "baseline_profile_sha256": "aa0b3be800689edfbaeb2500195f0ab8a288b0aa96314cefd4ad3d91d9e6aafe",
+      "candidate_profile_sha256": "75a6f4e497bb368729c806c09b4534545d335be183ab9446a8a9cab00996358b",
+      "cycle_partition": {
+        "head_wait_fmul": {
+          "baseline": 21,
+          "candidate": 21,
+          "delta": 0
+        },
+        "head_wait_fp_load": {
+          "baseline": 25265,
+          "candidate": 16007,
+          "delta": -9258
+        },
+        "head_wait_fp_store": {
+          "baseline": 21,
+          "candidate": 21,
+          "delta": 0
+        },
+        "head_wait_integer_other": {
+          "baseline": 684,
+          "candidate": 684,
+          "delta": 0
+        },
+        "head_wait_jump": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 645,
+          "candidate": 365,
+          "delta": -280
+        },
+        "retired_body": {
+          "baseline": 80976,
+          "candidate": 80976,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 1935,
+          "candidate": 1095,
+          "delta": -840
+        },
+        "store_ack_wait": {
+          "baseline": 23721,
+          "candidate": 23999,
+          "delta": 278
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 7700,
+          "mark_pending": 8000,
+          "other_inflight": 21,
+          "request_ready": 8000
+        },
+        "candidate": {
+          "load_response_buffer": 7999,
+          "mark_pending": 8000,
+          "other_inflight": 7999,
+          "request_ready": 1
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 642,
+          "own_external_inflight": 8701,
+          "own_response_buffer": 15922
+        },
+        "candidate": {
+          "before_external_request_or_forward": 82,
+          "own_external_inflight": 322,
+          "own_response_buffer": 15603
+        }
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "bicg",
+      "group": "matrix_ml",
+      "baseline_cycles": 23927,
+      "candidate_cycles": 20693,
+      "cycle_speedup": 1.1562847339680085,
+      "baseline_profile_sha256": "9731c779354bb200698650cd9698f9e61c364aa1d6098587991d020a4e8a53fb",
+      "candidate_profile_sha256": "d9387b40441df4c58ba3227252d801025b741cdd8986e8a61d9d5bded1ea371e",
+      "cycle_partition": {
+        "head_wait_fp_load": {
+          "baseline": 505,
+          "candidate": 337,
+          "delta": -168
+        },
+        "head_wait_fp_store": {
+          "baseline": 84,
+          "candidate": 84,
+          "delta": 0
+        },
+        "head_wait_int_store": {
+          "baseline": 3,
+          "candidate": 3,
+          "delta": 0
+        },
+        "head_wait_integer_other": {
+          "baseline": 7,
+          "candidate": 7,
+          "delta": 0
+        },
+        "head_wait_jump": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 88,
+          "candidate": 88,
+          "delta": 0
+        },
+        "retired_body": {
+          "baseline": 16508,
+          "candidate": 16508,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 265,
+          "candidate": 265,
+          "delta": 0
+        },
+        "store_ack_wait": {
+          "baseline": 6460,
+          "candidate": 3394,
+          "delta": -3066
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 1554,
+          "mark_pending": 1676,
+          "other_inflight": 1554,
+          "request_ready": 1676
+        },
+        "candidate": {
+          "load_response_buffer": 1554,
+          "mark_pending": 1676,
+          "other_inflight": 42,
+          "request_ready": 122
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 84,
+          "own_external_inflight": 210,
+          "own_response_buffer": 211
+        },
+        "candidate": {
+          "before_external_request_or_forward": 84,
+          "own_external_inflight": 43,
+          "own_response_buffer": 210
+        }
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "cholesky",
+      "group": "matrix_ml",
+      "baseline_cycles": 194161,
+      "candidate_cycles": 183250,
+      "cycle_speedup": 1.0595416098226467,
+      "baseline_profile_sha256": "48594aca4cea7aa7eb2887bf7db54df2ee54047364f60af05bcfa7750dadcd0e",
+      "candidate_profile_sha256": "a7e0e3c917debddfcc5de062c8e323e8f3b75b312bca28008aab1b3ff5e99c2f",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 130,
+          "candidate": 124,
+          "delta": -6
+        },
+        "head_wait_fdiv": {
+          "baseline": 20761,
+          "candidate": 20762,
+          "delta": 1
+        },
+        "head_wait_fma": {
+          "baseline": 40,
+          "candidate": 40,
+          "delta": 0
+        },
+        "head_wait_fp_load": {
+          "baseline": 16245,
+          "candidate": 15367,
+          "delta": -878
+        },
+        "head_wait_fp_other": {
+          "baseline": 89,
+          "candidate": 89,
+          "delta": 0
+        },
+        "head_wait_fp_store": {
+          "baseline": 123,
+          "candidate": 123,
+          "delta": 0
+        },
+        "head_wait_fsub": {
+          "baseline": 35,
+          "candidate": 35,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 6,
+          "candidate": 0,
+          "delta": -6
+        },
+        "head_wait_int_store": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "head_wait_integer_other": {
+          "baseline": 616,
+          "candidate": 618,
+          "delta": 2
+        },
+        "head_wait_jump": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 1796,
+          "candidate": 1798,
+          "delta": 2
+        },
+        "retired_body": {
+          "baseline": 105025,
+          "candidate": 105025,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 5388,
+          "candidate": 5394,
+          "delta": 6
+        },
+        "store_ack_wait": {
+          "baseline": 43901,
+          "candidate": 33869,
+          "delta": -10032
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 10736,
+          "mark_pending": 11568,
+          "other_inflight": 10029,
+          "request_ready": 11568
+        },
+        "candidate": {
+          "load_response_buffer": 10737,
+          "mark_pending": 11568,
+          "other_inflight": 10733,
+          "request_ready": 831
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 3069,
+          "own_external_inflight": 2373,
+          "own_response_buffer": 10809
+        },
+        "candidate": {
+          "before_external_request_or_forward": 3001,
+          "own_external_inflight": 1556,
+          "own_response_buffer": 10810
+        }
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "svm",
+      "group": "matrix_ml",
+      "baseline_cycles": 43392,
+      "candidate_cycles": 38501,
+      "cycle_speedup": 1.1270356614113919,
+      "baseline_profile_sha256": "45430d9e9fa0f59d9e6040e8b6ae5e59c3fa5763cc6eb045c5c06c581732e744",
+      "candidate_profile_sha256": "42d3eacafea675c8c679819f56cb80cba8f850e54112646c89f315c5fb05d135",
+      "cycle_partition": {
+        "head_wait_fma": {
+          "baseline": 400,
+          "candidate": 400,
+          "delta": 0
+        },
+        "head_wait_fp_load": {
+          "baseline": 7804,
+          "candidate": 3608,
+          "delta": -4196
+        },
+        "head_wait_fp_other": {
+          "baseline": 600,
+          "candidate": 306,
+          "delta": -294
+        },
+        "head_wait_int_load": {
+          "baseline": 424,
+          "candidate": 416,
+          "delta": -8
+        },
+        "head_wait_int_store": {
+          "baseline": 101,
+          "candidate": 101,
+          "delta": 0
+        },
+        "head_wait_integer_other": {
+          "baseline": 304,
+          "candidate": 304,
+          "delta": 0
+        },
+        "head_wait_jump": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 1005,
+          "candidate": 907,
+          "delta": -98
+        },
+        "retired_body": {
+          "baseline": 29522,
+          "candidate": 29522,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 3015,
+          "candidate": 2721,
+          "delta": -294
+        },
+        "store_ack_wait": {
+          "baseline": 212,
+          "candidate": 211,
+          "delta": -1
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 1,
+          "mark_pending": 105,
+          "other_inflight": 1,
+          "request_ready": 105
+        },
+        "candidate": {
+          "load_response_buffer": 1,
+          "mark_pending": 105,
+          "other_inflight": 1,
+          "request_ready": 104
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 1704,
+          "own_external_inflight": 1411,
+          "own_response_buffer": 5113
+        },
+        "candidate": {
+          "before_external_request_or_forward": 1704,
+          "own_external_inflight": 903,
+          "own_response_buffer": 1417
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "aha-mont64",
+      "group": null,
+      "baseline_cycles": 5356670,
+      "candidate_cycles": 5354540,
+      "cycle_speedup": 1.0003977932744923,
+      "baseline_profile_sha256": "25b2fa4c1352004c64ff532f415bfaa63b146b3d3ba714efd4db68997e004a4b",
+      "candidate_profile_sha256": "1ff29d4a9161c7e5458e4c9ad37d017c72660a5615165ef85402a611037246a2",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 101095,
+          "candidate": 101095,
+          "delta": 0
+        },
+        "head_wait_csr_system": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 14392,
+          "candidate": 11424,
+          "delta": -2968
+        },
+        "head_wait_int_store": {
+          "baseline": 849,
+          "candidate": 849,
+          "delta": 0
+        },
+        "head_wait_integer_other": {
+          "baseline": 293163,
+          "candidate": 294427,
+          "delta": 1264
+        },
+        "head_wait_jump": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 112526,
+          "candidate": 112526,
+          "delta": 0
+        },
+        "retired_body": {
+          "baseline": 4491085,
+          "candidate": 4491085,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 337581,
+          "candidate": 337581,
+          "delta": 0
+        },
+        "store_ack_wait": {
+          "baseline": 5968,
+          "candidate": 5542,
+          "delta": -426
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 427,
+          "mark_pending": 2558,
+          "other_inflight": 425,
+          "request_ready": 2558
+        },
+        "candidate": {
+          "load_response_buffer": 426,
+          "mark_pending": 2558,
+          "other_inflight": 426,
+          "request_ready": 2132
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 4228,
+          "own_external_inflight": 5081,
+          "own_response_buffer": 5083
+        },
+        "candidate": {
+          "before_external_request_or_forward": 4228,
+          "own_external_inflight": 2116,
+          "own_response_buffer": 5080
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "crc32",
+      "group": null,
+      "baseline_cycles": 5402220,
+      "candidate_cycles": 5054736,
+      "cycle_speedup": 1.068744243022781,
+      "baseline_profile_sha256": "828ea261bc74bf2d42caac5d207356e8477fb2835f0c0adc89eae99776e2a6e5",
+      "candidate_profile_sha256": "a7732921b7c7c715d04e317ed6da5b87da8262777e567fdce83db51720179baa",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 172,
+          "candidate": 172,
+          "delta": 0
+        },
+        "head_wait_csr_system": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 522763,
+          "candidate": 522759,
+          "delta": -4
+        },
+        "head_wait_int_store": {
+          "baseline": 174254,
+          "candidate": 514,
+          "delta": -173740
+        },
+        "head_wait_integer_other": {
+          "baseline": 349363,
+          "candidate": 175623,
+          "delta": -173740
+        },
+        "head_wait_jump": {
+          "baseline": 344,
+          "candidate": 344,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 349,
+          "candidate": 349,
+          "delta": 0
+        },
+        "retired_body": {
+          "baseline": 4005402,
+          "candidate": 4005402,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 1050,
+          "candidate": 1050,
+          "delta": 0
+        },
+        "store_ack_wait": {
+          "baseline": 348516,
+          "candidate": 348516,
+          "delta": 0
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "mark_pending": 174258,
+          "request_ready": 174258
+        },
+        "candidate": {
+          "mark_pending": 174258,
+          "request_ready": 174258
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 174253,
+          "own_external_inflight": 174254,
+          "own_response_buffer": 174256
+        },
+        "candidate": {
+          "before_external_request_or_forward": 174253,
+          "own_external_inflight": 174252,
+          "own_response_buffer": 174254
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "cubic",
+      "group": null,
+      "baseline_cycles": 14490894,
+      "candidate_cycles": 14160446,
+      "cycle_speedup": 1.0233359881461361,
+      "baseline_profile_sha256": "50e001776b54bf3dfa4ab7dcca557c5127ee85903601b67ce52428d0fbabc750",
+      "candidate_profile_sha256": "469abde87985048fb5e8c4b8efed1380ea57d8d40f423cf1a2e777e8da2e7555",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 232222,
+          "candidate": 235322,
+          "delta": 3100
+        },
+        "head_wait_csr_system": {
+          "baseline": 132064,
+          "candidate": 132064,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 886769,
+          "candidate": 661792,
+          "delta": -224977
+        },
+        "head_wait_int_store": {
+          "baseline": 82715,
+          "candidate": 82515,
+          "delta": -200
+        },
+        "head_wait_integer_other": {
+          "baseline": 2210687,
+          "candidate": 2206407,
+          "delta": -4280
+        },
+        "head_wait_jump": {
+          "baseline": 11892,
+          "candidate": 12052,
+          "delta": 160
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 475176,
+          "candidate": 474916,
+          "delta": -260
+        },
+        "retired_body": {
+          "baseline": 7762231,
+          "candidate": 7762231,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 1479431,
+          "candidate": 1478651,
+          "delta": -780
+        },
+        "store_ack_wait": {
+          "baseline": 1217704,
+          "candidate": 1114493,
+          "delta": -103211
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 102072,
+          "mark_pending": 512776,
+          "other_inflight": 90080,
+          "request_ready": 512776
+        },
+        "candidate": {
+          "load_response_buffer": 108460,
+          "mark_pending": 512776,
+          "other_inflight": 88941,
+          "request_ready": 404316
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 148443,
+          "own_external_inflight": 350938,
+          "own_response_buffer": 387388
+        },
+        "candidate": {
+          "before_external_request_or_forward": 148843,
+          "own_external_inflight": 144333,
+          "own_response_buffer": 368616
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "edn",
+      "group": null,
+      "baseline_cycles": 4754496,
+      "candidate_cycles": 4256669,
+      "cycle_speedup": 1.1169522459932872,
+      "baseline_profile_sha256": "993c4a29855bc624c1abb1dcd8dea24f046daf4bfd9ce42b8e4d88ef438bc37b",
+      "candidate_profile_sha256": "d7bfa59da308a98980a62c142255e21ce12381a206b7ccd056187f1963727d9e",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 89,
+          "candidate": 89,
+          "delta": 0
+        },
+        "head_wait_csr_system": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 156802,
+          "candidate": 109378,
+          "delta": -47424
+        },
+        "head_wait_int_store": {
+          "baseline": 33064,
+          "candidate": 38023,
+          "delta": 4959
+        },
+        "head_wait_integer_other": {
+          "baseline": 817986,
+          "candidate": 414393,
+          "delta": -403593
+        },
+        "head_wait_jump": {
+          "baseline": 176,
+          "candidate": 176,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 19324,
+          "candidate": 19411,
+          "delta": 87
+        },
+        "retired_body": {
+          "baseline": 3381065,
+          "candidate": 3381065,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 57975,
+          "candidate": 58236,
+          "delta": 261
+        },
+        "store_ack_wait": {
+          "baseline": 288008,
+          "candidate": 235891,
+          "delta": -52117
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 53507,
+          "mark_pending": 91193,
+          "other_inflight": 52115,
+          "request_ready": 91193
+        },
+        "candidate": {
+          "load_response_buffer": 57508,
+          "mark_pending": 91193,
+          "other_inflight": 53505,
+          "request_ready": 33685
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 19927,
+          "own_external_inflight": 59433,
+          "own_response_buffer": 77442
+        },
+        "candidate": {
+          "before_external_request_or_forward": 19927,
+          "own_external_inflight": 11748,
+          "own_response_buffer": 77703
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "huffbench",
+      "group": null,
+      "baseline_cycles": 3377028,
+      "candidate_cycles": 3306646,
+      "cycle_speedup": 1.0212850120635835,
+      "baseline_profile_sha256": "776cdce24904e4439191c74045961c251c15851ccc58eb949f3f987138c3d6c8",
+      "candidate_profile_sha256": "b95c9b398dea55e717c92d3763bc1a7db2f2ec0a6fa7c7e3d6961df3435a4f1a",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 99642,
+          "candidate": 99686,
+          "delta": 44
+        },
+        "head_wait_csr_system": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 228231,
+          "candidate": 227930,
+          "delta": -301
+        },
+        "head_wait_int_store": {
+          "baseline": 11062,
+          "candidate": 11029,
+          "delta": -33
+        },
+        "head_wait_integer_other": {
+          "baseline": 184673,
+          "candidate": 184640,
+          "delta": -33
+        },
+        "head_wait_jump": {
+          "baseline": 46,
+          "candidate": 46,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 97643,
+          "candidate": 97599,
+          "delta": -44
+        },
+        "retired_body": {
+          "baseline": 2022301,
+          "candidate": 2022301,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 292932,
+          "candidate": 292800,
+          "delta": -132
+        },
+        "store_ack_wait": {
+          "baseline": 440491,
+          "candidate": 370608,
+          "delta": -69883
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 68244,
+          "mark_pending": 181938,
+          "other_inflight": 8371,
+          "request_ready": 181938
+        },
+        "candidate": {
+          "load_response_buffer": 68816,
+          "mark_pending": 181938,
+          "other_inflight": 6732,
+          "request_ready": 113122
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 73999,
+          "own_external_inflight": 67920,
+          "own_response_buffer": 86312
+        },
+        "candidate": {
+          "before_external_request_or_forward": 71986,
+          "own_external_inflight": 70160,
+          "own_response_buffer": 85784
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "matmult-int",
+      "group": null,
+      "baseline_cycles": 4193163,
+      "candidate_cycles": 3825063,
+      "cycle_speedup": 1.0962337090918504,
+      "baseline_profile_sha256": "163c0237a3a517b19fa1667109e8d0536be32f4aa3e862da82b6bdff343c6f7c",
+      "candidate_profile_sha256": "d71f164c08193be3a4e089bc55105494ae5afef65eb75ac1b05f97de69383f21",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 418,
+          "candidate": 418,
+          "delta": 0
+        },
+        "head_wait_csr_system": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 129745,
+          "candidate": 92937,
+          "delta": -36808
+        },
+        "head_wait_int_store": {
+          "baseline": 37727,
+          "candidate": 37727,
+          "delta": 0
+        },
+        "head_wait_integer_other": {
+          "baseline": 793554,
+          "candidate": 462354,
+          "delta": -331200
+        },
+        "head_wait_jump": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 38005,
+          "candidate": 38005,
+          "delta": 0
+        },
+        "retired_body": {
+          "baseline": 2932369,
+          "candidate": 2932369,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 114018,
+          "candidate": 114018,
+          "delta": 0
+        },
+        "store_ack_wait": {
+          "baseline": 147318,
+          "candidate": 147226,
+          "delta": -92
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 92,
+          "mark_pending": 73613,
+          "request_ready": 73613
+        },
+        "candidate": {
+          "load_response_buffer": 92,
+          "mark_pending": 73613,
+          "request_ready": 73521
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 36804,
+          "own_external_inflight": 37731,
+          "own_response_buffer": 55210
+        },
+        "candidate": {
+          "before_external_request_or_forward": 36804,
+          "own_external_inflight": 18402,
+          "own_response_buffer": 37731
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "minver",
+      "group": null,
+      "baseline_cycles": 878777,
+      "candidate_cycles": 858801,
+      "cycle_speedup": 1.0232603362129293,
+      "baseline_profile_sha256": "4a4d506d39396cc5b2dc6f2372d5aa1092c502fd4597465f05ce22508825fb41",
+      "candidate_profile_sha256": "0b233aca1b36fbc436e702ad6a8b7b98f82f7b54e4a0259b4acc2df5d4f80023",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 17769,
+          "candidate": 18879,
+          "delta": 1110
+        },
+        "head_wait_csr_system": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_fdiv": {
+          "baseline": 185937,
+          "candidate": 194261,
+          "delta": 8324
+        },
+        "head_wait_fma": {
+          "baseline": 4994,
+          "candidate": 4995,
+          "delta": 1
+        },
+        "head_wait_fmul": {
+          "baseline": 1665,
+          "candidate": 1665,
+          "delta": 0
+        },
+        "head_wait_fp_load": {
+          "baseline": 46077,
+          "candidate": 41081,
+          "delta": -4996
+        },
+        "head_wait_fp_other": {
+          "baseline": 24975,
+          "candidate": 24420,
+          "delta": -555
+        },
+        "head_wait_fp_store": {
+          "baseline": 2775,
+          "candidate": 2775,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 5566,
+          "candidate": 5562,
+          "delta": -4
+        },
+        "head_wait_int_store": {
+          "baseline": 559,
+          "candidate": 559,
+          "delta": 0
+        },
+        "head_wait_integer_other": {
+          "baseline": 18329,
+          "candidate": 18329,
+          "delta": 0
+        },
+        "head_wait_jump": {
+          "baseline": 2226,
+          "candidate": 2226,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 19436,
+          "candidate": 19437,
+          "delta": 1
+        },
+        "retired_body": {
+          "baseline": 340273,
+          "candidate": 340273,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 58311,
+          "candidate": 58314,
+          "delta": 3
+        },
+        "store_ack_wait": {
+          "baseline": 149878,
+          "candidate": 126018,
+          "delta": -23860
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 23304,
+          "mark_pending": 56624,
+          "other_inflight": 13326,
+          "request_ready": 56624
+        },
+        "candidate": {
+          "load_response_buffer": 23303,
+          "mark_pending": 56624,
+          "other_inflight": 12770,
+          "request_ready": 33321
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 16099,
+          "own_external_inflight": 15552,
+          "own_response_buffer": 19992
+        },
+        "candidate": {
+          "before_external_request_or_forward": 14991,
+          "own_external_inflight": 12768,
+          "own_response_buffer": 18884
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "nbody",
+      "group": null,
+      "baseline_cycles": 5893151,
+      "candidate_cycles": 5821267,
+      "cycle_speedup": 1.012348514507237,
+      "baseline_profile_sha256": "1e15eb41f51d1f7a30ad90af6a395201a7438612cdf78d96407c6ee1284405c3",
+      "candidate_profile_sha256": "641fd952f41ff90b921441a5c380b4c79aac83ba4c3e277f793994c0b90721b0",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 132637,
+          "candidate": 132637,
+          "delta": 0
+        },
+        "head_wait_csr_system": {
+          "baseline": 68768,
+          "candidate": 68768,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 263913,
+          "candidate": 195549,
+          "delta": -68364
+        },
+        "head_wait_int_store": {
+          "baseline": 19545,
+          "candidate": 19545,
+          "delta": 0
+        },
+        "head_wait_integer_other": {
+          "baseline": 926096,
+          "candidate": 926196,
+          "delta": 100
+        },
+        "head_wait_jump": {
+          "baseline": 3219,
+          "candidate": 3319,
+          "delta": 100
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 214643,
+          "candidate": 214643,
+          "delta": 0
+        },
+        "retired_body": {
+          "baseline": 3424506,
+          "candidate": 3424506,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 672591,
+          "candidate": 672591,
+          "delta": 0
+        },
+        "store_ack_wait": {
+          "baseline": 167230,
+          "candidate": 163510,
+          "delta": -3720
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 3722,
+          "mark_pending": 80444,
+          "other_inflight": 2620,
+          "request_ready": 80444
+        },
+        "candidate": {
+          "load_response_buffer": 3624,
+          "mark_pending": 80444,
+          "other_inflight": 2622,
+          "request_ready": 76820
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 54300,
+          "own_external_inflight": 100398,
+          "own_response_buffer": 109215
+        },
+        "candidate": {
+          "before_external_request_or_forward": 54300,
+          "own_external_inflight": 38240,
+          "own_response_buffer": 103009
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "nettle-aes",
+      "group": null,
+      "baseline_cycles": 5203513,
+      "candidate_cycles": 4797126,
+      "cycle_speedup": 1.084714681248731,
+      "baseline_profile_sha256": "eb0e770748345567be6913735efb2f6ed4245e05dc7dd681edec0b1c5aabc5c4",
+      "candidate_profile_sha256": "6d11ef36a40213d7a438458241c4af0506584271acecc191e159e99147480ae5",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 9206,
+          "candidate": 9206,
+          "delta": 0
+        },
+        "head_wait_csr_system": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 686652,
+          "candidate": 306005,
+          "delta": -380647
+        },
+        "head_wait_int_store": {
+          "baseline": 4918,
+          "candidate": 4918,
+          "delta": 0
+        },
+        "head_wait_integer_other": {
+          "baseline": 120815,
+          "candidate": 121283,
+          "delta": 468
+        },
+        "head_wait_jump": {
+          "baseline": 472,
+          "candidate": 472,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 10147,
+          "candidate": 10147,
+          "delta": 0
+        },
+        "retired_body": {
+          "baseline": 4177417,
+          "candidate": 4177417,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 30444,
+          "candidate": 30444,
+          "delta": 0
+        },
+        "store_ack_wait": {
+          "baseline": 163435,
+          "candidate": 137227,
+          "delta": -26208
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 24804,
+          "mark_pending": 59916,
+          "other_inflight": 18799,
+          "request_ready": 59916
+        },
+        "candidate": {
+          "load_response_buffer": 24804,
+          "mark_pending": 59916,
+          "other_inflight": 17395,
+          "request_ready": 35112
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 5930,
+          "own_external_inflight": 273632,
+          "own_response_buffer": 407090
+        },
+        "candidate": {
+          "before_external_request_or_forward": 4448,
+          "own_external_inflight": 14976,
+          "own_response_buffer": 286581
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "nettle-sha256",
+      "group": null,
+      "baseline_cycles": 4307562,
+      "candidate_cycles": 4200675,
+      "cycle_speedup": 1.0254451963077362,
+      "baseline_profile_sha256": "ae27590ed54b995c7c65492fb5456874aa747c52fd21681e417e3a444f3bd8f3",
+      "candidate_profile_sha256": "6e8155ed839921a1f031cd01c879543474492c7a4186a4cfca2e7300b14e82f3",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 6189,
+          "candidate": 6189,
+          "delta": 0
+        },
+        "head_wait_csr_system": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 110244,
+          "candidate": 41831,
+          "delta": -68413
+        },
+        "head_wait_int_store": {
+          "baseline": 2857,
+          "candidate": 2857,
+          "delta": 0
+        },
+        "head_wait_integer_other": {
+          "baseline": 26146,
+          "candidate": 27096,
+          "delta": 950
+        },
+        "head_wait_jump": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 12369,
+          "candidate": 12369,
+          "delta": 0
+        },
+        "retired_body": {
+          "baseline": 3817632,
+          "candidate": 3817632,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 37110,
+          "candidate": 37110,
+          "delta": 0
+        },
+        "store_ack_wait": {
+          "baseline": 295006,
+          "candidate": 255582,
+          "delta": -39424
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 39898,
+          "mark_pending": 112590,
+          "other_inflight": 29928,
+          "request_ready": 112590
+        },
+        "candidate": {
+          "load_response_buffer": 37048,
+          "mark_pending": 112590,
+          "other_inflight": 30402,
+          "request_ready": 75542
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 6656,
+          "own_external_inflight": 43244,
+          "own_response_buffer": 60344
+        },
+        "candidate": {
+          "before_external_request_or_forward": 6656,
+          "own_external_inflight": 3803,
+          "own_response_buffer": 31372
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "nsichneu",
+      "group": null,
+      "baseline_cycles": 7298679,
+      "candidate_cycles": 6913377,
+      "cycle_speedup": 1.0557328205882595,
+      "baseline_profile_sha256": "995c333189fc41e3360c4511f6775cb74ce1a91d58937119e7b34e6af46745c5",
+      "candidate_profile_sha256": "0af74e6a945b258f5404986311ec758929d761ba698a9374d90f3a90997b6cb2",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 765687,
+          "candidate": 875247,
+          "delta": 109560
+        },
+        "head_wait_csr_system": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 2592489,
+          "candidate": 2098857,
+          "delta": -493632
+        },
+        "head_wait_int_store": {
+          "baseline": 2463,
+          "candidate": 2463,
+          "delta": 0
+        },
+        "head_wait_integer_other": {
+          "baseline": 2467,
+          "candidate": 2467,
+          "delta": 0
+        },
+        "head_wait_jump": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 422237,
+          "candidate": 422237,
+          "delta": 0
+        },
+        "retired_body": {
+          "baseline": 2236759,
+          "candidate": 2236759,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 1266714,
+          "candidate": 1266714,
+          "delta": 0
+        },
+        "store_ack_wait": {
+          "baseline": 9854,
+          "candidate": 8624,
+          "delta": -1230
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 1230,
+          "mark_pending": 3697,
+          "other_inflight": 1230,
+          "request_ready": 3697
+        },
+        "candidate": {
+          "load_response_buffer": 1230,
+          "mark_pending": 3697,
+          "other_inflight": 1230,
+          "request_ready": 2467
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 839542,
+          "own_external_inflight": 876473,
+          "own_response_buffer": 876474
+        },
+        "candidate": {
+          "before_external_request_or_forward": 839542,
+          "own_external_inflight": 419772,
+          "own_response_buffer": 839543
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "picojpeg",
+      "group": null,
+      "baseline_cycles": 5300988,
+      "candidate_cycles": 5064804,
+      "cycle_speedup": 1.0466324067032011,
+      "baseline_profile_sha256": "006763252613ebf3005cdb8878b5a3ff30429528cd547124173c065a125238ea",
+      "candidate_profile_sha256": "d4b7098fb34273c766dbdbe994f3e45b679060965e17ab8b7638e5444b544b2d",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 12703,
+          "candidate": 13490,
+          "delta": 787
+        },
+        "head_wait_csr_system": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 234609,
+          "candidate": 148221,
+          "delta": -86388
+        },
+        "head_wait_int_store": {
+          "baseline": 13643,
+          "candidate": 12923,
+          "delta": -720
+        },
+        "head_wait_integer_other": {
+          "baseline": 262594,
+          "candidate": 268792,
+          "delta": 6198
+        },
+        "head_wait_jump": {
+          "baseline": 9050,
+          "candidate": 9074,
+          "delta": 24
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 48416,
+          "candidate": 48380,
+          "delta": -36
+        },
+        "retired_body": {
+          "baseline": 3321047,
+          "candidate": 3321047,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 145251,
+          "candidate": 145143,
+          "delta": -108
+        },
+        "store_ack_wait": {
+          "baseline": 1253668,
+          "candidate": 1097727,
+          "delta": -155941
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 235051,
+          "mark_pending": 445924,
+          "other_inflight": 126769,
+          "request_ready": 445924
+        },
+        "candidate": {
+          "load_response_buffer": 255235,
+          "mark_pending": 445924,
+          "other_inflight": 205879,
+          "request_ready": 190689
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 38912,
+          "own_external_inflight": 84543,
+          "own_response_buffer": 111154
+        },
+        "candidate": {
+          "before_external_request_or_forward": 30680,
+          "own_external_inflight": 30026,
+          "own_response_buffer": 87515
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "qrduino",
+      "group": null,
+      "baseline_cycles": 4524180,
+      "candidate_cycles": 4377993,
+      "cycle_speedup": 1.0333913279441058,
+      "baseline_profile_sha256": "9a8911b9e447155151a2c7090eb26786ef6d01a8a4fe82cda612b71cf316f0e2",
+      "candidate_profile_sha256": "041d2ca5d1379ebd63e57a04350d8cd2832ca9c4bf38d53d21a98a54717d5778",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 172924,
+          "candidate": 176019,
+          "delta": 3095
+        },
+        "head_wait_csr_system": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 411010,
+          "candidate": 333693,
+          "delta": -77317
+        },
+        "head_wait_int_store": {
+          "baseline": 25505,
+          "candidate": 25570,
+          "delta": 65
+        },
+        "head_wait_integer_other": {
+          "baseline": 437337,
+          "candidate": 439057,
+          "delta": 1720
+        },
+        "head_wait_jump": {
+          "baseline": 8292,
+          "candidate": 8292,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 114719,
+          "candidate": 114429,
+          "delta": -290
+        },
+        "retired_body": {
+          "baseline": 2762062,
+          "candidate": 2762062,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 344160,
+          "candidate": 343290,
+          "delta": -870
+        },
+        "store_ack_wait": {
+          "baseline": 248164,
+          "candidate": 175574,
+          "delta": -72590
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 63690,
+          "mark_pending": 66897,
+          "other_inflight": 50680,
+          "request_ready": 66897
+        },
+        "candidate": {
+          "load_response_buffer": 58110,
+          "mark_pending": 66897,
+          "other_inflight": 41780,
+          "request_ready": 8787
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 89872,
+          "own_external_inflight": 128629,
+          "own_response_buffer": 192509
+        },
+        "candidate": {
+          "before_external_request_or_forward": 74087,
+          "own_external_inflight": 81502,
+          "own_response_buffer": 178104
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "sglib-combined",
+      "group": null,
+      "baseline_cycles": 4526268,
+      "candidate_cycles": 4332256,
+      "cycle_speedup": 1.044783133776028,
+      "baseline_profile_sha256": "50dab83c0e3144e5a21ab035907211383e0fb69018b90f6a416e7c690f40152b",
+      "candidate_profile_sha256": "17ae0c7e2a34c76788b52382960ac2d532a31817dc4575e0946c2ca850a61975",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 174669,
+          "candidate": 175767,
+          "delta": 1098
+        },
+        "head_wait_csr_system": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 747390,
+          "candidate": 633317,
+          "delta": -114073
+        },
+        "head_wait_int_store": {
+          "baseline": 41735,
+          "candidate": 41706,
+          "delta": -29
+        },
+        "head_wait_integer_other": {
+          "baseline": 156287,
+          "candidate": 147181,
+          "delta": -9106
+        },
+        "head_wait_jump": {
+          "baseline": 3598,
+          "candidate": 3482,
+          "delta": -116
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 148399,
+          "candidate": 147120,
+          "delta": -1279
+        },
+        "retired_body": {
+          "baseline": 2189708,
+          "candidate": 2189708,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 445200,
+          "candidate": 441363,
+          "delta": -3837
+        },
+        "store_ack_wait": {
+          "baseline": 619275,
+          "candidate": 552605,
+          "delta": -66670
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 64409,
+          "mark_pending": 249680,
+          "other_inflight": 55506,
+          "request_ready": 249680
+        },
+        "candidate": {
+          "load_response_buffer": 62496,
+          "mark_pending": 249680,
+          "other_inflight": 53245,
+          "request_ready": 187184
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 179280,
+          "own_external_inflight": 255157,
+          "own_response_buffer": 312953
+        },
+        "candidate": {
+          "before_external_request_or_forward": 162081,
+          "own_external_inflight": 168201,
+          "own_response_buffer": 303035
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "slre",
+      "group": null,
+      "baseline_cycles": 4902163,
+      "candidate_cycles": 4664230,
+      "cycle_speedup": 1.0510122785540164,
+      "baseline_profile_sha256": "8c2607dfb6b0880ab8579f7e64131283102bfb9f7fad42f0ffa3fc1f1ed260a6",
+      "candidate_profile_sha256": "e17cd4006a87039864343f2099398a93a0a3f9a3f2e2edc65b8ac057a3c308d7",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 164232,
+          "candidate": 168194,
+          "delta": 3962
+        },
+        "head_wait_csr_system": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 831504,
+          "candidate": 616667,
+          "delta": -214837
+        },
+        "head_wait_int_store": {
+          "baseline": 7373,
+          "candidate": 7373,
+          "delta": 0
+        },
+        "head_wait_integer_other": {
+          "baseline": 235846,
+          "candidate": 236506,
+          "delta": 660
+        },
+        "head_wait_jump": {
+          "baseline": 884,
+          "candidate": 884,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 166106,
+          "candidate": 165997,
+          "delta": -109
+        },
+        "retired_body": {
+          "baseline": 2391546,
+          "candidate": 2391546,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 498321,
+          "candidate": 497994,
+          "delta": -327
+        },
+        "store_ack_wait": {
+          "baseline": 606344,
+          "candidate": 579062,
+          "delta": -27282
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 27282,
+          "mark_pending": 277540,
+          "other_inflight": 23982,
+          "request_ready": 277540
+        },
+        "candidate": {
+          "load_response_buffer": 27391,
+          "mark_pending": 277540,
+          "other_inflight": 23982,
+          "request_ready": 250149
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 181280,
+          "own_external_inflight": 317577,
+          "own_response_buffer": 332647
+        },
+        "candidate": {
+          "before_external_request_or_forward": 167970,
+          "own_external_inflight": 131780,
+          "own_response_buffer": 316917
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "st",
+      "group": null,
+      "baseline_cycles": 7165107,
+      "candidate_cycles": 7092839,
+      "cycle_speedup": 1.0101888679554125,
+      "baseline_profile_sha256": "f3ca0cf393688a7f64e85aac6abff87ef2deb8403d3867b880f1748e33f974ec",
+      "candidate_profile_sha256": "e255d63043b27713495f01ea1423f90dc2dff8344820bec4f330919d49bbfab3",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 149513,
+          "candidate": 149513,
+          "delta": 0
+        },
+        "head_wait_csr_system": {
+          "baseline": 95164,
+          "candidate": 95164,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 325242,
+          "candidate": 256070,
+          "delta": -69172
+        },
+        "head_wait_int_store": {
+          "baseline": 28137,
+          "candidate": 28137,
+          "delta": 0
+        },
+        "head_wait_integer_other": {
+          "baseline": 1439320,
+          "candidate": 1439293,
+          "delta": -27
+        },
+        "head_wait_jump": {
+          "baseline": 3421,
+          "candidate": 3421,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 212825,
+          "candidate": 212799,
+          "delta": -26
+        },
+        "retired_body": {
+          "baseline": 3986450,
+          "candidate": 3986450,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 683042,
+          "candidate": 682964,
+          "delta": -78
+        },
+        "store_ack_wait": {
+          "baseline": 241990,
+          "candidate": 239025,
+          "delta": -2965
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 2965,
+          "mark_pending": 118063,
+          "other_inflight": 2899,
+          "request_ready": 118063
+        },
+        "candidate": {
+          "load_response_buffer": 2964,
+          "mark_pending": 118063,
+          "other_inflight": 2899,
+          "request_ready": 115099
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 79589,
+          "own_external_inflight": 116443,
+          "own_response_buffer": 129210
+        },
+        "candidate": {
+          "before_external_request_or_forward": 79589,
+          "own_external_inflight": 50365,
+          "own_response_buffer": 126116
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "statemate",
+      "group": null,
+      "baseline_cycles": 3368567,
+      "candidate_cycles": 3100457,
+      "cycle_speedup": 1.086474348781486,
+      "baseline_profile_sha256": "9262ad03aa0f22fe8e4db76c3068a877636b791e7990259ca194a131bbc4db57",
+      "candidate_profile_sha256": "eac8de1932d24b883bdee55a3d2244ea92cff6992e7d80e7d65ef660a0868437",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 26520,
+          "candidate": 20629,
+          "delta": -5891
+        },
+        "head_wait_csr_system": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 257342,
+          "candidate": 179748,
+          "delta": -77594
+        },
+        "head_wait_int_store": {
+          "baseline": 7864,
+          "candidate": 7864,
+          "delta": 0
+        },
+        "head_wait_integer_other": {
+          "baseline": 59923,
+          "candidate": 59923,
+          "delta": 0
+        },
+        "head_wait_jump": {
+          "baseline": 7860,
+          "candidate": 7860,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 42246,
+          "candidate": 42246,
+          "delta": 0
+        },
+        "retired_body": {
+          "baseline": 1551623,
+          "candidate": 1551623,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 126741,
+          "candidate": 126741,
+          "delta": 0
+        },
+        "store_ack_wait": {
+          "baseline": 1288441,
+          "candidate": 1103816,
+          "delta": -184625
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 170877,
+          "mark_pending": 494946,
+          "other_inflight": 127672,
+          "request_ready": 494946
+        },
+        "candidate": {
+          "load_response_buffer": 174805,
+          "mark_pending": 494946,
+          "other_inflight": 113924,
+          "request_ready": 320141
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 38309,
+          "own_external_inflight": 101170,
+          "own_response_buffer": 117863
+        },
+        "candidate": {
+          "before_external_request_or_forward": 38309,
+          "own_external_inflight": 34379,
+          "own_response_buffer": 107060
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "ud",
+      "group": null,
+      "baseline_cycles": 2775897,
+      "candidate_cycles": 2616256,
+      "cycle_speedup": 1.0610188758286652,
+      "baseline_profile_sha256": "a93e1b87151595a037335a7d2a849315b8d650f1dad203e5842f8aec94485ab8",
+      "candidate_profile_sha256": "fc3eb90280a5691acd1e9013ce188e8c46eacb0b9cbaedb6ff3b29a9b3f6fd17",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "head_wait_csr_system": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 263117,
+          "candidate": 181813,
+          "delta": -81304
+        },
+        "head_wait_int_store": {
+          "baseline": 42868,
+          "candidate": 42868,
+          "delta": 0
+        },
+        "head_wait_integer_other": {
+          "baseline": 1160272,
+          "candidate": 1135144,
+          "delta": -25128
+        },
+        "head_wait_jump": {
+          "baseline": 4,
+          "candidate": 4,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 32524,
+          "candidate": 34002,
+          "delta": 1478
+        },
+        "retired_body": {
+          "baseline": 814428,
+          "candidate": 814428,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 97575,
+          "candidate": 102009,
+          "delta": 4434
+        },
+        "store_ack_wait": {
+          "baseline": 365100,
+          "candidate": 305979,
+          "delta": -59121
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 53211,
+          "mark_pending": 131556,
+          "other_inflight": 48777,
+          "request_ready": 131556
+        },
+        "candidate": {
+          "load_response_buffer": 51735,
+          "mark_pending": 131556,
+          "other_inflight": 42867,
+          "request_ready": 79821
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 29562,
+          "own_external_inflight": 110865,
+          "own_response_buffer": 122690
+        },
+        "candidate": {
+          "before_external_request_or_forward": 29562,
+          "own_external_inflight": 32518,
+          "own_response_buffer": 119733
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "wikisort",
+      "group": null,
+      "baseline_cycles": 2173042,
+      "candidate_cycles": 2134990,
+      "cycle_speedup": 1.0178230342999264,
+      "baseline_profile_sha256": "17f9e963c482f88451577c38e8291cbf37477f6a43e7023d9cb0a6c03405d848",
+      "candidate_profile_sha256": "7d3d584dd1536a74e9869aa274aa67b1ef6cf8996c0b35f5cbcedbe81b36672c",
+      "cycle_partition": {
+        "head_wait_branch": {
+          "baseline": 28729,
+          "candidate": 28740,
+          "delta": 11
+        },
+        "head_wait_csr_system": {
+          "baseline": 15672,
+          "candidate": 15672,
+          "delta": 0
+        },
+        "head_wait_int_load": {
+          "baseline": 89110,
+          "candidate": 72455,
+          "delta": -16655
+        },
+        "head_wait_int_store": {
+          "baseline": 12245,
+          "candidate": 12347,
+          "delta": 102
+        },
+        "head_wait_integer_other": {
+          "baseline": 492610,
+          "candidate": 493445,
+          "delta": 835
+        },
+        "head_wait_jump": {
+          "baseline": 7273,
+          "candidate": 7273,
+          "delta": 0
+        },
+        "head_wait_marker": {
+          "baseline": 2,
+          "candidate": 2,
+          "delta": 0
+        },
+        "recovery": {
+          "baseline": 61933,
+          "candidate": 61940,
+          "delta": 7
+        },
+        "retired_body": {
+          "baseline": 1064027,
+          "candidate": 1064027,
+          "delta": 0
+        },
+        "retired_marker": {
+          "baseline": 1,
+          "candidate": 1,
+          "delta": 0
+        },
+        "rob_empty": {
+          "baseline": 191996,
+          "candidate": 192017,
+          "delta": 21
+        },
+        "store_ack_wait": {
+          "baseline": 209444,
+          "candidate": 187071,
+          "delta": -22373
+        }
+      },
+      "store_ack_wait_phases": {
+        "baseline": {
+          "load_response_buffer": 22054,
+          "mark_pending": 89561,
+          "other_inflight": 8268,
+          "request_ready": 89561
+        },
+        "candidate": {
+          "load_response_buffer": 26111,
+          "mark_pending": 89561,
+          "other_inflight": 7949,
+          "request_ready": 63450
+        }
+      },
+      "load_head_wait_phases": {
+        "baseline": {
+          "before_external_request_or_forward": 19453,
+          "own_external_inflight": 31497,
+          "own_response_buffer": 38160
+        },
+        "candidate": {
+          "before_external_request_or_forward": 19345,
+          "own_external_inflight": 16678,
+          "own_response_buffer": 36432
+        }
+      }
+    }
+  ]
+}

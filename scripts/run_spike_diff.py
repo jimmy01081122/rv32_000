@@ -25,6 +25,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 SIM_EXE = "build/sim/rv32_ooo_sim"
 TEST_DIR = "build/tests"
+OUT_DIR = TEST_DIR
 
 # Dynamic performance counters whose values reflect microarchitecture-dependent cycle/instruction counts
 PERF_COUNTER_CSRS = {
@@ -152,7 +153,7 @@ def parse_spike_suffix(suffix: str, insn: int) -> Tuple[Optional[int], Optional[
 def run_spike(elf_path: str, isa: str = "rv32im_zicsr") -> Tuple[bool, List[Dict[str, Any]], str]:
     """Execute Spike with -l --log-commits and extract golden architectural trace."""
     test_name = os.path.splitext(os.path.basename(elf_path))[0]
-    spike_log_path = f"build/tests/spike_{test_name}.log"
+    spike_log_path = f"{OUT_DIR}/spike_{test_name}.log"
     cmd = [
         "spike",
         "-l",
@@ -202,8 +203,8 @@ def run_spike(elf_path: str, isa: str = "rv32im_zicsr") -> Tuple[bool, List[Dict
 def run_dut(elf_path: str) -> Tuple[bool, List[Dict[str, Any]], Dict[str, Any], str]:
     """Execute DUT simulation harness and capture commit trace and performance stats."""
     test_name = os.path.splitext(os.path.basename(elf_path))[0]
-    trace_path = f"build/tests/dut_{test_name}.log"
-    dut_log_path = f"build/tests/diff_{test_name}.log"
+    trace_path = f"{OUT_DIR}/dut_{test_name}.log"
+    dut_log_path = f"{OUT_DIR}/diff_{test_name}.log"
 
     cmd = [
         SIM_EXE,
@@ -378,10 +379,15 @@ def run_test(elf_path: str) -> Dict[str, Any]:
 
 
 def main() -> int:
+    global SIM_EXE, OUT_DIR
     parser = argparse.ArgumentParser(description="Run architectural Spike differential verification on bare-metal test suite")
     parser.add_argument("--test", type=str, default=None, help="Run specific test ELF name (without .elf)")
     parser.add_argument("--json", action="store_true", help="Output results in JSON format")
+    parser.add_argument("--sim", default=SIM_EXE, help="explicit candidate simulator; default retains legacy entry")
+    parser.add_argument("--out", default=OUT_DIR, help="separate trace/result directory")
     args = parser.parse_args()
+    SIM_EXE, OUT_DIR = args.sim, args.out
+    os.makedirs(OUT_DIR, exist_ok=True)
 
     if not os.path.exists(SIM_EXE):
         print(f"Error: Simulator executable '{SIM_EXE}' not found. Run 'make sim-build' first.")
@@ -429,9 +435,9 @@ def main() -> int:
             "failed": total_count - passed_count,
             "results": results
         }
-        with open("build/tests/diff_results.json", "w") as f:
+        with open(os.path.join(OUT_DIR, "diff_results.json"), "w") as f:
             json.dump(out_json, f, indent=2)
-        print(f"Machine-readable summary written to build/tests/diff_results.json")
+        print(f"Machine-readable summary written to {OUT_DIR}/diff_results.json")
 
     return 0 if all_passed else 1
 

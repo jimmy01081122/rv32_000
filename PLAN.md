@@ -1,6 +1,6 @@
 # RV32 OoO 專案計畫
 
-版本：2.8；更新：2026-10-18；狀態：修正後 global-route 基線已凍結，正式 27/27 通過；A／B 待共同選擇。
+版本：2.11；更新：2026-10-20；狀態：修正後基線不變；A 兩個操作點與 global-route 研究資格完成，效能目標未達；B 獨立對照。
 
 ## 已確認的方向
 
@@ -12,7 +12,7 @@
 - FP32 集合採 4 項控制／DSP、4 項矩陣／ML，兩個子群各占 50%；既有數值資格確認通過，v1 fixture／容差／ELF 已固定。
 - FP32 主編譯設定採 `-ffp-contract=fast -fno-fast-math`，off 留作敏感度對照。
 - LSU 列為第一優先候選方向；[六案例／三延遲研究與 A／B／C 方案](docs/LSU_OPTIMIZATION_REVIEW.md)已可審查。
-  具體硬體尚未選定；[ready／store-error 介面修復](docs/LSU_INTERFACE_FIX.md)已完成定向與全集合功能回歸，[新基線](docs/evidence/2026-10-18/post-lsu-baseline/README.md)已完成正式 27 項與 global-route 量測。
+  已核准先做 A（回應交接重疊），B（head-store marking）另作獨立對照；[ready／store-error 介面修復](docs/LSU_INTERFACE_FIX.md)已完成定向與全集合功能回歸，[新基線](docs/evidence/2026-10-18/post-lsu-baseline/README.md)已完成正式 27 項與 global-route 量測。
 - 使用者參與優化方向、架構取捨、策略調整與工作流程決策。
 - 修正後基線採固定記憶體實際時間；ASAP7 RVT、TT 建置與獨立 SS／FF 時序檢查，
   先固定 global-route 寄生估算層級。正式 27 項通過；週期 10 ns、面積 22,081.1184 µm²，
@@ -75,4 +75,13 @@ G0 的長篇契約保留於 [歷史文件](docs/archive/README.md)，供追溯�
 | 6 | 優化與驗收 | 功能要求、兩類效能及面積預算的比較報告 |
 
 工作負載移植可與驗證準備並行，但結果在正確性資格確認前只能列為探索資料。
-LSU 吞吐、前端預測及 FPU 排程/資料路徑均為候選方向，尚未選定新的架構變更。
+[A 實驗](experiments/lsu-a-v1/README.md)已核准並開始；B 從相同基線獨立比較。
+A 的[乾淨來源功能與同頻證據](docs/evidence/2026-10-19/lsu-a-functional/README.md)
+已完成：27/27、原 3,629 筆 FP32 數值通過；100 MHz 與固定 10 ns 記憶體下，
+Embench GM 1.045830×、FP32 GM 1.078255×。兩者同頻結果皆未達 1.20×；
+[實體與雙操作點封存](docs/evidence/2026-10-20/lsu-a-physical/README.md)確認面積 22,162.24152 µm²（1.003674×）、
+最短已測通過週期 9.9 ns；該點完整 27/27 通過，但 Embench 0.726601×、FP32 0.700275×。
+固定 10 ns 記憶體在 9.9 ns 時脈跨兩拍取樣，因此提頻後系統時間退步。
+A 研究資格已完成，兩類各 1.20× 的專案目標仍未達。建議先以 100 MHz 評估 A，
+正式操作點及後續取捨待共同審查；不替換基線、不混用兩集合的時脈。
+前端預測、FPU 排程／資料路徑及 A+B 仍待後續證據與討論。

@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/workspace/rv32_000/scripts/lower_baseline_rtl.py", line 61, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/rv32_000/scripts/lower_baseline_rtl.py", line 26, in main
+    else:check_rtl(manifest)
+         ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/rv32_000/scripts/baseline_contract.py", line 38, in check_rtl
+    if sha(ROOT/name)!=expected:raise ValueError('baseline RTL changed: '+name)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: baseline RTL changed: rtl/lsu/rv32_ooo_lsu.sv

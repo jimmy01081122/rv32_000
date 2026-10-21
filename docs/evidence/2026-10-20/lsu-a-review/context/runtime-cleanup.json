@@ -1,0 +1,36 @@
+{
+  "scope": "Verified owned runtime idle after all review tests; remove only this container, preserve pinned images and every result.",
+  "container_id": "21bd80acca3ffe487a258af021da3ea15ed6a29dff62a679c17ec1d588569879",
+  "image_id": "sha256:2140263677b3a378d5cab75a3d0d4fd285ddb38a1a5a1f81f5cf97db024a02d5",
+  "idle_process_rows": [
+    "3324                sleep"
+  ],
+  "started_utc": "2026-10-20T10:34:59.364204+00:00",
+  "free_before_bytes": 5226377216,
+  "commands": [
+    {
+      "command": [
+        "docker",
+        "stop",
+        "--time",
+        "10",
+        "rv32-lsu-a-review"
+      ],
+      "returncode": 0,
+      "output": "Flag --time has been deprecated, use --timeout instead\nrv32-lsu-a-review\n"
+    },
+    {
+      "command": [
+        "docker",
+        "rm",
+        "21bd80acca3ffe487a258af021da3ea15ed6a29dff62a679c17ec1d588569879"
+      ],
+      "returncode": 0,
+      "output": "21bd80acca3ffe487a258af021da3ea15ed6a29dff62a679c17ec1d588569879\n"
+    }
+  ],
+  "completed": true,
+  "image_retained": true,
+  "free_after_bytes": 10396512256,
+  "finished_utc": "2026-10-20T10:35:09.990967+00:00"
+}

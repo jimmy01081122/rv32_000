@@ -1,0 +1,77 @@
+{
+  "build-clean-v1/summary.json": {
+    "passed": true,
+    "sha256": "6eb6f13883a5348f09c2a15f88a5efe27c85fde80458412dd8dec813f8eb8a30"
+  },
+  "qualification-clean-v1/summary.json": {
+    "passed": true,
+    "sha256": "c7f290441696556c89646f3f954f5caa86bc3902554e39d8d5cd292f34c4227f"
+  },
+  "measurement-10000ps-v1/summary.json": {
+    "passed": true,
+    "sha256": "5de23abc1efa4c617c872d3f1dedd707bad8d99a27f24ce0790d984aecda919e"
+  },
+  "started_utc": "2026-10-19T16:53:06.680429+00:00",
+  "verification_container": {
+    "Id": "8a5ce817dc80820a5c8eb2195793e9c6554e263b8e2a86e998c88c143e2de1cc",
+    "Image": "sha256:2140263677b3a378d5cab75a3d0d4fd285ddb38a1a5a1f81f5cf97db024a02d5",
+    "State": {
+      "Status": "running",
+      "Running": true,
+      "Paused": false,
+      "Restarting": false,
+      "OOMKilled": false,
+      "Dead": false,
+      "Pid": 3547,
+      "ExitCode": 0,
+      "Error": "",
+      "StartedAt": "2026-10-19T16:29:22.79978255Z",
+      "FinishedAt": "0001-01-01T00:00:00Z"
+    },
+    "User": "1000:1000"
+  },
+  "finished_verification_processes": "PID                 COMMAND             COMMAND\n3547                sleep               /bin/sleep infinity\n",
+  "verification_removed": true,
+  "free_before_physical_bytes": 10971721728,
+  "image_size_bytes": 4622063780,
+  "physical_container_id": "054ebe72b3728686b6e7edd14f5daf63972b4037af3afd74ed069c3848949ab0",
+  "platform204_before_prune": true,
+  "pruned_unused_private_image_directories": {
+    "removed_unused_private_image_directories": [
+      "/OpenROAD-flow-scripts/flow/platforms/gf180",
+      "/OpenROAD-flow-scripts/flow/platforms/ihp-sg13g2",
+      "/OpenROAD-flow-scripts/flow/platforms/nangate45",
+      "/OpenROAD-flow-scripts/flow/platforms/sky130hd",
+      "/OpenROAD-flow-scripts/flow/platforms/sky130hs",
+      "/OpenROAD-flow-scripts/flow/platforms/sky130io",
+      "/OpenROAD-flow-scripts/flow/platforms/sky130ram",
+      "/OpenROAD-flow-scripts/flow/designs"
+    ]
+  },
+  "platform204_after_prune": true,
+  "free_after_physical_prune_bytes": 2028556288,
+  "synthesis_launch_command": [
+    "python3",
+    "scripts/run_baseline_physical.py",
+    "--experiment",
+    "experiments/lsu-a-v1/manifest.json",
+    "--output-root",
+    "build/experiments/lsu-a-v1",
+    "--lowered-rtl",
+    "build/experiments/lsu-a-v1/rtl_lowered.v",
+    "--container",
+    "rv32-lsu-a-physical",
+    "--adder-mapping",
+    "abc",
+    "--jobs",
+    "2",
+    "--detached",
+    "--period-ps",
+    "5500",
+    "--stage",
+    "synthesis",
+    "--label",
+    "synth-clean-v1"
+  ],
+  "finished_utc": "2026-10-19T16:54:06.540689+00:00"
+}

@@ -1,0 +1,20 @@
+{
+  "scope": "Actual negative replay of original launch path; existing exclusive lock rejects before report/log mutation. Active v2 worker has a separate lock directory.",
+  "command": [
+    "docker",
+    "exec",
+    "--user",
+    "1000:1000",
+    "-w",
+    "/workspace",
+    "rv32-lsu-a-physical",
+    "python3",
+    "/workspace/scripts/run_physical_job.py",
+    "/workspace/build/experiments/lsu-a-v1/measurement-9900ps-job.json"
+  ],
+  "returncode": 1,
+  "log_sha256": "cc5464f5c7de368242c9892d0b58ed3cf45d94bb7bd91ffb000ea321aa06cc1f",
+  "original_report_remains_queued": true,
+  "original_worker_log_absent": true,
+  "negative_control_passed": true
+}

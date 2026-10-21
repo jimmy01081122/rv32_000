@@ -12,7 +12,7 @@ from qualify_fp_balanced import run,validate as numeric
 
 OUT=ROOT/'build/baselines/ap5b-post-lsu-v1/measurement'
 def state():return {'commit':subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),'status':subprocess.check_output(['git','status','--porcelain'],cwd=ROOT,text=True).strip()}
-def check_result(row,text,audit,core_ps,memory_ps,elf,profile):
+def check_result(row,text,audit,core_ps,memory_ps,elf,profile,*,require_reference_cycles=True):
     problems=[]
     if not audit['fixed_time'] or any(audit[k]!=v for k,v in {
         'core_period_ps':core_ps,'imem_response_ps':memory_ps,
@@ -30,7 +30,8 @@ def check_result(row,text,audit,core_ps,memory_ps,elf,profile):
         if not result.get('passed') or result.get('checksum')!=row['reference_checksum']:problems.append('independent numerical validation failed')
     else:
         result=None;match=re.search(r'Benchmark executed in cycles: (\d+)',text);cycles=int(match[1]) if match else None
-    if cycles!=row['reference_cycles']:problems.append('nominal ROI differs from qualified frozen reference')
+    if require_reference_cycles and cycles!=row['reference_cycles']:problems.append('nominal ROI differs from qualified frozen reference')
+    if not isinstance(cycles,int) or cycles<=0:problems.append('missing/non-positive ROI cycles')
     for field in ('imem_min_response_ps','dmem_min_response_ps'):
         if audit[field]<memory_ps:problems.append(field+' shorter than fixed memory time')
     for field in ('imem_max_response_ps','dmem_max_response_ps'):

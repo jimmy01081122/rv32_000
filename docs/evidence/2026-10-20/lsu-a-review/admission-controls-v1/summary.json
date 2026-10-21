@@ -1,0 +1,40 @@
+{
+  "scope": "Actual admission controls; deliberately altered copies, never new CPU results.",
+  "script_sha256": "e8c1b7bbfb5860511cdaa1154f877ed401eae1927a487c9d410e56791a770a13",
+  "old_reviewer_sha256": "fd1bb925b12358bcee3aaac3c2f2e0e5b8064994ea0e0c257de3f9ce824268ad",
+  "new_reviewer_sha256": "e787e633b5b2155569ce3b09e8a8f918eb123518c9e8cd8ba6b4db17ad90754b",
+  "provenance_validator_sha256": "7fb6e823b208ddeacc17769b4a573a8bb5755ae5465d80da695b1cb1a3ca0394",
+  "original_inputs_sha256": {
+    "/workspace/rv32_000/build/experiments/lsu-a-v1/measurement-10000ps-v1/summary.json": "5de23abc1efa4c617c872d3f1dedd707bad8d99a27f24ce0790d984aecda919e",
+    "/workspace/rv32_000/build/experiments/lsu-a-v1/measurement-10000ps-v1/fp32/fir/profile.json": "a6732b8b32dacd0cdd8e2a0da3be65657b11580cd3576dc37afdb2b78437625f",
+    "/workspace/rv32_000/build/experiments/lsu-a-v1/build-clean-v1/summary.json": "6eb6f13883a5348f09c2a15f88a5efe27c85fde80458412dd8dec813f8eb8a30"
+  },
+  "original_inputs_unchanged": true,
+  "records": [
+    {
+      "name": "unrelated-simulator",
+      "old_reviewer_accepted": true,
+      "passed": false,
+      "rejection": "measurement simulator is not the qualified normal executable"
+    },
+    {
+      "name": "missing-build-proof",
+      "old_reviewer_accepted": true,
+      "passed": false,
+      "rejection": "measurement/functional run are not bound to this build proof"
+    },
+    {
+      "name": "wrong-measurement-wrapper",
+      "old_reviewer_accepted": true,
+      "passed": false,
+      "rejection": "measurement wrapper identity differs"
+    },
+    {
+      "name": "per-pc-work-mismatch",
+      "old_reviewer_accepted": true,
+      "passed": false,
+      "rejection": "candidate numerical/memory/work equivalence failed"
+    }
+  ],
+  "all_four_regressions_rejected": true
+}

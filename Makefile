@@ -124,6 +124,16 @@ check-baseline-contract: ## Verify the complete frozen 19+8 input/RTL contract
 	python3 scripts/test_physical_job.py
 	python3 scripts/test_physical_closure.py
 
+.PHONY: check-experiment-contract
+CPU_EXPERIMENT ?= lsu-a-v1
+check-experiment-contract: ## Verify authorized candidate scope without weakening the frozen baseline gate
+	CPU_EXPERIMENT=$(CPU_EXPERIMENT) python3 scripts/test_experiment_contract.py
+	python3 scripts/test_baseline_measurement.py
+	python3 scripts/test_physical_job.py
+	python3 scripts/test_physical_closure.py
+	python3 scripts/test_cpu_experiment_review.py
+	python3 scripts/test_experiment_provenance.py
+
 check-memory-time: check-lsu-interface ## Check absolute-time memory and unchanged legacy behavior
 	$(DOCKER_RUN) $(FP_IMAGE) -c 'python3 scripts/test_fixed_time_memory.py && python3 scripts/check_memory_time.py'
 
