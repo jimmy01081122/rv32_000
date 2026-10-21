@@ -1,0 +1,41 @@
+Startpoint: dmem_req_ready (input port clocked by core_clk)
+Endpoint: u_lsu.in_flight_is_store$_SDFFE_PP0P_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: in2reg
+Path Type: min
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                  0.000000    0.000000 ^ input external delay
+     1    0.366815   20.000000    0.000000    0.000000 ^ dmem_req_ready (in)
+                                                         dmem_req_ready (net)
+                     20.000000    0.000000    0.000000 ^ _184339_/A (BUFx2_ASAP7_75t_R)
+     7    3.451420   30.423326   37.088921   37.088921 ^ _184339_/Y (BUFx2_ASAP7_75t_R)
+                                                         _129893_ (net)
+                     30.423326    0.000000   37.088921 ^ _184343_/A (NAND2x1_ASAP7_75t_R)
+     8    3.096296   34.645527   28.177534   65.266449 v _184343_/Y (NAND2x1_ASAP7_75t_R)
+                                                         _129896_ (net)
+                     34.645527    0.000000   65.266449 v _184344_/A (BUFx2_ASAP7_75t_R)
+    10    2.937914   22.371243   42.919529  108.185982 v _184344_/Y (BUFx2_ASAP7_75t_R)
+                                                         _129897_ (net)
+                     22.371243    0.000000  108.185982 v _327944_/A3 (AO32x1_ASAP7_75t_R)
+     1    0.442001   12.227105   39.212570  147.398560 v _327944_/Y (AO32x1_ASAP7_75t_R)
+                                                         _035662_ (net)
+                     12.227105    0.000000  147.398560 v u_lsu.in_flight_is_store$_SDFFE_PP0P_/D (DFFHQNx1_ASAP7_75t_R)
+                                            147.398560   data arrival time
+
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                 25.000000   25.000000   clock uncertainty
+                                  0.000000   25.000000   clock reconvergence pessimism
+                                             25.000000 ^ u_lsu.in_flight_is_store$_SDFFE_PP0P_/CLK (DFFHQNx1_ASAP7_75t_R)
+                                 13.592072   38.592075   library hold time
+                                             38.592075   data required time
+---------------------------------------------------------------------------------------------
+                                             38.592075   data required time
+                                           -147.398560   data arrival time
+---------------------------------------------------------------------------------------------
+                                            108.806480   slack (MET)
+
+

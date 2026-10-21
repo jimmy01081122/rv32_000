@@ -62,9 +62,11 @@ backend、TT 45% slew／50 ps hold ECO 與完整 global route。三階段均實�
 映射／布局的結果，不能據此證明頭端 store 邏輯必然造成全部時序退步。
 本次維持原門檻與 flow，沒有放寬失敗值或自動改成 A+B。
 
-建議先保留 A 作可用的候選參考，再共同決定是否追查 B 的 FP 映射／布局及
-FF 短路徑，或選擇另一項架構實驗。若調整實體流程，需維持基線與候選可比；
-A／B 個別收益不能直接相加。B v1 的功能機制可保留為證據，目前實作不取代基線。
+後續[時序診斷](LSU_B_TIMING_DIAGNOSIS.md)已完成：9 組原 routed corner
+重現通過，另 3 組 synthesis zero-wire 診斷確認未改 FPU 的時序差距在布局前
+就已出現；FF 則有兩個 LSU tracking hold 端點失敗。
+建議先共同選擇可比實體流程的改善，再決定下一項架構實驗；原門檻與基線仍不變。
+A／B 個別收益不能直接相加。B v1 的功能機制保留為證據，目前實作不取代基線。
 
 [完整原始證據與重播條件](evidence/2026-10-21/lsu-b/README.md)包含所有 27 項、
 失敗 corner、最終 ODB／網表、binary gzip、來源譜系與 copy inventory。

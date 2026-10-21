@@ -1,0 +1,57 @@
+Startpoint: rst (input port clocked by core_clk)
+Endpoint: dmem_req_valid (output port clocked by core_clk)
+Path Group: in2out
+Path Type: min
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+   0.00    0.00 ^ input external delay
+   0.00    0.00 ^ rst (in)
+  16.47   16.47 ^ hold21461/Y (BUFx2_ASAP7_75t_R)
+  12.27   28.74 ^ hold21397/Y (BUFx2_ASAP7_75t_R)
+  11.91   40.66 ^ hold21462/Y (BUFx2_ASAP7_75t_R)
+  11.96   52.62 ^ hold21178/Y (BUFx2_ASAP7_75t_R)
+  12.94   65.56 ^ hold21463/Y (BUFx2_ASAP7_75t_R)
+  12.78   78.34 ^ hold21398/Y (BUFx2_ASAP7_75t_R)
+  12.26   90.60 ^ hold21464/Y (BUFx2_ASAP7_75t_R)
+  12.32  102.92 ^ hold21137/Y (BUFx2_ASAP7_75t_R)
+  11.80  114.73 ^ hold21465/Y (BUFx2_ASAP7_75t_R)
+  11.50  126.22 ^ hold21399/Y (BUFx2_ASAP7_75t_R)
+  11.60  137.82 ^ hold21466/Y (BUFx2_ASAP7_75t_R)
+  11.54  149.36 ^ hold21179/Y (BUFx2_ASAP7_75t_R)
+  12.33  161.69 ^ hold21467/Y (BUFx2_ASAP7_75t_R)
+  13.05  174.74 ^ hold21400/Y (BUFx2_ASAP7_75t_R)
+  13.42  188.16 ^ hold21468/Y (BUFx2_ASAP7_75t_R)
+  16.04  204.20 ^ input101/Y (BUFx8_ASAP7_75t_R)
+  12.05  216.24 ^ hold21401/Y (BUFx2_ASAP7_75t_R)
+  11.98  228.22 ^ hold21180/Y (BUFx2_ASAP7_75t_R)
+  12.11  240.33 ^ hold21402/Y (BUFx2_ASAP7_75t_R)
+  13.31  253.64 ^ hold21138/Y (BUFx2_ASAP7_75t_R)
+  14.50  268.14 ^ hold21403/Y (BUFx2_ASAP7_75t_R)
+  18.31  286.46 ^ hold21181/Y (BUFx2_ASAP7_75t_R)
+  46.35  332.80 ^ hold21404/Y (BUFx2_ASAP7_75t_R)
+  35.66  368.46 ^ wire20254/Y (BUFx24_ASAP7_75t_R)
+  72.98  441.44 ^ place20249/Y (BUFx3_ASAP7_75t_R)
+  26.40  467.83 ^ place20248/Y (BUFx3_ASAP7_75t_R)
+  31.40  499.24 v _176245_/Y (INVx4_ASAP7_75t_R)
+  32.57  531.81 v place19504/Y (BUFx3_ASAP7_75t_R)
+  36.23  568.04 v wire23170/Y (BUFx16f_ASAP7_75t_R)
+  40.34  608.38 v place19503/Y (BUFx6f_ASAP7_75t_R)
+  47.23  655.60 v _184342_/Y (OA21x2_ASAP7_75t_R)
+  21.28  676.88 v output453/Y (BUFx2_ASAP7_75t_R)
+   0.00  676.88 v dmem_req_valid (out)
+         676.88   data arrival time
+
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+  25.00   25.00   clock uncertainty
+   0.00   25.00   clock reconvergence pessimism
+   0.00   25.00   output external delay
+          25.00   data required time
+---------------------------------------------------------
+          25.00   data required time
+        -676.88   data arrival time
+---------------------------------------------------------
+         651.88   slack (MET)

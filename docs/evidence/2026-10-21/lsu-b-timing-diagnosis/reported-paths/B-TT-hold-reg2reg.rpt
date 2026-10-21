@@ -1,0 +1,50 @@
+Startpoint: u_lsu.sq[15][80]$_DFFE_PP_
+            (rising edge-triggered flip-flop clocked by core_clk)
+Endpoint: u_lsu.sq[15][80]$_DFFE_PP_
+          (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: reg2reg
+Path Type: min
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock source latency
+   0.00    0.00 ^ clk (in)
+  58.26   58.26 ^ wire20255/Y (BUFx12_ASAP7_75t_R)
+  58.65  116.91 ^ clkbuf_0_clk/Y (BUFx24_ASAP7_75t_R)
+  34.89  151.80 ^ clkbuf_1_0_0_clk/Y (BUFx24_ASAP7_75t_R)
+  30.70  182.50 ^ clkbuf_2_1_0_clk/Y (BUFx24_ASAP7_75t_R)
+  35.98  218.48 ^ clkbuf_3_3_0_clk/Y (BUFx24_ASAP7_75t_R)
+  29.92  248.39 ^ clkbuf_4_7_0_clk/Y (BUFx24_ASAP7_75t_R)
+  34.01  282.40 ^ clkbuf_6_29_0_clk/Y (BUFx24_ASAP7_75t_R)
+  28.01  310.41 ^ clkbuf_7_58__f_clk/Y (BUFx24_ASAP7_75t_R)
+  33.33  343.74 ^ clkbuf_leaf_327_clk/Y (BUFx24_ASAP7_75t_R)
+   2.74  346.48 ^ u_lsu.sq[15][80]$_DFFE_PP_/CLK (DFFHQNx1_ASAP7_75t_R)
+  57.01  403.50 ^ u_lsu.sq[15][80]$_DFFE_PP_/QN (DFFHQNx1_ASAP7_75t_R)
+  23.12  426.61 ^ hold23731/Y (BUFx2_ASAP7_75t_R)
+   8.05  434.66 v _267849_/Y (OAI22x1_ASAP7_75t_R)
+   0.04  434.70 v u_lsu.sq[15][80]$_DFFE_PP_/D (DFFHQNx1_ASAP7_75t_R)
+         434.70   data arrival time
+
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock source latency
+   0.00    0.00 ^ clk (in)
+  59.12   59.12 ^ wire20255/Y (BUFx12_ASAP7_75t_R)
+  60.45  119.58 ^ clkbuf_0_clk/Y (BUFx24_ASAP7_75t_R)
+  36.03  155.61 ^ clkbuf_1_0_0_clk/Y (BUFx24_ASAP7_75t_R)
+  31.63  187.24 ^ clkbuf_2_1_0_clk/Y (BUFx24_ASAP7_75t_R)
+  37.47  224.71 ^ clkbuf_3_3_0_clk/Y (BUFx24_ASAP7_75t_R)
+  30.95  255.65 ^ clkbuf_4_7_0_clk/Y (BUFx24_ASAP7_75t_R)
+  35.79  291.45 ^ clkbuf_6_29_0_clk/Y (BUFx24_ASAP7_75t_R)
+  29.46  320.91 ^ clkbuf_7_58__f_clk/Y (BUFx24_ASAP7_75t_R)
+  36.02  356.93 ^ clkbuf_leaf_327_clk/Y (BUFx24_ASAP7_75t_R)
+   3.26  360.19 ^ u_lsu.sq[15][80]$_DFFE_PP_/CLK (DFFHQNx1_ASAP7_75t_R)
+  25.00  385.19   clock uncertainty
+ -13.71  371.48   clock reconvergence pessimism
+  14.36  385.85   library hold time
+         385.85   data required time
+---------------------------------------------------------
+         385.85   data required time
+        -434.70   data arrival time
+---------------------------------------------------------
+          48.86   slack (MET)

@@ -1,0 +1,38 @@
+Startpoint: u_rob.commit_trace[231]$_SDFF_PP0_
+            (rising edge-triggered flip-flop clocked by core_clk)
+Endpoint: commit_trace[231] (output port clocked by core_clk)
+Path Group: reg2out
+Path Type: min
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock source latency
+   0.00    0.00 ^ clk (in)
+  59.07   59.07 ^ wire18984/Y (BUFx12_ASAP7_75t_R)
+  58.21  117.29 ^ clkbuf_0_clk/Y (BUFx24_ASAP7_75t_R)
+  35.88  153.16 ^ clkbuf_1_1_0_clk/Y (BUFx24_ASAP7_75t_R)
+  28.33  181.49 ^ clkbuf_2_2_0_clk/Y (BUFx24_ASAP7_75t_R)
+  35.96  217.45 ^ clkbuf_3_5_0_clk/Y (BUFx24_ASAP7_75t_R)
+  31.16  248.60 ^ clkbuf_4_11_0_clk/Y (BUFx24_ASAP7_75t_R)
+  31.98  280.58 ^ clkbuf_6_47_0_clk/Y (BUFx24_ASAP7_75t_R)
+  25.22  305.80 ^ clkbuf_7_95__f_clk/Y (BUFx24_ASAP7_75t_R)
+  32.53  338.33 ^ clkbuf_leaf_587_clk/Y (BUFx24_ASAP7_75t_R)
+   1.06  339.39 ^ u_rob.commit_trace[231]$_SDFF_PP0_/CLK (DFFHQNx1_ASAP7_75t_R)
+  48.34  387.73 v u_rob.commit_trace[231]$_SDFF_PP0_/QN (DFFHQNx1_ASAP7_75t_R)
+  10.11  397.84 ^ _179088_/Y (INVx1_ASAP7_75t_R)
+  20.35  418.19 ^ output248/Y (BUFx2_ASAP7_75t_R)
+   0.00  418.19 ^ commit_trace[231] (out)
+         418.19   data arrival time
+
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+  25.00   25.00   clock uncertainty
+   0.00   25.00   clock reconvergence pessimism
+   0.00   25.00   output external delay
+          25.00   data required time
+---------------------------------------------------------
+          25.00   data required time
+        -418.19   data arrival time
+---------------------------------------------------------
+         393.19   slack (MET)

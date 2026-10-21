@@ -22,6 +22,7 @@ fixed-time performance measurement.
 | [Micro-operations](uop_spec.md) | Implemented packet types and their limitations |
 | [Workloads](docs/WORKLOADS.md) | Approved suites and planning targets; open measurement contracts |
 | [LSU candidate review](docs/LSU_OPTIMIZATION_REVIEW.md) | Fixed six-case memory sensitivity and concrete hardware options |
+| [B timing diagnosis](docs/LSU_B_TIMING_DIAGNOSIS.md) | Replayed corner results, FP mapping sensitivity, FF hold limits and next choices |
 | [LSU interface fixes](docs/LSU_INTERFACE_FIX.md) | Backpressure / precise access faults, assertion-enabled tests and regression evidence |
 | [FIR/BiCG bottleneck review](docs/FMA_BOTTLENECK_REVIEW.md) | Dynamic instruction savings, load-response/store-retirement waits and observer validation |
 | [FMA contraction review](docs/FMA_CONTRACTION_REVIEW.md) | Matched off/fast cycles, numerical differences and corrected finite FMA checks |

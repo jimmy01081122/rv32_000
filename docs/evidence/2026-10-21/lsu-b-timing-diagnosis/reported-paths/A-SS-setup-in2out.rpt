@@ -1,0 +1,65 @@
+Startpoint: dmem_rsp_valid (input port clocked by core_clk)
+Endpoint: dmem_req_wdata[5] (output port clocked by core_clk)
+Path Group: in2out
+Path Type: max
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+1100.00 1100.00 v input external delay
+   0.00 1100.00 v dmem_rsp_valid (in)
+  30.76 1130.76 v hold20218/Y (BUFx2_ASAP7_75t_R)
+  27.55 1158.32 v hold20174/Y (BUFx2_ASAP7_75t_R)
+  28.06 1186.37 v hold20219/Y (BUFx2_ASAP7_75t_R)
+  27.94 1214.31 v hold20120/Y (BUFx2_ASAP7_75t_R)
+  27.36 1241.67 v hold20175/Y (BUFx2_ASAP7_75t_R)
+  27.46 1269.13 v hold20102/Y (BUFx2_ASAP7_75t_R)
+  27.85 1296.98 v hold20176/Y (BUFx2_ASAP7_75t_R)
+  27.72 1324.70 v hold20121/Y (BUFx2_ASAP7_75t_R)
+  27.27 1351.97 v hold20177/Y (BUFx2_ASAP7_75t_R)
+  33.38 1385.35 v input65/Y (BUFx2_ASAP7_75t_R)
+  37.46 1422.81 v hold20178/Y (BUFx2_ASAP7_75t_R)
+  36.73 1459.54 v hold20122/Y (BUFx2_ASAP7_75t_R)
+  36.75 1496.29 v hold20179/Y (BUFx2_ASAP7_75t_R)
+  37.13 1533.42 v hold20103/Y (BUFx2_ASAP7_75t_R)
+  37.23 1570.65 v hold20180/Y (BUFx2_ASAP7_75t_R)
+  36.47 1607.12 v hold20123/Y (BUFx2_ASAP7_75t_R)
+  38.10 1645.22 v hold20181/Y (BUFx2_ASAP7_75t_R)
+  28.04 1673.26 ^ _179899_/Y (NAND3x1_ASAP7_75t_R)
+  32.34 1705.60 ^ hold20182/Y (BUFx2_ASAP7_75t_R)
+  24.53 1730.14 ^ hold20124/Y (BUFx2_ASAP7_75t_R)
+  24.99 1755.12 ^ hold20183/Y (BUFx2_ASAP7_75t_R)
+  25.00 1780.12 ^ hold20104/Y (BUFx2_ASAP7_75t_R)
+  24.76 1804.88 ^ hold20184/Y (BUFx2_ASAP7_75t_R)
+  31.62 1836.50 ^ hold20125/Y (BUFx2_ASAP7_75t_R)
+  42.33 1878.82 ^ _179900_/Y (OR2x2_ASAP7_75t_R)
+  41.46 1920.28 ^ _179919_/Y (OR5x1_ASAP7_75t_R)
+ 106.54 2026.82 ^ _179975_/Y (AO21x1_ASAP7_75t_R)
+ 102.90 2129.72 ^ _179976_/Y (OA21x2_ASAP7_75t_R)
+  34.52 2164.24 v _179978_/Y (INVx1_ASAP7_75t_R)
+  56.25 2220.50 v place15691/Y (BUFx3_ASAP7_75t_R)
+  34.56 2255.06 ^ _179979_/Y (OAI21x1_ASAP7_75t_R)
+ 102.15 2357.20 ^ _179980_/Y (AND2x2_ASAP7_75t_R)
+ 117.37 2474.57 ^ place15642/Y (BUFx3_ASAP7_75t_R)
+ 107.76 2582.33 ^ place15641/Y (BUFx3_ASAP7_75t_R)
+  58.53 2640.87 v _179989_/Y (NAND2x1_ASAP7_75t_R)
+  32.53 2673.40 ^ _179990_/Y (NOR2x1_ASAP7_75t_R)
+ 103.05 2776.44 ^ _179992_/Y (AND2x2_ASAP7_75t_R)
+ 136.27 2912.71 ^ place15215/Y (BUFx3_ASAP7_75t_R)
+ 123.39 3036.10 ^ _186553_/Y (OA21x2_ASAP7_75t_R)
+  77.30 3113.40 ^ output481/Y (BUFx2_ASAP7_75t_R)
+   3.08 3116.48 ^ dmem_req_wdata[5] (out)
+        3116.48   data arrival time
+
+10000.00 10000.00   clock core_clk (rise edge)
+   0.00 10000.00   clock network delay (propagated)
+ -50.00 9950.00   clock uncertainty
+   0.00 9950.00   clock reconvergence pessimism
+-1100.00 8850.00   output external delay
+        8850.00   data required time
+---------------------------------------------------------
+        8850.00   data required time
+        -3116.48   data arrival time
+---------------------------------------------------------
+        5733.52   slack (MET)

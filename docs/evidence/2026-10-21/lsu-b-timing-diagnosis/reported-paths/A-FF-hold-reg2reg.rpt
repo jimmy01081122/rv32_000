@@ -1,0 +1,50 @@
+Startpoint: fp_ex0_req_q[127]$_SDFFE_PP0P_
+            (rising edge-triggered flip-flop clocked by core_clk)
+Endpoint: u_fp_simple.cmp_data[90]$_SDFF_PP0_
+          (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: reg2reg
+Path Type: min
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock source latency
+   0.00    0.00 ^ clk (in)
+  49.27   49.27 ^ wire19034/Y (BUFx12_ASAP7_75t_R)
+  48.53   97.80 ^ clkbuf_0_clk/Y (BUFx24_ASAP7_75t_R)
+  30.23  128.03 ^ clkbuf_1_0_0_clk/Y (BUFx24_ASAP7_75t_R)
+  30.19  158.22 ^ clkbuf_2_1_0_clk/Y (BUFx24_ASAP7_75t_R)
+  28.49  186.71 ^ clkbuf_3_2_0_clk/Y (BUFx24_ASAP7_75t_R)
+  24.11  210.82 ^ clkbuf_4_4_0_clk/Y (BUFx24_ASAP7_75t_R)
+  23.54  234.36 ^ clkbuf_6_18_0_clk/Y (BUFx24_ASAP7_75t_R)
+  20.42  254.78 ^ clkbuf_7_37__f_clk/Y (BUFx24_ASAP7_75t_R)
+  24.90  279.68 ^ clkbuf_leaf_858_clk/Y (BUFx24_ASAP7_75t_R)
+   0.34  280.02 ^ fp_ex0_req_q[127]$_SDFFE_PP0P_/CLK (DFFHQNx1_ASAP7_75t_R)
+  44.28  324.30 ^ fp_ex0_req_q[127]$_SDFFE_PP0P_/QN (DFFHQNx1_ASAP7_75t_R)
+  10.92  335.22 v _255676_/Y (INVx1_ASAP7_75t_R)
+  16.57  351.79 v _258153_/Y (AND2x2_ASAP7_75t_R)
+   0.10  351.89 v u_fp_simple.cmp_data[90]$_SDFF_PP0_/D (DFFHQNx1_ASAP7_75t_R)
+         351.89   data arrival time
+
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock source latency
+   0.00    0.00 ^ clk (in)
+  50.02   50.02 ^ wire19034/Y (BUFx12_ASAP7_75t_R)
+  50.07  100.08 ^ clkbuf_0_clk/Y (BUFx24_ASAP7_75t_R)
+  31.37  131.45 ^ clkbuf_1_0_0_clk/Y (BUFx24_ASAP7_75t_R)
+  31.37  162.82 ^ clkbuf_2_1_0_clk/Y (BUFx24_ASAP7_75t_R)
+  27.21  190.04 ^ clkbuf_3_3_0_clk/Y (BUFx24_ASAP7_75t_R)
+  23.35  213.38 ^ clkbuf_4_7_0_clk/Y (BUFx24_ASAP7_75t_R)
+  32.23  245.62 ^ clkbuf_6_31_0_clk/Y (BUFx24_ASAP7_75t_R)
+  21.15  266.76 ^ clkbuf_7_62__f_clk/Y (BUFx24_ASAP7_75t_R)
+  23.75  290.51 ^ clkbuf_leaf_874_clk/Y (BUFx24_ASAP7_75t_R)
+   3.66  294.17 ^ u_fp_simple.cmp_data[90]$_SDFF_PP0_/CLK (DFFHQNx1_ASAP7_75t_R)
+  25.00  319.17   clock uncertainty
+  -4.61  314.56   clock reconvergence pessimism
+  12.68  327.24   library hold time
+         327.24   data required time
+---------------------------------------------------------
+         327.24   data required time
+        -351.89   data arrival time
+---------------------------------------------------------
+          24.65   slack (MET)

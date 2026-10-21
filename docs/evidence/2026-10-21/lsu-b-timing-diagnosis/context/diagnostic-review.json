@@ -1,0 +1,140 @@
+{
+  "scope": "Read-only B timing diagnosis, not a new physical operating-point qualification",
+  "reviewed_utc": "2026-10-21T13:48:14.343490+00:00",
+  "passed": true,
+  "native_jobs": 12,
+  "original_routed_corner_matches": [
+    {
+      "candidate": "B",
+      "corner": "SS",
+      "original_trial": "build/experiments/lsu-b-v1/physical-14000ps-eco-clean-v1/diagnostic-boundary-v1/SS/clock_trials.json",
+      "original_sha256": "05137675e901542afa362557af0f4628c44c4ef6d4228f52762aea3bb74d459f",
+      "differences_ps": {
+        "setup_slack_ps": 0.0,
+        "hold_slack_ps": 1.1368683772161603e-13
+      }
+    },
+    {
+      "candidate": "B",
+      "corner": "TT",
+      "original_trial": "build/experiments/lsu-b-v1/physical-14000ps-eco-clean-v1/diagnostic-boundary-v1/TT/clock_trials.json",
+      "original_sha256": "e44a663ec4fe65077e3e1eb96e7fdb5dddec0781aa2c3d7195fff6812529476e",
+      "differences_ps": {
+        "setup_slack_ps": -2.2737367544323206e-13,
+        "hold_slack_ps": 1.4210854715202004e-13
+      }
+    },
+    {
+      "candidate": "B",
+      "corner": "FF",
+      "original_trial": "build/experiments/lsu-b-v1/physical-14000ps-eco-clean-v1/diagnostic-boundary-v1/FF/clock_trials.json",
+      "original_sha256": "e069bb5f0e01ec7eec45144931df31fa154c6af1b7a02fa09162e1897a1f9cf1",
+      "differences_ps": {
+        "setup_slack_ps": 4.547473508864641e-13,
+        "hold_slack_ps": -3.0175861809311755e-13
+      }
+    },
+    {
+      "candidate": "baseline",
+      "corner": "SS",
+      "original_trial": "docs/evidence/2026-10-18/post-lsu-baseline/physical/boundary-9900-10000ps/SS/clock_trials.json",
+      "original_sha256": "973db9e0118629c2afa6e955c31398de27ca310626bcaafbae707220d93d763b",
+      "differences_ps": {
+        "setup_slack_ps": 3.979039320256561e-13,
+        "hold_slack_ps": 8.526512829121202e-14
+      }
+    },
+    {
+      "candidate": "baseline",
+      "corner": "TT",
+      "original_trial": "docs/evidence/2026-10-18/post-lsu-baseline/physical/boundary-9900-10000ps/TT/clock_trials.json",
+      "original_sha256": "643367bccc7c1be28d6c242387de549c2202231ca6445fda4abb3a76314fce60",
+      "differences_ps": {
+        "setup_slack_ps": 0.0,
+        "hold_slack_ps": 1.8474111129762605e-13
+      }
+    },
+    {
+      "candidate": "baseline",
+      "corner": "FF",
+      "original_trial": "docs/evidence/2026-10-18/post-lsu-baseline/physical/boundary-9900-10000ps/FF/clock_trials.json",
+      "original_sha256": "765dc7bfa929b39328e6c061aab7b1d48e8f3b32f6b03000a62a5b7e9e859a9a",
+      "differences_ps": {
+        "setup_slack_ps": 0.0,
+        "hold_slack_ps": -2.4158453015843406e-13
+      }
+    },
+    {
+      "candidate": "A",
+      "corner": "SS",
+      "original_trial": "build/experiments/lsu-a-v1/physical-14000ps-eco-clean-v1/boundary-v1/SS/clock_trials.json",
+      "original_sha256": "ab9dbf20b3013636c72e5d5657960e3a84c11667b36beed2273520bb9af7d903",
+      "differences_ps": {
+        "setup_slack_ps": 3.126388037344441e-13,
+        "hold_slack_ps": 3.694822225952521e-13
+      }
+    },
+    {
+      "candidate": "A",
+      "corner": "TT",
+      "original_trial": "build/experiments/lsu-a-v1/physical-14000ps-eco-clean-v1/boundary-v1/TT/clock_trials.json",
+      "original_sha256": "ac507f07b8b32afb068c41f8d9dff9b6803408e10184d28bc171b92faf093da3",
+      "differences_ps": {
+        "setup_slack_ps": 0.0,
+        "hold_slack_ps": -1.5631940186722204e-13
+      }
+    },
+    {
+      "candidate": "A",
+      "corner": "FF",
+      "original_trial": "build/experiments/lsu-a-v1/physical-14000ps-eco-clean-v1/boundary-v1/FF/clock_trials.json",
+      "original_sha256": "7de7012755588c03b41859eda9bbf2c848346812f5631e7aa1442cdebbd6b2da",
+      "differences_ps": {
+        "setup_slack_ps": 0.0,
+        "hold_slack_ps": 4.405364961712621e-13
+      }
+    }
+  ],
+  "cell_net_decompositions": 72,
+  "synthesis_cache_cells_checked": 534342,
+  "old_archives_verified": [
+    {
+      "path": "docs/evidence/2026-10-18/post-lsu-baseline",
+      "indexed_files": 214,
+      "index_sha256": "fab45cc3749ef1a6eb392b85eca1510c5cf08483f9b1b873ed6abc4aab3764af",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/2026-10-19/lsu-a-functional",
+      "indexed_files": 438,
+      "index_sha256": "e4ac7c39a39c52608ca874251a0833f2893e442f8f1022321ee5302abe59dcfc",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/2026-10-20/lsu-a-physical",
+      "indexed_files": 369,
+      "index_sha256": "e3069911821e74742938aa85bbdf318f7bd2d33ee1ec4ca79f9bd7822f4b4b8a",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/2026-10-20/lsu-a-review",
+      "indexed_files": 327,
+      "index_sha256": "00b9f00470e12835b75c4d74b81f7c6ea46d18818c9e9599ec32bea39102d6db",
+      "verified": true
+    },
+    {
+      "path": "docs/evidence/2026-10-21/lsu-b",
+      "indexed_files": 712,
+      "index_sha256": "dbcb2df1c2605b5750c3c275db638b20925df7ace11d3319ba58c3f0e33d719c",
+      "verified": true
+    }
+  ],
+  "baseline_sim_sha256": "fd2049c30c5453a532735eefe6c189bc879ce1220a2c33464573168bf24eae78",
+  "CPU_and_scored_inputs_unchanged": true,
+  "setup_deltas_B_minus_baseline_ps": {
+    "routed_worst_FP_data_delay": 2605.7641349999994,
+    "synthesis_zero_wire_worst_FP_data_delay": 1936.8977669999995,
+    "synthesis_zero_wire_same_FP_sink_115": 1971.8618079999997
+  },
+  "interpretation": "Original B remains timing rejected. Structural mapping and loaded cell-arc differences precede route; zero-wire results do not establish a usable clock. No particular FP opcode, optimizer pass, deterministic rerun property, or inevitable B architecture penalty is proved."
+}

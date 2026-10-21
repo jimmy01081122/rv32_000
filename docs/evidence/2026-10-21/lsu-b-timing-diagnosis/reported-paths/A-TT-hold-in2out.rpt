@@ -1,0 +1,53 @@
+Startpoint: rst (input port clocked by core_clk)
+Endpoint: dmem_req_addr[27] (output port clocked by core_clk)
+Path Group: in2out
+Path Type: min
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+   0.00    0.00 ^ input external delay
+   0.00    0.00 ^ rst (in)
+  20.59   20.59 ^ hold20160/Y (BUFx2_ASAP7_75t_R)
+  16.68   37.27 ^ hold20150/Y (BUFx2_ASAP7_75t_R)
+  16.58   53.85 ^ hold20161/Y (BUFx2_ASAP7_75t_R)
+  16.39   70.24 ^ hold20136/Y (BUFx2_ASAP7_75t_R)
+  16.07   86.31 ^ hold20162/Y (BUFx2_ASAP7_75t_R)
+  15.99  102.30 ^ hold20151/Y (BUFx2_ASAP7_75t_R)
+  16.25  118.55 ^ hold20163/Y (BUFx2_ASAP7_75t_R)
+  16.19  134.74 ^ hold19732/Y (BUFx2_ASAP7_75t_R)
+  15.81  150.55 ^ hold20152/Y (BUFx2_ASAP7_75t_R)
+  15.73  166.28 ^ hold20137/Y (BUFx2_ASAP7_75t_R)
+  16.62  182.91 ^ hold20153/Y (BUFx2_ASAP7_75t_R)
+  21.01  203.92 ^ input101/Y (BUFx8_ASAP7_75t_R)
+  18.40  222.32 ^ hold20154/Y (BUFx2_ASAP7_75t_R)
+  18.75  241.06 ^ hold20138/Y (BUFx2_ASAP7_75t_R)
+  18.93  259.99 ^ hold20155/Y (BUFx2_ASAP7_75t_R)
+  18.67  278.66 ^ hold19733/Y (BUFx2_ASAP7_75t_R)
+  18.63  297.29 ^ hold20156/Y (BUFx2_ASAP7_75t_R)
+  19.37  316.66 ^ hold20139/Y (BUFx2_ASAP7_75t_R)
+  61.35  378.01 ^ hold20157/Y (BUFx2_ASAP7_75t_R)
+  16.70  394.71 v _178898_/Y (INVx4_ASAP7_75t_R)
+  23.00  417.71 v hold20158/Y (BUFx2_ASAP7_75t_R)
+  18.46  436.17 v hold20140/Y (BUFx2_ASAP7_75t_R)
+  18.14  454.31 v hold20159/Y (BUFx2_ASAP7_75t_R)
+  19.31  473.62 v hold19734/Y (BUFx2_ASAP7_75t_R)
+  41.43  515.05 v hold20141/Y (BUFx2_ASAP7_75t_R)
+  36.99  552.04 v place18919/Y (BUFx6f_ASAP7_75t_R)
+  74.05  626.09 v _186881_/Y (AO32x1_ASAP7_75t_R)
+  21.87  647.97 v output436/Y (BUFx2_ASAP7_75t_R)
+   0.00  647.97 v dmem_req_addr[27] (out)
+         647.97   data arrival time
+
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+  25.00   25.00   clock uncertainty
+   0.00   25.00   clock reconvergence pessimism
+   0.00   25.00   output external delay
+          25.00   data required time
+---------------------------------------------------------
+          25.00   data required time
+        -647.97   data arrival time
+---------------------------------------------------------
+         622.97   slack (MET)

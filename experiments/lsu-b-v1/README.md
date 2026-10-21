@@ -2,6 +2,9 @@
 
 2026-10-21，B 獨立實驗已完成：[審查](../../docs/LSU_B_REVIEW.md)與[原始證據](../../docs/evidence/2026-10-21/lsu-b/README.md)已封存。功能／完整同頻 cycle 資料通過；面積0.995585×，但SS setup與FF hold未通過，無完整合格操作點。同頻 cycle GM為Embench 1.029459×／FP32 1.009599×，不作正式PPA通過成績。
 
+後續[時序診斷與選項](../../docs/LSU_B_TIMING_DIAGNOSIS.md)已完成，另行保存
+12 次唯讀程序、映射連線核對與原 corner 重現證據；沒有修改本實驗契約或 CPU。
+
 下列保留事前固定的設計與驗收條件。使用者核准進行 B。獨立分支 `codex/lsu-b-marking` 的父版本為
 凍結基線 `58a4159da0372b3286758be1e6c1b50f9f28cc27`。沿用 A 已審查的
 量測工具與歷史證據（`bf6702c`），CPU 的其餘 17 個 RTL 檔與模擬／實體

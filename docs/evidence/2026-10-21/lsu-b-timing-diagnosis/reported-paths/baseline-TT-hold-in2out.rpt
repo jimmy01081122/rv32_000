@@ -1,0 +1,49 @@
+Startpoint: rst (input port clocked by core_clk)
+Endpoint: dmem_req_valid (output port clocked by core_clk)
+Path Group: in2out
+Path Type: min
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+   0.00    0.00 ^ input external delay
+   0.00    0.00 ^ rst (in)
+  21.42   21.42 ^ hold20260/Y (BUFx2_ASAP7_75t_R)
+  17.47   38.88 ^ hold20170/Y (BUFx2_ASAP7_75t_R)
+  16.37   55.25 ^ hold20261/Y (BUFx2_ASAP7_75t_R)
+  16.46   71.71 ^ hold20159/Y (BUFx2_ASAP7_75t_R)
+  17.04   88.75 ^ hold20262/Y (BUFx2_ASAP7_75t_R)
+  16.64  105.39 ^ hold20171/Y (BUFx2_ASAP7_75t_R)
+  16.09  121.48 ^ hold20263/Y (BUFx2_ASAP7_75t_R)
+  16.07  137.55 ^ hold19218/Y (BUFx2_ASAP7_75t_R)
+  16.32  153.87 ^ hold20264/Y (BUFx2_ASAP7_75t_R)
+  16.24  170.11 ^ hold20172/Y (BUFx2_ASAP7_75t_R)
+  15.97  186.08 ^ hold20265/Y (BUFx2_ASAP7_75t_R)
+  15.68  201.76 ^ hold20160/Y (BUFx2_ASAP7_75t_R)
+  16.20  217.95 ^ hold20173/Y (BUFx2_ASAP7_75t_R)
+  20.45  238.41 ^ input101/Y (BUFx8_ASAP7_75t_R)
+  17.62  256.03 ^ hold20174/Y (BUFx2_ASAP7_75t_R)
+  17.66  273.69 ^ hold20161/Y (BUFx2_ASAP7_75t_R)
+  17.50  291.18 ^ hold20175/Y (BUFx2_ASAP7_75t_R)
+  17.47  308.65 ^ hold19219/Y (BUFx2_ASAP7_75t_R)
+  17.32  325.97 ^ hold20176/Y (BUFx2_ASAP7_75t_R)
+  22.09  348.06 ^ hold20162/Y (BUFx2_ASAP7_75t_R)
+  31.01  379.06 ^ hold20177/Y (BUFx2_ASAP7_75t_R)
+  58.61  437.68 ^ place18978/Y (BUFx3_ASAP7_75t_R)
+  40.74  478.42 v _208201_/Y (AOI21x1_ASAP7_75t_R)
+  36.55  514.97 v output453/Y (BUFx2_ASAP7_75t_R)
+   0.90  515.87 v dmem_req_valid (out)
+         515.87   data arrival time
+
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock network delay (propagated)
+  25.00   25.00   clock uncertainty
+   0.00   25.00   clock reconvergence pessimism
+   0.00   25.00   output external delay
+          25.00   data required time
+---------------------------------------------------------
+          25.00   data required time
+        -515.87   data arrival time
+---------------------------------------------------------
+         490.87   slack (MET)

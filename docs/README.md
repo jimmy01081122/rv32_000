@@ -28,6 +28,7 @@ signoff label applies only to the source/configuration and checks in that record
 | [LSU A verification review](LSU_A_VERIFICATION_REVIEW.md) | Build/functional provenance and per-PC admission fixes, expanded unit cases and unchanged full-denominator results |
 | [LSU B review](LSU_B_REVIEW.md) | Independent B, complete functional/cycle evidence, failed fixed-flow timing and joint next-direction decision |
 | [LSU B raw evidence](evidence/2026-10-21/lsu-b/README.md) | All27 diagnostic cases, binaries/netlist/ODB, actual timing failures and reproducible proof |
+| [LSU B timing diagnosis](LSU_B_TIMING_DIAGNOSIS.md) | Original corner replay, mapped FP depth and cell/net delay comparison, TT/FF hold limits and next choices |
 | [Session handoff](SESSION_HANDOFF.md) | Bring-up measurements, tool images and local evidence locations |
 | [CI workflow](../.github/workflows/README.md) | Existing jobs, prerequisites and limits |
 | [Physical flow](../physical/asap7/README.md) | ASAP7 setup status and current research limitations |

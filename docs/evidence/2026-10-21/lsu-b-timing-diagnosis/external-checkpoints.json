@@ -1,0 +1,26 @@
+{
+  "scope": "Reuse immutable original routed databases; do not reroute or replace them",
+  "records": [
+    {
+      "candidate": "baseline",
+      "archive_gzip": "docs/evidence/2026-10-18/post-lsu-baseline/physical/5_1_grt.odb.gz",
+      "gzip_sha256": "214431e4507ad0d10305360915f585dcffe6a97599b7b388a286b7ce60813b4f",
+      "raw_sha256": "9326b7001ac093c96c7d8e117f300ceae558fe395c29cfb72481536978ce52bf",
+      "restore_to": "build/experiments/lsu-b-diagnosis-v1/replays/baseline-routed.odb"
+    },
+    {
+      "candidate": "A",
+      "archive_gzip": "docs/evidence/2026-10-20/lsu-a-physical/physical/physical-14000ps-eco-clean-v1/5_1_grt.odb.gz",
+      "gzip_sha256": "9d2f39950634c8ca86b50330a7119b8133e35945d5c1ccede233ec1d3bcb69ba",
+      "raw_sha256": "df92f78cea3302e5f0060cf70f6d7e5b804282ff34d5147a920cf6a03cc4341e",
+      "restore_to": "build/experiments/lsu-a-v1/physical-14000ps-eco-clean-v1/results/asap7/rv32_post_lsu_v1/base/5_1_grt.odb"
+    },
+    {
+      "candidate": "B",
+      "archive_gzip": "docs/evidence/2026-10-21/lsu-b/physical/physical-14000ps-eco-clean-v1/results/asap7/rv32_post_lsu_v1/base/5_1_grt.odb.gz",
+      "gzip_sha256": "8ee0d7dfcfd9fee9963bd09a4ef0ea0a6194576b8174a85365842b8201486277",
+      "raw_sha256": "d720fb2c45f3b70eced5dbf1dbf528209fd84909cf52f835d2cc177f6ac7d4ea",
+      "restore_to": "build/experiments/lsu-b-v1/physical-14000ps-eco-clean-v1/results/asap7/rv32_post_lsu_v1/base/5_1_grt.odb"
+    }
+  ]
+}

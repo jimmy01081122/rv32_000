@@ -1,0 +1,50 @@
+Startpoint: u_rob.entries[0][127]$_SDFFE_PP0P_
+            (rising edge-triggered flip-flop clocked by core_clk)
+Endpoint: u_rob.commit_trace[200]$_SDFF_PP0_
+          (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: reg2reg
+Path Type: min
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock source latency
+   0.00    0.00 ^ clk (in)
+  48.36   48.36 ^ wire20255/Y (BUFx12_ASAP7_75t_R)
+  48.90   97.26 ^ clkbuf_0_clk/Y (BUFx24_ASAP7_75t_R)
+  28.00  125.26 ^ clkbuf_1_0_0_clk/Y (BUFx24_ASAP7_75t_R)
+  24.31  149.57 ^ clkbuf_2_1_0_clk/Y (BUFx24_ASAP7_75t_R)
+  29.47  179.04 ^ clkbuf_3_3_0_clk/Y (BUFx24_ASAP7_75t_R)
+  23.86  202.90 ^ clkbuf_4_6_0_clk/Y (BUFx24_ASAP7_75t_R)
+  26.10  229.00 ^ clkbuf_6_26_0_clk/Y (BUFx24_ASAP7_75t_R)
+  22.24  251.24 ^ clkbuf_7_53__f_clk/Y (BUFx24_ASAP7_75t_R)
+  29.40  280.64 ^ clkbuf_leaf_158_clk/Y (BUFx24_ASAP7_75t_R)
+   1.87  282.51 ^ u_rob.entries[0][127]$_SDFFE_PP0P_/CLK (DFFHQNx1_ASAP7_75t_R)
+  39.80  322.31 ^ u_rob.entries[0][127]$_SDFFE_PP0P_/QN (DFFHQNx1_ASAP7_75t_R)
+  25.31  347.62 ^ _228257_/Y (AO32x1_ASAP7_75t_R)
+  11.78  359.40 v _228258_/Y (NOR2x1_ASAP7_75t_R)
+   0.08  359.48 v u_rob.commit_trace[200]$_SDFF_PP0_/D (DFFHQNx1_ASAP7_75t_R)
+         359.48   data arrival time
+
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock source latency
+   0.00    0.00 ^ clk (in)
+  49.11   49.11 ^ wire20255/Y (BUFx12_ASAP7_75t_R)
+  50.44   99.55 ^ clkbuf_0_clk/Y (BUFx24_ASAP7_75t_R)
+  28.63  128.19 ^ clkbuf_1_1_0_clk/Y (BUFx24_ASAP7_75t_R)
+  29.34  157.52 ^ clkbuf_2_2_0_clk/Y (BUFx24_ASAP7_75t_R)
+  31.85  189.38 ^ clkbuf_3_4_0_clk/Y (BUFx24_ASAP7_75t_R)
+  24.64  214.01 ^ clkbuf_4_9_0_clk/Y (BUFx24_ASAP7_75t_R)
+  29.50  243.52 ^ clkbuf_6_37_0_clk/Y (BUFx24_ASAP7_75t_R)
+  21.28  264.80 ^ clkbuf_7_74__f_clk/Y (BUFx24_ASAP7_75t_R)
+  34.78  299.58 ^ clkbuf_leaf_666_clk/Y (BUFx24_ASAP7_75t_R)
+   1.67  301.24 ^ u_rob.commit_trace[200]$_SDFF_PP0_/CLK (DFFHQNx1_ASAP7_75t_R)
+  25.00  326.24   clock uncertainty
+  -2.29  323.95   clock reconvergence pessimism
+  11.68  335.63   library hold time
+         335.63   data required time
+---------------------------------------------------------
+         335.63   data required time
+        -359.48   data arrival time
+---------------------------------------------------------
+          23.85   slack (MET)

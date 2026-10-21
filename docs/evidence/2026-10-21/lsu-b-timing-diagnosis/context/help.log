@@ -1,0 +1,29 @@
+OpenROAD 26Q1-2900-gdf79404cd8 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+report_checks [-from from_list|-rise_from from_list|-fall_from from_list]
+   [-through through_list|-rise_through through_list|-fall_through through_list]
+   [-to to_list|-rise_to to_list|-fall_to to_list] [-unconstrained]
+   [-path_delay min|min_rise|min_fall|max|max_rise|max_fall|min_max]
+   [-scenes scenes] [-group_path_count path_count]
+   [-endpoint_path_count path_count] [-unique_paths_to_endpoint]
+   [-slack_max slack_max] [-slack_min slack_min] [-sort_by_slack]
+   [-path_group group_name]
+   [-format full|full_clock|full_clock_expanded|short|end|slack_only|summary|json]
+   [-fields capacitance|slew|fanout|input_pin|net|src_attr] [-digits digits]
+   [-no_line_splits] [> filename] [>> filename] 
+find_timing_paths [-from from_list|-rise_from from_list|-fall_from from_list]
+   [-through through_list|-rise_through through_list|-fall_through through_list]
+   [-to to_list|-rise_to to_list|-fall_to to_list]
+   [-path_delay min|min_rise|min_fall|max|max_rise|max_fall|min_max]
+   [-unconstrained] [-scenes scenes] [-group_path_count path_count]
+   [-endpoint_path_count path_count] [-unique_paths_to_endpoint]
+   [-unique_edges_to_endpoint] [-slack_max slack_max] [-slack_min slack_min]
+   [-sort_by_slack] [-path_group group_name] 
+[WARNING STA-0160] no commands match 'report_delay_calc'.
+get_property
+   [-object_type library|liberty_library|cell|liberty_cell|instance|pin|net|port|clock|timing_arc]
+   object property 
+report_edges [-from from_pin] [-to to_pin] [-digits digits] [-report_variance] 
+[WARNING STA-0160] no commands match 'report_cell'.

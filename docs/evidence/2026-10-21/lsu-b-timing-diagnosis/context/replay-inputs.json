@@ -1,0 +1,105 @@
+{
+  "restorations": [
+    {
+      "source": "docs/evidence/2026-10-18/post-lsu-baseline/physical/5_1_grt.odb.gz",
+      "source_sha256": "214431e4507ad0d10305360915f585dcffe6a97599b7b388a286b7ce60813b4f",
+      "restored": "build/experiments/lsu-b-diagnosis-v1/replays/baseline-routed.odb",
+      "raw_sha256": "9326b7001ac093c96c7d8e117f300ceae558fe395c29cfb72481536978ce52bf",
+      "bytes": 171916451,
+      "expected_original_sha256": "9326b7001ac093c96c7d8e117f300ceae558fe395c29cfb72481536978ce52bf"
+    },
+    {
+      "source": "build/baselines/ap5b-post-lsu-v1/physical-5500ps-abc-mapping-probe/results/asap7/rv32_post_lsu_v1/base/1_synth.odb.gz",
+      "source_sha256": "6db2d36e1bb3f8ec6411e68a924957a3bffde9033fae1b7b2e24a90b71dc3dcb",
+      "restored": "build/experiments/lsu-b-diagnosis-v1/replays/baseline-synthesis.odb",
+      "raw_sha256": "177bd86853bb7fd01477d6515bc50c782dc7710422e924a6bfcc6d12768002d9",
+      "bytes": 85163396,
+      "expected_original_sha256": null
+    },
+    {
+      "source": "build/experiments/lsu-a-v1/physical-5500ps-synth-clean-v1/results/asap7/rv32_post_lsu_v1/base/1_synth.odb.gz",
+      "source_sha256": "9e190e50d850d3a700e4e23b63e6802703c37d2c4df867ee682814dbb9abda31",
+      "restored": "build/experiments/lsu-b-diagnosis-v1/replays/A-synthesis.odb",
+      "raw_sha256": "c004fb3c6d787359e194410d7585941c260e4c3b2f97d9ddb4876a8036862e47",
+      "bytes": 85647260,
+      "expected_original_sha256": null
+    },
+    {
+      "source": "build/experiments/lsu-b-v1/physical-5500ps-synth-clean-v1/results/asap7/rv32_post_lsu_v1/base/1_synth.odb.gz",
+      "source_sha256": "d1cf1a97e7b6a26dc87210be9ed25abe3881046c90aad2c3f2f97945190337c4",
+      "restored": "build/experiments/lsu-b-diagnosis-v1/replays/B-synthesis.odb",
+      "raw_sha256": "44ab94b5de1fd388dc4703776d32192d0b2d625d9bd4d0911053107c9e40b3b5",
+      "bytes": 84319855,
+      "expected_original_sha256": null
+    }
+  ],
+  "implementations": {
+    "baseline": {
+      "routed": {
+        "path": "build/experiments/lsu-b-diagnosis-v1/replays/baseline-routed.odb",
+        "sha256": "9326b7001ac093c96c7d8e117f300ceae558fe395c29cfb72481536978ce52bf"
+      },
+      "synthesis": {
+        "path": "build/experiments/lsu-b-diagnosis-v1/replays/baseline-synthesis.odb",
+        "sha256": "177bd86853bb7fd01477d6515bc50c782dc7710422e924a6bfcc6d12768002d9"
+      },
+      "netlist": {
+        "path": "build/baselines/ap5b-post-lsu-v1/physical-5500ps-abc-mapping-probe/results/asap7/rv32_post_lsu_v1/base/1_2_yosys.v",
+        "sha256": "298e87969a0d80270fd522803d79ee691808c2549e65d0024532ce86736050b2"
+      },
+      "final_metadata": {
+        "path": "docs/evidence/2026-10-18/post-lsu-baseline/physical/boundary-9900-10000ps/run.json",
+        "sha256": "cefe47e6985e9ffc36d5b82a6a82119ac1127e0b64d634e6818d48ead4ec7caa"
+      },
+      "implementation": {
+        "path": "build/baselines/ap5b-post-lsu-v1/physical-14000ps-tt-abc-full-route-v6/run.json",
+        "sha256": "6bb84cc49326378ab61c23d234450fca4acf22f01fced9b2bd89841f58513a3b"
+      }
+    },
+    "A": {
+      "routed": {
+        "path": "build/experiments/lsu-a-v1/physical-14000ps-eco-clean-v1/results/asap7/rv32_post_lsu_v1/base/5_1_grt.odb",
+        "sha256": "df92f78cea3302e5f0060cf70f6d7e5b804282ff34d5147a920cf6a03cc4341e"
+      },
+      "synthesis": {
+        "path": "build/experiments/lsu-b-diagnosis-v1/replays/A-synthesis.odb",
+        "sha256": "c004fb3c6d787359e194410d7585941c260e4c3b2f97d9ddb4876a8036862e47"
+      },
+      "netlist": {
+        "path": "build/experiments/lsu-a-v1/physical-5500ps-synth-clean-v1/results/asap7/rv32_post_lsu_v1/base/1_2_yosys.v",
+        "sha256": "739426871dd033e9db6dead15d2cc8a25037647c6bdf212d5ad8df01dfb49da2"
+      },
+      "final_metadata": {
+        "path": "build/experiments/lsu-a-v1/physical-14000ps-eco-clean-v1/boundary-v1/run.json",
+        "sha256": "69d4fd4b7eea499c05998a437bae4db78598cf991cf59976f545bbbc01575a0e"
+      },
+      "implementation": {
+        "path": "build/experiments/lsu-a-v1/physical-14000ps-eco-clean-v1/run.json",
+        "sha256": "355494216fdd018505ced3558f7cc1b7d183b4fb3465f289fa65770b2034d132"
+      }
+    },
+    "B": {
+      "routed": {
+        "path": "build/experiments/lsu-b-v1/physical-14000ps-eco-clean-v1/results/asap7/rv32_post_lsu_v1/base/5_1_grt.odb",
+        "sha256": "d720fb2c45f3b70eced5dbf1dbf528209fd84909cf52f835d2cc177f6ac7d4ea"
+      },
+      "synthesis": {
+        "path": "build/experiments/lsu-b-diagnosis-v1/replays/B-synthesis.odb",
+        "sha256": "44ab94b5de1fd388dc4703776d32192d0b2d625d9bd4d0911053107c9e40b3b5"
+      },
+      "netlist": {
+        "path": "build/experiments/lsu-b-v1/physical-5500ps-synth-clean-v1/results/asap7/rv32_post_lsu_v1/base/1_2_yosys.v",
+        "sha256": "63abef6ce6b117e87889403558fd000c4aa400ad9d30eae2650051097105c276"
+      },
+      "final_metadata": {
+        "path": "build/experiments/lsu-b-v1/physical-14000ps-eco-clean-v1/diagnostic-boundary-v1/run.json",
+        "sha256": "02e0a21cd4c87e7ca4a15067eaad60be1d53bec01c7128307e1ad04ce02d2f1d"
+      },
+      "implementation": {
+        "path": "build/experiments/lsu-b-v1/physical-14000ps-eco-clean-v1/run.json",
+        "sha256": "6f0833bdc7c7ca0782d9099997eec17b6287c814bb03a1a76f952d2a6e76a78c"
+      }
+    }
+  },
+  "note": "Synth ODBs are recovered completed caches; their exported connectivity is checked against the original recorded mapped netlist. Routed ODB hashes bind to the independently archived trial metadata."
+}

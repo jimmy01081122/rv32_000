@@ -1,0 +1,50 @@
+Startpoint: u_frontend.iq_mem[2][54]$_DFFE_PP_
+            (rising edge-triggered flip-flop clocked by core_clk)
+Endpoint: u_frontend.iq_mem[2][54]$_DFFE_PP_
+          (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: reg2reg
+Path Type: min
+
+  Delay    Time   Description
+---------------------------------------------------------
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock source latency
+   0.00    0.00 ^ clk (in)
+  59.07   59.07 ^ wire18984/Y (BUFx12_ASAP7_75t_R)
+  58.21  117.29 ^ clkbuf_0_clk/Y (BUFx24_ASAP7_75t_R)
+  36.84  154.13 ^ clkbuf_1_0_0_clk/Y (BUFx24_ASAP7_75t_R)
+  32.62  186.75 ^ clkbuf_2_0_0_clk/Y (BUFx24_ASAP7_75t_R)
+  37.16  223.91 ^ clkbuf_3_0_0_clk/Y (BUFx24_ASAP7_75t_R)
+  31.75  255.66 ^ clkbuf_4_0_0_clk/Y (BUFx24_ASAP7_75t_R)
+  32.06  287.72 ^ clkbuf_6_0_0_clk/Y (BUFx24_ASAP7_75t_R)
+  29.43  317.16 ^ clkbuf_7_0__f_clk/Y (BUFx24_ASAP7_75t_R)
+  36.64  353.79 ^ clkbuf_leaf_976_clk/Y (BUFx24_ASAP7_75t_R)
+   1.26  355.06 ^ u_frontend.iq_mem[2][54]$_DFFE_PP_/CLK (DFFHQNx1_ASAP7_75t_R)
+  55.20  410.25 ^ u_frontend.iq_mem[2][54]$_DFFE_PP_/QN (DFFHQNx1_ASAP7_75t_R)
+  22.59  432.84 ^ hold22596/Y (BUFx2_ASAP7_75t_R)
+   9.35  442.19 v _269093_/Y (AOI21x1_ASAP7_75t_R)
+   0.05  442.25 v u_frontend.iq_mem[2][54]$_DFFE_PP_/D (DFFHQNx1_ASAP7_75t_R)
+         442.25   data arrival time
+
+   0.00    0.00   clock core_clk (rise edge)
+   0.00    0.00   clock source latency
+   0.00    0.00 ^ clk (in)
+  59.93   59.93 ^ wire18984/Y (BUFx12_ASAP7_75t_R)
+  60.00  119.93 ^ clkbuf_0_clk/Y (BUFx24_ASAP7_75t_R)
+  38.14  158.07 ^ clkbuf_1_0_0_clk/Y (BUFx24_ASAP7_75t_R)
+  33.68  191.75 ^ clkbuf_2_0_0_clk/Y (BUFx24_ASAP7_75t_R)
+  38.78  230.53 ^ clkbuf_3_0_0_clk/Y (BUFx24_ASAP7_75t_R)
+  33.00  263.52 ^ clkbuf_4_0_0_clk/Y (BUFx24_ASAP7_75t_R)
+  33.66  297.18 ^ clkbuf_6_0_0_clk/Y (BUFx24_ASAP7_75t_R)
+  31.37  328.55 ^ clkbuf_7_0__f_clk/Y (BUFx24_ASAP7_75t_R)
+  40.37  368.92 ^ clkbuf_leaf_976_clk/Y (BUFx24_ASAP7_75t_R)
+   1.54  370.46 ^ u_frontend.iq_mem[2][54]$_DFFE_PP_/CLK (DFFHQNx1_ASAP7_75t_R)
+  25.00  395.46   clock uncertainty
+ -15.40  380.06   clock reconvergence pessimism
+  13.75  393.81   library hold time
+         393.81   data required time
+---------------------------------------------------------
+         393.81   data required time
+        -442.25   data arrival time
+---------------------------------------------------------
+          48.44   slack (MET)

@@ -1,0 +1,16 @@
+{
+  "scope": "Read-only B timing diagnosis, not a new physical operating-point qualification",
+  "reviewed_utc": "2026-10-21T13:48:14.343490+00:00",
+  "passed": true,
+  "native_jobs": 12,
+  "cell_net_decompositions": 72,
+  "synthesis_cache_cells_checked": 534342,
+  "baseline_sim_sha256": "fd2049c30c5453a532735eefe6c189bc879ce1220a2c33464573168bf24eae78",
+  "CPU_and_scored_inputs_unchanged": true,
+  "setup_deltas_B_minus_baseline_ps": {
+    "routed_worst_FP_data_delay": 2605.7641349999994,
+    "synthesis_zero_wire_worst_FP_data_delay": 1936.8977669999995,
+    "synthesis_zero_wire_same_FP_sink_115": 1971.8618079999997
+  },
+  "interpretation": "Original B remains timing rejected. Structural mapping and loaded cell-arc differences precede route; zero-wire results do not establish a usable clock. No particular FP opcode, optimizer pass, deterministic rerun property, or inevitable B architecture penalty is proved."
+}

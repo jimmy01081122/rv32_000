@@ -1,0 +1,320 @@
+Startpoint: dmem_rsp_rdata[10] (input port clocked by core_clk)
+Endpoint: u_lsu.rsp_buf_rdata[10]$_SDFFE_PP0P_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: in2reg
+Path Type: min
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                  0.000000    0.000000 v input external delay
+     1    0.272120   20.000000    0.000000    0.000000 v dmem_rsp_rdata[10] (in)
+                                                         dmem_rsp_rdata[10] (net)
+                     20.000000    0.000000    0.000000 v _257446_/B2 (AO32x1_ASAP7_75t_R)
+     1    0.442001   12.065627   31.279905   31.279905 v _257446_/Y (AO32x1_ASAP7_75t_R)
+                                                         _024704_ (net)
+                     12.065627    0.000000   31.279905 v u_lsu.rsp_buf_rdata[10]$_SDFFE_PP0P_/D (DFFHQNx1_ASAP7_75t_R)
+                                             31.279905   data arrival time
+
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                 25.000000   25.000000   clock uncertainty
+                                  0.000000   25.000000   clock reconvergence pessimism
+                                             25.000000 ^ u_lsu.rsp_buf_rdata[10]$_SDFFE_PP0P_/CLK (DFFHQNx1_ASAP7_75t_R)
+                                 13.623151   38.623150   library hold time
+                                             38.623150   data required time
+---------------------------------------------------------------------------------------------
+                                             38.623150   data required time
+                                            -31.279905   data arrival time
+---------------------------------------------------------------------------------------------
+                                             -7.343244   slack (VIOLATED)
+
+
+Startpoint: dmem_rsp_rdata[11] (input port clocked by core_clk)
+Endpoint: u_lsu.rsp_buf_rdata[11]$_SDFFE_PP0P_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: in2reg
+Path Type: min
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                  0.000000    0.000000 v input external delay
+     1    0.272120   20.000000    0.000000    0.000000 v dmem_rsp_rdata[11] (in)
+                                                         dmem_rsp_rdata[11] (net)
+                     20.000000    0.000000    0.000000 v _257444_/B2 (AO32x1_ASAP7_75t_R)
+     1    0.442001   12.065627   31.279905   31.279905 v _257444_/Y (AO32x1_ASAP7_75t_R)
+                                                         _024703_ (net)
+                     12.065627    0.000000   31.279905 v u_lsu.rsp_buf_rdata[11]$_SDFFE_PP0P_/D (DFFHQNx1_ASAP7_75t_R)
+                                             31.279905   data arrival time
+
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                 25.000000   25.000000   clock uncertainty
+                                  0.000000   25.000000   clock reconvergence pessimism
+                                             25.000000 ^ u_lsu.rsp_buf_rdata[11]$_SDFFE_PP0P_/CLK (DFFHQNx1_ASAP7_75t_R)
+                                 13.623151   38.623150   library hold time
+                                             38.623150   data required time
+---------------------------------------------------------------------------------------------
+                                             38.623150   data required time
+                                            -31.279905   data arrival time
+---------------------------------------------------------------------------------------------
+                                             -7.343244   slack (VIOLATED)
+
+
+Startpoint: dmem_rsp_rdata[12] (input port clocked by core_clk)
+Endpoint: u_lsu.rsp_buf_rdata[12]$_SDFFE_PP0P_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: in2reg
+Path Type: min
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                  0.000000    0.000000 v input external delay
+     1    0.272120   20.000000    0.000000    0.000000 v dmem_rsp_rdata[12] (in)
+                                                         dmem_rsp_rdata[12] (net)
+                     20.000000    0.000000    0.000000 v _257441_/B2 (AO32x1_ASAP7_75t_R)
+     1    0.442001   12.065627   31.279905   31.279905 v _257441_/Y (AO32x1_ASAP7_75t_R)
+                                                         _024702_ (net)
+                     12.065627    0.000000   31.279905 v u_lsu.rsp_buf_rdata[12]$_SDFFE_PP0P_/D (DFFHQNx1_ASAP7_75t_R)
+                                             31.279905   data arrival time
+
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                 25.000000   25.000000   clock uncertainty
+                                  0.000000   25.000000   clock reconvergence pessimism
+                                             25.000000 ^ u_lsu.rsp_buf_rdata[12]$_SDFFE_PP0P_/CLK (DFFHQNx1_ASAP7_75t_R)
+                                 13.623151   38.623150   library hold time
+                                             38.623150   data required time
+---------------------------------------------------------------------------------------------
+                                             38.623150   data required time
+                                            -31.279905   data arrival time
+---------------------------------------------------------------------------------------------
+                                             -7.343244   slack (VIOLATED)
+
+
+Startpoint: dmem_rsp_rdata[13] (input port clocked by core_clk)
+Endpoint: u_lsu.rsp_buf_rdata[13]$_SDFFE_PP0P_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: in2reg
+Path Type: min
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                  0.000000    0.000000 v input external delay
+     1    0.272120   20.000000    0.000000    0.000000 v dmem_rsp_rdata[13] (in)
+                                                         dmem_rsp_rdata[13] (net)
+                     20.000000    0.000000    0.000000 v _257438_/B2 (AO32x1_ASAP7_75t_R)
+     1    0.442001   12.065627   31.279905   31.279905 v _257438_/Y (AO32x1_ASAP7_75t_R)
+                                                         _024701_ (net)
+                     12.065627    0.000000   31.279905 v u_lsu.rsp_buf_rdata[13]$_SDFFE_PP0P_/D (DFFHQNx1_ASAP7_75t_R)
+                                             31.279905   data arrival time
+
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                 25.000000   25.000000   clock uncertainty
+                                  0.000000   25.000000   clock reconvergence pessimism
+                                             25.000000 ^ u_lsu.rsp_buf_rdata[13]$_SDFFE_PP0P_/CLK (DFFHQNx1_ASAP7_75t_R)
+                                 13.623151   38.623150   library hold time
+                                             38.623150   data required time
+---------------------------------------------------------------------------------------------
+                                             38.623150   data required time
+                                            -31.279905   data arrival time
+---------------------------------------------------------------------------------------------
+                                             -7.343244   slack (VIOLATED)
+
+
+Startpoint: dmem_rsp_rdata[14] (input port clocked by core_clk)
+Endpoint: u_lsu.rsp_buf_rdata[14]$_SDFFE_PP0P_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: in2reg
+Path Type: min
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                  0.000000    0.000000 v input external delay
+     1    0.272120   20.000000    0.000000    0.000000 v dmem_rsp_rdata[14] (in)
+                                                         dmem_rsp_rdata[14] (net)
+                     20.000000    0.000000    0.000000 v _257436_/B2 (AO32x1_ASAP7_75t_R)
+     1    0.442001   12.065627   31.279905   31.279905 v _257436_/Y (AO32x1_ASAP7_75t_R)
+                                                         _024700_ (net)
+                     12.065627    0.000000   31.279905 v u_lsu.rsp_buf_rdata[14]$_SDFFE_PP0P_/D (DFFHQNx1_ASAP7_75t_R)
+                                             31.279905   data arrival time
+
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                 25.000000   25.000000   clock uncertainty
+                                  0.000000   25.000000   clock reconvergence pessimism
+                                             25.000000 ^ u_lsu.rsp_buf_rdata[14]$_SDFFE_PP0P_/CLK (DFFHQNx1_ASAP7_75t_R)
+                                 13.623151   38.623150   library hold time
+                                             38.623150   data required time
+---------------------------------------------------------------------------------------------
+                                             38.623150   data required time
+                                            -31.279905   data arrival time
+---------------------------------------------------------------------------------------------
+                                             -7.343244   slack (VIOLATED)
+
+
+Startpoint: dmem_rsp_rdata[15] (input port clocked by core_clk)
+Endpoint: u_lsu.rsp_buf_rdata[15]$_SDFFE_PP0P_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: in2reg
+Path Type: min
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                  0.000000    0.000000 v input external delay
+     1    0.272120   20.000000    0.000000    0.000000 v dmem_rsp_rdata[15] (in)
+                                                         dmem_rsp_rdata[15] (net)
+                     20.000000    0.000000    0.000000 v _257433_/B2 (AO32x1_ASAP7_75t_R)
+     1    0.442001   12.065627   31.279905   31.279905 v _257433_/Y (AO32x1_ASAP7_75t_R)
+                                                         _024699_ (net)
+                     12.065627    0.000000   31.279905 v u_lsu.rsp_buf_rdata[15]$_SDFFE_PP0P_/D (DFFHQNx1_ASAP7_75t_R)
+                                             31.279905   data arrival time
+
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                 25.000000   25.000000   clock uncertainty
+                                  0.000000   25.000000   clock reconvergence pessimism
+                                             25.000000 ^ u_lsu.rsp_buf_rdata[15]$_SDFFE_PP0P_/CLK (DFFHQNx1_ASAP7_75t_R)
+                                 13.623151   38.623150   library hold time
+                                             38.623150   data required time
+---------------------------------------------------------------------------------------------
+                                             38.623150   data required time
+                                            -31.279905   data arrival time
+---------------------------------------------------------------------------------------------
+                                             -7.343244   slack (VIOLATED)
+
+
+Startpoint: dmem_rsp_rdata[16] (input port clocked by core_clk)
+Endpoint: u_lsu.rsp_buf_rdata[16]$_SDFFE_PP0P_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: in2reg
+Path Type: min
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                  0.000000    0.000000 v input external delay
+     1    0.272120   20.000000    0.000000    0.000000 v dmem_rsp_rdata[16] (in)
+                                                         dmem_rsp_rdata[16] (net)
+                     20.000000    0.000000    0.000000 v _257431_/B2 (AO32x1_ASAP7_75t_R)
+     1    0.442001   12.065627   31.279905   31.279905 v _257431_/Y (AO32x1_ASAP7_75t_R)
+                                                         _024698_ (net)
+                     12.065627    0.000000   31.279905 v u_lsu.rsp_buf_rdata[16]$_SDFFE_PP0P_/D (DFFHQNx1_ASAP7_75t_R)
+                                             31.279905   data arrival time
+
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                 25.000000   25.000000   clock uncertainty
+                                  0.000000   25.000000   clock reconvergence pessimism
+                                             25.000000 ^ u_lsu.rsp_buf_rdata[16]$_SDFFE_PP0P_/CLK (DFFHQNx1_ASAP7_75t_R)
+                                 13.623151   38.623150   library hold time
+                                             38.623150   data required time
+---------------------------------------------------------------------------------------------
+                                             38.623150   data required time
+                                            -31.279905   data arrival time
+---------------------------------------------------------------------------------------------
+                                             -7.343244   slack (VIOLATED)
+
+
+Startpoint: dmem_rsp_rdata[17] (input port clocked by core_clk)
+Endpoint: u_lsu.rsp_buf_rdata[17]$_SDFFE_PP0P_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: in2reg
+Path Type: min
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                  0.000000    0.000000 v input external delay
+     1    0.272120   20.000000    0.000000    0.000000 v dmem_rsp_rdata[17] (in)
+                                                         dmem_rsp_rdata[17] (net)
+                     20.000000    0.000000    0.000000 v _257430_/B2 (AO32x1_ASAP7_75t_R)
+     1    0.442001   12.065627   31.279905   31.279905 v _257430_/Y (AO32x1_ASAP7_75t_R)
+                                                         _024697_ (net)
+                     12.065627    0.000000   31.279905 v u_lsu.rsp_buf_rdata[17]$_SDFFE_PP0P_/D (DFFHQNx1_ASAP7_75t_R)
+                                             31.279905   data arrival time
+
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                 25.000000   25.000000   clock uncertainty
+                                  0.000000   25.000000   clock reconvergence pessimism
+                                             25.000000 ^ u_lsu.rsp_buf_rdata[17]$_SDFFE_PP0P_/CLK (DFFHQNx1_ASAP7_75t_R)
+                                 13.623151   38.623150   library hold time
+                                             38.623150   data required time
+---------------------------------------------------------------------------------------------
+                                             38.623150   data required time
+                                            -31.279905   data arrival time
+---------------------------------------------------------------------------------------------
+                                             -7.343244   slack (VIOLATED)
+
+
+Startpoint: dmem_rsp_rdata[18] (input port clocked by core_clk)
+Endpoint: u_lsu.rsp_buf_rdata[18]$_SDFFE_PP0P_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: in2reg
+Path Type: min
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                  0.000000    0.000000 v input external delay
+     1    0.272120   20.000000    0.000000    0.000000 v dmem_rsp_rdata[18] (in)
+                                                         dmem_rsp_rdata[18] (net)
+                     20.000000    0.000000    0.000000 v _257429_/B2 (AO32x1_ASAP7_75t_R)
+     1    0.442001   12.065627   31.279905   31.279905 v _257429_/Y (AO32x1_ASAP7_75t_R)
+                                                         _024696_ (net)
+                     12.065627    0.000000   31.279905 v u_lsu.rsp_buf_rdata[18]$_SDFFE_PP0P_/D (DFFHQNx1_ASAP7_75t_R)
+                                             31.279905   data arrival time
+
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                 25.000000   25.000000   clock uncertainty
+                                  0.000000   25.000000   clock reconvergence pessimism
+                                             25.000000 ^ u_lsu.rsp_buf_rdata[18]$_SDFFE_PP0P_/CLK (DFFHQNx1_ASAP7_75t_R)
+                                 13.623151   38.623150   library hold time
+                                             38.623150   data required time
+---------------------------------------------------------------------------------------------
+                                             38.623150   data required time
+                                            -31.279905   data arrival time
+---------------------------------------------------------------------------------------------
+                                             -7.343244   slack (VIOLATED)
+
+
+Startpoint: dmem_rsp_rdata[19] (input port clocked by core_clk)
+Endpoint: u_lsu.rsp_buf_rdata[19]$_SDFFE_PP0P_ (rising edge-triggered flip-flop clocked by core_clk)
+Path Group: in2reg
+Path Type: min
+
+Fanout         Cap        Slew       Delay        Time   Description
+---------------------------------------------------------------------------------------------
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                  0.000000    0.000000 v input external delay
+     1    0.272120   20.000000    0.000000    0.000000 v dmem_rsp_rdata[19] (in)
+                                                         dmem_rsp_rdata[19] (net)
+                     20.000000    0.000000    0.000000 v _257428_/B2 (AO32x1_ASAP7_75t_R)
+     1    0.442001   12.065627   31.279905   31.279905 v _257428_/Y (AO32x1_ASAP7_75t_R)
+                                                         _024695_ (net)
+                     12.065627    0.000000   31.279905 v u_lsu.rsp_buf_rdata[19]$_SDFFE_PP0P_/D (DFFHQNx1_ASAP7_75t_R)
+                                             31.279905   data arrival time
+
+                      0.000000    0.000000    0.000000   clock core_clk (rise edge)
+                                  0.000000    0.000000   clock network delay (ideal)
+                                 25.000000   25.000000   clock uncertainty
+                                  0.000000   25.000000   clock reconvergence pessimism
+                                             25.000000 ^ u_lsu.rsp_buf_rdata[19]$_SDFFE_PP0P_/CLK (DFFHQNx1_ASAP7_75t_R)
+                                 13.623151   38.623150   library hold time
+                                             38.623150   data required time
+---------------------------------------------------------------------------------------------
+                                             38.623150   data required time
+                                            -31.279905   data arrival time
+---------------------------------------------------------------------------------------------
+                                             -7.343244   slack (VIOLATED)
+
+
