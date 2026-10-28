@@ -30,3 +30,19 @@ completion and achieving both 1.20x performance goals are reported separately.
 
 Work is in progress. Results and the final scope/coverage review will be linked
 here when the native checks and evidence review finish.
+
+The first 100 ps B ECO was stopped after more than 9,130 hold-repair iterations
+and 25,958 inserted buffers: its TT WNS had plateaued around 47 ps. The native
+failure, stop reason and completed incoming GRT are preserved. The pre-ECO
+100 MHz diagnosis passes setup at all three corners, but has FF hold -0.724 ps
+and SS slew violations, so it is rejected for admission.
+
+`contract-hold40.json` is the separate follow-up construction policy. It reuses
+each core's identical completed GRT under the original contract, then applies a
+fresh TT 45% slew / 40 ps hold ECO and complete global-route recheck. The 40 ps
+target is below the observed nonconvergent plateau; it is not an acceptance
+threshold. `repair.py` bounds an ECO attempt at 3,600 seconds and preserves a
+failed run instead of silently accepting it. Both cores use the same policy.
+`analyze_physical.py` collects independent native corners, and `review.py` binds
+FPU proof, actual passing clock trials, original functional/build provenance,
+all 27 workloads, 3,629 outputs and per-PC work to the explicit new flow.
