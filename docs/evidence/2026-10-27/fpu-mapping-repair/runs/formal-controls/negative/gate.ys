@@ -1,0 +1,6 @@
+read_verilog /workspace/build/experiments/fpu-mapping-v1/formal-controls/bad.v
+prep -top check
+opt_clean
+check -initdrv
+setundef -undriven -undef
+write_rtlil /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative/gate.il

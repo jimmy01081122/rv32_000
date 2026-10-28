@@ -1,0 +1,11 @@
+{
+  "native_generation": "gate-sim-v4",
+  "native_model_sha256": "0f5da24d510e57ec7dcf255217f39b8cdf99af4840b51cdeaeadf0b34366887e",
+  "host_model_sha256": "25e418b5168cdde0fdb387908aad225ad618bcee6f689633a444abc2dd5b5098",
+  "only_edit": {
+    "from": "bool p_top::eval(performer *performer) {",
+    "to": "__attribute__((optimize(\"O0\"))) bool p_top::eval(performer *performer) {"
+  },
+  "undo_edit_byte_identical_to_native_model": true,
+  "reason": "Optimize runtime helper functions and driver while avoiding expensive optimization of the giant generated eval function; no statements or RTL model logic changed."
+}

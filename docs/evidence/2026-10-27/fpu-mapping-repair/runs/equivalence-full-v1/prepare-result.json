@@ -1,0 +1,16 @@
+{
+  "command": [
+    "eqy",
+    "--yosys",
+    "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys",
+    "--abc",
+    "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys-abc",
+    "-m",
+    "-j",
+    "1",
+    "-d",
+    "/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work",
+    "/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/proof.eqy"
+  ],
+  "returncode": 0
+}

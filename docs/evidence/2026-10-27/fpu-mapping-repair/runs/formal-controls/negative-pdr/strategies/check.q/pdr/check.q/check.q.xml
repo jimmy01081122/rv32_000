@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+<testsuite timestamp="2026-10-22T09:43:51" hostname="c1a2bbae2853" package="check.q" id="0" name="default" tests="1" errors="1" failures="0" time="0" skipped="0">
+<properties>
+<property name="os" value="Linux"/>
+<property name="expect" value="PASS, FAIL, UNKNOWN, TIMEOUT"/>
+<property name="status" value="ERROR"/>
+</properties>
+<testcase classname="default" name="default" time="0">
+<error type="ERROR"/>
+</testcase>
+<system-out>SBY  9:43:51 [check.q] Removing directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr/strategies/check.q/pdr/check.q'.
+SBY  9:43:51 [check.q] engine_0: abc pdr
+SBY  9:43:51 [check.q] base: starting process &quot;cd check.q/src; yosys -ql ../model/design.log ../model/design.ys&quot;
+SBY  9:43:51 [check.q] base: Warning: Unhandled cell __po_q__assert ($scopeinfo) during maybe-x marking
+SBY  9:43:51 [check.q] base: Warning: Unhandled cell gate ($scopeinfo) during maybe-x marking
+SBY  9:43:51 [check.q] base: Warning: Unhandled cell gold ($scopeinfo) during maybe-x marking
+SBY  9:43:51 [check.q] base: finished (returncode=0)
+SBY  9:43:51 [check.q] prep: starting process &quot;cd check.q/model; yosys -ql design_prep.log design_prep.ys&quot;
+SBY  9:43:51 [check.q] prep: finished (returncode=0)
+SBY  9:43:51 [check.q] aig: starting process &quot;cd check.q/model; yosys -ql design_aiger.log design_aiger.ys&quot;
+SBY  9:43:51 [check.q] aig: Warning: Treating undriven bit miter.\__pi_rst like $anyseq.
+SBY  9:43:51 [check.q] aig: Warning: Treating undriven bit miter.\__pi_clk like $anyseq.
+SBY  9:43:51 [check.q] aig: Warning: Treating undriven bit miter.\__pi_b like $anyseq.
+SBY  9:43:51 [check.q] aig: Warning: Treating undriven bit miter.\__pi_a like $anyseq.
+SBY  9:43:51 [check.q] aig: Warning: Treating a total of 4 undriven bits in miter like $anyseq.
+SBY  9:43:51 [check.q] aig: finished (returncode=0)
+SBY  9:43:51 [check.q] engine_0: starting process &quot;cd check.q; yosys-abc -c 'read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw'&quot;
+SBY  9:43:51 [check.q] engine_0: ======== ABC command line &quot;read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw&quot;
+SBY  9:43:51 [check.q] engine_0: Warning: The last output is interpreted as a constraint.
+SBY  9:43:51 [check.q] engine_0: VarMax = 300. FrameMax = 10000. QueMax = 0. TimeMax = 119. MonoCNF = no. SkipGen = no. SolveAll = no.
+SBY  9:43:51 [check.q] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY  9:43:51 [check.q] engine_0: 1 : 0 0                                                                 2     0      0.00 sec  T/O =  0  PRV =  0
+SBY  9:43:51 [check.q] engine_0: Block =    1  Oblig =     3  Clause =     0  Call =     3 (sat=66.7%)  Cex =   0  Start =   0
+SBY  9:43:51 [check.q] engine_0: SAT solving =     0.00 sec (  0.49 %)
+SBY  9:43:51 [check.q] engine_0: unsat     =     0.00 sec (  0.02 %)
+SBY  9:43:51 [check.q] engine_0: sat       =     0.00 sec (  0.47 %)
+SBY  9:43:51 [check.q] engine_0: Generalize  =     0.00 sec (  0.22 %)
+SBY  9:43:51 [check.q] engine_0: Push clause =     0.00 sec (  0.00 %)
+SBY  9:43:51 [check.q] engine_0: Ternary sim =     0.00 sec (  0.08 %)
+SBY  9:43:51 [check.q] engine_0: Containment =     0.00 sec (  0.00 %)
+SBY  9:43:51 [check.q] engine_0: CNF compute =     0.00 sec (  0.02 %)
+SBY  9:43:51 [check.q] engine_0: Refinement  =     0.00 sec (  0.04 %)
+SBY  9:43:51 [check.q] engine_0: TOTAL       =     0.01 sec (100.00 %)
+SBY  9:43:51 [check.q] engine_0: Output 0 of miter &quot;model/design_aiger&quot; was asserted in frame 1.  Time =     0.01 sec
+SBY  9:43:51 [check.q] engine_0: finished (returncode=0)
+SBY  9:43:51 [check.q] engine_0: Status returned by engine: FAIL
+SBY  9:43:51 [check.q] smt2: starting process &quot;cd check.q/model; yosys -ql design_smt2.log design_smt2.ys&quot;
+SBY  9:43:51 [check.q] smt2: finished (returncode=0)
+SBY  9:43:51 [check.q] engine_0: starting process &quot;cd check.q; yosys-witness aiw2yw engine_0/trace.aiw model/design_aiger.ywa engine_0/trace_aiw.yw&quot;
+SBY  9:43:51 [check.q] engine_0: Converting AIGER witness trace 'engine_0/trace.aiw' to Yosys witness trace 'engine_0/trace_aiw.yw'...
+SBY  9:43:51 [check.q] engine_0: Using Yosys witness AIGER map file 'model/design_aiger.ywa'
+SBY  9:43:51 [check.q] engine_0: Converted 2 time steps.
+SBY  9:43:51 [check.q] engine_0: finished (returncode=0)
+SBY  9:43:51 [check.q] engine_0: starting process &quot;cd check.q; yosys-smtbmc -s yices --noprogress --append 0 --dump-vcd engine_0/trace.vcd --dump-yw engine_0/trace.yw --dump-vlogtb engine_0/trace_tb.v --dump-smtc engine_0/trace.smtc --yw engine_0/trace_aiw.yw model/design_smt2.smt2&quot;
+SBY  9:43:51 [check.q] engine_0: ##   0:00:00  Solver: yices
+SBY  9:43:51 [check.q] engine_0: ##   0:00:00  SMT Solver 'yices-smt2' not found in path.
+SBY  9:43:51 [check.q] engine_0: finished (returncode=1)
+SBY  9:43:51 [check.q] ERROR: engine_0: Could not determine aigsmt status.
+SBY  9:43:51 [check.q] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY  9:43:51 [check.q] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+SBY  9:43:51 [check.q] summary: engine_0 (abc pdr) returned FAIL
+SBY  9:43:51 [check.q] summary: engine_0 did not produce any traces
+SBY  9:43:51 [check.q] DONE (ERROR, rc=16)
+</system-out>
+<system-err>
+</system-err>
+</testsuite>
+</testsuites>

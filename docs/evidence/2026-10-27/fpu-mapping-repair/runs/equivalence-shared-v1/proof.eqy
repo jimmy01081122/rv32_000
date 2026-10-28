@@ -1,0 +1,48 @@
+[gold]
+read_rtlil /workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/results/asap7/rv32_post_lsu_v1/base/1_1_yosys_canonicalize.rtlil
+hierarchy -check -top rv32_ooo_fp_execute
+setattr -mod -unset keep_hierarchy
+synth -top rv32_ooo_fp_execute -noabc -extra-map /orfs-source/flow/platforms/common/lcu_kogge_stone.v
+prep -top rv32_ooo_fp_execute -flatten
+delete =A:blackbox =A:whitebox
+hierarchy -check -top rv32_ooo_fp_execute
+select -assert-none t:*_ASAP7*
+async2sync
+clk2fflogic
+
+[gate]
+read_liberty -ignore_miss_func /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -ignore_miss_func /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -ignore_miss_func /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -ignore_miss_func /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -ignore_miss_func /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_rtlil /workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/results/asap7/rv32_post_lsu_v1/base/fp_mapped.rtlil
+hierarchy -check -top rv32_ooo_fp_execute
+setattr -mod -unset keep_hierarchy
+prep -top rv32_ooo_fp_execute -flatten
+delete =A:blackbox =A:whitebox
+hierarchy -check -top rv32_ooo_fp_execute
+select -assert-none t:*_ASAP7*
+async2sync
+clk2fflogic
+
+[match rv32_ooo_fp_execute]
+final-gold-match clk
+final-gold-match rst
+final-gold-match flush_valid
+final-gold-match core_state
+final-gold-match issue_valid
+final-gold-match issue_req
+final-gold-match issue_ready
+final-gold-match cmp_valid
+final-gold-match cmp_data
+final-gold-match cmp_ready
+gold-nomatch *
+
+[partition rv32_ooo_fp_execute]
+merge cmp_data,cmp_valid,issue_ready
+
+[strategy pdr]
+use sby
+engine abc pdr
+timeout 900

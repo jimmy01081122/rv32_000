@@ -1,0 +1,9 @@
+START B
+Traceback (most recent call last):
+  File "/workspace/experiments/fpu-mapping-v1/run_synthesis.py", line 119, in <module>
+    main()
+  File "/workspace/experiments/fpu-mapping-v1/run_synthesis.py", line 111, in main
+    checked(execute(spec) == 0, 'native synthesis failed: ' + variant)
+  File "/workspace/experiments/fpu-mapping-v1/run_synthesis.py", line 48, in checked
+    raise ValueError(message)
+ValueError: native synthesis failed: B

@@ -1,0 +1,15 @@
+[gold]
+read_verilog /workspace/build/experiments/fpu-mapping-v1/formal-controls/gold.v
+prep -top check
+async2sync
+clk2fflogic
+
+[gate]
+read_verilog /workspace/build/experiments/fpu-mapping-v1/formal-controls/bad.v
+prep -top check
+async2sync
+clk2fflogic
+
+[strategy sat]
+use sat
+depth 3

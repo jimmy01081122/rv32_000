@@ -1,0 +1,27 @@
+read_rtlil /workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/results/asap7/rv32_post_lsu_v1/base/1_1_yosys_canonicalize.rtlil
+hierarchy -check -top rv32_ooo_fp_execute
+delete =A:blackbox =A:whitebox
+rename rv32_ooo_fp_execute gold
+design -stash golden
+read_liberty -ignore_miss_func /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -ignore_miss_func /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -ignore_miss_func /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -ignore_miss_func /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -ignore_miss_func /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_rtlil /workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/results/asap7/rv32_post_lsu_v1/base/fp_mapped.rtlil
+setattr -mod -unset keep_hierarchy
+hierarchy -check -top rv32_ooo_fp_execute
+flatten
+delete =A:blackbox =A:whitebox
+hierarchy -check -top rv32_ooo_fp_execute
+rename rv32_ooo_fp_execute gate
+design -copy-from golden -as gold gold
+read_verilog /workspace/build/experiments/fpu-mapping-v1/gate-sim-v2/top.v
+hierarchy -check -top top
+proc
+flatten
+techmap -map +/simcells.v
+proc
+opt_clean -purge
+check -assert
+write_cxxrtl -O3 -g0 /workspace/build/experiments/fpu-mapping-v1/gate-sim-v2/model.cc

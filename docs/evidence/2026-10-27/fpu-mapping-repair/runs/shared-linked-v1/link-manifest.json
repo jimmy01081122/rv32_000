@@ -1,0 +1,76 @@
+{
+  "scope": "mapped module link only; no PPA admission",
+  "unit_netlist": "build/experiments/fpu-mapping-v1/shared-unit-v1/results/asap7/rv32_post_lsu_v1/base/1_2_yosys.v",
+  "unit_netlist_sha256": "c84fbadab36d07d689697ca13ade057e94962b24c347143b929551de75ea0a15",
+  "shared_fpu_body_sha256": "e4fb651d8d08340bc3a8e32d364f309c8f749fa81cb46407cd6bd0be00967c87",
+  "shared_fpu_graph_sha256": "d12b91d198024deff4527b2c1e6217fcc7ca3355bdc09dfb4ebb309192a0fd89",
+  "interface": {
+    "clk": {
+      "direction": "input",
+      "width": 1
+    },
+    "rst": {
+      "direction": "input",
+      "width": 1
+    },
+    "flush_valid": {
+      "direction": "input",
+      "width": 1
+    },
+    "core_state": {
+      "direction": "input",
+      "width": 3
+    },
+    "issue_valid": {
+      "direction": "input",
+      "width": 1
+    },
+    "issue_req": {
+      "direction": "input",
+      "width": 401
+    },
+    "issue_ready": {
+      "direction": "output",
+      "width": 1
+    },
+    "cmp_valid": {
+      "direction": "output",
+      "width": 1
+    },
+    "cmp_data": {
+      "direction": "output",
+      "width": 155
+    },
+    "cmp_ready": {
+      "direction": "input",
+      "width": 1
+    }
+  },
+  "variants": {
+    "baseline": {
+      "netlist": "build/experiments/fpu-mapping-v1/keep-v2/baseline/results/asap7/rv32_post_lsu_v1/base/1_2_yosys.v",
+      "netlist_sha256": "1a2e067d562db7036ab214b8710a690b355f36f27f09391d0049da6e3486d221",
+      "core_body_sha256": "490c3ef33be935878b1a082393c54a2ccccfb63ed5a48a3426edc7dd1a3960b3",
+      "native_report_sha256": "81e2682b44c86da88f3789b212c84048a958d08f7b2cb04d27bbcd9c82f87d34",
+      "linked_netlist": "build/experiments/fpu-mapping-v1/shared-linked-v1/baseline.v",
+      "linked_sha256": "5465b37e13b4189a9a0f9e0ebb3744645ad4f478ef2a410fd2e17b1360084877"
+    },
+    "A": {
+      "netlist": "build/experiments/fpu-mapping-v1/keep-v2/A/results/asap7/rv32_post_lsu_v1/base/1_2_yosys.v",
+      "netlist_sha256": "6170ad1f16429a73fe9b93c7a6efec2594ad18002491716a5dbd08e5f801225e",
+      "core_body_sha256": "68afc4be39f557a2d0db803c70573833b99192cd096a6836ea55ecd3e85fe6de",
+      "native_report_sha256": "622f402fb07e1b507e7c50092e96481ca0dd8279a7763c12d1a490481359ad56",
+      "linked_netlist": "build/experiments/fpu-mapping-v1/shared-linked-v1/A.v",
+      "linked_sha256": "ca59e5146f84e3276bf74c8ac2398b84a722ed68f32751e3263772a872ff3647"
+    },
+    "B": {
+      "netlist": "build/experiments/fpu-mapping-v1/keep-v2/B/results/asap7/rv32_post_lsu_v1/base/1_2_yosys.v",
+      "netlist_sha256": "2e7d35b5f2a1c16fc27057de9d1d02fa4199cc9861d27a2507b66244a5f53261",
+      "core_body_sha256": "c1dbee4a08dbef77f2a4ba2daa2548cbeeda95f4c44c1ed975e3acb66a18683c",
+      "native_report_sha256": "8c4371e0e8a9ac0eb54213d0253c9394d1a5542f3569e8c368414fb1487ea021",
+      "linked_netlist": "build/experiments/fpu-mapping-v1/shared-linked-v1/B.v",
+      "linked_sha256": "4363f5e3ecb7663b8c24c31370280c6b2fc32a5ded326d1cfab4281980b179e2"
+    }
+  },
+  "passed": true
+}

@@ -1,0 +1,22 @@
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] read_gold: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative/gold.log /workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative/gold.ys"
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] read_gold: finished (returncode=0)
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] read_gate: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative/gate.log /workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative/gate.ys"
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] read_gate: finished (returncode=0)
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] combine: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative/combine.log /workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative/combine.ys"
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] combine: finished (returncode=0)
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] partition: starting process "cd /workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative; /OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql partition.log partition.ys"
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] partition: finished (returncode=0)
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] run: starting process "make -j1 -C /workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative -f strategies.mk"
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] run: make: Entering directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative'
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] run: Running strategy 'sat' on 'check.q'..
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] run: Could not prove equivalence of partition 'check.q' using strategy 'sat'
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] run: make -f strategies.mk summary
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] run: make[1]: Entering directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative'
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] run: make[1]: Leaving directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative'
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] run: make: Leaving directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative'
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] run: finished (returncode=0)
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] Warning: Failed to prove equivalence for 1/1 partitions:
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] Failed to prove equivalence of partition check.q
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+EQY  9:24:04 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/comb-negative] DONE (FAIL, rc=2)

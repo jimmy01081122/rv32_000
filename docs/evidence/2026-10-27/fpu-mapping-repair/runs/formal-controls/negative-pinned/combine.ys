@@ -1,0 +1,11 @@
+plugin -i /usr/local/bin/../share/yosys/plugins/eqy_combine.so
+read_rtlil /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pinned/gold.il
+uniquify
+hierarchy
+design -stash gold
+read_rtlil /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pinned/gate_recoded.il
+uniquify
+hierarchy
+design -stash gate
+eqy_combine -gold_ids /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pinned/gold.ids -gate_ids /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pinned/gate_recoded.ids
+write_rtlil /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pinned/combined.il

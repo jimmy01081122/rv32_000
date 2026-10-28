@@ -1,0 +1,26 @@
+[gold]
+read_rtlil /workspace/build/experiments/fpu-mapping-v1/keep-v2/B/results/asap7/rv32_post_lsu_v1/base/1_1_yosys_canonicalize.rtlil
+hierarchy -check -top rv32_ooo_fp_execute
+setattr -mod -unset keep_hierarchy
+prep -top rv32_ooo_fp_execute -flatten
+delete =A:blackbox =A:whitebox
+hierarchy -check -top rv32_ooo_fp_execute
+select -assert-none t:*_ASAP7*
+async2sync
+clk2fflogic
+
+[gate]
+read_liberty -ignore_miss_func /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_rtlil /workspace/build/experiments/fpu-mapping-v1/keep-v2/B/results/asap7/rv32_post_lsu_v1/base/fp_pre_abc.rtlil
+hierarchy -check -top rv32_ooo_fp_execute
+setattr -mod -unset keep_hierarchy
+prep -top rv32_ooo_fp_execute -flatten
+delete =A:blackbox =A:whitebox
+hierarchy -check -top rv32_ooo_fp_execute
+select -assert-none t:*_ASAP7*
+async2sync
+clk2fflogic
+
+[strategy sat]
+use sat
+depth 3

@@ -1,0 +1,94 @@
+======== ABC command line "read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw"
+Warning: The last output is interpreted as a constraint.
+VarMax = 300. FrameMax = 10000. QueMax = 0. TimeMax = 159. MonoCNF = no. SkipGen = no. SolveAll = no.
+Frame Clauses                                                     Max Queue Flops Time
+1 : 0 0                                                                 1     0      0.37 sec  T/O =  0  PRV =  0
+Timing out on output 0 in frame 1 (retrying in next anytime pass).
+1 : 0 4                                                                 1     6      0.42 sec  T/O =  1  PRV =  0
+2 : 0 2 5                                                               1     8      0.42 sec  T/O =  1  PRV =  0
+Proved output 1 in frame 2.
+Proved output 2 in frame 2.
+3 : 0 2 0 0 ~5                                                           0     8      0.42 sec  T/O =  1  PRV =  2
+Starting new anytime pass, reusing clauses.
+Frame Clauses                                                     Max Queue Flops Time
+1 : 0 2 ~5                                                               1     0      0.20 sec  T/O =  0  PRV =  2
+Timing out on output 0 in frame 1 (retrying in next anytime pass).
+1 : 0 2 ~5                                                               0     0      0.20 sec  T/O =  1  PRV =  2
+2 : 0 2 0 ~5                                                             0     0      0.21 sec  T/O =  1  PRV =  2
+All outputs solved or timed out in frame 2.
+Starting new anytime pass, reusing clauses.
+Frame Clauses                                                     Max Queue Flops Time
+1 : 0 2 ~5                                                               1     0      0.43 sec  T/O =  0  PRV =  2
+Timing out on output 0 in frame 1 (retrying in next anytime pass).
+1 : 0 2 ~5                                                               0     0      0.43 sec  T/O =  1  PRV =  2
+2 : 0 2 0 ~5                                                             0     0      0.43 sec  T/O =  1  PRV =  2
+All outputs solved or timed out in frame 2.
+Starting new anytime pass, reusing clauses.
+Frame Clauses                                                     Max Queue Flops Time
+1 : 0 2 ~5                                                               1     0      0.81 sec  T/O =  0  PRV =  2
+Timing out on output 0 in frame 1 (retrying in next anytime pass).
+1 : 0 2 ~5                                                               0     0      0.81 sec  T/O =  1  PRV =  2
+2 : 0 2 0 ~5                                                             0     0      0.82 sec  T/O =  1  PRV =  2
+All outputs solved or timed out in frame 2.
+Starting new anytime pass, reusing clauses.
+Frame Clauses                                                     Max Queue Flops Time
+1 : 0 2 ~5                                                               1     0      1.60 sec  T/O =  0  PRV =  2
+Timing out on output 0 in frame 1 (retrying in next anytime pass).
+1 : 0 2 ~5                                                               0     0      1.60 sec  T/O =  1  PRV =  2
+2 : 0 2 0 ~5                                                             0     0      1.61 sec  T/O =  1  PRV =  2
+All outputs solved or timed out in frame 2.
+Starting new anytime pass, reusing clauses.
+Frame Clauses                                                     Max Queue Flops Time
+1 : 0 2 ~5                                                               1     0      3.22 sec  T/O =  0  PRV =  2
+Timing out on output 0 in frame 1 (retrying in next anytime pass).
+1 : 0 2 ~5                                                               0     0      3.22 sec  T/O =  1  PRV =  2
+2 : 0 2 0 ~5                                                             0     0      3.22 sec  T/O =  1  PRV =  2
+All outputs solved or timed out in frame 2.
+Starting new anytime pass, reusing clauses.
+Frame Clauses                                                     Max Queue Flops Time
+1 : 0 2 ~5                                                               1     0      6.42 sec  T/O =  0  PRV =  2
+Timing out on output 0 in frame 1 (retrying in next anytime pass).
+1 : 0 2 ~5                                                               0     0      6.42 sec  T/O =  1  PRV =  2
+2 : 0 2 0 ~5                                                             0     0      6.42 sec  T/O =  1  PRV =  2
+All outputs solved or timed out in frame 2.
+Starting new anytime pass, reusing clauses.
+Frame Clauses                                                     Max Queue Flops Time
+1 : 0 2 ~5                                                               1     0     12.80 sec  T/O =  0  PRV =  2
+Timing out on output 0 in frame 1 (retrying in next anytime pass).
+1 : 0 2 ~5                                                               0     0     12.80 sec  T/O =  1  PRV =  2
+2 : 0 2 0 ~5                                                             0     0     12.81 sec  T/O =  1  PRV =  2
+All outputs solved or timed out in frame 2.
+Starting new anytime pass, reusing clauses.
+Frame Clauses                                                     Max Queue Flops Time
+1 : 0 2 ~5                                                               1     0     25.61 sec  T/O =  0  PRV =  2
+Timing out on output 0 in frame 1 (retrying in next anytime pass).
+1 : 0 2 ~5                                                               0     0     25.61 sec  T/O =  1  PRV =  2
+2 : 0 2 0 ~5                                                             0     0     25.61 sec  T/O =  1  PRV =  2
+All outputs solved or timed out in frame 2.
+Starting new anytime pass, reusing clauses.
+Frame Clauses                                                     Max Queue Flops Time
+1 : 0 2 ~5                                                               1     0     51.21 sec  T/O =  0  PRV =  2
+Timing out on output 0 in frame 1 (retrying in next anytime pass).
+1 : 0 2 ~5                                                               0     0     51.21 sec  T/O =  1  PRV =  2
+2 : 0 2 0 ~5                                                             0     0     51.21 sec  T/O =  1  PRV =  2
+All outputs solved or timed out in frame 2.
+Starting new anytime pass, reusing clauses.
+Frame Clauses                                                     Max Queue Flops Time
+1 : 0 2 ~5                                                               1     0    102.42 sec  T/O =  0  PRV =  2
+Timing out on output 0 in frame 1 (retrying in next anytime pass).
+1 : 0 2 ~5                                                               0     0    102.46 sec  T/O =  1  PRV =  2
+2 : 0 2 0 ~5                                                             0     0    102.47 sec  T/O =  1  PRV =  2
+All outputs solved or timed out in frame 2.
+Starting new anytime pass, reusing clauses.
+Frame Clauses                                                     Max Queue Flops Time
+1 : 0 2 ~5                                                               1     0    204.81 sec  T/O =  0  PRV =  2
+Timing out on output 0 in frame 1 (retrying in next anytime pass).
+1 : 0 2 ~5                                                               0     0    204.81 sec  T/O =  1  PRV =  2
+2 : 0 2 0 ~5                                                             0     0    204.82 sec  T/O =  1  PRV =  2
+All outputs solved or timed out in frame 2.
+Starting new anytime pass, reusing clauses.
+Frame Clauses                                                     Max Queue Flops Time
+1 : 0 2 ~5                                                               1     0    409.69 sec  T/O =  0  PRV =  2
+Timing out on output 0 in frame 1 (retrying in next anytime pass).
+1 : 0 2 ~5                                                               0     0    409.69 sec  T/O =  1  PRV =  2
+2 : 0 2 0 ~5                                                             0     0    409.69 sec  T/O =  1  PRV =  2

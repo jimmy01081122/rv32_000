@@ -1,0 +1,36 @@
+{
+  "scope": "original RTL model versus mapped-cell function model; not independent IEEE oracle",
+  "started_utc": "2026-10-27T14:44:00.083447+00:00",
+  "inputs": {
+    "experiments/fpu-mapping-v1/gate_driver.cc": "d1bf905e81b2e26e5c31d7a9c1f59772207a9e169343554ec594b6cfde67face",
+    "build/experiments/fpu-mapping-v1/gate-sim-v6/model.cc": "0f5da24d510e57ec7dcf255217f39b8cdf99af4840b51cdeaeadf0b34366887e",
+    "build/experiments/fpu-mapping-v1/gate-sim-v1/include/backends/cxxrtl/runtime/cxxrtl/cxxrtl_replay.h": "ddb140cb79d8b5a1f832c2c8f4abdff3c2ba0583a430bf2994333198fb4f76cb",
+    "build/experiments/fpu-mapping-v1/gate-sim-v1/include/backends/cxxrtl/runtime/cxxrtl/cxxrtl_vcd.h": "2f854e3b1edcf6b1a4c53162f158e184d1846eecf17ff8fa3f90f4ff49f45a30",
+    "build/experiments/fpu-mapping-v1/gate-sim-v1/include/backends/cxxrtl/runtime/cxxrtl/cxxrtl.h": "f278314d20e57dddb8c04974e513ff2bff417e51f1c404d8fa864c7cd6903b91",
+    "build/experiments/fpu-mapping-v1/gate-sim-v1/include/backends/cxxrtl/runtime/cxxrtl/cxxrtl_time.h": "eb3231b971bb6d7cb95167bb5ae03f2901e2c15ed55af72c35e73038f00bfdb5",
+    "build/experiments/fpu-mapping-v1/gate-sim-v1/include/backends/cxxrtl/runtime/cxxrtl/capi/cxxrtl_capi.h": "2e53569e39b12aa50725e68939a5d3f4e30062af86d062e057342fb189026ff5",
+    "build/experiments/fpu-mapping-v1/gate-sim-v1/include/backends/cxxrtl/runtime/cxxrtl/capi/cxxrtl_capi_vcd.h": "3fa28112cfbbe882b82f02818576e3bbd9f0907deb9a6a949b8b92ba2692f3c3"
+  },
+  "compile_command": [
+    "c++",
+    "-std=c++17",
+    "-O0",
+    "-g0",
+    "-D__has_attribute(x)=0",
+    "-I",
+    "/workspace/rv32_000/build/experiments/fpu-mapping-v1/gate-sim-v1/include/backends/cxxrtl/runtime",
+    "-I",
+    "/workspace/rv32_000/build/experiments/fpu-mapping-v1/gate-sim-v6",
+    "/workspace/rv32_000/experiments/fpu-mapping-v1/gate_driver.cc",
+    "-o",
+    "/workspace/rv32_000/build/experiments/fpu-mapping-v1/gate-sim-v6/check-gates"
+  ],
+  "compiler": "c++ (Debian 14.2.0-19) 14.2.0\nCopyright (C) 2024 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "state": "finished",
+  "passed": false,
+  "compile_returncode": 0,
+  "executable_sha256": "11f6f9d2268c2c37a0629abb83f69e25f279ad521f845e6c028025b5e84a67cc",
+  "test_returncode": 1,
+  "finished_utc": "2026-10-27T14:44:40.127227+00:00",
+  "input_identities_unchanged": true
+}

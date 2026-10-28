@@ -1,0 +1,41 @@
+{
+  "command": [
+    "make",
+    "-f",
+    "/orfs-source/flow/Makefile",
+    "FLOW_HOME=/orfs-source/flow",
+    "PLATFORM_DIR=/OpenROAD-flow-scripts/flow/platforms/asap7",
+    "PLATFORMS_DIR=/OpenROAD-flow-scripts/flow/platforms",
+    "OPENROAD_EXE=/OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad",
+    "YOSYS_EXE=/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys",
+    "RV32_ROOT=/workspace",
+    "RV32_SDC=/workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/constraint.sdc",
+    "WORK_HOME=/workspace/build/experiments/fpu-mapping-v1/shared-unit-v1",
+    "DESIGN_CONFIG=/workspace/physical/asap7/fpu-isolated/config.mk",
+    "VERILOG_FILES=/workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/fp-source.v",
+    "NUM_CORES=2",
+    "GPL_RANDOM_SEED=",
+    "CORNER=TC",
+    "CORNERS=typical",
+    "REPORT_CLOCK_SKEW=0",
+    "OPT_POST_GRT_WNS=0",
+    "ADDER_MAP_FILE=",
+    "DESIGN_NAME=rv32_ooo_fp_execute",
+    "synth"
+  ],
+  "cwd": "/workspace",
+  "report": "/workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/run.json",
+  "log": "/workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/make.log",
+  "inputs": {
+    "/workspace/build/baseline-setup/rtl_lowered.v": "2cbf3fa60c07b6cf21a81c5317e54b28c873bdee050df43793382ae9956d7382",
+    "/workspace/build/experiments/lsu-a-v1/rtl_lowered.v": "f57b627d8b84f5cda1222d206f2c786fa328abcb09e368815873d1749860176e",
+    "/workspace/build/experiments/lsu-b-v1/rtl_lowered.v": "9ce8b80aaad06d4b24345c10f373ed9d9d3ce28aad82b022ae7cedee0ee3b2e6",
+    "/workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/fp-source.v": "82af02e9736df0eaabc2372a3a2fb042766488625b1ef181cabc2f11dadc5afe",
+    "/workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/constraint.sdc": "826416ee940bf6f0bf8e548b8edc482ab261afe5beefaf88606f6dfbfb05359d",
+    "/workspace/physical/asap7/fpu-isolated/config.mk": "83093dd691029860138b6db7722672c016eadbdd263d22691867a9f0959e92e2",
+    "/workspace/physical/asap7/fpu-isolated/synth.tcl": "606552f1eab02daa3fba850b4044734617cd2e02f345f5d1c966ed42a76b2e16",
+    "/workspace/physical/asap7/baseline/config.mk": "be157001e0234853911d3eaf5c326c5e0ab30d19fd60a3102d400d74ca6e861b",
+    "/workspace/physical/asap7/baseline/lower_processes.tcl": "5b0fcbdc682336ea3527e3f01bed77e9f19645d1169a0653c0712f41abed6af1",
+    "/workspace/scripts/run_physical_job.py": "52aec471aa5303d51a12d8b271fe1efa4883f55d6c94ce1703ef29da4796c20b"
+  }
+}

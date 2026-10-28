@@ -1,0 +1,22 @@
+EQY  9:39:45 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] read_gold: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work/gold.log /workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work/gold.ys"
+EQY  9:39:46 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] read_gate: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work/gate.log /workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work/gate.ys"
+EQY  9:39:49 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] read_gold: finished (returncode=0)
+EQY  9:40:03 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] read_gate: finished (returncode=0)
+EQY  9:40:03 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] combine: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work/combine.log /workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work/combine.ys"
+EQY  9:40:04 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] combine: finished (returncode=0)
+EQY  9:40:04 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] partition: starting process "cd /workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work; /OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql partition.log partition.ys"
+EQY  9:40:05 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] partition: finished (returncode=0)
+EQY  9:40:05 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] run: starting process "make -j1 -C /workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work -f strategies.mk"
+EQY  9:40:05 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] run: make: Entering directory '/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work'
+EQY  9:40:05 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] run: Running strategy 'pdr' on 'rv32_ooo_fp_execute.cmp_data'..
+EQY  9:55:07 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] run: Could not prove equivalence of partition 'rv32_ooo_fp_execute.cmp_data' using strategy 'pdr': timeout
+EQY  9:55:07 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] run: make -f strategies.mk summary
+EQY  9:55:07 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] run: make[1]: Entering directory '/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work'
+EQY  9:55:07 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] run: make[1]: Leaving directory '/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work'
+EQY  9:55:07 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] run: make: Leaving directory '/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work'
+EQY  9:55:07 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] run: finished (returncode=0)
+EQY  9:55:07 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] Warning: Failed to prove equivalence for 1/1 partitions:
+EQY  9:55:07 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] Failed to prove equivalence of partition rv32_ooo_fp_execute.cmp_data
+EQY  9:55:07 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] summary: Elapsed clock time [H:MM:SS (secs)]: 0:15:21 (921)
+EQY  9:55:07 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] summary: Elapsed process time [H:MM:SS (secs)]: 0:15:11 (911)
+EQY  9:55:07 [/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work] DONE (FAIL, rc=2)

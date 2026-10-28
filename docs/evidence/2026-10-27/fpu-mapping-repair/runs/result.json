@@ -1,0 +1,67 @@
+{
+  "status": "MAPPING_REPAIR_VERIFIED; full RTL formal equivalence and physical qualification open",
+  "completed_utc": "2026-10-27T15:14:58.383588+00:00",
+  "source_parent": "0798c75",
+  "source_scope": "hash-identified experimental helpers; no clean-source CPU workload or PPA claim",
+  "rtl_changed": false,
+  "baseline_replaced": false,
+  "new_physical_qualification": false,
+  "mapping": {
+    "cells": 25855,
+    "dffs": 100,
+    "independent_standalone_runs": 2,
+    "graph_sha256": "d12b91d198024deff4527b2c1e6217fcc7ca3355bdc09dfb4ebb309192a0fd89",
+    "linked_variants": [
+      "baseline",
+      "A",
+      "B"
+    ]
+  },
+  "native_completion_log_reviews": 9,
+  "retained_cells_checked": 525189,
+  "removed_unobservable_cells": {
+    "baseline": 5212,
+    "A": 5006,
+    "B": 5620
+  },
+  "abc_transition_equivalence": {
+    "passed": true,
+    "state_bits": 100,
+    "negative_control_rejected": true,
+    "state_cut_review": true
+  },
+  "gate_regression": {
+    "passed": true,
+    "cycles": 116737,
+    "comparisons": 233474,
+    "opcode_rounding_pairs": 2048,
+    "edge_vectors": 32768,
+    "random_vectors": 65536,
+    "stall_cycles": 36401,
+    "flush_cycles": 4163,
+    "reset_cycles": 257,
+    "accepted": 54347,
+    "negative_result_bit_control": true,
+    "output_digest": "9d1048d6c98d11fd",
+    "settled_phases": 233476
+  },
+  "review_negative_controls": 4,
+  "state_cut_negative_rejected": true,
+  "full_rtl_formal": {
+    "status": "UNPROVEN_TIMEOUT",
+    "strategy_limit_seconds": 900,
+    "native_returncode": 2
+  },
+  "fp_zero_wire_ss_data_ps": {
+    "baseline": 6591.387207,
+    "A": 6587.406738,
+    "B": 6578.693359
+  },
+  "preserved_archive_indexed_files": 2353,
+  "limitations": [
+    "No independent IEEE-754 or full ISA proof",
+    "No new global-route PPA or qualified CPU clock",
+    "Original B FF hold failure remains",
+    "No baseline replacement or performance-target achievement"
+  ]
+}

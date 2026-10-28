@@ -1,0 +1,22 @@
+EQY  9:22:34 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] read_gold: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned/gold.log /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned/gold.ys"
+EQY  9:22:34 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] read_gold: finished (returncode=0)
+EQY  9:22:34 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] read_gate: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned/gate.log /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned/gate.ys"
+EQY  9:22:34 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] read_gate: finished (returncode=0)
+EQY  9:22:34 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] combine: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned/combine.log /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned/combine.ys"
+EQY  9:22:35 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] combine: finished (returncode=0)
+EQY  9:22:35 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] partition: starting process "cd /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned; /OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql partition.log partition.ys"
+EQY  9:22:35 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] partition: finished (returncode=0)
+EQY  9:22:35 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] run: starting process "make -j1 -C /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned -f strategies.mk"
+EQY  9:22:35 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] run: make: Entering directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned'
+EQY  9:22:35 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] run: Running strategy 'sat' on 'check.q'..
+EQY  9:22:35 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] run: Proved equivalence of partition 'check.q' using strategy 'sat'
+EQY  9:22:35 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] run: make -f strategies.mk summary
+EQY  9:22:35 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] run: make[1]: Entering directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned'
+EQY  9:22:35 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] run: make[1]: Leaving directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned'
+EQY  9:22:35 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] run: make: Leaving directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned'
+EQY  9:22:35 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] run: finished (returncode=0)
+EQY  9:22:35 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] Successfully proved equivalence of partition check.q
+EQY  9:22:35 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] Successfully proved designs equivalent
+EQY  9:22:35 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+EQY  9:22:35 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+EQY  9:22:35 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pinned] DONE (PASS, rc=0)

@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys",
+    "-s",
+    "/workspace/build/experiments/fpu-mapping-v1/gate-sim-v3/generate.ys"
+  ],
+  "cwd": "/workspace",
+  "report": "/workspace/build/experiments/fpu-mapping-v1/gate-sim-v3/run.json",
+  "log": "/workspace/build/experiments/fpu-mapping-v1/gate-sim-v3/generate.log",
+  "inputs": {
+    "/workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/results/asap7/rv32_post_lsu_v1/base/1_1_yosys_canonicalize.rtlil": "551cd23e94c3858c3b7b7a451fb16bb17228fdf9bcbe67ea03290c12ae8d6d7b",
+    "/workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/results/asap7/rv32_post_lsu_v1/base/fp_mapped.rtlil": "4fa586e90615b01f3624e2d793971248a42cb32c72d0de1bbd3567023db468e3",
+    "/workspace/build/experiments/fpu-mapping-v1/gate-sim-v3/generate.ys": "3c389c00c81f77001e357d165198f3bee90a760077123c1937faf2ce5d2aede3",
+    "/workspace/build/experiments/fpu-mapping-v1/gate-sim-v3/top.v": "2c424af48574c42b163434fd6ce980108eb5a122a408d2a4bbab3204218a5eb3"
+  }
+}

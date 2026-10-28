@@ -1,0 +1,54 @@
+EQY  9:30:31 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] read_gold: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work/gold.log /workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work/gold.ys"
+EQY  9:30:32 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] read_gate: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work/gate.log /workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work/gate.ys"
+EQY  9:30:35 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] read_gold: finished (returncode=0)
+EQY  9:30:39 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] read_gate: finished (returncode=0)
+EQY  9:30:39 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] combine: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work/combine.log /workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work/combine.ys"
+EQY  9:30:39 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] combine: finished (returncode=0)
+EQY  9:30:40 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] partition: starting process "cd /workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work; /OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql partition.log partition.ys"
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] partition: finished (returncode=0)
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.issue_ready contains 5 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.issue_ready contains 1 unused gate inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.136 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.136 contains 1 unused gate inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.128 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.127 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.126 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.125 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.124 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.123 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.122 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.121 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.120 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.119 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.118 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.117 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.116 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.115 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.114 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.113 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.112 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.111 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.110 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.109 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.108 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.107 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.106 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.105 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.104 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.103 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.102 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.101 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.100 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.99 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.98 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.97 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.57 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.57 contains 1 unused gate inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.54 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.comb_cmp.53 contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.cmp_valid contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.cmp_data contains 1 unused gold inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] Warning: Partition rv32_ooo_fp_execute.cmp_data contains 1 unused gate inputs.
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:44 (44)
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:41 (41)
+EQY  9:31:15 [/workspace/build/experiments/fpu-mapping-v1/equivalence-pre-v4/work] DONE (UNKNOWN, rc=0)

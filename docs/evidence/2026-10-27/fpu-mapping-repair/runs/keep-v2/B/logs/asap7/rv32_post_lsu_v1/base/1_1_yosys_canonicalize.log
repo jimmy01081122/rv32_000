@@ -1,0 +1,85 @@
+Yosys 0.63+post (git sha1 UNKNOWN-dirty, g++ 11.4.0-1ubuntu1~22.04.3 -fPIC -O3)
+Using ABC speed script.
+Extracting clock period from SDC file: /workspace/build/experiments/fpu-mapping-v1/keep-v2/B/results/asap7/rv32_post_lsu_v1/base/clock_period.txt
+Setting clock period to 5500
+1. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+2. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+3. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+4. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+5. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+6. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+7. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+8. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+9. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+10. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+11. Executing Verilog-2005 frontend: /workspace/build/experiments/lsu-b-v1/rtl_lowered.v
+12. Executing Verilog-2005 frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/yoSys/cells_clkgate_R.v
+13. Executing HIERARCHY pass (managing design hierarchy).
+14. Executing AST frontend in derive mode using pre-parsed AST for module `\rv32_ooo_core'.
+14.1. Analyzing design hierarchy..
+14.2. Executing AST frontend in derive mode using pre-parsed AST for module `\rv32_ooo_csr'.
+14.3. Executing AST frontend in derive mode using pre-parsed AST for module `\rv32_ooo_lsu'.
+14.4. Executing AST frontend in derive mode using pre-parsed AST for module `\rv32_ooo_fp_divsqrt'.
+14.5. Executing AST frontend in derive mode using pre-parsed AST for module `\rv32_ooo_fp_execute'.
+14.6. Executing AST frontend in derive mode using pre-parsed AST for module `\rv32_ooo_fp_simple'.
+14.7. Executing AST frontend in derive mode using pre-parsed AST for module `\rv32_ooo_int_execute'.
+14.8. Executing AST frontend in derive mode using pre-parsed AST for module `\rv32_ooo_fp_prf'.
+14.9. Executing AST frontend in derive mode using pre-parsed AST for module `\rv32_ooo_fp_iq'.
+14.10. Executing AST frontend in derive mode using pre-parsed AST for module `\rv32_ooo_int_prf'.
+14.11. Executing AST frontend in derive mode using pre-parsed AST for module `\rv32_ooo_int_iq'.
+Warning: Replacing memory \entries with list of registers. See /workspace/build/experiments/lsu-b-v1/rtl_lowered.v:1673
+Warning: Replacing memory \l2 with list of registers. See /workspace/build/experiments/lsu-b-v1/rtl_lowered.v:1665, /workspace/build/experiments/lsu-b-v1/rtl_lowered.v:1663
+Warning: Replacing memory \l1 with list of registers. See /workspace/build/experiments/lsu-b-v1/rtl_lowered.v:1663, /workspace/build/experiments/lsu-b-v1/rtl_lowered.v:1659
+Warning: Replacing memory \l0 with list of registers. See /workspace/build/experiments/lsu-b-v1/rtl_lowered.v:1659, /workspace/build/experiments/lsu-b-v1/rtl_lowered.v:1654
+14.12. Executing AST frontend in derive mode using pre-parsed AST for module `\rv32_ooo_rob'.
+Warning: Replacing memory \entries with list of registers. See /workspace/build/experiments/lsu-b-v1/rtl_lowered.v:1413
+14.13. Executing AST frontend in derive mode using pre-parsed AST for module `\rv32_ooo_rename'.
+Warning: Replacing memory \fp_rrat with list of registers. See /workspace/build/experiments/lsu-b-v1/rtl_lowered.v:1141
+Warning: Replacing memory \fp_rat with list of registers. See /workspace/build/experiments/lsu-b-v1/rtl_lowered.v:1140
+Warning: Replacing memory \int_rrat with list of registers. See /workspace/build/experiments/lsu-b-v1/rtl_lowered.v:1139
+Warning: Replacing memory \int_rat with list of registers. See /workspace/build/experiments/lsu-b-v1/rtl_lowered.v:1138
+14.14. Executing AST frontend in derive mode using pre-parsed AST for module `\rv32_ooo_frontend'.
+14.15. Analyzing design hierarchy..
+14.16. Executing AST frontend in derive mode using pre-parsed AST for module `\rv32_ooo_divider'.
+14.17. Executing AST frontend in derive mode using pre-parsed AST for module `\rv32_ooo_multiplier'.
+14.18. Analyzing design hierarchy..
+14.19. Analyzing design hierarchy..
+source /workspace/physical/asap7/baseline/lower_processes.tcl
+15. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+16. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+17. Executing PROC_INIT pass (extract init attributes).
+18. Executing PROC_ARST pass (detect async resets in processes).
+19. Executing PROC_MUX pass (convert decision trees to multiplexers).
+20. Executing OPT_EXPR pass (perform const folding).
+21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Warning: Ignoring module rv32_ooo_divider because it contains processes (run 'proc' command first).
+Warning: Ignoring module rv32_ooo_frontend because it contains processes (run 'proc' command first).
+Warning: Ignoring module rv32_ooo_rename because it contains processes (run 'proc' command first).
+Warning: Ignoring module rv32_ooo_rob because it contains processes (run 'proc' command first).
+Warning: Ignoring module rv32_ooo_int_iq because it contains processes (run 'proc' command first).
+Warning: Ignoring module rv32_ooo_int_prf because it contains processes (run 'proc' command first).
+Warning: Ignoring module rv32_ooo_fp_iq because it contains processes (run 'proc' command first).
+Warning: Ignoring module rv32_ooo_fp_prf because it contains processes (run 'proc' command first).
+Warning: Ignoring module rv32_ooo_int_execute because it contains processes (run 'proc' command first).
+Warning: Ignoring module rv32_ooo_fp_simple because it contains processes (run 'proc' command first).
+Warning: Ignoring module rv32_ooo_fp_execute because it contains processes (run 'proc' command first).
+Warning: Ignoring module rv32_ooo_fp_divsqrt because it contains processes (run 'proc' command first).
+Warning: Ignoring module rv32_ooo_lsu because it contains processes (run 'proc' command first).
+Warning: Ignoring module rv32_ooo_csr because it contains processes (run 'proc' command first).
+Warning: Ignoring module rv32_ooo_core because it contains processes (run 'proc' command first).
+Warning: Ignoring module $paramod\rv32_ooo_multiplier\LATENCY=s32'00000000000000000000000000000011 because it contains processes (run 'proc' command first).
+22. Executing PROC_DFF pass (convert process syncs to FFs).
+23. Executing PROC_MEMWR pass (convert process memory writes to cells).
+24. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+25. Executing OPT_CLEAN pass (remove unused cells and wires).
+26. Executing CHECK pass (checking for obvious problems).
+Took 31 seconds: source /workspace/physical/asap7/baseline/lower_processes.tcl
+27. Executing OPT_CLEAN pass (remove unused cells and wires).
+28. Executing RTLIL backend.
+Warnings: 25 unique messages, 25 total
+End of script. Logfile hash: c0e6a8dc55, CPU: user 96.18s system 0.14s, MEM: 524.75 MB peak
+Yosys 0.63+post (git sha1 UNKNOWN-dirty, g++ 11.4.0-1ubuntu1~22.04.3 -fPIC -O3)
+Time spent: 64% 1x hierarchy (62 sec), 25% 1x proc_mux (24 sec), ...
+Elapsed time: 1:36.63[h:]min:sec. CPU time: user 96.45 sys 0.15 (99%). Peak memory: 537340KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+1_1_yosys_canonicalize    .rtlil         96            524 113e7c249819125588cd

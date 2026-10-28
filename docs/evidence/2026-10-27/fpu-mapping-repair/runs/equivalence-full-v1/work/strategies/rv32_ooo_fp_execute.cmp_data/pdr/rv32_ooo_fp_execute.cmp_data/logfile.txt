@@ -1,0 +1,284 @@
+SBY  9:40:05 [rv32_ooo_fp_execute.cmp_data] Removing directory '/workspace/build/experiments/fpu-mapping-v1/equivalence-full-v1/work/strategies/rv32_ooo_fp_execute.cmp_data/pdr/rv32_ooo_fp_execute.cmp_data'.
+SBY  9:40:05 [rv32_ooo_fp_execute.cmp_data] engine_0: abc pdr
+SBY  9:40:05 [rv32_ooo_fp_execute.cmp_data] base: starting process "cd rv32_ooo_fp_execute.cmp_data/src; yosys -ql ../model/design.log ../model/design.ys"
+SBY  9:40:08 [rv32_ooo_fp_execute.cmp_data] base: Warning: Unhandled cell gate ($scopeinfo) during maybe-x marking
+SBY  9:40:08 [rv32_ooo_fp_execute.cmp_data] base: Warning: Unhandled cell __po_cmp_valid__assert ($scopeinfo) during maybe-x marking
+SBY  9:40:08 [rv32_ooo_fp_execute.cmp_data] base: Warning: Unhandled cell __po_cmp_data__assert ($scopeinfo) during maybe-x marking
+SBY  9:40:08 [rv32_ooo_fp_execute.cmp_data] base: Warning: Unhandled cell __po_issue_ready__assert ($scopeinfo) during maybe-x marking
+SBY  9:40:09 [rv32_ooo_fp_execute.cmp_data] base: Warning: Unhandled cell gold ($scopeinfo) during maybe-x marking
+SBY  9:40:10 [rv32_ooo_fp_execute.cmp_data] base: finished (returncode=0)
+SBY  9:40:10 [rv32_ooo_fp_execute.cmp_data] prep: starting process "cd rv32_ooo_fp_execute.cmp_data/model; yosys -ql design_prep.log design_prep.ys"
+SBY  9:40:19 [rv32_ooo_fp_execute.cmp_data] prep: finished (returncode=0)
+SBY  9:40:19 [rv32_ooo_fp_execute.cmp_data] aig: starting process "cd rv32_ooo_fp_execute.cmp_data/model; yosys -ql design_aiger.log design_aiger.ys"
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_rst like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_valid like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [0] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [1] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [2] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [3] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [4] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [5] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [6] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [7] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [8] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [9] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [10] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [11] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [12] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [13] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [14] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [15] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [16] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [17] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [18] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [19] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [20] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [21] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [22] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__299_276 [23] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__241 like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__233_228 [0] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__233_228 [1] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__233_228 [2] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__233_228 [3] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__233_228 [4] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__233_228 [5] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__157_155 [0] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__157_155 [1] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__157_155 [2] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [0] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [1] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [2] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [3] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [4] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [5] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [6] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [7] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [8] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [9] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [10] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [11] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [12] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [13] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [14] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [15] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [16] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [17] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [18] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [19] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [20] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [21] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [22] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [23] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [24] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [25] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [26] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [27] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [28] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [29] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [30] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [31] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [32] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [33] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [34] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [35] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [36] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [37] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [38] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [39] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [40] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [41] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [42] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [43] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [44] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [45] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [46] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [47] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [48] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [49] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [50] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [51] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [52] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [53] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [54] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [55] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [56] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [57] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [58] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [59] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [60] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [61] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [62] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [63] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [64] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [65] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [66] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [67] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [68] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [69] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [70] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [71] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [72] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [73] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [74] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [75] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [76] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [77] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [78] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [79] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [80] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [81] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [82] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [83] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [84] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [85] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [86] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [87] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [88] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [89] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [90] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [91] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [92] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [93] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [94] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [95] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [96] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [97] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [98] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [99] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [100] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [101] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [102] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [103] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [104] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [105] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [106] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [107] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [108] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [109] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [110] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [111] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [112] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [113] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [114] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [115] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [116] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [117] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [118] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [119] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [120] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [121] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [122] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [123] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [124] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [125] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [126] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [127] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [128] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [129] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [130] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [131] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [132] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_issue_req__133_0 [133] like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_flush_valid like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_cmp_ready like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating undriven bit miter.\__pi_clk like $anyseq.
+SBY  9:42:20 [rv32_ooo_fp_execute.cmp_data] aig: Warning: Treating a total of 173 undriven bits in miter like $anyseq.
+SBY  9:42:21 [rv32_ooo_fp_execute.cmp_data] aig: finished (returncode=0)
+SBY  9:42:21 [rv32_ooo_fp_execute.cmp_data] engine_0: starting process "cd rv32_ooo_fp_execute.cmp_data; yosys-abc -c 'read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw'"
+SBY  9:42:22 [rv32_ooo_fp_execute.cmp_data] engine_0: ======== ABC command line "read_aiger model/design_aiger.aig; fold; strash; pdr -v -l; write_cex -a engine_0/trace.aiw"
+SBY  9:42:22 [rv32_ooo_fp_execute.cmp_data] engine_0: Warning: The last output is interpreted as a constraint.
+SBY  9:42:22 [rv32_ooo_fp_execute.cmp_data] engine_0: VarMax = 300. FrameMax = 10000. QueMax = 0. TimeMax = 159. MonoCNF = no. SkipGen = no. SolveAll = no.
+SBY  9:42:22 [rv32_ooo_fp_execute.cmp_data] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY  9:42:22 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 2                                                                 1     2      0.54 sec  T/O =  0  PRV =  0
+SBY  9:42:22 [rv32_ooo_fp_execute.cmp_data] engine_0: Timing out on output 0 in frame 1 (retrying in next anytime pass).
+SBY  9:42:22 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 5                                                                 1     7      0.70 sec  T/O =  1  PRV =  0
+SBY  9:42:22 [rv32_ooo_fp_execute.cmp_data] engine_0: 2 : 0 1 7                                                               1    10      0.71 sec  T/O =  1  PRV =  0
+SBY  9:42:22 [rv32_ooo_fp_execute.cmp_data] engine_0: Proved output 1 in frame 2.
+SBY  9:42:22 [rv32_ooo_fp_execute.cmp_data] engine_0: Proved output 2 in frame 2.
+SBY  9:42:22 [rv32_ooo_fp_execute.cmp_data] engine_0: 3 : 0 1 2 0 ~5                                                           0    10      0.71 sec  T/O =  1  PRV =  2
+SBY  9:42:22 [rv32_ooo_fp_execute.cmp_data] engine_0: 4 : 0 1 2 0 0 ~5                                                         0    10      0.71 sec  T/O =  1  PRV =  2
+SBY  9:42:23 [rv32_ooo_fp_execute.cmp_data] engine_0: All outputs solved or timed out in frame 4.
+SBY  9:42:23 [rv32_ooo_fp_execute.cmp_data] engine_0: Starting new anytime pass, reusing clauses.
+SBY  9:42:23 [rv32_ooo_fp_execute.cmp_data] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY  9:42:23 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 5 ~5                                                               1     2      0.24 sec  T/O =  0  PRV =  2
+SBY  9:42:23 [rv32_ooo_fp_execute.cmp_data] engine_0: Timing out on output 0 in frame 1 (retrying in next anytime pass).
+SBY  9:42:23 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 5 ~5                                                               0     2      0.24 sec  T/O =  1  PRV =  2
+SBY  9:42:23 [rv32_ooo_fp_execute.cmp_data] engine_0: 2 : 0 1 4 ~5                                                             0     2      0.24 sec  T/O =  1  PRV =  2
+SBY  9:42:23 [rv32_ooo_fp_execute.cmp_data] engine_0: All outputs solved or timed out in frame 2.
+SBY  9:42:23 [rv32_ooo_fp_execute.cmp_data] engine_0: Starting new anytime pass, reusing clauses.
+SBY  9:42:23 [rv32_ooo_fp_execute.cmp_data] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY  9:42:23 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 8 ~5                                                               1     3      0.41 sec  T/O =  0  PRV =  2
+SBY  9:42:23 [rv32_ooo_fp_execute.cmp_data] engine_0: Timing out on output 0 in frame 1 (retrying in next anytime pass).
+SBY  9:42:23 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 8 ~5                                                               0     3      0.41 sec  T/O =  1  PRV =  2
+SBY  9:42:23 [rv32_ooo_fp_execute.cmp_data] engine_0: 2 : 0 1 7 ~5                                                             0     3      0.41 sec  T/O =  1  PRV =  2
+SBY  9:42:24 [rv32_ooo_fp_execute.cmp_data] engine_0: All outputs solved or timed out in frame 2.
+SBY  9:42:24 [rv32_ooo_fp_execute.cmp_data] engine_0: Starting new anytime pass, reusing clauses.
+SBY  9:42:24 [rv32_ooo_fp_execute.cmp_data] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY  9:42:24 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 10 ~5                                                              1     2      0.82 sec  T/O =  0  PRV =  2
+SBY  9:42:24 [rv32_ooo_fp_execute.cmp_data] engine_0: Timing out on output 0 in frame 1 (retrying in next anytime pass).
+SBY  9:42:24 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 10 ~5                                                              0     2      0.82 sec  T/O =  1  PRV =  2
+SBY  9:42:24 [rv32_ooo_fp_execute.cmp_data] engine_0: 2 : 0 1 9 ~5                                                             0     2      0.83 sec  T/O =  1  PRV =  2
+SBY  9:42:25 [rv32_ooo_fp_execute.cmp_data] engine_0: All outputs solved or timed out in frame 2.
+SBY  9:42:25 [rv32_ooo_fp_execute.cmp_data] engine_0: Starting new anytime pass, reusing clauses.
+SBY  9:42:25 [rv32_ooo_fp_execute.cmp_data] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY  9:42:25 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 12 ~5                                                              1     2      1.61 sec  T/O =  0  PRV =  2
+SBY  9:42:25 [rv32_ooo_fp_execute.cmp_data] engine_0: Timing out on output 0 in frame 1 (retrying in next anytime pass).
+SBY  9:42:25 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 12 ~5                                                              0     2      1.61 sec  T/O =  1  PRV =  2
+SBY  9:42:25 [rv32_ooo_fp_execute.cmp_data] engine_0: 2 : 0 1 11 ~5                                                            0     2      1.61 sec  T/O =  1  PRV =  2
+SBY  9:42:29 [rv32_ooo_fp_execute.cmp_data] engine_0: All outputs solved or timed out in frame 2.
+SBY  9:42:29 [rv32_ooo_fp_execute.cmp_data] engine_0: Starting new anytime pass, reusing clauses.
+SBY  9:42:29 [rv32_ooo_fp_execute.cmp_data] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY  9:42:29 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 14 ~5                                                              1     2      3.21 sec  T/O =  0  PRV =  2
+SBY  9:42:29 [rv32_ooo_fp_execute.cmp_data] engine_0: Timing out on output 0 in frame 1 (retrying in next anytime pass).
+SBY  9:42:29 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 14 ~5                                                              0     2      3.21 sec  T/O =  1  PRV =  2
+SBY  9:42:29 [rv32_ooo_fp_execute.cmp_data] engine_0: 2 : 0 1 13 ~5                                                            0     2      3.22 sec  T/O =  1  PRV =  2
+SBY  9:42:35 [rv32_ooo_fp_execute.cmp_data] engine_0: All outputs solved or timed out in frame 2.
+SBY  9:42:35 [rv32_ooo_fp_execute.cmp_data] engine_0: Starting new anytime pass, reusing clauses.
+SBY  9:42:35 [rv32_ooo_fp_execute.cmp_data] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY  9:42:35 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 17 ~5                                                              1     3      6.41 sec  T/O =  0  PRV =  2
+SBY  9:42:35 [rv32_ooo_fp_execute.cmp_data] engine_0: Timing out on output 0 in frame 1 (retrying in next anytime pass).
+SBY  9:42:35 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 17 ~5                                                              0     3      6.41 sec  T/O =  1  PRV =  2
+SBY  9:42:35 [rv32_ooo_fp_execute.cmp_data] engine_0: 2 : 0 1 16 ~5                                                            0     3      6.41 sec  T/O =  1  PRV =  2
+SBY  9:42:48 [rv32_ooo_fp_execute.cmp_data] engine_0: All outputs solved or timed out in frame 2.
+SBY  9:42:48 [rv32_ooo_fp_execute.cmp_data] engine_0: Starting new anytime pass, reusing clauses.
+SBY  9:42:48 [rv32_ooo_fp_execute.cmp_data] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY  9:42:48 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 54 ~5                                                              1    37     12.82 sec  T/O =  0  PRV =  2
+SBY  9:42:48 [rv32_ooo_fp_execute.cmp_data] engine_0: Timing out on output 0 in frame 1 (retrying in next anytime pass).
+SBY  9:42:48 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 54 ~5                                                              0    37     12.82 sec  T/O =  1  PRV =  2
+SBY  9:42:48 [rv32_ooo_fp_execute.cmp_data] engine_0: 2 : 0 1 53 ~5                                                            0    37     12.83 sec  T/O =  1  PRV =  2
+SBY  9:43:14 [rv32_ooo_fp_execute.cmp_data] engine_0: All outputs solved or timed out in frame 2.
+SBY  9:43:14 [rv32_ooo_fp_execute.cmp_data] engine_0: Starting new anytime pass, reusing clauses.
+SBY  9:43:14 [rv32_ooo_fp_execute.cmp_data] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY  9:43:14 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 54 ~5                                                              1     0     25.66 sec  T/O =  0  PRV =  2
+SBY  9:43:14 [rv32_ooo_fp_execute.cmp_data] engine_0: Timing out on output 0 in frame 1 (retrying in next anytime pass).
+SBY  9:43:14 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 54 ~5                                                              0     0     25.66 sec  T/O =  1  PRV =  2
+SBY  9:43:14 [rv32_ooo_fp_execute.cmp_data] engine_0: 2 : 0 1 53 ~5                                                            0     0     25.67 sec  T/O =  1  PRV =  2
+SBY  9:44:05 [rv32_ooo_fp_execute.cmp_data] engine_0: All outputs solved or timed out in frame 2.
+SBY  9:44:05 [rv32_ooo_fp_execute.cmp_data] engine_0: Starting new anytime pass, reusing clauses.
+SBY  9:44:05 [rv32_ooo_fp_execute.cmp_data] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY  9:44:05 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 54 ~5                                                              1     0     51.29 sec  T/O =  0  PRV =  2
+SBY  9:44:05 [rv32_ooo_fp_execute.cmp_data] engine_0: Timing out on output 0 in frame 1 (retrying in next anytime pass).
+SBY  9:44:05 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 54 ~5                                                              0     0     51.29 sec  T/O =  1  PRV =  2
+SBY  9:44:05 [rv32_ooo_fp_execute.cmp_data] engine_0: 2 : 0 1 53 ~5                                                            0     0     51.30 sec  T/O =  1  PRV =  2
+SBY  9:45:47 [rv32_ooo_fp_execute.cmp_data] engine_0: All outputs solved or timed out in frame 2.
+SBY  9:45:47 [rv32_ooo_fp_execute.cmp_data] engine_0: Starting new anytime pass, reusing clauses.
+SBY  9:45:47 [rv32_ooo_fp_execute.cmp_data] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY  9:45:47 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 54 ~5                                                              1     0    102.46 sec  T/O =  0  PRV =  2
+SBY  9:45:47 [rv32_ooo_fp_execute.cmp_data] engine_0: Timing out on output 0 in frame 1 (retrying in next anytime pass).
+SBY  9:45:47 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 54 ~5                                                              0     0    102.46 sec  T/O =  1  PRV =  2
+SBY  9:45:47 [rv32_ooo_fp_execute.cmp_data] engine_0: 2 : 0 1 53 ~5                                                            0     0    102.48 sec  T/O =  1  PRV =  2
+SBY  9:49:12 [rv32_ooo_fp_execute.cmp_data] engine_0: All outputs solved or timed out in frame 2.
+SBY  9:49:12 [rv32_ooo_fp_execute.cmp_data] engine_0: Starting new anytime pass, reusing clauses.
+SBY  9:49:12 [rv32_ooo_fp_execute.cmp_data] engine_0: Frame Clauses                                                     Max Queue Flops Time
+SBY  9:49:12 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 54 ~5                                                              1     0    204.83 sec  T/O =  0  PRV =  2
+SBY  9:49:12 [rv32_ooo_fp_execute.cmp_data] engine_0: Timing out on output 0 in frame 1 (retrying in next anytime pass).
+SBY  9:49:12 [rv32_ooo_fp_execute.cmp_data] engine_0: 1 : 0 54 ~5                                                              0     0    204.83 sec  T/O =  1  PRV =  2
+SBY  9:49:12 [rv32_ooo_fp_execute.cmp_data] engine_0: 2 : 0 1 53 ~5                                                            0     0    204.84 sec  T/O =  1  PRV =  2
+SBY  9:55:07 [rv32_ooo_fp_execute.cmp_data] Reached TIMEOUT (900 seconds). Terminating all subprocesses.
+SBY  9:55:07 [rv32_ooo_fp_execute.cmp_data] engine_0: terminating process
+SBY  9:55:07 [rv32_ooo_fp_execute.cmp_data] summary: Elapsed clock time [H:MM:SS (secs)]: 0:15:01 (901)
+SBY  9:55:07 [rv32_ooo_fp_execute.cmp_data] summary: Elapsed process time [H:MM:SS (secs)]: 0:02:10 (130)
+SBY  9:55:07 [rv32_ooo_fp_execute.cmp_data] summary: engine_0 (abc pdr) did not return a status
+SBY  9:55:07 [rv32_ooo_fp_execute.cmp_data] summary: engine_0 did not produce any traces
+SBY  9:55:07 [rv32_ooo_fp_execute.cmp_data] DONE (TIMEOUT, rc=0)

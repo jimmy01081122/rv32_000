@@ -1,0 +1,21 @@
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr] read_gold: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr/gold.log /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr/gold.ys"
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr] read_gate: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr/gate.log /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr/gate.ys"
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr] read_gold: finished (returncode=0)
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr] read_gate: finished (returncode=0)
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr] combine: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr/combine.log /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr/combine.ys"
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr] combine: finished (returncode=0)
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr] partition: starting process "cd /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr; /OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql partition.log partition.ys"
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr] partition: finished (returncode=0)
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr] run: starting process "make -j1 -C /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr -f strategies.mk"
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr] run: make: Entering directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr'
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr] run: Running strategy 'pdr' on 'check.q'..
+EQY  9:43:51 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr] run: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+EQY  9:43:51 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr] run: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+EQY  9:43:51 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr] run: engine_0 (abc pdr) returned FAIL
+EQY  9:43:51 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr] run: engine_0 did not produce any traces
+EQY  9:43:51 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr] run: Execution of strategy 'pdr' on partition 'check.q' encountered an error.
+EQY  9:43:51 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr] run: More details can be found in '/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr/strategies/check.q/pdr/check.q/logfile.txt'.
+EQY  9:43:51 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr] run: make: *** [strategies.mk:5: strategies/check.q/pdr/status] Error 1
+EQY  9:43:51 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr] run: make: Leaving directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr'
+EQY  9:43:51 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr] run: finished (returncode=2)
+ERROR: A problem occurred during equivalence check.

@@ -1,0 +1,22 @@
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] read_gold: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive/gold.log /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive/gold.ys"
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] read_gold: finished (returncode=0)
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] read_gate: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive/gate.log /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive/gate.ys"
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] read_gate: finished (returncode=0)
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] combine: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive/combine.log /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive/combine.ys"
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] combine: finished (returncode=0)
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] partition: starting process "cd /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive; /OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql partition.log partition.ys"
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] partition: finished (returncode=0)
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] run: starting process "make -j1 -C /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive -f strategies.mk"
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] run: make: Entering directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive'
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] run: Running strategy 'sat' on 'check.q'..
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] run: Proved equivalence of partition 'check.q' using strategy 'sat'
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] run: make -f strategies.mk summary
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] run: make[1]: Entering directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive'
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] run: make[1]: Leaving directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive'
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] run: make: Leaving directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive'
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] run: finished (returncode=0)
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] Successfully proved equivalence of partition check.q
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] Successfully proved designs equivalent
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+EQY  9:20:33 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive] DONE (PASS, rc=0)

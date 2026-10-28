@@ -1,0 +1,37 @@
+{
+  "scope": "original RTL model versus mapped-cell function model; not independent IEEE oracle",
+  "started_utc": "2026-10-27T15:00:32.031121+00:00",
+  "inputs": {
+    "experiments/fpu-mapping-v1/gate_driver.cc": "aefea00e1b1e28edaafb6d4a7e20f776c02d4e2e1a15e81eeec4ef313e3f1d50",
+    "build/experiments/fpu-mapping-v1/gate-sim-v8/model.cc": "25e418b5168cdde0fdb387908aad225ad618bcee6f689633a444abc2dd5b5098",
+    "build/experiments/fpu-mapping-v1/gate-sim-v1/include/backends/cxxrtl/runtime/cxxrtl/cxxrtl_replay.h": "ddb140cb79d8b5a1f832c2c8f4abdff3c2ba0583a430bf2994333198fb4f76cb",
+    "build/experiments/fpu-mapping-v1/gate-sim-v1/include/backends/cxxrtl/runtime/cxxrtl/cxxrtl_vcd.h": "2f854e3b1edcf6b1a4c53162f158e184d1846eecf17ff8fa3f90f4ff49f45a30",
+    "build/experiments/fpu-mapping-v1/gate-sim-v1/include/backends/cxxrtl/runtime/cxxrtl/cxxrtl.h": "f278314d20e57dddb8c04974e513ff2bff417e51f1c404d8fa864c7cd6903b91",
+    "build/experiments/fpu-mapping-v1/gate-sim-v1/include/backends/cxxrtl/runtime/cxxrtl/cxxrtl_time.h": "eb3231b971bb6d7cb95167bb5ae03f2901e2c15ed55af72c35e73038f00bfdb5",
+    "build/experiments/fpu-mapping-v1/gate-sim-v1/include/backends/cxxrtl/runtime/cxxrtl/capi/cxxrtl_capi.h": "2e53569e39b12aa50725e68939a5d3f4e30062af86d062e057342fb189026ff5",
+    "build/experiments/fpu-mapping-v1/gate-sim-v1/include/backends/cxxrtl/runtime/cxxrtl/capi/cxxrtl_capi_vcd.h": "3fa28112cfbbe882b82f02818576e3bbd9f0907deb9a6a949b8b92ba2692f3c3"
+  },
+  "compile_command": [
+    "c++",
+    "-std=c++17",
+    "-O2",
+    "-fno-inline",
+    "-g0",
+    "-D__has_attribute(x)=0",
+    "-I",
+    "/workspace/rv32_000/build/experiments/fpu-mapping-v1/gate-sim-v1/include/backends/cxxrtl/runtime",
+    "-I",
+    "/workspace/rv32_000/build/experiments/fpu-mapping-v1/gate-sim-v8",
+    "/workspace/rv32_000/experiments/fpu-mapping-v1/gate_driver.cc",
+    "-o",
+    "/workspace/rv32_000/build/experiments/fpu-mapping-v1/gate-sim-v8/check-gates"
+  ],
+  "compiler": "c++ (Debian 14.2.0-19) 14.2.0\nCopyright (C) 2024 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "state": "finished",
+  "passed": false,
+  "compile_returncode": 0,
+  "executable_sha256": "aa0a8d70b15c72269a4b2c66856bc3e8aca49923febc37847aaeab0a6e2e36c9",
+  "test_returncode": -15,
+  "finished_utc": "2026-10-27T15:14:58.350443+00:00",
+  "input_identities_unchanged": true
+}

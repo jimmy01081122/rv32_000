@@ -1,0 +1,38 @@
+[
+  {
+    "name": "positive",
+    "returncode": 0,
+    "command": [
+      "eqy",
+      "--yosys",
+      "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys",
+      "--abc",
+      "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys-abc",
+      "-j",
+      "1",
+      "-d",
+      "/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr",
+      "/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr.eqy"
+    ],
+    "pass_marker": true,
+    "fail_marker": false
+  },
+  {
+    "name": "negative",
+    "returncode": 1,
+    "command": [
+      "eqy",
+      "--yosys",
+      "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys",
+      "--abc",
+      "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys-abc",
+      "-j",
+      "1",
+      "-d",
+      "/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr",
+      "/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr.eqy"
+    ],
+    "pass_marker": false,
+    "fail_marker": false
+  }
+]

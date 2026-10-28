@@ -1,0 +1,33 @@
+[
+  {
+    "stage": "gold",
+    "command": [
+      "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys",
+      "-s",
+      "/workspace/build/experiments/fpu-mapping-v1/mapping-cec-v2/gold.ys"
+    ],
+    "returncode": 0
+  },
+  {
+    "stage": "gate",
+    "command": [
+      "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys",
+      "-s",
+      "/workspace/build/experiments/fpu-mapping-v1/mapping-cec-v2/gate.ys"
+    ],
+    "returncode": 0
+  },
+  {
+    "stage": "cec",
+    "command": [
+      "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys-abc",
+      "-c",
+      "cec /workspace/build/experiments/fpu-mapping-v1/mapping-cec-v2/gold.blif /workspace/build/experiments/fpu-mapping-v1/mapping-cec-v2/gate.blif"
+    ],
+    "started_utc": "2026-10-27T07:35:25.167718+00:00",
+    "state": "finished",
+    "returncode": 0,
+    "finished_utc": "2026-10-27T07:36:19.145207+00:00",
+    "equivalent": true
+  }
+]

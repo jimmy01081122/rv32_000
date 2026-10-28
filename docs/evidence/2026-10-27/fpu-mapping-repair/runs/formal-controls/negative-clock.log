@@ -1,0 +1,22 @@
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] read_gold: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock/gold.log /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock/gold.ys"
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] read_gold: finished (returncode=0)
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] read_gate: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock/gate.log /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock/gate.ys"
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] read_gate: finished (returncode=0)
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] combine: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock/combine.log /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock/combine.ys"
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] combine: finished (returncode=0)
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] partition: starting process "cd /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock; /OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql partition.log partition.ys"
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] partition: finished (returncode=0)
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] run: starting process "make -j1 -C /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock -f strategies.mk"
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] run: make: Entering directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock'
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] run: Running strategy 'sat' on 'check.q'..
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] run: Could not prove equivalence of partition 'check.q' using strategy 'sat'
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] run: make -f strategies.mk summary
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] run: make[1]: Entering directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock'
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] run: make[1]: Leaving directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock'
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] run: make: Leaving directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock'
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] run: finished (returncode=0)
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] Warning: Failed to prove equivalence for 1/1 partitions:
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] Failed to prove equivalence of partition check.q
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+EQY  9:24:37 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-clock] DONE (FAIL, rc=2)

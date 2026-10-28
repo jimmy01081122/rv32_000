@@ -1,0 +1,235 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63 (git sha1 70a11c6bf, g++ 11.4.0-1ubuntu1~22.04.3 -fPIC -O3)
+
+-- Executing script file `run.ys' --
+
+1. Executing Verilog-2005 frontend: ../../../partitions/check.q.sv
+Parsing SystemVerilog input from `../../../partitions/check.q.sv' to AST representation.
+Generating RTLIL representation for module `\miter'.
+Generating RTLIL representation for module `\miter_cmp_prop'.
+Generating RTLIL representation for module `\miter_def_prop'.
+Generating RTLIL representation for module `\gold.check.q'.
+Generating RTLIL representation for module `\gate.check.q'.
+Successfully finished Verilog frontend.
+
+2. Executing RTLIL frontend.
+Input filename: ../../../partitions/check.q.il
+Replacing existing blackbox module \gold.check.q.
+Replacing existing blackbox module \gate.check.q.
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+
+3.1. Analyzing design hierarchy..
+Top module:  \miter
+Used module:     \miter_cmp_prop
+Used module:     \gate.check.q
+Used module:     \gold.check.q
+Parameter 1 (\WIDTH) = 1
+Parameter 2 (\TYPE) = 48'011000010111001101110011011001010111001001110100
+
+3.2. Executing AST frontend in derive mode using pre-parsed AST for module `\miter_cmp_prop'.
+Parameter 1 (\WIDTH) = 1
+Parameter 2 (\TYPE) = 48'011000010111001101110011011001010111001001110100
+Generating RTLIL representation for module `$paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop'.
+
+3.3. Analyzing design hierarchy..
+Top module:  \miter
+Used module:     $paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop
+Used module:     \gate.check.q
+Used module:     \gold.check.q
+
+3.4. Analyzing design hierarchy..
+Top module:  \miter
+Used module:     $paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop
+Used module:     \gate.check.q
+Used module:     \gold.check.q
+Removing unused module `\miter_def_prop'.
+Removing unused module `\miter_cmp_prop'.
+Removed 2 unused modules.
+Module $paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop directly or indirectly contains formal properties -> setting "keep" attribute.
+Module miter directly or indirectly contains formal properties -> setting "keep" attribute.
+Mapping positional arguments of cell miter.__po_q__assert ($paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop).
+
+4. Executing PROC pass (convert processes to netlists).
+
+4.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+4.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+4.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 1 redundant assignment.
+Promoted 3 assignments to connections.
+
+4.4. Executing PROC_INIT pass (extract init attributes).
+
+4.5. Executing PROC_ARST pass (detect async resets in processes).
+
+4.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+4.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop.$proc$../../../partitions/check.q.sv:70$22'.
+Creating decoders for process `$paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop.$proc$../../../partitions/check.q.sv:64$17'.
+
+4.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+No latch inferred for signal `$paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop.\i' from process `$paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop.$proc$../../../partitions/check.q.sv:64$17'.
+No latch inferred for signal `$paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop.\okay' from process `$paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop.$proc$../../../partitions/check.q.sv:64$17'.
+
+4.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+4.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+4.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `$paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop.$proc$../../../partitions/check.q.sv:70$22'.
+Removing empty process `$paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop.$proc$../../../partitions/check.q.sv:64$17'.
+Cleaned up 0 empty switches.
+
+4.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module gold.check.q.
+Optimizing module $paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop.
+<suppressed ~1 debug messages>
+Optimizing module gate.check.q.
+Optimizing module miter.
+
+5. Executing ASYNC2SYNC pass.
+
+6. Executing FORMALFF pass.
+
+7. Executing SETUNDEF pass (replace undef values with defined constants).
+
+8. Executing FLATTEN pass (flatten design).
+Deleting now unused module gold.check.q.
+Deleting now unused module $paramod$7c68cd0f50b67350b96c971f2e7bf39c83376225\miter_cmp_prop.
+Deleting now unused module gate.check.q.
+<suppressed ~3 debug messages>
+
+9. Executing DFFUNMAP pass (unmap clock enable and synchronous reset from FFs).
+
+10. Executing OPT_EXPR pass (perform const folding).
+Optimizing module miter.
+<suppressed ~1 debug messages>
+
+11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \miter..
+Removed 1 unused cells and 7 unused wires.
+<suppressed ~2 debug messages>
+
+12. Executing SAT pass (solving SAT problems in the circuit).
+Using SAT solver `minisat`.
+
+Setting up time step 1:
+Final constraint equation: { } = { }
+Import def constraint for this timestep: \__pi_a
+Import def constraint for this timestep: \__pi_b
+Import def constraint for this timestep: \__pi_clk
+Import def constraint for this timestep: \__pi_rst
+Imported 14 cells to SAT database.
+Import proof for assert: \__po_q__assert.okay when 1'1.
+
+** Trying induction with length 1 **
+
+Setting up time step 1:
+Final constraint equation: { } = { }
+Import def constraint for this timestep: \__pi_a
+Import def constraint for this timestep: \__pi_b
+Import def constraint for this timestep: \__pi_clk
+Import def constraint for this timestep: \__pi_rst
+Imported 14 cells to SAT database.
+Final init constraint equation: \gold.q = 1'x
+Import proof for assert: \__po_q__assert.okay when 1'1.
+Import show expression: \__po_q__assert.i
+Import show expression: \__po_q__assert.okay
+Import show expression: \__po_q__assert.in_gate
+Import show expression: \__po_q__assert.in_gold
+Import show expression: \gate.rst
+Import show expression: \gate.b
+Import show expression: \gate.a
+Import show expression: \gate.clk
+Import show expression: \gate.q
+Import show expression: \gate.__pi_a
+Import show expression: \gate.__pi_b
+Import show expression: \gate.__pi_clk
+Import show expression: \gate.__pi_rst
+Import show expression: \gate.__po_q
+Import show expression: \gold.rst
+Import show expression: \gold.b
+Import show expression: \gold.a
+Import show expression: \gold.clk
+Import show expression: \gold.q
+Import show expression: \gold.__pi_a
+Import show expression: \gold.__pi_b
+Import show expression: \gold.__pi_clk
+Import show expression: \gold.__pi_rst
+Import show expression: \gold.__po_q
+Import show expression: \__po_q__gate
+Import show expression: \__po_q__gold
+Import show expression: \__pi_rst
+Import show expression: \__pi_clk
+Import show expression: \__pi_b
+Import show expression: \__pi_a
+
+[base case 1] Solving problem with 156 variables and 389 clauses..
+Base case for induction length 1 proven.
+
+Setting up time step 2:
+Final constraint equation: { } = { }
+Import def constraint for this timestep: \__pi_a
+Import def constraint for this timestep: \__pi_b
+Import def constraint for this timestep: \__pi_clk
+Import def constraint for this timestep: \__pi_rst
+Imported 14 cells to SAT database.
+Import proof for assert: \__po_q__assert.okay when 1'1.
+Import show expression: \__po_q__assert.i
+Import show expression: \__po_q__assert.okay
+Import show expression: \__po_q__assert.in_gate
+Import show expression: \__po_q__assert.in_gold
+Import show expression: \gate.rst
+Import show expression: \gate.b
+Import show expression: \gate.a
+Import show expression: \gate.clk
+Import show expression: \gate.q
+Import show expression: \gate.__pi_a
+Import show expression: \gate.__pi_b
+Import show expression: \gate.__pi_clk
+Import show expression: \gate.__pi_rst
+Import show expression: \gate.__po_q
+Import show expression: \gold.rst
+Import show expression: \gold.b
+Import show expression: \gold.a
+Import show expression: \gold.clk
+Import show expression: \gold.q
+Import show expression: \gold.__pi_a
+Import show expression: \gold.__pi_b
+Import show expression: \gold.__pi_clk
+Import show expression: \gold.__pi_rst
+Import show expression: \gold.__po_q
+Import show expression: \__po_q__gate
+Import show expression: \__po_q__gold
+Import show expression: \__pi_rst
+Import show expression: \__pi_clk
+Import show expression: \__pi_b
+Import show expression: \__pi_a
+
+[induction step 1] Solving problem with 326 variables and 820 clauses..
+Induction step proven: SUCCESS!
+
+                  /$$$$$$      /$$$$$$$$     /$$$$$$$    
+                 /$$__  $$    | $$_____/    | $$__  $$   
+                | $$  \ $$    | $$          | $$  \ $$   
+                | $$  | $$    | $$$$$       | $$  | $$   
+                | $$  | $$    | $$__/       | $$  | $$   
+                | $$/$$ $$    | $$          | $$  | $$   
+                |  $$$$$$/ /$$| $$$$$$$$ /$$| $$$$$$$//$$
+                 \____ $$$|__/|________/|__/|_______/|__/
+                       \__/                              
+
+End of script. Logfile hash: d16ccf4e37, CPU: user 0.01s system 0.00s, MEM: 22.04 MB peak
+Yosys 0.63 (git sha1 70a11c6bf, g++ 11.4.0-1ubuntu1~22.04.3 -fPIC -O3)
+Time spent: 30% 1x sat (0 sec), 21% 2x opt_expr (0 sec), ...

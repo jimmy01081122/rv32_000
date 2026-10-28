@@ -1,0 +1,22 @@
+EQY  7:19:09 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] read_gold: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work/gold.log /workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work/gold.ys"
+EQY  7:19:10 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] read_gate: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work/gate.log /workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work/gate.ys"
+EQY  7:19:30 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] read_gate: finished (returncode=0)
+EQY  7:21:00 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] read_gold: finished (returncode=0)
+EQY  7:21:00 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] combine: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work/combine.log /workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work/combine.ys"
+EQY  7:21:02 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] combine: finished (returncode=0)
+EQY  7:21:02 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] partition: starting process "cd /workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work; /OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql partition.log partition.ys"
+EQY  7:21:08 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] partition: finished (returncode=0)
+EQY  7:21:08 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] run: starting process "make -j1 -C /workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work -f strategies.mk"
+EQY  7:21:08 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] run: make: Entering directory '/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work'
+EQY  7:21:08 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] run: Running strategy 'pdr' on 'rv32_ooo_fp_execute.cmp_data'..
+EQY  7:36:10 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] run: Could not prove equivalence of partition 'rv32_ooo_fp_execute.cmp_data' using strategy 'pdr': timeout
+EQY  7:36:10 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] run: make -f strategies.mk summary
+EQY  7:36:10 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] run: make[1]: Entering directory '/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work'
+EQY  7:36:10 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] run: make[1]: Leaving directory '/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work'
+EQY  7:36:10 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] run: make: Leaving directory '/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work'
+EQY  7:36:10 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] run: finished (returncode=0)
+EQY  7:36:10 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] Warning: Failed to prove equivalence for 1/1 partitions:
+EQY  7:36:10 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] Failed to prove equivalence of partition rv32_ooo_fp_execute.cmp_data
+EQY  7:36:10 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] summary: Elapsed clock time [H:MM:SS (secs)]: 0:17:01 (1021)
+EQY  7:36:10 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] summary: Elapsed process time [H:MM:SS (secs)]: 0:16:02 (962)
+EQY  7:36:10 [/workspace/build/experiments/fpu-mapping-v1/equivalence-shared-v1/work] DONE (FAIL, rc=2)

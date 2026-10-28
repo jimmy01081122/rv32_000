@@ -1,0 +1,51 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63+post (git sha1 UNKNOWN-dirty, g++ 11.4.0-1ubuntu1~22.04.3 -fPIC -O3)
+
+-- Executing script file `/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr/combine.ys' --
+
+1. Executing RTLIL frontend.
+Input filename: /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr/gold.il
+
+2. Executing UNIQUIFY pass (creating unique copies of modules).
+Created 0 unique modules.
+
+3. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `check'. Setting top module to check.
+
+3.1. Analyzing design hierarchy..
+Top module:  \check
+
+3.2. Analyzing design hierarchy..
+Top module:  \check
+Removed 0 unused modules.
+
+4. Executing RTLIL frontend.
+Input filename: /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr/gate_recoded.il
+
+5. Executing UNIQUIFY pass (creating unique copies of modules).
+Created 0 unique modules.
+
+6. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `check'. Setting top module to check.
+
+6.1. Analyzing design hierarchy..
+Top module:  \check
+
+6.2. Analyzing design hierarchy..
+Top module:  \check
+Removed 0 unused modules.
+
+7. Executing MITER pass (creating miter circuit).
+Creating miter cell "miter" with gold cell "gold.check" and gate cell "gate.check".
+
+8. Executing RTLIL backend.
+Output filename: /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr/combined.il
+
+End of script. Logfile hash: 98327114f5, CPU: user 0.01s system 0.00s, MEM: 19.75 MB peak
+Yosys 0.63+post (git sha1 UNKNOWN-dirty, g++ 11.4.0-1ubuntu1~22.04.3 -fPIC -O3)
+Time spent: 25% 4x read_rtlil (0 sec), 24% 2x write_rtlil (0 sec), ...

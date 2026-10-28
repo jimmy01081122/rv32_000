@@ -1,0 +1,36 @@
+{
+  "command": [
+    "make",
+    "-f",
+    "/orfs-source/flow/Makefile",
+    "FLOW_HOME=/orfs-source/flow",
+    "PLATFORM_DIR=/OpenROAD-flow-scripts/flow/platforms/asap7",
+    "PLATFORMS_DIR=/OpenROAD-flow-scripts/flow/platforms",
+    "OPENROAD_EXE=/OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad",
+    "YOSYS_EXE=/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys",
+    "RV32_ROOT=/workspace",
+    "RV32_SDC=/workspace/build/experiments/fpu-mapping-v1/shared-native-v1/A/constraint.sdc",
+    "WORK_HOME=/workspace/build/experiments/fpu-mapping-v1/shared-native-v1/A",
+    "DESIGN_CONFIG=/workspace/physical/asap7/baseline/config.mk",
+    "VERILOG_FILES=/workspace/build/experiments/fpu-mapping-v1/shared-linked-v1/A.v",
+    "NUM_CORES=2",
+    "GPL_RANDOM_SEED=",
+    "CORNER=TC",
+    "CORNERS=typical",
+    "REPORT_CLOCK_SKEW=0",
+    "OPT_POST_GRT_WNS=0",
+    "ADDER_MAP_FILE=",
+    "SYNTH_NETLIST_FILES=/workspace/build/experiments/fpu-mapping-v1/shared-linked-v1/A.v",
+    "synth"
+  ],
+  "cwd": "/workspace",
+  "report": "/workspace/build/experiments/fpu-mapping-v1/shared-native-v1/A/run.json",
+  "log": "/workspace/build/experiments/fpu-mapping-v1/shared-native-v1/A/make.log",
+  "inputs": {
+    "/workspace/build/experiments/fpu-mapping-v1/shared-linked-v1/A.v": "ca59e5146f84e3276bf74c8ac2398b84a722ed68f32751e3263772a872ff3647",
+    "/workspace/build/experiments/fpu-mapping-v1/shared-native-v1/A/constraint.sdc": "826416ee940bf6f0bf8e548b8edc482ab261afe5beefaf88606f6dfbfb05359d",
+    "/workspace/build/experiments/fpu-mapping-v1/shared-linked-v1/link-manifest.json": "5c21f821c3e876d7afb898c45709ce45b2eb561fbeba81f7111bd75b9426829c",
+    "/workspace/physical/asap7/baseline/config.mk": "be157001e0234853911d3eaf5c326c5e0ab30d19fd60a3102d400d74ca6e861b",
+    "/workspace/scripts/run_physical_job.py": "52aec471aa5303d51a12d8b271fe1efa4883f55d6c94ce1703ef29da4796c20b"
+  }
+}

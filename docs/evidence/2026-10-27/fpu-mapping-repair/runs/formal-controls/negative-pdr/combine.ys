@@ -1,0 +1,11 @@
+plugin -i /usr/local/bin/../share/yosys/plugins/eqy_combine.so
+read_rtlil /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr/gold.il
+uniquify
+hierarchy
+design -stash gold
+read_rtlil /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr/gate_recoded.il
+uniquify
+hierarchy
+design -stash gate
+eqy_combine -gold_ids /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr/gold.ids -gate_ids /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr/gate_recoded.ids
+write_rtlil /workspace/build/experiments/fpu-mapping-v1/formal-controls/negative-pdr/combined.il

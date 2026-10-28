@@ -1,0 +1,44 @@
+Yosys 0.63+post (git sha1 UNKNOWN-dirty, g++ 11.4.0-1ubuntu1~22.04.3 -fPIC -O3)
+Using ABC speed script.
+Extracting clock period from SDC file: /workspace/build/experiments/fpu-mapping-v1/shared-unit-repeat-v1/results/asap7/rv32_post_lsu_v1/base/clock_period.txt
+Setting clock period to 5500
+1. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+2. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+3. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+4. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+5. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+6. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+7. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+8. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+9. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+10. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+11. Executing Verilog-2005 frontend: /workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/fp-source.v
+12. Executing Verilog-2005 frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/yoSys/cells_clkgate_R.v
+13. Executing HIERARCHY pass (managing design hierarchy).
+14. Executing AST frontend in derive mode using pre-parsed AST for module `\rv32_ooo_fp_execute'.
+14.1. Analyzing design hierarchy..
+14.2. Analyzing design hierarchy..
+source /workspace/physical/asap7/baseline/lower_processes.tcl
+15. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+16. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+17. Executing PROC_INIT pass (extract init attributes).
+18. Executing PROC_ARST pass (detect async resets in processes).
+19. Executing PROC_MUX pass (convert decision trees to multiplexers).
+20. Executing OPT_EXPR pass (perform const folding).
+21. Executing OPT_CLEAN pass (remove unused cells and wires).
+Warning: Ignoring module rv32_ooo_fp_execute because it contains processes (run 'proc' command first).
+22. Executing PROC_DFF pass (convert process syncs to FFs).
+23. Executing PROC_MEMWR pass (convert process memory writes to cells).
+24. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+25. Executing OPT_CLEAN pass (remove unused cells and wires).
+26. Executing CHECK pass (checking for obvious problems).
+Took 10 seconds: source /workspace/physical/asap7/baseline/lower_processes.tcl
+27. Executing OPT_CLEAN pass (remove unused cells and wires).
+28. Executing RTLIL backend.
+Warnings: 1 unique messages, 1 total
+End of script. Logfile hash: 7029c9a77b, CPU: user 13.82s system 0.09s, MEM: 219.91 MB peak
+Yosys 0.63+post (git sha1 UNKNOWN-dirty, g++ 11.4.0-1ubuntu1~22.04.3 -fPIC -O3)
+Time spent: 65% 1x proc_mux (9 sec), 15% 1x hierarchy (2 sec), ...
+Elapsed time: 0:13.97[h:]min:sec. CPU time: user 13.86 sys 0.10 (99%). Peak memory: 225192KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+1_1_yosys_canonicalize    .rtlil         13            219 f6f429a74a5d3d9815d1

@@ -1,0 +1,22 @@
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] read_gold: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr/gold.log /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr/gold.ys"
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] read_gold: finished (returncode=0)
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] read_gate: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr/gate.log /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr/gate.ys"
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] read_gate: finished (returncode=0)
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] combine: starting process "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr/combine.log /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr/combine.ys"
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] combine: finished (returncode=0)
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] partition: starting process "cd /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr; /OpenROAD-flow-scripts/tools/install/yosys/bin/yosys -ql partition.log partition.ys"
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] partition: finished (returncode=0)
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] run: starting process "make -j1 -C /workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr -f strategies.mk"
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] run: make: Entering directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr'
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] run: Running strategy 'pdr' on 'check.q'..
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] run: Proved equivalence of partition 'check.q' using strategy 'pdr'
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] run: make -f strategies.mk summary
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] run: make[1]: Entering directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr'
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] run: make[1]: Leaving directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr'
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] run: make: Leaving directory '/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr'
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] run: finished (returncode=0)
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] Successfully proved equivalence of partition check.q
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] Successfully proved designs equivalent
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] summary: Elapsed clock time [H:MM:SS (secs)]: 0:00:00 (0)
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] summary: Elapsed process time [H:MM:SS (secs)]: 0:00:00 (0)
+EQY  9:43:50 [/workspace/build/experiments/fpu-mapping-v1/formal-controls/positive-pdr] DONE (PASS, rc=0)

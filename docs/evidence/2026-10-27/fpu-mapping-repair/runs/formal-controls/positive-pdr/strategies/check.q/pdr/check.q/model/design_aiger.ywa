@@ -1,0 +1,23 @@
+{
+  "version": "Yosys Witness Aiger map",
+  "gennerator": "Yosys 0.63+post (git sha1 UNKNOWN-dirty, g++ 11.4.0-1ubuntu1~22.04.3 -fPIC -O3)",
+  "latch_count": 7,
+  "input_count": 5,
+  "clocks": [],
+  "inputs": [
+    {"input": 0, "offset": 0, "path": ["\\__pi_rst"]},
+    {"input": 1, "offset": 0, "path": ["\\__pi_clk"]},
+    {"input": 2, "offset": 0, "path": ["\\__pi_b"]},
+    {"input": 3, "offset": 0, "path": ["\\__pi_a"]}
+  ],
+  "seqs": [],
+  "inits": [
+    {"input": 4, "offset": 0, "path": ["\\_witness_", "\\anyinit_flatten_gate__auto_clk2fflogic_cc_108_sample_data_7"]}
+  ],
+  "asserts": [
+    ["\\_witness_", "\\assert_flatten___po_q__assert__assert________________partitions_check_q_sv_70_33"]
+  ],
+  "assumes": [
+    ["\\_witness_", "\\assume_auto_xprop_cc_1233_execute_48"]
+  ]
+}

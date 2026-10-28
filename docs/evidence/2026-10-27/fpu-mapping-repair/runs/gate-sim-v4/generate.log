@@ -1,0 +1,739 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63+post (git sha1 UNKNOWN-dirty, g++ 11.4.0-1ubuntu1~22.04.3 -fPIC -O3)
+
+-- Executing script file `/workspace/build/experiments/fpu-mapping-v1/gate-sim-v4/generate.ys' --
+
+1. Executing RTLIL frontend.
+Input filename: /workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/results/asap7/rv32_post_lsu_v1/base/1_1_yosys_canonicalize.rtlil
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \rv32_ooo_fp_execute
+
+2.2. Analyzing design hierarchy..
+Top module:  \rv32_ooo_fp_execute
+Removed 0 unused modules.
+Renaming module \rv32_ooo_fp_execute to \gold.
+Found gzip magic in file `/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz', decompressing using zlib.
+
+3. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+Imported 42 cell types from liberty file.
+Found gzip magic in file `/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz', decompressing using zlib.
+
+4. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+Imported 37 cell types from liberty file.
+Found gzip magic in file `/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz', decompressing using zlib.
+
+5. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+Imported 34 cell types from liberty file.
+
+6. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+Ignoring cell ICGx1_ASAP7_75t_R with missing function on output IQ.
+Ignoring cell ICGx2_ASAP7_75t_R with missing function on output IQ.
+Ignoring cell ICGx2p67DC_ASAP7_75t_R with missing function on output IQ.
+Ignoring cell ICGx3_ASAP7_75t_R with missing function on output IQ.
+Ignoring cell ICGx4DC_ASAP7_75t_R with missing function on output IQ.
+Ignoring cell ICGx4_ASAP7_75t_R with missing function on output IQ.
+Ignoring cell ICGx5_ASAP7_75t_R with missing function on output IQ.
+Ignoring cell ICGx5p33DC_ASAP7_75t_R with missing function on output IQ.
+Ignoring cell ICGx6p67DC_ASAP7_75t_R with missing function on output IQ.
+Ignoring cell ICGx8DC_ASAP7_75t_R with missing function on output IQ.
+Imported 23 cell types from liberty file.
+Found gzip magic in file `/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz', decompressing using zlib.
+
+7. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+Imported 56 cell types from liberty file.
+
+8. Executing RTLIL frontend.
+Input filename: /workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/results/asap7/rv32_post_lsu_v1/base/fp_mapped.rtlil
+
+9. Executing HIERARCHY pass (managing design hierarchy).
+
+9.1. Analyzing design hierarchy..
+Top module:  \rv32_ooo_fp_execute
+Used module:     \INVx1_ASAP7_75t_R
+Used module:     \NOR2x1_ASAP7_75t_R
+Used module:     \BUFx2_ASAP7_75t_R
+Used module:     \BUFx3_ASAP7_75t_R
+Used module:     \AND3x1_ASAP7_75t_R
+Used module:     \AO21x1_ASAP7_75t_R
+Used module:     \AND2x2_ASAP7_75t_R
+Used module:     \OR4x1_ASAP7_75t_R
+Used module:     \OR2x2_ASAP7_75t_R
+Used module:     \NAND2x1_ASAP7_75t_R
+Used module:     \OAI22x1_ASAP7_75t_R
+Used module:     \OR3x1_ASAP7_75t_R
+Used module:     \OR5x1_ASAP7_75t_R
+Used module:     \OA33x2_ASAP7_75t_R
+Used module:     \XNOR2x2_ASAP7_75t_R
+Used module:     \AND4x1_ASAP7_75t_R
+Used module:     \AND5x1_ASAP7_75t_R
+Used module:     \AOI21x1_ASAP7_75t_R
+Used module:     \OA21x2_ASAP7_75t_R
+Used module:     \OAI21x1_ASAP7_75t_R
+Used module:     \BUFx4f_ASAP7_75t_R
+Used module:     \BUFx6f_ASAP7_75t_R
+Used module:     \OR4x2_ASAP7_75t_R
+Used module:     \OA22x2_ASAP7_75t_R
+Used module:     \AO222x2_ASAP7_75t_R
+Used module:     \OA222x2_ASAP7_75t_R
+Used module:     \MAJx2_ASAP7_75t_R
+Used module:     \OA31x2_ASAP7_75t_R
+Used module:     \XOR2x2_ASAP7_75t_R
+Used module:     \AOI22x1_ASAP7_75t_R
+Used module:     \OA211x2_ASAP7_75t_R
+Used module:     \AO31x2_ASAP7_75t_R
+Used module:     \AO22x1_ASAP7_75t_R
+Used module:     \AO32x1_ASAP7_75t_R
+Used module:     \AOI221x1_ASAP7_75t_R
+Used module:     \AO221x1_ASAP7_75t_R
+Used module:     \XNOR2x1_ASAP7_75t_R
+Used module:     \NOR3x1_ASAP7_75t_R
+Used module:     \NAND3x1_ASAP7_75t_R
+Used module:     \AOI211x1_ASAP7_75t_R
+Used module:     \AO211x2_ASAP7_75t_R
+Used module:     \AO33x2_ASAP7_75t_R
+Used module:     \OA221x2_ASAP7_75t_R
+Used module:     \AND2x4_ASAP7_75t_R
+Used module:     \INVx2_ASAP7_75t_R
+Used module:     \AND5x2_ASAP7_75t_R
+Used module:     \NOR2x2_ASAP7_75t_R
+Used module:     \OR3x2_ASAP7_75t_R
+Used module:     \AND3x4_ASAP7_75t_R
+Used module:     \AO21x2_ASAP7_75t_R
+Used module:     \NAND3x2_ASAP7_75t_R
+Used module:     \NAND2x2_ASAP7_75t_R
+Used module:     \AO22x2_ASAP7_75t_R
+Used module:     \AND4x2_ASAP7_75t_R
+Used module:     \BUFx4_ASAP7_75t_R
+Used module:     \BUFx12f_ASAP7_75t_R
+Used module:     \TIELOx1_ASAP7_75t_R
+Used module:     \DFFHQNx1_ASAP7_75t_R
+
+9.2. Analyzing design hierarchy..
+Top module:  \rv32_ooo_fp_execute
+Used module:     \INVx1_ASAP7_75t_R
+Used module:     \NOR2x1_ASAP7_75t_R
+Used module:     \BUFx2_ASAP7_75t_R
+Used module:     \BUFx3_ASAP7_75t_R
+Used module:     \AND3x1_ASAP7_75t_R
+Used module:     \AO21x1_ASAP7_75t_R
+Used module:     \AND2x2_ASAP7_75t_R
+Used module:     \OR4x1_ASAP7_75t_R
+Used module:     \OR2x2_ASAP7_75t_R
+Used module:     \NAND2x1_ASAP7_75t_R
+Used module:     \OAI22x1_ASAP7_75t_R
+Used module:     \OR3x1_ASAP7_75t_R
+Used module:     \OR5x1_ASAP7_75t_R
+Used module:     \OA33x2_ASAP7_75t_R
+Used module:     \XNOR2x2_ASAP7_75t_R
+Used module:     \AND4x1_ASAP7_75t_R
+Used module:     \AND5x1_ASAP7_75t_R
+Used module:     \AOI21x1_ASAP7_75t_R
+Used module:     \OA21x2_ASAP7_75t_R
+Used module:     \OAI21x1_ASAP7_75t_R
+Used module:     \BUFx4f_ASAP7_75t_R
+Used module:     \BUFx6f_ASAP7_75t_R
+Used module:     \OR4x2_ASAP7_75t_R
+Used module:     \OA22x2_ASAP7_75t_R
+Used module:     \AO222x2_ASAP7_75t_R
+Used module:     \OA222x2_ASAP7_75t_R
+Used module:     \MAJx2_ASAP7_75t_R
+Used module:     \OA31x2_ASAP7_75t_R
+Used module:     \XOR2x2_ASAP7_75t_R
+Used module:     \AOI22x1_ASAP7_75t_R
+Used module:     \OA211x2_ASAP7_75t_R
+Used module:     \AO31x2_ASAP7_75t_R
+Used module:     \AO22x1_ASAP7_75t_R
+Used module:     \AO32x1_ASAP7_75t_R
+Used module:     \AOI221x1_ASAP7_75t_R
+Used module:     \AO221x1_ASAP7_75t_R
+Used module:     \XNOR2x1_ASAP7_75t_R
+Used module:     \NOR3x1_ASAP7_75t_R
+Used module:     \NAND3x1_ASAP7_75t_R
+Used module:     \AOI211x1_ASAP7_75t_R
+Used module:     \AO211x2_ASAP7_75t_R
+Used module:     \AO33x2_ASAP7_75t_R
+Used module:     \OA221x2_ASAP7_75t_R
+Used module:     \AND2x4_ASAP7_75t_R
+Used module:     \INVx2_ASAP7_75t_R
+Used module:     \AND5x2_ASAP7_75t_R
+Used module:     \NOR2x2_ASAP7_75t_R
+Used module:     \OR3x2_ASAP7_75t_R
+Used module:     \AND3x4_ASAP7_75t_R
+Used module:     \AO21x2_ASAP7_75t_R
+Used module:     \NAND3x2_ASAP7_75t_R
+Used module:     \NAND2x2_ASAP7_75t_R
+Used module:     \AO22x2_ASAP7_75t_R
+Used module:     \AND4x2_ASAP7_75t_R
+Used module:     \BUFx4_ASAP7_75t_R
+Used module:     \BUFx12f_ASAP7_75t_R
+Used module:     \TIELOx1_ASAP7_75t_R
+Used module:     \DFFHQNx1_ASAP7_75t_R
+Removing unused module `\XOR2xp5_ASAP7_75t_R'.
+Removing unused module `\XOR2x1_ASAP7_75t_R'.
+Removing unused module `\XNOR2xp5_ASAP7_75t_R'.
+Removing unused module `\TIEHIx1_ASAP7_75t_R'.
+Removing unused module `\OR5x2_ASAP7_75t_R'.
+Removing unused module `\OR3x4_ASAP7_75t_R'.
+Removing unused module `\OR2x6_ASAP7_75t_R'.
+Removing unused module `\OR2x4_ASAP7_75t_R'.
+Removing unused module `\NOR5xp2_ASAP7_75t_R'.
+Removing unused module `\NOR4xp75_ASAP7_75t_R'.
+Removing unused module `\NOR4xp25_ASAP7_75t_R'.
+Removing unused module `\NOR3xp33_ASAP7_75t_R'.
+Removing unused module `\NOR3x2_ASAP7_75t_R'.
+Removing unused module `\NOR2xp67_ASAP7_75t_R'.
+Removing unused module `\NOR2xp33_ASAP7_75t_R'.
+Removing unused module `\NOR2x1p5_ASAP7_75t_R'.
+Removing unused module `\NAND5xp2_ASAP7_75t_R'.
+Removing unused module `\NAND4xp75_ASAP7_75t_R'.
+Removing unused module `\NAND4xp25_ASAP7_75t_R'.
+Removing unused module `\NAND3xp33_ASAP7_75t_R'.
+Removing unused module `\NAND2xp67_ASAP7_75t_R'.
+Removing unused module `\NAND2xp5_ASAP7_75t_R'.
+Removing unused module `\NAND2xp33_ASAP7_75t_R'.
+Removing unused module `\NAND2x1p5_ASAP7_75t_R'.
+Removing unused module `\MAJx3_ASAP7_75t_R'.
+Removing unused module `\MAJIxp5_ASAP7_75t_R'.
+Removing unused module `\HAxp5_ASAP7_75t_R'.
+Removing unused module `\FAx1_ASAP7_75t_R'.
+Removing unused module `\AND3x2_ASAP7_75t_R'.
+Removing unused module `\AND2x6_ASAP7_75t_R'.
+Removing unused module `\SDFLx4_ASAP7_75t_R'.
+Removing unused module `\SDFLx3_ASAP7_75t_R'.
+Removing unused module `\SDFLx2_ASAP7_75t_R'.
+Removing unused module `\SDFLx1_ASAP7_75t_R'.
+Removing unused module `\SDFHx4_ASAP7_75t_R'.
+Removing unused module `\SDFHx3_ASAP7_75t_R'.
+Removing unused module `\SDFHx2_ASAP7_75t_R'.
+Removing unused module `\SDFHx1_ASAP7_75t_R'.
+Removing unused module `\DLLx3_ASAP7_75t_R'.
+Removing unused module `\DLLx2_ASAP7_75t_R'.
+Removing unused module `\DLLx1_ASAP7_75t_R'.
+Removing unused module `\DHLx3_ASAP7_75t_R'.
+Removing unused module `\DHLx2_ASAP7_75t_R'.
+Removing unused module `\DHLx1_ASAP7_75t_R'.
+Removing unused module `\DFFLQx4_ASAP7_75t_R'.
+Removing unused module `\DFFLQNx3_ASAP7_75t_R'.
+Removing unused module `\DFFLQNx2_ASAP7_75t_R'.
+Removing unused module `\DFFLQNx1_ASAP7_75t_R'.
+Removing unused module `\DFFHQx4_ASAP7_75t_R'.
+Removing unused module `\DFFHQNx3_ASAP7_75t_R'.
+Removing unused module `\DFFHQNx2_ASAP7_75t_R'.
+Removing unused module `\DFFASRHQNx1_ASAP7_75t_R'.
+Removing unused module `\OAI33xp33_ASAP7_75t_R'.
+Removing unused module `\OAI333xp33_ASAP7_75t_R'.
+Removing unused module `\OAI332xp33_ASAP7_75t_R'.
+Removing unused module `\OAI331xp33_ASAP7_75t_R'.
+Removing unused module `\OAI32xp33_ASAP7_75t_R'.
+Removing unused module `\OAI322xp33_ASAP7_75t_R'.
+Removing unused module `\OAI321xp33_ASAP7_75t_R'.
+Removing unused module `\OAI31xp67_ASAP7_75t_R'.
+Removing unused module `\OAI31xp33_ASAP7_75t_R'.
+Removing unused module `\OAI311xp33_ASAP7_75t_R'.
+Removing unused module `\OAI22xp5_ASAP7_75t_R'.
+Removing unused module `\OAI22xp33_ASAP7_75t_R'.
+Removing unused module `\OAI222xp33_ASAP7_75t_R'.
+Removing unused module `\OAI221xp5_ASAP7_75t_R'.
+Removing unused module `\OAI21xp5_ASAP7_75t_R'.
+Removing unused module `\OAI21xp33_ASAP7_75t_R'.
+Removing unused module `\OAI211xp5_ASAP7_75t_R'.
+Removing unused module `\OA333x2_ASAP7_75t_R'.
+Removing unused module `\OA333x1_ASAP7_75t_R'.
+Removing unused module `\OA332x2_ASAP7_75t_R'.
+Removing unused module `\OA332x1_ASAP7_75t_R'.
+Removing unused module `\OA331x2_ASAP7_75t_R'.
+Removing unused module `\OA331x1_ASAP7_75t_R'.
+Removing unused module `\O2A1O1Ixp5_ASAP7_75t_R'.
+Removing unused module `\O2A1O1Ixp33_ASAP7_75t_R'.
+Removing unused module `\INVxp67_ASAP7_75t_R'.
+Removing unused module `\INVxp33_ASAP7_75t_R'.
+Removing unused module `\INVx8_ASAP7_75t_R'.
+Removing unused module `\INVx6_ASAP7_75t_R'.
+Removing unused module `\INVx5_ASAP7_75t_R'.
+Removing unused module `\INVx4_ASAP7_75t_R'.
+Removing unused module `\INVx3_ASAP7_75t_R'.
+Removing unused module `\INVx13_ASAP7_75t_R'.
+Removing unused module `\INVx11_ASAP7_75t_R'.
+Removing unused module `\HB4xp67_ASAP7_75t_R'.
+Removing unused module `\HB3xp67_ASAP7_75t_R'.
+Removing unused module `\HB2xp67_ASAP7_75t_R'.
+Removing unused module `\HB1xp67_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx9p33_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx8_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx6p67_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx5p33_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx20_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx16_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx14_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx12_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx11_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx10_ASAP7_75t_R'.
+Removing unused module `\BUFx8_ASAP7_75t_R'.
+Removing unused module `\BUFx5_ASAP7_75t_R'.
+Removing unused module `\BUFx24_ASAP7_75t_R'.
+Removing unused module `\BUFx16f_ASAP7_75t_R'.
+Removing unused module `\BUFx12_ASAP7_75t_R'.
+Removing unused module `\BUFx10_ASAP7_75t_R'.
+Removing unused module `\AOI33xp33_ASAP7_75t_R'.
+Removing unused module `\AOI333xp33_ASAP7_75t_R'.
+Removing unused module `\AOI332xp33_ASAP7_75t_R'.
+Removing unused module `\AOI331xp33_ASAP7_75t_R'.
+Removing unused module `\AOI32xp33_ASAP7_75t_R'.
+Removing unused module `\AOI322xp5_ASAP7_75t_R'.
+Removing unused module `\AOI321xp33_ASAP7_75t_R'.
+Removing unused module `\AOI31xp67_ASAP7_75t_R'.
+Removing unused module `\AOI31xp33_ASAP7_75t_R'.
+Removing unused module `\AOI311xp33_ASAP7_75t_R'.
+Removing unused module `\AOI22xp5_ASAP7_75t_R'.
+Removing unused module `\AOI22xp33_ASAP7_75t_R'.
+Removing unused module `\AOI222xp33_ASAP7_75t_R'.
+Removing unused module `\AOI221xp5_ASAP7_75t_R'.
+Removing unused module `\AOI21xp5_ASAP7_75t_R'.
+Removing unused module `\AOI21xp33_ASAP7_75t_R'.
+Removing unused module `\AOI211xp5_ASAP7_75t_R'.
+Removing unused module `\AO333x2_ASAP7_75t_R'.
+Removing unused module `\AO333x1_ASAP7_75t_R'.
+Removing unused module `\AO332x2_ASAP7_75t_R'.
+Removing unused module `\AO332x1_ASAP7_75t_R'.
+Removing unused module `\AO331x2_ASAP7_75t_R'.
+Removing unused module `\AO331x1_ASAP7_75t_R'.
+Removing unused module `\AO32x2_ASAP7_75t_R'.
+Removing unused module `\AO322x2_ASAP7_75t_R'.
+Removing unused module `\AO221x2_ASAP7_75t_R'.
+Removing unused module `\A2O1A1O1Ixp25_ASAP7_75t_R'.
+Removing unused module `\A2O1A1Ixp33_ASAP7_75t_R'.
+Removed 134 unused modules.
+
+10. Executing FLATTEN pass (flatten design).
+Deleting now unused module NAND2x2_ASAP7_75t_R.
+Deleting now unused module OR4x1_ASAP7_75t_R.
+Deleting now unused module OAI21x1_ASAP7_75t_R.
+Deleting now unused module NAND2x1_ASAP7_75t_R.
+Deleting now unused module OA33x2_ASAP7_75t_R.
+Deleting now unused module NOR3x1_ASAP7_75t_R.
+Deleting now unused module BUFx6f_ASAP7_75t_R.
+Deleting now unused module MAJx2_ASAP7_75t_R.
+Deleting now unused module BUFx4f_ASAP7_75t_R.
+Deleting now unused module BUFx4_ASAP7_75t_R.
+Deleting now unused module BUFx3_ASAP7_75t_R.
+Deleting now unused module BUFx2_ASAP7_75t_R.
+Deleting now unused module XNOR2x2_ASAP7_75t_R.
+Deleting now unused module OR3x2_ASAP7_75t_R.
+Deleting now unused module BUFx12f_ASAP7_75t_R.
+Deleting now unused module NOR2x2_ASAP7_75t_R.
+Deleting now unused module AND5x2_ASAP7_75t_R.
+Deleting now unused module OA31x2_ASAP7_75t_R.
+Deleting now unused module OA22x2_ASAP7_75t_R.
+Deleting now unused module OA222x2_ASAP7_75t_R.
+Deleting now unused module OA221x2_ASAP7_75t_R.
+Deleting now unused module OA21x2_ASAP7_75t_R.
+Deleting now unused module OA211x2_ASAP7_75t_R.
+Deleting now unused module AND5x1_ASAP7_75t_R.
+Deleting now unused module AND4x2_ASAP7_75t_R.
+Deleting now unused module AND4x1_ASAP7_75t_R.
+Deleting now unused module DFFHQNx1_ASAP7_75t_R.
+Deleting now unused module AND3x4_ASAP7_75t_R.
+Deleting now unused module OR3x1_ASAP7_75t_R.
+Deleting now unused module AOI22x1_ASAP7_75t_R.
+Deleting now unused module AND3x1_ASAP7_75t_R.
+Deleting now unused module NOR2x1_ASAP7_75t_R.
+Deleting now unused module AOI221x1_ASAP7_75t_R.
+Deleting now unused module AND2x4_ASAP7_75t_R.
+Deleting now unused module INVx2_ASAP7_75t_R.
+Deleting now unused module AOI21x1_ASAP7_75t_R.
+Deleting now unused module INVx1_ASAP7_75t_R.
+Deleting now unused module AOI211x1_ASAP7_75t_R.
+Deleting now unused module AO33x2_ASAP7_75t_R.
+Deleting now unused module AND2x2_ASAP7_75t_R.
+Deleting now unused module XNOR2x1_ASAP7_75t_R.
+Deleting now unused module TIELOx1_ASAP7_75t_R.
+Deleting now unused module OR2x2_ASAP7_75t_R.
+Deleting now unused module NAND3x2_ASAP7_75t_R.
+Deleting now unused module NAND3x1_ASAP7_75t_R.
+Deleting now unused module AO32x1_ASAP7_75t_R.
+Deleting now unused module XOR2x2_ASAP7_75t_R.
+Deleting now unused module AO31x2_ASAP7_75t_R.
+Deleting now unused module AO22x2_ASAP7_75t_R.
+Deleting now unused module AO22x1_ASAP7_75t_R.
+Deleting now unused module AO222x2_ASAP7_75t_R.
+Deleting now unused module OAI22x1_ASAP7_75t_R.
+Deleting now unused module AO221x1_ASAP7_75t_R.
+Deleting now unused module AO21x2_ASAP7_75t_R.
+Deleting now unused module AO21x1_ASAP7_75t_R.
+Deleting now unused module AO211x2_ASAP7_75t_R.
+Deleting now unused module OR5x1_ASAP7_75t_R.
+Deleting now unused module OR4x2_ASAP7_75t_R.
+<suppressed ~25855 debug messages>
+
+11. Executing HIERARCHY pass (managing design hierarchy).
+
+11.1. Analyzing design hierarchy..
+Top module:  \rv32_ooo_fp_execute
+
+11.2. Analyzing design hierarchy..
+Top module:  \rv32_ooo_fp_execute
+Removed 0 unused modules.
+Renaming module \rv32_ooo_fp_execute to \gate.
+
+12. Executing Verilog-2005 frontend: /workspace/build/experiments/fpu-mapping-v1/gate-sim-v4/top.v
+Parsing Verilog input from `/workspace/build/experiments/fpu-mapping-v1/gate-sim-v4/top.v' to AST representation.
+Generating RTLIL representation for module `\top'.
+Successfully finished Verilog frontend.
+
+13. Executing HIERARCHY pass (managing design hierarchy).
+
+13.1. Analyzing design hierarchy..
+Top module:  \top
+Used module:     \gate
+Used module:     \gold
+
+13.2. Analyzing design hierarchy..
+Top module:  \top
+Used module:     \gate
+Used module:     \gold
+Removed 0 unused modules.
+
+14. Executing PROC pass (convert processes to netlists).
+
+14.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+14.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+14.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+14.4. Executing PROC_INIT pass (extract init attributes).
+
+14.5. Executing PROC_ARST pass (detect async resets in processes).
+
+14.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+14.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+14.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+14.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+14.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+14.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+14.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+Optimizing module gold.
+Optimizing module gate.
+<suppressed ~653 debug messages>
+
+15. Executing FLATTEN pass (flatten design).
+Deleting now unused module gold.
+Deleting now unused module gate.
+<suppressed ~2 debug messages>
+
+16. Executing TECHMAP pass (map to technology primitives).
+
+16.1. Executing Verilog-2005 frontend: /OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/simcells.v
+Parsing Verilog input from `/OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/simcells.v' to AST representation.
+/OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/simcells.v:476: Warning: Yosys has only limited support for tri-state logic at the moment.
+Generating RTLIL representation for module `$_BUF_'.
+Generating RTLIL representation for module `$_NOT_'.
+Generating RTLIL representation for module `$_AND_'.
+Generating RTLIL representation for module `$_NAND_'.
+Generating RTLIL representation for module `$_OR_'.
+Generating RTLIL representation for module `$_NOR_'.
+Generating RTLIL representation for module `$_XOR_'.
+Generating RTLIL representation for module `$_XNOR_'.
+Generating RTLIL representation for module `$_ANDNOT_'.
+Generating RTLIL representation for module `$_ORNOT_'.
+Generating RTLIL representation for module `$_MUX_'.
+Generating RTLIL representation for module `$_NMUX_'.
+Generating RTLIL representation for module `$_MUX4_'.
+Generating RTLIL representation for module `$_MUX8_'.
+Generating RTLIL representation for module `$_MUX16_'.
+Generating RTLIL representation for module `$_AOI3_'.
+Generating RTLIL representation for module `$_OAI3_'.
+Generating RTLIL representation for module `$_AOI4_'.
+Generating RTLIL representation for module `$_OAI4_'.
+Generating RTLIL representation for module `$_TBUF_'.
+Generating RTLIL representation for module `$_SR_NN_'.
+Generating RTLIL representation for module `$_SR_NP_'.
+Generating RTLIL representation for module `$_SR_PN_'.
+Generating RTLIL representation for module `$_SR_PP_'.
+Generating RTLIL representation for module `$_DFF_N_'.
+Generating RTLIL representation for module `$_DFF_P_'.
+Generating RTLIL representation for module `$_DFFE_NN_'.
+Generating RTLIL representation for module `$_DFFE_NP_'.
+Generating RTLIL representation for module `$_DFFE_PN_'.
+Generating RTLIL representation for module `$_DFFE_PP_'.
+Generating RTLIL representation for module `$_DFF_NN0_'.
+Generating RTLIL representation for module `$_DFF_NN1_'.
+Generating RTLIL representation for module `$_DFF_NP0_'.
+Generating RTLIL representation for module `$_DFF_NP1_'.
+Generating RTLIL representation for module `$_DFF_PN0_'.
+Generating RTLIL representation for module `$_DFF_PN1_'.
+Generating RTLIL representation for module `$_DFF_PP0_'.
+Generating RTLIL representation for module `$_DFF_PP1_'.
+Generating RTLIL representation for module `$_DFFE_NN0N_'.
+Generating RTLIL representation for module `$_DFFE_NN0P_'.
+Generating RTLIL representation for module `$_DFFE_NN1N_'.
+Generating RTLIL representation for module `$_DFFE_NN1P_'.
+Generating RTLIL representation for module `$_DFFE_NP0N_'.
+Generating RTLIL representation for module `$_DFFE_NP0P_'.
+Generating RTLIL representation for module `$_DFFE_NP1N_'.
+Generating RTLIL representation for module `$_DFFE_NP1P_'.
+Generating RTLIL representation for module `$_DFFE_PN0N_'.
+Generating RTLIL representation for module `$_DFFE_PN0P_'.
+Generating RTLIL representation for module `$_DFFE_PN1N_'.
+Generating RTLIL representation for module `$_DFFE_PN1P_'.
+Generating RTLIL representation for module `$_DFFE_PP0N_'.
+Generating RTLIL representation for module `$_DFFE_PP0P_'.
+Generating RTLIL representation for module `$_DFFE_PP1N_'.
+Generating RTLIL representation for module `$_DFFE_PP1P_'.
+Generating RTLIL representation for module `$_ALDFF_NN_'.
+Generating RTLIL representation for module `$_ALDFF_NP_'.
+Generating RTLIL representation for module `$_ALDFF_PN_'.
+Generating RTLIL representation for module `$_ALDFF_PP_'.
+Generating RTLIL representation for module `$_ALDFFE_NNN_'.
+Generating RTLIL representation for module `$_ALDFFE_NNP_'.
+Generating RTLIL representation for module `$_ALDFFE_NPN_'.
+Generating RTLIL representation for module `$_ALDFFE_NPP_'.
+Generating RTLIL representation for module `$_ALDFFE_PNN_'.
+Generating RTLIL representation for module `$_ALDFFE_PNP_'.
+Generating RTLIL representation for module `$_ALDFFE_PPN_'.
+Generating RTLIL representation for module `$_ALDFFE_PPP_'.
+Generating RTLIL representation for module `$_DFFSR_NNN_'.
+Generating RTLIL representation for module `$_DFFSR_NNP_'.
+Generating RTLIL representation for module `$_DFFSR_NPN_'.
+Generating RTLIL representation for module `$_DFFSR_NPP_'.
+Generating RTLIL representation for module `$_DFFSR_PNN_'.
+Generating RTLIL representation for module `$_DFFSR_PNP_'.
+Generating RTLIL representation for module `$_DFFSR_PPN_'.
+Generating RTLIL representation for module `$_DFFSR_PPP_'.
+Generating RTLIL representation for module `$_DFFSRE_NNNN_'.
+Generating RTLIL representation for module `$_DFFSRE_NNNP_'.
+Generating RTLIL representation for module `$_DFFSRE_NNPN_'.
+Generating RTLIL representation for module `$_DFFSRE_NNPP_'.
+Generating RTLIL representation for module `$_DFFSRE_NPNN_'.
+Generating RTLIL representation for module `$_DFFSRE_NPNP_'.
+Generating RTLIL representation for module `$_DFFSRE_NPPN_'.
+Generating RTLIL representation for module `$_DFFSRE_NPPP_'.
+Generating RTLIL representation for module `$_DFFSRE_PNNN_'.
+Generating RTLIL representation for module `$_DFFSRE_PNNP_'.
+Generating RTLIL representation for module `$_DFFSRE_PNPN_'.
+Generating RTLIL representation for module `$_DFFSRE_PNPP_'.
+Generating RTLIL representation for module `$_DFFSRE_PPNN_'.
+Generating RTLIL representation for module `$_DFFSRE_PPNP_'.
+Generating RTLIL representation for module `$_DFFSRE_PPPN_'.
+Generating RTLIL representation for module `$_DFFSRE_PPPP_'.
+Generating RTLIL representation for module `$_SDFF_NN0_'.
+Generating RTLIL representation for module `$_SDFF_NN1_'.
+Generating RTLIL representation for module `$_SDFF_NP0_'.
+Generating RTLIL representation for module `$_SDFF_NP1_'.
+Generating RTLIL representation for module `$_SDFF_PN0_'.
+Generating RTLIL representation for module `$_SDFF_PN1_'.
+Generating RTLIL representation for module `$_SDFF_PP0_'.
+Generating RTLIL representation for module `$_SDFF_PP1_'.
+Generating RTLIL representation for module `$_SDFFE_NN0N_'.
+Generating RTLIL representation for module `$_SDFFE_NN0P_'.
+Generating RTLIL representation for module `$_SDFFE_NN1N_'.
+Generating RTLIL representation for module `$_SDFFE_NN1P_'.
+Generating RTLIL representation for module `$_SDFFE_NP0N_'.
+Generating RTLIL representation for module `$_SDFFE_NP0P_'.
+Generating RTLIL representation for module `$_SDFFE_NP1N_'.
+Generating RTLIL representation for module `$_SDFFE_NP1P_'.
+Generating RTLIL representation for module `$_SDFFE_PN0N_'.
+Generating RTLIL representation for module `$_SDFFE_PN0P_'.
+Generating RTLIL representation for module `$_SDFFE_PN1N_'.
+Generating RTLIL representation for module `$_SDFFE_PN1P_'.
+Generating RTLIL representation for module `$_SDFFE_PP0N_'.
+Generating RTLIL representation for module `$_SDFFE_PP0P_'.
+Generating RTLIL representation for module `$_SDFFE_PP1N_'.
+Generating RTLIL representation for module `$_SDFFE_PP1P_'.
+Generating RTLIL representation for module `$_SDFFCE_NN0N_'.
+Generating RTLIL representation for module `$_SDFFCE_NN0P_'.
+Generating RTLIL representation for module `$_SDFFCE_NN1N_'.
+Generating RTLIL representation for module `$_SDFFCE_NN1P_'.
+Generating RTLIL representation for module `$_SDFFCE_NP0N_'.
+Generating RTLIL representation for module `$_SDFFCE_NP0P_'.
+Generating RTLIL representation for module `$_SDFFCE_NP1N_'.
+Generating RTLIL representation for module `$_SDFFCE_NP1P_'.
+Generating RTLIL representation for module `$_SDFFCE_PN0N_'.
+Generating RTLIL representation for module `$_SDFFCE_PN0P_'.
+Generating RTLIL representation for module `$_SDFFCE_PN1N_'.
+Generating RTLIL representation for module `$_SDFFCE_PN1P_'.
+Generating RTLIL representation for module `$_SDFFCE_PP0N_'.
+Generating RTLIL representation for module `$_SDFFCE_PP0P_'.
+Generating RTLIL representation for module `$_SDFFCE_PP1N_'.
+Generating RTLIL representation for module `$_SDFFCE_PP1P_'.
+Generating RTLIL representation for module `$_DLATCH_N_'.
+Generating RTLIL representation for module `$_DLATCH_P_'.
+Generating RTLIL representation for module `$_DLATCH_NN0_'.
+Generating RTLIL representation for module `$_DLATCH_NN1_'.
+Generating RTLIL representation for module `$_DLATCH_NP0_'.
+Generating RTLIL representation for module `$_DLATCH_NP1_'.
+Generating RTLIL representation for module `$_DLATCH_PN0_'.
+Generating RTLIL representation for module `$_DLATCH_PN1_'.
+Generating RTLIL representation for module `$_DLATCH_PP0_'.
+Generating RTLIL representation for module `$_DLATCH_PP1_'.
+Generating RTLIL representation for module `$_DLATCHSR_NNN_'.
+Generating RTLIL representation for module `$_DLATCHSR_NNP_'.
+Generating RTLIL representation for module `$_DLATCHSR_NPN_'.
+Generating RTLIL representation for module `$_DLATCHSR_NPP_'.
+Generating RTLIL representation for module `$_DLATCHSR_PNN_'.
+Generating RTLIL representation for module `$_DLATCHSR_PNP_'.
+Generating RTLIL representation for module `$_DLATCHSR_PPN_'.
+Generating RTLIL representation for module `$_DLATCHSR_PPP_'.
+Successfully finished Verilog frontend.
+
+16.2. Continuing TECHMAP pass.
+Using template $_AND_ for cells of type $_AND_.
+Using template $_NOT_ for cells of type $_NOT_.
+Using template $_OR_ for cells of type $_OR_.
+Using template $_DFF_P_ for cells of type $_DFF_P_.
+Technology map yielded processes: $proc$/OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/simcells.v:633$216683
+
+16.3. Executing PROC pass (convert processes to netlists).
+
+16.3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+<suppressed ~208 debug messages>
+
+16.3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+16.3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 1 assignment to connection.
+
+16.3.4. Executing PROC_INIT pass (extract init attributes).
+
+16.3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+16.3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+16.3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+Creating decoders for process `$_DFF_P_.$proc$/OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/simcells.v:633$216683'.
+
+16.3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+16.3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+Creating register for signal `$_DFF_P_.\Q' using process `$_DFF_P_.$proc$/OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/simcells.v:633$216683'.
+  created $dff cell `$procdff$217046' with positive edge clock.
+
+16.3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+16.3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Removing empty process `$_DFF_P_.$proc$/OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/simcells.v:633$216683'.
+Cleaned up 0 empty switches.
+
+16.3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module $_DFF_P_.
+No more expansions possible.
+<suppressed ~79161 debug messages>
+
+17. Executing PROC pass (convert processes to netlists).
+
+17.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+17.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+17.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+17.4. Executing PROC_INIT pass (extract init attributes).
+
+17.5. Executing PROC_ARST pass (detect async resets in processes).
+
+17.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+17.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+17.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+17.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+17.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+17.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+17.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+18. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \top..
+Removed 289 unused cells and 417480 unused wires.
+<suppressed ~610 debug messages>
+
+19. Executing CHECK pass (checking for obvious problems).
+Checking module top...
+Found and reported 0 problems.
+
+20. Executing CXXRTL backend.
+
+20.1. Executing HIERARCHY pass (managing design hierarchy).
+Attribute `top' found on module `top'. Setting top module to top.
+
+20.1.1. Analyzing design hierarchy..
+Top module:  \top
+
+20.1.2. Analyzing design hierarchy..
+Top module:  \top
+Removed 0 unused modules.
+
+20.2. Executing FLATTEN pass (flatten design).
+
+20.3. Executing PROC pass (convert processes to netlists).
+
+20.3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+20.3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+20.3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+20.3.4. Executing PROC_INIT pass (extract init attributes).
+
+20.3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+20.3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+20.3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+20.3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+20.3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+20.3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+20.3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+20.3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module top.
+
+Warnings: 1 unique messages, 1 total
+End of script. Logfile hash: d3f5b737fd, CPU: user 18.67s system 1.36s, MEM: 772.86 MB peak
+Yosys 0.63+post (git sha1 UNKNOWN-dirty, g++ 11.4.0-1ubuntu1~22.04.3 -fPIC -O3)
+Time spent: 17% 1x opt_clean (3 sec), 16% 1x techmap (3 sec), ...

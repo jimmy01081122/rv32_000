@@ -1,0 +1,419 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63+post (git sha1 UNKNOWN-dirty, g++ 11.4.0-1ubuntu1~22.04.3 -fPIC -O3)
+
+-- Executing script file `build/experiments/fpu-mapping-v1/mapping-cec-v2/mutant.ys' --
+Found gzip magic in file `/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz', decompressing using zlib.
+
+1. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+Imported 42 cell types from liberty file.
+Found gzip magic in file `/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz', decompressing using zlib.
+
+2. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+Imported 37 cell types from liberty file.
+Found gzip magic in file `/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz', decompressing using zlib.
+
+3. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+Imported 34 cell types from liberty file.
+
+4. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+Ignoring cell ICGx1_ASAP7_75t_R with missing function on output IQ.
+Ignoring cell ICGx2_ASAP7_75t_R with missing function on output IQ.
+Ignoring cell ICGx2p67DC_ASAP7_75t_R with missing function on output IQ.
+Ignoring cell ICGx3_ASAP7_75t_R with missing function on output IQ.
+Ignoring cell ICGx4DC_ASAP7_75t_R with missing function on output IQ.
+Ignoring cell ICGx4_ASAP7_75t_R with missing function on output IQ.
+Ignoring cell ICGx5_ASAP7_75t_R with missing function on output IQ.
+Ignoring cell ICGx5p33DC_ASAP7_75t_R with missing function on output IQ.
+Ignoring cell ICGx6p67DC_ASAP7_75t_R with missing function on output IQ.
+Ignoring cell ICGx8DC_ASAP7_75t_R with missing function on output IQ.
+Imported 23 cell types from liberty file.
+Found gzip magic in file `/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz', decompressing using zlib.
+
+5. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+Imported 56 cell types from liberty file.
+
+6. Executing JSON frontend.
+Importing module rv32_ooo_fp_execute from JSON tree.
+
+7. Executing HIERARCHY pass (managing design hierarchy).
+
+7.1. Analyzing design hierarchy..
+Top module:  \rv32_ooo_fp_execute
+Used module:     \INVx1_ASAP7_75t_R
+Used module:     \NOR2x1_ASAP7_75t_R
+Used module:     \BUFx2_ASAP7_75t_R
+Used module:     \BUFx3_ASAP7_75t_R
+Used module:     \AND3x1_ASAP7_75t_R
+Used module:     \AO21x1_ASAP7_75t_R
+Used module:     \AND2x2_ASAP7_75t_R
+Used module:     \OR4x1_ASAP7_75t_R
+Used module:     \OR2x2_ASAP7_75t_R
+Used module:     \NAND2x1_ASAP7_75t_R
+Used module:     \OAI22x1_ASAP7_75t_R
+Used module:     \OR3x1_ASAP7_75t_R
+Used module:     \OR5x1_ASAP7_75t_R
+Used module:     \OA33x2_ASAP7_75t_R
+Used module:     \XNOR2x2_ASAP7_75t_R
+Used module:     \AND4x1_ASAP7_75t_R
+Used module:     \AND5x1_ASAP7_75t_R
+Used module:     \AOI21x1_ASAP7_75t_R
+Used module:     \OA21x2_ASAP7_75t_R
+Used module:     \OAI21x1_ASAP7_75t_R
+Used module:     \BUFx4f_ASAP7_75t_R
+Used module:     \BUFx6f_ASAP7_75t_R
+Used module:     \OR4x2_ASAP7_75t_R
+Used module:     \OA22x2_ASAP7_75t_R
+Used module:     \AO222x2_ASAP7_75t_R
+Used module:     \OA222x2_ASAP7_75t_R
+Used module:     \MAJx2_ASAP7_75t_R
+Used module:     \OA31x2_ASAP7_75t_R
+Used module:     \XOR2x2_ASAP7_75t_R
+Used module:     \AOI22x1_ASAP7_75t_R
+Used module:     \OA211x2_ASAP7_75t_R
+Used module:     \AO31x2_ASAP7_75t_R
+Used module:     \AO22x1_ASAP7_75t_R
+Used module:     \AO32x1_ASAP7_75t_R
+Used module:     \AOI221x1_ASAP7_75t_R
+Used module:     \AO221x1_ASAP7_75t_R
+Used module:     \XNOR2x1_ASAP7_75t_R
+Used module:     \NOR3x1_ASAP7_75t_R
+Used module:     \NAND3x1_ASAP7_75t_R
+Used module:     \AOI211x1_ASAP7_75t_R
+Used module:     \AO211x2_ASAP7_75t_R
+Used module:     \AO33x2_ASAP7_75t_R
+Used module:     \OA221x2_ASAP7_75t_R
+Used module:     \AND2x4_ASAP7_75t_R
+Used module:     \INVx2_ASAP7_75t_R
+Used module:     \AND5x2_ASAP7_75t_R
+Used module:     \NOR2x2_ASAP7_75t_R
+Used module:     \OR3x2_ASAP7_75t_R
+Used module:     \AND3x4_ASAP7_75t_R
+Used module:     \AO21x2_ASAP7_75t_R
+Used module:     \NAND3x2_ASAP7_75t_R
+Used module:     \NAND2x2_ASAP7_75t_R
+Used module:     \AO22x2_ASAP7_75t_R
+Used module:     \AND4x2_ASAP7_75t_R
+Used module:     \BUFx4_ASAP7_75t_R
+Used module:     \BUFx12f_ASAP7_75t_R
+Used module:     \TIELOx1_ASAP7_75t_R
+
+7.2. Analyzing design hierarchy..
+Top module:  \rv32_ooo_fp_execute
+Used module:     \INVx1_ASAP7_75t_R
+Used module:     \NOR2x1_ASAP7_75t_R
+Used module:     \BUFx2_ASAP7_75t_R
+Used module:     \BUFx3_ASAP7_75t_R
+Used module:     \AND3x1_ASAP7_75t_R
+Used module:     \AO21x1_ASAP7_75t_R
+Used module:     \AND2x2_ASAP7_75t_R
+Used module:     \OR4x1_ASAP7_75t_R
+Used module:     \OR2x2_ASAP7_75t_R
+Used module:     \NAND2x1_ASAP7_75t_R
+Used module:     \OAI22x1_ASAP7_75t_R
+Used module:     \OR3x1_ASAP7_75t_R
+Used module:     \OR5x1_ASAP7_75t_R
+Used module:     \OA33x2_ASAP7_75t_R
+Used module:     \XNOR2x2_ASAP7_75t_R
+Used module:     \AND4x1_ASAP7_75t_R
+Used module:     \AND5x1_ASAP7_75t_R
+Used module:     \AOI21x1_ASAP7_75t_R
+Used module:     \OA21x2_ASAP7_75t_R
+Used module:     \OAI21x1_ASAP7_75t_R
+Used module:     \BUFx4f_ASAP7_75t_R
+Used module:     \BUFx6f_ASAP7_75t_R
+Used module:     \OR4x2_ASAP7_75t_R
+Used module:     \OA22x2_ASAP7_75t_R
+Used module:     \AO222x2_ASAP7_75t_R
+Used module:     \OA222x2_ASAP7_75t_R
+Used module:     \MAJx2_ASAP7_75t_R
+Used module:     \OA31x2_ASAP7_75t_R
+Used module:     \XOR2x2_ASAP7_75t_R
+Used module:     \AOI22x1_ASAP7_75t_R
+Used module:     \OA211x2_ASAP7_75t_R
+Used module:     \AO31x2_ASAP7_75t_R
+Used module:     \AO22x1_ASAP7_75t_R
+Used module:     \AO32x1_ASAP7_75t_R
+Used module:     \AOI221x1_ASAP7_75t_R
+Used module:     \AO221x1_ASAP7_75t_R
+Used module:     \XNOR2x1_ASAP7_75t_R
+Used module:     \NOR3x1_ASAP7_75t_R
+Used module:     \NAND3x1_ASAP7_75t_R
+Used module:     \AOI211x1_ASAP7_75t_R
+Used module:     \AO211x2_ASAP7_75t_R
+Used module:     \AO33x2_ASAP7_75t_R
+Used module:     \OA221x2_ASAP7_75t_R
+Used module:     \AND2x4_ASAP7_75t_R
+Used module:     \INVx2_ASAP7_75t_R
+Used module:     \AND5x2_ASAP7_75t_R
+Used module:     \NOR2x2_ASAP7_75t_R
+Used module:     \OR3x2_ASAP7_75t_R
+Used module:     \AND3x4_ASAP7_75t_R
+Used module:     \AO21x2_ASAP7_75t_R
+Used module:     \NAND3x2_ASAP7_75t_R
+Used module:     \NAND2x2_ASAP7_75t_R
+Used module:     \AO22x2_ASAP7_75t_R
+Used module:     \AND4x2_ASAP7_75t_R
+Used module:     \BUFx4_ASAP7_75t_R
+Used module:     \BUFx12f_ASAP7_75t_R
+Used module:     \TIELOx1_ASAP7_75t_R
+Removing unused module `\XOR2xp5_ASAP7_75t_R'.
+Removing unused module `\XOR2x1_ASAP7_75t_R'.
+Removing unused module `\XNOR2xp5_ASAP7_75t_R'.
+Removing unused module `\TIEHIx1_ASAP7_75t_R'.
+Removing unused module `\OR5x2_ASAP7_75t_R'.
+Removing unused module `\OR3x4_ASAP7_75t_R'.
+Removing unused module `\OR2x6_ASAP7_75t_R'.
+Removing unused module `\OR2x4_ASAP7_75t_R'.
+Removing unused module `\NOR5xp2_ASAP7_75t_R'.
+Removing unused module `\NOR4xp75_ASAP7_75t_R'.
+Removing unused module `\NOR4xp25_ASAP7_75t_R'.
+Removing unused module `\NOR3xp33_ASAP7_75t_R'.
+Removing unused module `\NOR3x2_ASAP7_75t_R'.
+Removing unused module `\NOR2xp67_ASAP7_75t_R'.
+Removing unused module `\NOR2xp33_ASAP7_75t_R'.
+Removing unused module `\NOR2x1p5_ASAP7_75t_R'.
+Removing unused module `\NAND5xp2_ASAP7_75t_R'.
+Removing unused module `\NAND4xp75_ASAP7_75t_R'.
+Removing unused module `\NAND4xp25_ASAP7_75t_R'.
+Removing unused module `\NAND3xp33_ASAP7_75t_R'.
+Removing unused module `\NAND2xp67_ASAP7_75t_R'.
+Removing unused module `\NAND2xp5_ASAP7_75t_R'.
+Removing unused module `\NAND2xp33_ASAP7_75t_R'.
+Removing unused module `\NAND2x1p5_ASAP7_75t_R'.
+Removing unused module `\MAJx3_ASAP7_75t_R'.
+Removing unused module `\MAJIxp5_ASAP7_75t_R'.
+Removing unused module `\HAxp5_ASAP7_75t_R'.
+Removing unused module `\FAx1_ASAP7_75t_R'.
+Removing unused module `\AND3x2_ASAP7_75t_R'.
+Removing unused module `\AND2x6_ASAP7_75t_R'.
+Removing unused module `\SDFLx4_ASAP7_75t_R'.
+Removing unused module `\SDFLx3_ASAP7_75t_R'.
+Removing unused module `\SDFLx2_ASAP7_75t_R'.
+Removing unused module `\SDFLx1_ASAP7_75t_R'.
+Removing unused module `\SDFHx4_ASAP7_75t_R'.
+Removing unused module `\SDFHx3_ASAP7_75t_R'.
+Removing unused module `\SDFHx2_ASAP7_75t_R'.
+Removing unused module `\SDFHx1_ASAP7_75t_R'.
+Removing unused module `\DLLx3_ASAP7_75t_R'.
+Removing unused module `\DLLx2_ASAP7_75t_R'.
+Removing unused module `\DLLx1_ASAP7_75t_R'.
+Removing unused module `\DHLx3_ASAP7_75t_R'.
+Removing unused module `\DHLx2_ASAP7_75t_R'.
+Removing unused module `\DHLx1_ASAP7_75t_R'.
+Removing unused module `\DFFLQx4_ASAP7_75t_R'.
+Removing unused module `\DFFLQNx3_ASAP7_75t_R'.
+Removing unused module `\DFFLQNx2_ASAP7_75t_R'.
+Removing unused module `\DFFLQNx1_ASAP7_75t_R'.
+Removing unused module `\DFFHQx4_ASAP7_75t_R'.
+Removing unused module `\DFFHQNx3_ASAP7_75t_R'.
+Removing unused module `\DFFHQNx2_ASAP7_75t_R'.
+Removing unused module `\DFFHQNx1_ASAP7_75t_R'.
+Removing unused module `\DFFASRHQNx1_ASAP7_75t_R'.
+Removing unused module `\OAI33xp33_ASAP7_75t_R'.
+Removing unused module `\OAI333xp33_ASAP7_75t_R'.
+Removing unused module `\OAI332xp33_ASAP7_75t_R'.
+Removing unused module `\OAI331xp33_ASAP7_75t_R'.
+Removing unused module `\OAI32xp33_ASAP7_75t_R'.
+Removing unused module `\OAI322xp33_ASAP7_75t_R'.
+Removing unused module `\OAI321xp33_ASAP7_75t_R'.
+Removing unused module `\OAI31xp67_ASAP7_75t_R'.
+Removing unused module `\OAI31xp33_ASAP7_75t_R'.
+Removing unused module `\OAI311xp33_ASAP7_75t_R'.
+Removing unused module `\OAI22xp5_ASAP7_75t_R'.
+Removing unused module `\OAI22xp33_ASAP7_75t_R'.
+Removing unused module `\OAI222xp33_ASAP7_75t_R'.
+Removing unused module `\OAI221xp5_ASAP7_75t_R'.
+Removing unused module `\OAI21xp5_ASAP7_75t_R'.
+Removing unused module `\OAI21xp33_ASAP7_75t_R'.
+Removing unused module `\OAI211xp5_ASAP7_75t_R'.
+Removing unused module `\OA333x2_ASAP7_75t_R'.
+Removing unused module `\OA333x1_ASAP7_75t_R'.
+Removing unused module `\OA332x2_ASAP7_75t_R'.
+Removing unused module `\OA332x1_ASAP7_75t_R'.
+Removing unused module `\OA331x2_ASAP7_75t_R'.
+Removing unused module `\OA331x1_ASAP7_75t_R'.
+Removing unused module `\O2A1O1Ixp5_ASAP7_75t_R'.
+Removing unused module `\O2A1O1Ixp33_ASAP7_75t_R'.
+Removing unused module `\INVxp67_ASAP7_75t_R'.
+Removing unused module `\INVxp33_ASAP7_75t_R'.
+Removing unused module `\INVx8_ASAP7_75t_R'.
+Removing unused module `\INVx6_ASAP7_75t_R'.
+Removing unused module `\INVx5_ASAP7_75t_R'.
+Removing unused module `\INVx4_ASAP7_75t_R'.
+Removing unused module `\INVx3_ASAP7_75t_R'.
+Removing unused module `\INVx13_ASAP7_75t_R'.
+Removing unused module `\INVx11_ASAP7_75t_R'.
+Removing unused module `\HB4xp67_ASAP7_75t_R'.
+Removing unused module `\HB3xp67_ASAP7_75t_R'.
+Removing unused module `\HB2xp67_ASAP7_75t_R'.
+Removing unused module `\HB1xp67_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx9p33_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx8_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx6p67_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx5p33_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx20_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx16_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx14_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx12_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx11_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx10_ASAP7_75t_R'.
+Removing unused module `\BUFx8_ASAP7_75t_R'.
+Removing unused module `\BUFx5_ASAP7_75t_R'.
+Removing unused module `\BUFx24_ASAP7_75t_R'.
+Removing unused module `\BUFx16f_ASAP7_75t_R'.
+Removing unused module `\BUFx12_ASAP7_75t_R'.
+Removing unused module `\BUFx10_ASAP7_75t_R'.
+Removing unused module `\AOI33xp33_ASAP7_75t_R'.
+Removing unused module `\AOI333xp33_ASAP7_75t_R'.
+Removing unused module `\AOI332xp33_ASAP7_75t_R'.
+Removing unused module `\AOI331xp33_ASAP7_75t_R'.
+Removing unused module `\AOI32xp33_ASAP7_75t_R'.
+Removing unused module `\AOI322xp5_ASAP7_75t_R'.
+Removing unused module `\AOI321xp33_ASAP7_75t_R'.
+Removing unused module `\AOI31xp67_ASAP7_75t_R'.
+Removing unused module `\AOI31xp33_ASAP7_75t_R'.
+Removing unused module `\AOI311xp33_ASAP7_75t_R'.
+Removing unused module `\AOI22xp5_ASAP7_75t_R'.
+Removing unused module `\AOI22xp33_ASAP7_75t_R'.
+Removing unused module `\AOI222xp33_ASAP7_75t_R'.
+Removing unused module `\AOI221xp5_ASAP7_75t_R'.
+Removing unused module `\AOI21xp5_ASAP7_75t_R'.
+Removing unused module `\AOI21xp33_ASAP7_75t_R'.
+Removing unused module `\AOI211xp5_ASAP7_75t_R'.
+Removing unused module `\AO333x2_ASAP7_75t_R'.
+Removing unused module `\AO333x1_ASAP7_75t_R'.
+Removing unused module `\AO332x2_ASAP7_75t_R'.
+Removing unused module `\AO332x1_ASAP7_75t_R'.
+Removing unused module `\AO331x2_ASAP7_75t_R'.
+Removing unused module `\AO331x1_ASAP7_75t_R'.
+Removing unused module `\AO32x2_ASAP7_75t_R'.
+Removing unused module `\AO322x2_ASAP7_75t_R'.
+Removing unused module `\AO221x2_ASAP7_75t_R'.
+Removing unused module `\A2O1A1O1Ixp25_ASAP7_75t_R'.
+Removing unused module `\A2O1A1Ixp33_ASAP7_75t_R'.
+Removed 135 unused modules.
+
+8. Executing FLATTEN pass (flatten design).
+Deleting now unused module OAI21x1_ASAP7_75t_R.
+Deleting now unused module NOR3x1_ASAP7_75t_R.
+Deleting now unused module OA33x2_ASAP7_75t_R.
+Deleting now unused module MAJx2_ASAP7_75t_R.
+Deleting now unused module XNOR2x2_ASAP7_75t_R.
+Deleting now unused module BUFx6f_ASAP7_75t_R.
+Deleting now unused module OR3x2_ASAP7_75t_R.
+Deleting now unused module BUFx4f_ASAP7_75t_R.
+Deleting now unused module BUFx4_ASAP7_75t_R.
+Deleting now unused module BUFx3_ASAP7_75t_R.
+Deleting now unused module BUFx2_ASAP7_75t_R.
+Deleting now unused module NOR2x2_ASAP7_75t_R.
+Deleting now unused module AND5x2_ASAP7_75t_R.
+Deleting now unused module BUFx12f_ASAP7_75t_R.
+Deleting now unused module AND5x1_ASAP7_75t_R.
+Deleting now unused module OA31x2_ASAP7_75t_R.
+Deleting now unused module OA22x2_ASAP7_75t_R.
+Deleting now unused module OA222x2_ASAP7_75t_R.
+Deleting now unused module OA221x2_ASAP7_75t_R.
+Deleting now unused module OA21x2_ASAP7_75t_R.
+Deleting now unused module OA211x2_ASAP7_75t_R.
+Deleting now unused module AND4x2_ASAP7_75t_R.
+Deleting now unused module AND4x1_ASAP7_75t_R.
+Deleting now unused module AND3x4_ASAP7_75t_R.
+Deleting now unused module OR3x1_ASAP7_75t_R.
+Deleting now unused module AND3x1_ASAP7_75t_R.
+Deleting now unused module NOR2x1_ASAP7_75t_R.
+Deleting now unused module AND2x4_ASAP7_75t_R.
+Deleting now unused module AOI22x1_ASAP7_75t_R.
+Deleting now unused module AND2x2_ASAP7_75t_R.
+Deleting now unused module XNOR2x1_ASAP7_75t_R.
+Deleting now unused module AOI221x1_ASAP7_75t_R.
+Deleting now unused module INVx2_ASAP7_75t_R.
+Deleting now unused module INVx1_ASAP7_75t_R.
+Deleting now unused module AOI21x1_ASAP7_75t_R.
+Deleting now unused module TIELOx1_ASAP7_75t_R.
+Deleting now unused module AOI211x1_ASAP7_75t_R.
+Deleting now unused module AO33x2_ASAP7_75t_R.
+Deleting now unused module OR2x2_ASAP7_75t_R.
+Deleting now unused module NAND3x2_ASAP7_75t_R.
+Deleting now unused module NAND3x1_ASAP7_75t_R.
+Deleting now unused module XOR2x2_ASAP7_75t_R.
+Deleting now unused module OR5x1_ASAP7_75t_R.
+Deleting now unused module OAI22x1_ASAP7_75t_R.
+Deleting now unused module AO32x1_ASAP7_75t_R.
+Deleting now unused module OR4x2_ASAP7_75t_R.
+Deleting now unused module AO31x2_ASAP7_75t_R.
+Deleting now unused module AO22x2_ASAP7_75t_R.
+Deleting now unused module AO22x1_ASAP7_75t_R.
+Deleting now unused module AO222x2_ASAP7_75t_R.
+Deleting now unused module NAND2x2_ASAP7_75t_R.
+Deleting now unused module AO221x1_ASAP7_75t_R.
+Deleting now unused module AO21x2_ASAP7_75t_R.
+Deleting now unused module AO21x1_ASAP7_75t_R.
+Deleting now unused module AO211x2_ASAP7_75t_R.
+Deleting now unused module OR4x1_ASAP7_75t_R.
+Deleting now unused module NAND2x1_ASAP7_75t_R.
+<suppressed ~25755 debug messages>
+
+9. Executing HIERARCHY pass (managing design hierarchy).
+
+9.1. Analyzing design hierarchy..
+Top module:  \rv32_ooo_fp_execute
+
+9.2. Analyzing design hierarchy..
+Top module:  \rv32_ooo_fp_execute
+Removed 0 unused modules.
+
+10. Executing TECHMAP pass (map to technology primitives).
+
+10.1. Executing Verilog-2005 frontend: /OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/techmap.v
+Parsing Verilog input from `/OpenROAD-flow-scripts/tools/install/yosys/bin/../share/yosys/techmap.v' to AST representation.
+Generating RTLIL representation for module `\_90_simplemap_bool_ops'.
+Generating RTLIL representation for module `\_90_simplemap_reduce_ops'.
+Generating RTLIL representation for module `\_90_simplemap_logic_ops'.
+Generating RTLIL representation for module `\_90_simplemap_compare_ops'.
+Generating RTLIL representation for module `\_90_simplemap_various'.
+Generating RTLIL representation for module `\_90_simplemap_registers'.
+Generating RTLIL representation for module `\_90_shift_ops_shr_shl_sshl_sshr'.
+Generating RTLIL representation for module `\_90_shift_shiftx'.
+Generating RTLIL representation for module `\_90_fa'.
+Generating RTLIL representation for module `\_90_lcu_brent_kung'.
+Generating RTLIL representation for module `\_90_alu'.
+Generating RTLIL representation for module `\_90_macc'.
+Generating RTLIL representation for module `\_90_alumacc'.
+Generating RTLIL representation for module `$__div_mod_u'.
+Generating RTLIL representation for module `$__div_mod_trunc'.
+Generating RTLIL representation for module `\_90_div'.
+Generating RTLIL representation for module `\_90_mod'.
+Generating RTLIL representation for module `$__div_mod_floor'.
+Generating RTLIL representation for module `\_90_divfloor'.
+Generating RTLIL representation for module `\_90_modfloor'.
+Generating RTLIL representation for module `\_90_pow'.
+Generating RTLIL representation for module `\_90_pmux'.
+Generating RTLIL representation for module `\_90_demux'.
+Generating RTLIL representation for module `\_90_lut'.
+Generating RTLIL representation for module `$connect'.
+Generating RTLIL representation for module `$input_port'.
+Successfully finished Verilog frontend.
+
+10.2. Continuing TECHMAP pass.
+No more expansions possible.
+<suppressed ~77 debug messages>
+
+11. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \rv32_ooo_fp_execute..
+Removed 120 unused cells and 120609 unused wires.
+<suppressed ~121 debug messages>
+
+12. Executing CHECK pass (checking for obvious problems).
+Checking module rv32_ooo_fp_execute...
+Found and reported 0 problems.
+
+13. Executing BLIF backend.
+
+End of script. Logfile hash: b376a7b553, CPU: user 3.61s system 0.07s, MEM: 226.40 MB peak
+Yosys 0.63+post (git sha1 UNKNOWN-dirty, g++ 11.4.0-1ubuntu1~22.04.3 -fPIC -O3)
+Time spent: 34% 1x opt_clean (1 sec), 13% 10x read_liberty (0 sec), ...
