@@ -60,3 +60,10 @@ legalization and full rerouting; removing that one buffer recovers the original
 connectivity. Both variants use the identical insertion rule and unchanged
 independent TT/SS/FF acceptance. `ready_guard.py` preserves its predecessor and
 records the native execution, complete connectivity check and final database.
+
+The first guard attempts (`physical-*-v3`) stopped at the strict cell-name check:
+OpenROAD treats `-buffer_name` as a prefix and adds a numeric suffix. A native
+in-memory probe confirmed the requested BUFx2 cell was inserted. The revised
+check identifies the unique added instance immediately, validates its master
+and prefix, then audits all original cells/pins after routing. The failed logs
+and exact commit `33d566a` source are retained; fresh attempts use `*-v4` outputs.

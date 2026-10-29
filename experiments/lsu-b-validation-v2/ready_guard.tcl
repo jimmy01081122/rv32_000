@@ -42,6 +42,16 @@ set dbu [$block getDbUnitsPerMicron]
 set location [list [expr {double($x)/$dbu}] [expr {double($y)/$dbu}]]
 global_route -start_incremental
 insert_buffer -buffer_cell BUFx2_ASAP7_75t_R -net $old_name -location $location -buffer_name rv32_ready_hold_guard -net_name rv32_ready_hold_guard_net
+# The native -buffer_name is a prefix, not a literal instance name.
+set additions {}
+foreach inst [$block getInsts] {
+  if {![dict exists $before [$inst getName]]} { lappend additions $inst }
+}
+if {[llength $additions] != 1} { error "insertion did not add exactly one cell" }
+set inserted [lindex $additions 0]
+set guard_name [$inserted getName]
+if {[[$inserted getMaster] getName] ne "BUFx2_ASAP7_75t_R" || ![regexp {^rv32_ready_hold_guard[0-9]*$} $guard_name]} { error "unexpected inserted cell" }
+puts "RV32_GUARD_INSERTED name=$guard_name master=[[$inserted getMaster] getName]"
 detailed_placement
 check_placement -verbose
 global_route -end_incremental -congestion_iterations 30 -verbose
@@ -53,7 +63,7 @@ puts "RV32_GUARD_FULL_ROUTE_COMPLETE"
 check_antennas -report_file $::env(REPORTS_DIR)/ready_guard_antennas.rpt
 # All original cell masters, every pin and all boundary terminals must survive.
 # Removing this one proven wire buffer must recover exactly the original graph.
-set guard [$block findInst rv32_ready_hold_guard]
+set guard [$block findInst $guard_name]
 if {$guard eq "NULL" || [[$guard getMaster] getName] ne "BUFx2_ASAP7_75t_R"} { error "wrong guard cell" }
 if {[llength [$block getInsts]] != [dict size $before]+1} { error "unexpected cell addition/removal" }
 set a [pin_net [$guard findITerm A]]
@@ -83,7 +93,7 @@ dict for {name value} $ports {
 }
 if {$checked_pins != $original_pins || $changed_loads != [llength $loads]} { error "incomplete connectivity audit" }
 set audit [open $::env(REPORTS_DIR)/ready_guard_connectivity.json w]
-puts $audit "\{\"passed\":true,\"original_cells\":[dict size $before],\"final_cells\":[llength [$block getInsts]],\"original_pins_checked\":$checked_pins,\"boundary_ports_checked\":[dict size $ports],\"redirected_input_loads\":$changed_loads,\"added_buffer\":\"rv32_ready_hold_guard\",\"master\":\"BUFx2_ASAP7_75t_R\",\"all_other_cells_masters_pins_ports_unchanged\":true\}"
+puts $audit "\{\"passed\":true,\"original_cells\":[dict size $before],\"final_cells\":[llength [$block getInsts]],\"original_pins_checked\":$checked_pins,\"boundary_ports_checked\":[dict size $ports],\"redirected_input_loads\":$changed_loads,\"added_buffer\":\"$guard_name\",\"master\":\"BUFx2_ASAP7_75t_R\",\"all_other_cells_masters_pins_ports_unchanged\":true\}"
 close $audit
 puts "RV32_GUARD_CONNECTIVITY_PASS cells=[dict size $before] pins=$checked_pins ports=[dict size $ports]"
 write_guides $::env(RESULTS_DIR)/route.guide
