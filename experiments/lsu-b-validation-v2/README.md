@@ -46,3 +46,17 @@ failed run instead of silently accepting it. Both cores use the same policy.
 `analyze_physical.py` collects independent native corners, and `review.py` binds
 FPU proof, actual passing clock trials, original functional/build provenance,
 all 27 workloads, 3,629 outputs and per-PC work to the explicit new flow.
+
+Both hold40 constructions completed. B passed all corners down to an actual
+9,600 ps point (9,500 ps SS setup fails), but the same-flow baseline has FF hold
+-1.237 ps on `dmem_req_ready` to LSU in-flight address storage. Its failure is
+retained; the original zero-hold threshold is not waived.
+
+`contract-ready-guard.json` defines the next common construction step: one
+`BUFx2_ASAP7_75t_R` on `dmem_req_ready` in each already completed hold40 database.
+The native Liberty model proves this cell is the wire function Y=A. The guard
+script verifies every original cell master, pin and boundary terminal after
+legalization and full rerouting; removing that one buffer recovers the original
+connectivity. Both variants use the identical insertion rule and unchanged
+independent TT/SS/FF acceptance. `ready_guard.py` preserves its predecessor and
+records the native execution, complete connectivity check and final database.
