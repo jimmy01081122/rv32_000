@@ -1,0 +1,17 @@
+TT STA returncode 0
+SS STA returncode 0
+FF STA returncode 0
+{
+  "scope": "tested global-route timing trials only; routing review and formal measurement still required",
+  "analysis_report_sha256": "772b40a5aea31483b80a5357e387678d070c97df687a52cdc1bf56703d5467b8",
+  "implementation_report_sha256": "a9294a7e02cdb86e63a065cc5e3a127eb2fdeb8661dccdf65444d15279e3da69",
+  "checker_sha256": "170a5abc90b2f6dad76d2fa0a81a5b6601b897865862b867d784e888fc1048b5",
+  "qualified_periods_ps": [
+    9600,
+    9700,
+    10000
+  ],
+  "smallest_tested_passing_period_ps": 9600,
+  "standard_cell_area_um2": 21309.821820015095,
+  "passed": true
+}

@@ -1,0 +1,58 @@
+{
+  "completed_utc": "2026-10-29T01:39:06.757103+00:00",
+  "scope": "B experiment contract completed with a common input guard at global-route research boundary; no baseline promotion or full ISA/IEEE-754/detailed-route signoff",
+  "verification_complete": true,
+  "planning_targets_met": false,
+  "baseline_promoted": false,
+  "cpu_RTL_changed_during_completion": false,
+  "original_frozen_baseline_commit": "58a4159da0372b3286758be1e6c1b50f9f28cc27",
+  "B_functional_source": "95ac0dd6451a1799f9f3fe948c7b74c02f5fccd2",
+  "native_stage_commits": {
+    "guard_source_commit": "a5cc433598b3e61388bd85a9ff2442ff88cc9010",
+    "predecessor_source_commit": "f2c8b4520fc68d1c95a043a3b638fc9539bf48c2",
+    "predecessor_GRT_source_commit": "6493269c0002920837ba9ac308b0ec7199945942"
+  },
+  "common_clock": {
+    "passed": true,
+    "comparison_point": "common-clock",
+    "period_ps": 10000,
+    "memory_ps": 10000,
+    "measurement_summary_sha256": "122dbd4bf430e1ef8f2e87c8f32705313307097308d3dec4279e54161c2392da",
+    "per_pc_work_matches": true,
+    "numerical_values_checked": 3629,
+    "embench_time_geomean_speedup": 1.029458926609211,
+    "fp32_time_geomean_speedup": 1.0095989895859971,
+    "fp32_subgroup_speedup": {
+      "dsp": 1.013839324971106,
+      "matrix_ml": 1.005376389204587
+    }
+  },
+  "fastest_tested": {
+    "passed": true,
+    "comparison_point": "fastest",
+    "period_ps": 9600,
+    "memory_ps": 10000,
+    "measurement_summary_sha256": "073ef7cd07ce0500354e10f31ba3a757448e3ee4c0585a4544d131b1b26fb66b",
+    "per_pc_work_matches": true,
+    "numerical_values_checked": 3629,
+    "embench_time_geomean_speedup": 0.7487049850788335,
+    "fp32_time_geomean_speedup": 0.71967963279465,
+    "fp32_subgroup_speedup": {
+      "dsp": 0.6744662082415074,
+      "matrix_ml": 0.7679239782966012
+    }
+  },
+  "B_area_um2": 21309.821820015095,
+  "same_flow_baseline_area_um2": 21545.492940008164,
+  "original_area_ratio": 0.9650698589619994,
+  "same_flow_area_ratio": 0.9890616974673414,
+  "evidence_sha256": {
+    "final-common-clock-review.json": "c133e45ff7ad30f1ad049a13a45f4c66b3c8a6d37e6cad85daa8aee397de0ea0",
+    "final-fastest-review.json": "a2a642284582568adc2b442ec95554fd98d7fac7da9f1ac886a98121775f5977",
+    "guard-admission-controls-v1/summary.json": "9390129cb2c03d92e1f208a0446ab63c2704cd834fbb756b0f4ab20f6e0b96c3",
+    "retained-evidence-review.json": "24674df3b0feb694e3a77814b3f4b984807a954fd85f07bb06552ceb34957ca2",
+    "formal-to-physical-link-review.json": "3ed1bdc1abe11d89c03e84431de23cd8b98e76f0e5962709098514e016e19706",
+    "completed-runtime-cleanup.json": "e38b93eb91ed1687182b1c9d4cc7d54888fc45a2935fdd93a087eeb9636c4482"
+  },
+  "next_decision": "joint architecture/operating-point review; no A+B or baseline promotion"
+}

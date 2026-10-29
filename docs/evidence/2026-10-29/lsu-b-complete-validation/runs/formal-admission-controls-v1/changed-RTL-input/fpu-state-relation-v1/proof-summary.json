@@ -1,0 +1,199 @@
+{
+  "scope": "reset-established full FPU state relation; no internal arithmetic cutpoints",
+  "started_utc": "2026-10-28T09:18:51.050470+00:00",
+  "inputs": {
+    "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/run_proofs.py": "3d88372aff5ffdefa57d6d90d9aa8d978cb801f666268ebbc076b9c82cdcf469",
+    "/workspace/experiments/lsu-b-validation-v2/fpu_state_models.py": "4158a37ec2ceb2074bfbfae2197c377c878718c32ba10c011bf784ebb0e2a9eb",
+    "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/original.json": "0b1e9d1b88011800ec6abd6c09e73626fbec00fe4d457b048b6f715f57721922",
+    "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/cell.json": "b26f8e0d2f38ec1900e375f97d8f6f259d02e7ac396c84a6d85ac66febf8c409",
+    "/workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/fp-source.v": "0000000000000000000000000000000000000000000000000000000000000000",
+    "/workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/results/asap7/rv32_post_lsu_v1/base/fp_mapped.rtlil.json": "0f63f195545b9e9fde79b9829f3b6772d901f01511ef19178b914c0b2663d81d",
+    "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/models/step-gold.json": "c36a7d6826683b07d09112851bab3cd0365216cf6b051c1098eae2b45a29d7e5",
+    "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/models/reset-gate.json": "56189ad770d0eb6983434afe7df6bf56f52ae9d226ffb5aac266b9b1c1f7327c",
+    "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/models/reset-gold-zero.json": "7bbf8a6a7dc9cdd4e5cc556c71f5de3190c2d52e50d6f49a3ed4817c49626005",
+    "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/models/step-gate.json": "6bbf171ee596d1b4fac01f20ba8d5239f6da41fccba5a29f5a361ecb05ed8504",
+    "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/models/reset-gate-zero.json": "0c810aeb142f0bf151ae5dbac1237b7e5020d1fa0dee785e1d3874f1bfdc1efc",
+    "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/models/reset-gold.json": "bea76cb5d3e0bee92fb017cac03054f7e5ac8a9f46be167171c30ec83ac413b7",
+    "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/models/relation.json": "028df51cce0aec792b96e13e3cf772e82fb916b13aaf88db731b3a57a4f40907",
+    "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/models/step-mutant.json": "2a932824ff2b1f86d7848cb95966eac994cbcdb875c7a85d14673821c3d82943",
+    "/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz": "fe9f1c18e88ab129d63ad82adc256f3a85c7e38e47dabbe0a96749b41087dea1",
+    "/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz": "8d6db2c2f83c3c162be54a5e102b2d379fcaaaef2db5f0b1d4152c395d01fea1",
+    "/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz": "bbe6d904d58c7367de1ed7639e4eae386c65fa0a5af26ae62dc5e4e2ec52b08b",
+    "/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib": "57a0b403485b99ebd676942af4673ac086b86c7c75fbdc3e5c0038501dd22ba3",
+    "/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz": "073ac4b6b08f272b6953b0ad54d1d9743767a7d15a0e2964ed86cf44c3dbe00e",
+    "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys": "82d6e93803e865fa8ee4651f22e9dd9b806adf242475c9c065c25a89c07f345f",
+    "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys-abc": "9435048831622cd2f464c143a470c3fba878de7117241c99da45a10133474d46"
+  },
+  "stages": [
+    {
+      "stage": "lower-reset-gold",
+      "command": [
+        "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys",
+        "-s",
+        "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/reset-gold.ys"
+      ],
+      "returncode": 0,
+      "script_sha256": "d9b1d80f7f39652ecb3d772f9da4826b6ca67dd73871634a7e7e539ac813bbf2",
+      "log_sha256": "27dd932c3beb5f854314b7a7062e544b6f9b134104e0ef1c191afde86e070d96",
+      "combinational_cells": 0,
+      "no_remaining_state": true,
+      "blif_sha256": "8b480094e864cb1d713a251b9d72b9d5413c1d4311e80a38ff00fe06ab99d267"
+    },
+    {
+      "stage": "lower-reset-gold-zero",
+      "command": [
+        "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys",
+        "-s",
+        "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/reset-gold-zero.ys"
+      ],
+      "returncode": 0,
+      "script_sha256": "d7c50ce7deba32647f53c96fdff6ed0c8ac67ee51ef9972ef6b72b78d77a6178",
+      "log_sha256": "59fcca3c75a996428bcaae9d0f2c31db0612101b1dee9c5fa9d706afe17834de",
+      "combinational_cells": 0,
+      "no_remaining_state": true,
+      "blif_sha256": "8b480094e864cb1d713a251b9d72b9d5413c1d4311e80a38ff00fe06ab99d267"
+    },
+    {
+      "stage": "reset-gold-proof",
+      "command": [
+        "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys-abc",
+        "-c",
+        "cec /workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/reset-gold.blif /workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/reset-gold-zero.blif"
+      ],
+      "state": "finished",
+      "started_utc": "2026-10-28T09:18:52.233916+00:00",
+      "returncode": 0,
+      "equivalent": true,
+      "inequivalent": false,
+      "expected_equivalent": true,
+      "passed": true,
+      "finished_utc": "2026-10-28T09:18:52.266244+00:00",
+      "log_sha256": "631346a01337376a94a9dbc16ea22309a384f88fc02f089c855b1496eefe785c"
+    },
+    {
+      "stage": "lower-reset-gate",
+      "command": [
+        "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys",
+        "-s",
+        "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/reset-gate.ys"
+      ],
+      "returncode": 0,
+      "script_sha256": "86f078effa7184cb17cac447e0238fca1b822565dbe4bdc4fc2e275a32244ccd",
+      "log_sha256": "0d78a6769bf72ea4bdd917977fb1a25e326d0f5cafb8eb637bd9be7fa17cf0f8",
+      "combinational_cells": 0,
+      "no_remaining_state": true,
+      "blif_sha256": "6a55a282f6e073f7129c00c2617fbdeab4a9bc5d219e0f784bac35008eb4b57f"
+    },
+    {
+      "stage": "lower-reset-gate-zero",
+      "command": [
+        "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys",
+        "-s",
+        "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/reset-gate-zero.ys"
+      ],
+      "returncode": 0,
+      "script_sha256": "d91efffaa973b30a723b922822bfc9d21afea0c55222b49d2775b3b214f68a84",
+      "log_sha256": "04d80c14e5db43cf1bb4098d1d1f55a6ba13041bdbeb465509be6bbc52cd4422",
+      "combinational_cells": 0,
+      "no_remaining_state": true,
+      "blif_sha256": "6a55a282f6e073f7129c00c2617fbdeab4a9bc5d219e0f784bac35008eb4b57f"
+    },
+    {
+      "stage": "reset-gate-proof",
+      "command": [
+        "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys-abc",
+        "-c",
+        "cec /workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/reset-gate.blif /workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/reset-gate-zero.blif"
+      ],
+      "state": "finished",
+      "started_utc": "2026-10-28T09:18:57.272014+00:00",
+      "returncode": 0,
+      "equivalent": true,
+      "inequivalent": false,
+      "expected_equivalent": true,
+      "passed": true,
+      "finished_utc": "2026-10-28T09:18:57.304196+00:00",
+      "log_sha256": "153998464818de07e2fe14f31e8d8e54232404e2831aef4709e6daa187765c2d"
+    },
+    {
+      "stage": "lower-step-gold",
+      "command": [
+        "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys",
+        "-s",
+        "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/step-gold.ys"
+      ],
+      "returncode": 0,
+      "script_sha256": "3178b46e8a4ab9c638fef24fe24d256e19bceedd9f06ec542304de50e7bd27d8",
+      "log_sha256": "aac07b59b0d3b8f83bb55a505739cedd2e4eb30582f87f5355298a0575bdf2b8",
+      "combinational_cells": 54546,
+      "no_remaining_state": true,
+      "blif_sha256": "0041d157f2af104a46cb2a920903fd5fcfb8e90a0bf2df12310e410a24643c77"
+    },
+    {
+      "stage": "lower-step-gate",
+      "command": [
+        "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys",
+        "-s",
+        "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/step-gate.ys"
+      ],
+      "returncode": 0,
+      "script_sha256": "4826a4cb2a6a6757c037ac21e9bcc787853893e78bc2c0f474d7af267bae5d69",
+      "log_sha256": "09f2b5f98a285388e40877bff625fab75ee76cd0a4cc2be3a95c4e6bc6235506",
+      "combinational_cells": 65372,
+      "no_remaining_state": true,
+      "blif_sha256": "6b6565c2ca9f72bdda6b15af97b665c2ba9793557240d80b47837b6cf5330550"
+    },
+    {
+      "stage": "step-output-proof",
+      "command": [
+        "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys-abc",
+        "-c",
+        "cec /workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/step-gold.blif /workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/step-gate.blif"
+      ],
+      "state": "finished",
+      "started_utc": "2026-10-28T09:20:44.029734+00:00",
+      "returncode": 0,
+      "equivalent": true,
+      "inequivalent": false,
+      "expected_equivalent": true,
+      "passed": true,
+      "finished_utc": "2026-10-28T09:21:44.235855+00:00",
+      "log_sha256": "a05ec5bd3deb9384fd38acca24061fbace8d4e7260c727be8a765ffa0dbe7e21"
+    },
+    {
+      "stage": "lower-step-mutant",
+      "command": [
+        "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys",
+        "-s",
+        "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/step-mutant.ys"
+      ],
+      "returncode": 0,
+      "script_sha256": "f96c660b316eeb5ba4d8c007ddbb5b2db68fa775fa55096ad322579581e38d9c",
+      "log_sha256": "951852b0eed75f73b9d438f9efc8ecde1922fceec96c26ecc964289e31c90b28",
+      "combinational_cells": 65373,
+      "no_remaining_state": true,
+      "blif_sha256": "c26e8df6d5b797dc7b2d380668201d83895c558edc6d2d4638c07b13718ee9b9"
+    },
+    {
+      "stage": "negative-bit-proof",
+      "command": [
+        "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys-abc",
+        "-c",
+        "cec /workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/step-gold.blif /workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/step-mutant.blif"
+      ],
+      "state": "finished",
+      "started_utc": "2026-10-28T09:22:19.512765+00:00",
+      "returncode": 0,
+      "equivalent": false,
+      "inequivalent": true,
+      "expected_equivalent": false,
+      "passed": true,
+      "finished_utc": "2026-10-28T09:22:20.079381+00:00",
+      "log_sha256": "afa627997841bfb8173cc251f2cef51461821944e8c7552fc8f8ad840f9f5f2f"
+    }
+  ],
+  "passed": true,
+  "state": "finished",
+  "input_identities_unchanged": true,
+  "finished_utc": "2026-10-28T09:22:20.167162+00:00"
+}

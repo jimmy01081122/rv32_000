@@ -1,0 +1,62 @@
+{
+  "variant": "baseline",
+  "started_utc": "2026-10-28T15:17:53.816259+00:00",
+  "records": [
+    {
+      "command": [
+        "env",
+        "-u",
+        "DOCKER_HOST",
+        "-u",
+        "DOCKER_CONTEXT",
+        "-u",
+        "DOCKER_TLS",
+        "-u",
+        "DOCKER_TLS_VERIFY",
+        "-u",
+        "DOCKER_CERT_PATH",
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "exec",
+        "--user",
+        "1000:1000",
+        "rv32-lsu-b-validation-v2",
+        "python3",
+        "/workspace/experiments/lsu-b-validation-v2/repair.py",
+        "--variant",
+        "baseline",
+        "--incoming",
+        "/workspace/build/experiments/lsu-b-validation-v2/physical-baseline-v1/grt",
+        "--output",
+        "/workspace/build/experiments/lsu-b-validation-v2/physical-baseline-v2"
+      ],
+      "returncode": 0,
+      "log_sha256": "26ab3c99124073f054ba9874918456f0d334be66da54028de84804b2d88d550e"
+    },
+    {
+      "command": [
+        "python3",
+        "experiments/lsu-b-validation-v2/analyze_physical.py",
+        "--attempt",
+        "/workspace/rv32_000/build/experiments/lsu-b-validation-v2/physical-baseline-v2/eco",
+        "--container",
+        "rv32-lsu-b-validation-v2",
+        "--adder-audit",
+        "build/baseline-setup/asap7-adder-qualification-v2/summary.json",
+        "--label",
+        "independent-sta-v1",
+        "--periods-ps",
+        "9700",
+        "9800",
+        "9900",
+        "10000",
+        "10100",
+        "10200"
+      ],
+      "returncode": 0,
+      "log_sha256": "a65016a8cf47e723bf13846f9285832f6f05ed75b82c48eec4582ba032c268b3"
+    }
+  ],
+  "complete": true,
+  "finished_utc": "2026-10-28T16:45:51.941946+00:00"
+}

@@ -1,0 +1,47 @@
+{
+  "started_utc": "2026-10-28T15:10:08.793411+00:00",
+  "archives": [
+    {
+      "path": "docs/evidence/2026-10-27/fpu-mapping-repair",
+      "sha256sums_sha256": "f38e17f30074d94763597345b4057bbcf1054c645e56409583b08ff2e394fc3c",
+      "indexed_files": 771,
+      "returncode": 0
+    },
+    {
+      "path": "docs/evidence/2026-10-21/lsu-b",
+      "sha256sums_sha256": "dbcb2df1c2605b5750c3c275db638b20925df7ace11d3319ba58c3f0e33d719c",
+      "indexed_files": 712,
+      "returncode": 0
+    }
+  ],
+  "passed": true,
+  "retained_unit": {
+    "summary_sha256": "9eac74cd721d8d6a17914667a555bcfb65488d7196101cf0a74c3dc5432c8fc5",
+    "cases_per_rtl": 62,
+    "original_RTL_timing_negative": true,
+    "passed": true
+  },
+  "retained_functional": {
+    "validator_sha256": "7fb6e823b208ddeacc17769b4a573a8bb5755ae5465d80da695b1cb1a3ca0394",
+    "build_summary_sha256": "1100da367ad9990009a0e5110b02dbb0a6a7bfe07e82841094a196b27e3aa79c",
+    "qualification_summary_sha256": "f7801e7130612bec403dfa12b8d72fa39ac46896d90139e145ea7742d3defd0d",
+    "normal_simulator_sha256": "359ea89735e630a3c1f2fcd7795ec9598f35d6fb4e9a8b0f448ba3f6ee2c1144",
+    "assert_simulator_sha256": "da70e3bd5c695a9d4bea54950746537092a2ffdf69d10367c56a1f45a1dfc860",
+    "directed_cases": 18,
+    "spike_cases": 18,
+    "interface_cases": 48,
+    "fixed_time_controls": 58,
+    "finite_fma_values": 3400,
+    "passed": true
+  },
+  "fresh_measurement": {
+    "scope": "functional/full workload cycle checks only; physical qualification separately required",
+    "summary_sha256": "122dbd4bf430e1ef8f2e87c8f32705313307097308d3dec4279e54161c2392da",
+    "workloads": 27,
+    "numerical_values": 3629,
+    "per_pc_work_matches": true,
+    "passed": true
+  },
+  "finished_utc": "2026-10-28T15:10:09.174009+00:00",
+  "reviewer_sha256": "e8a6a65ebf3388aeedb8843e18a6f6dd8b580462ca1310359857d27008a60c33"
+}

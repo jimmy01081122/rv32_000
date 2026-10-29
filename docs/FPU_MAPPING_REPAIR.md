@@ -1,9 +1,10 @@
 # FPU 映射修復與驗證
 
-更新：2026-10-27。使用者已核准先修復 FPU；本階段針對
+更新：2026-10-30（Asia/Taipei）。使用者已核准先修復 FPU；本階段針對
 [B 診斷](LSU_B_TIMING_DIAGNOSIS.md)發現的合成映射敏感性，維持原算術、
 介面與 latency。已建立共同 FPU 映射，完成映射層形式檢查及三版接線審查；
-完整 RTL 等價證明與實體資格仍未完成。
+後續 [B 完整驗證](LSU_B_COMPLETE_VALIDATION.md)已補完 reset 後二態 RTL 實作等價，
+並完成同新流程 baseline／B 實體資格；A 的新流程實體重跑仍未進行。
 
 ## 修正內容
 
@@ -33,7 +34,7 @@
 | ABC 前後等價 | 100 bit 的任意狀態／輸入轉移與全部輸出 CEC 通過；nextstate bit 錯誤注入被拒絕 |
 | 審查器負向控制 | 對調輸入 bit、加入未支援初始化、改接腳、移除有用元件，4/4 被拒絕 |
 | RTL／閘級逐週期回歸 | 116,737 cycles、233,474 次完整輸出比較通過；結果 bit 錯誤注入被拒絕 |
-| 完整 RTL → mapped 形式證明 | interface-only EQY/PDR 900 s timeout，未證明，未列為 PASS |
+| 完整 RTL → mapped 形式證明 | 後續 reset 建立關係＋任意相關狀態／輸入的轉移及完整輸出證明通過；原 EQY/PDR 900 s timeout 保留為歷史失敗 |
 
 OpenDB 原生匯入刪去無可觀察用途的邏輯。審查確認整個刪除子圖不驅動
 任何保留元件或 top output；其中包含無用暫存器與 FPU 邏輯，並非全是 buffer。
@@ -46,7 +47,10 @@ OpenDB 原生匯入刪去無可觀察用途的邏輯。審查確認整個刪除�
 
 CEC 將 ABC 前後同身分、型別與 clock 的 100 個 DFF，轉為共同任意 `state`
 輸入與 `nextstate` 輸出，其餘元件及原 port 不變；審查器重建並核對轉換。
-這證明映射的狀態轉移等價，尚未形式證明前面的 RTL 降階與算術展開。
+這個早期證據只證明映射的狀態轉移等價。後續完整證明以原 sv2v FPU 為 golden，
+從任意初始狀態證明 reset 建立 156-bit／100-FF 關係，再證明全部轉移與可見輸出。
+沒有內部算術切點；原生 frontend 重播、X／Z 排除、實際錯誤注入與物理圖綁定通過。
+詳見 [證明範圍](LSU_B_COMPLETE_VALIDATION.md)；工具 frontend 是明示信任邊界。
 
 完整 EQY 逾時及早期不適當內部切點、工具／模型缺失均保留。小型 sequential
 fixture 曾揭露未明確處理 clock 的 SAT 設定會誤放行負向案例，該設定已拒用。
@@ -77,17 +81,18 @@ flush、reset；共 233,476 次固定 clock 下的輸出穩定性檢查。
 
 新三版差距約 12.7 ps；相同 FPU 圖仍受邊界 driver、負載與前段核心邏輯影響。
 這支持映射差異已被控制，但不是 routed Fmax 或 CPU 加速比。整體流程已改變，
-不能把新資料混入原 v1 PPA 比例。
+後續 routed 結果另外列出原凍結基線與同新流程 baseline 兩種面積比例，
+不把流程修復的收益全部歸因於 B。
 
-## 後續關卡
+## 完成狀態與後續關卡
 
-1. 補完 RTL 到映射的形式驗證計畫，或共同明訂下一階段可接受的證據範圍；
-   定向與隨機比較不等於完整 ISA／IEEE-754 資格。
-2. 校準 TT-only 建置的 hold 修補裕量，維持獨立 SS／FF 零負 slack 門檻。
-   本次沒有修復 B 原本兩個 FF hold 端點。
-3. 用同一新流程完成 baseline、A、B 實體比較，再共同決定新物理參考或下一項
-   架構實驗。原基線與兩類 ≥1.20×、面積 ≤1.10× 目標不變；未導入 A+B 或
-   新增 FPU pipeline。
+1. 完整 FPU 實作等價已完成，條件為一次同步 reset 後的二態模型；完整 ISA／
+   IEEE-754 規格資格仍需獨立補齊。
+2. 共同 TT hold40 修補與單一 ready buffer 已讓 baseline／B 取得三 corner 資格，
+   零負 slack 與電氣門檻不變。最終 B 9.6 ns 合格、9.5 ns SS setup 失敗；原失敗保留。
+3. B 的 100 MHz／104.17 MHz 完整 27 項均通過，但效能目標未達。若要新流程 A/B
+   面積／時脈比較，仍須重跑 A；新的物理參考或下一項架構由使用者共同決定。
 
 [實作與重播](../experiments/fpu-mapping-v1/README.md)、
-[原始紀錄](evidence/2026-10-27/fpu-mapping-repair/README.md)。
+[原始映射里程碑](evidence/2026-10-27/fpu-mapping-repair/README.md)、
+[完整驗證與新實體封存](evidence/2026-10-29/lsu-b-complete-validation/README.md)。

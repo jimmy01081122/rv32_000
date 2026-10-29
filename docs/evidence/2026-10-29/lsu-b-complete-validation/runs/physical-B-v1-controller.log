@@ -1,0 +1,13 @@
+START B grt
+DONE B grt
+START B eco
+Traceback (most recent call last):
+  File "/workspace/experiments/lsu-b-validation-v2/physical.py", line 145, in <module>
+    if __name__=='__main__':main()
+  File "/workspace/experiments/lsu-b-validation-v2/physical.py", line 137, in main
+    run_stage(out/stage,stage,args.variant,contract,out/'grt' if stage=='eco' else None)
+  File "/workspace/experiments/lsu-b-validation-v2/physical.py", line 110, in run_stage
+    require(execute(out/'job.json')==0, 'native '+stage+' failed; preserve this attempt')
+  File "/workspace/experiments/lsu-b-validation-v2/physical.py", line 42, in require
+    raise ValueError(message)
+ValueError: native eco failed; preserve this attempt

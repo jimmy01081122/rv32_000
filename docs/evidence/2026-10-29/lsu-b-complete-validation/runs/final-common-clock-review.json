@@ -1,0 +1,646 @@
+{
+  "scope": "B experiment contract completed with a common input guard at global-route research boundary; no baseline promotion or full ISA/IEEE-754/detailed-route signoff",
+  "passed": true,
+  "reviewer_sha256": "b7f301bc4def1e2644063619e3ba8115a519c30a93425a66284c22619f7123a2",
+  "predecessor_reviewer_sha256": "1890e62dc82fbb7c575e355a8640dfdcaed9d17563d3bb0c7a714d366aebc74f",
+  "contract_sha256": "f50fd5da553a257d0e7313488d1d8becb7460a42e16a06fb97898ae8e925e3b2",
+  "formal": {
+    "passed": true,
+    "scope": "complete two-state FPU implementation equivalence after one synchronous reset edge; no arithmetic cutpoints; not IEEE-754 conformance",
+    "original_state_bits": 156,
+    "mapped_state_bits": 100,
+    "obligations": {
+      "reset-gold-proof": true,
+      "reset-gate-proof": true,
+      "step-output-proof": true,
+      "negative-bit-proof": false
+    },
+    "proof_summary_sha256": "474ad1e28ba62b0d990eb0a2cf26c8fbf180bb9c5ba3865f92de1a2bb07f13c6",
+    "frontend_replay_sha256": "d9433c5ad2e91ae76d147a5adb991f6251b8097e475a2c751d7f310c8d2ec6ae",
+    "negative_summary_sha256": "4fae1a7f0d70704acc328f45d479dd1b62b6dd84f704e2fb81d64e24c68ea8be"
+  },
+  "extra_formal_binding": {
+    "passed": true,
+    "formal_to_physical_link_review_sha256": "3ed1bdc1abe11d89c03e84431de23cd8b98e76f0e5962709098514e016e19706",
+    "functional_proof_bits_defined": true
+  },
+  "baseline_physical": {
+    "scope": "tested global-route timing trials only; routing review and formal measurement still required",
+    "analysis_report_sha256": "c86254a51a0847b439788b04087d8a9cad5028516170f1a11fb773c20281efd2",
+    "implementation_report_sha256": "9237f9919158020c481979db910b135166c6c9fde6569740f7bf6f57d9822069",
+    "checker_sha256": "170a5abc90b2f6dad76d2fa0a81a5b6601b897865862b867d784e888fc1048b5",
+    "records": [
+      {
+        "corner": "TT",
+        "standard_cell_area_um2": 21545.492940008164,
+        "standard_cell_count": 174141,
+        "register_count": 18288,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9400,
+            "setup_slack_ps": 2781.1424385788623,
+            "hold_slack_ps": 39.195119528953185,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": 2881.14244725248,
+            "hold_slack_ps": 39.195119528953185,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 2981.142455926097,
+            "hold_slack_ps": 39.195119528953185,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 3381.142490620567,
+            "hold_slack_ps": 39.195119528953185,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      },
+      {
+        "corner": "SS",
+        "standard_cell_area_um2": 21545.492940008164,
+        "standard_cell_count": 174141,
+        "register_count": 18288,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9400,
+            "setup_slack_ps": -11.991296892286249,
+            "hold_slack_ps": 71.08219596910978,
+            "problems": [
+              "setup violation"
+            ],
+            "passed": false
+          },
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": 88.00871178133117,
+            "hold_slack_ps": 71.08219596910978,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 188.0087204549486,
+            "hold_slack_ps": 71.08219596910978,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 588.0087551494182,
+            "hold_slack_ps": 71.08219596910978,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      },
+      {
+        "corner": "FF",
+        "standard_cell_area_um2": 21545.492940008164,
+        "standard_cell_count": 174141,
+        "register_count": 18288,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9400,
+            "setup_slack_ps": 4283.167615488132,
+            "hold_slack_ps": 9.122730385373158,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": 4383.167624161749,
+            "hold_slack_ps": 9.122730385373158,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 4483.167632835367,
+            "hold_slack_ps": 9.122730385373158,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 4883.167667529836,
+            "hold_slack_ps": 9.122730385373158,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      }
+    ],
+    "qualified_periods_ps": [
+      9500,
+      9600,
+      10000
+    ],
+    "smallest_tested_passing_period_ps": 9500,
+    "standard_cell_area_um2": 21545.492940008164,
+    "passed": true,
+    "variant": "baseline",
+    "guard_source_commit": "a5cc433598b3e61388bd85a9ff2442ff88cc9010",
+    "predecessor_source_commit": "f2c8b4520fc68d1c95a043a3b638fc9539bf48c2",
+    "predecessor_GRT_source_commit": "6493269c0002920837ba9ac308b0ec7199945942",
+    "native_topology_audit": {
+      "passed": true,
+      "original_cells": 174140,
+      "final_cells": 174141,
+      "original_pins_checked": 967132,
+      "boundary_ports_checked": 523,
+      "redirected_input_loads": 1,
+      "added_buffer": "rv32_ready_hold_guard22839",
+      "master": "BUFx2_ASAP7_75t_R",
+      "all_other_cells_masters_pins_ports_unchanged": true
+    },
+    "predecessor_timing_passed": false,
+    "predecessor_analysis_sha256": "4d5390194dc6baa34b60ae9b2357d346b4ca25cd3c6f895b14a8f29f66f068b1",
+    "whole_route_overflow": [
+      0,
+      0,
+      0
+    ],
+    "antenna_net_pin_violations": [
+      0,
+      0
+    ]
+  },
+  "B_physical": {
+    "scope": "tested global-route timing trials only; routing review and formal measurement still required",
+    "analysis_report_sha256": "772b40a5aea31483b80a5357e387678d070c97df687a52cdc1bf56703d5467b8",
+    "implementation_report_sha256": "a9294a7e02cdb86e63a065cc5e3a127eb2fdeb8661dccdf65444d15279e3da69",
+    "checker_sha256": "170a5abc90b2f6dad76d2fa0a81a5b6601b897865862b867d784e888fc1048b5",
+    "records": [
+      {
+        "corner": "TT",
+        "standard_cell_area_um2": 21309.821820015095,
+        "standard_cell_count": 171538,
+        "register_count": 18131,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": 2898.293616694632,
+            "hold_slack_ps": 39.488357186504025,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 2998.293625368249,
+            "hold_slack_ps": 39.488357186504025,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9700,
+            "setup_slack_ps": 3098.293634041867,
+            "hold_slack_ps": 39.488357186504025,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 3398.293660062719,
+            "hold_slack_ps": 39.488357186504025,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      },
+      {
+        "corner": "SS",
+        "standard_cell_area_um2": 21309.821820015095,
+        "standard_cell_count": 171538,
+        "register_count": 18131,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": -45.953463440485756,
+            "hold_slack_ps": 71.21075979587509,
+            "problems": [
+              "setup violation"
+            ],
+            "passed": false
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 54.04654523313166,
+            "hold_slack_ps": 71.21075979587509,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9700,
+            "setup_slack_ps": 154.04655390674907,
+            "hold_slack_ps": 71.21075979587509,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 454.04657992760133,
+            "hold_slack_ps": 71.21075979587509,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      },
+      {
+        "corner": "FF",
+        "standard_cell_area_um2": 21309.821820015095,
+        "standard_cell_count": 171538,
+        "register_count": 18131,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": 4389.066905248969,
+            "hold_slack_ps": 17.279566735462907,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 4489.066913922587,
+            "hold_slack_ps": 17.279566735462907,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9700,
+            "setup_slack_ps": 4589.066922596205,
+            "hold_slack_ps": 17.279566735462907,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 4889.066948617056,
+            "hold_slack_ps": 17.279566735462907,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      }
+    ],
+    "qualified_periods_ps": [
+      9600,
+      9700,
+      10000
+    ],
+    "smallest_tested_passing_period_ps": 9600,
+    "standard_cell_area_um2": 21309.821820015095,
+    "passed": true,
+    "variant": "B",
+    "guard_source_commit": "a5cc433598b3e61388bd85a9ff2442ff88cc9010",
+    "predecessor_source_commit": "f2c8b4520fc68d1c95a043a3b638fc9539bf48c2",
+    "predecessor_GRT_source_commit": "6493269c0002920837ba9ac308b0ec7199945942",
+    "native_topology_audit": {
+      "passed": true,
+      "original_cells": 171537,
+      "final_cells": 171538,
+      "original_pins_checked": 948537,
+      "boundary_ports_checked": 523,
+      "redirected_input_loads": 1,
+      "added_buffer": "rv32_ready_hold_guard22320",
+      "master": "BUFx2_ASAP7_75t_R",
+      "all_other_cells_masters_pins_ports_unchanged": true
+    },
+    "predecessor_timing_passed": true,
+    "predecessor_analysis_sha256": "19b0008341a559fcc50a710132264974ec8df4822618707ac906743bb1072139",
+    "whole_route_overflow": [
+      0,
+      0,
+      0
+    ],
+    "antenna_net_pin_violations": [
+      0,
+      0
+    ]
+  },
+  "measurement": {
+    "passed": true,
+    "comparison_point": "common-clock",
+    "period_ps": 10000,
+    "memory_ps": 10000,
+    "measurement_summary_sha256": "122dbd4bf430e1ef8f2e87c8f32705313307097308d3dec4279e54161c2392da",
+    "functional_provenance": {
+      "validator_sha256": "7fb6e823b208ddeacc17769b4a573a8bb5755ae5465d80da695b1cb1a3ca0394",
+      "build_summary_sha256": "1100da367ad9990009a0e5110b02dbb0a6a7bfe07e82841094a196b27e3aa79c",
+      "qualification_summary_sha256": "f7801e7130612bec403dfa12b8d72fa39ac46896d90139e145ea7742d3defd0d",
+      "normal_simulator_sha256": "359ea89735e630a3c1f2fcd7795ec9598f35d6fb4e9a8b0f448ba3f6ee2c1144",
+      "assert_simulator_sha256": "da70e3bd5c695a9d4bea54950746537092a2ffdf69d10367c56a1f45a1dfc860",
+      "directed_cases": 18,
+      "spike_cases": 18,
+      "interface_cases": 48,
+      "fixed_time_controls": 58,
+      "finite_fma_values": 3400,
+      "passed": true
+    },
+    "per_pc_work_matches": true,
+    "numerical_values_checked": 3629,
+    "embench_time_geomean_speedup": 1.029458926609211,
+    "fp32_time_geomean_speedup": 1.0095989895859971,
+    "fp32_subgroup_speedup": {
+      "dsp": 1.013839324971106,
+      "matrix_ml": 1.005376389204587
+    },
+    "records": [
+      {
+        "family": "fp32",
+        "name": "fir",
+        "group": "dsp",
+        "baseline_cycles": 74311,
+        "candidate_cycles": 74303,
+        "baseline_time_ps": 743110000,
+        "candidate_time_ps": 743030000,
+        "time_speedup": 1.0001076672543505
+      },
+      {
+        "family": "fp32",
+        "name": "iir",
+        "group": "dsp",
+        "baseline_cycles": 13523,
+        "candidate_cycles": 12499,
+        "baseline_time_ps": 135230000,
+        "candidate_time_ps": 124990000,
+        "time_speedup": 1.08192655412433
+      },
+      {
+        "family": "fp32",
+        "name": "fft",
+        "group": "dsp",
+        "baseline_cycles": 40867,
+        "candidate_cycles": 36722,
+        "baseline_time_ps": 408670000,
+        "candidate_time_ps": 367220000,
+        "time_speedup": 1.1128751157344372
+      },
+      {
+        "family": "fp32",
+        "name": "pid",
+        "group": "dsp",
+        "baseline_cycles": 7248,
+        "candidate_cycles": 8261,
+        "baseline_time_ps": 72480000,
+        "candidate_time_ps": 82610000,
+        "time_speedup": 0.8773756203849413
+      },
+      {
+        "family": "fp32",
+        "name": "gemm",
+        "group": "matrix_ml",
+        "baseline_cycles": 133275,
+        "candidate_cycles": 133870,
+        "baseline_time_ps": 1332750000,
+        "candidate_time_ps": 1338700000,
+        "time_speedup": 0.9955553895570329
+      },
+      {
+        "family": "fp32",
+        "name": "bicg",
+        "group": "matrix_ml",
+        "baseline_cycles": 23927,
+        "candidate_cycles": 23720,
+        "baseline_time_ps": 239270000,
+        "candidate_time_ps": 237200000,
+        "time_speedup": 1.0087268128161888
+      },
+      {
+        "family": "fp32",
+        "name": "cholesky",
+        "group": "matrix_ml",
+        "baseline_cycles": 194161,
+        "candidate_cycles": 190887,
+        "baseline_time_ps": 1941610000,
+        "candidate_time_ps": 1908870000,
+        "time_speedup": 1.017151508484077
+      },
+      {
+        "family": "fp32",
+        "name": "svm",
+        "group": "matrix_ml",
+        "baseline_cycles": 43392,
+        "candidate_cycles": 43383,
+        "baseline_time_ps": 433920000,
+        "candidate_time_ps": 433830000,
+        "time_speedup": 1.0002074545328816
+      },
+      {
+        "family": "embench",
+        "name": "aha-mont64",
+        "group": null,
+        "baseline_cycles": 5356670,
+        "candidate_cycles": 5359621,
+        "baseline_time_ps": 53566700000,
+        "candidate_time_ps": 53596210000,
+        "time_speedup": 0.9994494013662534
+      },
+      {
+        "family": "embench",
+        "name": "crc32",
+        "group": null,
+        "baseline_cycles": 5402220,
+        "candidate_cycles": 5402210,
+        "baseline_time_ps": 54022200000,
+        "candidate_time_ps": 54022100000,
+        "time_speedup": 1.0000018510942743
+      },
+      {
+        "family": "embench",
+        "name": "cubic",
+        "group": null,
+        "baseline_cycles": 14490894,
+        "candidate_cycles": 14025779,
+        "baseline_time_ps": 144908940000,
+        "candidate_time_ps": 140257790000,
+        "time_speedup": 1.0331614379493645
+      },
+      {
+        "family": "embench",
+        "name": "edn",
+        "group": null,
+        "baseline_cycles": 4754496,
+        "candidate_cycles": 4723764,
+        "baseline_time_ps": 47544960000,
+        "candidate_time_ps": 47237640000,
+        "time_speedup": 1.0065058288263342
+      },
+      {
+        "family": "embench",
+        "name": "huffbench",
+        "group": null,
+        "baseline_cycles": 3377028,
+        "candidate_cycles": 3217162,
+        "baseline_time_ps": 33770280000,
+        "candidate_time_ps": 32171620000,
+        "time_speedup": 1.0496916226164552
+      },
+      {
+        "family": "embench",
+        "name": "matmult-int",
+        "group": null,
+        "baseline_cycles": 4193163,
+        "candidate_cycles": 4138048,
+        "baseline_time_ps": 41931630000,
+        "candidate_time_ps": 41380480000,
+        "time_speedup": 1.0133190818472864
+      },
+      {
+        "family": "embench",
+        "name": "minver",
+        "group": null,
+        "baseline_cycles": 878777,
+        "candidate_cycles": 843225,
+        "baseline_time_ps": 8787770000,
+        "candidate_time_ps": 8432250000,
+        "time_speedup": 1.0421619377983338
+      },
+      {
+        "family": "embench",
+        "name": "nbody",
+        "group": null,
+        "baseline_cycles": 5893151,
+        "candidate_cycles": 5823850,
+        "baseline_time_ps": 58931510000,
+        "candidate_time_ps": 58238500000,
+        "time_speedup": 1.0118995166427707
+      },
+      {
+        "family": "embench",
+        "name": "nettle-aes",
+        "group": null,
+        "baseline_cycles": 5203513,
+        "candidate_cycles": 5170824,
+        "baseline_time_ps": 52035130000,
+        "candidate_time_ps": 51708240000,
+        "time_speedup": 1.0063218164068242
+      },
+      {
+        "family": "embench",
+        "name": "nettle-sha256",
+        "group": null,
+        "baseline_cycles": 4307562,
+        "candidate_cycles": 4247681,
+        "baseline_time_ps": 43075620000,
+        "candidate_time_ps": 42476810000,
+        "time_speedup": 1.014097339230512
+      },
+      {
+        "family": "embench",
+        "name": "nsichneu",
+        "group": null,
+        "baseline_cycles": 7298679,
+        "candidate_cycles": 7302368,
+        "baseline_time_ps": 72986790000,
+        "candidate_time_ps": 73023680000,
+        "time_speedup": 0.9994948214058782
+      },
+      {
+        "family": "embench",
+        "name": "picojpeg",
+        "group": null,
+        "baseline_cycles": 5300988,
+        "candidate_cycles": 5105271,
+        "baseline_time_ps": 53009880000,
+        "candidate_time_ps": 51052710000,
+        "time_speedup": 1.0383362606999706
+      },
+      {
+        "family": "embench",
+        "name": "qrduino",
+        "group": null,
+        "baseline_cycles": 4524180,
+        "candidate_cycles": 4548795,
+        "baseline_time_ps": 45241800000,
+        "candidate_time_ps": 45487950000,
+        "time_speedup": 0.9945886767814334
+      },
+      {
+        "family": "embench",
+        "name": "sglib-combined",
+        "group": null,
+        "baseline_cycles": 4526268,
+        "candidate_cycles": 4351929,
+        "baseline_time_ps": 45262680000,
+        "candidate_time_ps": 43519290000,
+        "time_speedup": 1.0400601664227518
+      },
+      {
+        "family": "embench",
+        "name": "slre",
+        "group": null,
+        "baseline_cycles": 4902163,
+        "candidate_cycles": 4580842,
+        "baseline_time_ps": 49021630000,
+        "candidate_time_ps": 45808420000,
+        "time_speedup": 1.0701445280147186
+      },
+      {
+        "family": "embench",
+        "name": "st",
+        "group": null,
+        "baseline_cycles": 7165107,
+        "candidate_cycles": 7077473,
+        "baseline_time_ps": 71651070000,
+        "candidate_time_ps": 70774730000,
+        "time_speedup": 1.0123821030472318
+      },
+      {
+        "family": "embench",
+        "name": "statemate",
+        "group": null,
+        "baseline_cycles": 3368567,
+        "candidate_cycles": 2826412,
+        "baseline_time_ps": 33685670000,
+        "candidate_time_ps": 28264120000,
+        "time_speedup": 1.1918173995864723
+      },
+      {
+        "family": "embench",
+        "name": "ud",
+        "group": null,
+        "baseline_cycles": 2775897,
+        "candidate_cycles": 2725595,
+        "baseline_time_ps": 27758970000,
+        "candidate_time_ps": 27255950000,
+        "time_speedup": 1.0184554198257627
+      },
+      {
+        "family": "embench",
+        "name": "wikisort",
+        "group": null,
+        "baseline_cycles": 2173042,
+        "candidate_cycles": 2102321,
+        "baseline_time_ps": 21730420000,
+        "candidate_time_ps": 21023210000,
+        "time_speedup": 1.0336394870241035
+      }
+    ]
+  },
+  "original_area_ratio": 0.9650698589619994,
+  "same_flow_area_ratio": 0.9890616974673414,
+  "planning_targets": {
+    "embench_geomean_ge_1_20": false,
+    "fp32_geomean_ge_1_20": false,
+    "original_area_ratio_le_1_10": true,
+    "same_flow_area_ratio_le_1_10": true
+  },
+  "all_planning_targets_met": false
+}

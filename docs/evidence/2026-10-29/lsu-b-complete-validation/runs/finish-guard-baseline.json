@@ -1,0 +1,28 @@
+{
+  "variant": "baseline",
+  "state": "finished",
+  "started_utc": "2026-10-29T01:21:54.790834+00:00",
+  "complete": true,
+  "command": [
+    "python3",
+    "experiments/lsu-b-validation-v2/analyze_guard.py",
+    "--attempt",
+    "/workspace/rv32_000/build/experiments/lsu-b-validation-v2/physical-baseline-v4/guard",
+    "--container",
+    "rv32-lsu-b-validation-v2",
+    "--adder-audit",
+    "build/baseline-setup/asap7-adder-qualification-v2/summary.json",
+    "--label",
+    "independent-boundary-v1",
+    "--periods-ps",
+    "9400",
+    "9500",
+    "9600",
+    "10000"
+  ],
+  "returncode": 0,
+  "log_sha256": "d50b591698712bfb1cfe04229db7e1a2b8b78d8d4e559ec3ca37f6642a010765",
+  "closure_review_sha256": "69a9e35406e76e0d73355f37f9a99b90f5340673e310995af9e624527b01a452",
+  "timing_passed": true,
+  "finished_utc": "2026-10-29T01:31:45.364094+00:00"
+}

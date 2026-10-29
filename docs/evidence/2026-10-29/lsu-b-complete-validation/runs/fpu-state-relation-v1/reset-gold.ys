@@ -1,0 +1,15 @@
+read_liberty -ignore_miss_func /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -ignore_miss_func /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -ignore_miss_func /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -ignore_miss_func /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -ignore_miss_func /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_json /workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/models/reset-gold.json
+setattr -mod -unset keep_hierarchy
+hierarchy -check -top rv32_ooo_fp_execute
+flatten
+delete =A:whitebox =A:blackbox
+hierarchy -check -top rv32_ooo_fp_execute
+synth -top rv32_ooo_fp_execute -noabc -extra-map /orfs-source/flow/platforms/common/lcu_kogge_stone.v
+check -assert
+write_json /workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/reset-gold-lowered.json
+write_blif -noalias /workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/reset-gold.blif

@@ -1,0 +1,116 @@
+OpenROAD 26Q1-2900-gdf79404cd8 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 2 thread(s).
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v4/guard/results/asap7/rv32_post_lsu_v1/base/5_0_grt_input.odb
+read_sdc /workspace/build/experiments/lsu-b-validation-v2/physical-B-v4/guard/results/asap7/rv32_post_lsu_v1/base/5_0_grt_input.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+RV32_GUARD_INSERTED name=rv32_ready_hold_guard22320 master=BUFx2_ASAP7_75t_R
+[INFO DPL-0005] Max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+Movements Summary
+---------------------------------------
+Total cells:                  167012
+Diamond Move Success:         167012 (100.00%)
+Diamond Move Failure:              0
+Rip-up and replace Success:        0 (  0.00% of diamond failures)
+Rip-up and replace Failure:        0
+Total Placement Failures:          0
+---------------------------------------
+Placement Analysis
+---------------------------------
+total displacement          2.2 u
+average displacement        0.0 u
+max displacement            0.3 u
+original HPWL          828970.8 u
+legalized HPWL         828970.8 u
+delta HPWL                    0 %
+
+[INFO GRT-0009] rerouting 8 nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 2
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Overflow
+---------------------------------------------------------------------------------------
+M1                   0             0            0.00%             0 /  0 /  0
+M2             1147148            12            0.00%             0 /  0 /  0
+M3             1492745             6            0.00%             0 /  0 /  0
+M4             1143284             1            0.00%             0 /  0 /  0
+M5             1101788             0            0.00%             0 /  0 /  0
+M6              699621             0            0.00%             0 /  0 /  0
+M7              793155             0            0.00%             0 /  0 /  0
+---------------------------------------------------------------------------------------
+Total          6377741            19            0.00%             0 /  0 /  0
+
+[INFO GRT-0018] Total wirelength: 1384693 um
+[INFO GRT-0014] Routed nets: 166244
+RV32_GUARD_FULL_ROUTE_BEGIN
+[INFO GRT-0020] Min routing layer: M2
+[INFO GRT-0021] Max routing layer: M7
+[INFO GRT-0022] Global adjustment: 0%
+[INFO GRT-0023] Grid origin: (0, 0)
+[INFO GRT-0088] Layer M1      Track-Pitch = 0.0360  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M2      Track-Pitch = 0.0390  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M3      Track-Pitch = 0.0360  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M4      Track-Pitch = 0.0480  line-2-Via Pitch: 0.0480
+[INFO GRT-0088] Layer M5      Track-Pitch = 0.0480  line-2-Via Pitch: 0.0480
+[INFO GRT-0088] Layer M6      Track-Pitch = 0.0640  line-2-Via Pitch: 0.0640
+[INFO GRT-0088] Layer M7      Track-Pitch = 0.0640  line-2-Via Pitch: 0.0640
+[INFO GRT-0003] Macros: 0
+[INFO GRT-0004] Blockages: 54393
+[INFO GRT-0019] Found 1195 clock nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 107
+
+[INFO GRT-0053] Routing resources analysis:
+          Routing      Original      Derated      Resource
+Layer     Direction    Resources     Resources    Reduction (%)
+---------------------------------------------------------------
+M1         Vertical            0             0          0.00%
+M2         Horizontal    1589749       1147148          27.84%
+M3         Vertical      2009520       1492745          25.72%
+M4         Horizontal    1539803       1143284          25.75%
+M5         Vertical      1485723       1101788          25.84%
+M6         Horizontal    1034409        699621          32.37%
+M7         Vertical      1177209        793155          32.62%
+---------------------------------------------------------------
+
+[INFO GRT-0101] Running extra iterations to remove overflow.
+[INFO GRT-0102] Start extra iteration 1/30
+[INFO GRT-0102] Start extra iteration 2/30
+[INFO GRT-0197] Via related to pin nodes: 1135478
+[INFO GRT-0198] Via related Steiner nodes: 52688
+[INFO GRT-0199] Via filling finished.
+[INFO GRT-0111] Final number of vias: 1522509
+[INFO GRT-0112] Final usage 3D: 6425814
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Overflow
+---------------------------------------------------------------------------------------
+M1                   0             0            0.00%             0 /  0 /  0
+M2             1147148        663615           57.85%             0 /  0 /  0
+M3             1492745        746542           50.01%             0 /  0 /  0
+M4             1143284        279479           24.45%             0 /  0 /  0
+M5             1101788        131037           11.89%             0 /  0 /  0
+M6              699621         33851            4.84%             0 /  0 /  0
+M7              793155          3763            0.47%             0 /  0 /  0
+---------------------------------------------------------------------------------------
+Total          6377741       1858287           29.14%             0 /  0 /  0
+
+[INFO GRT-0018] Total wirelength: 1384872 um
+[INFO GRT-0014] Routed nets: 166244
+[INFO GRT-0303] Global routing runtime = 00:00:26
+RV32_GUARD_FULL_ROUTE_COMPLETE
+[INFO ANT-0002] Found 0 net violations.
+[INFO ANT-0001] Found 0 pin violations.
+RV32_GUARD_CONNECTIVITY_PASS cells=171537 pins=948537 ports=523
+write_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v4/guard/results/asap7/rv32_post_lsu_v1/base/5_1_grt.odb
+write_sdc -no_timestamp /workspace/build/experiments/lsu-b-validation-v2/physical-B-v4/guard/results/asap7/rv32_post_lsu_v1/base/5_1_grt.sdc
+RV32_GUARD_COMPLETE

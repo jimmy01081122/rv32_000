@@ -1,0 +1,696 @@
+{
+  "scope": "models only; sequential equivalence requires both reset-to-zero obligations and unrestricted step/output CEC",
+  "initial_condition": "at least one synchronous reset rising edge before observable comparison",
+  "original_state_bits": 156,
+  "mapped_state_bits": 100,
+  "library_transition": "positive CLK; QN(next) = NOT D",
+  "state_names": [
+    "cmp_data[100]$_SDFFE_PP0P_",
+    "cmp_data[101]$_SDFFE_PP0P_",
+    "cmp_data[102]$_SDFFE_PP0P_",
+    "cmp_data[103]$_SDFFE_PP0P_",
+    "cmp_data[104]$_SDFFE_PP0P_",
+    "cmp_data[105]$_SDFFE_PP0P_",
+    "cmp_data[106]$_SDFFE_PP0P_",
+    "cmp_data[107]$_SDFFE_PP0P_",
+    "cmp_data[108]$_SDFFE_PP0P_",
+    "cmp_data[109]$_SDFFE_PP0P_",
+    "cmp_data[110]$_SDFFE_PP0P_",
+    "cmp_data[111]$_SDFFE_PP0P_",
+    "cmp_data[112]$_SDFFE_PP0P_",
+    "cmp_data[113]$_SDFFE_PP0P_",
+    "cmp_data[114]$_SDFFE_PP0P_",
+    "cmp_data[115]$_SDFFE_PP0P_",
+    "cmp_data[116]$_SDFFE_PP0P_",
+    "cmp_data[117]$_SDFFE_PP0P_",
+    "cmp_data[118]$_SDFFE_PP0P_",
+    "cmp_data[119]$_SDFFE_PP0P_",
+    "cmp_data[120]$_SDFFE_PP0P_",
+    "cmp_data[121]$_SDFFE_PP0P_",
+    "cmp_data[122]$_SDFFE_PP0P_",
+    "cmp_data[123]$_SDFFE_PP0P_",
+    "cmp_data[124]$_SDFFE_PP0P_",
+    "cmp_data[125]$_SDFFE_PP0P_",
+    "cmp_data[126]$_SDFFE_PP0P_",
+    "cmp_data[127]$_SDFFE_PP0P_",
+    "cmp_data[128]$_SDFFE_PP0P_",
+    "cmp_data[129]$_SDFFE_PP0P_",
+    "cmp_data[130]$_SDFFE_PP0P_",
+    "cmp_data[131]$_SDFFE_PP0P_",
+    "cmp_data[132]$_SDFFE_PP0P_",
+    "cmp_data[133]$_SDFFE_PP0P_",
+    "cmp_data[134]$_SDFFE_PP0P_",
+    "cmp_data[135]$_SDFFE_PP0P_",
+    "cmp_data[136]$_SDFFE_PP0P_",
+    "cmp_data[137]$_SDFFE_PP0P_",
+    "cmp_data[138]$_SDFFE_PP0P_",
+    "cmp_data[139]$_SDFFE_PP0P_",
+    "cmp_data[140]$_SDFFE_PP0P_",
+    "cmp_data[141]$_SDFFE_PP0P_",
+    "cmp_data[142]$_SDFFE_PP0P_",
+    "cmp_data[143]$_SDFFE_PP0P_",
+    "cmp_data[144]$_SDFFE_PP0P_",
+    "cmp_data[145]$_SDFFE_PP0P_",
+    "cmp_data[146]$_SDFFE_PP0P_",
+    "cmp_data[147]$_SDFFE_PP0P_",
+    "cmp_data[148]$_SDFFE_PP0P_",
+    "cmp_data[149]$_SDFFE_PP0P_",
+    "cmp_data[150]$_SDFFE_PP0P_",
+    "cmp_data[151]$_SDFFE_PP0P_",
+    "cmp_data[152]$_SDFFE_PP0P_",
+    "cmp_data[153]$_SDFFE_PP0P_",
+    "cmp_data[53]$_SDFFE_PP0P_",
+    "cmp_data[54]$_SDFFE_PP0P_",
+    "cmp_data[55]$_SDFFE_PP0P_",
+    "cmp_data[57]$_SDFFE_PP0P_",
+    "cmp_data[58]$_SDFFE_PP0P_",
+    "cmp_data[59]$_SDFFE_PP0P_",
+    "cmp_data[60]$_SDFFE_PP0P_",
+    "cmp_data[61]$_SDFFE_PP0P_",
+    "cmp_data[62]$_SDFFE_PP0P_",
+    "cmp_data[63]$_SDFFE_PP0P_",
+    "cmp_data[64]$_SDFFE_PP0P_",
+    "cmp_data[65]$_SDFFE_PP0P_",
+    "cmp_data[66]$_SDFFE_PP0P_",
+    "cmp_data[67]$_SDFFE_PP0P_",
+    "cmp_data[68]$_SDFFE_PP0P_",
+    "cmp_data[69]$_SDFFE_PP0P_",
+    "cmp_data[70]$_SDFFE_PP0P_",
+    "cmp_data[71]$_SDFFE_PP0P_",
+    "cmp_data[72]$_SDFFE_PP0P_",
+    "cmp_data[73]$_SDFFE_PP0P_",
+    "cmp_data[74]$_SDFFE_PP0P_",
+    "cmp_data[75]$_SDFFE_PP0P_",
+    "cmp_data[76]$_SDFFE_PP0P_",
+    "cmp_data[77]$_SDFFE_PP0P_",
+    "cmp_data[78]$_SDFFE_PP0P_",
+    "cmp_data[79]$_SDFFE_PP0P_",
+    "cmp_data[80]$_SDFFE_PP0P_",
+    "cmp_data[81]$_SDFFE_PP0P_",
+    "cmp_data[82]$_SDFFE_PP0P_",
+    "cmp_data[83]$_SDFFE_PP0P_",
+    "cmp_data[84]$_SDFFE_PP0P_",
+    "cmp_data[85]$_SDFFE_PP0P_",
+    "cmp_data[86]$_SDFFE_PP0P_",
+    "cmp_data[87]$_SDFFE_PP0P_",
+    "cmp_data[88]$_SDFFE_PP0P_",
+    "cmp_data[89]$_SDFFE_PP0P_",
+    "cmp_data[90]$_SDFFE_PP0P_",
+    "cmp_data[91]$_SDFFE_PP0P_",
+    "cmp_data[92]$_SDFFE_PP0P_",
+    "cmp_data[93]$_SDFFE_PP0P_",
+    "cmp_data[94]$_SDFFE_PP0P_",
+    "cmp_data[95]$_SDFFE_PP0P_",
+    "cmp_data[96]$_SDFFE_PP0P_",
+    "cmp_data[97]$_SDFFE_PP0P_",
+    "cmp_data[98]$_SDFFE_PP0P_",
+    "cmp_data[99]$_SDFFE_PP0P_"
+  ],
+  "observation_order": "cmp_data[0:154], cmp_valid",
+  "relation": [
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "constant": 0
+    },
+    {
+      "state": 54,
+      "invert": 1
+    },
+    {
+      "state": 55,
+      "invert": 1
+    },
+    {
+      "state": 56,
+      "invert": 1
+    },
+    {
+      "constant": 0
+    },
+    {
+      "state": 57,
+      "invert": 1
+    },
+    {
+      "state": 58,
+      "invert": 1
+    },
+    {
+      "state": 59,
+      "invert": 1
+    },
+    {
+      "state": 60,
+      "invert": 1
+    },
+    {
+      "state": 61,
+      "invert": 1
+    },
+    {
+      "state": 62,
+      "invert": 1
+    },
+    {
+      "state": 63,
+      "invert": 1
+    },
+    {
+      "state": 64,
+      "invert": 1
+    },
+    {
+      "state": 65,
+      "invert": 1
+    },
+    {
+      "state": 66,
+      "invert": 1
+    },
+    {
+      "state": 67,
+      "invert": 1
+    },
+    {
+      "state": 68,
+      "invert": 1
+    },
+    {
+      "state": 69,
+      "invert": 1
+    },
+    {
+      "state": 70,
+      "invert": 1
+    },
+    {
+      "state": 71,
+      "invert": 1
+    },
+    {
+      "state": 72,
+      "invert": 1
+    },
+    {
+      "state": 73,
+      "invert": 1
+    },
+    {
+      "state": 74,
+      "invert": 1
+    },
+    {
+      "state": 75,
+      "invert": 1
+    },
+    {
+      "state": 76,
+      "invert": 1
+    },
+    {
+      "state": 77,
+      "invert": 1
+    },
+    {
+      "state": 78,
+      "invert": 1
+    },
+    {
+      "state": 79,
+      "invert": 1
+    },
+    {
+      "state": 80,
+      "invert": 1
+    },
+    {
+      "state": 81,
+      "invert": 1
+    },
+    {
+      "state": 82,
+      "invert": 1
+    },
+    {
+      "state": 83,
+      "invert": 1
+    },
+    {
+      "state": 84,
+      "invert": 1
+    },
+    {
+      "state": 85,
+      "invert": 1
+    },
+    {
+      "state": 86,
+      "invert": 1
+    },
+    {
+      "state": 87,
+      "invert": 1
+    },
+    {
+      "state": 88,
+      "invert": 1
+    },
+    {
+      "state": 89,
+      "invert": 1
+    },
+    {
+      "state": 90,
+      "invert": 1
+    },
+    {
+      "state": 91,
+      "invert": 1
+    },
+    {
+      "state": 92,
+      "invert": 1
+    },
+    {
+      "state": 93,
+      "invert": 1
+    },
+    {
+      "state": 94,
+      "invert": 1
+    },
+    {
+      "state": 95,
+      "invert": 1
+    },
+    {
+      "state": 96,
+      "invert": 1
+    },
+    {
+      "state": 97,
+      "invert": 1
+    },
+    {
+      "state": 98,
+      "invert": 1
+    },
+    {
+      "state": 99,
+      "invert": 1
+    },
+    {
+      "state": 0,
+      "invert": 1
+    },
+    {
+      "state": 1,
+      "invert": 1
+    },
+    {
+      "state": 2,
+      "invert": 1
+    },
+    {
+      "state": 3,
+      "invert": 1
+    },
+    {
+      "state": 4,
+      "invert": 1
+    },
+    {
+      "state": 5,
+      "invert": 1
+    },
+    {
+      "state": 6,
+      "invert": 1
+    },
+    {
+      "state": 7,
+      "invert": 1
+    },
+    {
+      "state": 8,
+      "invert": 1
+    },
+    {
+      "state": 9,
+      "invert": 1
+    },
+    {
+      "state": 10,
+      "invert": 1
+    },
+    {
+      "state": 11,
+      "invert": 1
+    },
+    {
+      "state": 12,
+      "invert": 1
+    },
+    {
+      "state": 13,
+      "invert": 1
+    },
+    {
+      "state": 14,
+      "invert": 1
+    },
+    {
+      "state": 15,
+      "invert": 1
+    },
+    {
+      "state": 16,
+      "invert": 1
+    },
+    {
+      "state": 17,
+      "invert": 1
+    },
+    {
+      "state": 18,
+      "invert": 1
+    },
+    {
+      "state": 19,
+      "invert": 1
+    },
+    {
+      "state": 20,
+      "invert": 1
+    },
+    {
+      "state": 21,
+      "invert": 1
+    },
+    {
+      "state": 22,
+      "invert": 1
+    },
+    {
+      "state": 23,
+      "invert": 1
+    },
+    {
+      "state": 24,
+      "invert": 1
+    },
+    {
+      "state": 25,
+      "invert": 1
+    },
+    {
+      "state": 26,
+      "invert": 1
+    },
+    {
+      "state": 27,
+      "invert": 1
+    },
+    {
+      "state": 28,
+      "invert": 1
+    },
+    {
+      "state": 29,
+      "invert": 1
+    },
+    {
+      "state": 30,
+      "invert": 1
+    },
+    {
+      "state": 31,
+      "invert": 1
+    },
+    {
+      "state": 32,
+      "invert": 1
+    },
+    {
+      "state": 33,
+      "invert": 1
+    },
+    {
+      "state": 34,
+      "invert": 1
+    },
+    {
+      "state": 35,
+      "invert": 1
+    },
+    {
+      "state": 36,
+      "invert": 1
+    },
+    {
+      "state": 37,
+      "invert": 1
+    },
+    {
+      "state": 38,
+      "invert": 1
+    },
+    {
+      "state": 39,
+      "invert": 1
+    },
+    {
+      "state": 40,
+      "invert": 1
+    },
+    {
+      "state": 41,
+      "invert": 1
+    },
+    {
+      "state": 42,
+      "invert": 1
+    },
+    {
+      "state": 43,
+      "invert": 1
+    },
+    {
+      "state": 44,
+      "invert": 1
+    },
+    {
+      "state": 45,
+      "invert": 1
+    },
+    {
+      "state": 46,
+      "invert": 1
+    },
+    {
+      "state": 47,
+      "invert": 1
+    },
+    {
+      "state": 48,
+      "invert": 1
+    },
+    {
+      "state": 49,
+      "invert": 1
+    },
+    {
+      "state": 50,
+      "invert": 1
+    },
+    {
+      "state": 51,
+      "invert": 1
+    },
+    {
+      "state": 52,
+      "invert": 1
+    },
+    {
+      "state": 53,
+      "invert": 1
+    },
+    {
+      "state": 58,
+      "invert": 1
+    },
+    {
+      "state": 58,
+      "invert": 1
+    }
+  ],
+  "inputs": {
+    "build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/original.json": "0b1e9d1b88011800ec6abd6c09e73626fbec00fe4d457b048b6f715f57721922",
+    "build/experiments/fpu-mapping-v1/shared-unit-v1/results/asap7/rv32_post_lsu_v1/base/fp_mapped.rtlil.json": "0f63f195545b9e9fde79b9829f3b6772d901f01511ef19178b914c0b2663d81d",
+    "build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/cell.json": "b26f8e0d2f38ec1900e375f97d8f6f259d02e7ac396c84a6d85ac66febf8c409"
+  },
+  "models": {
+    "step-gold": "c36a7d6826683b07d09112851bab3cd0365216cf6b051c1098eae2b45a29d7e5",
+    "step-gate": "6bbf171ee596d1b4fac01f20ba8d5239f6da41fccba5a29f5a361ecb05ed8504",
+    "reset-gold": "bea76cb5d3e0bee92fb017cac03054f7e5ac8a9f46be167171c30ec83ac413b7",
+    "reset-gate": "56189ad770d0eb6983434afe7df6bf56f52ae9d226ffb5aac266b9b1c1f7327c",
+    "reset-gold-zero": "7bbf8a6a7dc9cdd4e5cc556c71f5de3190c2d52e50d6f49a3ed4817c49626005",
+    "reset-gate-zero": "0c810aeb142f0bf151ae5dbac1237b7e5020d1fa0dee785e1d3874f1bfdc1efc",
+    "step-mutant": "2a932824ff2b1f86d7848cb95966eac994cbcdb875c7a85d14673821c3d82943"
+  }
+}

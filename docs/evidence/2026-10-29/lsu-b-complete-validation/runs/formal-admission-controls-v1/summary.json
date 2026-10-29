@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "reviewer_sha256": "1890e62dc82fbb7c575e355a8640dfdcaed9d17563d3bb0c7a714d366aebc74f",
+  "positive": {
+    "passed": true,
+    "scope": "complete two-state FPU implementation equivalence after one synchronous reset edge; no arithmetic cutpoints; not IEEE-754 conformance",
+    "original_state_bits": 156,
+    "mapped_state_bits": 100,
+    "obligations": {
+      "reset-gold-proof": true,
+      "reset-gate-proof": true,
+      "step-output-proof": true,
+      "negative-bit-proof": false
+    },
+    "proof_summary_sha256": "474ad1e28ba62b0d990eb0a2cf26c8fbf180bb9c5ba3865f92de1a2bb07f13c6",
+    "frontend_replay_sha256": "d9433c5ad2e91ae76d147a5adb991f6251b8097e475a2c751d7f310c8d2ec6ae",
+    "negative_summary_sha256": "4fae1a7f0d70704acc328f45d479dd1b62b6dd84f704e2fb81d64e24c68ea8be"
+  },
+  "records": [
+    {
+      "control": "failed-formal-status",
+      "rejected": true,
+      "reason": "incomplete FPU proof"
+    },
+    {
+      "control": "changed-RTL-input",
+      "rejected": true,
+      "reason": "formal input changed: /workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/fp-source.v"
+    },
+    {
+      "control": "forged-proof-success",
+      "rejected": true,
+      "reason": "formal native proof marker differs"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "passed": true,
+  "reviewer_sha256": "1890e62dc82fbb7c575e355a8640dfdcaed9d17563d3bb0c7a714d366aebc74f",
+  "positive_review_sha256": "2cc0db4beb8b1a9ca1525ced388d65c977ad5c597bfee1a3879c7ade84b717a4",
+  "records": [
+    {
+      "control": "wrong-core-variant",
+      "rejected": true,
+      "reason": "v2 physical variant/contract mismatch"
+    },
+    {
+      "control": "unmatched-repair-policy",
+      "rejected": true,
+      "reason": "v2 ECO construction differs"
+    },
+    {
+      "control": "route-overflow",
+      "rejected": true,
+      "reason": "nonzero global-route overflow"
+    },
+    {
+      "control": "negative-hold-all-clocks",
+      "rejected": true,
+      "reason": "no period passes all TT/SS/FF checks"
+    },
+    {
+      "control": "electrical-violation-all-clocks",
+      "rejected": true,
+      "reason": "no period passes all TT/SS/FF checks"
+    },
+    {
+      "control": "raw-report-digest-changed",
+      "rejected": true,
+      "reason": "corner artifact changed: units.rpt"
+    }
+  ]
+}

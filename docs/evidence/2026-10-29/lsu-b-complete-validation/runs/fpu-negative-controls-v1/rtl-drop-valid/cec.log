@@ -1,0 +1,6 @@
+======== ABC command line "cec /workspace/build/experiments/lsu-b-validation-v2/fpu-negative-controls-v1/rtl-drop-valid/mutant.blif /workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/step-gate.blif"
+Networks are NOT EQUIVALENT.  Time =     0.80 sec
+INPUT: clk = 1'h0, cmp_ready = 1'h1, core_state = 3'h0, flush_valid = 1'h0, issue_req = 401'h0000000000000000000000000000003C000000000000000000000000000002800000000000000006FB4B38CDBF3E956984B10, issue_valid = 1'h1, proof_state = 100'hE0000000003C000081F7FFFFF, rst = 1'h0.  OUTPUT: cmp_data = 155'h7FFFF7E08000001FFFFFFFFFC00000000000000, cmp_valid = 1'h1, issue_ready = 1'h1, next_observed = 156'h4000101AD309620000000000420000000000000 (mutant), cmp_data = 155'h7FFFF7E08000001FFFFFFFFFC00000000000000, cmp_valid = 1'h1, issue_ready = 1'h1, next_observed = 156'hC000101AD309620000000000420000000000000 (step-gate).
+Verification failed for at least 1 outputs:  next_observed[155]
+Output next_observed[155]: Value in Network1 = 0. Value in Network2 = 1.
+Input pattern:  rst=0 flush_valid=0 proof_state[58]=0 cmp_ready=1

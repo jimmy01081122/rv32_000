@@ -1,0 +1,9 @@
+START B uniform ready guard
+Traceback (most recent call last):
+  File "/workspace/experiments/lsu-b-validation-v2/ready_guard.py", line 50, in <module>
+    if __name__=='__main__':main()
+  File "/workspace/experiments/lsu-b-validation-v2/ready_guard.py", line 45, in main
+    require(execute(stage/'job.json')==0,'native guard failed; preserve attempt')
+  File "/workspace/experiments/lsu-b-validation-v2/ready_guard.py", line 21, in require
+    if not ok:raise ValueError(message)
+ValueError: native guard failed; preserve attempt

@@ -1,6 +1,6 @@
 # Current project status
 
-Updated 2026-10-27. Initial documentation-cleanup baseline: maintenance commit `1b266ed0b17aaec2dc598e5128fc57ab9edf56bb`;
+Updated 2026-10-30 (Asia/Taipei). Initial documentation-cleanup baseline: maintenance commit `1b266ed0b17aaec2dc598e5128fc57ab9edf56bb`;
 incoming RTL revision: `0d79df58e65c2e1034e40f7f586a463fd8602ff1`.
 The documentation cleanup changes no RTL behavior or executable acceptance thresholds.
 
@@ -15,7 +15,7 @@ TT/SS/FF closure is qualified at global-route research scope. The approved
 functional qualification and complete 27-case measurement at both independently
 qualified operating points. Its [physical evidence](evidence/2026-10-20/lsu-a-physical/README.md) records
 22,162.24152 µm² (1.003674× baseline), actual 9.8 ns SS setup failure and
-9.9/10.0 ns TT/SS/FF passes. The independent [B experiment](LSU_B_REVIEW.md) is now complete: functional/cycle qualification passes, physical timing fails; C remains later.
+9.9/10.0 ns TT/SS/FF passes. The independent [B experiment](LSU_B_COMPLETE_VALIDATION.md) now completes its full research contract after shared FPU mapping and common hold repair: functional, FPU implementation equivalence, same-flow physical qualification and both complete workload points pass. Both performance goals remain unmet; C remains later.
 
 The [A functional milestone](evidence/2026-10-19/lsu-a-functional/README.md) at
 clean `39bc12d` includes 40 positive LSU pin-driven cases and an original-RTL
@@ -41,7 +41,38 @@ All four real-data negative controls now reject; 30 contract/review controls pas
 Both complete operating points pass the strengthened review with unchanged scores.
 The A review changed no CPU RTL or scored simulator/physical inputs. The completed B branch starts at frozen `58a4159`, with only LSU B RTL and explicitly shared tooling. Clean `95ac0dd` passes baseline/B unit 62 each, directed 18/Spike 18/interface 48/fixed-time 58/FMA 3400, all 27 workloads and FP 3629, with matching per-PC work. The common-clock cycle diagnostics are Embench 1.029459× / FP32 1.009599×, DSP 1.013839× / matrix/ML 1.005376×. PID time increases 13.9763%.
 
-B standard-cell area is 21,983.62194 µm² (0.995585×). Native synthesis/backend/ECO complete rc0 with unchanged inputs and zero final route overflow, but independent timing rejects it: SS setup −2282.992ps at 10000 ps, SS setup −82.991ps at 12200 ps and +17.009ps at 12300 ps; FF hold −0.333ps at all tested periods, including 14000 ps. There is no qualified B clock or accepted system-time score. Strict admission rejects the physical proof; a separate complete functional/raw-data review passes. The [B review](LSU_B_REVIEW.md) and [raw archive](evidence/2026-10-21/lsu-b/README.md) retain failures and the mapping/layout limitation. Subsequent [timing diagnosis](LSU_B_TIMING_DIAGNOSIS.md) completes 12 read-only processes: all nine original routed corner results reproduce, and exact connectivity of 534,342 synthesis cells binds the zero-wire probes to the recorded mappings. The unchanged FPU already has a longer B path before placement; FF has two failing LSU tracking endpoints despite positive TT hold margin. The user subsequently approved the [FPU mapping repair](FPU_MAPPING_REPAIR.md): a shared standalone FPU map now repeats exactly and passes ABC transition equivalence, native connectivity review and 116,737 cycles / 233,474 complete-output comparisons. Full RTL formal equivalence remains unproven (timeout); physical requalification and TT-to-FF hold calibration remain open. This B version is not promoted; no CPU RTL, physical acceptance rule or baseline was changed.
+The [B completion review](LSU_B_COMPLETE_VALIDATION.md) admits both fresh 27-case
+runs: 100 MHz scores Embench 1.029459× / FP32 1.009599×; 104.17 MHz (9,600 ps)
+scores 0.748705× / 0.719680×. Each passes 3,629 numerical outputs and per-PC work.
+Fixed 10 ns memory needs two CPU cycles at 9.6 ns, explaining the slower system
+time. B area is 21,309.821820 µm², 0.965070× the frozen baseline and 0.989062×
+the baseline rebuilt in the identical new flow (21,545.492940 µm²). The original
+ratio includes flow changes. Both area comparisons pass; both 1.20× speed goals fail.
+
+Final independent TT/SS/FF qualifies B at 9,600/9,700/10,000 ps and the same-flow
+baseline at 9,500/9,600/10,000 ps. Actual adjacent SS setup failures are B 9,500 ps
+−45.953 ps and baseline 9,400 ps −11.991 ps. FF hold is +17.280/+9.123 ps for
+B/baseline. Full route, placement, antenna and electrical checks pass. Both use
+TT 45% slew / 40 ps hold repair followed by exactly one BUFx2 on dmem_req_ready;
+all original cells/pins/ports remain connected through the proven Y=A buffer.
+The final reviewer passes positive data and rejects all seven real-data negatives.
+
+Complete two-state FPU implementation equivalence after one synchronous reset
+edge now passes: independent reset obligations plus arbitrary related-state/input
+next-state and all-output equivalence, without internal arithmetic cutpoints.
+The original sv2v FPU is the golden implementation; full ISA/IEEE-754 conformance
+is a separate gap. Native frontend replay, actual mutants, definedness and
+proof-to-physical graph binding pass. Prior B functional qualification is reused
+with freshly revalidated source/executable/log hashes; it is not a fresh full
+Spike rerun. Two full DUT workload runs, formal proof and physical work are fresh.
+
+The [original B v1](LSU_B_REVIEW.md) timing failure and [diagnosis](LSU_B_TIMING_DIAGNOSIS.md),
+old EQY timeout, nonconvergent 100 ps hold ECO, failed hold40 baseline and initial
+buffer-name assertion failure remain preserved. The [new raw archive](evidence/2026-10-29/lsu-b-complete-validation/README.md)
+records completed qualifications separately. No CPU RTL or frozen baseline was
+changed during this completion; A has not been rerun in the new physical flow.
+Recommend reviewing B at 100 MHz, retaining the PID regression for joint decision;
+no new baseline, A+B combination or next architecture has been selected.
 
 ## Evidence available
 

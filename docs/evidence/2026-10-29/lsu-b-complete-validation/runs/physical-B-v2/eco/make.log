@@ -1,0 +1,407 @@
+OpenROAD 26Q1-2900-gdf79404cd8 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 2 thread(s).
+mkdir -p /workspace/build/experiments/lsu-b-validation-v2/physical-B-v2/eco/objects/asap7/rv32_post_lsu_v1/base
+mkdir -p /workspace/build/experiments/lsu-b-validation-v2/physical-B-v2/eco/logs/asap7/rv32_post_lsu_v1/base /workspace/build/experiments/lsu-b-validation-v2/physical-B-v2/eco/reports/asap7/rv32_post_lsu_v1/base /workspace/build/experiments/lsu-b-validation-v2/physical-B-v2/eco/results/asap7/rv32_post_lsu_v1/base
+/OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad -exit -no_init -threads 2  -log /workspace/build/experiments/lsu-b-validation-v2/physical-B-v2/eco/logs/asap7/rv32_post_lsu_v1/base/5_2_grt_eco.log -metrics /workspace/build/experiments/lsu-b-validation-v2/physical-B-v2/eco/logs/asap7/rv32_post_lsu_v1/base/5_2_grt_eco.json /workspace/physical/asap7/baseline/repair.tcl
+OpenROAD 26Q1-2900-gdf79404cd8 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 2 thread(s).
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v2/eco/results/asap7/rv32_post_lsu_v1/base/5_0_grt_input.odb
+read_sdc /workspace/build/experiments/lsu-b-validation-v2/physical-B-v2/eco/results/asap7/rv32_post_lsu_v1/base/5_0_grt_input.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+Perform buffer insertion and gate resizing...
+repair_design -verbose -slew_margin 45
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |    165302
+     1000 |     +0.0% |       0 |       2 |             1 |    164302
+     2000 |     +0.0% |       0 |       2 |             1 |    163302
+     3000 |     +0.0% |       0 |       2 |             1 |    162302
+     4000 |     +0.0% |       0 |       6 |             4 |    161302
+     5000 |     +0.0% |       0 |       6 |             4 |    160302
+     6000 |     +0.0% |       0 |       6 |             4 |    159302
+     7000 |     +0.0% |       0 |      10 |             8 |    158302
+     8000 |     +0.0% |       0 |      12 |             9 |    157302
+     9000 |     +0.0% |       0 |      12 |             9 |    156302
+    10000 |     +0.0% |       0 |      12 |             9 |    155302
+    11000 |     +0.0% |       0 |      12 |             9 |    154302
+    12000 |     +0.0% |       0 |      22 |            17 |    153302
+    13000 |     +0.0% |       0 |      24 |            18 |    152302
+    14000 |     +0.0% |       0 |      26 |            19 |    151302
+    15000 |     +0.0% |       0 |      26 |            19 |    150302
+    16000 |     +0.1% |       0 |      50 |            40 |    149302
+    17000 |     +0.1% |       0 |      67 |            47 |    148302
+    18000 |     +0.1% |       0 |      67 |            47 |    147302
+    19000 |     +0.1% |       0 |      81 |            60 |    146302
+    20000 |     +0.1% |       0 |      83 |            61 |    145302
+    21000 |     +0.1% |       0 |      83 |            61 |    144302
+    22000 |     +0.1% |       0 |      99 |            72 |    143302
+    23000 |     +0.1% |       0 |     103 |            74 |    142302
+    24000 |     +0.1% |       0 |     103 |            74 |    141302
+    25000 |     +0.2% |       0 |     120 |            88 |    140302
+    26000 |     +0.2% |       0 |     120 |            88 |    139302
+    27000 |     +0.2% |       0 |     138 |           101 |    138302
+    28000 |     +0.2% |       0 |     161 |           115 |    137302
+    29000 |     +0.2% |       0 |     200 |           138 |    136302
+    30000 |     +0.2% |       0 |     210 |           146 |    135302
+    31000 |     +0.2% |       0 |     212 |           147 |    134302
+    32000 |     +0.2% |       0 |     215 |           149 |    133302
+    33000 |     +0.2% |       0 |     215 |           149 |    132302
+    34000 |     +0.3% |       0 |     226 |           155 |    131302
+    35000 |     +0.3% |       0 |     228 |           156 |    130302
+    36000 |     +0.3% |       0 |     228 |           156 |    129302
+    37000 |     +0.3% |       0 |     228 |           156 |    128302
+    38000 |     +0.3% |       0 |     228 |           156 |    127302
+    39000 |     +0.3% |       0 |     228 |           156 |    126302
+    40000 |     +0.3% |       0 |     234 |           160 |    125302
+    41000 |     +0.3% |       0 |     234 |           160 |    124302
+    42000 |     +0.3% |       0 |     253 |           175 |    123302
+    43000 |     +0.3% |       0 |     263 |           181 |    122302
+    44000 |     +0.3% |       0 |     265 |           182 |    121302
+    45000 |     +0.3% |       0 |     265 |           182 |    120302
+    46000 |     +0.3% |       0 |     266 |           183 |    119302
+    47000 |     +0.3% |       0 |     266 |           183 |    118302
+    48000 |     +0.3% |       0 |     268 |           184 |    117302
+    49000 |     +0.3% |       0 |     275 |           188 |    116302
+    50000 |     +0.3% |       0 |     288 |           194 |    115302
+    51000 |     +0.3% |       0 |     312 |           205 |    114302
+    52000 |     +0.3% |       0 |     312 |           205 |    113302
+    53000 |     +0.4% |       0 |     315 |           207 |    112302
+    54000 |     +0.4% |       0 |     324 |           214 |    111302
+    55000 |     +0.4% |       0 |     329 |           218 |    110302
+    56000 |     +0.4% |       0 |     331 |           220 |    109302
+    57000 |     +0.4% |       0 |     338 |           226 |    108302
+    58000 |     +0.4% |       0 |     341 |           228 |    107302
+    59000 |     +0.4% |       0 |     369 |           244 |    106302
+    60000 |     +0.4% |       0 |     380 |           251 |    105302
+    61000 |     +0.5% |       0 |     424 |           271 |    104302
+    62000 |     +0.5% |       0 |     451 |           291 |    103302
+    63000 |     +0.5% |       0 |     470 |           304 |    102302
+    64000 |     +0.6% |       0 |     492 |           321 |    101302
+    65000 |     +0.6% |       0 |     500 |           325 |    100302
+    66000 |     +0.6% |       0 |     510 |           331 |     99302
+    67000 |     +0.6% |       0 |     528 |           341 |     98302
+    68000 |     +0.6% |       0 |     536 |           348 |     97302
+    69000 |     +0.6% |       0 |     536 |           348 |     96302
+    70000 |     +0.6% |       0 |     544 |           355 |     95302
+    71000 |     +0.6% |       0 |     544 |           355 |     94302
+    72000 |     +0.6% |       0 |     544 |           355 |     93302
+    73000 |     +0.7% |       0 |     580 |           381 |     92302
+    74000 |     +0.7% |       0 |     584 |           383 |     91302
+    75000 |     +0.7% |       0 |     586 |           384 |     90302
+    76000 |     +0.7% |       0 |     598 |           392 |     89302
+    77000 |     +0.7% |       0 |     602 |           394 |     88302
+    78000 |     +0.7% |       0 |     627 |           410 |     87302
+    79000 |     +0.7% |       0 |     629 |           411 |     86302
+    80000 |     +0.7% |       0 |     641 |           419 |     85302
+    81000 |     +0.8% |       0 |     662 |           430 |     84302
+    82000 |     +0.8% |       0 |     675 |           438 |     83302
+    83000 |     +0.8% |       0 |     681 |           441 |     82302
+    84000 |     +0.8% |       0 |     687 |           444 |     81302
+    85000 |     +0.8% |       0 |     687 |           444 |     80302
+    86000 |     +0.8% |       0 |     688 |           445 |     79302
+    87000 |     +0.8% |       0 |     690 |           447 |     78302
+    88000 |     +0.8% |       0 |     712 |           462 |     77302
+    89000 |     +0.8% |       0 |     728 |           475 |     76302
+    90000 |     +0.8% |       0 |     737 |           481 |     75302
+    91000 |     +0.9% |       0 |     754 |           491 |     74302
+    92000 |     +0.9% |       0 |     768 |           500 |     73302
+    93000 |     +0.9% |       0 |     781 |           508 |     72302
+    94000 |     +0.9% |       0 |     795 |           517 |     71302
+    95000 |     +0.9% |       0 |     799 |           519 |     70302
+    96000 |     +0.9% |       0 |     804 |           523 |     69302
+    97000 |     +0.9% |       0 |     807 |           525 |     68302
+    98000 |     +1.0% |       0 |     819 |           532 |     67302
+    99000 |     +1.0% |       0 |     819 |           532 |     66302
+   100000 |     +1.0% |       0 |     819 |           532 |     65302
+   101000 |     +1.0% |       0 |     826 |           537 |     64302
+   102000 |     +1.0% |       0 |     826 |           537 |     63302
+   103000 |     +1.0% |       0 |     842 |           550 |     62302
+   104000 |     +1.0% |       0 |     859 |           559 |     61302
+   105000 |     +1.0% |       0 |     905 |           578 |     60302
+   106000 |     +1.0% |       0 |     922 |           589 |     59302
+   107000 |     +1.0% |       0 |     932 |           597 |     58302
+   108000 |     +1.1% |       0 |     938 |           600 |     57302
+   109000 |     +1.1% |       0 |     956 |           610 |     56302
+   110000 |     +1.1% |       0 |     966 |           615 |     55302
+   111000 |     +1.1% |       0 |     972 |           618 |     54302
+   112000 |     +1.1% |       0 |     976 |           622 |     53302
+   113000 |     +1.1% |       0 |     982 |           627 |     52302
+   114000 |     +1.1% |       0 |     982 |           627 |     51302
+   115000 |     +1.1% |       0 |     985 |           629 |     50302
+   116000 |     +1.1% |       0 |     989 |           631 |     49302
+   117000 |     +1.1% |       0 |     991 |           632 |     48302
+   118000 |     +1.1% |       0 |     997 |           637 |     47302
+   119000 |     +1.1% |       0 |    1006 |           643 |     46302
+   120000 |     +1.1% |       0 |    1008 |           644 |     45302
+   121000 |     +1.1% |       0 |    1016 |           650 |     44302
+   122000 |     +1.1% |       0 |    1026 |           656 |     43302
+   123000 |     +1.1% |       0 |    1028 |           657 |     42302
+   124000 |     +1.2% |       0 |    1032 |           660 |     41302
+   125000 |     +1.2% |       0 |    1042 |           666 |     40302
+   126000 |     +1.2% |       0 |    1042 |           666 |     39302
+   127000 |     +1.2% |       0 |    1042 |           666 |     38302
+   128000 |     +1.2% |       0 |    1061 |           680 |     37302
+   129000 |     +1.2% |       0 |    1061 |           680 |     36302
+   130000 |     +1.2% |       0 |    1061 |           680 |     35302
+   131000 |     +1.2% |       0 |    1069 |           686 |     34302
+   132000 |     +1.2% |       0 |    1074 |           690 |     33302
+   133000 |     +1.2% |       0 |    1074 |           690 |     32302
+   134000 |     +1.2% |       0 |    1075 |           691 |     31302
+   135000 |     +1.2% |       0 |    1087 |           700 |     30302
+   136000 |     +1.2% |       0 |    1089 |           701 |     29302
+   137000 |     +1.2% |       1 |    1091 |           702 |     28302
+   138000 |     +1.2% |       1 |    1095 |           704 |     27302
+   139000 |     +1.3% |       1 |    1133 |           734 |     26302
+   140000 |     +1.3% |       2 |    1137 |           736 |     25302
+   141000 |     +1.3% |       2 |    1142 |           739 |     24302
+   142000 |     +1.3% |       3 |    1142 |           739 |     23302
+   143000 |     +1.3% |       3 |    1142 |           739 |     22302
+   144000 |     +1.3% |       4 |    1146 |           741 |     21302
+   145000 |     +1.3% |       4 |    1148 |           742 |     20302
+   146000 |     +1.3% |       4 |    1148 |           742 |     19302
+   147000 |     +1.3% |       4 |    1148 |           742 |     18302
+   148000 |     +1.3% |       4 |    1148 |           742 |     17302
+   149000 |     +1.3% |       4 |    1148 |           742 |     16302
+   150000 |     +1.3% |       4 |    1148 |           742 |     15302
+   151000 |     +1.3% |       5 |    1160 |           748 |     14302
+   152000 |     +1.3% |       5 |    1160 |           748 |     13302
+   153000 |     +1.3% |       5 |    1160 |           748 |     12302
+   154000 |     +1.3% |       5 |    1166 |           751 |     11302
+   155000 |     +1.3% |       5 |    1170 |           753 |     10302
+   156000 |     +1.3% |       5 |    1170 |           753 |      9302
+   157000 |     +1.3% |       5 |    1170 |           753 |      8302
+   158000 |     +1.3% |       5 |    1170 |           753 |      7302
+   159000 |     +1.3% |       5 |    1170 |           753 |      6302
+   160000 |     +1.3% |       5 |    1170 |           753 |      5302
+   161000 |     +1.3% |       5 |    1170 |           753 |      4302
+   162000 |     +1.3% |       5 |    1170 |           753 |      3302
+   163000 |     +1.3% |       5 |    1171 |           754 |      2302
+   164000 |     +1.3% |       5 |    1171 |           754 |      1302
+   165000 |     +1.3% |       5 |    1171 |           754 |       302
+    final |     +1.3% |       5 |    1171 |           754 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0034] Found 759 slew violations.
+[INFO RSZ-0039] Resized 5 instances.
+[INFO RSZ-0038] Inserted 1171 buffers in 754 nets.
+Took 221 seconds: repair_design -verbose -slew_margin 45
+[INFO DPL-0005] Max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+Movements Summary
+---------------------------------------
+Total cells:                  166401
+Diamond Move Success:         166401 (100.00%)
+Diamond Move Failure:              0
+Rip-up and replace Success:        0 (  0.00% of diamond failures)
+Rip-up and replace Failure:        0
+Total Placement Failures:          0
+---------------------------------------
+Placement Analysis
+---------------------------------
+total displacement        989.5 u
+average displacement        0.0 u
+max displacement            1.6 u
+original HPWL          827816.3 u
+legalized HPWL         828592.8 u
+delta HPWL                    0 %
+
+[INFO GRT-0009] rerouting 4428 nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 92
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Overflow
+---------------------------------------------------------------------------------------
+M1                   0             0            0.00%             0 /  0 /  0
+M2             1147120        140579           12.25%             0 /  0 /  0
+M3             1492745        127467            8.54%             0 /  0 /  0
+M4             1143284           815            0.07%             0 /  0 /  0
+M5             1101788            32            0.00%             0 /  0 /  0
+M6              699621             0            0.00%             0 /  0 /  0
+M7              793155             0            0.00%             0 /  0 /  0
+---------------------------------------------------------------------------------------
+Total          6377713        268893            4.22%             0 /  0 /  0
+
+[INFO GRT-0018] Total wirelength: 1381483 um
+[INFO GRT-0014] Routed nets: 165633
+repair_timing -setup_margin 0 -hold_margin 40 -repair_tns 100 -verbose
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
+[INFO RSZ-0098] No setup violations found
+[INFO RSZ-0046] Found 602 endpoints with hold violations.
+Iteration | Resized | Buffers | Cloned Gates |   Area   |   WNS   |   TNS   | Endpoint
+--------------------------------------------------------------------------------------
+        0 |       0 |       0 |            0 |    +0.0% |  14.729 |   0.000 | u_lsu.rsp_buf_dst[17]$_SDFFE_PP0P_/D
+       10 |       0 |      11 |            0 |    +0.0% |  28.597 |   0.000 | u_lsu.sq[2][81]$_DFFE_PP_/D
+       20 |       0 |      22 |            0 |    +0.0% |  29.014 |   0.000 | u_lsu.sq[8][114]$_DFFE_PP_/D
+       30 |       0 |      32 |            0 |    +0.0% |  29.428 |   0.000 | u_lsu.sq[12][103]$_DFFE_PP_/D
+       40 |       0 |      43 |            0 |    +0.0% |  29.745 |   0.000 | u_lsu.sq[6][89]$_DFFE_PP_/D
+       50 |       0 |      53 |            0 |    +0.0% |  29.907 |   0.000 | u_lsu.rsp_buf_dst[9]$_SDFFE_PP0P_/D
+       60 |       0 |      65 |            0 |    +0.0% |  30.106 |   0.000 | u_lsu.sq[12][111]$_DFFE_PP_/D
+       70 |       0 |      75 |            0 |    +0.0% |  30.294 |   0.000 | u_lsu.sq[2][80]$_DFFE_PP_/D
+       80 |       0 |      86 |            0 |    +0.0% |  30.457 |   0.000 | u_frontend.btb[12][43]$_SDFFE_PP1P_/D
+       90 |       0 |      96 |            0 |    +0.0% |  30.685 |   0.000 | u_lsu.sq[6][90]$_DFFE_PP_/D
+      100 |       0 |     107 |            0 |    +0.0% |  30.918 |   0.000 | u_lsu.sq[12][104]$_DFFE_PP_/D
+      110 |       0 |     117 |            0 |    +0.0% |  31.116 |   0.000 | u_rob.commit_trace[331]$_SDFF_PP0_/D
+      120 |       0 |     127 |            0 |    +0.0% |  31.442 |   0.000 | u_lsu.sq[6][82]$_DFFE_PP_/D
+      130 |       0 |     137 |            0 |    +0.0% |  31.726 |   0.000 | u_fp_divsqrt.special_res_data[26]$_SDFFE_PP0P_/D
+      140 |       0 |     147 |            0 |    +0.1% |  32.063 |   0.000 | u_lsu.sq[6][108]$_DFFE_PP_/D
+      150 |       0 |     157 |            0 |    +0.1% |  32.525 |   0.000 | u_frontend.iq_mem[4][107]$_DFFE_PP_/D
+      160 |       0 |     167 |            0 |    +0.1% |  32.806 |   0.000 | u_rob.entries[4][229]$_SDFFE_PP0P_/D
+      170 |       0 |     177 |            0 |    +0.1% |  33.175 |   0.000 | u_lsu.sq[14][76]$_DFFE_PP_/D
+      180 |       0 |     187 |            0 |    +0.1% |  33.748 |   0.000 | u_rob.entries[1][227]$_SDFFE_PP0P_/D
+      190 |       0 |     197 |            0 |    +0.1% |  34.209 |   0.000 | u_lsu.sq[12][99]$_DFFE_PP_/D
+      200 |       0 |     207 |            0 |    +0.1% |  34.621 |   0.000 | u_lsu.sq[2][50]$_DFFE_PP_/D
+      210 |       0 |     217 |            0 |    +0.1% |  34.877 |   0.000 | u_lsu.sq[4][116]$_DFFE_PP_/D
+      220 |       0 |     227 |            0 |    +0.1% |  35.192 |   0.000 | u_lsu.sq[10][50]$_DFFE_PP_/D
+      230 |       0 |     237 |            0 |    +0.1% |  35.353 |   0.000 | u_lsu.sq[12][113]$_DFFE_PP_/D
+      240 |       0 |     247 |            0 |    +0.1% |  35.532 |   0.000 | u_lsu.sq[10][114]$_DFFE_PP_/D
+      250 |       0 |     257 |            0 |    +0.1% |  35.765 |   0.000 | u_rob.commit_trace[335]$_SDFF_PP0_/D
+      260 |       0 |     267 |            0 |    +0.1% |  35.924 |   0.000 | u_lsu.sq[0][50]$_DFFE_PP_/D
+      270 |       0 |     277 |            0 |    +0.1% |  36.136 |   0.000 | u_int_execute.u_multiplier.rsp_result[19]$_SDFFE_PP0N_/D
+      280 |       0 |     287 |            0 |    +0.1% |  36.380 |   0.000 | u_lsu.sq[12][116]$_DFFE_PP_/D
+      290 |       0 |     297 |            0 |    +0.1% |  36.501 |   0.000 | u_lsu.sq[11][113]$_DFFE_PP_/D
+      300 |       0 |     307 |            0 |    +0.1% |  36.631 |   0.000 | u_lsu.sq[14][77]$_DFFE_PP_/D
+      310 |       0 |     317 |            0 |    +0.1% |  36.811 |   0.000 | u_rob.commit_trace[330]$_SDFF_PP0_/D
+      320 |       0 |     327 |            0 |    +0.1% |  36.925 |   0.000 | u_lsu.sq[10][113]$_DFFE_PP_/D
+      330 |       0 |     337 |            0 |    +0.1% |  37.042 |   0.000 | u_lsu.sq[7][113]$_DFFE_PP_/D
+      340 |       0 |     347 |            0 |    +0.1% |  37.114 |   0.000 | u_lsu.sq[8][45]$_DFFE_PP_/D
+      350 |       0 |     357 |            0 |    +0.1% |  37.284 |   0.000 | u_lsu.sq[1][113]$_DFFE_PP_/D
+      360 |       0 |     367 |            0 |    +0.1% |  37.386 |   0.000 | u_rob.commit_trace[294]$_SDFF_PP0_/D
+      370 |       0 |     377 |            0 |    +0.1% |  37.480 |   0.000 | u_lsu.sq[3][115]$_DFFE_PP_/D
+      380 |       0 |     387 |            0 |    +0.1% |  37.580 |   0.000 | u_int_execute.u_multiplier.rsp_result[20]$_SDFFE_PP0N_/D
+      390 |       0 |     397 |            0 |    +0.1% |  37.692 |   0.000 | u_lsu.sq[2][69]$_DFFE_PP_/D
+      400 |       0 |     407 |            0 |    +0.1% |  37.788 |   0.000 | u_lsu.sq[14][96]$_DFFE_PP_/D
+      410 |       0 |     417 |            0 |    +0.1% |  37.898 |   0.000 | u_lsu.sq[1][115]$_DFFE_PP_/D
+      420 |       0 |     427 |            0 |    +0.1% |  37.994 |   0.000 | u_fp_divsqrt.special_res_data[11]$_SDFFE_PP0P_/D
+      430 |       0 |     437 |            0 |    +0.1% |  38.054 |   0.000 | u_lsu.sq[14][65]$_DFFE_PP_/D
+      440 |       0 |     447 |            0 |    +0.2% |  38.153 |   0.000 | u_lsu.sq[5][113]$_DFFE_PP_/D
+      450 |       0 |     457 |            0 |    +0.2% |  38.265 |   0.000 | u_lsu.sq[10][58]$_DFFE_PP_/D
+      460 |       0 |     467 |            0 |    +0.2% |  38.402 |   0.000 | u_lsu.sq[0][87]$_DFFE_PP_/D
+      470 |       0 |     477 |            0 |    +0.2% |  38.542 |   0.000 | u_fp_divsqrt.special_res_data[9]$_SDFFE_PP0P_/D
+      480 |       0 |     487 |            0 |    +0.2% |  38.705 |   0.000 | u_lsu.sq[3][81]$_DFFE_PP_/D
+      490 |       0 |     497 |            0 |    +0.2% |  38.768 |   0.000 | u_lsu.sq[6][0]$_DFFE_PP_/D
+      500 |       0 |     507 |            0 |    +0.2% |  38.914 |   0.000 | u_int_iq.entries[4][188]$_SDFFE_PP0P_/D
+      510 |       0 |     517 |            0 |    +0.2% |  39.019 |   0.000 | u_rob.commit_trace[327]$_SDFF_PP0_/D
+      520 |       0 |     527 |            0 |    +0.2% |  39.140 |   0.000 | u_lsu.sq[10][62]$_DFFE_PP_/D
+      530 |       0 |     537 |            0 |    +0.2% |  39.240 |   0.000 | u_lsu.sq[8][66]$_DFFE_PP_/D
+      540 |       0 |     547 |            0 |    +0.2% |  39.297 |   0.000 | u_lsu.sq[1][81]$_DFFE_PP_/D
+      550 |       0 |     557 |            0 |    +0.2% |  39.393 |   0.000 | u_lsu.sq[2][79]$_DFFE_PP_/D
+      560 |       0 |     567 |            0 |    +0.2% |  39.464 |   0.000 | u_lsu.sq[2][57]$_DFFE_PP_/D
+      570 |       0 |     577 |            0 |    +0.2% |  39.596 |   0.000 | u_lsu.sq[8][54]$_DFFE_PP_/D
+      580 |       0 |     587 |            0 |    +0.2% |  39.697 |   0.000 | u_int_execute.alu_fifo_cmp[1][138]$_SDFFCE_PN0P_/D
+      590 |       0 |     597 |            0 |    +0.2% |  39.811 |   0.000 | u_lsu.sq[14][37]$_DFFE_PP_/D
+      600 |       0 |     607 |            0 |    +0.2% |  39.945 |   0.000 | u_lsu.sq[0][102]$_DFFE_PP_/D
+    final |       0 |     610 |            0 |    +0.2% |  40.016 |   0.000 | u_lsu.sq[14][99]$_DFFE_PP_/D
+--------------------------------------------------------------------------------------
+[INFO RSZ-0032] Inserted 610 hold buffers.
+Took 307 seconds: repair_timing -setup_margin 0 -hold_margin 40 -repair_tns 100 -verbose
+[INFO DPL-0005] Max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+Movements Summary
+---------------------------------------
+Total cells:                  167011
+Diamond Move Success:         167011 (100.00%)
+Diamond Move Failure:              0
+Rip-up and replace Success:        0 (  0.00% of diamond failures)
+Rip-up and replace Failure:        0
+Total Placement Failures:          0
+---------------------------------------
+Placement Analysis
+---------------------------------
+total displacement        176.6 u
+average displacement        0.0 u
+max displacement            0.8 u
+original HPWL          828855.4 u
+legalized HPWL         828970.7 u
+delta HPWL                    0 %
+
+[INFO GRT-0009] rerouting 551 nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 28
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Overflow
+---------------------------------------------------------------------------------------
+M1                   0             0            0.00%             0 /  0 /  0
+M2             1147120        141945           12.37%             0 /  0 /  0
+M3             1492745        128705            8.62%             0 /  0 /  0
+M4             1143284           815            0.07%             0 /  0 /  0
+M5             1101788            32            0.00%             0 /  0 /  0
+M6              699621             0            0.00%             0 /  0 /  0
+M7              793155             0            0.00%             0 /  0 /  0
+---------------------------------------------------------------------------------------
+Total          6377713        271497            4.26%             0 /  0 /  0
+
+[INFO GRT-0018] Total wirelength: 1382248 um
+[INFO GRT-0014] Routed nets: 166243
+RV32_GRT_FINAL_FULL_ROUTE_BEGIN
+[INFO GRT-0020] Min routing layer: M2
+[INFO GRT-0021] Max routing layer: M7
+[INFO GRT-0022] Global adjustment: 0%
+[INFO GRT-0023] Grid origin: (0, 0)
+[INFO GRT-0088] Layer M1      Track-Pitch = 0.0360  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M2      Track-Pitch = 0.0390  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M3      Track-Pitch = 0.0360  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M4      Track-Pitch = 0.0480  line-2-Via Pitch: 0.0480
+[INFO GRT-0088] Layer M5      Track-Pitch = 0.0480  line-2-Via Pitch: 0.0480
+[INFO GRT-0088] Layer M6      Track-Pitch = 0.0640  line-2-Via Pitch: 0.0640
+[INFO GRT-0088] Layer M7      Track-Pitch = 0.0640  line-2-Via Pitch: 0.0640
+[INFO GRT-0003] Macros: 0
+[INFO GRT-0004] Blockages: 54393
+[INFO GRT-0019] Found 1195 clock nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 107
+
+[INFO GRT-0053] Routing resources analysis:
+          Routing      Original      Derated      Resource
+Layer     Direction    Resources     Resources    Reduction (%)
+---------------------------------------------------------------
+M1         Vertical            0             0          0.00%
+M2         Horizontal    1589749       1147148          27.84%
+M3         Vertical      2009520       1492745          25.72%
+M4         Horizontal    1539803       1143284          25.75%
+M5         Vertical      1485723       1101788          25.84%
+M6         Horizontal    1034409        699621          32.37%
+M7         Vertical      1177209        793155          32.62%
+---------------------------------------------------------------
+
+[INFO GRT-0101] Running extra iterations to remove overflow.
+[INFO GRT-0102] Start extra iteration 1/30
+[INFO GRT-0102] Start extra iteration 2/30
+[INFO GRT-0197] Via related to pin nodes: 1135414
+[INFO GRT-0198] Via related Steiner nodes: 52717
+[INFO GRT-0199] Via filling finished.
+[INFO GRT-0111] Final number of vias: 1522159
+[INFO GRT-0112] Final usage 3D: 6424732
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Overflow
+---------------------------------------------------------------------------------------
+M1                   0             0            0.00%             0 /  0 /  0
+M2             1147148        663634           57.85%             0 /  0 /  0
+M3             1492745        746161           49.99%             0 /  0 /  0
+M4             1143284        279850           24.48%             0 /  0 /  0
+M5             1101788        131201           11.91%             0 /  0 /  0
+M6              699621         33725            4.82%             0 /  0 /  0
+M7              793155          3684            0.46%             0 /  0 /  0
+---------------------------------------------------------------------------------------
+Total          6377741       1858255           29.14%             0 /  0 /  0
+
+[INFO GRT-0018] Total wirelength: 1384689 um
+[INFO GRT-0014] Routed nets: 166243
+[INFO GRT-0303] Global routing runtime = 00:00:35
+RV32_GRT_FULL_ROUTE_COMPLETE
+[INFO ANT-0002] Found 0 net violations.
+[INFO ANT-0001] Found 0 pin violations.
+write_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v2/eco/results/asap7/rv32_post_lsu_v1/base/5_1_grt.odb
+write_sdc -no_timestamp /workspace/build/experiments/lsu-b-validation-v2/physical-B-v2/eco/results/asap7/rv32_post_lsu_v1/base/5_1_grt.sdc
+RV32_GRT_ECO_COMPLETE

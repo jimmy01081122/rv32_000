@@ -1,0 +1,155 @@
+{
+  "started_utc": "2026-10-28T09:39:09.399364+00:00",
+  "inputs": {
+    "/workspace/build/experiments/lsu-b-validation-v2/fpu-negative-controls.py": "09bfda95e4a5bf60077275f15f2e15237aa9c1828c644792f13e06905206ee0c",
+    "/workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/fp-source.v": "82af02e9736df0eaabc2372a3a2fb042766488625b1ef181cabc2f11dadc5afe",
+    "/workspace/experiments/lsu-b-validation-v2/fpu_state_models.py": "4158a37ec2ceb2074bfbfae2197c377c878718c32ba10c011bf784ebb0e2a9eb",
+    "/workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/results/asap7/rv32_post_lsu_v1/base/fp_mapped.rtlil.json": "0f63f195545b9e9fde79b9829f3b6772d901f01511ef19178b914c0b2663d81d",
+    "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/cell.json": "b26f8e0d2f38ec1900e375f97d8f6f259d02e7ac396c84a6d85ac66febf8c409",
+    "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/proof-summary.json": "474ad1e28ba62b0d990eb0a2cf26c8fbf180bb9c5ba3865f92de1a2bb07f13c6",
+    "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/step-gate.blif": "6b6565c2ca9f72bdda6b15af97b665c2ba9793557240d80b47837b6cf5330550"
+  },
+  "records": [
+    {
+      "label": "rtl-drop-valid",
+      "mutation": {
+        "before": "holding_valid <= issue_valid;",
+        "after": "holding_valid <= 1'b0;"
+      },
+      "source_sha256": "ea79dd8efb201f3064f56b1e467bd8ea10138acdd70d52ee62e41def32507f7a",
+      "commands": [
+        {
+          "command": [
+            "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys",
+            "-s",
+            "/workspace/build/experiments/lsu-b-validation-v2/fpu-negative-controls-v1/rtl-drop-valid/prepare.ys"
+          ],
+          "returncode": 0,
+          "log_sha256": "16e84bc31f5e906e381dbea2fc84cd88be3ec369bb0dec975b38e2eeb4c99417"
+        },
+        {
+          "command": [
+            "python3",
+            "/workspace/experiments/lsu-b-validation-v2/fpu_state_models.py",
+            "--original",
+            "/workspace/build/experiments/lsu-b-validation-v2/fpu-negative-controls-v1/rtl-drop-valid/original.json",
+            "--mapped",
+            "/workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/results/asap7/rv32_post_lsu_v1/base/fp_mapped.rtlil.json",
+            "--cell",
+            "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/cell.json",
+            "--output",
+            "/workspace/build/experiments/lsu-b-validation-v2/fpu-negative-controls-v1/rtl-drop-valid/models"
+          ],
+          "returncode": 0,
+          "log_sha256": "7d2c8a6e8a31bb4b58debf324562081830b1433352be293556e3c9490a852f9b"
+        },
+        {
+          "command": [
+            "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys",
+            "-s",
+            "/workspace/build/experiments/lsu-b-validation-v2/fpu-negative-controls-v1/rtl-drop-valid/lower.ys"
+          ],
+          "returncode": 0,
+          "log_sha256": "6ffc3d05471bca69a1782e920a4c3f02ed7e164efc4b9c067e551f729c57e823"
+        },
+        {
+          "command": [
+            "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys-abc",
+            "-c",
+            "cec /workspace/build/experiments/lsu-b-validation-v2/fpu-negative-controls-v1/rtl-drop-valid/mutant.blif /workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/step-gate.blif"
+          ],
+          "returncode": 0,
+          "log_sha256": "4f216141a9d2f4a3bbc8a4651bc3de11deeaf448667d74c6d66f42d6fee6bc5c"
+        }
+      ],
+      "rejected": true,
+      "lowered_json_compaction": {
+        "sha256": "856b7b4c7358da0213fe20616c6fae98e5953e987282d33ead3ab48a617557db",
+        "raw_bytes": 51399210,
+        "gzip_sha256": "89cfac5e6bd8521c699b4979ea056a99e291fb3a6e611df085b0d6975b2165bf"
+      }
+    },
+    {
+      "label": "rtl-reset-high",
+      "mutation": {
+        "before": "holding_valid <= 1'b0;",
+        "after": "holding_valid <= 1'b1;"
+      },
+      "source_sha256": "d66da63a7a05b85fc43d8897e9b563a40b38dc200236f3970330ec8a1845a6d3",
+      "commands": [
+        {
+          "command": [
+            "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys",
+            "-s",
+            "/workspace/build/experiments/lsu-b-validation-v2/fpu-negative-controls-v1/rtl-reset-high/prepare.ys"
+          ],
+          "returncode": 0,
+          "log_sha256": "786a5033476fc813b4746ebd42873228a2fee2b39545b44f13952cab6fe1e31d"
+        },
+        {
+          "command": [
+            "python3",
+            "/workspace/experiments/lsu-b-validation-v2/fpu_state_models.py",
+            "--original",
+            "/workspace/build/experiments/lsu-b-validation-v2/fpu-negative-controls-v1/rtl-reset-high/original.json",
+            "--mapped",
+            "/workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/results/asap7/rv32_post_lsu_v1/base/fp_mapped.rtlil.json",
+            "--cell",
+            "/workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/cell.json",
+            "--output",
+            "/workspace/build/experiments/lsu-b-validation-v2/fpu-negative-controls-v1/rtl-reset-high/models"
+          ],
+          "returncode": 0,
+          "log_sha256": "7d2c8a6e8a31bb4b58debf324562081830b1433352be293556e3c9490a852f9b"
+        },
+        {
+          "command": [
+            "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys",
+            "-s",
+            "/workspace/build/experiments/lsu-b-validation-v2/fpu-negative-controls-v1/rtl-reset-high/lower.ys"
+          ],
+          "returncode": 0,
+          "log_sha256": "b7be8032268281c2a0b7373a93043a09c16d28d30051d37a425463cc87bacb24"
+        },
+        {
+          "command": [
+            "/OpenROAD-flow-scripts/tools/install/yosys/bin/yosys-abc",
+            "-c",
+            "cec /workspace/build/experiments/lsu-b-validation-v2/fpu-negative-controls-v1/rtl-reset-high/mutant.blif /workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/reset-gold-zero.blif"
+          ],
+          "returncode": 0,
+          "log_sha256": "67d9c56a1d01c4cd0bea0826fe4662b5c8c5fff000120b17bb48a52062e8d0e4"
+        }
+      ],
+      "rejected": true,
+      "lowered_json_compaction": {
+        "sha256": "50d6e8fd290410bea5187afd070130b73e5dd7cc0322ada4cad7a192a72b3717",
+        "raw_bytes": 129331,
+        "gzip_sha256": "e84f47561d0a542550985af3bb0283fa9bc431148450598c0c41587cc5f2d326"
+      }
+    },
+    {
+      "label": "mapped-wrong-clock",
+      "rejected": true,
+      "reason": "mapped FF/clock changed"
+    },
+    {
+      "label": "hidden-mapped-state",
+      "rejected": true,
+      "reason": "expected 100 mapped FFs"
+    },
+    {
+      "label": "gold-init",
+      "rejected": true,
+      "reason": "unexpected gold initialization"
+    },
+    {
+      "label": "wrong-ff-polarity",
+      "rejected": true,
+      "reason": "FF polarity/clock mismatch"
+    }
+  ],
+  "passed": true,
+  "input_identities_unchanged": true,
+  "finished_utc": "2026-10-28T09:41:51.473448+00:00"
+}

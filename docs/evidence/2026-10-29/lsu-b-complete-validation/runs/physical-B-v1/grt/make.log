@@ -1,0 +1,2029 @@
+mkdir -p /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/
+echo 14000 > /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/clock_period.txt
+/orfs-source/flow/scripts/synth.sh /orfs-source/flow/scripts/synth_canonicalize.tcl /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/logs/asap7/rv32_post_lsu_v1/base/1_1_yosys_canonicalize.log
+exec cp /workspace/build/experiments/fpu-mapping-v1/shared-linked-v1/B.v /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/1_2_yosys.v
+exec touch -r /workspace/build/experiments/fpu-mapping-v1/shared-linked-v1/B.v /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/1_2_yosys.v
+Elapsed time: 0:00.09[h:]min:sec. CPU time: user 0.03 sys 0.06 (97%). Peak memory: 24392KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+1_1_yosys_canonicalize                    0             23                  N/A
+/orfs-source/flow/scripts/synth.sh /orfs-source/flow/scripts/synth.tcl /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/logs/asap7/rv32_post_lsu_v1/base/1_2_yosys.log
+exec cp /workspace/build/experiments/fpu-mapping-v1/shared-linked-v1/B.v /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/1_2_yosys.v
+exec touch -r /workspace/build/experiments/fpu-mapping-v1/shared-linked-v1/B.v /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/1_2_yosys.v
+Elapsed time: 0:00.07[h:]min:sec. CPU time: user 0.04 sys 0.03 (99%). Peak memory: 24268KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+1_2_yosys                 .v              0             23 4ebf2d22c97a38512f8d
+cp /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/constraint.sdc /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/1_2_yosys.sdc
+touch -r /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/constraint.sdc /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/1_2_yosys.sdc
+OpenROAD 26Q1-2900-gdf79404cd8 
+Features included (+) or not (-): +GPU +GUI +Python
+This program is licensed under the BSD-3 license. See the LICENSE file for details.
+Components of this program may be licensed under more restrictive licenses which must be honored.
+[INFO ORD-0030] Using 2 thread(s).
+mkdir -p /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/objects/asap7/rv32_post_lsu_v1/base
+/orfs-source/flow/scripts/flow.sh 1_synth synth_odb
+Running synth_odb.tcl, stage 1_synth
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+[INFO ODB-0227] LEF file: /OpenROAD-flow-scripts/flow/platforms/asap7/lef/asap7_tech_1x_201209.lef, created 30 layers, 9 vias
+[INFO ODB-0227] LEF file: /OpenROAD-flow-scripts/flow/platforms/asap7/lef/asap7sc7p5t_28_R_1x_220121a.lef, created 212 library cells
+link_design rv32_ooo_core
+Took 5 seconds: link_design rv32_ooo_core
+read_sdc /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/1_2_yosys.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+eliminate_dead_logic
+Removed 5620 unused instances and 5620 unused nets.
+Design area 20723 um^2 100% utilization.
+write_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/1_synth.odb
+write_sdc -no_timestamp /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/1_synth.sdc
+Elapsed time: 0:14.60[h:]min:sec. CPU time: user 10.91 sys 3.66 (99%). Peak memory: 865196KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+1_synth                   .odb           14            844 0c8e842773091875fbca
+1_synth                   .sdc                             b47c54a2d55efef2d132
+/orfs-source/flow/scripts/flow.sh 2_1_floorplan floorplan
+Running floorplan.tcl, stage 2_1_floorplan
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/1_synth.odb
+read_sdc /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/1_synth.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+
+==========================================================================
+Floorplan check_setup
+--------------------------------------------------------------------------
+number instances in verilog is 172666
+[INFO IFP-0107] Defining die area using utilization: 50.00% and aspect ratio: 1.
+[WARNING IFP-0028] Core area lower left (2.000, 2.000) snapped to (2.052, 2.160).
+[INFO IFP-0001] Added 753 rows of 3769 site asap7sc7p5t.
+[INFO IFP-0100] Die BBox:  (  0.000  0.000 ) ( 207.581 207.581 ) um
+[INFO IFP-0101] Core BBox: (  2.052  2.160 ) ( 205.578 205.470 ) um
+[INFO IFP-0102] Core area:                        41378.871 um^2
+[INFO IFP-0103] Total instances area:             20722.627 um^2
+[INFO IFP-0104] Effective utilization:                0.501
+[INFO IFP-0105] Number of instances:                 172666
+source /OpenROAD-flow-scripts/flow/platforms/asap7/openRoad/make_tracks.tcl
+source /OpenROAD-flow-scripts/flow/platforms/asap7/fastroute.tcl
+Repair tie lo fanout...
+[INFO RSZ-0042] Inserted 30 tie TIELOx1_ASAP7_75t_R instances.
+Repair tie hi fanout...
+[INFO RSZ-0042] Inserted 1 tie TIEHIx1_ASAP7_75t_R instances.
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -setup -skip_last_gasp -sequence unbuffer,sizeup,swap,vt_swap -verbose
+[WARNING EST-0027] no estimated parasitics. Using wire load models.
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove 
+[INFO RSZ-0098] No setup violations found
+Took 5 seconds: repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -setup -skip_last_gasp -sequence unbuffer,sizeup,swap,vt_swap -verbose
+Default units for flow
+ time 1ps
+ capacitance 1fF
+ resistance 1kohm
+ voltage 1v
+ current 1mA
+ power 1pW
+ distance 1um
+   Layer   | Unit Resistance | Unit Capacitance 
+           |       (kohm/um) |          (fF/um)
+------------------------------------------------
+        M1 |        7.04e-02 |         1.00e-10
+        M2 |        4.62e-02 |         1.85e-01
+        M3 |        3.63e-02 |         1.54e-01
+        M4 |        2.03e-02 |         1.89e-01
+        M5 |        1.93e-02 |         1.72e-01
+        M6 |        1.19e-02 |         1.76e-01
+        M7 |        1.25e-02 |         1.47e-01
+        M8 |        0.00e+00 |         0.00e+00
+        M9 |        0.00e+00 |         0.00e+00
+       Pad |        0.00e+00 |         0.00e+00
+------------------------------------------------
+
+   Layer   | Via Resistance 
+           |         (kohm) 
+----------------------------
+        V1 |       1.72e-02 
+        V2 |       1.72e-02 
+        V3 |       1.72e-02 
+        V4 |       1.18e-02 
+        V5 |       1.18e-02 
+        V6 |       8.20e-03 
+        V7 |       8.20e-03 
+        V8 |       6.30e-03 
+        V9 |       0.00e+00 
+----------------------------
+Report metrics stage 2, floorplan final...
+
+==========================================================================
+floorplan final report_design_area
+--------------------------------------------------------------------------
+Design area 20724 um^2 50% utilization.
+write_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_1_floorplan.odb
+write_sdc -no_timestamp /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_1_floorplan.sdc
+Elapsed time: 1:10.27[h:]min:sec. CPU time: user 71.26 sys 7.17 (111%). Peak memory: 964704KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_1_floorplan             .odb           70            942 5a13369d4227506d00e5
+2_1_floorplan             .sdc                             b47c54a2d55efef2d132
+/orfs-source/flow/scripts/flow.sh 2_2_floorplan_macro macro_place
+Running macro_place.tcl, stage 2_2_floorplan_macro
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_1_floorplan.odb
+read_sdc /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_1_floorplan.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+No macros found: Skipping macro_placement
+Design area 20724 um^2 50% utilization.
+write_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_2_floorplan_macro.odb
+Elapsed time: 0:03.73[h:]min:sec. CPU time: user 3.40 sys 0.32 (99%). Peak memory: 487020KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_2_floorplan_macro       .odb            3            475 5a13369d4227506d00e5
+/orfs-source/flow/scripts/flow.sh 2_3_floorplan_tapcell tapcell
+Running tapcell.tcl, stage 2_3_floorplan_tapcell
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_2_floorplan_macro.odb
+read_sdc /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_1_floorplan.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+Tap and End Cap cell insertion
+  TAP Cell          : TAPCELL_ASAP7_75t_R
+  ENDCAP Cell       : TAPCELL_ASAP7_75t_R
+  Halo Around Macro : 2 2
+  TAP Cell Distance : 25
+[INFO TAP-0004] Inserted 1506 endcaps.
+[INFO TAP-0005] Inserted 3020 tapcells.
+Design area 20856 um^2 50% utilization.
+write_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_3_floorplan_tapcell.odb
+Elapsed time: 0:03.64[h:]min:sec. CPU time: user 3.42 sys 0.22 (99%). Peak memory: 404524KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_3_floorplan_tapcell     .odb            3            395 012a780704d526a15037
+/orfs-source/flow/scripts/flow.sh 2_4_floorplan_pdn pdn
+Running pdn.tcl, stage 2_4_floorplan_pdn
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_3_floorplan_tapcell.odb
+read_sdc /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_1_floorplan.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+[INFO PDN-0001] Inserting grid: top
+Design area 20856 um^2 50% utilization.
+write_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_4_floorplan_pdn.odb
+Elapsed time: 0:05.65[h:]min:sec. CPU time: user 5.35 sys 0.27 (99%). Peak memory: 501400KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+2_4_floorplan_pdn         .odb            5            489 297982726106aeaf8b15
+cp /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_4_floorplan_pdn.odb /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_floorplan.odb
+cp /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_1_floorplan.sdc /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_floorplan.sdc
+/orfs-source/flow/scripts/flow.sh 3_1_place_gp_skip_io global_place_skip_io
+Running global_place_skip_io.tcl, stage 3_1_place_gp_skip_io
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_floorplan.odb
+read_sdc /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_floorplan.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+global_placement -skip_io -density 0.55 -pad_left 0 -pad_right 0
+[INFO GPL-0001] ---- Initialize GPL Main Data Structures
+[INFO GPL-0002] DBU: 1000
+[INFO GPL-0003] SiteSize: (  0.054  0.270 ) um
+[INFO GPL-0004] CoreBBox: (  2.052  2.160 ) ( 205.578 205.470 ) um
+[INFO GPL-0036] Movable instances area:      20723.852 um^2
+[INFO GPL-0037] Total instances area:        20855.830 um^2
+[INFO GPL-0035] Pin density area adjust:      2655.679 um^2
+[INFO GPL-0032] ---- Initialize Region: Top-level
+[INFO GPL-0006] Number of instances:            177220
+[INFO GPL-0007] Movable instances:              172694
+[INFO GPL-0008] Fixed instances:                  4526
+[INFO GPL-0009] Dummy instances:                     0
+[INFO GPL-0010] Number of nets:                 172766
+[INFO GPL-0011] Number of pins:                 616829
+[INFO GPL-0012] Die BBox:  (  0.000  0.000 ) ( 207.581 207.581 ) um
+[INFO GPL-0013] Core BBox: (  2.052  2.160 ) ( 205.578 205.470 ) um
+[INFO GPL-0016] Core area:                   41378.871 um^2
+[INFO GPL-0014] Region name: top-level.
+[INFO GPL-0015] Region area:                 41378.871 um^2
+[INFO GPL-0017] Fixed instances area:          131.978 um^2
+[INFO GPL-0018] Movable instances area:      23379.531 um^2
+[INFO GPL-0019] Utilization:                    56.682 %
+[INFO GPL-0020] Standard cells area:         23379.531 um^2
+[INFO GPL-0021] Large instances area:            0.000 um^2
+[INFO GPL-0005] ---- Execute Conjugate Gradient Initial Placement.
+[INFO GPL-0051] Source of initial instance position counters:
+	Odb location = 31	Core center = 172663	Region center = 0
+[INFO GPL-0033] ---- Initialize Nesterov Region: Top-level
+[WARNING GPL-0302] Target density 0.5500 is too low for the available free area.
+Automatically adjusting to uniform density 0.5700.
+[INFO GPL-0023] Placement target density:       0.5700
+[INFO GPL-0024] Movable insts average area:      0.135 um^2
+[INFO GPL-0025] Ideal bin area:                  0.238 um^2
+[INFO GPL-0026] Ideal bin count:                174218
+[INFO GPL-0027] Total bin area:              41378.871 um^2
+[INFO GPL-0028] Bin count (X, Y):         256 ,    256
+[INFO GPL-0029] Bin size (W * H):       0.795 *  0.794 um
+[INFO GPL-0030] Number of bins:                  65536
+[INFO GPL-0007] ---- Execute Nesterov Global Placement.
+[INFO GPL-0031] HPWL: Half-Perimeter Wirelength
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+        0 |   0.9983 |  1.361514e+05 |   +0.00% |  1.13e-14 |      
+       10 |   0.9984 |  3.438176e+04 |  -74.75% |  1.84e-14 |      
+       20 |   0.9984 |  3.294692e+04 |   -4.17% |  3.00e-14 |      
+       30 |   0.9984 |  3.275835e+04 |   -0.57% |  4.89e-14 |      
+       40 |   0.9984 |  3.270458e+04 |   -0.16% |  7.97e-14 |      
+       50 |   0.9984 |  3.267550e+04 |   -0.09% |  1.30e-13 |      
+       60 |   0.9984 |  3.266266e+04 |   -0.04% |  2.12e-13 |      
+       70 |   0.9984 |  3.266440e+04 |   +0.01% |  3.45e-13 |      
+       80 |   0.9984 |  3.271596e+04 |   +0.16% |  5.61e-13 |      
+       90 |   0.9984 |  3.297341e+04 |   +0.79% |  9.14e-13 |      
+      100 |   0.9983 |  3.381591e+04 |   +2.56% |  1.49e-12 |      
+      110 |   0.9982 |  3.591912e+04 |   +6.22% |  2.42e-12 |      
+      120 |   0.9980 |  4.008993e+04 |  +11.61% |  3.95e-12 |      
+      130 |   0.9975 |  4.714571e+04 |  +17.60% |  6.43e-12 |      
+      140 |   0.9965 |  5.865565e+04 |  +24.41% |  1.05e-11 |      
+      150 |   0.9945 |  7.545532e+04 |  +28.64% |  1.70e-11 |      
+      160 |   0.9916 |  9.713938e+04 |  +28.74% |  2.76e-11 |      
+      170 |   0.9879 |  1.201389e+05 |  +23.68% |  4.49e-11 |      
+      180 |   0.9826 |  1.450800e+05 |  +20.76% |  7.29e-11 |      
+      190 |   0.9753 |  1.743152e+05 |  +20.15% |  1.18e-10 |      
+      200 |   0.9647 |  2.112298e+05 |  +21.18% |  1.92e-10 |      
+      210 |   0.9510 |  2.583290e+05 |  +22.30% |  3.11e-10 |      
+      220 |   0.9328 |  3.159991e+05 |  +22.32% |  5.04e-10 |      
+      230 |   0.9099 |  3.822068e+05 |  +20.95% |  8.15e-10 |      
+      240 |   0.8834 |  4.532974e+05 |  +18.60% |  1.32e-09 |      
+      250 |   0.8546 |  5.234016e+05 |  +15.47% |  2.13e-09 |      
+      260 |   0.8251 |  5.869565e+05 |  +12.14% |  3.44e-09 |      
+      270 |   0.7953 |  6.433654e+05 |   +9.61% |  5.58e-09 |      
+      280 |   0.7645 |  6.996153e+05 |   +8.74% |  9.03e-09 |      
+      290 |   0.7327 |  7.631109e+05 |   +9.08% |  1.46e-08 |      
+      300 |   0.7001 |  8.328784e+05 |   +9.14% |  2.36e-08 |      
+      310 |   0.6658 |  8.968892e+05 |   +7.69% |  3.82e-08 |      
+      320 |   0.6252 |  9.480734e+05 |   +5.71% |  6.18e-08 |      
+      330 |   0.5828 |  9.922589e+05 |   +4.66% |  1.00e-07 |      
+      340 |   0.5360 |  1.023268e+06 |   +3.13% |  1.63e-07 |      
+      350 |   0.4885 |  1.047055e+06 |   +2.32% |  2.64e-07 |      
+      360 |   0.4393 |  1.076416e+06 |   +2.80% |  4.29e-07 |      
+      370 |   0.3915 |  1.095404e+06 |   +1.76% |  6.98e-07 |      
+      380 |   0.3469 |  1.100441e+06 |   +0.46% |  1.14e-06 |      
+      390 |   0.3106 |  1.107017e+06 |   +0.60% |  1.69e-06 |      
+      400 |   0.2751 |  1.107803e+06 |   +0.07% |  2.49e-06 |      
+      410 |   0.2439 |  1.111350e+06 |   +0.32% |  3.66e-06 |      
+      420 |   0.2127 |  1.112524e+06 |   +0.11% |  5.39e-06 |      
+      430 |   0.1841 |  1.112193e+06 |   -0.03% |  7.95e-06 |      
+      440 |   0.1588 |  1.112545e+06 |   +0.03% |  1.17e-05 |      
+      450 |   0.1362 |  1.112302e+06 |   -0.02% |  1.72e-05 |      
+      460 |   0.1157 |  1.111978e+06 |   -0.03% |  2.54e-05 |      
+      470 |   0.0993 |  1.111439e+06 |   -0.05% |  3.74e-05 |      
+      470 |   0.0993 |  1.111439e+06 |          |  3.89e-05 |      
+---------------------------------------------------------------
+[INFO GPL-1001] Global placement finished at iteration 470
+[INFO GPL-1002] Placed Cell Area            23379.5311
+[INFO GPL-1003] Available Free Area         41246.8929
+[INFO GPL-1004] Minimum Feasible Density        0.5700 (cell_area / free_area)
+[INFO GPL-1006]   Suggested Target Densities:
+[INFO GPL-1007]     - For 90% usage of free space: 0.6298
+[INFO GPL-1008]     - For 80% usage of free space: 0.7085
+[INFO GPL-1014] Final placement area: 23379.53 (+0.00%)
+Took 53 seconds: global_placement -skip_io -density 0.55 -pad_left 0 -pad_right 0
+Design area 20856 um^2 50% utilization.
+write_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/3_1_place_gp_skip_io.odb
+Elapsed time: 0:56.06[h:]min:sec. CPU time: user 72.33 sys 1.01 (130%). Peak memory: 739364KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_1_place_gp_skip_io      .odb           56            722 9713d2295feaa7cb4e21
+/orfs-source/flow/scripts/flow.sh 3_2_place_iop io_placement
+Running io_placement.tcl, stage 3_2_place_iop
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/3_1_place_gp_skip_io.odb
+read_sdc /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_floorplan.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+place_pins -hor_layers M4 -ver_layers M5
+Found 0 macro blocks.
+Using 2 tracks default min distance between IO pins.
+[INFO PPL-0001] Number of available slots 8588
+[INFO PPL-0002] Number of I/O             521
+[INFO PPL-0003] Number of I/O w/sink      521
+[INFO PPL-0004] Number of I/O w/o sink    0
+[INFO PPL-0005] Slots per section         200
+[INFO PPL-0008] Successfully assigned pins to sections.
+[INFO PPL-0012] I/O nets HPWL: 16171.28 um.
+Design area 20856 um^2 50% utilization.
+write_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/3_2_place_iop.odb
+Elapsed time: 0:03.69[h:]min:sec. CPU time: user 3.36 sys 0.33 (99%). Peak memory: 502428KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_2_place_iop             .odb            3            490 3757d1d66eef349f47b1
+/orfs-source/flow/scripts/flow.sh 3_3_place_gp global_place
+Running global_place.tcl, stage 3_3_place_gp
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/3_2_place_iop.odb
+read_sdc /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_floorplan.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+[INFO RSZ-0026] Removed 18270 buffers.
+Perform port buffering...
+[INFO RSZ-0027] Inserted 71 BUFx2_ASAP7_75t_R input buffers.
+[INFO RSZ-0028] Inserted 419 BUFx2_ASAP7_75t_R output buffers.
+global_placement -density 0.55 -pad_left 0 -pad_right 0 -routability_driven -timing_driven -force_center_initial_place -min_phi_coef 0.95 -max_phi_coef 1.05
+[INFO GPL-0001] ---- Initialize GPL Main Data Structures
+[INFO GPL-0002] DBU: 1000
+[INFO GPL-0003] SiteSize: (  0.054  0.270 ) um
+[INFO GPL-0004] CoreBBox: (  2.052  2.160 ) ( 205.578 205.470 ) um
+[INFO GPL-0036] Movable instances area:      19418.650 um^2
+[INFO GPL-0037] Total instances area:        19550.628 um^2
+[INFO GPL-0035] Pin density area adjust:      2627.626 um^2
+[INFO GPL-0032] ---- Initialize Region: Top-level
+[INFO GPL-0006] Number of instances:            159440
+[INFO GPL-0007] Movable instances:              154914
+[INFO GPL-0008] Fixed instances:                  4526
+[INFO GPL-0009] Dummy instances:                     0
+[INFO GPL-0010] Number of nets:                 154986
+[INFO GPL-0011] Number of pins:                 581790
+[INFO GPL-0012] Die BBox:  (  0.000  0.000 ) ( 207.581 207.581 ) um
+[INFO GPL-0013] Core BBox: (  2.052  2.160 ) ( 205.578 205.470 ) um
+[INFO GPL-0016] Core area:                   41378.871 um^2
+[INFO GPL-0014] Region name: top-level.
+[INFO GPL-0015] Region area:                 41378.871 um^2
+[INFO GPL-0017] Fixed instances area:          131.978 um^2
+[INFO GPL-0018] Movable instances area:      22046.276 um^2
+[INFO GPL-0019] Utilization:                    53.450 %
+[INFO GPL-0020] Standard cells area:         22046.276 um^2
+[INFO GPL-0021] Large instances area:            0.000 um^2
+[INFO GPL-0005] ---- Execute Conjugate Gradient Initial Placement.
+[INFO GPL-0051] Source of initial instance position counters:
+	Odb location = 0	Core center = 154914	Region center = 0
+[InitialPlace]  Iter: 1 conjugate gradient residual: 0.00230352 HPWL: 872004499
+[InitialPlace]  Iter: 2 conjugate gradient residual: 0.00141162 HPWL: 217632557
+[InitialPlace]  Iter: 3 conjugate gradient residual: 0.00063753 HPWL: 210945610
+[InitialPlace]  Iter: 4 conjugate gradient residual: 0.00040777 HPWL: 210620821
+[InitialPlace]  Iter: 5 conjugate gradient residual: 0.00053400 HPWL: 207898831
+[InitialPlace]  Iter: 6 conjugate gradient residual: 0.00044426 HPWL: 207457649
+[InitialPlace]  Iter: 7 conjugate gradient residual: 0.00044257 HPWL: 205758264
+[InitialPlace]  Iter: 8 conjugate gradient residual: 0.00035125 HPWL: 206223944
+[InitialPlace]  Iter: 9 conjugate gradient residual: 0.00022933 HPWL: 204780703
+[InitialPlace]  Iter: 10 conjugate gradient residual: 0.00020681 HPWL: 205135349
+[InitialPlace]  Iter: 11 conjugate gradient residual: 0.00018658 HPWL: 204424542
+[InitialPlace]  Iter: 12 conjugate gradient residual: 0.00016441 HPWL: 204973561
+[InitialPlace]  Iter: 13 conjugate gradient residual: 0.00015136 HPWL: 204502634
+[InitialPlace]  Iter: 14 conjugate gradient residual: 0.00011251 HPWL: 205129994
+[InitialPlace]  Iter: 15 conjugate gradient residual: 0.00011155 HPWL: 204505756
+[InitialPlace]  Iter: 16 conjugate gradient residual: 0.00013727 HPWL: 205186768
+[InitialPlace]  Iter: 17 conjugate gradient residual: 0.00010023 HPWL: 204677201
+[InitialPlace]  Iter: 18 conjugate gradient residual: 0.00008399 HPWL: 205286370
+[InitialPlace]  Iter: 19 conjugate gradient residual: 0.00007998 HPWL: 204765368
+[InitialPlace]  Iter: 20 conjugate gradient residual: 0.00006837 HPWL: 205418700
+[INFO GPL-0033] ---- Initialize Nesterov Region: Top-level
+[INFO GPL-0023] Placement target density:       0.5500
+[INFO GPL-0024] Movable insts average area:      0.142 um^2
+[INFO GPL-0025] Ideal bin area:                  0.259 um^2
+[INFO GPL-0026] Ideal bin count:                159917
+[INFO GPL-0027] Total bin area:              41378.871 um^2
+[INFO GPL-0028] Bin count (X, Y):         256 ,    256
+[INFO GPL-0029] Bin size (W * H):       0.795 *  0.794 um
+[INFO GPL-0030] Number of bins:                  65536
+[INFO GPL-0007] ---- Execute Nesterov Global Placement.
+[INFO GPL-0031] HPWL: Half-Perimeter Wirelength
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+        0 |   0.9880 |  1.705037e+05 |   +0.00% |  1.79e-14 |      
+       10 |   0.9811 |  1.192154e+05 |  -30.08% |  2.92e-14 |      
+       20 |   0.9772 |  1.252627e+05 |   +5.07% |  4.75e-14 |      
+       30 |   0.9742 |  1.291301e+05 |   +3.09% |  7.73e-14 |      
+       40 |   0.9722 |  1.332340e+05 |   +3.18% |  1.26e-13 |      
+       50 |   0.9710 |  1.359996e+05 |   +2.08% |  2.05e-13 |      
+       60 |   0.9701 |  1.385673e+05 |   +1.89% |  3.34e-13 |      
+       70 |   0.9696 |  1.412413e+05 |   +1.93% |  5.44e-13 |      
+       80 |   0.9682 |  1.440005e+05 |   +1.95% |  8.85e-13 |      
+       90 |   0.9668 |  1.467266e+05 |   +1.89% |  1.44e-12 |      
+      100 |   0.9658 |  1.493028e+05 |   +1.76% |  2.35e-12 |      
+      110 |   0.9652 |  1.517634e+05 |   +1.65% |  3.82e-12 |      
+      120 |   0.9645 |  1.542534e+05 |   +1.64% |  6.23e-12 |      
+      130 |   0.9637 |  1.570134e+05 |   +1.79% |  1.01e-11 |      
+      140 |   0.9624 |  1.604131e+05 |   +2.17% |  1.65e-11 |      
+      150 |   0.9606 |  1.650248e+05 |   +2.87% |  2.69e-11 |      
+      160 |   0.9582 |  1.715271e+05 |   +3.94% |  4.37e-11 |      
+      170 |   0.9544 |  1.808227e+05 |   +5.42% |  7.12e-11 |      
+      180 |   0.9484 |  1.938065e+05 |   +7.18% |  1.16e-10 |      
+      190 |   0.9395 |  2.111639e+05 |   +8.96% |  1.88e-10 |      
+      200 |   0.9267 |  2.371061e+05 |  +12.29% |  3.06e-10 |      
+      210 |   0.9091 |  2.741401e+05 |  +15.62% |  4.96e-10 |      
+      220 |   0.8876 |  3.167865e+05 |  +15.56% |  8.05e-10 |      
+      230 |   0.8629 |  3.650666e+05 |  +15.24% |  1.30e-09 |      
+      240 |   0.8339 |  4.183326e+05 |  +14.59% |  2.11e-09 |      
+      250 |   0.8022 |  4.702955e+05 |  +12.42% |  3.42e-09 |      
+      260 |   0.7698 |  5.101347e+05 |   +8.47% |  5.55e-09 |      
+      270 |   0.7368 |  5.258900e+05 |   +3.09% |  9.01e-09 |      
+      280 |   0.7016 |  5.228552e+05 |   -0.58% |  1.47e-08 |      
+      290 |   0.6637 |  5.406368e+05 |   +3.40% |  2.39e-08 |      
+[INFO GPL-0100] Timing-driven iteration 1/2, virtual: false.
+[INFO GPL-0101]    Iter: 298, overflow: 0.634, keep resizer changes at: 1, HPWL: 574531495
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |    154986
+    final |     +7.9% |     275 |    7186 |          1498 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0034] Found 1484 slew violations.
+[INFO RSZ-0036] Found 637 capacitance violations.
+[INFO RSZ-0037] Found 100 long wires.
+[INFO RSZ-0039] Resized 275 instances.
+[INFO RSZ-0038] Inserted 7186 buffers in 1498 nets.
+   Iter   |    Area   | Removed | Inserted |   Pins
+          |           | Buffers | Buffers  | Remaining
+-------------------------------------------------------
+        0 |     +0.0% |       0 |        0 |    154883
+    15400 |     -0.2% |     293 |      120 |    139483
+    30800 |     -1.1% |    1492 |      726 |    124083
+    46200 |     -1.3% |    1665 |      864 |    108683
+    61600 |     -2.2% |    3079 |     1600 |     93283
+    77000 |     -2.9% |    4015 |     2075 |     77883
+    92400 |     -3.4% |    4664 |     2531 |     62483
+   107800 |     -4.2% |    5920 |     3210 |     47083
+   123200 |     -4.4% |    6300 |     3570 |     31683
+   138600 |     -4.8% |    6813 |     4003 |     16283
+   154000 |     -4.9% |    6899 |     4155 |       883
+    final |     -5.2% |    7186 |     4521 |         0
+-------------------------------------------------------
+[INFO GPL-0106] Timing-driven: worst slack 7.86361e-09
+[INFO GPL-0107] Timing-driven: repair_design delta area: 455.876 um^2 (+2.07%)
+[INFO GPL-0108] Timing-driven: repair_design, gpl delta gcells: 4521 (+2.92%)
+[INFO GPL-0109] Timing-driven: repair_design, gcells created: 11707, deleted: 7186
+[INFO GPL-0110] Timing-driven: new target density: 0.5610524
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+      300 |   0.6168 |  6.702484e+05 |  +23.97% |  3.85e-08 |      
+[INFO GPL-0038] Routability snapshot saved at iter = 307
+      306 |   0.5993 |  6.908374e+05 |          |           |      
+      310 |   0.5928 |  6.881331e+05 |   +2.67% |  6.23e-08 |      
+      320 |   0.5684 |  6.785141e+05 |   -1.40% |  1.01e-07 |      
+      330 |   0.5243 |  6.869869e+05 |   +1.25% |  1.65e-07 |      
+      340 |   0.4734 |  7.316023e+05 |   +6.49% |  2.68e-07 |      
+      350 |   0.4236 |  7.528440e+05 |   +2.90% |  4.35e-07 |      
+      360 |   0.3772 |  7.536962e+05 |   +0.11% |  7.07e-07 |      
+      370 |   0.3397 |  7.825931e+05 |   +3.83% |  1.12e-06 |      
+      380 |   0.3052 |  7.617074e+05 |   -2.67% |  1.66e-06 |      
+[INFO GPL-0040] Routability iteration: 1
+[WARNING GRT-0281] Net clk has a large fanout of 18132 terminals.
+[INFO GPL-0041] Total routing overflow: 50.2583
+[INFO GPL-0042] Number of overflowed tiles: 347 (0.26%)
+[INFO GPL-0043] Average top 0.5% routing congestion: 1.0585
+[INFO GPL-0044] Average top 1.0% routing congestion: 0.9772
+[INFO GPL-0045] Average top 2.0% routing congestion: 0.9009
+[INFO GPL-0046] Average top 5.0% routing congestion: 0.8063
+[INFO GPL-0047] Routability iteration weighted routing congestion: 1.0178
+[INFO GPL-0048] Routing congestion (1.0178) lower than previous minimum (1e+30). Updating minimum.
+[INFO GPL-0051] Inflated area:                  90.348 um^2 (+0.40%)
+[INFO GPL-0052] Placement target density:       0.5611
+[INFO GPL-0076] Removing fillers, count: Before: 4522, After: 3884 (-14.11%)
+[INFO GPL-0077] Filler area (um^2)     : Before: 639.514, After: 549.252 (-14.11%)
+[INFO GPL-0078] Removed fillers count: 638, area removed: 90.222 um^2. Remaining area to be compensated by modifying density: 0.126 um^2
+[INFO GPL-0058] White space area:            41246.893 um^2 (+0.00%)
+[INFO GPL-0059] Movable instances area:      23141.667 um^2 (+0.00%)
+[INFO GPL-0060] Total filler area:             549.252 um^2 (-14.11%)
+[INFO GPL-0061] Total non-inflated area:     23141.753 um^2 (+0.00%)
+[INFO GPL-0062] Total inflated area:         23232.101 um^2 (+0.00%)
+[INFO GPL-0063] New Target Density:             0.5611
+[INFO GPL-0087] Routability end iteration: increase inflation and revert back to snapshot.
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+      390 |   0.5873 |  6.836155e+05 |  -10.25% |  7.06e-08 |      
+      400 |   0.5639 |  6.733909e+05 |   -1.50% |  1.04e-07 |      
+      410 |   0.5270 |  6.857609e+05 |   +1.84% |  1.53e-07 |      
+      420 |   0.4895 |  7.216650e+05 |   +5.24% |  2.25e-07 |      
+      430 |   0.4504 |  7.321249e+05 |   +1.45% |  3.31e-07 |      
+      440 |   0.4131 |  7.280866e+05 |   -0.55% |  4.87e-07 |      
+      450 |   0.3812 |  7.565871e+05 |   +3.91% |  7.15e-07 |      
+      460 |   0.3468 |  7.369616e+05 |   -2.59% |  1.05e-06 |      
+      470 |   0.3112 |  7.580614e+05 |   +2.86% |  1.55e-06 |      
+[INFO GPL-0040] Routability iteration: 2
+[INFO GPL-0041] Total routing overflow: 4.0943
+[INFO GPL-0042] Number of overflowed tiles: 76 (0.06%)
+[INFO GPL-0043] Average top 0.5% routing congestion: 0.9224
+[INFO GPL-0044] Average top 1.0% routing congestion: 0.8786
+[INFO GPL-0045] Average top 2.0% routing congestion: 0.8324
+[INFO GPL-0046] Average top 5.0% routing congestion: 0.7678
+[INFO GPL-0047] Routability iteration weighted routing congestion: 0.9005
+[INFO GPL-0050] Weighted routing congestion is lower than target routing congestion(1.0100), end routability optimization.
+[INFO GPL-0090] Routability finished. Target routing congestion achieved succesfully.
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+      480 |   0.2839 |  7.504098e+05 |   -1.01% |  2.28e-06 |      
+      490 |   0.2542 |  7.466990e+05 |   -0.49% |  3.36e-06 |      
+      500 |   0.2250 |  7.487604e+05 |   +0.28% |  4.94e-06 |      
+      510 |   0.2025 |  7.422121e+05 |   -0.87% |  7.28e-06 |      
+[INFO GPL-0100] Timing-driven iteration 2/2, virtual: false.
+[INFO GPL-0101]    Iter: 514, overflow: 0.195, keep resizer changes at: 1, HPWL: 738552091
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |    159507
+    final |     +0.0% |       0 |      27 |            20 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0034] Found 16 slew violations.
+[INFO RSZ-0036] Found 2 capacitance violations.
+[INFO RSZ-0037] Found 6 long wires.
+[INFO RSZ-0038] Inserted 27 buffers in 20 nets.
+   Iter   |    Area   | Removed | Inserted |   Pins
+          |           | Buffers | Buffers  | Remaining
+-------------------------------------------------------
+        0 |     +0.0% |       0 |        0 |    154883
+    15400 |     +0.0% |     121 |      193 |    139483
+    30800 |     +0.1% |     737 |      932 |    124083
+    46200 |     +0.1% |     877 |     1126 |    108683
+    61600 |     +0.3% |    1613 |     2300 |     93283
+    77000 |     +0.4% |    2091 |     2882 |     77883
+    92400 |     +0.4% |    2553 |     3482 |     62483
+   107800 |     +0.7% |    3235 |     4659 |     47083
+   123200 |     +0.7% |    3595 |     5090 |     31683
+   138600 |     +0.7% |    4029 |     5584 |     16283
+   154000 |     +0.8% |    4182 |     5884 |       883
+    final |     +0.8% |    4548 |     6288 |         0
+-------------------------------------------------------
+[INFO GPL-0106] Timing-driven: worst slack 7.8268165e-09
+[INFO GPL-0107] Timing-driven: repair_design delta area: 167.625 um^2 (+0.74%)
+[INFO GPL-0108] Timing-driven: repair_design, gpl delta gcells: 1767 (+1.11%)
+[INFO GPL-0109] Timing-driven: repair_design, gcells created: 6315, deleted: 4548
+[INFO GPL-0110] Timing-driven: new target density: 0.5651184
+Iteration | Overflow |     HPWL (um) |  HPWL(%) |   Penalty | Group
+---------------------------------------------------------------
+      520 |   0.1752 |  8.154463e+05 |   +9.87% |  1.06e-05 |      
+      530 |   0.1531 |  7.940375e+05 |   -2.63% |  1.57e-05 |      
+      540 |   0.1321 |  7.872043e+05 |   -0.86% |  2.31e-05 |      
+      550 |   0.1143 |  7.841790e+05 |   -0.38% |  3.40e-05 |      
+      560 |   0.0988 |  7.800003e+05 |   -0.53% |  5.01e-05 |      
+      560 |   0.0988 |  7.800003e+05 |          |  5.21e-05 |      
+---------------------------------------------------------------
+[INFO GPL-1001] Global placement finished at iteration 560
+[INFO GPL-1003] Routability mode iteration count: 167
+[INFO GPL-1005] Routability final weighted congestion: 0.8503
+[INFO GPL-1002] Placed Cell Area            22760.1260
+[INFO GPL-1003] Available Free Area         41246.8929
+[INFO GPL-1004] Minimum Feasible Density        0.5400 (cell_area / free_area)
+[INFO GPL-1006]   Suggested Target Densities:
+[INFO GPL-1007]     - For 90% usage of free space: 0.6131
+[INFO GPL-1008]     - For 80% usage of free space: 0.6898
+[INFO GPL-1011] Original area (um^2): 22046.28
+[INFO GPL-1012] Total routability artificial inflation: 90.35 (+0.41%)
+[INFO GPL-1013] Total timing-driven delta area: 623.50 (+2.83%)
+[INFO GPL-1014] Final placement area: 22760.13 (+3.24%)
+Took 512 seconds: global_placement -density 0.55 -pad_left 0 -pad_right 0 -routability_driven -timing_driven -force_center_initial_place -min_phi_coef 0.95 -max_phi_coef 1.05
+estimate_parasitics -placement
+Took 8 seconds: estimate_parasitics -placement
+Report metrics stage 3, global place...
+
+==========================================================================
+global place report_design_area
+--------------------------------------------------------------------------
+Design area 20173 um^2 49% utilization.
+write_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/3_3_place_gp.odb
+Elapsed time: 10:07.92[h:]min:sec. CPU time: user 614.17 sys 199.09 (133%). Peak memory: 2148316KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_3_place_gp              .odb          607           2097 76e2215a03501891a957
+/orfs-source/flow/scripts/flow.sh 3_4_place_resized resize
+Running resize.tcl, stage 3_4_place_resized
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/3_3_place_gp.odb
+read_sdc /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_floorplan.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+estimate_parasitics -placement
+Took 7 seconds: estimate_parasitics -placement
+Perform buffer insertion and gate resizing...
+repair_design -verbose
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |    161274
+     1000 |     +0.0% |       0 |       0 |             0 |    160274
+     2000 |     +0.0% |       0 |       0 |             0 |    159274
+     3000 |     +0.0% |       0 |       0 |             0 |    158274
+     4000 |     +0.0% |       0 |       0 |             0 |    157274
+     5000 |     +0.0% |       0 |       0 |             0 |    156274
+     6000 |     +0.0% |       0 |       0 |             0 |    155274
+     7000 |     +0.0% |       0 |       0 |             0 |    154274
+     8000 |     +0.0% |       0 |       0 |             0 |    153274
+     9000 |     +0.0% |       0 |       0 |             0 |    152274
+    10000 |     +0.0% |       0 |       0 |             0 |    151274
+    11000 |     +0.0% |       0 |       0 |             0 |    150274
+    12000 |     +0.0% |       0 |       0 |             0 |    149274
+    13000 |     +0.0% |       0 |       0 |             0 |    148274
+    14000 |     +0.0% |       0 |       0 |             0 |    147274
+    15000 |     +0.0% |       0 |       0 |             0 |    146274
+    16000 |     +0.0% |       0 |       0 |             0 |    145274
+    17000 |     +0.0% |       0 |       0 |             0 |    144274
+    18000 |     +0.0% |       0 |       0 |             0 |    143274
+    19000 |     +0.0% |       0 |       0 |             0 |    142274
+    20000 |     +0.0% |       0 |       0 |             0 |    141274
+    21000 |     +0.0% |       0 |       0 |             0 |    140274
+    22000 |     +0.0% |       0 |       0 |             0 |    139274
+    23000 |     +0.0% |       0 |       0 |             0 |    138274
+    24000 |     +0.0% |       0 |       0 |             0 |    137274
+    25000 |     +0.0% |       0 |       0 |             0 |    136274
+    26000 |     +0.0% |       0 |       0 |             0 |    135274
+    27000 |     +0.0% |       0 |       0 |             0 |    134274
+    28000 |     +0.0% |       0 |       0 |             0 |    133274
+    29000 |     +0.0% |       0 |       1 |             1 |    132274
+    30000 |     +0.0% |       0 |       1 |             1 |    131274
+    31000 |     +0.0% |       0 |       1 |             1 |    130274
+    32000 |     +0.0% |       0 |       1 |             1 |    129274
+    33000 |     +0.0% |       0 |       1 |             1 |    128274
+    34000 |     +0.0% |       0 |       1 |             1 |    127274
+    35000 |     +0.0% |       0 |       1 |             1 |    126274
+    36000 |     +0.0% |       0 |       1 |             1 |    125274
+    37000 |     +0.0% |       0 |       1 |             1 |    124274
+    38000 |     +0.0% |       0 |       1 |             1 |    123274
+    39000 |     +0.0% |       0 |       1 |             1 |    122274
+    40000 |     +0.0% |       0 |       1 |             1 |    121274
+    41000 |     +0.0% |       0 |       1 |             1 |    120274
+    42000 |     +0.0% |       0 |       1 |             1 |    119274
+    43000 |     +0.0% |       0 |       1 |             1 |    118274
+    44000 |     +0.0% |       0 |       1 |             1 |    117274
+    45000 |     +0.0% |       0 |       1 |             1 |    116274
+    46000 |     +0.0% |       0 |       1 |             1 |    115274
+    47000 |     +0.0% |       0 |       1 |             1 |    114274
+    48000 |     +0.0% |       0 |       1 |             1 |    113274
+    49000 |     +0.0% |       0 |       1 |             1 |    112274
+    50000 |     +0.0% |       0 |       1 |             1 |    111274
+    51000 |     +0.0% |       0 |       3 |             2 |    110274
+    52000 |     +0.0% |       0 |       3 |             2 |    109274
+    53000 |     +0.0% |       0 |       3 |             2 |    108274
+    54000 |     +0.0% |       0 |       3 |             2 |    107274
+    55000 |     +0.0% |       0 |       3 |             2 |    106274
+    56000 |     +0.0% |       0 |       3 |             2 |    105274
+    57000 |     +0.0% |       0 |       3 |             2 |    104274
+    58000 |     +0.0% |       0 |       3 |             2 |    103274
+    59000 |     +0.0% |       0 |       3 |             2 |    102274
+    60000 |     +0.0% |       0 |       3 |             2 |    101274
+    61000 |     +0.0% |       0 |       5 |             3 |    100274
+    62000 |     +0.0% |       0 |       5 |             3 |     99274
+    63000 |     +0.0% |       0 |       5 |             3 |     98274
+    64000 |     +0.0% |       0 |       5 |             3 |     97274
+    65000 |     +0.0% |       0 |       5 |             3 |     96274
+    66000 |     +0.0% |       0 |       5 |             3 |     95274
+    67000 |     +0.0% |       0 |       5 |             3 |     94274
+    68000 |     +0.0% |       0 |       5 |             3 |     93274
+    69000 |     +0.0% |       0 |       5 |             3 |     92274
+    70000 |     +0.0% |       0 |       5 |             3 |     91274
+    71000 |     +0.0% |       0 |       5 |             3 |     90274
+    72000 |     +0.0% |       0 |       5 |             3 |     89274
+    73000 |     +0.0% |       0 |       5 |             3 |     88274
+    74000 |     +0.0% |       0 |       5 |             3 |     87274
+    75000 |     +0.0% |       0 |       5 |             3 |     86274
+    76000 |     +0.0% |       0 |       5 |             3 |     85274
+    77000 |     +0.0% |       0 |       5 |             3 |     84274
+    78000 |     +0.0% |       0 |       5 |             3 |     83274
+    79000 |     +0.0% |       0 |       5 |             3 |     82274
+    80000 |     +0.0% |       0 |       5 |             3 |     81274
+    81000 |     +0.0% |       0 |       5 |             3 |     80274
+    82000 |     +0.0% |       0 |       5 |             3 |     79274
+    83000 |     +0.0% |       0 |       5 |             3 |     78274
+    84000 |     +0.0% |       0 |       5 |             3 |     77274
+    85000 |     +0.0% |       0 |       5 |             3 |     76274
+    86000 |     +0.0% |       0 |       5 |             3 |     75274
+    87000 |     +0.0% |       0 |       5 |             3 |     74274
+    88000 |     +0.0% |       0 |       5 |             3 |     73274
+    89000 |     +0.0% |       0 |       5 |             3 |     72274
+    90000 |     +0.0% |       0 |       5 |             3 |     71274
+    91000 |     +0.0% |       0 |       5 |             3 |     70274
+    92000 |     +0.0% |       0 |       5 |             3 |     69274
+    93000 |     +0.0% |       0 |       5 |             3 |     68274
+    94000 |     +0.0% |       0 |       5 |             3 |     67274
+    95000 |     +0.0% |       0 |       5 |             3 |     66274
+    96000 |     +0.0% |       0 |       5 |             3 |     65274
+    97000 |     +0.0% |       0 |       5 |             3 |     64274
+    98000 |     +0.0% |       0 |       5 |             3 |     63274
+    99000 |     +0.0% |       0 |       5 |             3 |     62274
+   100000 |     +0.0% |       0 |       5 |             3 |     61274
+   101000 |     +0.0% |       0 |       5 |             3 |     60274
+   102000 |     +0.0% |       0 |       5 |             3 |     59274
+   103000 |     +0.0% |       0 |       5 |             3 |     58274
+   104000 |     +0.0% |       0 |       5 |             3 |     57274
+   105000 |     +0.0% |       0 |       5 |             3 |     56274
+   106000 |     +0.0% |       0 |       5 |             3 |     55274
+   107000 |     +0.0% |       0 |       5 |             3 |     54274
+   108000 |     +0.0% |       0 |       5 |             3 |     53274
+   109000 |     +0.0% |       0 |       5 |             3 |     52274
+   110000 |     +0.0% |       0 |       5 |             3 |     51274
+   111000 |     +0.0% |       0 |       5 |             3 |     50274
+   112000 |     +0.0% |       0 |       5 |             3 |     49274
+   113000 |     +0.0% |       0 |       5 |             3 |     48274
+   114000 |     +0.0% |       0 |       5 |             3 |     47274
+   115000 |     +0.0% |       0 |       5 |             3 |     46274
+   116000 |     +0.0% |       0 |       5 |             3 |     45274
+   117000 |     +0.0% |       0 |       5 |             3 |     44274
+   118000 |     +0.0% |       0 |       5 |             3 |     43274
+   119000 |     +0.0% |       0 |       5 |             3 |     42274
+   120000 |     +0.0% |       0 |       5 |             3 |     41274
+   121000 |     +0.0% |       0 |       5 |             3 |     40274
+   122000 |     +0.0% |       0 |       5 |             3 |     39274
+   123000 |     +0.0% |       0 |       5 |             3 |     38274
+   124000 |     +0.0% |       0 |       5 |             3 |     37274
+   125000 |     +0.0% |       0 |       5 |             3 |     36274
+   126000 |     +0.0% |       0 |       5 |             3 |     35274
+   127000 |     +0.0% |       0 |       5 |             3 |     34274
+   128000 |     +0.0% |       0 |       5 |             3 |     33274
+   129000 |     +0.0% |       0 |       5 |             3 |     32274
+   130000 |     +0.0% |       0 |       5 |             3 |     31274
+   131000 |     +0.0% |       0 |       5 |             3 |     30274
+   132000 |     +0.0% |       0 |       5 |             3 |     29274
+   133000 |     +0.0% |       0 |       5 |             3 |     28274
+   134000 |     +0.0% |       0 |       5 |             3 |     27274
+   135000 |     +0.0% |       0 |       5 |             3 |     26274
+   136000 |     +0.0% |       0 |       5 |             3 |     25274
+   137000 |     +0.0% |       0 |       5 |             3 |     24274
+   138000 |     +0.0% |       0 |       5 |             3 |     23274
+   139000 |     +0.0% |       0 |       5 |             3 |     22274
+   140000 |     +0.0% |       0 |       5 |             3 |     21274
+   141000 |     +0.0% |       0 |       5 |             3 |     20274
+   142000 |     +0.0% |       0 |       6 |             4 |     19274
+   143000 |     +0.0% |       0 |       6 |             4 |     18274
+   144000 |     +0.0% |       0 |       6 |             4 |     17274
+   145000 |     +0.0% |       0 |       6 |             4 |     16274
+   146000 |     +0.0% |       0 |       6 |             4 |     15274
+   147000 |     +0.0% |       0 |       6 |             4 |     14274
+   148000 |     +0.0% |       0 |       6 |             4 |     13274
+   149000 |     +0.0% |       0 |       6 |             4 |     12274
+   150000 |     +0.0% |       0 |       6 |             4 |     11274
+   151000 |     +0.0% |       0 |       6 |             4 |     10274
+   152000 |     +0.0% |       0 |       6 |             4 |      9274
+   153000 |     +0.0% |       0 |       6 |             4 |      8274
+   154000 |     +0.0% |       0 |       6 |             4 |      7274
+   155000 |     +0.0% |       0 |       6 |             4 |      6274
+   156000 |     +0.0% |       0 |       6 |             4 |      5274
+   157000 |     +0.0% |       0 |       6 |             4 |      4274
+   158000 |     +0.0% |       0 |       6 |             4 |      3274
+   159000 |     +0.0% |       0 |       6 |             4 |      2274
+   160000 |     +0.0% |       0 |       6 |             4 |      1274
+   161000 |     +0.0% |       0 |       6 |             4 |       274
+    final |     +0.0% |       0 |       6 |             4 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0034] Found 4 slew violations.
+[INFO RSZ-0038] Inserted 6 buffers in 4 nets.
+Took 42 seconds: repair_design -verbose
+Floating nets: 
+Report metrics stage 3, resizer...
+
+==========================================================================
+resizer report_design_area
+--------------------------------------------------------------------------
+Design area 20174 um^2 49% utilization.
+Instance count before 165728, after 165734
+Pin count before 593845, after 593857
+write_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/3_4_place_resized.odb
+Elapsed time: 3:21.93[h:]min:sec. CPU time: user 180.71 sys 28.26 (103%). Peak memory: 1252144KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_4_place_resized         .odb          201           1222 9145c2b6ca2e6493bf9d
+/orfs-source/flow/scripts/flow.sh 3_5_place_dp detail_place
+Running detail_place.tcl, stage 3_5_place_dp
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/3_4_place_resized.odb
+read_sdc /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/2_floorplan.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+detailed_placement
+[INFO DPL-0005] Max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+Movements Summary
+---------------------------------------
+Total cells:                  161208
+Diamond Move Success:         161208 (100.00%)
+Diamond Move Failure:              0
+Rip-up and replace Success:        0 (  0.00% of diamond failures)
+Rip-up and replace Failure:        0
+Total Placement Failures:          0
+---------------------------------------
+Placement Analysis
+---------------------------------
+total displacement      35694.1 u
+average displacement        0.2 u
+max displacement            1.2 u
+original HPWL          781559.0 u
+legalized HPWL         812841.1 u
+delta HPWL                    4 %
+
+improve_placement -max_displacement "5 1"
+Detailed placement improvement.
+[INFO DPL-0401] Setting random seed to 1.
+[INFO DPL-0402] Setting maximum displacement 5 1 to 1350 270 units.
+[INFO DPL-0320] Collected 5047 fixed cells.
+[INFO DPL-0318] Collected 161208 single height cells.
+[INFO DPL-0321] Collected 0 wide cells.
+[INFO DPL-0322] Image (2052, 2160) - (205578, 205470)
+[INFO DPL-0310] Assigned 161208 cells into segments.  Movement in X-direction is 0.000000, movement in Y-direction is 0.000000.
+[INFO DPL-0313] Found 0 cells in wrong regions.
+[INFO DPL-0315] Found 0 row alignment problems.
+[INFO DPL-0314] Found 0 site alignment problems.
+[INFO DPL-0311] Found 0 overlaps between adjacent cells.
+[INFO DPL-0312] Found 0 edge spacing violations and 0 padding violations.
+[INFO DPL-0303] Running algorithm for independent set matching.
+[INFO DPL-0300] Set matching objective is wirelength.
+[INFO DPL-0301] Pass   1 of matching; objective is 8.116474e+08.
+[INFO DPL-0302] End of matching; objective is 8.114041e+08, improvement is 0.03 percent.
+[INFO DPL-0303] Running algorithm for global swaps.
+[INFO DPL-0306] Pass   1 of global swaps; hpwl is 8.038613e+08.
+[INFO DPL-0307] End of global swaps; objective is 8.038613e+08, improvement is 0.93 percent.
+[INFO DPL-0303] Running algorithm for vertical swaps.
+[INFO DPL-0308] Pass   1 of vertical swaps; hpwl is 8.016852e+08.
+[INFO DPL-0309] End of vertical swaps; objective is 8.016852e+08, improvement is 0.27 percent.
+[INFO DPL-0303] Running algorithm for reordering.
+[INFO DPL-0304] Pass   1 of reordering; objective is 8.008699e+08.
+[INFO DPL-0305] End of reordering; objective is 8.008699e+08, improvement is 0.10 percent.
+[INFO DPL-0303] Running algorithm for random improvement.
+[INFO DPL-0324] Random improver is using random generator.
+[INFO DPL-0325] Random improver is using hpwl objective.
+[INFO DPL-0326] Random improver cost string is (a).
+[INFO DPL-0332] End of pass, Generator random called 3224160 times.
+[INFO DPL-0335] Generator random, Cumulative attempts 3224160, swaps 375862, moves 1035727 since last reset.
+[INFO DPL-0333] End of pass, Objective hpwl, Initial cost 8.001501e+08, Scratch cost 7.941942e+08, Incremental cost 7.941942e+08, Mismatch? N
+[INFO DPL-0338] End of pass, Total cost is 7.941942e+08.
+[INFO DPL-0327] Pass   1 of random improver; improvement in cost is 0.74 percent.
+[INFO DPL-0328] End of random improver; improvement is 0.744350 percent.
+[INFO DPL-0380] Cell flipping.
+[INFO DPL-0382] Changed 0 cell orientations for row compatibility.
+[INFO DPL-0383] Performed 50522 cell flips.
+[INFO DPL-0384] End of flipping; objective is 7.835675e+08, improvement is 1.43 percent.
+[INFO DPL-0313] Found 0 cells in wrong regions.
+[INFO DPL-0315] Found 0 row alignment problems.
+[INFO DPL-0314] Found 0 site alignment problems.
+[INFO DPL-0311] Found 0 overlaps between adjacent cells.
+[INFO DPL-0312] Found 0 edge spacing violations and 0 padding violations.
+Detailed Improvement Results
+------------------------------------------
+Original HPWL           812841.1 u (  424654.7,   388186.4)
+Final HPWL              782931.0 u (  406423.5,   376507.6)
+Delta HPWL                  -3.7 % (      -4.3,       -3.0)
+
+Took 75 seconds: improve_placement -max_displacement "5 1"
+optimize_mirroring
+[INFO DPL-0020] Mirrored 14304 instances
+[INFO DPL-0021] HPWL before          782931.0 u
+[INFO DPL-0022] HPWL after           782491.8 u
+[INFO DPL-0023] HPWL delta               -0.1 %
+[INFO FLW-0012] Placement violations .
+estimate_parasitics -placement
+Took 7 seconds: estimate_parasitics -placement
+Report metrics stage 3, detailed place...
+
+==========================================================================
+detailed place report_design_area
+--------------------------------------------------------------------------
+Design area 20174 um^2 49% utilization.
+write_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/3_5_place_dp.odb
+write_sdc -no_timestamp /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/3_place.sdc
+Elapsed time: 3:48.34[h:]min:sec. CPU time: user 212.16 sys 28.12 (105%). Peak memory: 1496012KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+3_5_place_dp              .odb          228           1460 4d298727c546f2abc740
+cp /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/3_5_place_dp.odb /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/3_place.odb
+/orfs-source/flow/scripts/flow.sh 4_1_cts cts
+Running cts.tcl, stage 4_1_cts
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/3_place.odb
+read_sdc /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/3_place.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+clock_tree_synthesis -sink_clustering_enable -repair_clock_nets
+[INFO CTS-0050] Root buffer is BUFx24_ASAP7_75t_R.
+[INFO CTS-0051] Sink buffer is BUFx24_ASAP7_75t_R.
+[INFO CTS-0052] The following clock buffers will be used for CTS:
+                    BUFx24_ASAP7_75t_R
+[INFO CTS-0049] Characterization buffer is BUFx24_ASAP7_75t_R.
+[INFO CTS-0007] Net "clk" found for clock "core_clk".
+[INFO CTS-0010]  Clock net "clk" has 18131 sinks.
+[INFO CTS-0008] TritonCTS found 1 clock nets.
+[INFO CTS-0097] Characterization used 1 buffer(s) types.
+[INFO CTS-0201] 0 blockages from hard placement blockages and placed macros will be used.
+[INFO CTS-0027] Generating H-Tree topology for net clk.
+[INFO CTS-0028]  Total number of sinks: 18131.
+[INFO CTS-0090]  Sinks will be clustered based on buffer max cap.
+[INFO CTS-0030]  Number of static layers: 0.
+[INFO CTS-0020]  Wire segment unit: 1350  dbu (1 um).
+[INFO CTS-0206] Best clustering solution was found from clustering size of 10 and clustering diameter of 50.
+[INFO CTS-0019]  Total number of sinks after clustering: 970.
+[INFO CTS-0024]  Normalized sink region: [(2.73501, 4.61579), (150.86, 150.71)].
+[INFO CTS-0025]     Width:  148.1249.
+[INFO CTS-0026]     Height: 146.0937.
+ Level 1
+    Direction: Horizontal
+    Sinks per sub-region: 485
+    Sub-region size: 74.0624 X 146.0937
+[INFO CTS-0034]     Segment length (rounded): 38.
+ Level 2
+    Direction: Vertical
+    Sinks per sub-region: 243
+    Sub-region size: 74.0624 X 73.0469
+[INFO CTS-0034]     Segment length (rounded): 36.
+ Level 3
+    Direction: Horizontal
+    Sinks per sub-region: 122
+    Sub-region size: 37.0312 X 73.0469
+[INFO CTS-0034]     Segment length (rounded): 18.
+ Level 4
+    Direction: Vertical
+    Sinks per sub-region: 61
+    Sub-region size: 37.0312 X 36.5234
+[INFO CTS-0034]     Segment length (rounded): 18.
+ Level 5
+    Direction: Horizontal
+    Sinks per sub-region: 31
+    Sub-region size: 18.5156 X 36.5234
+[INFO CTS-0034]     Segment length (rounded): 10.
+ Level 6
+    Direction: Vertical
+    Sinks per sub-region: 16
+    Sub-region size: 18.5156 X 18.2617
+[INFO CTS-0034]     Segment length (rounded): 10.
+ Level 7
+    Direction: Horizontal
+    Sinks per sub-region: 8
+    Sub-region size: 9.2578 X 18.2617
+[INFO CTS-0034]     Segment length (rounded): 4.
+[INFO CTS-0032]  Stop criterion found. Max number of sinks is 15.
+[INFO CTS-0035]  Number of sinks covered: 970.
+[INFO CTS-0018]     Created 1193 clock buffers.
+[INFO CTS-0012]     Minimum number of buffers in the clock path: 8.
+[INFO CTS-0013]     Maximum number of buffers in the clock path: 8.
+[INFO CTS-0015]     Created 1193 clock nets.
+[INFO CTS-0016]     Fanout distribution for the current clock = 3:1, 4:10, 5:19, 6:19, 7:17, 8:16, 9:24, 10:16, 11:12, 12:12, 13:12, 14:21, 15:31, 16:57, 17:113, 18:161, 19:186, 20:155, 21:111, 22:78, 23:25, 24:2..
+[INFO CTS-0017]     Max level of the clock tree: 7.
+[INFO CTS-0098] Clock net "clk"
+[INFO CTS-0099]  Sinks 18971
+[INFO CTS-0100]  Leaf buffers 970
+[INFO CTS-0101]  Average sink wire length 380.98 um
+[INFO CTS-0102]  Path depth 7 - 8
+[INFO CTS-0207]  Dummy loads inserted 840
+[INFO RSZ-0047] Found 1 long wires.
+[INFO RSZ-0048] Inserted 1 buffers in 1 nets.
+Took 28 seconds: clock_tree_synthesis -sink_clustering_enable -repair_clock_nets
+estimate_parasitics -placement
+Took 5 seconds: estimate_parasitics -placement
+detailed_placement
+[INFO DPL-0005] Max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+Movements Summary
+---------------------------------------
+Total cells:                  163242
+Diamond Move Success:         163242 (100.00%)
+Diamond Move Failure:              0
+Rip-up and replace Success:        0 (  0.00% of diamond failures)
+Rip-up and replace Failure:        0
+Total Placement Failures:          0
+---------------------------------------
+Placement Analysis
+---------------------------------
+total displacement       2103.7 u
+average displacement        0.0 u
+max displacement            1.2 u
+original HPWL          799788.7 u
+legalized HPWL         814845.0 u
+delta HPWL                    2 %
+
+estimate_parasitics -placement
+Took 6 seconds: estimate_parasitics -placement
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
+[INFO RSZ-0098] No setup violations found
+[INFO RSZ-0046] Found 5128 endpoints with hold violations.
+Iteration | Resized | Buffers | Cloned Gates |   Area   |   WNS   |   TNS   | Endpoint
+--------------------------------------------------------------------------------------
+        0 |       0 |       0 |            0 |    +0.0% | -425.472 | -663848.750 | u_frontend.iq_mem[0][76]$_DFFE_PP_/D
+       10 |       0 |      70 |            0 |    +0.0% | -424.228 | -620776.938 | u_frontend.iq_mem[4][96]$_DFFE_PP_/D
+       20 |       0 |     127 |            0 |    +0.0% | -423.154 | -591813.125 | u_frontend.iq_mem[0][77]$_DFFE_PP_/D
+       30 |       0 |     181 |            0 |    +0.1% | -422.769 | -585837.625 | u_frontend.iq_mem[1][90]$_DFFE_PP_/D
+       40 |       0 |     239 |            0 |    +0.1% | -422.432 | -579464.438 | u_frontend.iq_mem[4][85]$_DFFE_PP_/D
+       50 |       0 |     288 |            0 |    +0.1% | -422.083 | -574009.062 | u_frontend.iq_mem[2][101]$_DFFE_PP_/D
+       60 |       0 |     358 |            0 |    +0.1% | -421.590 | -566079.625 | u_frontend.iq_mem[5][84]$_DFFE_PP_/D
+       70 |       0 |     434 |            0 |    +0.2% | -421.590 | -557409.750 | u_frontend.iq_mem[5][84]$_DFFE_PP_/D
+       80 |       0 |     511 |            0 |    +0.2% | -421.297 | -548845.375 | u_frontend.iq_mem[1][91]$_DFFE_PP_/D
+       90 |       0 |     576 |            0 |    +0.2% | -420.549 | -541502.562 | u_frontend.iq_mem[1][83]$_DFFE_PP_/D
+      100 |       0 |     648 |            0 |    +0.2% | -420.549 | -533421.688 | u_frontend.iq_mem[1][83]$_DFFE_PP_/D
+      110 |       0 |     703 |            0 |    +0.2% | -419.771 | -527336.250 | u_frontend.iq_mem[5][92]$_DFFE_PP_/D
+      120 |       0 |     763 |            0 |    +0.3% | -419.050 | -520622.750 | u_frontend.iq_mem[5][80]$_DFFE_PP_/D
+      130 |       0 |     822 |            0 |    +0.3% | -416.814 | -514193.469 | u_frontend.iq_mem[1][104]$_DFFE_PP_/D
+      140 |       0 |     885 |            0 |    +0.3% | -415.095 | -507036.125 | u_frontend.iq_mem[4][32]$_DFFE_PP_/D
+      150 |       0 |     972 |            0 |    +0.3% | -410.440 | -487529.469 | u_lsu.rsp_buf_rdata[22]$_SDFFE_PP0P_/D
+      160 |       0 |    1002 |            0 |    +0.4% | -409.698 | -487014.250 | u_lsu.rsp_buf_rdata[19]$_SDFFE_PP0P_/D
+      170 |       0 |    1026 |            0 |    +0.4% | -408.638 | -486602.969 | u_lsu.rsp_buf_rdata[24]$_SDFFE_PP0P_/D
+      180 |       0 |    1035 |            0 |    +0.4% | -406.930 | -486448.344 | u_lsu.rsp_buf_rdata[30]$_SDFFE_PP0P_/D
+      190 |       0 |    1038 |            0 |    +0.4% | -404.691 | -486396.844 | u_lsu.rsp_buf_rdata[12]$_SDFFE_PP0P_/D
+      200 |       0 |    1038 |            0 |    +0.4% | -404.691 | -486396.844 | u_lsu.rsp_buf_rdata[12]$_SDFFE_PP0P_/D
+      210 |       0 |    1038 |            0 |    +0.4% | -404.691 | -486396.844 | u_lsu.rsp_buf_rdata[12]$_SDFFE_PP0P_/D
+      220 |       0 |    1038 |            0 |    +0.4% | -404.691 | -486396.844 | u_lsu.rsp_buf_rdata[12]$_SDFFE_PP0P_/D
+      230 |       0 |    1041 |            0 |    +0.4% | -403.684 | -486345.938 | u_lsu.rsp_buf_rdata[8]$_SDFFE_PP0P_/D
+      240 |       0 |    1044 |            0 |    +0.4% | -401.234 | -486295.281 | u_lsu.rsp_buf_rdata[13]$_SDFFE_PP0P_/D
+      250 |       0 |    1044 |            0 |    +0.4% | -401.234 | -486295.281 | u_lsu.rsp_buf_rdata[13]$_SDFFE_PP0P_/D
+      260 |       0 |    1044 |            0 |    +0.4% | -401.234 | -486295.281 | u_lsu.rsp_buf_rdata[13]$_SDFFE_PP0P_/D
+      270 |       0 |    1056 |            0 |    +0.4% | -400.029 | -469276.188 | u_lsu.rsp_buf_rdata[10]$_SDFFE_PP0P_/D
+      280 |       0 |    1062 |            0 |    +0.4% | -392.986 | -469174.156 | u_lsu.in_flight_load_req[184]$_SDFFE_PP0P_/D
+      290 |       0 |    1075 |            0 |    +0.4% | -366.068 | -273916.375 | u_lsu.rsp_buf_is_store$_SDFFE_PP0P_/D
+      300 |       0 |    1140 |            0 |    +0.4% | -359.299 | -177202.031 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      310 |       0 |    1180 |            0 |    +0.4% | -359.299 | -67993.008 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      320 |       0 |    1218 |            0 |    +0.4% | -359.299 | -42552.961 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      330 |       0 |    1249 |            0 |    +0.4% | -359.299 | -12569.779 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      340 |       0 |    1249 |            0 |    +0.4% | -359.299 | -12569.779 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      350 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      360 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      370 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      380 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      390 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      400 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      410 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      420 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      430 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      440 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      450 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      460 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      470 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      480 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      490 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      500 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      510 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      520 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      530 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      540 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      550 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      560 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      570 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      580 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      590 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      600 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      610 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      620 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      630 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      640 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      650 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      660 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      670 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      680 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      690 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      700 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      710 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      720 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      730 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      740 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      750 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      760 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      770 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      780 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      790 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      800 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      810 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      820 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      830 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      840 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      850 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      860 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      870 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      880 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      890 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      900 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      910 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      920 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      930 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      940 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      950 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      960 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      970 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      980 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+      990 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1000 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1010 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1020 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1030 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1040 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1050 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1060 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1070 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1080 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1090 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1100 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1110 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1120 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1130 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1140 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1150 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1160 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1170 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1180 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1190 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1200 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1210 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1220 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1230 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1240 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1250 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1260 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1270 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1280 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1290 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1300 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1310 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1320 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1330 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1340 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1350 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1360 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1370 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1380 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1390 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1400 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1410 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1420 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1430 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1440 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1450 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1460 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1470 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1480 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1490 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1500 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1510 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1520 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1530 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1540 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1550 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1560 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1570 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1580 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1590 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1600 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1610 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1620 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1630 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1640 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1650 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1660 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1670 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1680 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1690 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1700 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1710 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1720 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1730 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1740 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1750 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1760 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1770 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1780 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1790 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1800 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1810 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1820 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1830 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1840 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1850 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1860 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1870 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1880 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1890 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1900 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1910 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1920 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1930 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1940 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1950 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1960 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1970 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1980 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     1990 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2000 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2010 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2020 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2030 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2040 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2050 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2060 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2070 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2080 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2090 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2100 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2110 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2120 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2130 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2140 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2150 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2160 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2170 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2180 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2190 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2200 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2210 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2220 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2230 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2240 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2250 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2260 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2270 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2280 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2290 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2300 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2310 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2320 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2330 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2340 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2350 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2360 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2370 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2380 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2390 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2400 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2410 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2420 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2430 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2440 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2450 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2460 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2470 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2480 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2490 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2500 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2510 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2520 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2530 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2540 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2550 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2560 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2570 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2580 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2590 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2600 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2610 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2620 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2630 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2640 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2650 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2660 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2670 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2680 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2690 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2700 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2710 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2720 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2730 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2740 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2750 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2760 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2770 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2780 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2790 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2800 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2810 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2820 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2830 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2840 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2850 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2860 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2870 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2880 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2890 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2900 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2910 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2920 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2930 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2940 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2950 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2960 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2970 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2980 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     2990 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3000 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3010 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3020 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3030 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3040 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3050 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3060 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3070 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3080 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3090 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3100 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3110 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3120 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3130 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3140 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3150 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3160 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3170 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3180 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3190 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3200 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3210 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3220 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3230 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3240 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3250 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3260 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3270 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3280 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3290 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3300 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3310 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3320 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3330 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3340 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3350 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3360 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3370 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3380 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3390 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3400 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3410 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3420 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3430 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3440 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3450 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3460 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3470 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3480 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3490 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3500 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3510 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3520 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3530 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3540 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3550 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3560 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3570 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3580 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3590 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3600 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3610 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3620 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3630 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3640 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3650 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3660 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3670 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3680 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3690 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3700 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3710 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3720 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3730 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3740 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3750 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3760 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3770 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3780 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3790 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3800 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3810 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3820 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3830 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3840 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3850 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3860 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3870 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3880 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3890 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3900 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3910 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3920 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3930 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3940 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3950 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3960 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3970 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3980 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     3990 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4000 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4010 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4020 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4030 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4040 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4050 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4060 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4070 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4080 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4090 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4100 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4110 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4120 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4130 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4140 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4150 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4160 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4170 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4180 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4190 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4200 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4210 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4220 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4230 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4240 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4250 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4260 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4270 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4280 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4290 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4300 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4310 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4320 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4330 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4340 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4350 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4360 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4370 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4380 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4390 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4400 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4410 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4420 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4430 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4440 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4450 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4460 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4470 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4480 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4490 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4500 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4510 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4520 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4530 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4540 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4550 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4560 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4570 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4580 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4590 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4600 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4610 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4620 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4630 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4640 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4650 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4660 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4670 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4680 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4690 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4700 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4710 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4720 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4730 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4740 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4750 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4760 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4770 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4780 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4790 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4800 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4810 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4820 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4830 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4840 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4850 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4860 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4870 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4880 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4890 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4900 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4910 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4920 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4930 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4940 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4950 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4960 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4970 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4980 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     4990 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     5000 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     5010 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     5020 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     5030 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     5040 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     5050 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     5060 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     5070 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     5080 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     5090 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     5100 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     5110 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     5120 |       0 |    1263 |            0 |    +0.4% | -359.299 | -11214.579 | u_lsu.rsp_buf_rdata[5]$_SDFFE_PP0P_/D
+     5130 |       0 |    1269 |            0 |    +0.4% | -358.872 | -11112.938 | u_lsu.rsp_buf_rdata[20]$_SDFFE_PP0P_/D
+     5140 |       0 |    1329 |            0 |    +0.5% | -358.144 | -10097.224 | u_lsu.rsp_buf_rdata[18]$_SDFFE_PP0P_/D
+     5150 |       0 |    1389 |            0 |    +0.5% | -355.383 | -9080.977 | u_lsu.rsp_buf_rdata[30]$_SDFFE_PP0P_/D
+     5160 |       0 |    1449 |            0 |    +0.5% | -306.014 | -8076.399 | u_lsu.rsp_buf_rdata[31]$_SDFFE_PP0P_/D
+     5170 |       0 |    1563 |            0 |    +0.5% | -256.723 | -6283.671 | u_lsu.rsp_buf_rdata[19]$_SDFFE_PP0P_/D
+     5180 |       0 |    1683 |            0 |    +0.6% | -255.065 | -4398.161 | u_lsu.rsp_buf_rdata[29]$_SDFFE_PP0P_/D
+     5190 |       0 |    1803 |            0 |    +0.6% | -207.483 | -2504.075 | u_lsu.rsp_buf_rdata[15]$_SDFFE_PP0P_/D
+     5200 |       0 |    1874 |            0 |    +0.7% | -68.676 | -1443.922 | u_lsu.rsp_buf_rdata[18]$_SDFFE_PP0P_/D
+     5210 |       0 |    1924 |            0 |    +0.7% | -66.505 | -764.252 | u_lsu.rsp_buf_rdata[17]$_SDFFE_PP0P_/D
+     5220 |       0 |    1971 |            0 |    +0.7% | -58.074 | -128.916 | u_lsu.rsp_buf_rdata[21]$_SDFFE_PP0P_/D
+    final |       0 |    1981 |            0 |    +0.7% |   0.118 |   0.000 | u_frontend.iq_mem[4][91]$_DFFE_PP_/D
+--------------------------------------------------------------------------------------
+[INFO RSZ-0032] Inserted 1981 hold buffers.
+Took 407 seconds: repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+detailed_placement
+[INFO DPL-0005] Max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+Movements Summary
+---------------------------------------
+Total cells:                  165223
+Diamond Move Success:         165223 (100.00%)
+Diamond Move Failure:              0
+Rip-up and replace Success:        0 (  0.00% of diamond failures)
+Rip-up and replace Failure:        0
+Total Placement Failures:          0
+---------------------------------------
+Placement Analysis
+---------------------------------
+total displacement       4534.9 u
+average displacement        0.0 u
+max displacement           11.5 u
+original HPWL          815569.4 u
+legalized HPWL         818345.7 u
+delta HPWL                    0 %
+
+estimate_parasitics -placement
+Took 6 seconds: estimate_parasitics -placement
+Report metrics stage 4, cts final...
+
+==========================================================================
+cts final report_design_area
+--------------------------------------------------------------------------
+Design area 20986 um^2 51% utilization.
+write_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/4_1_cts.odb
+write_sdc -no_timestamp /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/4_cts.sdc
+Elapsed time: 10:17.63[h:]min:sec. CPU time: user 537.59 sys 228.65 (124%). Peak memory: 1766552KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+4_1_cts                   .odb          617           1725 2fa76b3dffc463d43bec
+cp /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/4_1_cts.odb /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/4_cts.odb
+/orfs-source/flow/scripts/flow.sh 5_1_grt global_route
+Running global_route.tcl, stage 5_1_grt
+source /OpenROAD-flow-scripts/flow/platforms/asap7/liberty_suppressions.tcl
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_AO_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_OA_RVT_TT_nldm_211120.lib.gz
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SEQ_RVT_TT_nldm_220123.lib
+read_liberty -corner typical /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_SIMPLE_RVT_TT_nldm_211120.lib.gz
+read_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/4_cts.odb
+read_sdc /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/4_cts.sdc
+source /OpenROAD-flow-scripts/flow/platforms/asap7/setRC.tcl
+pin_access
+[INFO DRT-0149] Reading tech and libs.
+
+Units:                1000
+Number of layers:     21
+Number of macros:     212
+Number of vias:       14
+Number of viarulegen: 11
+
+[INFO DRT-0150] Reading design.
+[WARNING DRT-0120] Large net net17682 has 123 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15163 has 104 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15161 has 105 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15190 has 107 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15211 has 105 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15210 has 104 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15206 has 113 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net15215 has 112 pins which may impact routing performance. Consider optimization.
+[WARNING DRT-0120] Large net net17726 has 128 pins which may impact routing performance. Consider optimization.
+
+Design:                   rv32_ooo_core
+Die area:                 ( 0 0 ) ( 207581 207581 )
+Number of track patterns: 32
+Number of DEF vias:       0
+Number of components:     169749
+Number of terminals:      523
+Number of snets:          2
+Number of nets:           164455
+
+[INFO DRT-0167] List of default vias:
+  Layer V2
+    default via: VIA23
+  Layer V3
+    default via: VIA34
+  Layer V4
+    default via: VIA45
+  Layer V5
+    default via: VIA56
+  Layer V6
+    default via: VIA67
+  Layer V7
+    default via: VIA78
+  Layer V8
+    default via: VIA89
+  Layer V9
+    default via: VIA9Pad
+[INFO DRT-0162] Library cell analysis.
+[INFO DRT-0163] Instance analysis.
+  Complete 100000 instances.
+[INFO DRT-0164] Number of unique instances = 277.
+[INFO DRT-0168] Init region query.
+[INFO DRT-0018]   Complete 100000 insts.
+[INFO DRT-0024]   Complete Active.
+[INFO DRT-0024]   Complete V0.
+[INFO DRT-0024]   Complete M1.
+[INFO DRT-0024]   Complete V1.
+[INFO DRT-0024]   Complete M2.
+[INFO DRT-0024]   Complete V2.
+[INFO DRT-0024]   Complete M3.
+[INFO DRT-0024]   Complete V3.
+[INFO DRT-0024]   Complete M4.
+[INFO DRT-0024]   Complete V4.
+[INFO DRT-0024]   Complete M5.
+[INFO DRT-0024]   Complete V5.
+[INFO DRT-0024]   Complete M6.
+[INFO DRT-0024]   Complete V6.
+[INFO DRT-0024]   Complete M7.
+[INFO DRT-0024]   Complete V7.
+[INFO DRT-0024]   Complete M8.
+[INFO DRT-0024]   Complete V8.
+[INFO DRT-0024]   Complete M9.
+[INFO DRT-0024]   Complete V9.
+[INFO DRT-0024]   Complete Pad.
+[INFO DRT-0033] Active shape region query size = 0.
+[INFO DRT-0033] V0 shape region query size = 0.
+[INFO DRT-0033] M1 shape region query size = 2986621.
+[INFO DRT-0033] V1 shape region query size = 4425703.
+[INFO DRT-0033] M2 shape region query size = 84634.
+[INFO DRT-0033] V2 shape region query size = 85956.
+[INFO DRT-0033] M3 shape region query size = 85956.
+[INFO DRT-0033] V3 shape region query size = 57304.
+[INFO DRT-0033] M4 shape region query size = 57589.
+[INFO DRT-0033] V4 shape region query size = 57304.
+[INFO DRT-0033] M5 shape region query size = 31852.
+[INFO DRT-0033] V5 shape region query size = 5776.
+[INFO DRT-0033] M6 shape region query size = 3040.
+[INFO DRT-0033] V6 shape region query size = 0.
+[INFO DRT-0033] M7 shape region query size = 0.
+[INFO DRT-0033] V7 shape region query size = 0.
+[INFO DRT-0033] M8 shape region query size = 0.
+[INFO DRT-0033] V8 shape region query size = 0.
+[INFO DRT-0033] M9 shape region query size = 0.
+[INFO DRT-0033] V9 shape region query size = 0.
+[INFO DRT-0033] Pad shape region query size = 0.
+[INFO DRT-0165] Start pin access.
+[INFO DRT-0076]   Complete 1000 pins.
+[INFO DRT-0078]   Complete 1606 pins.
+[INFO DRT-0079]   Complete 100 unique inst patterns.
+[INFO DRT-0079]   Complete 200 unique inst patterns.
+[INFO DRT-0081]   Complete 277 unique inst patterns.
+[INFO DRT-0082]   Complete 10000 groups.
+[INFO DRT-0082]   Complete 20000 groups.
+[INFO DRT-0082]   Complete 30000 groups.
+[INFO DRT-0082]   Complete 40000 groups.
+[INFO DRT-0082]   Complete 50000 groups.
+[INFO DRT-0082]   Complete 60000 groups.
+[INFO DRT-0082]   Complete 70000 groups.
+[INFO DRT-0082]   Complete 80000 groups.
+[INFO DRT-0082]   Complete 90000 groups.
+[INFO DRT-0082]   Complete 100000 groups.
+[INFO DRT-0084]   Complete 107209 groups.
+#scanned instances     = 169749
+#unique  instances     = 277
+#stdCellGenAp          = 7539
+#stdCellValidPlanarAp  = 26
+#stdCellValidViaAp     = 6287
+#stdCellPinNoAp        = 0
+#stdCellPinCnt         = 601016
+#instTermValidViaApCnt = 0
+#macroGenAp            = 0
+#macroValidPlanarAp    = 0
+#macroValidViaAp       = 0
+#macroNoAp             = 0
+[INFO DRT-0166] Complete pin access.
+[INFO DRT-0267] cpu time = 00:30:23, elapsed time = 00:19:08, memory = 989.62 (MB), peak = 1121.14 (MB)
+Took 1152 seconds: pin_access
+set_global_routing_random -seed 1
+global_route -congestion_report_file /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/reports/asap7/rv32_post_lsu_v1/base/congestion.rpt -congestion_iterations 30 -congestion_report_iter_step 5 -verbose
+[INFO GRT-0020] Min routing layer: M2
+[INFO GRT-0021] Max routing layer: M7
+[INFO GRT-0022] Global adjustment: 0%
+[INFO GRT-0023] Grid origin: (0, 0)
+[INFO GRT-0088] Layer M1      Track-Pitch = 0.0360  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M2      Track-Pitch = 0.0390  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M3      Track-Pitch = 0.0360  line-2-Via Pitch: 0.0360
+[INFO GRT-0088] Layer M4      Track-Pitch = 0.0480  line-2-Via Pitch: 0.0480
+[INFO GRT-0088] Layer M5      Track-Pitch = 0.0480  line-2-Via Pitch: 0.0480
+[INFO GRT-0088] Layer M6      Track-Pitch = 0.0640  line-2-Via Pitch: 0.0640
+[INFO GRT-0088] Layer M7      Track-Pitch = 0.0640  line-2-Via Pitch: 0.0640
+[INFO GRT-0003] Macros: 0
+[INFO GRT-0004] Blockages: 54393
+[INFO GRT-0019] Found 1195 clock nets.
+[INFO GRT-0001] Minimum degree: 2
+[INFO GRT-0002] Maximum degree: 128
+
+[INFO GRT-0053] Routing resources analysis:
+          Routing      Original      Derated      Resource
+Layer     Direction    Resources     Resources    Reduction (%)
+---------------------------------------------------------------
+M1         Vertical            0             0          0.00%
+M2         Horizontal    1589726       1147121          27.84%
+M3         Vertical      2009520       1492745          25.72%
+M4         Horizontal    1539803       1143284          25.75%
+M5         Vertical      1485723       1101788          25.84%
+M6         Horizontal    1034409        699621          32.37%
+M7         Vertical      1177209        793155          32.62%
+---------------------------------------------------------------
+
+[INFO GRT-0101] Running extra iterations to remove overflow.
+[INFO GRT-0102] Start extra iteration 1/30
+[INFO GRT-0102] Start extra iteration 2/30
+[INFO GRT-0197] Via related to pin nodes: 1129074
+[INFO GRT-0198] Via related Steiner nodes: 52582
+[INFO GRT-0199] Via filling finished.
+[INFO GRT-0111] Final number of vias: 1514525
+[INFO GRT-0112] Final usage 3D: 6400011
+
+[INFO GRT-0096] Final congestion report:
+Layer         Resource        Demand        Usage (%)    Max H / Max V / Total Overflow
+---------------------------------------------------------------------------------------
+M1                   0             0            0.00%             0 /  0 /  0
+M2             1147121        663159           57.81%             0 /  0 /  0
+M3             1492745        745109           49.92%             0 /  0 /  0
+M4             1143284        278488           24.36%             0 /  0 /  0
+M5             1101788        131012           11.89%             0 /  0 /  0
+M6              699621         34793            4.97%             0 /  0 /  0
+M7              793155          3875            0.49%             0 /  0 /  0
+---------------------------------------------------------------------------------------
+Total          6377714       1856436           29.11%             0 /  0 /  0
+
+[INFO GRT-0018] Total wirelength: 1382184 um
+[INFO GRT-0014] Routed nets: 164455
+[INFO GRT-0303] Global routing runtime = 00:00:30
+Took 31 seconds: global_route -congestion_report_file /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/reports/asap7/rv32_post_lsu_v1/base/congestion.rpt -congestion_iterations 30 -congestion_report_iter_step 5 -verbose
+estimate_parasitics -global_routing
+Took 8 seconds: estimate_parasitics -global_routing
+Perform buffer insertion and gate resizing...
+repair_design -verbose
+Iteration |   Area    | Resized | Buffers | Nets repaired | Remaining
+---------------------------------------------------------------------
+        0 |     +0.0% |       0 |       0 |             0 |    165295
+     1000 |     +0.0% |       0 |       0 |             0 |    164295
+     2000 |     +0.0% |       0 |       0 |             0 |    163295
+     3000 |     +0.0% |       0 |       0 |             0 |    162295
+     4000 |     +0.0% |       0 |       0 |             0 |    161295
+     5000 |     +0.0% |       0 |       0 |             0 |    160295
+     6000 |     +0.0% |       0 |       0 |             0 |    159295
+     7000 |     +0.0% |       0 |       0 |             0 |    158295
+     8000 |     +0.0% |       0 |       0 |             0 |    157295
+     9000 |     +0.0% |       0 |       0 |             0 |    156295
+    10000 |     +0.0% |       0 |       0 |             0 |    155295
+    11000 |     +0.0% |       0 |       0 |             0 |    154295
+    12000 |     +0.0% |       0 |       0 |             0 |    153295
+    13000 |     +0.0% |       0 |       0 |             0 |    152295
+    14000 |     +0.0% |       0 |       0 |             0 |    151295
+    15000 |     +0.0% |       0 |       0 |             0 |    150295
+    16000 |     +0.0% |       0 |       0 |             0 |    149295
+    17000 |     +0.0% |       0 |       0 |             0 |    148295
+    18000 |     +0.0% |       0 |       0 |             0 |    147295
+    19000 |     +0.0% |       0 |       0 |             0 |    146295
+    20000 |     +0.0% |       0 |       0 |             0 |    145295
+    21000 |     +0.0% |       0 |       0 |             0 |    144295
+    22000 |     +0.0% |       0 |       0 |             0 |    143295
+    23000 |     +0.0% |       0 |       0 |             0 |    142295
+    24000 |     +0.0% |       0 |       0 |             0 |    141295
+    25000 |     +0.0% |       0 |       0 |             0 |    140295
+    26000 |     +0.0% |       0 |       0 |             0 |    139295
+    27000 |     +0.0% |       0 |       2 |             1 |    138295
+    28000 |     +0.0% |       0 |       3 |             2 |    137295
+    29000 |     +0.0% |       0 |       4 |             3 |    136295
+    30000 |     +0.0% |       0 |       5 |             4 |    135295
+    31000 |     +0.0% |       0 |       5 |             4 |    134295
+    32000 |     +0.0% |       0 |       5 |             4 |    133295
+    33000 |     +0.0% |       0 |       5 |             4 |    132295
+    34000 |     +0.0% |       0 |       5 |             4 |    131295
+    35000 |     +0.0% |       0 |       5 |             4 |    130295
+    36000 |     +0.0% |       0 |       5 |             4 |    129295
+    37000 |     +0.0% |       0 |       5 |             4 |    128295
+    38000 |     +0.0% |       0 |       5 |             4 |    127295
+    39000 |     +0.0% |       0 |       5 |             4 |    126295
+    40000 |     +0.0% |       0 |       5 |             4 |    125295
+    41000 |     +0.0% |       0 |       5 |             4 |    124295
+    42000 |     +0.0% |       0 |       5 |             4 |    123295
+    43000 |     +0.0% |       0 |       5 |             4 |    122295
+    44000 |     +0.0% |       0 |       5 |             4 |    121295
+    45000 |     +0.0% |       0 |       5 |             4 |    120295
+    46000 |     +0.0% |       0 |       5 |             4 |    119295
+    47000 |     +0.0% |       0 |       5 |             4 |    118295
+    48000 |     +0.0% |       0 |       5 |             4 |    117295
+    49000 |     +0.0% |       0 |       5 |             4 |    116295
+    50000 |     +0.0% |       0 |       5 |             4 |    115295
+    51000 |     +0.0% |       0 |       5 |             4 |    114295
+    52000 |     +0.0% |       0 |       5 |             4 |    113295
+    53000 |     +0.0% |       0 |       5 |             4 |    112295
+    54000 |     +0.0% |       0 |       5 |             4 |    111295
+    55000 |     +0.0% |       0 |       5 |             4 |    110295
+    56000 |     +0.0% |       0 |       5 |             4 |    109295
+    57000 |     +0.0% |       0 |       5 |             4 |    108295
+    58000 |     +0.0% |       0 |       5 |             4 |    107295
+    59000 |     +0.0% |       0 |       5 |             4 |    106295
+    60000 |     +0.0% |       0 |       5 |             4 |    105295
+    61000 |     +0.0% |       0 |       5 |             4 |    104295
+    62000 |     +0.0% |       0 |       5 |             4 |    103295
+    63000 |     +0.0% |       0 |       5 |             4 |    102295
+    64000 |     +0.0% |       0 |       5 |             4 |    101295
+    65000 |     +0.0% |       0 |       5 |             4 |    100295
+    66000 |     +0.0% |       0 |       5 |             4 |     99295
+    67000 |     +0.0% |       0 |       7 |             5 |     98295
+    68000 |     +0.0% |       0 |       7 |             5 |     97295
+    69000 |     +0.0% |       0 |       7 |             5 |     96295
+    70000 |     +0.0% |       0 |       7 |             5 |     95295
+    71000 |     +0.0% |       0 |       7 |             5 |     94295
+    72000 |     +0.0% |       0 |       7 |             5 |     93295
+    73000 |     +0.0% |       0 |       7 |             5 |     92295
+    74000 |     +0.0% |       0 |       7 |             5 |     91295
+    75000 |     +0.0% |       0 |       7 |             5 |     90295
+    76000 |     +0.0% |       0 |       7 |             5 |     89295
+    77000 |     +0.0% |       0 |       7 |             5 |     88295
+    78000 |     +0.0% |       0 |       7 |             5 |     87295
+    79000 |     +0.0% |       0 |       7 |             5 |     86295
+    80000 |     +0.0% |       0 |       7 |             5 |     85295
+    81000 |     +0.0% |       0 |       7 |             5 |     84295
+    82000 |     +0.0% |       0 |       7 |             5 |     83295
+    83000 |     +0.0% |       0 |       7 |             5 |     82295
+    84000 |     +0.0% |       0 |       7 |             5 |     81295
+    85000 |     +0.0% |       0 |       7 |             5 |     80295
+    86000 |     +0.0% |       0 |       7 |             5 |     79295
+    87000 |     +0.0% |       0 |       7 |             5 |     78295
+    88000 |     +0.0% |       0 |       7 |             5 |     77295
+    89000 |     +0.0% |       0 |       7 |             5 |     76295
+    90000 |     +0.0% |       0 |       7 |             5 |     75295
+    91000 |     +0.0% |       0 |       7 |             5 |     74295
+    92000 |     +0.0% |       0 |       7 |             5 |     73295
+    93000 |     +0.0% |       0 |       7 |             5 |     72295
+    94000 |     +0.0% |       0 |       7 |             5 |     71295
+    95000 |     +0.0% |       0 |       7 |             5 |     70295
+    96000 |     +0.0% |       0 |       7 |             5 |     69295
+    97000 |     +0.0% |       0 |       7 |             5 |     68295
+    98000 |     +0.0% |       0 |       7 |             5 |     67295
+    99000 |     +0.0% |       0 |       7 |             5 |     66295
+   100000 |     +0.0% |       0 |       7 |             5 |     65295
+   101000 |     +0.0% |       0 |       7 |             5 |     64295
+   102000 |     +0.0% |       0 |       7 |             5 |     63295
+   103000 |     +0.0% |       0 |       7 |             5 |     62295
+   104000 |     +0.0% |       0 |       7 |             5 |     61295
+   105000 |     +0.0% |       0 |       7 |             5 |     60295
+   106000 |     +0.0% |       0 |       7 |             5 |     59295
+   107000 |     +0.0% |       0 |       7 |             5 |     58295
+   108000 |     +0.0% |       0 |       7 |             5 |     57295
+   109000 |     +0.0% |       0 |       7 |             5 |     56295
+   110000 |     +0.0% |       0 |       7 |             5 |     55295
+   111000 |     +0.0% |       0 |       7 |             5 |     54295
+   112000 |     +0.0% |       0 |       7 |             5 |     53295
+   113000 |     +0.0% |       0 |       7 |             5 |     52295
+   114000 |     +0.0% |       0 |       7 |             5 |     51295
+   115000 |     +0.0% |       0 |       7 |             5 |     50295
+   116000 |     +0.0% |       0 |       7 |             5 |     49295
+   117000 |     +0.0% |       0 |       7 |             5 |     48295
+   118000 |     +0.0% |       0 |       7 |             5 |     47295
+   119000 |     +0.0% |       0 |       7 |             5 |     46295
+   120000 |     +0.0% |       0 |       7 |             5 |     45295
+   121000 |     +0.0% |       0 |       7 |             5 |     44295
+   122000 |     +0.0% |       0 |       7 |             5 |     43295
+   123000 |     +0.0% |       0 |       7 |             5 |     42295
+   124000 |     +0.0% |       0 |       7 |             5 |     41295
+   125000 |     +0.0% |       0 |       7 |             5 |     40295
+   126000 |     +0.0% |       0 |       7 |             5 |     39295
+   127000 |     +0.0% |       0 |       7 |             5 |     38295
+   128000 |     +0.0% |       0 |       7 |             5 |     37295
+   129000 |     +0.0% |       0 |       7 |             5 |     36295
+   130000 |     +0.0% |       0 |       7 |             5 |     35295
+   131000 |     +0.0% |       0 |       7 |             5 |     34295
+   132000 |     +0.0% |       0 |       7 |             5 |     33295
+   133000 |     +0.0% |       0 |       7 |             5 |     32295
+   134000 |     +0.0% |       0 |       7 |             5 |     31295
+   135000 |     +0.0% |       0 |       7 |             5 |     30295
+   136000 |     +0.0% |       0 |       7 |             5 |     29295
+   137000 |     +0.0% |       0 |       7 |             5 |     28295
+   138000 |     +0.0% |       0 |       7 |             5 |     27295
+   139000 |     +0.0% |       0 |       7 |             5 |     26295
+   140000 |     +0.0% |       0 |       7 |             5 |     25295
+   141000 |     +0.0% |       0 |       7 |             5 |     24295
+   142000 |     +0.0% |       0 |       7 |             5 |     23295
+   143000 |     +0.0% |       0 |       7 |             5 |     22295
+   144000 |     +0.0% |       0 |       7 |             5 |     21295
+   145000 |     +0.0% |       0 |       7 |             5 |     20295
+   146000 |     +0.0% |       0 |       7 |             5 |     19295
+   147000 |     +0.0% |       0 |       7 |             5 |     18295
+   148000 |     +0.0% |       0 |       7 |             5 |     17295
+   149000 |     +0.0% |       0 |       7 |             5 |     16295
+   150000 |     +0.0% |       0 |       7 |             5 |     15295
+   151000 |     +0.0% |       0 |       7 |             5 |     14295
+   152000 |     +0.0% |       0 |       7 |             5 |     13295
+   153000 |     +0.0% |       0 |       7 |             5 |     12295
+   154000 |     +0.0% |       0 |       7 |             5 |     11295
+   155000 |     +0.0% |       0 |       7 |             5 |     10295
+   156000 |     +0.0% |       0 |       7 |             5 |      9295
+   157000 |     +0.0% |       0 |       7 |             5 |      8295
+   158000 |     +0.0% |       0 |       7 |             5 |      7295
+   159000 |     +0.0% |       0 |       7 |             5 |      6295
+   160000 |     +0.0% |       0 |       7 |             5 |      5295
+   161000 |     +0.0% |       0 |       7 |             5 |      4295
+   162000 |     +0.0% |       0 |       7 |             5 |      3295
+   163000 |     +0.0% |       0 |       7 |             5 |      2295
+   164000 |     +0.0% |       0 |       7 |             5 |      1295
+   165000 |     +0.0% |       0 |       7 |             5 |       295
+    final |     +0.0% |       0 |       7 |             5 |         0
+---------------------------------------------------------------------
+[INFO RSZ-0034] Found 5 slew violations.
+[INFO RSZ-0038] Inserted 7 buffers in 5 nets.
+Took 43 seconds: repair_design -verbose
+global_route -start_incremental
+detailed_placement
+[INFO DPL-0005] Max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+Movements Summary
+---------------------------------------
+Total cells:                  165230
+Diamond Move Success:         165230 (100.00%)
+Diamond Move Failure:              0
+Rip-up and replace Success:        0 (  0.00% of diamond failures)
+Rip-up and replace Failure:        0
+Total Placement Failures:          0
+---------------------------------------
+Placement Analysis
+---------------------------------
+total displacement          4.8 u
+average displacement        0.0 u
+max displacement            0.5 u
+original HPWL          818398.8 u
+legalized HPWL         818401.4 u
+delta HPWL                    0 %
+
+global_route -end_incremental -congestion_report_file /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/reports/asap7/rv32_post_lsu_v1/base/congestion_post_repair_design.rpt
+Repair setup and hold violations...
+estimate_parasitics -global_routing
+Took 8 seconds: estimate_parasitics -global_routing
+repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+[INFO RSZ-0100] Repair move sequence: UnbufferMove SizeUpMove SwapPinsMove BufferMove CloneMove SplitLoadMove 
+[INFO RSZ-0098] No setup violations found
+[INFO RSZ-0033] No hold violations found.
+Took 27 seconds: repair_timing -setup_margin 0 -hold_margin 0 -repair_tns 100 -verbose
+global_route -start_incremental
+detailed_placement
+[INFO DPL-0005] Max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+Movements Summary
+---------------------------------------
+Total cells:                  165230
+Diamond Move Success:         165230 (100.00%)
+Diamond Move Failure:              0
+Rip-up and replace Success:        0 (  0.00% of diamond failures)
+Rip-up and replace Failure:        0
+Total Placement Failures:          0
+---------------------------------------
+Placement Analysis
+---------------------------------
+total displacement          0.0 u
+average displacement        0.0 u
+max displacement            0.0 u
+original HPWL          818401.4 u
+legalized HPWL         818401.4 u
+delta HPWL                    0 %
+
+check_placement -verbose
+global_route -end_incremental -congestion_report_file /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/reports/asap7/rv32_post_lsu_v1/base/congestion_post_repair_timing.rpt
+estimate_parasitics -global_routing
+Took 8 seconds: estimate_parasitics -global_routing
+global_route -start_incremental
+global_route -end_incremental -congestion_report_file /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/reports/asap7/rv32_post_lsu_v1/base/congestion_post_recover_power.rpt
+Repair antennas...
+[WARNING GRT-0246] No diode with LEF class CORE ANTENNACELL found.
+[INFO ANT-0002] Found 0 net violations.
+[INFO ANT-0001] Found 0 pin violations.
+Estimate parasitics...
+estimate_parasitics -global_routing
+Took 8 seconds: estimate_parasitics -global_routing
+Report metrics stage 5, global route...
+
+==========================================================================
+global route report_design_area
+--------------------------------------------------------------------------
+Design area 20988 um^2 51% utilization.
+[INFO FLW-0007] clock core_clk period 14000.000000
+[INFO FLW-0008] Clock core_clk period 6383.567
+[INFO FLW-0009] Clock core_clk slack 7280.456
+write_sdc -no_timestamp /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/updated_clks.sdc
+[INFO FLW-0011] Path endpoint path count 19391
+write_db /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/5_1_grt.odb
+write_sdc -no_timestamp /workspace/build/experiments/lsu-b-validation-v2/physical-B-v1/grt/results/asap7/rv32_post_lsu_v1/base/5_1_grt.sdc
+Elapsed time: 25:17.22[h:]min:sec. CPU time: user 2295.21 sys 71.41 (155%). Peak memory: 3835536KB.
+Log                       Ext     Elapsed/s Peak Memory/MB sha1sum result [0:20)
+5_1_grt                   .odb         1517           3745 c44ae1099ba79197ce06
+5_1_grt                   .sdc                             38ffb51c0ec82d748e38

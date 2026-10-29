@@ -1,6 +1,6 @@
 # Documentation index
 
-Updated 2026-10-21. Begin with current documents below. A historical PASS or
+Updated 2026-10-30 (Asia/Taipei). Begin with current documents below. A historical PASS or
 signoff label applies only to the source/configuration and checks in that record.
 
 ## Current documents
@@ -26,7 +26,10 @@ signoff label applies only to the source/configuration and checks in that record
 | [LSU A functional milestone](evidence/2026-10-19/lsu-a-functional/README.md) | Clean-source interface qualification and original full common-clock measurement |
 | [LSU A physical and operating-point review](evidence/2026-10-20/lsu-a-physical/README.md) | Actual timing grid, area and complete 27-case comparison at both qualified clocks |
 | [LSU A verification review](LSU_A_VERIFICATION_REVIEW.md) | Build/functional provenance and per-PC admission fixes, expanded unit cases and unchanged full-denominator results |
-| [LSU B review](LSU_B_REVIEW.md) | Independent B, complete functional/cycle evidence, failed fixed-flow timing and joint next-direction decision |
+| [B complete validation](LSU_B_COMPLETE_VALIDATION.md) | Full B contract completion, FPU reset/transition proof, same-flow physical qualification and both 27-case results |
+| [B completion raw evidence](evidence/2026-10-29/lsu-b-complete-validation/README.md) | Final reviews, native proof/timing, preserved failures, workload records and hashes |
+| [FPU mapping repair](FPU_MAPPING_REPAIR.md) | Shared map, equivalence evidence and current qualification scope |
+| [LSU B review](LSU_B_REVIEW.md) | Historical B v1 functional/cycle evidence and failed original-flow timing |
 | [LSU B raw evidence](evidence/2026-10-21/lsu-b/README.md) | All27 diagnostic cases, binaries/netlist/ODB, actual timing failures and reproducible proof |
 | [LSU B timing diagnosis](LSU_B_TIMING_DIAGNOSIS.md) | Original corner replay, mapped FP depth and cell/net delay comparison, TT/FF hold limits and next choices |
 | [Session handoff](SESSION_HANDOFF.md) | Bring-up measurements, tool images and local evidence locations |

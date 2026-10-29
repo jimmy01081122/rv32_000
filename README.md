@@ -22,6 +22,7 @@ fixed-time performance measurement.
 | [Micro-operations](uop_spec.md) | Implemented packet types and their limitations |
 | [Workloads](docs/WORKLOADS.md) | Approved suites and planning targets; open measurement contracts |
 | [LSU candidate review](docs/LSU_OPTIMIZATION_REVIEW.md) | Fixed six-case memory sensitivity and concrete hardware options |
+| [B complete validation](docs/LSU_B_COMPLETE_VALIDATION.md) | Completed FPU proof, same-flow timing, two full workload points and unmet performance targets |
 | [B timing diagnosis](docs/LSU_B_TIMING_DIAGNOSIS.md) | Replayed corner results, FP mapping sensitivity, FF hold limits and next choices |
 | [LSU interface fixes](docs/LSU_INTERFACE_FIX.md) | Backpressure / precise access faults, assertion-enabled tests and regression evidence |
 | [FIR/BiCG bottleneck review](docs/FMA_BOTTLENECK_REVIEW.md) | Dynamic instruction savings, load-response/store-retirement waits and observer validation |
@@ -97,12 +98,16 @@ Its [raw evidence](docs/evidence/2026-10-19/lsu-a-functional/README.md) is archi
 101.01 MHz run yields Embench 0.726601× and FP32 0.700275×: fixed 10 ns memory
 is sampled after two cycles at that clock. Neither point reaches both 1.20×
 goals. The 100 MHz point is recommended for discussion; the baseline is unchanged
-and the [independent B experiment](docs/LSU_B_REVIEW.md) is complete. Its full
-functional qualification and all 27 common-clock cases pass; physical timing fails.
-B cycle diagnostics are Embench 1.029459× / FP32 1.009599×, with cell area
-21,983.62194 µm² (0.995585×). At 100 MHz, SS setup is −2282.992 ps and FF hold
-is −0.333 ps. B has no qualified operating point; these cycle ratios remain
-unqualified system-time diagnostics.
+and the [independent B completion review](docs/LSU_B_COMPLETE_VALIDATION.md)
+now passes its global-route research contract after shared FPU mapping and hold
+repair. At 100 MHz B scores Embench 1.029459× / FP32 1.009599×; its fastest tested
+qualified 9.6 ns point scores 0.748705× / 0.719680× with fixed 10 ns memory.
+Both full 27-case runs and 3,629 FP32 outputs pass. Cell area is 21,309.821820 µm²,
+0.965070× the frozen baseline or 0.989062× the baseline rebuilt in the same new
+flow. The area budget passes; both 1.20× performance goals remain unmet.
+Complete FPU implementation equivalence after reset passes, within its stated
+two-state model. Full ISA/IEEE-754 coverage remains separate. The original
+[B v1 timing failure](docs/LSU_B_REVIEW.md) is retained as historical evidence.
 
 `make profile-fp-bottlenecks JOBS=4` adds read-only FIR/BiCG cycle observations
 and checks that observer on/off runs preserve the qualified output and timing.

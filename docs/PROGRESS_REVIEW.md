@@ -1,8 +1,8 @@
 # 可信進度與 AP5B 基線審查
 
-更新：2026-10-27。修正後 AP5B v1 的 global-route 研究基線已凍結；
+更新：2026-10-30（Asia/Taipei）。修正後 AP5B v1 的 global-route 研究基線已凍結；
 使用者已核准 A 先、B 作獨立 CPU 對照；[A 初版](../experiments/lsu-a-v1/README.md)
-已完成[雙操作點與實體研究資格](evidence/2026-10-20/lsu-a-physical/README.md)。[B](LSU_B_REVIEW.md)也已完成獨立實驗：完整功能與同頻資料通過，固定流程時序未過。兩類效能目標仍未達，原基線不變。專案沒有硬性時程。
+已完成[雙操作點與實體研究資格](evidence/2026-10-20/lsu-a-physical/README.md)。[B](LSU_B_COMPLETE_VALIDATION.md)已完成修復後的完整實驗契約：功能資格重驗、FPU 實作等價、同流程三 corner 與雙操作點完整 27 項通過。兩類效能目標仍未達，原基線不變。專案沒有硬性時程。
 
 ## 目前能證明的進度
 
@@ -13,8 +13,8 @@
 | 3. 驗證基礎 | LSU 48 assertion cases、18 directed／Spike、3,400 有限 FMA；固定時間 normal／assert 各 58 controls | 定向資格完成；完整 ISA／FP 覆蓋仍開放 |
 | 4. 修正後基線 | 10 ns 三 corner 通過、22,081.1184 µm²；乾淨來源正式 27/27 通過 | global-route 研究層級完成 |
 | 5. 目標與第一項 CPU 方案 | 兩類各 ≥1.20×、面積 ≤1.10× 已核准；先 A、B 獨立對照 | 順序已核准 |
-| 6. CPU 優化驗收 | A 100 MHz／101.01 MHz 各 27/27、FP3,629；同頻 GM 1.045830×／1.078255×；面積 1.003674×、三 corner 通過 | A 研究資格完成；B 功能／cycle 通過、實體拒收；兩類 ≥1.20× 目標未達 |
-| 7. FPU 映射流程修復 | 共同 25,855-cell 映射重跑一致；100-bit CEC、525,189 個保留元件接線與 116,737-cycle 回歸通過 | 映射層里程碑完成；完整 RTL 形式證明逾時，新流程實體資格／FF hold 仍開放 |
+| 6. CPU 優化驗收 | A 100 MHz／101.01 MHz 各 27/27、FP3,629；同頻 GM 1.045830×／1.078255×；面積 1.003674×、三 corner 通過 | A、B 研究資格完成；B 新流程面積 0.989062× 同流程 baseline；兩類 ≥1.20× 目標未達 |
+| 7. FPU 映射流程修復 | 共同映射、完整 reset／轉移／輸出等價及實際物理圖綁定通過；共同 hold40／ready buffer 完成兩版三 corner | B 契約完成；IEEE-754／完整 ISA 覆蓋仍開放 |
 
 進度以關卡、完整分母和原始證據呈現，不換算成整個專案的完成百分比。
 失敗／不完整實體嘗試保留原結果，不併入正向資格。
@@ -95,13 +95,18 @@ B 已從相同凍結基線完成獨立對照（結果見下）；操作點與後
 架構、集合、目標或驗收條件變更都先討論；可比條件內的檢查與修復持續進行。
 
 
-B 的[完整封存](evidence/2026-10-21/lsu-b/README.md)確認：基線／B 各62單元、定向回歸、原27項與FP 3629均通過。同頻 cycle GM為1.029459×／1.009599×，面積0.995585×；100MHz SS setup −2282.992ps、各已測period FF hold −0.333ps，沒有完整合格操作點。12.3ns只通過setup，不能作合格時脈。
+B 的[原 v1 封存](evidence/2026-10-21/lsu-b/README.md)保留當時的完整功能通過與
+原流程時序失敗。後續[時序診斷](LSU_B_TIMING_DIAGNOSIS.md)確認未改 FPU 的映射
+差距在布局前已存在；[共同 FPU 修復](FPU_MAPPING_REPAIR.md)及 B 完整驗證已接續完成。
 
-後續[時序診斷與選項](LSU_B_TIMING_DIAGNOSIS.md)完成 12 次唯讀程序，
-重現 9 組原 routed corner、核對 534,342 個 synthesis cells 的完整連線，
-另以 zero-wire／ideal-clock 確認未改 FPU 的映射差距在布局前已存在。
-TT 的 50 ps hold 修補也未保障 B 的 FF，後者仍有兩個失敗端點。
-使用者後續已核准先進行 [FPU 映射修復](FPU_MAPPING_REPAIR.md)。共同 standalone
-映射兩次重跑相同，100-bit 狀態轉移 CEC 與 525,189 個保留元件的接線審查通過。
-完整 RTL 等價形式證明仍逾時未證明；新流程實體資格與 FF hold 修復尚待完成。
-目前沒有修改 CPU RTL、基線、實體門檻或導入 A+B。
+[B 最終審查](LSU_B_COMPLETE_VALIDATION.md)確認完整 FPU reset 後二態實作等價，
+同流程 baseline／B 三 corner 分別自 9.5／9.6 ns 合格，均有實際相鄰較快失敗點。
+B 在 100 MHz 為 Embench 1.029459×／FP32 1.009599×，104.17 MHz 為
+0.748705×／0.719680×；每點 27/27、3,629 數值與逐 PC 計數通過。
+B 面積 21,309.821820 µm²，為原基線 0.965070×、同新流程 baseline 的 0.989062×。
+建議以 100 MHz 評估，PID +13.9763% 的時間退步仍列入討論。最終審查器 7 個
+反例全數拒收，正向通過；失敗修補嘗試與舊 EQY timeout 未改寫。
+
+[新封存](evidence/2026-10-29/lsu-b-complete-validation/README.md)區分原功能資格
+重新核對與新跑的工作負載／形式／實體。完成驗證不代表達成效能目標；A 尚未以
+新物理流程重跑，也沒有選定新基線或導入 A+B。下一步架構方向由使用者共同選擇。

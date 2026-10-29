@@ -1,0 +1,91 @@
+{
+  "scope": "tested global-route timing trials only; routing review and formal measurement still required",
+  "analysis_report_sha256": "f4ff54e124c5b115992df4199d5ee27628ea88f7d381d5abe4a8a9bc3304852f",
+  "implementation_report_sha256": "346c966c9a1d8f348167867213c537ac69fb11f6eea14dd5da35acbcd87f7ea0",
+  "checker_sha256": "170a5abc90b2f6dad76d2fa0a81a5b6601b897865862b867d784e888fc1048b5",
+  "records": [
+    {
+      "corner": "TT",
+      "standard_cell_area_um2": 20988.36198001649,
+      "standard_cell_count": 169756,
+      "register_count": 18131,
+      "library_warning_cell_instances": 0,
+      "trials": [
+        {
+          "period_ps": 10000,
+          "setup_slack_ps": 3282.1177018556773,
+          "hold_slack_ps": 14.729328926557445,
+          "problems": [],
+          "passed": true
+        },
+        {
+          "period_ps": 14000,
+          "setup_slack_ps": 7282.118048800374,
+          "hold_slack_ps": 14.729328926557445,
+          "problems": [],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "corner": "SS",
+      "standard_cell_area_um2": 20988.36198001649,
+      "standard_cell_count": 169756,
+      "register_count": 18131,
+      "library_warning_cell_instances": 0,
+      "trials": [
+        {
+          "period_ps": 10000,
+          "setup_slack_ps": 373.5092250426417,
+          "hold_slack_ps": 37.49833791806294,
+          "problems": [
+            "electrical/library timing checks need review"
+          ],
+          "passed": false
+        },
+        {
+          "period_ps": 14000,
+          "setup_slack_ps": 4373.509571987338,
+          "hold_slack_ps": 37.49833791806294,
+          "problems": [
+            "electrical/library timing checks need review"
+          ],
+          "passed": false
+        }
+      ]
+    },
+    {
+      "corner": "FF",
+      "standard_cell_area_um2": 20988.36198001649,
+      "standard_cell_count": 169756,
+      "register_count": 18131,
+      "library_warning_cell_instances": 0,
+      "trials": [
+        {
+          "period_ps": 10000,
+          "setup_slack_ps": 4813.049533728012,
+          "hold_slack_ps": -0.7243650153111031,
+          "problems": [
+            "hold violation",
+            "electrical/library timing checks need review"
+          ],
+          "passed": false
+        },
+        {
+          "period_ps": 14000,
+          "setup_slack_ps": 8813.049880672708,
+          "hold_slack_ps": -0.7243650153111031,
+          "problems": [
+            "hold violation",
+            "electrical/library timing checks need review"
+          ],
+          "passed": false
+        }
+      ]
+    }
+  ],
+  "qualified_periods_ps": [],
+  "smallest_tested_passing_period_ps": null,
+  "standard_cell_area_um2": 20988.36198001649,
+  "passed": false
+}

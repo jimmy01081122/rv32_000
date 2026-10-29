@@ -1,0 +1,39 @@
+{
+  "creator": "Yosys 0.63+post (git sha1 UNKNOWN-dirty, g++ 11.4.0-1ubuntu1~22.04.3 -fPIC -O3)",
+  "modules": {
+    "BUFx2_ASAP7_75t_R": {
+      "attributes": {
+        "top": "00000000000000000000000000000001",
+        "abc9_box": "00000000000000000000000000000001",
+        "area": "0.0729"
+      },
+      "ports": {
+        "A": {
+          "direction": "input",
+          "bits": [ 2 ]
+        },
+        "Y": {
+          "direction": "output",
+          "bits": [ 2 ]
+        }
+      },
+      "cells": {
+      },
+      "netnames": {
+        "A": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+            "capacitance": "0.534279"
+          }
+        },
+        "Y": {
+          "hide_name": 0,
+          "bits": [ 2 ],
+          "attributes": {
+          }
+        }
+      }
+    }
+  }
+}

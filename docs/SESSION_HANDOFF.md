@@ -1,6 +1,7 @@
 # Session handoff — 2026-10-16
 
 > Environment bring-up snapshot. For subsequent project decisions and open work,
+> 最新 B 完成紀錄見 [B 線完整驗證](LSU_B_COMPLETE_VALIDATION.md)。
 > use [PLAN.md](../PLAN.md), [STATUS.md](STATUS.md) and [WORKLOADS.md](WORKLOADS.md).
 > The measurements below retain their original scope; documentation cleanup is
 > not a new benchmark or physical run.

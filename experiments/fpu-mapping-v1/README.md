@@ -68,9 +68,11 @@ the evidence archive or overwrite an original job's status.
 
 ## Admission limits
 
-Common mapping and ABC transition equivalence are established. Full RTL-to-mapped
-sequential formal equivalence is **unproven (900 s timeout)**. Cycle regression is
-bounded testing, not an independent IEEE-754 oracle. Synthesis STA is zero-wire,
-ideal-clock diagnosis, not a qualified clock or area. Fresh same-flow baseline/A/B
-physical implementations and independent TT/SS/FF checks remain necessary;
-B's original FF hold rejection remains unchanged.
+Common mapping and ABC transition equivalence are established. The subsequent
+[B completion](../../docs/LSU_B_COMPLETE_VALIDATION.md) proves full two-state FPU
+implementation equivalence after one synchronous reset edge, with unrestricted
+related-state/input transition and complete-output obligations. The original
+900 s EQY timeout remains a historical failure. IEEE-754 specification coverage
+is separate. Shared-flow baseline/B global-route qualification now passes;
+A has not been rerun in that new physical flow. The v1 archive retains its
+original zero-wire diagnosis and then-open qualification status unchanged.

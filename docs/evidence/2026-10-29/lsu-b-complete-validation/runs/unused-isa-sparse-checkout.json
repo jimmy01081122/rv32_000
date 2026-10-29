@@ -1,0 +1,25 @@
+{
+  "utc": "2026-10-28T15:16:43.427435+00:00",
+  "scope": "omit unused RV64 and RV32E generated third-party working files only; all Git objects and RV32I tests retained; no source edits or validation claims",
+  "repository": "verification/act4/riscv-arch-test",
+  "commit": "74efcaac81f48f437f58868771daf2ed2776d422",
+  "command": [
+    "git",
+    "-C",
+    "verification/act4/riscv-arch-test",
+    "sparse-checkout",
+    "set",
+    "--no-cone",
+    "--stdin"
+  ],
+  "patterns": "/*\n!/tests/rv64i/\n!/tests/rv64e/\n!/tests/rv32e/\n",
+  "restore_command": [
+    "git",
+    "-C",
+    "verification/act4/riscv-arch-test",
+    "sparse-checkout",
+    "disable"
+  ],
+  "clean_before": true,
+  "clean_after": true
+}

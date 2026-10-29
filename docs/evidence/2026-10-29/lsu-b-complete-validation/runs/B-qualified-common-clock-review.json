@@ -1,0 +1,301 @@
+{
+  "passed": true,
+  "comparison_point": "common-clock",
+  "period_ps": 10000,
+  "memory_ps": 10000,
+  "measurement_summary_sha256": "122dbd4bf430e1ef8f2e87c8f32705313307097308d3dec4279e54161c2392da",
+  "functional_provenance": {
+    "validator_sha256": "7fb6e823b208ddeacc17769b4a573a8bb5755ae5465d80da695b1cb1a3ca0394",
+    "build_summary_sha256": "1100da367ad9990009a0e5110b02dbb0a6a7bfe07e82841094a196b27e3aa79c",
+    "qualification_summary_sha256": "f7801e7130612bec403dfa12b8d72fa39ac46896d90139e145ea7742d3defd0d",
+    "normal_simulator_sha256": "359ea89735e630a3c1f2fcd7795ec9598f35d6fb4e9a8b0f448ba3f6ee2c1144",
+    "assert_simulator_sha256": "da70e3bd5c695a9d4bea54950746537092a2ffdf69d10367c56a1f45a1dfc860",
+    "directed_cases": 18,
+    "spike_cases": 18,
+    "interface_cases": 48,
+    "fixed_time_controls": 58,
+    "finite_fma_values": 3400,
+    "passed": true
+  },
+  "per_pc_work_matches": true,
+  "numerical_values_checked": 3629,
+  "embench_time_geomean_speedup": 1.029458926609211,
+  "fp32_time_geomean_speedup": 1.0095989895859971,
+  "fp32_subgroup_speedup": {
+    "dsp": 1.013839324971106,
+    "matrix_ml": 1.005376389204587
+  },
+  "records": [
+    {
+      "family": "fp32",
+      "name": "fir",
+      "group": "dsp",
+      "baseline_cycles": 74311,
+      "candidate_cycles": 74303,
+      "baseline_time_ps": 743110000,
+      "candidate_time_ps": 743030000,
+      "time_speedup": 1.0001076672543505
+    },
+    {
+      "family": "fp32",
+      "name": "iir",
+      "group": "dsp",
+      "baseline_cycles": 13523,
+      "candidate_cycles": 12499,
+      "baseline_time_ps": 135230000,
+      "candidate_time_ps": 124990000,
+      "time_speedup": 1.08192655412433
+    },
+    {
+      "family": "fp32",
+      "name": "fft",
+      "group": "dsp",
+      "baseline_cycles": 40867,
+      "candidate_cycles": 36722,
+      "baseline_time_ps": 408670000,
+      "candidate_time_ps": 367220000,
+      "time_speedup": 1.1128751157344372
+    },
+    {
+      "family": "fp32",
+      "name": "pid",
+      "group": "dsp",
+      "baseline_cycles": 7248,
+      "candidate_cycles": 8261,
+      "baseline_time_ps": 72480000,
+      "candidate_time_ps": 82610000,
+      "time_speedup": 0.8773756203849413
+    },
+    {
+      "family": "fp32",
+      "name": "gemm",
+      "group": "matrix_ml",
+      "baseline_cycles": 133275,
+      "candidate_cycles": 133870,
+      "baseline_time_ps": 1332750000,
+      "candidate_time_ps": 1338700000,
+      "time_speedup": 0.9955553895570329
+    },
+    {
+      "family": "fp32",
+      "name": "bicg",
+      "group": "matrix_ml",
+      "baseline_cycles": 23927,
+      "candidate_cycles": 23720,
+      "baseline_time_ps": 239270000,
+      "candidate_time_ps": 237200000,
+      "time_speedup": 1.0087268128161888
+    },
+    {
+      "family": "fp32",
+      "name": "cholesky",
+      "group": "matrix_ml",
+      "baseline_cycles": 194161,
+      "candidate_cycles": 190887,
+      "baseline_time_ps": 1941610000,
+      "candidate_time_ps": 1908870000,
+      "time_speedup": 1.017151508484077
+    },
+    {
+      "family": "fp32",
+      "name": "svm",
+      "group": "matrix_ml",
+      "baseline_cycles": 43392,
+      "candidate_cycles": 43383,
+      "baseline_time_ps": 433920000,
+      "candidate_time_ps": 433830000,
+      "time_speedup": 1.0002074545328816
+    },
+    {
+      "family": "embench",
+      "name": "aha-mont64",
+      "group": null,
+      "baseline_cycles": 5356670,
+      "candidate_cycles": 5359621,
+      "baseline_time_ps": 53566700000,
+      "candidate_time_ps": 53596210000,
+      "time_speedup": 0.9994494013662534
+    },
+    {
+      "family": "embench",
+      "name": "crc32",
+      "group": null,
+      "baseline_cycles": 5402220,
+      "candidate_cycles": 5402210,
+      "baseline_time_ps": 54022200000,
+      "candidate_time_ps": 54022100000,
+      "time_speedup": 1.0000018510942743
+    },
+    {
+      "family": "embench",
+      "name": "cubic",
+      "group": null,
+      "baseline_cycles": 14490894,
+      "candidate_cycles": 14025779,
+      "baseline_time_ps": 144908940000,
+      "candidate_time_ps": 140257790000,
+      "time_speedup": 1.0331614379493645
+    },
+    {
+      "family": "embench",
+      "name": "edn",
+      "group": null,
+      "baseline_cycles": 4754496,
+      "candidate_cycles": 4723764,
+      "baseline_time_ps": 47544960000,
+      "candidate_time_ps": 47237640000,
+      "time_speedup": 1.0065058288263342
+    },
+    {
+      "family": "embench",
+      "name": "huffbench",
+      "group": null,
+      "baseline_cycles": 3377028,
+      "candidate_cycles": 3217162,
+      "baseline_time_ps": 33770280000,
+      "candidate_time_ps": 32171620000,
+      "time_speedup": 1.0496916226164552
+    },
+    {
+      "family": "embench",
+      "name": "matmult-int",
+      "group": null,
+      "baseline_cycles": 4193163,
+      "candidate_cycles": 4138048,
+      "baseline_time_ps": 41931630000,
+      "candidate_time_ps": 41380480000,
+      "time_speedup": 1.0133190818472864
+    },
+    {
+      "family": "embench",
+      "name": "minver",
+      "group": null,
+      "baseline_cycles": 878777,
+      "candidate_cycles": 843225,
+      "baseline_time_ps": 8787770000,
+      "candidate_time_ps": 8432250000,
+      "time_speedup": 1.0421619377983338
+    },
+    {
+      "family": "embench",
+      "name": "nbody",
+      "group": null,
+      "baseline_cycles": 5893151,
+      "candidate_cycles": 5823850,
+      "baseline_time_ps": 58931510000,
+      "candidate_time_ps": 58238500000,
+      "time_speedup": 1.0118995166427707
+    },
+    {
+      "family": "embench",
+      "name": "nettle-aes",
+      "group": null,
+      "baseline_cycles": 5203513,
+      "candidate_cycles": 5170824,
+      "baseline_time_ps": 52035130000,
+      "candidate_time_ps": 51708240000,
+      "time_speedup": 1.0063218164068242
+    },
+    {
+      "family": "embench",
+      "name": "nettle-sha256",
+      "group": null,
+      "baseline_cycles": 4307562,
+      "candidate_cycles": 4247681,
+      "baseline_time_ps": 43075620000,
+      "candidate_time_ps": 42476810000,
+      "time_speedup": 1.014097339230512
+    },
+    {
+      "family": "embench",
+      "name": "nsichneu",
+      "group": null,
+      "baseline_cycles": 7298679,
+      "candidate_cycles": 7302368,
+      "baseline_time_ps": 72986790000,
+      "candidate_time_ps": 73023680000,
+      "time_speedup": 0.9994948214058782
+    },
+    {
+      "family": "embench",
+      "name": "picojpeg",
+      "group": null,
+      "baseline_cycles": 5300988,
+      "candidate_cycles": 5105271,
+      "baseline_time_ps": 53009880000,
+      "candidate_time_ps": 51052710000,
+      "time_speedup": 1.0383362606999706
+    },
+    {
+      "family": "embench",
+      "name": "qrduino",
+      "group": null,
+      "baseline_cycles": 4524180,
+      "candidate_cycles": 4548795,
+      "baseline_time_ps": 45241800000,
+      "candidate_time_ps": 45487950000,
+      "time_speedup": 0.9945886767814334
+    },
+    {
+      "family": "embench",
+      "name": "sglib-combined",
+      "group": null,
+      "baseline_cycles": 4526268,
+      "candidate_cycles": 4351929,
+      "baseline_time_ps": 45262680000,
+      "candidate_time_ps": 43519290000,
+      "time_speedup": 1.0400601664227518
+    },
+    {
+      "family": "embench",
+      "name": "slre",
+      "group": null,
+      "baseline_cycles": 4902163,
+      "candidate_cycles": 4580842,
+      "baseline_time_ps": 49021630000,
+      "candidate_time_ps": 45808420000,
+      "time_speedup": 1.0701445280147186
+    },
+    {
+      "family": "embench",
+      "name": "st",
+      "group": null,
+      "baseline_cycles": 7165107,
+      "candidate_cycles": 7077473,
+      "baseline_time_ps": 71651070000,
+      "candidate_time_ps": 70774730000,
+      "time_speedup": 1.0123821030472318
+    },
+    {
+      "family": "embench",
+      "name": "statemate",
+      "group": null,
+      "baseline_cycles": 3368567,
+      "candidate_cycles": 2826412,
+      "baseline_time_ps": 33685670000,
+      "candidate_time_ps": 28264120000,
+      "time_speedup": 1.1918173995864723
+    },
+    {
+      "family": "embench",
+      "name": "ud",
+      "group": null,
+      "baseline_cycles": 2775897,
+      "candidate_cycles": 2725595,
+      "baseline_time_ps": 27758970000,
+      "candidate_time_ps": 27255950000,
+      "time_speedup": 1.0184554198257627
+    },
+    {
+      "family": "embench",
+      "name": "wikisort",
+      "group": null,
+      "baseline_cycles": 2173042,
+      "candidate_cycles": 2102321,
+      "baseline_time_ps": 21730420000,
+      "candidate_time_ps": 21023210000,
+      "time_speedup": 1.0336394870241035
+    }
+  ],
+  "scope": "qualified B common-clock time against frozen original v1; same-flow baseline physical/area review still pending"
+}

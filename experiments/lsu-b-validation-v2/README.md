@@ -28,8 +28,10 @@ The original v1 failure remains in its archive. System-time scores require a
 qualified measured period and the complete frozen workload set. Verification
 completion and achieving both 1.20x performance goals are reported separately.
 
-Work is in progress. Results and the final scope/coverage review will be linked
-here when the native checks and evidence review finish.
+The [completed review](../../docs/LSU_B_COMPLETE_VALIDATION.md) and
+[raw evidence](../../docs/evidence/2026-10-29/lsu-b-complete-validation/README.md)
+record final admission. Both complete workload points pass; the performance
+targets remain unmet. The construction history below preserves failed attempts.
 
 The first 100 ps B ECO was stopped after more than 9,130 hold-repair iterations
 and 25,958 inserted buffers: its TT WNS had plateaued around 47 ps. The native
@@ -67,3 +69,58 @@ in-memory probe confirmed the requested BUFx2 cell was inserted. The revised
 check identifies the unique added instance immediately, validates its master
 and prefix, then audits all original cells/pins after routing. The failed logs
 and exact commit `33d566a` source are retained; fresh attempts use `*-v4` outputs.
+
+## Final result and replay
+
+Final `*-v4` guards pass both variants, with zero routing/placement/antenna
+violations. The actual adjacent timing boundary is baseline 9,400 ps fail /
+9,500 ps pass, B 9,500 ps fail / 9,600 ps pass; 10,000 ps passes both.
+`review_guard.py` admits the complete contract at common 100 MHz and the B
+fastest tested 104.17 MHz point, while reporting both performance goals unmet.
+It checks original native graph-audit counts against the raw log, in addition
+to full stage identities, route/timing proof and workload provenance.
+
+Restore archived build inputs into a scratch checkout using the archive copy
+inventories; retained B v1 functional and FPU mapping dependencies are linked
+from the final archive. Losslessly compacted formal JSON can be read by the
+reviewer as `.json.gz`; native Yosys replay requires decompression first.
+Recreate the two baseline/B `physical-*-v2/grt` aliases with relative targets
+`../physical-baseline-v1/grt` and `../physical-B-v1/grt`, respectively. The archived
+`normalize_route_alias.py` was used only to convert already-existing absolute
+native aliases; it is not a fresh-restore command.
+Do not rerun an archived worker in place: use fresh outputs and record commands
+and any path adaptation, preserving the original attempt and hashes.
+
+With the restored dependencies, the host-only final reviews are:
+
+```sh
+python3 experiments/lsu-b-validation-v2/review_guard.py \
+  --b-analysis build/experiments/lsu-b-validation-v2/physical-B-v4/guard/independent-boundary-v1 \
+  --baseline-analysis build/experiments/lsu-b-validation-v2/physical-baseline-v4/guard/independent-boundary-v1 \
+  --measurement build/experiments/lsu-b-validation-v2/measurement-10000ps-v1 \
+  --build-summary build/experiments/lsu-b-v1/build-clean-v1/summary.json \
+  --qualification-summary build/experiments/lsu-b-v1/qualification-clean-v1/summary.json \
+  --comparison common-clock --output build/B-common-replay.json
+python3 experiments/lsu-b-validation-v2/review_guard.py \
+  --b-analysis build/experiments/lsu-b-validation-v2/physical-B-v4/guard/independent-boundary-v1 \
+  --baseline-analysis build/experiments/lsu-b-validation-v2/physical-baseline-v4/guard/independent-boundary-v1 \
+  --measurement build/experiments/lsu-b-validation-v2/measurement-9600ps-v1 \
+  --build-summary build/experiments/lsu-b-v1/build-clean-v1/summary.json \
+  --qualification-summary build/experiments/lsu-b-v1/qualification-clean-v1/summary.json \
+  --comparison fastest --output build/B-fastest-replay.json
+python3 experiments/lsu-b-validation-v2/check_guard_admission.py \
+  --analysis build/experiments/lsu-b-validation-v2/physical-B-v4/guard/independent-boundary-v1 \
+  --output build/B-admission-controls-replay
+```
+
+Native proof replay uses the archived `prepare.ys`, `models/*.json`, lowering
+scripts and ABC commands in `fpu-state-relation-v1/proof-summary.json`.
+The independent frontend replay, actual RTL mutants, definedness and physical
+binding reviews are separate retained evidence. Native physical replay uses
+`physical.py`, `repair.py`, `ready_guard.py` and `analyze_guard.py` in that order,
+with each versioned contract and clean input checkpoint; the original 100 ps
+attempt intentionally fails. Successful stage sources must remain unchanged
+because job input hashes bind them. Record a new version for construction changes.
+The pinned image and 204 tool/platform files remain the tool boundary. Global
+routing uses nominal wire RC; detailed-route/OCV/ISA/IEEE-754 signoff is outside
+this completion contract.

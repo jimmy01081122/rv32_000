@@ -1,0 +1,41 @@
+{
+  "scope": "post-lowering functional cell connections and observable ports; no X/Z is admitted to native Boolean CEC",
+  "records": [
+    {
+      "model": "step-gold",
+      "cell_constants": {
+        "0": 8397,
+        "1": 1649
+      },
+      "port_constants": {
+        "0": 108
+      },
+      "no_unknown_functional_bits": true
+    },
+    {
+      "model": "step-gate",
+      "cell_constants": {},
+      "port_constants": {
+        "0": 108
+      },
+      "no_unknown_functional_bits": true
+    },
+    {
+      "model": "reset-gold",
+      "cell_constants": {},
+      "port_constants": {
+        "0": 156
+      },
+      "no_unknown_functional_bits": true
+    },
+    {
+      "model": "reset-gate",
+      "cell_constants": {},
+      "port_constants": {
+        "0": 156
+      },
+      "no_unknown_functional_bits": true
+    }
+  ],
+  "passed": true
+}

@@ -1,0 +1,42 @@
+{
+  "passed": true,
+  "reviewer_sha256": "b7f301bc4def1e2644063619e3ba8115a519c30a93425a66284c22619f7123a2",
+  "positive_review_sha256": "f7d533a610ddafc8a502a7cae45f1d7bfaada0ea490906a00e84dfe263a5c5e9",
+  "records": [
+    {
+      "control": "wrong-core-variant",
+      "rejected": true,
+      "reason": "guard variant/contract mismatch"
+    },
+    {
+      "control": "unmatched-input-guard-policy",
+      "rejected": true,
+      "reason": "guard rule/predecessor mismatch"
+    },
+    {
+      "control": "route-overflow",
+      "rejected": true,
+      "reason": "guard full route overflow"
+    },
+    {
+      "control": "negative-hold-all-clocks",
+      "rejected": true,
+      "reason": "guard has no fully qualified period"
+    },
+    {
+      "control": "electrical-violation-all-clocks",
+      "rejected": true,
+      "reason": "guard has no fully qualified period"
+    },
+    {
+      "control": "raw-report-digest-changed",
+      "rejected": true,
+      "reason": "corner artifact changed: units.rpt"
+    },
+    {
+      "control": "native-graph-audit-count-mismatch",
+      "rejected": true,
+      "reason": "native graph-audit counts disagree with summary"
+    }
+  ]
+}

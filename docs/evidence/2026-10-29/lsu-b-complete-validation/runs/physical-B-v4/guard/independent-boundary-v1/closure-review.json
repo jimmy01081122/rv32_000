@@ -1,0 +1,129 @@
+{
+  "scope": "tested global-route timing trials only; routing review and formal measurement still required",
+  "analysis_report_sha256": "772b40a5aea31483b80a5357e387678d070c97df687a52cdc1bf56703d5467b8",
+  "implementation_report_sha256": "a9294a7e02cdb86e63a065cc5e3a127eb2fdeb8661dccdf65444d15279e3da69",
+  "checker_sha256": "170a5abc90b2f6dad76d2fa0a81a5b6601b897865862b867d784e888fc1048b5",
+  "records": [
+    {
+      "corner": "TT",
+      "standard_cell_area_um2": 21309.821820015095,
+      "standard_cell_count": 171538,
+      "register_count": 18131,
+      "library_warning_cell_instances": 0,
+      "trials": [
+        {
+          "period_ps": 9500,
+          "setup_slack_ps": 2898.293616694632,
+          "hold_slack_ps": 39.488357186504025,
+          "problems": [],
+          "passed": true
+        },
+        {
+          "period_ps": 9600,
+          "setup_slack_ps": 2998.293625368249,
+          "hold_slack_ps": 39.488357186504025,
+          "problems": [],
+          "passed": true
+        },
+        {
+          "period_ps": 9700,
+          "setup_slack_ps": 3098.293634041867,
+          "hold_slack_ps": 39.488357186504025,
+          "problems": [],
+          "passed": true
+        },
+        {
+          "period_ps": 10000,
+          "setup_slack_ps": 3398.293660062719,
+          "hold_slack_ps": 39.488357186504025,
+          "problems": [],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "corner": "SS",
+      "standard_cell_area_um2": 21309.821820015095,
+      "standard_cell_count": 171538,
+      "register_count": 18131,
+      "library_warning_cell_instances": 0,
+      "trials": [
+        {
+          "period_ps": 9500,
+          "setup_slack_ps": -45.953463440485756,
+          "hold_slack_ps": 71.21075979587509,
+          "problems": [
+            "setup violation"
+          ],
+          "passed": false
+        },
+        {
+          "period_ps": 9600,
+          "setup_slack_ps": 54.04654523313166,
+          "hold_slack_ps": 71.21075979587509,
+          "problems": [],
+          "passed": true
+        },
+        {
+          "period_ps": 9700,
+          "setup_slack_ps": 154.04655390674907,
+          "hold_slack_ps": 71.21075979587509,
+          "problems": [],
+          "passed": true
+        },
+        {
+          "period_ps": 10000,
+          "setup_slack_ps": 454.04657992760133,
+          "hold_slack_ps": 71.21075979587509,
+          "problems": [],
+          "passed": true
+        }
+      ]
+    },
+    {
+      "corner": "FF",
+      "standard_cell_area_um2": 21309.821820015095,
+      "standard_cell_count": 171538,
+      "register_count": 18131,
+      "library_warning_cell_instances": 0,
+      "trials": [
+        {
+          "period_ps": 9500,
+          "setup_slack_ps": 4389.066905248969,
+          "hold_slack_ps": 17.279566735462907,
+          "problems": [],
+          "passed": true
+        },
+        {
+          "period_ps": 9600,
+          "setup_slack_ps": 4489.066913922587,
+          "hold_slack_ps": 17.279566735462907,
+          "problems": [],
+          "passed": true
+        },
+        {
+          "period_ps": 9700,
+          "setup_slack_ps": 4589.066922596205,
+          "hold_slack_ps": 17.279566735462907,
+          "problems": [],
+          "passed": true
+        },
+        {
+          "period_ps": 10000,
+          "setup_slack_ps": 4889.066948617056,
+          "hold_slack_ps": 17.279566735462907,
+          "problems": [],
+          "passed": true
+        }
+      ]
+    }
+  ],
+  "qualified_periods_ps": [
+    9600,
+    9700,
+    10000
+  ],
+  "smallest_tested_passing_period_ps": 9600,
+  "standard_cell_area_um2": 21309.821820015095,
+  "passed": true
+}

@@ -1,0 +1,6 @@
+read_verilog /workspace/build/experiments/lsu-b-validation-v2/fpu-negative-controls-v1/rtl-drop-valid/mutant.v
+hierarchy -check -top rv32_ooo_fp_execute
+proc
+opt_clean
+check -assert
+write_json /workspace/build/experiments/lsu-b-validation-v2/fpu-negative-controls-v1/rtl-drop-valid/original.json

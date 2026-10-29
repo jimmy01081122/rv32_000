@@ -1,0 +1,6 @@
+read_verilog /workspace/build/experiments/fpu-mapping-v1/shared-unit-v1/fp-source.v
+hierarchy -check -top rv32_ooo_fp_execute
+proc
+opt_clean
+check -assert
+write_json /workspace/build/experiments/lsu-b-validation-v2/fpu-frontend-replay-v1/original.json

@@ -1,0 +1,6 @@
+======== ABC command line "cec /workspace/build/experiments/lsu-b-validation-v2/fpu-negative-controls-v1/rtl-reset-high/mutant.blif /workspace/build/experiments/lsu-b-validation-v2/fpu-state-relation-v1/reset-gold-zero.blif"
+Networks are NOT EQUIVALENT after structural hashing.  INPUT: clk = 1'h0, cmp_ready = 1'h0, core_state = 3'h0, flush_valid = 1'h0, issue_req = 401'h00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000, issue_valid = 1'h0, proof_state = 156'h000000000000000000000000000000000000000.  OUTPUT: next_observed = 156'h800000000000000000000000000000000000000 (mutant), next_observed = 156'h000000000000000000000000000000000000000 (reset-gold-zero).
+Verification failed for at least 1 outputs:  next_observed[155]
+Output next_observed[155]: Value in Network1 = 1. Value in Network2 = 0.
+Input pattern: 
+Time =     0.00 sec

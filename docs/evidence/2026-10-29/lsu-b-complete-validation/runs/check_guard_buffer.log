@@ -1,0 +1,100 @@
+
+ /----------------------------------------------------------------------------\
+ |  yosys -- Yosys Open SYnthesis Suite                                       |
+ |  Copyright (C) 2012 - 2026  Claire Xenia Wolf <claire@yosyshq.com>         |
+ |  Distributed under an ISC-like license, type "license" to see terms        |
+ \----------------------------------------------------------------------------/
+ Yosys 0.63+post (git sha1 UNKNOWN-dirty, g++ 11.4.0-1ubuntu1~22.04.3 -fPIC -O3)
+
+-- Executing script file `/workspace/build/experiments/lsu-b-validation-v2/check_guard_buffer.ys' --
+Found gzip magic in file `/OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz', decompressing using zlib.
+
+1. Executing Liberty frontend: /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+Imported 37 cell types from liberty file.
+
+2. Executing HIERARCHY pass (managing design hierarchy).
+
+2.1. Analyzing design hierarchy..
+Top module:  \BUFx2_ASAP7_75t_R
+
+2.2. Analyzing design hierarchy..
+Top module:  \BUFx2_ASAP7_75t_R
+Removing unused module `\INVxp67_ASAP7_75t_R'.
+Removing unused module `\INVxp33_ASAP7_75t_R'.
+Removing unused module `\INVx8_ASAP7_75t_R'.
+Removing unused module `\INVx6_ASAP7_75t_R'.
+Removing unused module `\INVx5_ASAP7_75t_R'.
+Removing unused module `\INVx4_ASAP7_75t_R'.
+Removing unused module `\INVx3_ASAP7_75t_R'.
+Removing unused module `\INVx2_ASAP7_75t_R'.
+Removing unused module `\INVx1_ASAP7_75t_R'.
+Removing unused module `\INVx13_ASAP7_75t_R'.
+Removing unused module `\INVx11_ASAP7_75t_R'.
+Removing unused module `\HB4xp67_ASAP7_75t_R'.
+Removing unused module `\HB3xp67_ASAP7_75t_R'.
+Removing unused module `\HB2xp67_ASAP7_75t_R'.
+Removing unused module `\HB1xp67_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx9p33_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx8_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx6p67_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx5p33_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx20_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx16_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx14_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx12_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx11_ASAP7_75t_R'.
+Removing unused module `\CKINVDCx10_ASAP7_75t_R'.
+Removing unused module `\BUFx8_ASAP7_75t_R'.
+Removing unused module `\BUFx6f_ASAP7_75t_R'.
+Removing unused module `\BUFx5_ASAP7_75t_R'.
+Removing unused module `\BUFx4f_ASAP7_75t_R'.
+Removing unused module `\BUFx4_ASAP7_75t_R'.
+Removing unused module `\BUFx3_ASAP7_75t_R'.
+Removing unused module `\BUFx24_ASAP7_75t_R'.
+Removing unused module `\BUFx16f_ASAP7_75t_R'.
+Removing unused module `\BUFx12f_ASAP7_75t_R'.
+Removing unused module `\BUFx12_ASAP7_75t_R'.
+Removing unused module `\BUFx10_ASAP7_75t_R'.
+Removed 36 unused modules.
+
+3. Executing PROC pass (convert processes to netlists).
+
+3.1. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.2. Executing PROC_RMDEAD pass (remove dead branches from decision trees).
+Removed a total of 0 dead cases.
+
+3.3. Executing PROC_PRUNE pass (remove redundant assignments in processes).
+Removed 0 redundant assignments.
+Promoted 0 assignments to connections.
+
+3.4. Executing PROC_INIT pass (extract init attributes).
+
+3.5. Executing PROC_ARST pass (detect async resets in processes).
+
+3.6. Executing PROC_ROM pass (convert switches to ROMs).
+Converted 0 switches.
+
+3.7. Executing PROC_MUX pass (convert decision trees to multiplexers).
+
+3.8. Executing PROC_DLATCH pass (convert process syncs to latches).
+
+3.9. Executing PROC_DFF pass (convert process syncs to FFs).
+
+3.10. Executing PROC_MEMWR pass (convert process memory writes to cells).
+
+3.11. Executing PROC_CLEAN pass (remove empty switches from decision trees).
+Cleaned up 0 empty switches.
+
+3.12. Executing OPT_EXPR pass (perform const folding).
+Optimizing module BUFx2_ASAP7_75t_R.
+
+4. Executing OPT_CLEAN pass (remove unused cells and wires).
+Finding unused cells or wires in module \BUFx2_ASAP7_75t_R..
+
+5. Executing JSON backend.
+
+End of script. Logfile hash: e2149f34c3, CPU: user 0.02s system 0.01s, MEM: 20.34 MB peak
+Yosys 0.63+post (git sha1 UNKNOWN-dirty, g++ 11.4.0-1ubuntu1~22.04.3 -fPIC -O3)
+Time spent: 60% 2x read_liberty (0 sec), 8% 1x opt_clean (0 sec), ...

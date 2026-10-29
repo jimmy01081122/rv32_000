@@ -1,0 +1,5 @@
+read_liberty -ignore_miss_func /OpenROAD-flow-scripts/flow/platforms/asap7/lib/NLDM/asap7sc7p5t_INVBUF_RVT_TT_nldm_220122.lib.gz
+hierarchy -check -top BUFx2_ASAP7_75t_R
+proc
+opt_clean
+write_json /workspace/build/experiments/lsu-b-validation-v2/guard-buffer.json
