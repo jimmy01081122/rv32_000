@@ -1,0 +1,34 @@
+flowchart TB
+    IM[指令記憶體通道] <--> FE["取指・預測・解碼<br/>4 筆追蹤／FIFO 8<br/>BTB 64／BHT 64；無 RAS<br/>④ 預測與恢復"]
+    FE --> RN["Rename／Dispatch：1 指令每拍<br/>INT／FP RAT、RRAT、free／ready"]
+    RN --> II["INT IQ：8<br/>⑥ 容量與排程"]
+    RN --> FI["FP IQ：4；三來源喚醒<br/>③ 功能單元感知發射"]
+    RN -. 配置 .-> ROB["ROB：16；依序退休 ≤1 指令每拍<br/>② load completion 前瞻<br/>⑥ window 容量"]
+    PRF["INT／FP PRF 各 48×32<br/>INT 4R/3W；FP 4R/2W"] --> IX["INT EX0 → ALU／Branch／CSR／AGU<br/>MUL 3 級；迭代 DIV／REM"]
+    PRF --> FX["共享 FP EX0<br/>Simple／Arithmetic（含 FCVT）／DIV-SQRT<br/>③ EX0 阻塞；⑤ 算術路徑與 pipeline"]
+    II --> IX
+    FI --> FX
+    FX --> FA["FP 完成仲裁：最多 1 筆每拍<br/>Simple ＞ Arithmetic ＞ DIV-SQRT<br/>③ 完成公平性"]
+    IX --> LSU["LSU：SQ 16／外部 outstanding 1<br/>AP5B response buffer／store forwarding<br/>B：head-store 資格與 marking 同拍<br/>① A 回應交接重疊：目前未含<br/>② C load → 退休前瞻：未做"]
+    LSU <--> DM["資料記憶體通道<br/>無實際 16-entry LQ／無 cache、MMU"]
+    IX --> WB["INT／LOAD／FP completion<br/>PRF 寫回、IQ 喚醒、ROB 更新"]
+    FA --> WB
+    LSU --> WB
+    WB --> ROB
+    WB -. 寫回／bypass .-> PRF
+    WB -. 喚醒 .-> FI
+    WB -. 喚醒 .-> II
+    ROB -. head-store 授權／response ack .-> LSU
+    ROB --> CT["退休／CSR／fflags／commit trace"]
+    ROB -.-> REC["目前分支錯誤預測在退休時 redirect<br/>④ 提前恢復需完整精確狀態機制"]
+    REC -.-> FE
+    REC -. 恢復 map／全核心 flush .-> RN
+    CT -. RRAT／釋放 .-> RN
+    classDef current fill:#eff6ff,stroke:#93b4d8,color:#0f172a;
+    classDef bline fill:#ecfdf5,stroke:#34a37a,color:#0f172a;
+    classDef external fill:#f1f5f9,stroke:#94a3b8,color:#0f172a;
+    classDef control fill:#f5f3ff,stroke:#a78bfa,color:#0f172a;
+    class FE,RN,II,FI,ROB,PRF,IX,FX,FA,WB,CT current;
+    class LSU bline;
+    class IM,DM external;
+    class REC control;

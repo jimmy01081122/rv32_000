@@ -1,6 +1,8 @@
 # RV32 OoO architecture: implementation and requirements
 
-Version 0.7 — 2026-10-21. Status: AP5B baseline frozen; isolated A research-qualified, current B branch functionally validated but rejected by physical timing; project targets unmet.
+Version 0.8 — 2026-10-30. Status: AP5B baseline frozen; isolated A and current B research-qualified; B completed shared-flow physical and FPU implementation-equivalence checks. Performance targets remain unmet.
+
+See the [current B architecture map and candidate directions](docs/ARCHITECTURE_MAP.md) for a source-checked diagram.
 
 This document distinguishes observed RTL structure from required architectural
 behavior. Describing an implementation does not certify its correctness.
@@ -96,8 +98,9 @@ after it, with the corresponding tag. That A variant retains the baseline SQ mar
 The current independent B branch retains the baseline response-buffer exclusion.
 A RUN-state ROB-head store with full tag match, captured address/data, no exception
 and no flush may request in its SQ-marking cycle. Successful response still
-precedes retirement. B has passed functional qualification but has no qualified
-physical operating point; see the [B review](docs/LSU_B_REVIEW.md). The frozen
+precedes retirement. B has completed its [research validation](docs/LSU_B_COMPLETE_VALIDATION.md),
+including actual 9.6/10.0 ns operating-point qualification and both full workload
+runs under the shared FPU/hold flow. Both speed targets remain unmet. The frozen
 baseline includes neither A nor B.
 
 The LSU checks older stores, forwards from a fully covering older store, and

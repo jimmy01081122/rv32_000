@@ -1,0 +1,55 @@
+digraph RV32 {
+  graph [rankdir=TB, bgcolor="#F8FAFC", pad="0.35", nodesep="0.45", ranksep="0.48", splines=polyline, fontname="Noto Sans CJK TC", fontsize=25, fontcolor="#0F172A", labelloc=t, label="RV32 OoO｜目前 B 分支架構與候選改善方向\nRTL：59c6193 · 2026-10-30 · 單寬派發／單寬退休；整數與 FP 可並行\n ", labeljust=l];
+  node [shape=box, style="rounded,filled", fillcolor="#EFF6FF", color="#93B4D8", penwidth=1.4, fontname="Noto Sans CJK TC", fontsize=17, fontcolor="#0F172A", margin="0.18,0.13"];
+  edge [color="#64748B", penwidth=1.5, arrowsize=0.7, fontname="Noto Sans CJK TC", fontsize=12, fontcolor="#475569"];
+
+  imem [fillcolor="#F1F5F9", color="#94A3B8", label="指令記憶體通道\n有序 valid／ready\n最多 4 筆取指追蹤"];
+  fe [label=< <B>取指＋預測＋解碼</B><BR/>BTB 64 ／ BHT 64 × 2-bit<BR/>指令 FIFO 8；無 RAS<BR/><FONT COLOR="#B45309">[4] 預測／分支恢復</FONT> >];
+  ren [label=< <B>Rename／Dispatch</B><BR/>INT／FP RAT、RRAT<BR/>free mask、ready table<BR/>每拍最多派發 1 指令 >];
+  iiq [label=< <B>整數 IQ：8 entries</B><BR/>含整數、分支、LSU、CSR<BR/><FONT COLOR="#B45309">[6] 容量與排程需先量測</FONT> >];
+  fiq [label=< <B>FP IQ：4 entries</B><BR/>FMA 三來源喚醒<BR/><FONT COLOR="#B45309">[3] 發射感知功能單元狀態</FONT> >];
+  prf [label=< <B>實體暫存器與 bypass</B><BR/>INT 48 × 32；4R／3W<BR/>FP 48 × 32；4R／2W<BR/><FONT COLOR="#B45309">[6] 面積／port／依賴成本</FONT> >];
+  iex [label=< <B>INT EX0 → 整數執行</B><BR/>ALU／Branch／CSR／AGU<BR/>MUL：3 級 pipeline<BR/>DIV／REM：迭代式 >];
+  fex [label=< <B>共享 FP EX0 → 三類單元</B><BR/>Simple：比較／搬移／分類<BR/>Arithmetic：ADD／MUL／FMA／FCVT<BR/>DIV／SQRT：迭代式<BR/><FONT COLOR="#B45309">[3] 減少共享 EX0 阻塞</FONT><BR/><FONT COLOR="#B45309">[5] 算術路徑／pipeline 評估</FONT> >];
+  fparb [label=< <B>FP completion 仲裁</B><BR/>每拍最多 1 筆 FP completion<BR/>目前優先序：<BR/>Simple ＞ Arithmetic ＞ DIV/SQRT<BR/><FONT COLOR="#B45309">[3] 公平性／完成等待</FONT> >];
+  lsu [fillcolor="#ECFDF5", color="#34A37A", label=< <B>LSU／目前 B 已實作</B><BR/>SQ：16；外部 outstanding：1<BR/>in-flight record ＋ AP5B response buffer<BR/>load forwarding／相依檢查<BR/><B>head-store 資格與 marking 同拍</B><BR/>成功 store response 後才能退休<BR/><FONT COLOR="#B45309">[1] A 回應交接重疊：本分支未含</FONT><BR/><FONT COLOR="#B45309">[2] 已註冊 load → 退休前瞻（C）</FONT> >];
+  dmem [fillcolor="#F1F5F9", color="#94A3B8", label="資料記憶體通道\n有序 valid／ready\n沒有實際配置的 16-entry LQ\n目前無 cache／MMU"];
+  wb [label=< <B>完成／寫回／喚醒</B><BR/>INT、LOAD、FP 三條 completion<BR/>依 domain 寫入 INT／FP PRF<BR/>更新 ROB／ready table／IQ >];
+  rob [label=< <B>ROB：16 entries</B><BR/>完整 tag：12-bit seq ＋ 4-bit idx<BR/>依序退休，最多 1 指令／cycle<BR/>store 等 response；精確例外<BR/><FONT COLOR="#B45309">[2] completion → head 可見延遲</FONT><BR/><FONT COLOR="#B45309">[6] 擴大 window 前先看滿載率</FONT> >];
+  csr [label="退休狀態／CSR／Trace\nRRAT 更新、舊 PRF 釋放\nfflags、trap、計數器、commit trace"];
+  recovery [fillcolor="#F5F3FF", color="#A78BFA", label=< <B>恢復控制</B><BR/>branch mispredict 在退休時 redirect<BR/>trap／MRET／FENCE.I → flush<BR/><FONT COLOR="#B45309">[4] 提前恢復需 checkpoint／精確狀態</FONT> >];
+  notes [shape=note, fillcolor="#FFFBEB", color="#D6AC55", fontsize=15, label="讀圖與比較邊界\n藍色：既有結構；綠色：目前 B 的 LSU\n虛線：控制／資料回授；橘字：候選方向\n橘字不是已實作，也未承諾效能收益\n\n現行測試 RAM 共 1 MiB；I／D 固定 10 ns\n100 MHz：Embench 1.029459×，FP32 1.009599×\n104.17 MHz 需跨兩拍取樣，整體反而變慢\n目標：兩類各 ≥1.20×；面積 ≤1.10×\n凍結基線維持原樣；A／B 尚未組合"];
+
+  {rank=same; imem; fe; ren;}
+  {rank=same; prf; iiq; fiq;}
+  {rank=same; iex; fex;}
+  {rank=same; lsu; dmem; fparb;}
+  {rank=same; wb; rob; csr;}
+  {rank=same; recovery; notes;}
+
+
+  imem -> fe [dir=both, label="req／rsp"];
+  fe -> ren [label="decoded uop"];
+  ren -> iiq;
+  ren -> fiq;
+  iiq -> iex [label="選取／讀值"];
+  fiq -> fex [label="選取／讀值"];
+  prf -> iex [color="#94A3B8"];
+  prf -> fex [color="#94A3B8"];
+  iex -> lsu [label="AGU：INT／FP load/store"];
+  iex -> wb [label="int_cmp"];
+  fex -> fparb;
+  fparb -> wb [label="fp_cmp"];
+  lsu -> dmem [dir=both, label="req／rsp"];
+  lsu -> wb [label="ld_cmp／fault"];
+  wb -> rob [label="完成／結果／例外"];
+  rob -> csr [label="retire", constraint=false];
+  ren -> rob [label="配置 ROB", style=dashed, color="#94A3B8", constraint=false];
+  wb -> prf [label="寫回＋bypass", style=dashed, color="#64748B", constraint=false];
+  wb -> fiq [label="喚醒 INT／FP IQ、ready table", style=dashed, color="#64748B", constraint=false];
+  rob -> lsu [label="head-store 授權／ack", dir=both, style=dashed, color="#64748B", constraint=false];
+  rob -> recovery [style=dashed, color="#8B5CF6", constraint=false];
+  recovery -> fe [style=dashed, color="#8B5CF6", constraint=false];
+  recovery -> ren [label="恢復 map；全核心 flush", style=dashed, color="#8B5CF6", constraint=false];
+  csr -> ren [label="RRAT／free", style=dashed, color="#94A3B8", constraint=false];
+}

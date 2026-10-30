@@ -10,6 +10,7 @@ signoff label applies only to the source/configuration and checks in that record
 | [Project README](../README.md) | Entry point and development commands |
 | [Project plan](../PLAN.md) | Agreed direction, review process, proposed targets and milestones |
 | [Status](STATUS.md) | Evidence and unresolved implementation/verification gaps |
+| [Current architecture map](ARCHITECTURE_MAP.md) | Source-checked B diagram, editable SVG/Graphviz/Mermaid and candidate optimization directions |
 | [Architecture](../architecture_spec.md) | Implemented structures and architectural obligations |
 | [Micro-operations](../uop_spec.md) | Current packet/schema reference |
 | [Workloads](WORKLOADS.md) | Approved main suites, targets and frozen v1 measurement contract |
