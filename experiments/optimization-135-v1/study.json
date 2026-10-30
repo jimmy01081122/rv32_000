@@ -1,0 +1,16 @@
+{
+  "scope": "Directions 1, 3 and 5 first-round controlled study; no combined CPU candidate",
+  "workloads": "Frozen Embench19 plus balanced FP32 eight",
+  "cpu_period_ps": 10000,
+  "memory_ps": 10000,
+  "direction_1": "Existing A same-flow physical qualification against completed baseline/B",
+  "direction_3": "Read-only FP EX0 / FU-ready / completion contention observations plus observer invariance and actual controls",
+  "direction_5": "Native path decomposition and measured FP operation/latency/throughput evidence; pipeline proposal only if supported",
+  "variants_to_observe": [
+    "baseline",
+    "A",
+    "B"
+  ],
+  "performance_claim_policy": "Do not turn overlapping waits into saved cycles or partial suites into acceptance scores",
+  "next_architecture_policy": "Present measured evidence and concrete candidate choices for joint review; preserve independent experiments"
+}

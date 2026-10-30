@@ -4,6 +4,18 @@ Updated 2026-10-30 (Asia/Taipei). Initial documentation-cleanup baseline: mainte
 incoming RTL revision: `0d79df58e65c2e1034e40f7f586a463fd8602ff1`.
 The documentation cleanup changes no RTL behavior or executable acceptance thresholds.
 
+The user selected architecture-map directions **1, 3 and 5**. The
+[first evidence study](OPTIMIZATION_135_STUDY.md) verifies 81 retained profiles,
+27 observer off/on pairs and six real instruction controls. FP32 eight show no
+EX0 or completion contention in baseline/A/B; `minver` exposes ready arithmetic
+work behind busy DIV/SQRT. Existing native SS paths identify arithmetic FPU
+timing followed closely by the LSU output path. No new CPU candidate is implemented.
+The isolated A common-flow input/policy preflight passes, but native construction
+has not started: Docker VFS creation exhausted workspace storage and subsequent
+socket access requests were cancelled. New complete diagnostic evidence is
+preserved in the [portable archive](evidence/optimization-135-study-2026-10-30.tar.gz)
+with 721 stored/decoded payloads verified; a temporary extracted copy is under `/tmp/rv32-opt135/archive`.
+
 FP32 compiler contraction is now approved as `fast` with `-fno-fast-math`;
 the daily qualifier defaults to fast and retains explicit off comparisons.
 The post-LSU v1 workload identities and fixed-absolute-time memory policy are

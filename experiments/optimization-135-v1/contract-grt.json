@@ -1,0 +1,117 @@
+{
+  "schema_version": 1,
+  "experiment_id": "optimization-135-A-grt",
+  "scope": "Direction 1: qualify existing isolated A in the completed shared-FPU / hold40 / uniform-ready-guard flow; no A+B or baseline promotion",
+  "source_parent": "07fc287b538e88dc41353295614fe5ecacf0985c",
+  "baseline_manifest_sha256": "60f59b3cc705560885e2101046d810cf3548fef277c1c1e5820826ef25485fb6",
+  "b_manifest_sha256": "dff4339c0f3b4992f0c0fd90089d55ccbef06d27e662ae2d3b298d49dd73a40a",
+  "unchanged_rtl": {
+    "rtl/pkg/rv32_ooo_params.sv": "3fc72080a0387a5424badf665656399ecc48e1c9170bedecb0aea16bd7602523",
+    "rtl/pkg/rv32_ooo_types.sv": "01be8e3b4c3959d9284e105412e415d77a6702db7de86eb1505d6fd428ee6759",
+    "rtl/rename/rv32_ooo_int_prf.sv": "69261b57971908d2765555c540ba4292a169024a222983143fdf4785f0fe2406",
+    "rtl/rename/rv32_ooo_fp_prf.sv": "452daf771a3c83fc24693a54b6ce46da762a1942b5ca56eac5440e948bb83603",
+    "rtl/frontend/rv32_ooo_frontend.sv": "c0e222d798dc8c18d5e75bd25a7c9cf0d7b053f91c49650d27c0b8bb49f2dd4d",
+    "rtl/rename/rv32_ooo_rename.sv": "1eb31d73eb54785c3e816eda35381e5b9d362b378ad0f118ac125d753063d574",
+    "rtl/rob/rv32_ooo_rob.sv": "94e4874dfcb3274fd5d0759776acde8dae373988151b4470698fa847c0a78555",
+    "rtl/issue/rv32_ooo_int_iq.sv": "c12029eec5fca025da55c95d6c0207f6472f9eb653a3a1020d1543f78aa9d349",
+    "rtl/issue/rv32_ooo_fp_iq.sv": "7968fa7b3ce4b51b54e4ba21e41b1b5bc4989ac68b405c7a2a7e3e3394e43ca2",
+    "rtl/execute/int/rv32_ooo_divider.sv": "b8ca86ee486d8976ccf07f25adb4955a3945d348a7f5b1350fb8b6edbec91de6",
+    "rtl/execute/int/rv32_ooo_multiplier.sv": "09afa5a87fbd59873a4cfc5f78a48492e928cc7b16f372dd51d71af96703a1d8",
+    "rtl/execute/int/rv32_ooo_int_execute.sv": "dde3fee3c0031150f9cf45b9b1d6f2e665868be754ec70566d95c77dff7bb632",
+    "rtl/execute/fp/rv32_ooo_fp_simple.sv": "bff3232ceafd3da96d85729ad630745b14cd47e398a32e35d11c25fe38547f4b",
+    "rtl/execute/fp/rv32_ooo_fp_execute.sv": "ee83a69dfbd7b2c9d141ebe14e1c40605ca43ce0f5f490d324113bcb9465c63b",
+    "rtl/execute/fp/rv32_ooo_fp_divsqrt.sv": "0c5e80032fd016aa60557d3e3908f07732c9230c50cea3519e1106b2f7715b3f",
+    "rtl/lsu/rv32_ooo_lsu.sv": "3632a910cc769aa8a3a1594678420e5b3ec1a77e871811742d48195c761fe92e",
+    "rtl/csr/rv32_ooo_csr.sv": "68c911e9e956761b3ffdb86fec2b82e94b5fc7632953dca308c30658e70f176e",
+    "rtl/core/rv32_ooo_core.sv": "81c116be3845d05c63ab6ffa31efdf5fee9e7374a6902ef0d54555e8a13fcb1c"
+  },
+  "shared_fpu_graph_sha256": "d12b91d198024deff4527b2c1e6217fcc7ca3355bdc09dfb4ebb309192a0fd89",
+  "shared_link_manifest": {
+    "path": "build/experiments/fpu-mapping-v1/shared-linked-v1/link-manifest.json",
+    "sha256": "5c21f821c3e876d7afb898c45709ce45b2eb561fbeba81f7111bd75b9426829c"
+  },
+  "physical": {
+    "image": "rv32ooo-orfs:8359fde-flat",
+    "image_id": "sha256:92a37abacbbf91494f9a8078b45fe1f6688a533cf5c87d02599d28c5fe229b33",
+    "orfs_commit": "8359fde81991e6118b15b8a93fcde606b577794d",
+    "platform": "ASAP7 RVT",
+    "construction_corners": [
+      "TT"
+    ],
+    "analysis_corners": [
+      "TT",
+      "SS",
+      "FF"
+    ],
+    "mapping_period_ps": 5500,
+    "construction_period_ps": 14000,
+    "jobs": 2,
+    "post_route_eco": {
+      "slew_margin_percent": 45,
+      "hold_margin_ps": 40,
+      "final_full_route_recheck": true
+    },
+    "period_grid_ps": 100,
+    "acceptance": "unchanged propagated-clock setup/hold >= 0; complete constraint/electrical and route checks",
+    "eco_walltime_limit_seconds": 3600,
+    "uniform_input_guard": {
+      "port": "dmem_req_ready",
+      "cell": "BUFx2_ASAP7_75t_R",
+      "count": 1,
+      "construction_corner": "TT",
+      "full_global_route_recheck": true,
+      "original_connectivity_preserved_except_buffered_input": true
+    }
+  },
+  "memory_ps": 10000,
+  "workloads": "original frozen 19 Embench + 8 balanced FP32 ELFs and all 3629 outputs",
+  "targets": {
+    "embench_time_speedup_geomean_min": 1.2,
+    "fp32_time_speedup_geomean_min": 1.2,
+    "standard_cell_area_ratio_max": 1.1
+  },
+  "comparison_policy": "Compare exact accepted baseline/B native policies and tool hashes; chronological source commits may differ while construction code/arguments remain equal",
+  "variants": {
+    "A": {
+      "netlist": "build/experiments/fpu-mapping-v1/shared-linked-v1/A.v",
+      "netlist_sha256": "ca59e5146f84e3276bf74c8ac2398b84a722ed68f32751e3263772a872ff3647",
+      "rtl_files_sha256": {
+        "rtl/pkg/rv32_ooo_params.sv": "3fc72080a0387a5424badf665656399ecc48e1c9170bedecb0aea16bd7602523",
+        "rtl/pkg/rv32_ooo_types.sv": "01be8e3b4c3959d9284e105412e415d77a6702db7de86eb1505d6fd428ee6759",
+        "rtl/rename/rv32_ooo_int_prf.sv": "69261b57971908d2765555c540ba4292a169024a222983143fdf4785f0fe2406",
+        "rtl/rename/rv32_ooo_fp_prf.sv": "452daf771a3c83fc24693a54b6ce46da762a1942b5ca56eac5440e948bb83603",
+        "rtl/frontend/rv32_ooo_frontend.sv": "c0e222d798dc8c18d5e75bd25a7c9cf0d7b053f91c49650d27c0b8bb49f2dd4d",
+        "rtl/rename/rv32_ooo_rename.sv": "1eb31d73eb54785c3e816eda35381e5b9d362b378ad0f118ac125d753063d574",
+        "rtl/rob/rv32_ooo_rob.sv": "94e4874dfcb3274fd5d0759776acde8dae373988151b4470698fa847c0a78555",
+        "rtl/issue/rv32_ooo_int_iq.sv": "c12029eec5fca025da55c95d6c0207f6472f9eb653a3a1020d1543f78aa9d349",
+        "rtl/issue/rv32_ooo_fp_iq.sv": "7968fa7b3ce4b51b54e4ba21e41b1b5bc4989ac68b405c7a2a7e3e3394e43ca2",
+        "rtl/execute/int/rv32_ooo_divider.sv": "b8ca86ee486d8976ccf07f25adb4955a3945d348a7f5b1350fb8b6edbec91de6",
+        "rtl/execute/int/rv32_ooo_multiplier.sv": "09afa5a87fbd59873a4cfc5f78a48492e928cc7b16f372dd51d71af96703a1d8",
+        "rtl/execute/int/rv32_ooo_int_execute.sv": "dde3fee3c0031150f9cf45b9b1d6f2e665868be754ec70566d95c77dff7bb632",
+        "rtl/execute/fp/rv32_ooo_fp_simple.sv": "bff3232ceafd3da96d85729ad630745b14cd47e398a32e35d11c25fe38547f4b",
+        "rtl/execute/fp/rv32_ooo_fp_execute.sv": "ee83a69dfbd7b2c9d141ebe14e1c40605ca43ce0f5f490d324113bcb9465c63b",
+        "rtl/execute/fp/rv32_ooo_fp_divsqrt.sv": "0c5e80032fd016aa60557d3e3908f07732c9230c50cea3519e1106b2f7715b3f",
+        "rtl/lsu/rv32_ooo_lsu.sv": "d830c39b1a69b9fb5bae5d7d8e7627b67c1bebd9f34f3ecaefad69cae8179ffd",
+        "rtl/csr/rv32_ooo_csr.sv": "68c911e9e956761b3ffdb86fec2b82e94b5fc7632953dca308c30658e70f176e",
+        "rtl/core/rv32_ooo_core.sv": "81c116be3845d05c63ab6ffa31efdf5fee9e7374a6902ef0d54555e8a13fcb1c"
+      }
+    }
+  },
+  "a_manifest_sha256": "a1782d1b5ac12cb7dbfba2900c9542693dad846b9af6f2e00f8e74d5fa0c758e",
+  "native_flow_sources_sha256": {
+    "experiments/lsu-b-validation-v2/physical.py": "620ef98f6b6a1bfe0e30399ec6e48db70ac3c507499c78e7cf387c4c01bf4251",
+    "experiments/lsu-b-validation-v2/repair.py": "80a6a3c2ac53e61ae562d01993fb485be877b9ecc9c1626f8b75792444eb256d",
+    "experiments/lsu-b-validation-v2/ready_guard.py": "c133c107fa9a1e898635cba5033f3b42460ee441c451a7577981edd9219bdf80",
+    "experiments/lsu-b-validation-v2/ready_guard.tcl": "181318286ea51924399e63171f569f1f4ed73d4ec31d3feec4fe8efe1a36b5bc",
+    "experiments/lsu-b-validation-v2/ready_guard.mk": "57fae9c53bd2efd56fd935925ed73361efa4aa19253b42580ee71fef90e9fc3a",
+    "physical/asap7/baseline/config.mk": "be157001e0234853911d3eaf5c326c5e0ab30d19fd60a3102d400d74ca6e861b",
+    "physical/asap7/baseline/repair.tcl": "a216bc584018c3b1b1cc1ce382c451ad78991633c43c81ec604a916fac284a0d",
+    "physical/asap7/baseline/report.tcl": "c22e08c5c83f8a9a693fe569eecf7c0aaa72e045b731fe69e0b4d6ac81f1427e",
+    "physical/asap7/baseline/timing_common.tcl": "01a70b8acb67b82bb8579ef8a6aa0cf21160b9f8eb2ef32698f4f5b39e9ac2cc",
+    "scripts/run_physical_job.py": "52aec471aa5303d51a12d8b271fe1efa4883f55d6c94ce1703ef29da4796c20b"
+  },
+  "study_sources_sha256": {
+    "experiments/optimization-135-v1/run_A_physical.py": "156a3a122b830b8518693640d28632a69daf86c843c6626a4c8890e2c16b829d",
+    "experiments/optimization-135-v1/guard_A.py": "c8fb6e6a1cb2a68d21a9c958454783cc56f6f9f71a9db92da77978afc46f401e"
+  }
+}

@@ -19,6 +19,7 @@ fixed-time performance measurement.
 | [Project plan](PLAN.md) | Agreed scope, decision process and next milestones |
 | [Current status](docs/STATUS.md) | Measured checks, implementation drift and open verification gaps |
 | [Current architecture diagram](docs/ARCHITECTURE_MAP.md) | Current B datapath, capacities, control feedback and six candidate improvement directions |
+| [Directions 1/3/5 first study](docs/OPTIMIZATION_135_STUDY.md) | Verified FP observations and native path analysis; isolated A same-flow physical run blocked by storage/runtime access |
 | [Architecture](architecture_spec.md) | Current implementation inventory and architectural requirements |
 | [Micro-operations](uop_spec.md) | Implemented packet types and their limitations |
 | [Workloads](docs/WORKLOADS.md) | Approved suites and planning targets; open measurement contracts |

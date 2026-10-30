@@ -1,0 +1,8 @@
+{
+  "#include \"core_roi_profile.h\"": "#include \"core_roi_profile.h\"\n#include \"fp_observer.h\"",
+  "    std::string core_profile_file;": "    std::string core_profile_file;\n    std::string fp_observer_file;",
+  "        } else if (arg.rfind(\"+profile-core-roi=\", 0) == 0) {": "        } else if (arg.rfind(\"+observe-fp=\", 0) == 0) {\n            config.fp_observer_file = arg.substr(arg.find('=') + 1);\n            config.profile_fp_roi = true;\n        } else if (arg.rfind(\"+profile-core-roi=\", 0) == 0) {",
+  "    CoreRoi::Profile core_roi;": "    CoreRoi::Profile core_roi;\n    FpObserve::Profile fp_observer;",
+  "        if (core_profile_out.is_open() && fp_roi.active) core_roi.sample(CoreRoi::read(*top));": "        if (core_profile_out.is_open() && fp_roi.active) core_roi.sample(CoreRoi::read(*top));\n        if (!config.fp_observer_file.empty()) fp_observer.sample(FpObserve::read(*top), fp_roi.active);",
+  "    if (core_profile_out.is_open()) core_roi.write(core_profile_out);": "    if (core_profile_out.is_open()) core_roi.write(core_profile_out);\n    if (!config.fp_observer_file.empty()) {\n        std::ofstream out(config.fp_observer_file);\n        if (!out) throw std::runtime_error(\"Cannot open observer output\");\n        fp_observer.write(out);\n    }"
+}
