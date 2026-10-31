@@ -29,8 +29,8 @@ def main():
     grt_policy=HERE/'contract-grt.json';eco_policy=HERE/'contract-hold40.json';guard_policy=HERE/'contract-guard.json'
     policies=[json.loads(p.read_text()) for p in [grt_policy,eco_policy,guard_policy]]
     for d in policies:check(d)
-    require(shutil.disk_usage(ROOT).free>=3*1024**3,'need at least 3 GiB available before fresh A GRT')
     BASE.mkdir(parents=True,exist_ok=True)
+    require(shutil.disk_usage(BASE).free>=3*1024**3,'need at least 3 GiB available on the actual experiment output filesystem')
     paths=[BASE/'physical-A-v1',BASE/'physical-A-v2',BASE/'physical-A-v4'];require(not any(p.exists() for p in paths),'preserve existing attempts')
     tracked=[Path(__file__),HERE/'guard_A.py',grt_policy,eco_policy,guard_policy];report=dict(scope='A same-flow construction; independent corners/measurement still required',started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),source_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),inputs={str(p):sha(p) for p in tracked},stages=[],complete=False);summary=BASE/'physical-controller.json';save(summary,report)
     p=paths[0];p.mkdir();state=dict(variant='A',contract_sha256=sha(grt_policy),stages=[],complete=False);save(p/'pipeline.json',state)

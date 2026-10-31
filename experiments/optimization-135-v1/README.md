@@ -62,9 +62,30 @@ cycles. Issue/first-valid/grant observations include speculative work and are
 not retirement latency measurements. Inputs with completions outside the ROI
 are excluded from pair histograms; outstanding work is dropped on flush.
 
-Before native A construction, recover storage, commit the source, verify the
-fixed image/tool/PDK manifest, and use a fresh native runtime mounted at
+Before native A construction, verify available output storage, commit the source,
+verify the fixed image/tool/PDK manifest, and use a fresh native runtime mounted at
 `/workspace` and `/orfs-source`. `run_A_physical.py` then uses the unchanged
 accepted native construction functions. Independent corner checks and actual
 adjacent-period failures remain required after construction. A preflight PASS
 does not qualify timing, area or system speed.
+
+### Storage recovery on 2026-10-31
+
+Docker/network access was approved and the first study commit was pushed.
+Two unregistered VFS copies from the failed create were positively identified;
+the complete copy matched the 204-file tool/platform manifest before its contents
+were removed. Three unused project images were saved in a verified gzip archive,
+including every image config and layer digest, before removing their tags and
+explicitly inventoried build-cache records. The pinned ORFS image is unchanged.
+
+The native runtime uses a private 4 GiB tmpfs at the same experiment output path
+to avoid the VFS copies competing with intermediate OpenDB files on the 32 GiB
+disk. The existing 3 GiB preflight applies to that actual output filesystem.
+The previous B GRT used about 1.14 GiB of intermediate databases and less than
+3.7 GiB peak process memory; the host has an 8 GiB memory limit. Native commands,
+placement/route policy, tool/PDK bytes and acceptance thresholds are unchanged.
+After construction, copy and hash-check every output onto the host, then detach
+the private tmpfs inside the container before running the unchanged independent
+STA collectors against the shared host paths. The runtime's SYS_ADMIN capability
+is used only for that private mount operation. Keep recovery/backup/publication
+receipts in the experiment's ignored working directory.
