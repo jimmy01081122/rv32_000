@@ -34,8 +34,11 @@ limits do not change.
 See [the measured review](../../docs/OPTIMIZATION_135_STUDY.md). All 81 retained
 profiles and 27 observer off/on pairs pass. Six real instruction controls exercise
 nonzero completion contention and preserve the full ordered retirement trace.
-The A policy/input preflight passes; the native A run has **not started**.
-Workspace disk exhaustion and unavailable Docker socket access block it.
+The A policy/input preflight passes. Access/storage recovery allowed an initial
+native run on October 31, but its unpublished tmpfs outputs were lost when the
+environment stopped. That attempt supplies no physical qualification. A complete
+fresh common-clock A measurement finished and remains on durable storage.
+The replacement native attempt uses automatic verified stage checkpoints below.
 
 Actual diagnostic output is at `/tmp/rv32-opt135`; the full archive is also saved
 as [a portable repository bundle](../../docs/evidence/optimization-135-study-2026-10-30.tar.gz).
@@ -89,3 +92,26 @@ the private tmpfs inside the container before running the unchanged independent
 STA collectors against the shared host paths. The runtime's SYS_ADMIN capability
 is used only for that private mount operation. Keep recovery/backup/publication
 receipts in the experiment's ignored working directory.
+
+### Durable checkpoints after the November 5 restart
+
+The initial native container stopped on November 3 without OOM; on November 5
+its tmpfs was empty. No native completion or timing result is admitted from that
+attempt. The separate October 31 A measurement finished 27/27 on durable storage.
+
+`run_A_physical.py --label v2` uses a fresh `attempt-v2` namespace and saves each
+completed GRT/hold40/guard stage automatically before proceeding. `checkpoint.py`
+checks every archive member, decoded file SHA/size and relative symlink, then
+fsyncs the archive and receipt. Controller progress and the bound guard contract
+also go directly to durable storage. Five negative controls cover changed bytes,
+missing/duplicate members, existing checkpoints and escaping links. Native flow
+functions, PDK/tool identities, timing policy and acceptance remain unchanged.
+
+Inside the existing disposable container, a nonrecursive bind of `/workspace`
+to `/run/rv32-durable` exposes the underlying host directory without the nested
+tmpfs mount. Its host-visible marker and distinct filesystem are verified before
+launch. SYS_ADMIN is used for this private bind and eventual tmpfs detachment.
+A detached supervisor stores the native controller log on the host, then attempts
+full publication and the unchanged independent STA collectors. A stage checkpoint
+is a recovery artifact, not physical closure. The complete physical review and
+adjacent failing clock point are still required.

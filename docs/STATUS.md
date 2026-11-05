@@ -1,6 +1,6 @@
 # Current project status
 
-Updated 2026-10-30 (Asia/Taipei). Initial documentation-cleanup baseline: maintenance commit `1b266ed0b17aaec2dc598e5128fc57ab9edf56bb`;
+Updated 2026-11-05 (UTC). Initial documentation-cleanup baseline: maintenance commit `1b266ed0b17aaec2dc598e5128fc57ab9edf56bb`;
 incoming RTL revision: `0d79df58e65c2e1034e40f7f586a463fd8602ff1`.
 The documentation cleanup changes no RTL behavior or executable acceptance thresholds.
 
@@ -10,11 +10,13 @@ The user selected architecture-map directions **1, 3 and 5**. The
 EX0 or completion contention in baseline/A/B; `minver` exposes ready arithmetic
 work behind busy DIV/SQRT. Existing native SS paths identify arithmetic FPU
 timing followed closely by the LSU output path. No new CPU candidate is implemented.
-The isolated A common-flow input/policy preflight passes, but native construction
-has not started: Docker VFS creation exhausted workspace storage and subsequent
-socket access requests were cancelled. New complete diagnostic evidence is
+The isolated A common-flow preflight passes. Its first native attempt lost
+unpublished tmpfs outputs during an environment stop and supplies no physical
+qualification. A fresh 27-case common-clock measurement completed on durable
+storage. The replacement native attempt adds automatic verified per-stage
+checkpoints and a durable controller log; independent closure remains pending. New complete diagnostic evidence is
 preserved in the [portable archive](evidence/optimization-135-study-2026-10-30.tar.gz)
-with 721 stored/decoded payloads verified; a temporary extracted copy is under `/tmp/rv32-opt135/archive`.
+with 721 stored/decoded payloads verified; temporary extraction is not durable storage.
 
 FP32 compiler contraction is now approved as `fast` with `-fno-fast-math`;
 the daily qualifier defaults to fast and retains explicit off comparisons.

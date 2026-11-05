@@ -1,6 +1,6 @@
 # 第 1、3、5 項：第一輪證據研究
 
-更新：2026-10-30（Asia/Taipei）。使用者已選擇架構圖的 1、3、5，這一輪先完成獨立 A 的同流程比較準備、FP 阻塞觀測與 FPU 時序分析，再共同決定 RTL 改動。CPU RTL、凍結工作負載、10 ns 記憶體政策及兩類各 ≥1.20×／面積 ≤1.10× 目標維持原狀。
+更新：2026-11-05（UTC）；第一輪觀測資料日期為 2026-10-30。使用者已選擇架構圖的 1、3、5，這一輪先完成獨立 A 的同流程比較準備、FP 阻塞觀測與 FPU 時序分析，再共同決定 RTL 改動。CPU RTL、凍結工作負載、10 ns 記憶體政策及兩類各 ≥1.20×／面積 ≤1.10× 目標維持原狀。
 
 | 項目 | 本輪狀態 | 尚未完成 |
 | --- | --- | --- |
@@ -54,8 +54,10 @@ SS 的下一條 reg2out 邊界只多約 **235.78 ps** 餘裕。若只縮短 FPU�
 
 ## 環境阻擋與證據保存
 
-建立 `rv32-opt135-native` 的 Docker VFS 可寫副本時發生 ENOSPC；後續 Docker socket 存取請求被取消，無法辨識／清理失敗容器或啟動 A native 流程。未執行 global prune，也未手動刪除不明 Docker layer。
+10 月 31 日已恢復 Docker／網路存取，固定 ORFS 映像與 204 個工具／PDK 檔案核對通過，並啟動 A。該容器在 11 月 3 日停止（沒有 OOM 記錄），11 月 5 日確認尚未保存的 tmpfs 已清空；這次嘗試沒有可採認的實體結果。原先依賴建置後人工觸發保存的流程已改為每個完成階段自動壓縮、逐檔核對與 fsync，並將進度和 controller 日誌直接存入主機。新嘗試使用獨立 `attempt-v2`，不重用消失的結果。
 
-已完成的 B／baseline 工作目錄 ODB 與兩個 route guide 改以既有 gzip payload 的 hardlink 保存；解碼雜湊與回復路徑記在 compaction receipts。**原封存資料未改動**，1327 筆 stored／decoded 記錄再驗證通過。需要舊 raw ODB 的工具須先解壓還原相同 bytes。
+獨立 A 工作目錄在凍結 `bf6702c` 以原驗證模型完成新的 100 MHz／固定 10 ns 記憶體全 27 項重測，測試器全部通過，資料仍在主機磁碟；完整來源／數值／per-PC 審查和新的實體資格仍待合併確認。主分支 RTL 維持 B。
 
-工作區可用容量仍為 0，新 archive 目錄建立失敗；改將完整新證據保存為既有目錄內的 [可攜式封裝](evidence/optimization-135-study-2026-10-30.tar.gz)，附 [SHA256](evidence/optimization-135-study-2026-10-30.tar.gz.sha256)。721 份原始／解碼 payload 通過檢查；解壓後可執行 `python3 source/verify_study_archive.py .`。暫存副本仍在 `/tmp/rv32-opt135/archive`。新的 native A 輸入契約與診斷程式位於 [experiments/optimization-135-v1](../experiments/optimization-135-v1/README.md)。本輪 push 狀態以實際 Git 記錄為準。
+已完成的 B／baseline 工作目錄 ODB 與兩個 route guide 以既有 gzip payload 的 hardlink 保存；24 份相同的已完成 gzip 快取也去除重複實體副本。**原封存 bytes 未改動**，需要舊 raw ODB 的工具須先解壓還原。三個暫未載入的 FP／SIM／SYN 映像完整保存在經逐 layer 核對的 gzip 備份，待 native 容器釋放容量後還原。
+
+第一輪完整證據保存為 [可攜式封裝](evidence/optimization-135-study-2026-10-30.tar.gz)，附 [SHA256](evidence/optimization-135-study-2026-10-30.tar.gz.sha256)。721 份原始／解碼 payload 已通過檢查；解壓後可執行 `python3 source/verify_study_archive.py .`。暫存解壓副本不作持久保存保證。native A 輸入契約與診斷程式位於 [experiments/optimization-135-v1](../experiments/optimization-135-v1/README.md)。第一輪及容量修正已推送；後續結果依實際審查與 Git 紀錄更新。
