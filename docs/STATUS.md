@@ -10,13 +10,23 @@ The user selected architecture-map directions **1, 3 and 5**. The
 EX0 or completion contention in baseline/A/B; `minver` exposes ready arithmetic
 work behind busy DIV/SQRT. Existing native SS paths identify arithmetic FPU
 timing followed closely by the LSU output path. No new CPU candidate is implemented.
-The isolated A common-flow preflight passes. Its first native attempt lost
-unpublished tmpfs outputs during an environment stop and supplies no physical
-qualification. A fresh 27-case common-clock measurement completed on durable
-storage. The replacement native attempt adds automatic verified per-stage
-checkpoints and a durable controller log; independent closure remains pending. New complete diagnostic evidence is
-preserved in the [portable archive](evidence/optimization-135-study-2026-10-30.tar.gz)
-with 721 stored/decoded payloads verified; temporary extraction is not durable storage.
+The [isolated A common-flow completion](evidence/2026-11-05/optimization-135-A/README.md)
+now passes: exact shared FPU/hold40/ready-guard construction, independent TT/SS/FF,
+actual 9,300 ps SS failure (−52.245 ps), and 9,400/10,000 ps qualification.
+Area is 21,602.442420 µm²: 1.002643× same-flow baseline, 0.978322× original.
+Both fresh full 27-case A replays pass 3,629 numerical outputs and per-PC work.
+At 100 MHz, Embench/FP32 are 1.045830×/1.078255×; at 106.38 MHz they are
+0.765250×/0.737524× because fixed 10 ns memory is sampled after 18.8 ns.
+Neither speed target is met. At common clock A wins 18 cases, B wins nine.
+Original A functional qualification is reused with fresh source/model/log checks;
+this is not a fresh full Spike rerun or full IEEE-754 qualification.
+
+The first native attempt lost unpublished tmpfs outputs and contributes no result.
+Its replacement automatically persisted verified stage checkpoints. Publication
+capacity/mount-view failures and restart recovery remain recorded; actual container
+namespace streaming published all native results before independent STA. The
+[first diagnostic archive](evidence/optimization-135-study-2026-10-30.tar.gz)
+retains 721 verified payloads; the A completion has a separate split archive.
 
 FP32 compiler contraction is now approved as `fast` with `-fno-fast-math`;
 the daily qualifier defaults to fast and retains explicit off comparisons.
@@ -24,7 +34,7 @@ The post-LSU v1 workload identities and fixed-absolute-time memory policy are
 frozen in [AP5B v1](../baselines/ap5b-post-lsu-v1/manifest.json). The
 [formal baseline](evidence/2026-10-18/post-lsu-baseline/README.md) passes 27/27 at
 10 ns (100 MHz), with 22,081.1184 µm² cell area and fixed 10 ns I/D memory time.
-TT/SS/FF closure is qualified at global-route research scope. The approved
+TT/SS/FF closure is qualified at global-route research scope. The original October 20
 [isolated LSU A experiment](../experiments/lsu-a-v1/README.md) passes clean-source
 functional qualification and complete 27-case measurement at both independently
 qualified operating points. Its [physical evidence](evidence/2026-10-20/lsu-a-physical/README.md) records
@@ -84,8 +94,9 @@ The [original B v1](LSU_B_REVIEW.md) timing failure and [diagnosis](LSU_B_TIMING
 old EQY timeout, nonconvergent 100 ps hold ECO, failed hold40 baseline and initial
 buffer-name assertion failure remain preserved. The [new raw archive](evidence/2026-10-29/lsu-b-complete-validation/README.md)
 records completed qualifications separately. No CPU RTL or frozen baseline was
-changed during this completion; A has not been rerun in the new physical flow.
-Recommend reviewing B at 100 MHz, retaining the PID regression for joint decision;
+changed during the B completion. A has since completed the same physical flow;
+see the newer [1/3/5 study](OPTIMIZATION_135_STUDY.md).
+Compare A and B at 100 MHz, retaining individual regressions for joint decision;
 no new baseline, A+B combination or next architecture has been selected.
 
 ## Evidence available

@@ -1,0 +1,520 @@
+{
+  "passed": true,
+  "scope": "isolated A at shared-FPU/hold40/ready-guard global-route research boundary; no baseline promotion",
+  "reviewer_sha256": "d373c97296acc424e744df5efb45c7996deadf1347510929f5c8b12a62ae1b0c",
+  "accepted_guard_reviewer_sha256": "b7f301bc4def1e2644063619e3ba8115a519c30a93425a66284c22619f7123a2",
+  "contract_sha256": "3769d390d3a147a0060048f3d9f018685c8a0468fa541c895e3c6ace331ef74b",
+  "formal": {
+    "passed": true,
+    "scope": "complete two-state FPU implementation equivalence after one synchronous reset edge; no arithmetic cutpoints; not IEEE-754 conformance",
+    "original_state_bits": 156,
+    "mapped_state_bits": 100,
+    "obligations": {
+      "reset-gold-proof": true,
+      "reset-gate-proof": true,
+      "step-output-proof": true,
+      "negative-bit-proof": false
+    },
+    "proof_summary_sha256": "474ad1e28ba62b0d990eb0a2cf26c8fbf180bb9c5ba3865f92de1a2bb07f13c6",
+    "frontend_replay_sha256": "d9433c5ad2e91ae76d147a5adb991f6251b8097e475a2c751d7f310c8d2ec6ae",
+    "negative_summary_sha256": "4fae1a7f0d70704acc328f45d479dd1b62b6dd84f704e2fb81d64e24c68ea8be"
+  },
+  "formal_to_physical": {
+    "passed": true,
+    "retained_link_review_sha256": "3ed1bdc1abe11d89c03e84431de23cd8b98e76f0e5962709098514e016e19706",
+    "common_graph_sha256": "d12b91d198024deff4527b2c1e6217fcc7ca3355bdc09dfb4ebb309192a0fd89",
+    "A_linked_netlist_sha256": "ca59e5146f84e3276bf74c8ac2398b84a722ed68f32751e3263772a872ff3647",
+    "A_lowering_report_sha256": "72f5f81bdce8f9af52214b04743f6d641ebdb747f40319a292db3a448f262478",
+    "A_mapping_report_sha256": "622f402fb07e1b507e7c50092e96481ca0dd8279a7763c12d1a490481359ad56"
+  },
+  "A_physical": {
+    "scope": "tested global-route timing trials only; routing review and formal measurement still required",
+    "analysis_report_sha256": "93a820ba599e2711a9df5788c5f3ebb9a5a8f224b8eed678bc80c93a8b32478f",
+    "implementation_report_sha256": "a44951db18a4673249930079890f468fe71b06089f4d5bb374d3a34792413d72",
+    "checker_sha256": "170a5abc90b2f6dad76d2fa0a81a5b6601b897865862b867d784e888fc1048b5",
+    "records": [
+      {
+        "corner": "TT",
+        "standard_cell_area_um2": 21602.442420008647,
+        "standard_cell_count": 174293,
+        "register_count": 18329,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9300,
+            "setup_slack_ps": 3052.7283045723407,
+            "hold_slack_ps": 40.0151025026422,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9400,
+            "setup_slack_ps": 3152.7283132459584,
+            "hold_slack_ps": 40.0151025026422,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 3752.7283652876627,
+            "hold_slack_ps": 40.0151025026422,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      },
+      {
+        "corner": "SS",
+        "standard_cell_area_um2": 21602.442420008647,
+        "standard_cell_count": 174293,
+        "register_count": 18329,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9300,
+            "setup_slack_ps": -52.24531939078246,
+            "hold_slack_ps": 71.70275513120365,
+            "problems": [
+              "setup violation"
+            ],
+            "passed": false
+          },
+          {
+            "period_ps": 9400,
+            "setup_slack_ps": 47.75468928283495,
+            "hold_slack_ps": 71.70275513120365,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 647.7547413245394,
+            "hold_slack_ps": 71.70275513120365,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      },
+      {
+        "corner": "FF",
+        "standard_cell_area_um2": 21602.442420008647,
+        "standard_cell_count": 174293,
+        "register_count": 18329,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9300,
+            "setup_slack_ps": 4463.915477333018,
+            "hold_slack_ps": 16.90556035254785,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9400,
+            "setup_slack_ps": 4563.9154860066365,
+            "hold_slack_ps": 16.90556035254785,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 5163.915538048341,
+            "hold_slack_ps": 16.90556035254785,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      }
+    ],
+    "qualified_periods_ps": [
+      9400,
+      10000
+    ],
+    "smallest_tested_passing_period_ps": 9400,
+    "standard_cell_area_um2": 21602.442420008647,
+    "passed": true,
+    "variant": "A",
+    "guard_source_commit": "8a1c5820b32fed3c647e298f24bc4f0bde768dd4",
+    "predecessor_source_commit": "8a1c5820b32fed3c647e298f24bc4f0bde768dd4",
+    "predecessor_GRT_source_commit": "8a1c5820b32fed3c647e298f24bc4f0bde768dd4",
+    "native_topology_audit": {
+      "passed": true,
+      "original_cells": 174292,
+      "final_cells": 174293,
+      "original_pins_checked": 967228,
+      "boundary_ports_checked": 523,
+      "redirected_input_loads": 1,
+      "added_buffer": "rv32_ready_hold_guard23009",
+      "master": "BUFx2_ASAP7_75t_R",
+      "all_other_cells_masters_pins_ports_unchanged": true
+    },
+    "predecessor_timing_passed": true,
+    "predecessor_analysis_sha256": "3bbb7fbcd5b6cc2537af3acfc286b8cd1c3e1e8846c0fbe2ef1b330fa478e007",
+    "whole_route_overflow": [
+      0,
+      0,
+      0
+    ],
+    "antenna_net_pin_violations": [
+      0,
+      0
+    ]
+  },
+  "baseline_physical": {
+    "scope": "tested global-route timing trials only; routing review and formal measurement still required",
+    "analysis_report_sha256": "c86254a51a0847b439788b04087d8a9cad5028516170f1a11fb773c20281efd2",
+    "implementation_report_sha256": "9237f9919158020c481979db910b135166c6c9fde6569740f7bf6f57d9822069",
+    "checker_sha256": "170a5abc90b2f6dad76d2fa0a81a5b6601b897865862b867d784e888fc1048b5",
+    "records": [
+      {
+        "corner": "TT",
+        "standard_cell_area_um2": 21545.492940008164,
+        "standard_cell_count": 174141,
+        "register_count": 18288,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9400,
+            "setup_slack_ps": 2781.1424385788623,
+            "hold_slack_ps": 39.195119528953185,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": 2881.14244725248,
+            "hold_slack_ps": 39.195119528953185,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 2981.142455926097,
+            "hold_slack_ps": 39.195119528953185,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 3381.142490620567,
+            "hold_slack_ps": 39.195119528953185,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      },
+      {
+        "corner": "SS",
+        "standard_cell_area_um2": 21545.492940008164,
+        "standard_cell_count": 174141,
+        "register_count": 18288,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9400,
+            "setup_slack_ps": -11.991296892286249,
+            "hold_slack_ps": 71.08219596910978,
+            "problems": [
+              "setup violation"
+            ],
+            "passed": false
+          },
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": 88.00871178133117,
+            "hold_slack_ps": 71.08219596910978,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 188.0087204549486,
+            "hold_slack_ps": 71.08219596910978,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 588.0087551494182,
+            "hold_slack_ps": 71.08219596910978,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      },
+      {
+        "corner": "FF",
+        "standard_cell_area_um2": 21545.492940008164,
+        "standard_cell_count": 174141,
+        "register_count": 18288,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9400,
+            "setup_slack_ps": 4283.167615488132,
+            "hold_slack_ps": 9.122730385373158,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": 4383.167624161749,
+            "hold_slack_ps": 9.122730385373158,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 4483.167632835367,
+            "hold_slack_ps": 9.122730385373158,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 4883.167667529836,
+            "hold_slack_ps": 9.122730385373158,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      }
+    ],
+    "qualified_periods_ps": [
+      9500,
+      9600,
+      10000
+    ],
+    "smallest_tested_passing_period_ps": 9500,
+    "standard_cell_area_um2": 21545.492940008164,
+    "passed": true,
+    "variant": "baseline",
+    "guard_source_commit": "a5cc433598b3e61388bd85a9ff2442ff88cc9010",
+    "predecessor_source_commit": "f2c8b4520fc68d1c95a043a3b638fc9539bf48c2",
+    "predecessor_GRT_source_commit": "6493269c0002920837ba9ac308b0ec7199945942",
+    "native_topology_audit": {
+      "passed": true,
+      "original_cells": 174140,
+      "final_cells": 174141,
+      "original_pins_checked": 967132,
+      "boundary_ports_checked": 523,
+      "redirected_input_loads": 1,
+      "added_buffer": "rv32_ready_hold_guard22839",
+      "master": "BUFx2_ASAP7_75t_R",
+      "all_other_cells_masters_pins_ports_unchanged": true
+    },
+    "predecessor_timing_passed": false,
+    "predecessor_analysis_sha256": "4d5390194dc6baa34b60ae9b2357d346b4ca25cd3c6f895b14a8f29f66f068b1",
+    "whole_route_overflow": [
+      0,
+      0,
+      0
+    ],
+    "antenna_net_pin_violations": [
+      0,
+      0
+    ]
+  },
+  "B_physical": {
+    "scope": "tested global-route timing trials only; routing review and formal measurement still required",
+    "analysis_report_sha256": "772b40a5aea31483b80a5357e387678d070c97df687a52cdc1bf56703d5467b8",
+    "implementation_report_sha256": "a9294a7e02cdb86e63a065cc5e3a127eb2fdeb8661dccdf65444d15279e3da69",
+    "checker_sha256": "170a5abc90b2f6dad76d2fa0a81a5b6601b897865862b867d784e888fc1048b5",
+    "records": [
+      {
+        "corner": "TT",
+        "standard_cell_area_um2": 21309.821820015095,
+        "standard_cell_count": 171538,
+        "register_count": 18131,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": 2898.293616694632,
+            "hold_slack_ps": 39.488357186504025,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 2998.293625368249,
+            "hold_slack_ps": 39.488357186504025,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9700,
+            "setup_slack_ps": 3098.293634041867,
+            "hold_slack_ps": 39.488357186504025,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 3398.293660062719,
+            "hold_slack_ps": 39.488357186504025,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      },
+      {
+        "corner": "SS",
+        "standard_cell_area_um2": 21309.821820015095,
+        "standard_cell_count": 171538,
+        "register_count": 18131,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": -45.953463440485756,
+            "hold_slack_ps": 71.21075979587509,
+            "problems": [
+              "setup violation"
+            ],
+            "passed": false
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 54.04654523313166,
+            "hold_slack_ps": 71.21075979587509,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9700,
+            "setup_slack_ps": 154.04655390674907,
+            "hold_slack_ps": 71.21075979587509,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 454.04657992760133,
+            "hold_slack_ps": 71.21075979587509,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      },
+      {
+        "corner": "FF",
+        "standard_cell_area_um2": 21309.821820015095,
+        "standard_cell_count": 171538,
+        "register_count": 18131,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": 4389.066905248969,
+            "hold_slack_ps": 17.279566735462907,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 4489.066913922587,
+            "hold_slack_ps": 17.279566735462907,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9700,
+            "setup_slack_ps": 4589.066922596205,
+            "hold_slack_ps": 17.279566735462907,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 4889.066948617056,
+            "hold_slack_ps": 17.279566735462907,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      }
+    ],
+    "qualified_periods_ps": [
+      9600,
+      9700,
+      10000
+    ],
+    "smallest_tested_passing_period_ps": 9600,
+    "standard_cell_area_um2": 21309.821820015095,
+    "passed": true,
+    "variant": "B",
+    "guard_source_commit": "a5cc433598b3e61388bd85a9ff2442ff88cc9010",
+    "predecessor_source_commit": "f2c8b4520fc68d1c95a043a3b638fc9539bf48c2",
+    "predecessor_GRT_source_commit": "6493269c0002920837ba9ac308b0ec7199945942",
+    "native_topology_audit": {
+      "passed": true,
+      "original_cells": 171537,
+      "final_cells": 171538,
+      "original_pins_checked": 948537,
+      "boundary_ports_checked": 523,
+      "redirected_input_loads": 1,
+      "added_buffer": "rv32_ready_hold_guard22320",
+      "master": "BUFx2_ASAP7_75t_R",
+      "all_other_cells_masters_pins_ports_unchanged": true
+    },
+    "predecessor_timing_passed": true,
+    "predecessor_analysis_sha256": "19b0008341a559fcc50a710132264974ec8df4822618707ac906743bb1072139",
+    "whole_route_overflow": [
+      0,
+      0,
+      0
+    ],
+    "antenna_net_pin_violations": [
+      0,
+      0
+    ]
+  },
+  "native_comparisons": [
+    {
+      "stage": "grt",
+      "reference": "baseline",
+      "native_arguments_equal_except_variant_paths": true,
+      "A_commit": "8a1c5820b32fed3c647e298f24bc4f0bde768dd4",
+      "reference_commit": "6493269c0002920837ba9ac308b0ec7199945942"
+    },
+    {
+      "stage": "grt",
+      "reference": "B",
+      "native_arguments_equal_except_variant_paths": true,
+      "A_commit": "8a1c5820b32fed3c647e298f24bc4f0bde768dd4",
+      "reference_commit": "6493269c0002920837ba9ac308b0ec7199945942"
+    },
+    {
+      "stage": "eco",
+      "reference": "baseline",
+      "native_arguments_equal_except_variant_paths": true,
+      "A_commit": "8a1c5820b32fed3c647e298f24bc4f0bde768dd4",
+      "reference_commit": "f2c8b4520fc68d1c95a043a3b638fc9539bf48c2"
+    },
+    {
+      "stage": "eco",
+      "reference": "B",
+      "native_arguments_equal_except_variant_paths": true,
+      "A_commit": "8a1c5820b32fed3c647e298f24bc4f0bde768dd4",
+      "reference_commit": "f2c8b4520fc68d1c95a043a3b638fc9539bf48c2"
+    },
+    {
+      "stage": "guard",
+      "reference": "baseline",
+      "native_arguments_equal_except_variant_paths": true,
+      "A_commit": "8a1c5820b32fed3c647e298f24bc4f0bde768dd4",
+      "reference_commit": "a5cc433598b3e61388bd85a9ff2442ff88cc9010"
+    },
+    {
+      "stage": "guard",
+      "reference": "B",
+      "native_arguments_equal_except_variant_paths": true,
+      "A_commit": "8a1c5820b32fed3c647e298f24bc4f0bde768dd4",
+      "reference_commit": "a5cc433598b3e61388bd85a9ff2442ff88cc9010"
+    }
+  ],
+  "reference_review_sha256": "c133e45ff7ad30f1ad049a13a45f4c66b3c8a6d37e6cad85daa8aee397de0ea0",
+  "original_area_ratio": 0.9783219322805998,
+  "same_flow_area_ratio": 1.002643220099863
+}

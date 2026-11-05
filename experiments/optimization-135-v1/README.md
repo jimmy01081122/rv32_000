@@ -29,16 +29,30 @@ losslessly compacted with hash-checked receipts; raw OpenDB inputs must be resto
 before a tool that requires them is rerun. Image/PDK identities and final acceptance
 limits do not change.
 
-## First study status
+## Completed study status (2026-11-05)
 
 See [the measured review](../../docs/OPTIMIZATION_135_STUDY.md). All 81 retained
 profiles and 27 observer off/on pairs pass. Six real instruction controls exercise
 nonzero completion contention and preserve the full ordered retirement trace.
-The A policy/input preflight passes. Access/storage recovery allowed an initial
-native run on October 31, but its unpublished tmpfs outputs were lost when the
-environment stopped. That attempt supplies no physical qualification. A complete
-fresh common-clock A measurement finished and remains on durable storage.
-The replacement native attempt uses automatic verified stage checkpoints below.
+A now completes the identical shared-FPU/GRT/hold40/ready-guard flow at clean
+`8a1c582`. Independent TT/SS/FF qualifies 9,400 and 10,000 ps; the actual adjacent
+9,300 ps SS setup failure is −52.245 ps. Area is 21,602.442420 µm², 1.002643×
+the same-flow baseline and 0.978322× the original frozen baseline.
+Both new A full-27 replays at frozen `bf6702c` pass 3,629 numerical values and
+per-PC retired work. Embench/FP32 are 1.045830×/1.078255× at 100 MHz and
+0.765250×/0.737524× at 106.38 MHz. Fixed 10 ns memory is sampled after 18.8 ns
+in the latter case. The original A functional qualification is revalidated,
+not rerun as a fresh full Spike qualification. Both speed goals remain unmet.
+The [completion archive](../../docs/evidence/2026-11-05/optimization-135-A/README.md)
+preserves the new results separately from the first observer study.
+
+The first native attempt supplies no physical qualification: its unpublished
+tmpfs outputs were lost when the environment stopped. The successful replacement
+saves automatic verified stage checkpoints below. Publication was corrected to
+stream `tar` through `docker exec`, because daemon-side `docker cp` saw the
+underlying bind view instead of the container's private mount. Every output
+byte/link was verified before unmount and independent STA. Original failed
+attempts and controls remain recorded.
 
 Actual diagnostic output is at `/tmp/rv32-opt135`; the full archive is also saved
 as [a portable repository bundle](../../docs/evidence/optimization-135-study-2026-10-30.tar.gz).
@@ -115,3 +129,30 @@ A detached supervisor stores the native controller log on the host, then attempt
 full publication and the unchanged independent STA collectors. A stage checkpoint
 is a recovery artifact, not physical closure. The complete physical review and
 adjacent failing clock point are still required.
+
+### Completed admission and portable verification
+
+`review_physical_A.py` reuses the unchanged accepted guard reviewer and collectors,
+revalidates the full shared-FPU proof/mapping link and A source chain, and checks
+native commands against both baseline and B. Only four explicit variant path
+arguments are normalized. Original clock/corner/area/electrical limits remain.
+`review_measurement_A.py` binds the original qualified executable and frozen A
+source independently of the current B worktree; all 27 cases, 3,629 numerical
+values and per-PC work are mandatory. Source-link, workload-admission and
+publication negative controls are included in the archive.
+
+```bash
+python3 experiments/optimization-135-v1/verify_completion_archive.py   docs/evidence/2026-11-05/optimization-135-A
+```
+
+The verifier streams split files without extracting them, verifies the combined
+archive identity and every decoded member, and rejects missing/duplicate/unlisted
+entries. This proves archive integrity; the separately recorded reviewers supply
+functional/physical admission. The three native checkpoint tarballs are original
+bytes and include the original raw OpenDB files. Subsequent independent STA
+outputs are archived separately. `archive_A_completion.py` creates a fresh output
+only and records native source commit separately from archive-parent commit and
+worktree status. Large tool-image payloads are excluded; identity/restore receipts
+are included. Final environment receipts supersede earlier temporary cold-cache
+states. Historical working gzip caches must be restored before old direct-file
+reviewers are rerun; original committed evidence is unchanged.
