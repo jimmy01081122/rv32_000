@@ -14,6 +14,19 @@ XDG_CACHE_HOME=/tmp/rv32-diagram-cache dot -Tsvg graph/current-b/architecture.do
 XDG_CACHE_HOME=/tmp/rv32-diagram-cache dot -Tpng -Gdpi=110 graph/current-b/architecture.dot -o graph/current-b/architecture.png
 ```
 
+## November 6 bottleneck view
+
+[Updated SVG](current-b/bottlenecks.svg), [PNG](current-b/bottlenecks.png) and
+[Graphviz source](current-b/bottlenecks.dot) preserve the same B architecture at
+`ccbd26b`, annotate the measured timing/workload limits, and add candidate 7
+(integer DIV/REM). A remains a separate experiment. See the
+[bottleneck report](../docs/BOTTLENECK_ANALYSIS.md) for denominators and caveats.
+
+```sh
+XDG_CACHE_HOME=/tmp/rv32-diagram-cache dot -Tsvg graph/current-b/bottlenecks.dot -o graph/current-b/bottlenecks.svg
+XDG_CACHE_HOME=/tmp/rv32-diagram-cache dot -Tpng -Gdpi=100 graph/current-b/bottlenecks.dot -o graph/current-b/bottlenecks.png
+```
+
 ## Historical image
 
 [ap5a.png](ap5a.png) is an archived diagram named for the AP5A stage. It has not

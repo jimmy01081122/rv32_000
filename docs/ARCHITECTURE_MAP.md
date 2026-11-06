@@ -1,8 +1,11 @@
 # 目前架構與改善方向
 
-2026-11-05 更新研究狀態；圖依 `59c6193c1dee49a6ae03a7aa7657afd31cf1a4e9`
+2026-11-06 更新研究狀態；圖依 `59c6193c1dee49a6ae03a7aa7657afd31cf1a4e9`
 的目前 **B 分支 RTL** 核對；CPU 是單寬派發、單寬退休的 scalar OoO，整數與
 浮點執行可以並行。此分支不含 A，原 AP5B v1 凍結基線也未被替換。
+
+最新 [瓶頸分析與方案比較](BOTTLENECK_ANALYSIS.md) 及 [標註瓶頸的架構圖](../graph/current-b/bottlenecks.svg)
+已加入 81 份既有 profile 的重新分析、A／B 剩餘 load 等待與⑦整數除法候選。
 
 ![目前 B 分支架構與改善方向](../graph/current-b/architecture.svg)
 
@@ -17,7 +20,7 @@
 「完成／寫回／喚醒」框是 core 接線的概念分組，不是新增的單一仲裁器。
 INT、LOAD、FP completion 可並行；FP 三個來源則共享一條 FP completion。
 
-## 圖上六個方向
+## 原圖六個方向與新增候選
 
 | 編號／位置 | 可以評估的改動 | 目前證據與優先判斷 | 先確認什麼／主要代價 |
 | --- | --- | --- | --- |
@@ -27,8 +30,9 @@ INT、LOAD、FP completion 可並行；FP 三個來源則共享一條 FP complet
 | **④ Frontend／分支恢復** | 先檢查預測衝突／return misses，再選 BTB/BHT 或 RAS；另案評估執行階段提前 redirect | **結構限制已確認，工作負載收益未量測。** 現有 BTB 64、BHT 64×2-bit、無 RAS；branch mispredict 到退休才恢復 | 先量測 miss rate、return 占比、resolve-to-retire 等待。提前恢復需 RAT／free-list checkpoint 或等價恢復機制，並處理精確例外與已接受的記憶體交易 |
 | **⑤ FP 算術資料路徑** | 針對長路徑重構、切 pipeline，或另評估迭代除法／平方根 | **路徑／延遲研究完成。** 已觀測算術單元接受發射到 valid 為 1 cycle，並可連拍發射；B 的 SS 最差路徑在算術 FPU，LSU output 緊接其後 | 優先討論維持 1-cycle 延遲的組合邏輯候選；切級可能增加相依鏈 cycles。需重做等價／數值、所有權與三 corner 檢查 |
 | **⑥ ROB／IQ／PRF** | 調整 window、queue 容量、選取／喚醒、PRF 或 bypass 結構 | **先做飽和度量測，再決定。** ROB 16、IQ 8/4、PRF 各 48；目前沒有證據證明單純加大一定有效 | 量測 full／free-list-empty／operand-wait／issue-idle。更多 slots／ports 增加面積、比較與 bypass 成本；擴大 window 不會自動解除單寬退休上限 |
+| **⑦ 整數 DIV／REM（新增）** | 先量運算元與真正執行延遲，再比較早停／少迭代或每拍 2-bit | **逐 PC 等待拆分已有證據。** B 的 `ud`／`wikisort` DIV/REM 頭端等待占 ROI 37.80%／14.79%；一般 RTL 固定 32 次計算迭代 | 區分 operand／issue／計算／仲裁等待；精確 signed、remainder、除零／overflow、flush／backpressure。沒有 FP32 八項直接收益證據 |
 
-「優先判斷」是本次建議，並非已核准的新實作順序。①～⑥的架構變更仍由使用者
+「優先判斷」是本次建議，並非已核准的新實作順序。①～⑦的架構變更仍由使用者
 參與選擇。多筆 outstanding、實際 LQ、cache 或 store 提前退休屬更大範圍候選，
 需另定 request／response、ordering、MMIO、精確 fault 與面積比較條件，未畫成現有硬體。
 

@@ -18,7 +18,8 @@ fixed-time performance measurement.
 | --- | --- |
 | [Project plan](PLAN.md) | Agreed scope, decision process and next milestones |
 | [Current status](docs/STATUS.md) | Measured checks, implementation drift and open verification gaps |
-| [Current architecture diagram](docs/ARCHITECTURE_MAP.md) | Current B datapath, capacities, control feedback and six candidate improvement directions |
+| [Current architecture diagram](docs/ARCHITECTURE_MAP.md) | Current B datapath, capacities, control feedback and candidate improvement directions |
+| [Bottlenecks and candidate proposals](docs/BOTTLENECK_ANALYSIS.md) | Updated architecture diagram, measured wait positions and next experiment choices |
 | [Directions 1/3/5 first study](docs/OPTIMIZATION_135_STUDY.md) | Completed isolated A common-flow comparison, verified FP observations and native path analysis |
 | [Architecture](architecture_spec.md) | Current implementation inventory and architectural requirements |
 | [Micro-operations](uop_spec.md) | Implemented packet types and their limitations |

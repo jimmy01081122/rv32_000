@@ -1,8 +1,16 @@
 # Current project status
 
-Updated 2026-11-05 (UTC). Initial documentation-cleanup baseline: maintenance commit `1b266ed0b17aaec2dc598e5128fc57ab9edf56bb`;
+Updated 2026-11-06 (UTC). Initial documentation-cleanup baseline: maintenance commit `1b266ed0b17aaec2dc598e5128fc57ab9edf56bb`;
 incoming RTL revision: `0d79df58e65c2e1034e40f7f586a463fd8602ff1`.
 The documentation cleanup changes no RTL behavior or executable acceptance thresholds.
+
+The [November 6 bottleneck analysis](BOTTLENECK_ANALYSIS.md) rechecks 81 retained
+profiles and decomposes integer head waits by actual RV32M opcode. B DIV/REM
+head waits occupy 37.80% of `ud` and 14.79% of `wikisort`; these are wait
+positions, not proven removable execution cycles. It proposes an isolated A+B
+experiment and an integer-divider investigation for joint choice. FP scheduling
+remains a targeted `minver` candidate; FP timing work alone has no demonstrated
+full-suite cycle gain. No new CPU candidate was implemented or benchmark rerun.
 
 The user selected architecture-map directions **1, 3 and 5**. The
 [first evidence study](OPTIMIZATION_135_STUDY.md) verifies 81 retained profiles,

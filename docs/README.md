@@ -11,6 +11,7 @@ signoff label applies only to the source/configuration and checks in that record
 | [Project plan](../PLAN.md) | Agreed direction, review process, proposed targets and milestones |
 | [Status](STATUS.md) | Evidence and unresolved implementation/verification gaps |
 | [Current architecture map](ARCHITECTURE_MAP.md) | Source-checked B diagram, editable SVG/Graphviz/Mermaid and candidate optimization directions |
+| [Current bottlenecks and proposals](BOTTLENECK_ANALYSIS.md) | Current B diagram, full-suite wait positions, integer DIV/REM evidence and ranked candidate experiments |
 | [Directions 1/3/5 first study](OPTIMIZATION_135_STUDY.md) | Completed A same-flow physical/two-clock comparison, FP scheduling observations and native path analysis |
 | [Architecture](../architecture_spec.md) | Implemented structures and architectural obligations |
 | [Micro-operations](../uop_spec.md) | Current packet/schema reference |
