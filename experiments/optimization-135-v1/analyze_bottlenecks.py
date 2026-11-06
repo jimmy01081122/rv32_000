@@ -130,7 +130,7 @@ if __name__ == '__main__':
     fields = ['variant', 'family', 'name', 'cycles', 'retirement_ipc', 'speedup_vs_original',
               'integer_div_rem_head_wait_percent', 'own_load_response_buffer_percent']
     with (args.output / 'workloads.csv').open('w', newline='') as stream:
-        writer = csv.DictWriter(stream, fieldnames=fields, extrasaction='ignore')
+        writer = csv.DictWriter(stream, fieldnames=fields, extrasaction='ignore', lineterminator='\n')
         writer.writeheader()
         writer.writerows(result['records'])
     print(json.dumps(dict(passed=True, profiles=len(result['records']), scores=result['scores']), indent=2))
