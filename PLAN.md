@@ -1,6 +1,6 @@
 # RV32 OoO 專案計畫
 
-版本：2.16；更新：2026-10-30（Asia/Taipei）；狀態：修正後基線不變；A、B 既有研究資格完成，兩類效能目標未達。已選架構圖 1、3、5；第一輪 FP 觀測與路徑研究完成，A 新共同流程實體建置受磁碟／Docker 存取阻擋。
+版本：2.17；更新：2026-11-08（UTC）；狀態：修正後基線不變；A、B 及 A 共同流程研究完成，兩類效能目標未達。已核准獨立 A+B 合併實驗與整數 DIV/REM 診斷，驗證進行中。
 
 ## 已確認的方向
 
@@ -14,7 +14,7 @@
 - LSU 列為第一優先候選方向；[六案例／三延遲研究與 A／B／C 方案](docs/LSU_OPTIMIZATION_REVIEW.md)已可審查。
   已核准先做 A（回應交接重疊），B（head-store marking）另作獨立對照；[ready／store-error 介面修復](docs/LSU_INTERFACE_FIX.md)已完成定向與全集合功能回歸，[新基線](docs/evidence/2026-10-18/post-lsu-baseline/README.md)已完成正式 27 項與 global-route 量測。
 - 使用者參與優化方向、架構取捨、策略調整與工作流程決策。
-- 使用者已選架構圖 1、3、5，先做[獨立 A 同流程準備、FP 阻塞觀測與 FPU 關鍵路徑研究](docs/OPTIMIZATION_135_STUDY.md)。觀測有界定數據範圍及正／負控制；下一個 RTL 候選仍共同選擇。
+- 使用者已選架構圖 1、3、5，先做[獨立 A 同流程準備、FP 阻塞觀測與 FPU 關鍵路徑研究](docs/OPTIMIZATION_135_STUDY.md)。觀測有界定數據範圍及正／負控制；2026-11-08 已核准[獨立 A+B 實驗](experiments/lsu-ab-v1/README.md)，整數除法器先做診斷；後續架構取捨仍共同選擇。
 - 修正後基線採固定記憶體實際時間；ASAP7 RVT、TT 建置與獨立 SS／FF 時序檢查，
   先固定 global-route 寄生估算層級。正式 27 項通過；週期 10 ns、面積 22,081.1184 µm²，
   I response／I initiation interval／D response 各固定 10 ns。

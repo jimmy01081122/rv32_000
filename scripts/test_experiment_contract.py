@@ -27,7 +27,7 @@ class Experiment(unittest.TestCase):
         original,_=load_experiment(CONTRACT)
         mutations=[('baseline_manifest_sha256','0'*64),('baseline_commit','0'*40),
                    ('allowed_rtl_changes',['rtl/lsu/rv32_ooo_lsu.sv','rtl/core/rv32_ooo_core.sv']),
-                   ('memory_ps',9999),('state','implementing'),('experiment_id','lsu-ab-v1')]
+                   ('memory_ps',9999),('state','implementing'),('experiment_id','unapproved-experiment')]
         for field,value in mutations:
             with self.subTest(field=field):
                 x=copy.deepcopy(original);x[field]=value

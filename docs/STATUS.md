@@ -1,8 +1,13 @@
 # Current project status
 
-Updated 2026-11-06 (UTC). Initial documentation-cleanup baseline: maintenance commit `1b266ed0b17aaec2dc598e5128fc57ab9edf56bb`;
+Updated 2026-11-08 (UTC). Initial documentation-cleanup baseline: maintenance commit `1b266ed0b17aaec2dc598e5128fc57ab9edf56bb`;
 incoming RTL revision: `0d79df58e65c2e1034e40f7f586a463fd8602ff1`.
 The documentation cleanup changes no RTL behavior or executable acceptance thresholds.
+
+The user authorized the recommended independent [A+B experiment](../experiments/lsu-ab-v1/README.md)
+on November 8. This branch implements response handoff plus head-store marking;
+validation is in progress. Integer DIV/REM diagnosis is a separate read-only
+study. Neither a new baseline nor a divider RTL optimization has been selected.
 
 The [November 6 bottleneck analysis](BOTTLENECK_ANALYSIS.md) rechecks 81 retained
 profiles and decomposes integer head waits by actual RV32M opcode. B DIV/REM
@@ -10,14 +15,14 @@ head waits occupy 37.80% of `ud` and 14.79% of `wikisort`; these are wait
 positions, not proven removable execution cycles. It proposes an isolated A+B
 experiment and an integer-divider investigation for joint choice. FP scheduling
 remains a targeted `minver` candidate; FP timing work alone has no demonstrated
-full-suite cycle gain. No new CPU candidate was implemented or benchmark rerun.
+full-suite cycle gain. That November 6 report used retained evidence; subsequent A+B work is tracked separately.
 
 The user selected architecture-map directions **1, 3 and 5**. The
 [first evidence study](OPTIMIZATION_135_STUDY.md) verifies 81 retained profiles,
 27 observer off/on pairs and six real instruction controls. FP32 eight show no
 EX0 or completion contention in baseline/A/B; `minver` exposes ready arithmetic
 work behind busy DIV/SQRT. Existing native SS paths identify arithmetic FPU
-timing followed closely by the LSU output path. No new CPU candidate is implemented.
+timing followed closely by the LSU output path. The completed first study itself made no CPU changes.
 The [isolated A common-flow completion](evidence/2026-11-05/optimization-135-A/README.md)
 now passes: exact shared FPU/hold40/ready-guard construction, independent TT/SS/FF,
 actual 9,300 ps SS failure (−52.245 ps), and 9,400/10,000 ps qualification.
