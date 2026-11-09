@@ -1,13 +1,20 @@
 # Current project status
 
-Updated 2026-11-08 (UTC). Initial documentation-cleanup baseline: maintenance commit `1b266ed0b17aaec2dc598e5128fc57ab9edf56bb`;
+Updated 2026-11-09 (Asia/Taipei). Initial documentation-cleanup baseline: maintenance commit `1b266ed0b17aaec2dc598e5128fc57ab9edf56bb`;
 incoming RTL revision: `0d79df58e65c2e1034e40f7f586a463fd8602ff1`.
 The documentation cleanup changes no RTL behavior or executable acceptance thresholds.
 
 The user authorized the recommended independent [A+B experiment](../experiments/lsu-ab-v1/README.md)
 on November 8. This branch implements response handoff plus head-store marking;
-validation is in progress. Integer DIV/REM diagnosis is a separate read-only
-study. Neither a new baseline nor a divider RTL optimization has been selected.
+[functional qualification and all 27 common-clock workloads pass](LSU_AB_REVIEW.md).
+At 100 MHz / 10 ns memory, Embench is 1.073943× and FP32 is 1.088248×;
+3,629 numerical outputs and per-PC retired work match the baseline. A+B beats
+B in all 27 cases, but five regress against A, including PID time +14.00%.
+Independent AB physical qualification remains pending. The separate read-only
+integer DIV/REM diagnosis passes six on/off pairs and 48 instruction controls:
+ordinary accepted-request-to-result latency is 33 cycles, without completion
+arbitration waits. Early-result operands concentrate in ud, cubic and nettle-aes.
+Neither a new baseline nor a divider RTL optimization has been selected.
 
 The [November 6 bottleneck analysis](BOTTLENECK_ANALYSIS.md) rechecks 81 retained
 profiles and decomposes integer head waits by actual RV32M opcode. B DIV/REM

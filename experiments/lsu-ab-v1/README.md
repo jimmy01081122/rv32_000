@@ -5,6 +5,8 @@ successful registered-response handoff with B's full-tag, exception-free
 ROB-head store marking. Only `rtl/lsu/rv32_ooo_lsu.sv` changes in the CPU.
 The frozen baseline and independent A/B references remain unchanged.
 
+Functional gates 1–3 pass at clean `3f079c1`; [results and limits](../../docs/LSU_AB_REVIEW.md). Physical gate 4 remains pending.
+
 Validation gates, in order:
 
 1. One pin-driven 83-case suite against actual baseline, A, B and A+B RTL,

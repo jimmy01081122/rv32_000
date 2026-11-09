@@ -1,0 +1,852 @@
+{
+  "passed": true,
+  "scope": "100 MHz functional/cycle comparison; AB physical qualification still pending",
+  "reference_analysis_sources_sha256": {
+    "docs/evidence/2026-11-05/optimization-135-A/common-clock-review.json": "8c149aafffe5d6f32a1c1c4ffc37cb96be942f748a1ffbe593f01b7a878a339f",
+    "build/experiments/lsu-b-validation-v2/final-common-clock-review.json": "c133e45ff7ad30f1ad049a13a45f4c66b3c8a6d37e6cad85daa8aee397de0ea0",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/summary.json": "0dac120d0295ea3ceac26141195f2863d1625a9503a5f478bc2fc3038023bef7",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/fp32/fir/profile.json": "33a38b761801dc87b1cbc1975d0f747afd22155bc86123ad0e2f1c40118558cd",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/fp32/iir/profile.json": "2daedeb87c5d05f567a66b77acc81e1bffc3714838450d273027733fd27a6d53",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/fp32/fft/profile.json": "fbfdf6744e5d6f694590e935de3c3c5d1a44de64a33c928b35da5ff3276fc778",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/fp32/pid/profile.json": "5ec7675d89421ea824f01f192ab1172dfe075f75901269662ba64e4c088df1a9",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/fp32/gemm/profile.json": "aa0b3be800689edfbaeb2500195f0ab8a288b0aa96314cefd4ad3d91d9e6aafe",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/fp32/bicg/profile.json": "9731c779354bb200698650cd9698f9e61c364aa1d6098587991d020a4e8a53fb",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/fp32/cholesky/profile.json": "48594aca4cea7aa7eb2887bf7db54df2ee54047364f60af05bcfa7750dadcd0e",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/fp32/svm/profile.json": "45430d9e9fa0f59d9e6040e8b6ae5e59c3fa5763cc6eb045c5c06c581732e744",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/embench/aha-mont64/profile.json": "25b2fa4c1352004c64ff532f415bfaa63b146b3d3ba714efd4db68997e004a4b",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/embench/crc32/profile.json": "828ea261bc74bf2d42caac5d207356e8477fb2835f0c0adc89eae99776e2a6e5",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/embench/cubic/profile.json": "50e001776b54bf3dfa4ab7dcca557c5127ee85903601b67ce52428d0fbabc750",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/embench/edn/profile.json": "993c4a29855bc624c1abb1dcd8dea24f046daf4bfd9ce42b8e4d88ef438bc37b",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/embench/huffbench/profile.json": "776cdce24904e4439191c74045961c251c15851ccc58eb949f3f987138c3d6c8",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/embench/matmult-int/profile.json": "163c0237a3a517b19fa1667109e8d0536be32f4aa3e862da82b6bdff343c6f7c",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/embench/minver/profile.json": "4a4d506d39396cc5b2dc6f2372d5aa1092c502fd4597465f05ce22508825fb41",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/embench/nbody/profile.json": "1e15eb41f51d1f7a30ad90af6a395201a7438612cdf78d96407c6ee1284405c3",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/embench/nettle-aes/profile.json": "eb0e770748345567be6913735efb2f6ed4245e05dc7dd681edec0b1c5aabc5c4",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/embench/nettle-sha256/profile.json": "ae27590ed54b995c7c65492fb5456874aa747c52fd21681e417e3a444f3bd8f3",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/embench/nsichneu/profile.json": "995c333189fc41e3360c4511f6775cb74ce1a91d58937119e7b34e6af46745c5",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/embench/picojpeg/profile.json": "006763252613ebf3005cdb8878b5a3ff30429528cd547124173c065a125238ea",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/embench/qrduino/profile.json": "9a8911b9e447155151a2c7090eb26786ef6d01a8a4fe82cda612b71cf316f0e2",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/embench/sglib-combined/profile.json": "50dab83c0e3144e5a21ab035907211383e0fb69018b90f6a416e7c690f40152b",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/embench/slre/profile.json": "8c2607dfb6b0880ab8579f7e64131283102bfb9f7fad42f0ffa3fc1f1ed260a6",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/embench/st/profile.json": "f3ca0cf393688a7f64e85aac6abff87ef2deb8403d3867b880f1748e33f974ec",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/embench/statemate/profile.json": "9262ad03aa0f22fe8e4db76c3068a877636b791e7990259ca194a131bbc4db57",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/embench/ud/profile.json": "a93e1b87151595a037335a7d2a849315b8d650f1dad203e5842f8aec94485ab8",
+    "build/baselines/ap5b-post-lsu-v1/measurement-formal-10000ps/embench/wikisort/profile.json": "17f9e963c482f88451577c38e8291cbf37477f6a43e7023d9cb0a6c03405d848",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/summary.json": "cea6c2e180d0c94b68c06495c8eef4a702f175014921f58e23ecfff791dd7f1b",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/fp32/fir/profile.json": "a6732b8b32dacd0cdd8e2a0da3be65657b11580cd3576dc37afdb2b78437625f",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/fp32/iir/profile.json": "dfa11df90118e477587dc5a6e46a5f942df0ed8c7dd6e1ac6173ff4ff52f3716",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/fp32/fft/profile.json": "d10fef8246f9f074a6a42b5ad1beb641e067f23267ba68f7e938a0b127454b1e",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/fp32/pid/profile.json": "354906e5884aaf2833f9a422d7c696b73c58d468d1d6200432fb5b46d282b77a",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/fp32/gemm/profile.json": "75a6f4e497bb368729c806c09b4534545d335be183ab9446a8a9cab00996358b",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/fp32/bicg/profile.json": "d9387b40441df4c58ba3227252d801025b741cdd8986e8a61d9d5bded1ea371e",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/fp32/cholesky/profile.json": "a7e0e3c917debddfcc5de062c8e323e8f3b75b312bca28008aab1b3ff5e99c2f",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/fp32/svm/profile.json": "42d3eacafea675c8c679819f56cb80cba8f850e54112646c89f315c5fb05d135",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/embench/aha-mont64/profile.json": "1ff29d4a9161c7e5458e4c9ad37d017c72660a5615165ef85402a611037246a2",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/embench/crc32/profile.json": "a7732921b7c7c715d04e317ed6da5b87da8262777e567fdce83db51720179baa",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/embench/cubic/profile.json": "469abde87985048fb5e8c4b8efed1380ea57d8d40f423cf1a2e777e8da2e7555",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/embench/edn/profile.json": "d7bfa59da308a98980a62c142255e21ce12381a206b7ccd056187f1963727d9e",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/embench/huffbench/profile.json": "b95c9b398dea55e717c92d3763bc1a7db2f2ec0a6fa7c7e3d6961df3435a4f1a",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/embench/matmult-int/profile.json": "d71f164c08193be3a4e089bc55105494ae5afef65eb75ac1b05f97de69383f21",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/embench/minver/profile.json": "0b233aca1b36fbc436e702ad6a8b7b98f82f7b54e4a0259b4acc2df5d4f80023",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/embench/nbody/profile.json": "641fd952f41ff90b921441a5c380b4c79aac83ba4c3e277f793994c0b90721b0",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/embench/nettle-aes/profile.json": "6d11ef36a40213d7a438458241c4af0506584271acecc191e159e99147480ae5",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/embench/nettle-sha256/profile.json": "6e8155ed839921a1f031cd01c879543474492c7a4186a4cfca2e7300b14e82f3",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/embench/nsichneu/profile.json": "0af74e6a945b258f5404986311ec758929d761ba698a9374d90f3a90997b6cb2",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/embench/picojpeg/profile.json": "d4b7098fb34273c766dbdbe994f3e45b679060965e17ab8b7638e5444b544b2d",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/embench/qrduino/profile.json": "041d2ca5d1379ebd63e57a04350d8cd2832ca9c4bf38d53d21a98a54717d5778",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/embench/sglib-combined/profile.json": "17ae0c7e2a34c76788b52382960ac2d532a31817dc4575e0946c2ca850a61975",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/embench/slre/profile.json": "e17cd4006a87039864343f2099398a93a0a3f9a3f2e2edc65b8ac057a3c308d7",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/embench/st/profile.json": "e255d63043b27713495f01ea1423f90dc2dff8344820bec4f330919d49bbfab3",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/embench/statemate/profile.json": "eac8de1932d24b883bdee55a3d2244ea92cff6992e7d80e7d65ef660a0868437",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/embench/ud/profile.json": "fc3eb90280a5691acd1e9013ce188e8c46eacb0b9cbaedb6ff3b29a9b3f6fd17",
+    "build/experiments/optimization-135-v1/measurement-source/build/measurement-10000ps-v1/embench/wikisort/profile.json": "7d3d584dd1536a74e9869aa274aa67b1ef6cf8996c0b35f5cbcedbe81b36672c",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/summary.json": "122dbd4bf430e1ef8f2e87c8f32705313307097308d3dec4279e54161c2392da",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/fp32/fir/profile.json": "23afa296161fbce09cc99955a1149ff9c879536cede4618a94593559a9a4d351",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/fp32/iir/profile.json": "7d5dc0a51c996323b3f71ef39576d1b56decdadd59dbdcef80d028a7f20be073",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/fp32/fft/profile.json": "dfb20dc173416986a56a5f848e1773491e14b6a2cd71a9a8faee28830d03288e",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/fp32/pid/profile.json": "e9f58c6e7eb925a694f0ee41dc5e48cc462961f19cf8c9002f5442db509041f6",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/fp32/gemm/profile.json": "b4b26ffdb4c82733c612ddcc9ff5a123e20b9cf12cfa60321277aa8dffda231a",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/fp32/bicg/profile.json": "10485663bd3107a1e213823249e0fedede12e80bd09664b6b5f2ef8125159e9a",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/fp32/cholesky/profile.json": "563b163d1998b398bb7229a6ad620643b21833d3d1abda9eaf2e8ed802f7b426",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/fp32/svm/profile.json": "39d9bbb24cdb74777d19c143217f1f47cef3316df31765d20a9f0d064bb01d77",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/embench/aha-mont64/profile.json": "2ad3c1e3b1a0c4e46e93d993a14ee9ce18d80de2914ccd8089cf8720be82c038",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/embench/crc32/profile.json": "323fd72c341bf716176428053a3f035ea3952f5c1ae912da0881a09005841f4a",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/embench/cubic/profile.json": "db86e7f6e552f77c6988580dbc244a18a61809b7cd1f99c2f7cc59a878a705f1",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/embench/edn/profile.json": "69953ffccc5c7a48aeb2ac372863ceb65c1f09508e8d3a83d49dd7539287b932",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/embench/huffbench/profile.json": "584b258219e73bee5abde3b1a74d0a032be3b3f45520241e09e7a9901804543d",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/embench/matmult-int/profile.json": "0764bf185cc9ad8e732f0f128bacd5716a66ad3c816b159ae1415783987a749d",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/embench/minver/profile.json": "9fe92d2922aef368a20675f5ce6bed0d556b725a1c77e8a86988fafadbbfe614",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/embench/nbody/profile.json": "f759ab8da39ec14d8933ad252e2d9844e07b440c3e0e67a2eed79791c5f61057",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/embench/nettle-aes/profile.json": "969505ac1e1500e8d56fef146e55209876b4d0505fc7e16527e6769b92810705",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/embench/nettle-sha256/profile.json": "bbaa5ccd53634668448fb659a97a561f5720b5e6760615ccf7a332de3f0c7c72",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/embench/nsichneu/profile.json": "24c6f5dae47b6ffe4c60a20161b5ce44b330e08f29e0e8fc655a0cbeba5fa48c",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/embench/picojpeg/profile.json": "ce19bc44075b1a8492449ce14f88e71ed6b796d2528b8225bafa617c47dcfdfb",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/embench/qrduino/profile.json": "479b7adfe4ec1f11a7934f8f16d03fa6a77186b680f272ff0ccfd59f5d6c3795",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/embench/sglib-combined/profile.json": "a86c2fae99e59949ae7ad8be303c4cf46c0d8c78c7877f50cad3408c8705ee5f",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/embench/slre/profile.json": "3659fb716538aece6d80da5b9ab52861adfd59966c09615f50536ae718c22257",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/embench/st/profile.json": "a8edecaafa3c6dd2a908b1f4b1acc36484dbf7932194df4802a1c065dcbabdc2",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/embench/statemate/profile.json": "eb128d37072fef2d9d9675004c215e47b2c0ae44abb02f099dca7886b355b65b",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/embench/ud/profile.json": "c97048683f48fa4e6106f5fcc2cf1c27afc0858d16cd62ef8bc68e25eb61b5da",
+    "build/experiments/lsu-b-validation-v2/measurement-10000ps-v1/embench/wikisort/profile.json": "13f9eb46bcfdc4ebcf0fcb02b604ddb6fad95df7a5328e692385f4e2e7e9660f",
+    "sim/tb/core_roi_profile.h": "296aa8ccaca4d56e442b8d2d4cc45e9bc79e75cb3a42b285cdc776259261c247",
+    "rtl/execute/int/rv32_ooo_divider.sv": "b8ca86ee486d8976ccf07f25adb4955a3945d348a7f5b1350fb8b6edbec91de6",
+    "rtl/core/rv32_ooo_core.sv": "81c116be3845d05c63ab6ffa31efdf5fee9e7374a6902ef0d54555e8a13fcb1c",
+    "rtl/lsu/rv32_ooo_lsu.sv": "c7d13644470f3db310340d4336118ff89dd4f66ac327c258ebecccfa275d55cd",
+    "rtl/issue/rv32_ooo_fp_iq.sv": "7968fa7b3ce4b51b54e4ba21e41b1b5bc4989ac68b405c7a2a7e3e3394e43ca2",
+    "rtl/rob/rv32_ooo_rob.sv": "94e4874dfcb3274fd5d0759776acde8dae373988151b4470698fa847c0a78555"
+  },
+  "candidate": {
+    "passed": true,
+    "scope": "full A+B functional/cycle measurement; physical qualification remains separate",
+    "reviewer_sha256": "744dfccfa8fc7d507a62284022af9ab8c003ca88f53a58723202814a67323579",
+    "measurement": "build/experiments/lsu-ab-v1/measurement-10000ps-v1",
+    "measurement_summary_sha256": "cabae3ddc7229e0776503a74d5f6c569a07f9988f9e3e4734204aa96a0b6af4a",
+    "functional_provenance": {
+      "validator_sha256": "7fb6e823b208ddeacc17769b4a573a8bb5755ae5465d80da695b1cb1a3ca0394",
+      "build_summary_sha256": "10f4a008279ec6214abb2cc3420b127ade16a09868f0d7893b2671d59fe36b6a",
+      "qualification_summary_sha256": "50a5035a208996556b5c14202b109b307a7af0ec620a269cf66f852f7028fde4",
+      "normal_simulator_sha256": "f0db659259f1a773fd9fedf83f2d3ce860dc300bf4fd0dfb79205ec405acc058",
+      "assert_simulator_sha256": "c4f1fb167a96dc2f85d755c0913fe484e3e93bce95f27feb1b6e31decc5bcea4",
+      "directed_cases": 18,
+      "spike_cases": 18,
+      "interface_cases": 48,
+      "fixed_time_controls": 58,
+      "finite_fma_values": 3400,
+      "passed": true
+    },
+    "source_commit": "3f079c1c3d7b53c50beb13bc2d8bf366ac42999f",
+    "source_files_verified": 33,
+    "period_ps": 10000,
+    "memory_ps": 10000,
+    "per_pc_work_matches": true,
+    "numerical_values_checked": 3629,
+    "embench_time_geomean_speedup": 1.0739431920706144,
+    "fp32_time_geomean_speedup": 1.0882479376576741,
+    "fp32_subgroup_speedup": {
+      "dsp": 1.067629126269767,
+      "matrix_ml": 1.1092649541643713
+    },
+    "records": [
+      {
+        "family": "fp32",
+        "name": "fir",
+        "group": "dsp",
+        "baseline_cycles": 74311,
+        "candidate_cycles": 66110,
+        "baseline_time_ps": 743110000,
+        "candidate_time_ps": 661100000,
+        "time_speedup": 1.1240508243836032
+      },
+      {
+        "family": "fp32",
+        "name": "iir",
+        "group": "dsp",
+        "baseline_cycles": 13523,
+        "candidate_cycles": 12472,
+        "baseline_time_ps": 135230000,
+        "candidate_time_ps": 124720000,
+        "time_speedup": 1.0842687620269404
+      },
+      {
+        "family": "fp32",
+        "name": "fft",
+        "group": "dsp",
+        "baseline_cycles": 40867,
+        "candidate_cycles": 33656,
+        "baseline_time_ps": 408670000,
+        "candidate_time_ps": 336560000,
+        "time_speedup": 1.2142560019015927
+      },
+      {
+        "family": "fp32",
+        "name": "pid",
+        "group": "dsp",
+        "baseline_cycles": 7248,
+        "candidate_cycles": 8256,
+        "baseline_time_ps": 72480000,
+        "candidate_time_ps": 82560000,
+        "time_speedup": 0.877906976744186
+      },
+      {
+        "family": "fp32",
+        "name": "gemm",
+        "group": "matrix_ml",
+        "baseline_cycles": 133275,
+        "candidate_cycles": 123490,
+        "baseline_time_ps": 1332750000,
+        "candidate_time_ps": 1234900000,
+        "time_speedup": 1.079237185197182
+      },
+      {
+        "family": "fp32",
+        "name": "bicg",
+        "group": "matrix_ml",
+        "baseline_cycles": 23927,
+        "candidate_cycles": 20619,
+        "baseline_time_ps": 239270000,
+        "candidate_time_ps": 206190000,
+        "time_speedup": 1.160434550657161
+      },
+      {
+        "family": "fp32",
+        "name": "cholesky",
+        "group": "matrix_ml",
+        "baseline_cycles": 194161,
+        "candidate_cycles": 181507,
+        "baseline_time_ps": 1941610000,
+        "candidate_time_ps": 1815070000,
+        "time_speedup": 1.0697163194807913
+      },
+      {
+        "family": "fp32",
+        "name": "svm",
+        "group": "matrix_ml",
+        "baseline_cycles": 43392,
+        "candidate_cycles": 38395,
+        "baseline_time_ps": 433920000,
+        "candidate_time_ps": 383950000,
+        "time_speedup": 1.1301471545774189
+      },
+      {
+        "family": "embench",
+        "name": "aha-mont64",
+        "group": null,
+        "baseline_cycles": 5356670,
+        "candidate_cycles": 5356643,
+        "baseline_time_ps": 53566700000,
+        "candidate_time_ps": 53566430000,
+        "time_speedup": 1.0000050404703096
+      },
+      {
+        "family": "embench",
+        "name": "crc32",
+        "group": null,
+        "baseline_cycles": 5402220,
+        "candidate_cycles": 5054726,
+        "baseline_time_ps": 54022200000,
+        "candidate_time_ps": 50547260000,
+        "time_speedup": 1.0687463573693212
+      },
+      {
+        "family": "embench",
+        "name": "cubic",
+        "group": null,
+        "baseline_cycles": 14490894,
+        "candidate_cycles": 13751431,
+        "baseline_time_ps": 144908940000,
+        "candidate_time_ps": 137514310000,
+        "time_speedup": 1.0537735309147098
+      },
+      {
+        "family": "embench",
+        "name": "edn",
+        "group": null,
+        "baseline_cycles": 4754496,
+        "candidate_cycles": 4232380,
+        "baseline_time_ps": 47544960000,
+        "candidate_time_ps": 42323800000,
+        "time_speedup": 1.1233622689834089
+      },
+      {
+        "family": "embench",
+        "name": "huffbench",
+        "group": null,
+        "baseline_cycles": 3377028,
+        "candidate_cycles": 3209315,
+        "baseline_time_ps": 33770280000,
+        "candidate_time_ps": 32093150000,
+        "time_speedup": 1.0522581921687337
+      },
+      {
+        "family": "embench",
+        "name": "matmult-int",
+        "group": null,
+        "baseline_cycles": 4193163,
+        "candidate_cycles": 3769948,
+        "baseline_time_ps": 41931630000,
+        "candidate_time_ps": 37699480000,
+        "time_speedup": 1.1122601691057807
+      },
+      {
+        "family": "embench",
+        "name": "minver",
+        "group": null,
+        "baseline_cycles": 878777,
+        "candidate_cycles": 831001,
+        "baseline_time_ps": 8787770000,
+        "candidate_time_ps": 8310010000,
+        "time_speedup": 1.0574921089144298
+      },
+      {
+        "family": "embench",
+        "name": "nbody",
+        "group": null,
+        "baseline_cycles": 5893151,
+        "candidate_cycles": 5754377,
+        "baseline_time_ps": 58931510000,
+        "candidate_time_ps": 57543770000,
+        "time_speedup": 1.0241162509859887
+      },
+      {
+        "family": "embench",
+        "name": "nettle-aes",
+        "group": null,
+        "baseline_cycles": 5203513,
+        "candidate_cycles": 4766309,
+        "baseline_time_ps": 52035130000,
+        "candidate_time_ps": 47663090000,
+        "time_speedup": 1.0917280016885182
+      },
+      {
+        "family": "embench",
+        "name": "nettle-sha256",
+        "group": null,
+        "baseline_cycles": 4307562,
+        "candidate_cycles": 4136522,
+        "baseline_time_ps": 43075620000,
+        "candidate_time_ps": 41365220000,
+        "time_speedup": 1.0413487466040312
+      },
+      {
+        "family": "embench",
+        "name": "nsichneu",
+        "group": null,
+        "baseline_cycles": 7298679,
+        "candidate_cycles": 6917065,
+        "baseline_time_ps": 72986790000,
+        "candidate_time_ps": 69170650000,
+        "time_speedup": 1.0551699311774574
+      },
+      {
+        "family": "embench",
+        "name": "picojpeg",
+        "group": null,
+        "baseline_cycles": 5300988,
+        "candidate_cycles": 4880601,
+        "baseline_time_ps": 53009880000,
+        "candidate_time_ps": 48806010000,
+        "time_speedup": 1.086134269119725
+      },
+      {
+        "family": "embench",
+        "name": "qrduino",
+        "group": null,
+        "baseline_cycles": 4524180,
+        "candidate_cycles": 4411503,
+        "baseline_time_ps": 45241800000,
+        "candidate_time_ps": 44115030000,
+        "time_speedup": 1.025541635129796
+      },
+      {
+        "family": "embench",
+        "name": "sglib-combined",
+        "group": null,
+        "baseline_cycles": 4526268,
+        "candidate_cycles": 4198421,
+        "baseline_time_ps": 45262680000,
+        "candidate_time_ps": 41984210000,
+        "time_speedup": 1.0780881669561009
+      },
+      {
+        "family": "embench",
+        "name": "slre",
+        "group": null,
+        "baseline_cycles": 4902163,
+        "candidate_cycles": 4362711,
+        "baseline_time_ps": 49021630000,
+        "candidate_time_ps": 43627110000,
+        "time_speedup": 1.1236506383301577
+      },
+      {
+        "family": "embench",
+        "name": "st",
+        "group": null,
+        "baseline_cycles": 7165107,
+        "candidate_cycles": 7008181,
+        "baseline_time_ps": 71651070000,
+        "candidate_time_ps": 70081810000,
+        "time_speedup": 1.022391830347989
+      },
+      {
+        "family": "embench",
+        "name": "statemate",
+        "group": null,
+        "baseline_cycles": 3368567,
+        "candidate_cycles": 2614289,
+        "baseline_time_ps": 33685670000,
+        "candidate_time_ps": 26142890000,
+        "time_speedup": 1.2885212767218925
+      },
+      {
+        "family": "embench",
+        "name": "ud",
+        "group": null,
+        "baseline_cycles": 2775897,
+        "candidate_cycles": 2571871,
+        "baseline_time_ps": 27758970000,
+        "candidate_time_ps": 25718710000,
+        "time_speedup": 1.0793297953124399
+      },
+      {
+        "family": "embench",
+        "name": "wikisort",
+        "group": null,
+        "baseline_cycles": 2173042,
+        "candidate_cycles": 2067954,
+        "baseline_time_ps": 21730420000,
+        "candidate_time_ps": 20679540000,
+        "time_speedup": 1.0508173779494128
+      }
+    ]
+  },
+  "relative_to_parents": {
+    "A": {
+      "embench_geomean": 1.0268815711709867,
+      "fp32_geomean": 1.0092676368397324,
+      "AB_faster": 22,
+      "AB_slower": 5,
+      "equal": 0
+    },
+    "B": {
+      "embench_geomean": 1.0432113067472484,
+      "fp32_geomean": 1.077901175499322,
+      "AB_faster": 27,
+      "AB_slower": 0,
+      "equal": 0
+    }
+  },
+  "records": [
+    {
+      "family": "fp32",
+      "name": "fir",
+      "group": "dsp",
+      "baseline_cycles": 74311,
+      "candidate_cycles": 66110,
+      "baseline_time_ps": 743110000,
+      "candidate_time_ps": 661100000,
+      "time_speedup": 1.1240508243836032,
+      "parent_cycles": {
+        "A": 66117,
+        "B": 74303
+      },
+      "AB_vs_A": 1.0001058841325063,
+      "AB_vs_B": 1.1239298139464529
+    },
+    {
+      "family": "fp32",
+      "name": "iir",
+      "group": "dsp",
+      "baseline_cycles": 13523,
+      "candidate_cycles": 12472,
+      "baseline_time_ps": 135230000,
+      "candidate_time_ps": 124720000,
+      "time_speedup": 1.0842687620269404,
+      "parent_cycles": {
+        "A": 13496,
+        "B": 12499
+      },
+      "AB_vs_A": 1.0821039127645926,
+      "AB_vs_B": 1.0021648492623476
+    },
+    {
+      "family": "fp32",
+      "name": "fft",
+      "group": "dsp",
+      "baseline_cycles": 40867,
+      "candidate_cycles": 33656,
+      "baseline_time_ps": 408670000,
+      "candidate_time_ps": 336560000,
+      "time_speedup": 1.2142560019015927,
+      "parent_cycles": {
+        "A": 37663,
+        "B": 36722
+      },
+      "AB_vs_A": 1.1190575231756597,
+      "AB_vs_B": 1.091098169717138
+    },
+    {
+      "family": "fp32",
+      "name": "pid",
+      "group": "dsp",
+      "baseline_cycles": 7248,
+      "candidate_cycles": 8256,
+      "baseline_time_ps": 72480000,
+      "candidate_time_ps": 82560000,
+      "time_speedup": 0.877906976744186,
+      "parent_cycles": {
+        "A": 7242,
+        "B": 8261
+      },
+      "AB_vs_A": 0.8771802325581395,
+      "AB_vs_B": 1.0006056201550388
+    },
+    {
+      "family": "fp32",
+      "name": "gemm",
+      "group": "matrix_ml",
+      "baseline_cycles": 133275,
+      "candidate_cycles": 123490,
+      "baseline_time_ps": 1332750000,
+      "candidate_time_ps": 1234900000,
+      "time_speedup": 1.079237185197182,
+      "parent_cycles": {
+        "A": 123175,
+        "B": 133870
+      },
+      "AB_vs_A": 0.9974491861689205,
+      "AB_vs_B": 1.084055389100332
+    },
+    {
+      "family": "fp32",
+      "name": "bicg",
+      "group": "matrix_ml",
+      "baseline_cycles": 23927,
+      "candidate_cycles": 20619,
+      "baseline_time_ps": 239270000,
+      "candidate_time_ps": 206190000,
+      "time_speedup": 1.160434550657161,
+      "parent_cycles": {
+        "A": 20693,
+        "B": 23720
+      },
+      "AB_vs_A": 1.003588922838159,
+      "AB_vs_B": 1.1503952665017703
+    },
+    {
+      "family": "fp32",
+      "name": "cholesky",
+      "group": "matrix_ml",
+      "baseline_cycles": 194161,
+      "candidate_cycles": 181507,
+      "baseline_time_ps": 1941610000,
+      "candidate_time_ps": 1815070000,
+      "time_speedup": 1.0697163194807913,
+      "parent_cycles": {
+        "A": 183250,
+        "B": 190887
+      },
+      "AB_vs_A": 1.0096029354239782,
+      "AB_vs_B": 1.0516784476631755
+    },
+    {
+      "family": "fp32",
+      "name": "svm",
+      "group": "matrix_ml",
+      "baseline_cycles": 43392,
+      "candidate_cycles": 38395,
+      "baseline_time_ps": 433920000,
+      "candidate_time_ps": 383950000,
+      "time_speedup": 1.1301471545774189,
+      "parent_cycles": {
+        "A": 38501,
+        "B": 43383
+      },
+      "AB_vs_A": 1.0027607761427269,
+      "AB_vs_B": 1.1299127490558667
+    },
+    {
+      "family": "embench",
+      "name": "aha-mont64",
+      "group": null,
+      "baseline_cycles": 5356670,
+      "candidate_cycles": 5356643,
+      "baseline_time_ps": 53566700000,
+      "candidate_time_ps": 53566430000,
+      "time_speedup": 1.0000050404703096,
+      "parent_cycles": {
+        "A": 5354540,
+        "B": 5359621
+      },
+      "AB_vs_A": 0.9996074033681169,
+      "AB_vs_B": 1.0005559452067274
+    },
+    {
+      "family": "embench",
+      "name": "crc32",
+      "group": null,
+      "baseline_cycles": 5402220,
+      "candidate_cycles": 5054726,
+      "baseline_time_ps": 54022200000,
+      "candidate_time_ps": 50547260000,
+      "time_speedup": 1.0687463573693212,
+      "parent_cycles": {
+        "A": 5054736,
+        "B": 5402210
+      },
+      "AB_vs_A": 1.0000019783466008,
+      "AB_vs_B": 1.0687443790227205
+    },
+    {
+      "family": "embench",
+      "name": "cubic",
+      "group": null,
+      "baseline_cycles": 14490894,
+      "candidate_cycles": 13751431,
+      "baseline_time_ps": 144908940000,
+      "candidate_time_ps": 137514310000,
+      "time_speedup": 1.0537735309147098,
+      "parent_cycles": {
+        "A": 14160446,
+        "B": 14025779
+      },
+      "AB_vs_A": 1.0297434499725884,
+      "AB_vs_B": 1.0199505055146625
+    },
+    {
+      "family": "embench",
+      "name": "edn",
+      "group": null,
+      "baseline_cycles": 4754496,
+      "candidate_cycles": 4232380,
+      "baseline_time_ps": 47544960000,
+      "candidate_time_ps": 42323800000,
+      "time_speedup": 1.1233622689834089,
+      "parent_cycles": {
+        "A": 4256669,
+        "B": 4723764
+      },
+      "AB_vs_A": 1.0057388514263843,
+      "AB_vs_B": 1.1161011062333723
+    },
+    {
+      "family": "embench",
+      "name": "huffbench",
+      "group": null,
+      "baseline_cycles": 3377028,
+      "candidate_cycles": 3209315,
+      "baseline_time_ps": 33770280000,
+      "candidate_time_ps": 32093150000,
+      "time_speedup": 1.0522581921687337,
+      "parent_cycles": {
+        "A": 3306646,
+        "B": 3217162
+      },
+      "AB_vs_A": 1.0303276555900558,
+      "AB_vs_B": 1.00244507005389
+    },
+    {
+      "family": "embench",
+      "name": "matmult-int",
+      "group": null,
+      "baseline_cycles": 4193163,
+      "candidate_cycles": 3769948,
+      "baseline_time_ps": 41931630000,
+      "candidate_time_ps": 37699480000,
+      "time_speedup": 1.1122601691057807,
+      "parent_cycles": {
+        "A": 3825063,
+        "B": 4138048
+      },
+      "AB_vs_A": 1.0146195650443985,
+      "AB_vs_B": 1.0976406040613822
+    },
+    {
+      "family": "embench",
+      "name": "minver",
+      "group": null,
+      "baseline_cycles": 878777,
+      "candidate_cycles": 831001,
+      "baseline_time_ps": 8787770000,
+      "candidate_time_ps": 8310010000,
+      "time_speedup": 1.0574921089144298,
+      "parent_cycles": {
+        "A": 858801,
+        "B": 843225
+      },
+      "AB_vs_A": 1.033453630019699,
+      "AB_vs_B": 1.014709970264777
+    },
+    {
+      "family": "embench",
+      "name": "nbody",
+      "group": null,
+      "baseline_cycles": 5893151,
+      "candidate_cycles": 5754377,
+      "baseline_time_ps": 58931510000,
+      "candidate_time_ps": 57543770000,
+      "time_speedup": 1.0241162509859887,
+      "parent_cycles": {
+        "A": 5821267,
+        "B": 5823850
+      },
+      "AB_vs_A": 1.0116241949389135,
+      "AB_vs_B": 1.012073070638229
+    },
+    {
+      "family": "embench",
+      "name": "nettle-aes",
+      "group": null,
+      "baseline_cycles": 5203513,
+      "candidate_cycles": 4766309,
+      "baseline_time_ps": 52035130000,
+      "candidate_time_ps": 47663090000,
+      "time_speedup": 1.0917280016885182,
+      "parent_cycles": {
+        "A": 4797126,
+        "B": 5170824
+      },
+      "AB_vs_A": 1.0064655900404276,
+      "AB_vs_B": 1.084869654904875
+    },
+    {
+      "family": "embench",
+      "name": "nettle-sha256",
+      "group": null,
+      "baseline_cycles": 4307562,
+      "candidate_cycles": 4136522,
+      "baseline_time_ps": 43075620000,
+      "candidate_time_ps": 41365220000,
+      "time_speedup": 1.0413487466040312,
+      "parent_cycles": {
+        "A": 4200675,
+        "B": 4247681
+      },
+      "AB_vs_A": 1.0155089227133327,
+      "AB_vs_B": 1.0268725755598545
+    },
+    {
+      "family": "embench",
+      "name": "nsichneu",
+      "group": null,
+      "baseline_cycles": 7298679,
+      "candidate_cycles": 6917065,
+      "baseline_time_ps": 72986790000,
+      "candidate_time_ps": 69170650000,
+      "time_speedup": 1.0551699311774574,
+      "parent_cycles": {
+        "A": 6913377,
+        "B": 7302368
+      },
+      "AB_vs_A": 0.9994668258864128,
+      "AB_vs_B": 1.0557032498610321
+    },
+    {
+      "family": "embench",
+      "name": "picojpeg",
+      "group": null,
+      "baseline_cycles": 5300988,
+      "candidate_cycles": 4880601,
+      "baseline_time_ps": 53009880000,
+      "candidate_time_ps": 48806010000,
+      "time_speedup": 1.086134269119725,
+      "parent_cycles": {
+        "A": 5064804,
+        "B": 5105271
+      },
+      "AB_vs_A": 1.037741868265814,
+      "AB_vs_B": 1.046033265165499
+    },
+    {
+      "family": "embench",
+      "name": "qrduino",
+      "group": null,
+      "baseline_cycles": 4524180,
+      "candidate_cycles": 4411503,
+      "baseline_time_ps": 45241800000,
+      "candidate_time_ps": 44115030000,
+      "time_speedup": 1.025541635129796,
+      "parent_cycles": {
+        "A": 4377993,
+        "B": 4548795
+      },
+      "AB_vs_A": 0.9924039494022785,
+      "AB_vs_B": 1.0311213661194383
+    },
+    {
+      "family": "embench",
+      "name": "sglib-combined",
+      "group": null,
+      "baseline_cycles": 4526268,
+      "candidate_cycles": 4198421,
+      "baseline_time_ps": 45262680000,
+      "candidate_time_ps": 41984210000,
+      "time_speedup": 1.0780881669561009,
+      "parent_cycles": {
+        "A": 4332256,
+        "B": 4351929
+      },
+      "AB_vs_A": 1.0318774605976866,
+      "AB_vs_B": 1.0365632698578824
+    },
+    {
+      "family": "embench",
+      "name": "slre",
+      "group": null,
+      "baseline_cycles": 4902163,
+      "candidate_cycles": 4362711,
+      "baseline_time_ps": 49021630000,
+      "candidate_time_ps": 43627110000,
+      "time_speedup": 1.1236506383301577,
+      "parent_cycles": {
+        "A": 4664230,
+        "B": 4580842
+      },
+      "AB_vs_A": 1.0691127603914172,
+      "AB_vs_B": 1.0499989570705004
+    },
+    {
+      "family": "embench",
+      "name": "st",
+      "group": null,
+      "baseline_cycles": 7165107,
+      "candidate_cycles": 7008181,
+      "baseline_time_ps": 71651070000,
+      "candidate_time_ps": 70081810000,
+      "time_speedup": 1.022391830347989,
+      "parent_cycles": {
+        "A": 7092839,
+        "B": 7077473
+      },
+      "AB_vs_A": 1.0120798820692558,
+      "AB_vs_B": 1.009887301712099
+    },
+    {
+      "family": "embench",
+      "name": "statemate",
+      "group": null,
+      "baseline_cycles": 3368567,
+      "candidate_cycles": 2614289,
+      "baseline_time_ps": 33685670000,
+      "candidate_time_ps": 26142890000,
+      "time_speedup": 1.2885212767218925,
+      "parent_cycles": {
+        "A": 3100457,
+        "B": 2826412
+      },
+      "AB_vs_A": 1.185965667912002,
+      "AB_vs_B": 1.0811398433761532
+    },
+    {
+      "family": "embench",
+      "name": "ud",
+      "group": null,
+      "baseline_cycles": 2775897,
+      "candidate_cycles": 2571871,
+      "baseline_time_ps": 27758970000,
+      "candidate_time_ps": 25718710000,
+      "time_speedup": 1.0793297953124399,
+      "parent_cycles": {
+        "A": 2616256,
+        "B": 2725595
+      },
+      "AB_vs_A": 1.0172578640219514,
+      "AB_vs_B": 1.0597712715762182
+    },
+    {
+      "family": "embench",
+      "name": "wikisort",
+      "group": null,
+      "baseline_cycles": 2173042,
+      "candidate_cycles": 2067954,
+      "baseline_time_ps": 21730420000,
+      "candidate_time_ps": 20679540000,
+      "time_speedup": 1.0508173779494128,
+      "parent_cycles": {
+        "A": 2134990,
+        "B": 2102321
+      },
+      "AB_vs_A": 1.0324165818001754,
+      "AB_vs_B": 1.016618841618334
+    }
+  ]
+}

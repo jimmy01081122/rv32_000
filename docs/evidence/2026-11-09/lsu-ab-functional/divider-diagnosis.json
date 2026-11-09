@@ -1,0 +1,611 @@
+{
+  "passed": true,
+  "scope": "Read-only retained B diagnosis; accepted issue operand counts can include speculation and are not saved cycles or CPU speedup",
+  "reviewer_sha256": "385509791ebb9c95a6e1298f2cc57173578a50d5b4c246c61340a05d9bdbe9a9",
+  "accepted_reference_sha256": "c133e45ff7ad30f1ad049a13a45f4c66b3c8a6d37e6cad85daa8aee397de0ea0",
+  "reference_profiles_checked": 27,
+  "reference_profiles_sha256": {
+    "fir": "23afa296161fbce09cc99955a1149ff9c879536cede4618a94593559a9a4d351",
+    "iir": "7d5dc0a51c996323b3f71ef39576d1b56decdadd59dbdcef80d028a7f20be073",
+    "fft": "dfb20dc173416986a56a5f848e1773491e14b6a2cd71a9a8faee28830d03288e",
+    "pid": "e9f58c6e7eb925a694f0ee41dc5e48cc462961f19cf8c9002f5442db509041f6",
+    "gemm": "b4b26ffdb4c82733c612ddcc9ff5a123e20b9cf12cfa60321277aa8dffda231a",
+    "bicg": "10485663bd3107a1e213823249e0fedede12e80bd09664b6b5f2ef8125159e9a",
+    "cholesky": "563b163d1998b398bb7229a6ad620643b21833d3d1abda9eaf2e8ed802f7b426",
+    "svm": "39d9bbb24cdb74777d19c143217f1f47cef3316df31765d20a9f0d064bb01d77",
+    "aha-mont64": "2ad3c1e3b1a0c4e46e93d993a14ee9ce18d80de2914ccd8089cf8720be82c038",
+    "crc32": "323fd72c341bf716176428053a3f035ea3952f5c1ae912da0881a09005841f4a",
+    "cubic": "db86e7f6e552f77c6988580dbc244a18a61809b7cd1f99c2f7cc59a878a705f1",
+    "edn": "69953ffccc5c7a48aeb2ac372863ceb65c1f09508e8d3a83d49dd7539287b932",
+    "huffbench": "584b258219e73bee5abde3b1a74d0a032be3b3f45520241e09e7a9901804543d",
+    "matmult-int": "0764bf185cc9ad8e732f0f128bacd5716a66ad3c816b159ae1415783987a749d",
+    "minver": "9fe92d2922aef368a20675f5ce6bed0d556b725a1c77e8a86988fafadbbfe614",
+    "nbody": "f759ab8da39ec14d8933ad252e2d9844e07b440c3e0e67a2eed79791c5f61057",
+    "nettle-aes": "969505ac1e1500e8d56fef146e55209876b4d0505fc7e16527e6769b92810705",
+    "nettle-sha256": "bbaa5ccd53634668448fb659a97a561f5720b5e6760615ccf7a332de3f0c7c72",
+    "nsichneu": "24c6f5dae47b6ffe4c60a20161b5ce44b330e08f29e0e8fc655a0cbeba5fa48c",
+    "picojpeg": "ce19bc44075b1a8492449ce14f88e71ed6b796d2528b8225bafa617c47dcfdfb",
+    "qrduino": "479b7adfe4ec1f11a7934f8f16d03fa6a77186b680f272ff0ccfd59f5d6c3795",
+    "sglib-combined": "a86c2fae99e59949ae7ad8be303c4cf46c0d8c78c7877f50cad3408c8705ee5f",
+    "slre": "3659fb716538aece6d80da5b9ab52861adfd59966c09615f50536ae718c22257",
+    "st": "a8edecaafa3c6dd2a908b1f4b1acc36484dbf7932194df4802a1c065dcbabdc2",
+    "statemate": "eb128d37072fef2d9d9675004c215e47b2c0ae44abb02f099dca7886b355b65b",
+    "ud": "c97048683f48fa4e6106f5fcc2cf1c27afc0858d16cd62ef8bc68e25eb61b5da",
+    "wikisort": "13f9eb46bcfdc4ebcf0fcb02b604ddb6fad95df7a5328e692385f4e2e7e9660f"
+  },
+  "observer_case_pairs": 6,
+  "hardware_control_instructions": 48,
+  "observer_build_sha256": "d947fb5eafaea28f3b05199654bec8d1f203bf9082523996b9d6e9ad1d9eaad0",
+  "observer_summary_sha256": "1cee4cb6c2644d8201102fe173bc43c8b4d011b1b37755faafb69ec3c13c873f",
+  "hardware_controls_sha256": "1d12548633d596e5c32e2c78e14c1dc09adaa3c39cbc173adc5b822225ea629f",
+  "records": [
+    {
+      "name": "cubic",
+      "roi_cycles": 14025779,
+      "accepted_issues": 22960,
+      "retired_div_rem": 22960,
+      "div_rem_head_wait": 737130,
+      "cancelled_by_flush": 0,
+      "censored_at_roi_end": 0,
+      "operand_categories": {
+        "abs_dividend_less": 6140,
+        "general": 15560,
+        "remaining_power_two": 1260
+      },
+      "new_early_result_operand_fraction": 0.32229965156794427,
+      "non_special_mean_abs_dividend_leading_zeros": 11.18815331010453,
+      "issue_to_first_valid": {
+        "33": 22960
+      },
+      "issue_to_grant": {
+        "33": 22960
+      },
+      "completion_blocked_cycles": 0,
+      "request_not_ready_cycles": 70720,
+      "observer_sha256": "2c36dc30f0443ee7cd9e3ba7adea9bc2a7250d04618fee81f76c1e5b9926a7e3",
+      "per_pc_retired": [
+        {
+          "pc": "80009b48",
+          "insn": "027355b3",
+          "kind": "integer_other",
+          "retired": 1730,
+          "head_wait": 57140
+        },
+        {
+          "pc": "80009b64",
+          "insn": "02737333",
+          "kind": "integer_other",
+          "retired": 1730,
+          "head_wait": 48440
+        },
+        {
+          "pc": "80009b8c",
+          "insn": "0277f333",
+          "kind": "integer_other",
+          "retired": 1730,
+          "head_wait": 58820
+        },
+        {
+          "pc": "80009b98",
+          "insn": "0277d7b3",
+          "kind": "integer_other",
+          "retired": 1730,
+          "head_wait": 54880
+        },
+        {
+          "pc": "80009ca0",
+          "insn": "027f5e33",
+          "kind": "integer_other",
+          "retired": 1730,
+          "head_wait": 56880
+        },
+        {
+          "pc": "80009ca8",
+          "insn": "027f7f33",
+          "kind": "integer_other",
+          "retired": 1730,
+          "head_wait": 56830
+        },
+        {
+          "pc": "80009cd4",
+          "insn": "0275ff33",
+          "kind": "integer_other",
+          "retired": 1730,
+          "head_wait": 58720
+        },
+        {
+          "pc": "80009ce0",
+          "insn": "0275d5b3",
+          "kind": "integer_other",
+          "retired": 1730,
+          "head_wait": 55100
+        },
+        {
+          "pc": "8000f980",
+          "insn": "0307d3b3",
+          "kind": "integer_other",
+          "retired": 2280,
+          "head_wait": 68020
+        },
+        {
+          "pc": "8000f988",
+          "insn": "0307f7b3",
+          "kind": "integer_other",
+          "retired": 2280,
+          "head_wait": 75240
+        },
+        {
+          "pc": "8000f9b0",
+          "insn": "030577b3",
+          "kind": "integer_other",
+          "retired": 2280,
+          "head_wait": 77520
+        },
+        {
+          "pc": "8000f9bc",
+          "insn": "03055533",
+          "kind": "integer_other",
+          "retired": 2280,
+          "head_wait": 69540
+        }
+      ]
+    },
+    {
+      "name": "nbody",
+      "roi_cycles": 5823850,
+      "accepted_issues": 8120,
+      "retired_div_rem": 8120,
+      "div_rem_head_wait": 263258,
+      "cancelled_by_flush": 0,
+      "censored_at_roi_end": 0,
+      "operand_categories": {
+        "general": 8120
+      },
+      "new_early_result_operand_fraction": 0.0,
+      "non_special_mean_abs_dividend_leading_zeros": 3.373152709359606,
+      "issue_to_first_valid": {
+        "33": 8120
+      },
+      "issue_to_grant": {
+        "33": 8120
+      },
+      "completion_blocked_cycles": 0,
+      "request_not_ready_cycles": 6656,
+      "observer_sha256": "216fa47adb3256ac8288ed538a3a3fa8e4c03d52bc7d3307caccd7d1e34b5f68",
+      "per_pc_retired": [
+        {
+          "pc": "800055b4",
+          "insn": "027355b3",
+          "kind": "integer_other",
+          "retired": 1015,
+          "head_wait": 34486
+        },
+        {
+          "pc": "800055d0",
+          "insn": "02737333",
+          "kind": "integer_other",
+          "retired": 1015,
+          "head_wait": 28420
+        },
+        {
+          "pc": "800055f8",
+          "insn": "0277f333",
+          "kind": "integer_other",
+          "retired": 1015,
+          "head_wait": 34510
+        },
+        {
+          "pc": "80005604",
+          "insn": "0277d7b3",
+          "kind": "integer_other",
+          "retired": 1015,
+          "head_wait": 32470
+        },
+        {
+          "pc": "8000570c",
+          "insn": "027f5e33",
+          "kind": "integer_other",
+          "retired": 1015,
+          "head_wait": 33495
+        },
+        {
+          "pc": "80005714",
+          "insn": "027f7f33",
+          "kind": "integer_other",
+          "retired": 1015,
+          "head_wait": 33495
+        },
+        {
+          "pc": "80005740",
+          "insn": "0275ff33",
+          "kind": "integer_other",
+          "retired": 1015,
+          "head_wait": 34308
+        },
+        {
+          "pc": "8000574c",
+          "insn": "0275d5b3",
+          "kind": "integer_other",
+          "retired": 1015,
+          "head_wait": 32074
+        }
+      ]
+    },
+    {
+      "name": "nettle-aes",
+      "roi_cycles": 5170824,
+      "accepted_issues": 4602,
+      "retired_div_rem": 4056,
+      "div_rem_head_wait": 105830,
+      "cancelled_by_flush": 546,
+      "censored_at_roi_end": 0,
+      "operand_categories": {
+        "remaining_power_two": 4602
+      },
+      "new_early_result_operand_fraction": 1.0,
+      "non_special_mean_abs_dividend_leading_zeros": 26.610169491525422,
+      "issue_to_first_valid": {
+        "33": 4056
+      },
+      "issue_to_grant": {
+        "33": 4056
+      },
+      "completion_blocked_cycles": 0,
+      "request_not_ready_cycles": 0,
+      "observer_sha256": "60c97acb33a70f14d8a03a7f8cf8b947be9b73361f53fa2035f2593af7aa54fa",
+      "per_pc_retired": [
+        {
+          "pc": "80001c64",
+          "insn": "02b6f733",
+          "kind": "integer_other",
+          "retired": 4056,
+          "head_wait": 105830
+        }
+      ]
+    },
+    {
+      "name": "st",
+      "roi_cycles": 7077473,
+      "accepted_issues": 21320,
+      "retired_div_rem": 21320,
+      "div_rem_head_wait": 672328,
+      "cancelled_by_flush": 0,
+      "censored_at_roi_end": 0,
+      "operand_categories": {
+        "general": 21320
+      },
+      "new_early_result_operand_fraction": 0.0,
+      "non_special_mean_abs_dividend_leading_zeros": 2.7939024390243903,
+      "issue_to_first_valid": {
+        "33": 21320
+      },
+      "issue_to_grant": {
+        "33": 21320
+      },
+      "completion_blocked_cycles": 0,
+      "request_not_ready_cycles": 123648,
+      "observer_sha256": "d5d39ef47acb18cf2d464fd2d6c8d5e5b8a0cd3d791aef8e28a6d25c9eff002e",
+      "per_pc_retired": [
+        {
+          "pc": "80005210",
+          "insn": "027355b3",
+          "kind": "integer_other",
+          "retired": 2665,
+          "head_wait": 80366
+        },
+        {
+          "pc": "8000522c",
+          "insn": "02737333",
+          "kind": "integer_other",
+          "retired": 2665,
+          "head_wait": 74620
+        },
+        {
+          "pc": "80005254",
+          "insn": "0277f333",
+          "kind": "integer_other",
+          "retired": 2665,
+          "head_wait": 90610
+        },
+        {
+          "pc": "80005260",
+          "insn": "0277d7b3",
+          "kind": "integer_other",
+          "retired": 2665,
+          "head_wait": 85152
+        },
+        {
+          "pc": "80005368",
+          "insn": "027f5e33",
+          "kind": "integer_other",
+          "retired": 2665,
+          "head_wait": 85345
+        },
+        {
+          "pc": "80005370",
+          "insn": "027f7f33",
+          "kind": "integer_other",
+          "retired": 2665,
+          "head_wait": 82745
+        },
+        {
+          "pc": "8000539c",
+          "insn": "0275ff33",
+          "kind": "integer_other",
+          "retired": 2665,
+          "head_wait": 90610
+        },
+        {
+          "pc": "800053a8",
+          "insn": "0275d5b3",
+          "kind": "integer_other",
+          "retired": 2665,
+          "head_wait": 82880
+        }
+      ]
+    },
+    {
+      "name": "ud",
+      "roi_cycles": 2725595,
+      "accepted_issues": 31038,
+      "retired_div_rem": 31038,
+      "div_rem_head_wait": 1030166,
+      "cancelled_by_flush": 0,
+      "censored_at_roi_end": 0,
+      "operand_categories": {
+        "abs_dividend_less": 19214,
+        "general": 4434,
+        "remaining_power_two": 7390
+      },
+      "new_early_result_operand_fraction": 0.8571428571428571,
+      "non_special_mean_abs_dividend_leading_zeros": 29.047619047619047,
+      "issue_to_first_valid": {
+        "33": 31038
+      },
+      "issue_to_grant": {
+        "33": 31038
+      },
+      "completion_blocked_cycles": 0,
+      "request_not_ready_cycles": 0,
+      "observer_sha256": "ae5ffd2ff3607d0b2e943709757728af4dbcc7d59bd17eebf3dd6c3ec4a7e977",
+      "per_pc_retired": [
+        {
+          "pc": "80000a74",
+          "insn": "03f64633",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 45818
+        },
+        {
+          "pc": "80000ae4",
+          "insn": "03fbcbb3",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 45818
+        },
+        {
+          "pc": "80000aec",
+          "insn": "03f6c6b3",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 47296
+        },
+        {
+          "pc": "80000af4",
+          "insn": "03f74733",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 47296
+        },
+        {
+          "pc": "80000b00",
+          "insn": "03f7c7b3",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 45818
+        },
+        {
+          "pc": "80000bac",
+          "insn": "03564633",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 50252
+        },
+        {
+          "pc": "80000c00",
+          "insn": "03564633",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 51730
+        },
+        {
+          "pc": "80000ef8",
+          "insn": "03464633",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 45818
+        },
+        {
+          "pc": "80000f10",
+          "insn": "03464633",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 50252
+        },
+        {
+          "pc": "80000f24",
+          "insn": "03464633",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 50252
+        },
+        {
+          "pc": "80000f38",
+          "insn": "03464633",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 50252
+        },
+        {
+          "pc": "80001078",
+          "insn": "0366c533",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 48774
+        },
+        {
+          "pc": "80001088",
+          "insn": "03584833",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 50252
+        },
+        {
+          "pc": "800010a0",
+          "insn": "0337c7b3",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 48774
+        },
+        {
+          "pc": "800010f0",
+          "insn": "0336c6b3",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 51730
+        },
+        {
+          "pc": "80001120",
+          "insn": "03e64633",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 48774
+        },
+        {
+          "pc": "8000115c",
+          "insn": "03f7c7b3",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 50252
+        },
+        {
+          "pc": "800011bc",
+          "insn": "03564633",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 48774
+        },
+        {
+          "pc": "8000129c",
+          "insn": "03564633",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 51730
+        },
+        {
+          "pc": "800012d4",
+          "insn": "03564633",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 48774
+        },
+        {
+          "pc": "80001310",
+          "insn": "03564633",
+          "kind": "integer_other",
+          "retired": 1478,
+          "head_wait": 51730
+        }
+      ]
+    },
+    {
+      "name": "wikisort",
+      "roi_cycles": 2102321,
+      "accepted_issues": 9640,
+      "retired_div_rem": 9636,
+      "div_rem_head_wait": 310868,
+      "cancelled_by_flush": 4,
+      "censored_at_roi_end": 0,
+      "operand_categories": {
+        "abs_dividend_less": 244,
+        "general": 9396
+      },
+      "new_early_result_operand_fraction": 0.025311203319502075,
+      "non_special_mean_abs_dividend_leading_zeros": 4.819502074688796,
+      "issue_to_first_valid": {
+        "33": 9636
+      },
+      "issue_to_grant": {
+        "33": 9636
+      },
+      "completion_blocked_cycles": 0,
+      "request_not_ready_cycles": 12800,
+      "observer_sha256": "b1ae14db8cfbd1ed9de96a196e2674d7dc2150f088e4f3d7df80b27e5a22b797",
+      "per_pc_retired": [
+        {
+          "pc": "80001710",
+          "insn": "02a44733",
+          "kind": "integer_other",
+          "retired": 36,
+          "head_wait": 1260
+        },
+        {
+          "pc": "80007dc0",
+          "insn": "027355b3",
+          "kind": "integer_other",
+          "retired": 1200,
+          "head_wait": 39208
+        },
+        {
+          "pc": "80007ddc",
+          "insn": "02737333",
+          "kind": "integer_other",
+          "retired": 1200,
+          "head_wait": 33600
+        },
+        {
+          "pc": "80007e04",
+          "insn": "0277f333",
+          "kind": "integer_other",
+          "retired": 1200,
+          "head_wait": 40800
+        },
+        {
+          "pc": "80007e10",
+          "insn": "0277d7b3",
+          "kind": "integer_other",
+          "retired": 1200,
+          "head_wait": 37600
+        },
+        {
+          "pc": "80007f18",
+          "insn": "027f5e33",
+          "kind": "integer_other",
+          "retired": 1200,
+          "head_wait": 39600
+        },
+        {
+          "pc": "80007f20",
+          "insn": "027f7f33",
+          "kind": "integer_other",
+          "retired": 1200,
+          "head_wait": 39600
+        },
+        {
+          "pc": "80007f4c",
+          "insn": "0275ff33",
+          "kind": "integer_other",
+          "retired": 1200,
+          "head_wait": 40800
+        },
+        {
+          "pc": "80007f58",
+          "insn": "0275d5b3",
+          "kind": "integer_other",
+          "retired": 1200,
+          "head_wait": 38400
+        }
+      ]
+    }
+  ]
+}
