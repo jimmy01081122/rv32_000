@@ -12,6 +12,7 @@ def require(ok,msg):
     if not ok:raise ValueError(msg)
 def main():
     p=argparse.ArgumentParser();p.add_argument('--core',type=Path,required=True);p.add_argument('--output',type=Path,required=True);a=p.parse_args()
+    a.core=a.core.resolve();a.output=a.output.resolve()
     require(not a.output.exists(),'fresh linked output required')
     complete(a.core)
     proof=json.loads((a.core.parent/'adapter-proof.json').read_text());require(proof['passed'],'missing synthesis adapter proof')
