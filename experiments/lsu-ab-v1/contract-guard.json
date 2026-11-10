@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "experiment_id": "lsu-ab-guard-v1",
+  "scope": "Independent AB under exact accepted shared-FPU/hold40/uniform-guard global-route policy; no baseline promotion",
+  "source_parent": "89be789d66e5eb1caddb7dcbeaa443b696eefb67",
+  "baseline_manifest_sha256": "60f59b3cc705560885e2101046d810cf3548fef277c1c1e5820826ef25485fb6",
+  "unchanged_rtl": {
+    "rtl/pkg/rv32_ooo_params.sv": "3fc72080a0387a5424badf665656399ecc48e1c9170bedecb0aea16bd7602523",
+    "rtl/pkg/rv32_ooo_types.sv": "01be8e3b4c3959d9284e105412e415d77a6702db7de86eb1505d6fd428ee6759",
+    "rtl/rename/rv32_ooo_int_prf.sv": "69261b57971908d2765555c540ba4292a169024a222983143fdf4785f0fe2406",
+    "rtl/rename/rv32_ooo_fp_prf.sv": "452daf771a3c83fc24693a54b6ce46da762a1942b5ca56eac5440e948bb83603",
+    "rtl/frontend/rv32_ooo_frontend.sv": "c0e222d798dc8c18d5e75bd25a7c9cf0d7b053f91c49650d27c0b8bb49f2dd4d",
+    "rtl/rename/rv32_ooo_rename.sv": "1eb31d73eb54785c3e816eda35381e5b9d362b378ad0f118ac125d753063d574",
+    "rtl/rob/rv32_ooo_rob.sv": "94e4874dfcb3274fd5d0759776acde8dae373988151b4470698fa847c0a78555",
+    "rtl/issue/rv32_ooo_int_iq.sv": "c12029eec5fca025da55c95d6c0207f6472f9eb653a3a1020d1543f78aa9d349",
+    "rtl/issue/rv32_ooo_fp_iq.sv": "7968fa7b3ce4b51b54e4ba21e41b1b5bc4989ac68b405c7a2a7e3e3394e43ca2",
+    "rtl/execute/int/rv32_ooo_divider.sv": "b8ca86ee486d8976ccf07f25adb4955a3945d348a7f5b1350fb8b6edbec91de6",
+    "rtl/execute/int/rv32_ooo_multiplier.sv": "09afa5a87fbd59873a4cfc5f78a48492e928cc7b16f372dd51d71af96703a1d8",
+    "rtl/execute/int/rv32_ooo_int_execute.sv": "dde3fee3c0031150f9cf45b9b1d6f2e665868be754ec70566d95c77dff7bb632",
+    "rtl/execute/fp/rv32_ooo_fp_simple.sv": "bff3232ceafd3da96d85729ad630745b14cd47e398a32e35d11c25fe38547f4b",
+    "rtl/execute/fp/rv32_ooo_fp_execute.sv": "ee83a69dfbd7b2c9d141ebe14e1c40605ca43ce0f5f490d324113bcb9465c63b",
+    "rtl/execute/fp/rv32_ooo_fp_divsqrt.sv": "0c5e80032fd016aa60557d3e3908f07732c9230c50cea3519e1106b2f7715b3f",
+    "rtl/lsu/rv32_ooo_lsu.sv": "c7d13644470f3db310340d4336118ff89dd4f66ac327c258ebecccfa275d55cd",
+    "rtl/csr/rv32_ooo_csr.sv": "68c911e9e956761b3ffdb86fec2b82e94b5fc7632953dca308c30658e70f176e",
+    "rtl/core/rv32_ooo_core.sv": "81c116be3845d05c63ab6ffa31efdf5fee9e7374a6902ef0d54555e8a13fcb1c"
+  },
+  "shared_fpu_graph_sha256": "d12b91d198024deff4527b2c1e6217fcc7ca3355bdc09dfb4ebb309192a0fd89",
+  "shared_link_manifest": {
+    "path": "build/experiments/lsu-ab-v1/shared-linked-v1/link-manifest.json",
+    "sha256": "03ab1ee60b1c27900d6106f582d5466d2e3612fce66216c62f7f6dd2b881754d"
+  },
+  "physical": {
+    "image": "rv32ooo-orfs:8359fde-flat",
+    "image_id": "sha256:92a37abacbbf91494f9a8078b45fe1f6688a533cf5c87d02599d28c5fe229b33",
+    "orfs_commit": "8359fde81991e6118b15b8a93fcde606b577794d",
+    "platform": "ASAP7 RVT",
+    "construction_corners": [
+      "TT"
+    ],
+    "analysis_corners": [
+      "TT",
+      "SS",
+      "FF"
+    ],
+    "mapping_period_ps": 5500,
+    "construction_period_ps": 14000,
+    "jobs": 2,
+    "post_route_eco": {
+      "slew_margin_percent": 45,
+      "hold_margin_ps": 40,
+      "final_full_route_recheck": true
+    },
+    "period_grid_ps": 100,
+    "acceptance": "unchanged propagated-clock setup/hold >= 0; complete constraint/electrical and route checks",
+    "eco_walltime_limit_seconds": 3600,
+    "uniform_input_guard": {
+      "port": "dmem_req_ready",
+      "cell": "BUFx2_ASAP7_75t_R",
+      "count": 1,
+      "construction_corner": "TT",
+      "full_global_route_recheck": true,
+      "original_connectivity_preserved_except_buffered_input": true
+    }
+  },
+  "memory_ps": 10000,
+  "workloads": "original frozen 19 Embench + 8 balanced FP32 ELFs and all 3629 outputs",
+  "targets": {
+    "embench_time_speedup_geomean_min": 1.2,
+    "fp32_time_speedup_geomean_min": 1.2,
+    "standard_cell_area_ratio_max": 1.1
+  },
+  "comparison_policy": "Compare exact accepted baseline/B native policies and tool hashes; chronological source commits may differ while construction code/arguments remain equal",
+  "variants": {
+    "AB": {
+      "netlist": "build/experiments/lsu-ab-v1/shared-linked-v1/AB.v",
+      "netlist_sha256": "6b2f3025181eb852e93aafbb82ff2f019c70bdda377d6c5c77323ba0cf2f765f",
+      "rtl_files_sha256": {
+        "rtl/pkg/rv32_ooo_params.sv": "3fc72080a0387a5424badf665656399ecc48e1c9170bedecb0aea16bd7602523",
+        "rtl/pkg/rv32_ooo_types.sv": "01be8e3b4c3959d9284e105412e415d77a6702db7de86eb1505d6fd428ee6759",
+        "rtl/rename/rv32_ooo_int_prf.sv": "69261b57971908d2765555c540ba4292a169024a222983143fdf4785f0fe2406",
+        "rtl/rename/rv32_ooo_fp_prf.sv": "452daf771a3c83fc24693a54b6ce46da762a1942b5ca56eac5440e948bb83603",
+        "rtl/frontend/rv32_ooo_frontend.sv": "c0e222d798dc8c18d5e75bd25a7c9cf0d7b053f91c49650d27c0b8bb49f2dd4d",
+        "rtl/rename/rv32_ooo_rename.sv": "1eb31d73eb54785c3e816eda35381e5b9d362b378ad0f118ac125d753063d574",
+        "rtl/rob/rv32_ooo_rob.sv": "94e4874dfcb3274fd5d0759776acde8dae373988151b4470698fa847c0a78555",
+        "rtl/issue/rv32_ooo_int_iq.sv": "c12029eec5fca025da55c95d6c0207f6472f9eb653a3a1020d1543f78aa9d349",
+        "rtl/issue/rv32_ooo_fp_iq.sv": "7968fa7b3ce4b51b54e4ba21e41b1b5bc4989ac68b405c7a2a7e3e3394e43ca2",
+        "rtl/execute/int/rv32_ooo_divider.sv": "b8ca86ee486d8976ccf07f25adb4955a3945d348a7f5b1350fb8b6edbec91de6",
+        "rtl/execute/int/rv32_ooo_multiplier.sv": "09afa5a87fbd59873a4cfc5f78a48492e928cc7b16f372dd51d71af96703a1d8",
+        "rtl/execute/int/rv32_ooo_int_execute.sv": "dde3fee3c0031150f9cf45b9b1d6f2e665868be754ec70566d95c77dff7bb632",
+        "rtl/execute/fp/rv32_ooo_fp_simple.sv": "bff3232ceafd3da96d85729ad630745b14cd47e398a32e35d11c25fe38547f4b",
+        "rtl/execute/fp/rv32_ooo_fp_execute.sv": "ee83a69dfbd7b2c9d141ebe14e1c40605ca43ce0f5f490d324113bcb9465c63b",
+        "rtl/execute/fp/rv32_ooo_fp_divsqrt.sv": "0c5e80032fd016aa60557d3e3908f07732c9230c50cea3519e1106b2f7715b3f",
+        "rtl/lsu/rv32_ooo_lsu.sv": "c7d13644470f3db310340d4336118ff89dd4f66ac327c258ebecccfa275d55cd",
+        "rtl/csr/rv32_ooo_csr.sv": "68c911e9e956761b3ffdb86fec2b82e94b5fc7632953dca308c30658e70f176e",
+        "rtl/core/rv32_ooo_core.sv": "81c116be3845d05c63ab6ffa31efdf5fee9e7374a6902ef0d54555e8a13fcb1c"
+      }
+    }
+  },
+  "incoming_contract": {
+    "path": "experiments/lsu-ab-v1/contract-hold40.json",
+    "sha256": "fb30f8cfc2c3975933229624ae665656aa239a9234a13a0c9e42a8a64587a005"
+  },
+  "guard_function_model": {
+    "path": "build/experiments/lsu-b-validation-v2/guard-buffer.json",
+    "sha256": "8a0566985b9427b5a6621788a9e2d2f1e4e61ef4dee18bf419f500bf9752ea59",
+    "function": "Y=A; no state or logic cells in native Liberty model"
+  },
+  "runtime_checkpoint_policy": "Materialize a separate immutable guard contract only after completed hold40; bind actual incoming report/log/ODB/SDC hashes before guard execution.",
+  "native_flow_sources_sha256": {
+    "experiments/lsu-b-validation-v2/physical.py": "620ef98f6b6a1bfe0e30399ec6e48db70ac3c507499c78e7cf387c4c01bf4251",
+    "experiments/lsu-b-validation-v2/repair.py": "80a6a3c2ac53e61ae562d01993fb485be877b9ecc9c1626f8b75792444eb256d",
+    "experiments/lsu-b-validation-v2/ready_guard.py": "c133c107fa9a1e898635cba5033f3b42460ee441c451a7577981edd9219bdf80",
+    "experiments/lsu-b-validation-v2/ready_guard.tcl": "181318286ea51924399e63171f569f1f4ed73d4ec31d3feec4fe8efe1a36b5bc",
+    "experiments/lsu-b-validation-v2/ready_guard.mk": "57fae9c53bd2efd56fd935925ed73361efa4aa19253b42580ee71fef90e9fc3a",
+    "physical/asap7/baseline/config.mk": "be157001e0234853911d3eaf5c326c5e0ab30d19fd60a3102d400d74ca6e861b",
+    "physical/asap7/baseline/repair.tcl": "a216bc584018c3b1b1cc1ce382c451ad78991633c43c81ec604a916fac284a0d",
+    "physical/asap7/baseline/report.tcl": "c22e08c5c83f8a9a693fe569eecf7c0aaa72e045b731fe69e0b4d6ac81f1427e",
+    "physical/asap7/baseline/timing_common.tcl": "01a70b8acb67b82bb8579ef8a6aa0cf21160b9f8eb2ef32698f4f5b39e9ac2cc",
+    "scripts/run_physical_job.py": "52aec471aa5303d51a12d8b271fe1efa4883f55d6c94ce1703ef29da4796c20b"
+  },
+  "study_sources_sha256": {
+    "experiments/lsu-ab-v1/run_physical.py": "c041207dbfc8f876030f10789928a54b68d05de186e1de64ac6d2e01cdb411c0",
+    "experiments/lsu-ab-v1/guard_ab.py": "29c26313c86cafd795ed4b16430b3609965329ab711036c3daac8eb69e5011ca",
+    "experiments/optimization-135-v1/checkpoint.py": "c86be70203fc34505dc9c2d847a93ed8e7023b14a791e08c459fb4d17a31e63a"
+  },
+  "experiment_manifest_sha256": "9ec76da42b3d436fb46519d9ff3250fec6755dced79b7ad41aa579e3bac178c6",
+  "template_sha256": "6d4a06383e5adef39d5138ca805fbee6fa4325e196b638208897caf4f7abe054"
+}

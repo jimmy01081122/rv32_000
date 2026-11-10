@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Publish completed private tmpfs evidence, verify all bytes, then unmount it."""
+"""Verify completed native evidence is already durable in both namespaces."""
 import datetime
 import hashlib
 import json
@@ -87,7 +87,7 @@ def verify(root, rows, allow_missing=False):
 def main():
     output = BASE/'native-publication.json'
     require(not output.exists(), 'preserve earlier publication receipt')
-    state = dict(scope='lossless publication before private tmpfs teardown; no physical qualification',
+    state = dict(scope='verify direct durable host evidence; no physical qualification',
                  started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
                  publisher_sha256=sha(Path(__file__)), stream_copy_sha256=sha(Path(__file__).with_name('publish_stream.py')), container=CONTAINER, passed=False)
     def save():
@@ -102,9 +102,16 @@ def main():
             pipeline = native_json(directory+'/pipeline.json')
             require(pipeline['complete'] and pipeline['variant'] == 'AB'
                     and pipeline['stages'] == stages, 'incomplete pipeline: '+directory)
+        storage = ROOT/'build/experiments/lsu-ab-v1/checkpoints/native-storage.json'
+        proof = json.loads(storage.read_text())
+        require(proof['passed'] and proof['mode'] == 'direct_host_bind'
+                and proof['private_tmpfs_unmounted'], 'direct host storage required')
+        require(sha(BASE/'host-storage-marker.json') == proof['marker_sha256'], 'storage marker changed')
+        require(controller['storage_receipt_sha256'] == sha(storage), 'controller storage receipt changed')
         mounts = subprocess.check_output(DOCKER+['exec', CONTAINER, 'cat', '/proc/self/mountinfo'], text=True)
-        require(any(' '+MOUNT+' ' in line and ' - tmpfs ' in line for line in mounts.splitlines()),
-                'private tmpfs must still be mounted')
+        require(not any(' '+MOUNT+' ' in line for line in mounts.splitlines()), 'private output mount must be absent')
+        state.update(publication_mode='direct_host_bind', storage_receipt_sha256=sha(storage),
+                     private_tmpfs_unmounted=True)
         # Only completed immutable OpenDB/SDC copies are deduplicated. All bytes
         # remain available at their original paths; The namespace tar stream preserves hardlinks.
         dedup_code = r"""
@@ -128,21 +135,12 @@ def main():
         state['completed_database_hardlinks'] = dedup
         rows = inventory()
         require(rows, 'empty native inventory')
-        verify(BASE, rows, allow_missing=True)
-        unique_files = {(r['device'],r['inode']):r['bytes'] for r in rows if r['kind']=='file'}
-        byte_count = sum(unique_files.values())
-        free = shutil.disk_usage(BASE).free
-        require(free >= byte_count+256*1024**2, 'insufficient host capacity for lossless publication')
-        state.update(controller=controller, native_exit=status, files=rows,
-                     file_bytes=byte_count, host_free_before_bytes=free, phase='copy')
-        save()
-        stream_copy(DOCKER, CONTAINER, GUEST, BASE, rows)
         verify(BASE, rows)
-        require(inventory() == rows, 'native evidence changed while copying')
-        state.update(all_host_bytes_and_links_verified=True, phase='verified-before-unmount')
-        save()
-        subprocess.run(DOCKER+['exec', '--user', '0:0', CONTAINER, 'umount', MOUNT], check=True)
-        state.update(private_tmpfs_unmounted=True, phase='verify-shared-view')
+        unique_files = {(r['device'],r['inode']):r['bytes'] for r in rows if r['kind']=='file'}
+        require(inventory() == rows, 'native evidence changed while verifying')
+        state.update(controller=controller, native_exit=status, files=rows,
+                     file_bytes=sum(unique_files.values()), host_free_before_bytes=shutil.disk_usage(BASE).free,
+                     all_host_bytes_and_links_verified=True, phase='verify-shared-view')
         save()
         # The native and host namespaces must now see the exact published files.
         # Verify in a plain Python process inside the container, without recursively invoking Docker.

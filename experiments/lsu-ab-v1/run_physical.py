@@ -32,7 +32,11 @@ def main():
     BASE=BASE/'native'
     durable=ROOT/'build/experiments/lsu-ab-v1/checkpoints'
     require(durable.is_dir() and (durable/'host-visible-marker.json').is_file(),'explicit durable host mount/marker required')
-    require(BASE.stat().st_dev!=durable.stat().st_dev,'scratch and durable checkpoint mounts must be separate')
+    storage=durable/'native-storage.json';proof=json.loads(storage.read_text())
+    require(proof['passed'] and proof['mode']=='direct_host_bind' and proof['private_tmpfs_unmounted'],'durable native storage not prepared')
+    require(sha(BASE/'host-storage-marker.json')==proof['marker_sha256'],'host/container storage marker differs')
+    require(BASE.stat().st_dev==durable.stat().st_dev,'native output must use durable workspace storage')
+    require(not any(' '+str(BASE)+' ' in line for line in Path('/proc/self/mountinfo').read_text().splitlines()),'private output mount still present')
     require(shutil.disk_usage(durable).free>=768*1024**2,'need 768 MiB durable checkpoint capacity')
     grt_policy=HERE/'contract-grt.json';eco_policy=HERE/'contract-hold40.json';guard_policy=HERE/'contract-guard.json'
     policies=[json.loads(p.read_text()) for p in [grt_policy,eco_policy,guard_policy]]
@@ -40,7 +44,7 @@ def main():
     BASE.mkdir(parents=True,exist_ok=True)
     require(shutil.disk_usage(BASE).free>=3*1024**3,'need at least 3 GiB available on the actual experiment output filesystem')
     paths=[BASE/'physical-AB-v1',BASE/'physical-AB-v2',BASE/'physical-AB-v4'];require(not any(p.exists() for p in paths),'preserve existing attempts')
-    tracked=[Path(__file__),HERE/'guard_ab.py',ROOT/'experiments/optimization-135-v1/checkpoint.py',grt_policy,eco_policy,guard_policy];report=dict(scope='AB same-flow construction; independent corners/measurement still required',attempt=args.label,started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),source_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),inputs={str(p):sha(p) for p in tracked},stages=[],checkpoints=[],complete=False);summary=BASE/'physical-controller.json';save(summary,report);atomic_json(durable/'physical-controller.json',report)
+    tracked=[Path(__file__),HERE/'guard_ab.py',ROOT/'experiments/optimization-135-v1/checkpoint.py',grt_policy,eco_policy,guard_policy];report=dict(scope='AB same-flow construction; independent corners/measurement still required',attempt=args.label,started_utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),source_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),storage_mode=proof['mode'],storage_receipt_sha256=sha(storage),inputs={str(p):sha(p) for p in tracked},stages=[],checkpoints=[],complete=False);summary=BASE/'physical-controller.json';save(summary,report);atomic_json(durable/'physical-controller.json',report)
     p=paths[0];p.mkdir();state=dict(variant='AB',contract_sha256=sha(grt_policy),stages=[],complete=False);save(p/'pipeline.json',state)
     physical=load('physical.py');physical.CONTRACT=grt_policy;print('START AB GRT',flush=True);physical.run_stage(p/'grt','grt','AB',policies[0]);state.update(stages=['grt'],complete=True);save(p/'pipeline.json',state);report['stages'].append('grt');report['checkpoints'].append(checkpoint(p,durable));save(summary,report);atomic_json(durable/'physical-controller.json',report)
     check(policies[1]);p=paths[1];p.mkdir();(p/'grt').symlink_to('../physical-AB-v1/grt',target_is_directory=True);state=dict(variant='AB',contract_sha256=sha(eco_policy),stages=['grt-reused'],complete=False);save(p/'pipeline.json',state)
