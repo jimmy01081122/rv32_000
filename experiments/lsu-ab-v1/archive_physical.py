@@ -32,7 +32,7 @@ def main():
         for path in sorted(directory.rglob('*')):
             if path.is_file():include(path)
     for name in ['rtl_lowered.v','rtl_lowered.lowering.json','complete-review.json','physical-review.json',
-                 'formal-link-preflight.json','common-clock-review.json','common-clock-recovery-review.json',
+                 'formal-link-preflight.json','physical-recovery-review.json','native-restart-visibility-v3.json','physical-path-summary.json','common-clock-review.json','common-clock-recovery-review.json',
                  'parent-comparison.json','regression-attribution-v1.json','remaining-bottlenecks-v1.json','pid-mechanism-review.json','physical-driver.json',
                  'physical-driver-launch.json','physical-driver-console.log','physical-native.log',
                  'physical-publication.log','physical-parent-sta.log','physical-guard-sta.log','physical-review.log',
@@ -44,8 +44,16 @@ def main():
     for directory in [BASE/'pid-waveforms-v1',BASE/'pid-waveform-review-v2']:
         for path in sorted(directory.rglob('*')):
             if path.is_file() and path.name!='wave.vcd.gz':include(path)
+    capture=json.loads((BASE/'pid-waveforms-v1/summary.json').read_text())
+    for record in capture['records']:
+        binary=Path(record['command'][0]);require(sha(binary)==record['simulator_sha256'],'captured model changed')
+        # Retain the exact A and AB executables and generated normal models for replay.
+        for path in sorted(binary.parent.rglob('*')):
+            if path.is_file():include(path)
     include(BASE/'image-cache-v2/summary.json')
     for path in sorted(BASE.glob('restore-*.log')):include(path)
+    for path in sorted(BASE.glob('environment-restoration-*.json')):include(path)
+    for path in sorted(BASE.glob('environment-restoration-*.log')):include(path)
     for path in sorted(BASE.glob('fastest-*.json')):include(path)
     for path in sorted(BASE.glob('fastest-*.log')):include(path)
     for directory in [ROOT/'experiments/lsu-ab-v1',ROOT/'scripts',ROOT/'physical/asap7/baseline',ROOT/'baselines/ap5b-post-lsu-v1']:

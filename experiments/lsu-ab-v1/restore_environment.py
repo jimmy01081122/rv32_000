@@ -25,8 +25,8 @@ def main():
   with (BASE/('restore-'+name+'.log')).open('x') as log:result=subprocess.run(command,cwd=ROOT,stdout=log,stderr=subprocess.STDOUT)
   state['stages'].append(dict(name=name,command=command,returncode=result.returncode,log_sha256=sha(BASE/('restore-'+name+'.log'))));atomic_json(out,state)
   require(result.returncode==0,'restoration step failed: '+name)
- commands=subprocess.check_output(DOCKER+['top',CONTAINER,'-eo','comm'],text=True).splitlines()
- require(not any(x.strip() in ['openroad','yosys','make','python3'] for x in commands[1:]),'native job still running')
+ commands=subprocess.check_output(DOCKER+['top',CONTAINER,'-eo','pid,comm'],text=True).splitlines()
+ require(not any(x.split()[-1] in ['openroad','yosys','make','python3'] for x in commands[1:]),'native job still running')
  run('final-platform-check',DOCKER+['exec',CONTAINER,'sha256sum','--strict','--quiet','-c','/workspace/docs/evidence/2026-10-18/post-lsu-baseline-preparation/environment/physical-tool-platform-sha256.txt'])
  run('native-stop',DOCKER+['stop','--time','10',CONTAINER]);run('native-remove',DOCKER+['rm',CONTAINER])
  cache=BASE/'image-cache-v2';receipt=json.loads((cache/'summary.json').read_text());archive=cache/'rv32-inactive-images.tar.gz'

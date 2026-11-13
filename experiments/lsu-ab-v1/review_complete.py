@@ -34,7 +34,10 @@ def main():
         require(parent['candidate'][k]==scores['common_clock'][k],'parent comparison score differs')
     pid=json.loads((BASE/'pid-mechanism-review.json').read_text())
     require(pid['passed'] and pid['analyzer_sha256']==sha(Path(diagnose_pid.__file__)), 'PID reviewer changed')
-    require({v:diagnose_pid.analyze(v) for v in ['A','AB']}==pid['variants'], 'PID raw-signal reanalysis differs')
+    # Histogram keys are integers in memory and strings in the stored JSON.
+    # Compare the same serialized representation while retaining every value.
+    replay=json.loads(json.dumps({v:diagnose_pid.analyze(v) for v in ['A','AB']}))
+    require(replay==pid['variants'], 'PID raw-signal reanalysis differs')
     result=dict(pid_mechanism_review_sha256=sha(BASE/'pid-mechanism-review.json'),passed=True,scope='AB isolated experiment qualified at global-route research boundary; no baseline promotion, tapeout signoff or full ISA/IEEE-754 claim',
                 reviewer_sha256=sha(Path(__file__)),physical_review_sha256=sha(BASE/'physical-review.json'),
                 physical=native,operating_points=scores,parent_comparison_sha256=sha(BASE/'parent-comparison.json'),
