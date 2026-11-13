@@ -18,9 +18,9 @@ fixed-time performance measurement.
 | --- | --- |
 | [Project plan](PLAN.md) | Agreed scope, decision process and next milestones |
 | [Current status](docs/STATUS.md) | Measured checks, implementation drift and open verification gaps |
-| [A+B experiment and divider diagnosis](docs/LSU_AB_REVIEW.md) | New full-suite functional/cycle results, regressions and pending physical qualification |
-| [Current architecture diagram](docs/ARCHITECTURE_MAP.md) | B reference datapath, capacities, control feedback and candidate improvement directions |
-| [Bottlenecks and candidate proposals](docs/BOTTLENECK_ANALYSIS.md) | Updated architecture diagram, measured wait positions and next experiment choices |
+| [A+B experiment and divider diagnosis](docs/LSU_AB_REVIEW.md) | Completed functional/PPA/two-clock results, PID arbitration mechanism and next choices |
+| [Current architecture diagram](docs/ARCHITECTURE_MAP.md) | A+B datapath, capacities, measured bottlenecks and candidate improvement directions |
+| [Earlier bottleneck study](docs/BOTTLENECK_ANALYSIS.md) | November 6 B-reference analysis and links to the completed A+B result |
 | [Directions 1/3/5 first study](docs/OPTIMIZATION_135_STUDY.md) | Completed isolated A common-flow comparison, verified FP observations and native path analysis |
 | [Architecture](architecture_spec.md) | Current implementation inventory and architectural requirements |
 | [Micro-operations](uop_spec.md) | Implemented packet types and their limitations |
@@ -52,6 +52,12 @@ fixed-time performance measurement.
 Integer and FP execution can overlap; sustained retirement IPC is at most one.
 The `LQ_ENTRIES` and PRF-port constants do not fully describe the instantiated
 structures; see the architecture inventory before changing their values.
+
+The current branch combines A+B LSU response handoff and head-store marking; its
+[complete experiment](docs/LSU_AB_REVIEW.md) passes the agreed research checks.
+At 100 MHz it reaches 1.073943× Embench and 1.088248× FP32 with 0.981066×
+original-baseline cell area. Both performance targets remain unmet, and PID
+regresses against A. The frozen baseline remains unchanged.
 
 The current RTL contains AP5B registered load responses. Its frozen post-LSU
 global-route research baseline is 10 ns (100 MHz), 22,081.1184 µm², with all
@@ -93,25 +99,17 @@ then runs matched off/fast qualifications on the same RTL. The
 8/8 passes per mode and diagnostic 1.113x cycle speedup from compiler contraction.
 The approved main FP32 policy is `-ffp-contract=fast -fno-fast-math` (also the
 qualifier default); use `--fp-contract off` for sensitivity checks. The post-LSU
-baseline is frozen; the approved [LSU A experiment](experiments/lsu-a-v1/README.md)
-passes clean-source functional qualification and all 27 common-clock cases:
-Embench 1.045830× and FP32 1.078255× at 100 MHz with fixed 10 ns memory.
-Its [raw evidence](docs/evidence/2026-10-19/lsu-a-functional/README.md) is archived;
-[physical qualification](docs/evidence/2026-10-20/lsu-a-physical/README.md) now passes at 100 MHz and
-101.01 MHz, with 22,162.24152 µm² cell area (1.003674× baseline). The complete
-101.01 MHz run yields Embench 0.726601× and FP32 0.700275×: fixed 10 ns memory
-is sampled after two cycles at that clock. Neither point reaches both 1.20×
-goals. The 100 MHz point is recommended for discussion; the baseline is unchanged
-and the [independent B completion review](docs/LSU_B_COMPLETE_VALIDATION.md)
-now passes its global-route research contract after shared FPU mapping and hold
-repair. At 100 MHz B scores Embench 1.029459× / FP32 1.009599×; its fastest tested
-qualified 9.6 ns point scores 0.748705× / 0.719680× with fixed 10 ns memory.
-Both full 27-case runs and 3,629 FP32 outputs pass. Cell area is 21,309.821820 µm²,
-0.965070× the frozen baseline or 0.989062× the baseline rebuilt in the same new
-flow. The area budget passes; both 1.20× performance goals remain unmet.
-Complete FPU implementation equivalence after reset passes, within its stated
-two-state model. Full ISA/IEEE-754 coverage remains separate. The original
-[B v1 timing failure](docs/LSU_B_REVIEW.md) is retained as historical evidence.
+baseline is frozen. Independent A, B and A+B studies now have complete
+functional and global-route research reviews; the [current comparison](docs/LSU_AB_REVIEW.md)
+uses shared FPU mapping, hold40 and the same ready guard. Both performance
+goals remain unmet. A+B is currently best at the tested 100 MHz operating point,
+with five individual regressions against A retained for review. Faster qualified
+CPU clocks require two cycles to sample the fixed 10 ns memory service and
+produce slower system time on these complete suites.
+
+Complete shared-FPU implementation equivalence after reset passes within its
+stated two-state model. Full ISA/IEEE-754 coverage remains separate. Earlier
+physical flows and failures remain archived with their own source identities.
 
 `make profile-fp-bottlenecks JOBS=4` adds read-only FIR/BiCG cycle observations
 and checks that observer on/off runs preserve the qualified output and timing.
@@ -123,7 +121,7 @@ response delays 1/2/4. Its [review](docs/LSU_OPTIMIZATION_REVIEW.md) separates
 compares A/B/C options. The source-locked historical runner rejects newer RTL.
 The [interface fixes](docs/LSU_INTERFACE_FIX.md) close the two defects with 48
 assertion-enabled cases; rerun with `make check-lsu-interface JOBS=4` and
-`python3 scripts/test_lsu_interface.py`. The approved performance/area targets remain unmet after the independent A/B studies; subsequent direction is selected jointly.
+`python3 scripts/test_lsu_interface.py`. The approved performance/area targets remain unmet after the independent A/B/AB studies; subsequent direction is selected jointly.
 
 The simulation and generic-synthesis images are separate. For a proxy/private CA:
 

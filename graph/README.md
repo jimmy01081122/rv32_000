@@ -1,6 +1,22 @@
 # Architecture diagrams
 
-The [current B architecture map](../docs/ARCHITECTURE_MAP.md) was checked against
+The [current A+B architecture map](../docs/ARCHITECTURE_MAP.md) reflects CPU RTL
+at `3f079c1` and the completed research review dated 2026-11-13 (Asia/Taipei).
+[SVG](current-ab/bottlenecks.svg), [PNG](current-ab/bottlenecks.png) and
+[Graphviz source](current-ab/bottlenecks.dot) show the composed LSU, observed PID
+arbitration interaction and independently checked timing paths. Candidate labels
+describe possible next experiments, not implemented gains.
+
+Render with Graphviz and Noto Sans CJK TC installed:
+
+```sh
+XDG_CACHE_HOME=/tmp/rv32-diagram-cache dot -Tsvg graph/current-ab/bottlenecks.dot -o graph/current-ab/bottlenecks.svg
+XDG_CACHE_HOME=/tmp/rv32-diagram-cache dot -Tpng -Gdpi=100 graph/current-ab/bottlenecks.dot -o graph/current-ab/bottlenecks.png
+```
+
+## Historical B architecture
+
+The earlier B architecture map was checked against
 RTL at `59c6193` on 2026-10-30. [SVG](current-b/architecture.svg) and
 [PNG](current-b/architecture.png) show the existing structure and numbered
 candidate directions; orange labels are proposals, not implemented gains.

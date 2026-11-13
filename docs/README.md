@@ -1,6 +1,6 @@
 # Documentation index
 
-Updated 2026-11-09 (Asia/Taipei). Begin with current documents below. A historical PASS or
+Updated 2026-11-13 (Asia/Taipei). Begin with current documents below. A historical PASS or
 signoff label applies only to the source/configuration and checks in that record.
 
 ## Current documents
@@ -10,9 +10,9 @@ signoff label applies only to the source/configuration and checks in that record
 | [Project README](../README.md) | Entry point and development commands |
 | [Project plan](../PLAN.md) | Agreed direction, review process, proposed targets and milestones |
 | [Status](STATUS.md) | Evidence and unresolved implementation/verification gaps |
-| [A+B experiment and divider diagnosis](LSU_AB_REVIEW.md) | Complete new functional/cycle evidence, PID regression, read-only DIV operand/latency results and pending physical gate |
-| [Current architecture map](ARCHITECTURE_MAP.md) | Source-checked B diagram, editable SVG/Graphviz/Mermaid and candidate optimization directions |
-| [Current bottlenecks and proposals](BOTTLENECK_ANALYSIS.md) | Current B diagram, full-suite wait positions, integer DIV/REM evidence and ranked candidate experiments |
+| [A+B experiment and divider diagnosis](LSU_AB_REVIEW.md) | Complete functional/PPA/two-clock evidence, PID arbitration mechanism and read-only DIV diagnosis |
+| [Current architecture map](ARCHITECTURE_MAP.md) | Current A+B diagram, source-checked capacities and candidate optimization directions |
+| [Current bottlenecks and proposals](BOTTLENECK_ANALYSIS.md) | Latest A+B update with retained B study, full-suite wait positions and candidate choices |
 | [Directions 1/3/5 first study](OPTIMIZATION_135_STUDY.md) | Completed A same-flow physical/two-clock comparison, FP scheduling observations and native path analysis |
 | [Architecture](../architecture_spec.md) | Implemented structures and architectural obligations |
 | [Micro-operations](../uop_spec.md) | Current packet/schema reference |
@@ -51,7 +51,7 @@ determine what it should do. Disagreement must be tracked and verified.
 - [Archive guide](archive/README.md): superseded G0 plan, architecture and uop contracts.
 - [Report index](../reports/README.md): AP0–AP5A research reports and their applicability.
 - [Audit index](../audit/README.md): old spec reviews and milestone evidence.
-- [Diagram provenance](../graph/README.md): historical AP5A image.
+- [Diagram provenance](../graph/README.md): current A+B and retained B/AP5A diagrams.
 
 Raw results, archives and manifests remain at their original paths so existing
 evidence can be traced. New results must identify their source SHA and exact

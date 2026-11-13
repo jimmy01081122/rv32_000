@@ -1,8 +1,8 @@
 # RV32 OoO architecture: implementation and requirements
 
-Version 0.8 — 2026-10-30. Status: AP5B baseline frozen; isolated A and current B research-qualified; B completed shared-flow physical and FPU implementation-equivalence checks. Performance targets remain unmet.
+Version 0.9 — 2026-11-13 (Asia/Taipei). Status: AP5B baseline frozen; independent A, B and current A+B experiments research-qualified. A+B completed shared-flow physical and both full workload operating points. Performance targets remain unmet.
 
-See the [current B architecture map and candidate directions](docs/ARCHITECTURE_MAP.md) for a source-checked diagram.
+See the [current A+B architecture map and candidate directions](docs/ARCHITECTURE_MAP.md) for a source-checked diagram.
 
 This document distinguishes observed RTL structure from required architectural
 behavior. Describing an implementation does not certify its correctness.
@@ -87,20 +87,22 @@ Each channel has valid/ready handshaking. The environment contract is one ordere
 response per accepted request; redirects do not cancel accepted bus transactions.
 The frontend tracks up to four instruction requests. The data side admits one
 external transaction. The frozen AP5B baseline blocks new data requests while a
-response buffer is valid. Experiment A permits a new request on the same edge
+response buffer is valid. A, including the current A+B composition, permits a new request on the same edge
 that a successful registered response is consumed, only with no external
 in-flight transaction and no flush. Faulting or unconsumed responses continue
 to block requests. This does not bypass the external response register or
 accept a second external outstanding transaction. `dmem_pending.valid` covers
 the old buffered response before the handoff edge and the new in-flight request
-after it, with the corresponding tag. That A variant retains the baseline SQ marking protocol.
+after it, with the corresponding tag. Isolated A retains the baseline SQ marking protocol.
 
-The current independent B branch retains the baseline response-buffer exclusion.
-A RUN-state ROB-head store with full tag match, captured address/data, no exception
-and no flush may request in its SQ-marking cycle. Successful response still
-precedes retirement. B has completed its [research validation](docs/LSU_B_COMPLETE_VALIDATION.md),
-including actual 9.6/10.0 ns operating-point qualification and both full workload
-runs under the shared FPU/hold flow. Both speed targets remain unmet. The frozen
+Isolated B retains the baseline response-buffer exclusion. Its store change,
+also present in A+B, lets a RUN-state ROB-head store with full tag match, captured
+address/data, no exception and no flush request in its SQ-marking cycle. Successful response still
+precedes retirement. A+B combines both mechanisms while retaining store priority
+when a store and an otherwise eligible load compete for the single data port.
+The [complete A+B review](docs/LSU_AB_REVIEW.md) records the resulting PID
+regression, same-flow physical qualification and both full workload points.
+No new arbitration policy or C head lookahead has been implemented. The frozen
 baseline includes neither A nor B.
 
 The LSU checks older stores, forwards from a fully covering older store, and
