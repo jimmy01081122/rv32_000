@@ -1,0 +1,252 @@
+{
+  "passed": true,
+  "started_utc": "2026-11-12T16:58:02.262566+00:00",
+  "stages": [
+    {
+      "name": "final-platform-check",
+      "command": [
+        "env",
+        "-u",
+        "DOCKER_HOST",
+        "-u",
+        "DOCKER_CONTEXT",
+        "-u",
+        "DOCKER_TLS",
+        "-u",
+        "DOCKER_TLS_VERIFY",
+        "-u",
+        "DOCKER_CERT_PATH",
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "exec",
+        "rv32-ab-native",
+        "sha256sum",
+        "--strict",
+        "--quiet",
+        "-c",
+        "/workspace/docs/evidence/2026-10-18/post-lsu-baseline-preparation/environment/physical-tool-platform-sha256.txt"
+      ],
+      "returncode": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "native-stop",
+      "command": [
+        "env",
+        "-u",
+        "DOCKER_HOST",
+        "-u",
+        "DOCKER_CONTEXT",
+        "-u",
+        "DOCKER_TLS",
+        "-u",
+        "DOCKER_TLS_VERIFY",
+        "-u",
+        "DOCKER_CERT_PATH",
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "stop",
+        "--time",
+        "10",
+        "rv32-ab-native"
+      ],
+      "returncode": 0,
+      "log_sha256": "dd3a05dc1a8c2e5d72b6038572707dda8ce107186aa1df43e682a74b291dcc46"
+    },
+    {
+      "name": "native-remove",
+      "command": [
+        "env",
+        "-u",
+        "DOCKER_HOST",
+        "-u",
+        "DOCKER_CONTEXT",
+        "-u",
+        "DOCKER_TLS",
+        "-u",
+        "DOCKER_TLS_VERIFY",
+        "-u",
+        "DOCKER_CERT_PATH",
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "rm",
+        "rv32-ab-native"
+      ],
+      "returncode": 0,
+      "log_sha256": "1082fd69a9116f16139d77133c699d53e6d4c7eb37cf008588c79f058cc9bf62"
+    },
+    {
+      "name": "pinned-images",
+      "command": [
+        "env",
+        "-u",
+        "DOCKER_HOST",
+        "-u",
+        "DOCKER_CONTEXT",
+        "-u",
+        "DOCKER_TLS",
+        "-u",
+        "DOCKER_TLS_VERIFY",
+        "-u",
+        "DOCKER_CERT_PATH",
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "load",
+        "--input",
+        "/workspace/rv32_000/build/experiments/lsu-ab-v1/image-cache-v2/rv32-inactive-images.tar.gz"
+      ],
+      "returncode": 0,
+      "log_sha256": "135d04a642c71c1d8a209f3c2dd61f23e9be6688ee77c514dfb008a4e0f6f42e"
+    },
+    {
+      "name": "smoke-0",
+      "command": [
+        "env",
+        "-u",
+        "DOCKER_HOST",
+        "-u",
+        "DOCKER_CONTEXT",
+        "-u",
+        "DOCKER_TLS",
+        "-u",
+        "DOCKER_TLS_VERIFY",
+        "-u",
+        "DOCKER_CERT_PATH",
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--entrypoint",
+        "python3",
+        "rv32ooo-fp:p1",
+        "-c",
+        "import subprocess,json\ncommands=[['verilator', '--version'], ['g++', '--version'], ['riscv-none-elf-gcc', '--version'], ['riscv-none-elf-gcc', '-march=rv32imf_zicsr', '-mabi=ilp32f', '-print-multi-directory']]\nfor command in commands:\n result=subprocess.run(command,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True)\n print(json.dumps(dict(command=command,returncode=result.returncode,output=result.stdout)))\n assert result.returncode==0 or command==[\"spike\",\"--help\"] and result.returncode==1 and \"usage:\" in result.stdout.lower()\n"
+      ],
+      "returncode": 0,
+      "log_sha256": "bef56f8e7598416d527352f963312e2b84fd9193bc3f8cbbd47726b37d636090"
+    },
+    {
+      "name": "smoke-1",
+      "command": [
+        "env",
+        "-u",
+        "DOCKER_HOST",
+        "-u",
+        "DOCKER_CONTEXT",
+        "-u",
+        "DOCKER_TLS",
+        "-u",
+        "DOCKER_TLS_VERIFY",
+        "-u",
+        "DOCKER_CERT_PATH",
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--entrypoint",
+        "python3",
+        "rv32ooo-sim:g1",
+        "-c",
+        "import subprocess,json\ncommands=[['verilator', '--version'], ['riscv32-unknown-elf-gcc', '--version'], ['spike', '--help']]\nfor command in commands:\n result=subprocess.run(command,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True)\n print(json.dumps(dict(command=command,returncode=result.returncode,output=result.stdout)))\n assert result.returncode==0 or command==[\"spike\",\"--help\"] and result.returncode==1 and \"usage:\" in result.stdout.lower()\n"
+      ],
+      "returncode": 0,
+      "log_sha256": "5157f48e9e2881719b411e37bfc80317229d8d83218eeec7beeac3ccd069ce9a"
+    },
+    {
+      "name": "smoke-2",
+      "command": [
+        "env",
+        "-u",
+        "DOCKER_HOST",
+        "-u",
+        "DOCKER_CONTEXT",
+        "-u",
+        "DOCKER_TLS",
+        "-u",
+        "DOCKER_TLS_VERIFY",
+        "-u",
+        "DOCKER_CERT_PATH",
+        "docker",
+        "--host=unix:///var/run/docker.sock",
+        "run",
+        "--rm",
+        "--network",
+        "none",
+        "--entrypoint",
+        "python3",
+        "rv32ooo-syn:g1",
+        "-c",
+        "import subprocess,json\ncommands=[['sv2v', '--version'], ['yosys', '-V']]\nfor command in commands:\n result=subprocess.run(command,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True)\n print(json.dumps(dict(command=command,returncode=result.returncode,output=result.stdout)))\n assert result.returncode==0 or command==[\"spike\",\"--help\"] and result.returncode==1 and \"usage:\" in result.stdout.lower()\n"
+      ],
+      "returncode": 0,
+      "log_sha256": "a8956278a7521b9af18513b8eb5f94f5e08a65877aabb0e8bafb93b61816c635"
+    },
+    {
+      "name": "sparse-checkout",
+      "command": [
+        "git",
+        "sparse-checkout",
+        "disable"
+      ],
+      "returncode": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "script_sha256": "c145a0f67c7b828cab96659461f1726c1d3626808f941aa201b4ea53166a11d0",
+  "images": {
+    "rv32ooo-fp:p1": "sha256:2140263677b3a378d5cab75a3d0d4fd285ddb38a1a5a1f81f5cf97db024a02d5",
+    "rv32ooo-sim:g1": "sha256:0d80d39df2f24dc60a77387242f781edc1cc67f53865719981e01b5b5a989d26",
+    "rv32ooo-syn:g1": "sha256:b56c1e8635d9baabe4d64ecdd9c63d0685da9aa11075b69bc6bd665ca52bea2b"
+  },
+  "backup_sha256": "4ff27f145499c096165164968d12580c9799895f03f6cdd6cdc063beb4614139",
+  "historical_files": [
+    {
+      "path": "build/experiments/optimization-135-v1/attempt-v2/physical-A-v1/grt/results/asap7/rv32_post_lsu_v1/base/5_1_grt.odb",
+      "bytes": 168191737,
+      "sha256": "3fd742f990d149f9c917c92ff7c411919ed9be43c653e8e09f655a0175f29e42"
+    },
+    {
+      "path": "build/experiments/optimization-135-v1/attempt-v2/physical-A-v1/grt/results/asap7/rv32_post_lsu_v1/base/route.guide",
+      "bytes": 52489066,
+      "sha256": "b190ff1194d15d8598274ff9f58f3caa5209e1b32d537fdcf67c5c4d7b012aab"
+    },
+    {
+      "path": "build/experiments/optimization-135-v1/attempt-v2/physical-A-v2/eco/results/asap7/rv32_post_lsu_v1/base/5_0_grt_input.odb",
+      "bytes": 168191737,
+      "sha256": "3fd742f990d149f9c917c92ff7c411919ed9be43c653e8e09f655a0175f29e42"
+    },
+    {
+      "path": "build/experiments/optimization-135-v1/attempt-v2/physical-A-v2/eco/results/asap7/rv32_post_lsu_v1/base/5_1_grt.odb",
+      "bytes": 169400146,
+      "sha256": "3296f5cf42fe7c97aa48b700bb387c1765047edee5d7adca25100ff342f46345"
+    },
+    {
+      "path": "build/experiments/optimization-135-v1/attempt-v2/physical-A-v2/eco/results/asap7/rv32_post_lsu_v1/base/route.guide",
+      "bytes": 52729464,
+      "sha256": "6129e5416e29ade9004187284dbf4b9dec870b24c0e2c0f4cd9c6ae50f3ba44d"
+    },
+    {
+      "path": "build/experiments/optimization-135-v1/attempt-v2/physical-A-v4/guard/results/asap7/rv32_post_lsu_v1/base/5_0_grt_input.odb",
+      "bytes": 169400146,
+      "sha256": "3296f5cf42fe7c97aa48b700bb387c1765047edee5d7adca25100ff342f46345"
+    },
+    {
+      "path": "build/experiments/optimization-135-v1/attempt-v2/physical-A-v4/guard/results/asap7/rv32_post_lsu_v1/base/5_1_grt.odb",
+      "bytes": 169531709,
+      "sha256": "ebb7b7553d1a0ac8af4d2b425842d8f88823857a1a26f30d34bf56947c85d0b9"
+    },
+    {
+      "path": "build/experiments/optimization-135-v1/attempt-v2/physical-A-v4/guard/results/asap7/rv32_post_lsu_v1/base/route.guide",
+      "bytes": 52729262,
+      "sha256": "0ca19544a85360587310c7bb7a1882df24da51cad8d1cd4fa39ab263f65857f6"
+    }
+  ],
+  "sparse_checkout_restored": true,
+  "native_runtime_removed": true,
+  "free_bytes": 10626719744,
+  "finished_utc": "2026-11-12T16:59:32.617519+00:00"
+}

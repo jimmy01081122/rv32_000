@@ -1,0 +1,687 @@
+{
+  "passed": true,
+  "scope": "Independent AB global-route research qualification; no baseline promotion",
+  "reviewer_sha256": "4f2cfe3fb612d714c704ccf3b3a1cefb2951fb6c5c5a7e3c0dd68d3e727584fb",
+  "accepted_guard_reviewer_sha256": "b7f301bc4def1e2644063619e3ba8115a519c30a93425a66284c22619f7123a2",
+  "contract_sha256": "872b1ead36123be2dcbe1d404012d90d46e3db77e0e90c625f8d338877cf7f20",
+  "formal": {
+    "passed": true,
+    "scope": "complete two-state FPU implementation equivalence after one synchronous reset edge; no arithmetic cutpoints; not IEEE-754 conformance",
+    "original_state_bits": 156,
+    "mapped_state_bits": 100,
+    "obligations": {
+      "reset-gold-proof": true,
+      "reset-gate-proof": true,
+      "step-output-proof": true,
+      "negative-bit-proof": false
+    },
+    "proof_summary_sha256": "474ad1e28ba62b0d990eb0a2cf26c8fbf180bb9c5ba3865f92de1a2bb07f13c6",
+    "frontend_replay_sha256": "d9433c5ad2e91ae76d147a5adb991f6251b8097e475a2c751d7f310c8d2ec6ae",
+    "negative_summary_sha256": "4fae1a7f0d70704acc328f45d479dd1b62b6dd84f704e2fb81d64e24c68ea8be"
+  },
+  "formal_to_physical": {
+    "passed": true,
+    "retained_link_review_sha256": "3ed1bdc1abe11d89c03e84431de23cd8b98e76f0e5962709098514e016e19706",
+    "proof_summary_sha256": "474ad1e28ba62b0d990eb0a2cf26c8fbf180bb9c5ba3865f92de1a2bb07f13c6",
+    "common_graph_sha256": "d12b91d198024deff4527b2c1e6217fcc7ca3355bdc09dfb4ebb309192a0fd89",
+    "AB_linked_netlist_sha256": "6b2f3025181eb852e93aafbb82ff2f019c70bdda377d6c5c77323ba0cf2f765f",
+    "AB_lowering_report_sha256": "40be63a17ce494c6436362557b43f2dc59d8864028992cd7edc7110b7b3ddcd9",
+    "AB_mapping_report_sha256": "e323c1f6d35f7e74c9f86d47cb29aae1b50e67db0cd8260ea33a7917ec32f4ce"
+  },
+  "AB_physical": {
+    "scope": "tested global-route timing trials only; routing review and formal measurement still required",
+    "analysis_report_sha256": "ab92d48a40351c834b684dd965e9e63faf26f656806fec55146092d1ffedb7af",
+    "implementation_report_sha256": "0c6a54acef56cbbdc924da08c870b82f720920c202d83804e510d7601c87a8f3",
+    "checker_sha256": "170a5abc90b2f6dad76d2fa0a81a5b6601b897865862b867d784e888fc1048b5",
+    "records": [
+      {
+        "corner": "TT",
+        "standard_cell_area_um2": 21663.036900012085,
+        "standard_cell_count": 175441,
+        "register_count": 18355,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9000,
+            "setup_slack_ps": 2319.23370324866,
+            "hold_slack_ps": 39.97910352092489,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9100,
+            "setup_slack_ps": 2419.2337119222775,
+            "hold_slack_ps": 39.97910352092489,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9200,
+            "setup_slack_ps": 2519.2337205958947,
+            "hold_slack_ps": 39.97910352092489,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9300,
+            "setup_slack_ps": 2619.2337292695124,
+            "hold_slack_ps": 39.97910352092489,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9400,
+            "setup_slack_ps": 2719.2337379431297,
+            "hold_slack_ps": 39.97910352092489,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": 2819.233746616747,
+            "hold_slack_ps": 39.97910352092489,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 2919.2337552903646,
+            "hold_slack_ps": 39.97910352092489,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9700,
+            "setup_slack_ps": 3019.233763963982,
+            "hold_slack_ps": 39.97910352092489,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9800,
+            "setup_slack_ps": 3119.2337726375995,
+            "hold_slack_ps": 39.97910352092489,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9900,
+            "setup_slack_ps": 3219.2337813112167,
+            "hold_slack_ps": 39.97910352092489,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 3319.2337899848344,
+            "hold_slack_ps": 39.97910352092489,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      },
+      {
+        "corner": "SS",
+        "standard_cell_area_um2": 21663.036900012085,
+        "standard_cell_count": 175441,
+        "register_count": 18355,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9000,
+            "setup_slack_ps": -391.7985951341874,
+            "hold_slack_ps": 71.313177870306,
+            "problems": [
+              "setup violation"
+            ],
+            "passed": false
+          },
+          {
+            "period_ps": 9100,
+            "setup_slack_ps": -291.79858646056994,
+            "hold_slack_ps": 71.313177870306,
+            "problems": [
+              "setup violation"
+            ],
+            "passed": false
+          },
+          {
+            "period_ps": 9200,
+            "setup_slack_ps": -191.79857778695254,
+            "hold_slack_ps": 71.313177870306,
+            "problems": [
+              "setup violation"
+            ],
+            "passed": false
+          },
+          {
+            "period_ps": 9300,
+            "setup_slack_ps": -91.79856911333512,
+            "hold_slack_ps": 71.313177870306,
+            "problems": [
+              "setup violation"
+            ],
+            "passed": false
+          },
+          {
+            "period_ps": 9400,
+            "setup_slack_ps": 8.201439560282292,
+            "hold_slack_ps": 71.313177870306,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": 108.20144823389971,
+            "hold_slack_ps": 71.313177870306,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 208.20145690751713,
+            "hold_slack_ps": 71.313177870306,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9700,
+            "setup_slack_ps": 308.2014655811345,
+            "hold_slack_ps": 71.313177870306,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9800,
+            "setup_slack_ps": 408.20147425475193,
+            "hold_slack_ps": 71.313177870306,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9900,
+            "setup_slack_ps": 508.2014829283694,
+            "hold_slack_ps": 71.313177870306,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 608.2014916019867,
+            "hold_slack_ps": 71.313177870306,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      },
+      {
+        "corner": "FF",
+        "standard_cell_area_um2": 21663.036900012085,
+        "standard_cell_count": 175441,
+        "register_count": 18355,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9000,
+            "setup_slack_ps": 3825.6931109360003,
+            "hold_slack_ps": 17.57999308712692,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9100,
+            "setup_slack_ps": 3925.693119609618,
+            "hold_slack_ps": 17.57999308712692,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9200,
+            "setup_slack_ps": 4025.693128283235,
+            "hold_slack_ps": 17.57999308712692,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9300,
+            "setup_slack_ps": 4125.693136956853,
+            "hold_slack_ps": 17.57999308712692,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9400,
+            "setup_slack_ps": 4225.69314563047,
+            "hold_slack_ps": 17.57999308712692,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": 4325.693154304087,
+            "hold_slack_ps": 17.57999308712692,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 4425.693162977705,
+            "hold_slack_ps": 17.57999308712692,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9700,
+            "setup_slack_ps": 4525.693171651323,
+            "hold_slack_ps": 17.57999308712692,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9800,
+            "setup_slack_ps": 4625.69318032494,
+            "hold_slack_ps": 17.57999308712692,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9900,
+            "setup_slack_ps": 4725.693188998557,
+            "hold_slack_ps": 17.57999308712692,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 4825.693197672174,
+            "hold_slack_ps": 17.57999308712692,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      }
+    ],
+    "qualified_periods_ps": [
+      9400,
+      9500,
+      9600,
+      9700,
+      9800,
+      9900,
+      10000
+    ],
+    "smallest_tested_passing_period_ps": 9400,
+    "standard_cell_area_um2": 21663.036900012085,
+    "passed": true,
+    "variant": "AB",
+    "guard_source_commit": "f66e12baf034113070c298006595d7292aa911bd",
+    "predecessor_source_commit": "f66e12baf034113070c298006595d7292aa911bd",
+    "predecessor_GRT_source_commit": "f66e12baf034113070c298006595d7292aa911bd",
+    "native_topology_audit": {
+      "passed": true,
+      "original_cells": 175440,
+      "final_cells": 175441,
+      "original_pins_checked": 970525,
+      "boundary_ports_checked": 523,
+      "redirected_input_loads": 1,
+      "added_buffer": "rv32_ready_hold_guard22884",
+      "master": "BUFx2_ASAP7_75t_R",
+      "all_other_cells_masters_pins_ports_unchanged": true
+    },
+    "predecessor_timing_passed": true,
+    "predecessor_analysis_sha256": "d72207bb61b5349847bec872d03579bc7babeb831858696ee51cb7c2b89c6b3a",
+    "whole_route_overflow": [
+      0,
+      0,
+      0
+    ],
+    "antenna_net_pin_violations": [
+      0,
+      0
+    ]
+  },
+  "baseline_physical": {
+    "scope": "tested global-route timing trials only; routing review and formal measurement still required",
+    "analysis_report_sha256": "c86254a51a0847b439788b04087d8a9cad5028516170f1a11fb773c20281efd2",
+    "implementation_report_sha256": "9237f9919158020c481979db910b135166c6c9fde6569740f7bf6f57d9822069",
+    "checker_sha256": "170a5abc90b2f6dad76d2fa0a81a5b6601b897865862b867d784e888fc1048b5",
+    "records": [
+      {
+        "corner": "TT",
+        "standard_cell_area_um2": 21545.492940008164,
+        "standard_cell_count": 174141,
+        "register_count": 18288,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9400,
+            "setup_slack_ps": 2781.1424385788623,
+            "hold_slack_ps": 39.195119528953185,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": 2881.14244725248,
+            "hold_slack_ps": 39.195119528953185,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 2981.142455926097,
+            "hold_slack_ps": 39.195119528953185,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 3381.142490620567,
+            "hold_slack_ps": 39.195119528953185,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      },
+      {
+        "corner": "SS",
+        "standard_cell_area_um2": 21545.492940008164,
+        "standard_cell_count": 174141,
+        "register_count": 18288,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9400,
+            "setup_slack_ps": -11.991296892286249,
+            "hold_slack_ps": 71.08219596910978,
+            "problems": [
+              "setup violation"
+            ],
+            "passed": false
+          },
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": 88.00871178133117,
+            "hold_slack_ps": 71.08219596910978,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 188.0087204549486,
+            "hold_slack_ps": 71.08219596910978,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 588.0087551494182,
+            "hold_slack_ps": 71.08219596910978,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      },
+      {
+        "corner": "FF",
+        "standard_cell_area_um2": 21545.492940008164,
+        "standard_cell_count": 174141,
+        "register_count": 18288,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9400,
+            "setup_slack_ps": 4283.167615488132,
+            "hold_slack_ps": 9.122730385373158,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": 4383.167624161749,
+            "hold_slack_ps": 9.122730385373158,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 4483.167632835367,
+            "hold_slack_ps": 9.122730385373158,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 4883.167667529836,
+            "hold_slack_ps": 9.122730385373158,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      }
+    ],
+    "qualified_periods_ps": [
+      9500,
+      9600,
+      10000
+    ],
+    "smallest_tested_passing_period_ps": 9500,
+    "standard_cell_area_um2": 21545.492940008164,
+    "passed": true,
+    "variant": "baseline",
+    "guard_source_commit": "a5cc433598b3e61388bd85a9ff2442ff88cc9010",
+    "predecessor_source_commit": "f2c8b4520fc68d1c95a043a3b638fc9539bf48c2",
+    "predecessor_GRT_source_commit": "6493269c0002920837ba9ac308b0ec7199945942",
+    "native_topology_audit": {
+      "passed": true,
+      "original_cells": 174140,
+      "final_cells": 174141,
+      "original_pins_checked": 967132,
+      "boundary_ports_checked": 523,
+      "redirected_input_loads": 1,
+      "added_buffer": "rv32_ready_hold_guard22839",
+      "master": "BUFx2_ASAP7_75t_R",
+      "all_other_cells_masters_pins_ports_unchanged": true
+    },
+    "predecessor_timing_passed": false,
+    "predecessor_analysis_sha256": "4d5390194dc6baa34b60ae9b2357d346b4ca25cd3c6f895b14a8f29f66f068b1",
+    "whole_route_overflow": [
+      0,
+      0,
+      0
+    ],
+    "antenna_net_pin_violations": [
+      0,
+      0
+    ]
+  },
+  "B_physical": {
+    "scope": "tested global-route timing trials only; routing review and formal measurement still required",
+    "analysis_report_sha256": "772b40a5aea31483b80a5357e387678d070c97df687a52cdc1bf56703d5467b8",
+    "implementation_report_sha256": "a9294a7e02cdb86e63a065cc5e3a127eb2fdeb8661dccdf65444d15279e3da69",
+    "checker_sha256": "170a5abc90b2f6dad76d2fa0a81a5b6601b897865862b867d784e888fc1048b5",
+    "records": [
+      {
+        "corner": "TT",
+        "standard_cell_area_um2": 21309.821820015095,
+        "standard_cell_count": 171538,
+        "register_count": 18131,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": 2898.293616694632,
+            "hold_slack_ps": 39.488357186504025,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 2998.293625368249,
+            "hold_slack_ps": 39.488357186504025,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9700,
+            "setup_slack_ps": 3098.293634041867,
+            "hold_slack_ps": 39.488357186504025,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 3398.293660062719,
+            "hold_slack_ps": 39.488357186504025,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      },
+      {
+        "corner": "SS",
+        "standard_cell_area_um2": 21309.821820015095,
+        "standard_cell_count": 171538,
+        "register_count": 18131,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": -45.953463440485756,
+            "hold_slack_ps": 71.21075979587509,
+            "problems": [
+              "setup violation"
+            ],
+            "passed": false
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 54.04654523313166,
+            "hold_slack_ps": 71.21075979587509,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9700,
+            "setup_slack_ps": 154.04655390674907,
+            "hold_slack_ps": 71.21075979587509,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 454.04657992760133,
+            "hold_slack_ps": 71.21075979587509,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      },
+      {
+        "corner": "FF",
+        "standard_cell_area_um2": 21309.821820015095,
+        "standard_cell_count": 171538,
+        "register_count": 18131,
+        "library_warning_cell_instances": 0,
+        "trials": [
+          {
+            "period_ps": 9500,
+            "setup_slack_ps": 4389.066905248969,
+            "hold_slack_ps": 17.279566735462907,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9600,
+            "setup_slack_ps": 4489.066913922587,
+            "hold_slack_ps": 17.279566735462907,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 9700,
+            "setup_slack_ps": 4589.066922596205,
+            "hold_slack_ps": 17.279566735462907,
+            "problems": [],
+            "passed": true
+          },
+          {
+            "period_ps": 10000,
+            "setup_slack_ps": 4889.066948617056,
+            "hold_slack_ps": 17.279566735462907,
+            "problems": [],
+            "passed": true
+          }
+        ]
+      }
+    ],
+    "qualified_periods_ps": [
+      9600,
+      9700,
+      10000
+    ],
+    "smallest_tested_passing_period_ps": 9600,
+    "standard_cell_area_um2": 21309.821820015095,
+    "passed": true,
+    "variant": "B",
+    "guard_source_commit": "a5cc433598b3e61388bd85a9ff2442ff88cc9010",
+    "predecessor_source_commit": "f2c8b4520fc68d1c95a043a3b638fc9539bf48c2",
+    "predecessor_GRT_source_commit": "6493269c0002920837ba9ac308b0ec7199945942",
+    "native_topology_audit": {
+      "passed": true,
+      "original_cells": 171537,
+      "final_cells": 171538,
+      "original_pins_checked": 948537,
+      "boundary_ports_checked": 523,
+      "redirected_input_loads": 1,
+      "added_buffer": "rv32_ready_hold_guard22320",
+      "master": "BUFx2_ASAP7_75t_R",
+      "all_other_cells_masters_pins_ports_unchanged": true
+    },
+    "predecessor_timing_passed": true,
+    "predecessor_analysis_sha256": "19b0008341a559fcc50a710132264974ec8df4822618707ac906743bb1072139",
+    "whole_route_overflow": [
+      0,
+      0,
+      0
+    ],
+    "antenna_net_pin_violations": [
+      0,
+      0
+    ]
+  },
+  "native_comparisons": [
+    {
+      "stage": "grt",
+      "reference": "baseline",
+      "command_policy_identical": true
+    },
+    {
+      "stage": "grt",
+      "reference": "B",
+      "command_policy_identical": true
+    },
+    {
+      "stage": "eco",
+      "reference": "baseline",
+      "command_policy_identical": true
+    },
+    {
+      "stage": "eco",
+      "reference": "B",
+      "command_policy_identical": true
+    },
+    {
+      "stage": "guard",
+      "reference": "baseline",
+      "command_policy_identical": true
+    },
+    {
+      "stage": "guard",
+      "reference": "B",
+      "command_policy_identical": true
+    }
+  ],
+  "original_area_ratio": 0.9810661084996553,
+  "same_flow_area_ratio": 1.0054556171135751
+}

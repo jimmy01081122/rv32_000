@@ -1,0 +1,1538 @@
+{
+  "passed": true,
+  "scope": "remaining wait positions from complete AB common-clock measurement",
+  "analyzer_sha256": "a18e2db6dc6301d79936d2147fdad2b997ebd3e34877491992d6e75ad2b38a79",
+  "measurement_summary_sha256": "cabae3ddc7229e0776503a74d5f6c569a07f9988f9e3e4734204aa96a0b6af4a",
+  "sources_sha256": {
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/fir/profile.json": "efac2c5b2d99c1e3243606651a13442ef47e5c629d2f839e1fcba7c4cff0edf9",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/iir/profile.json": "5f511e7fb2b6d02a8746cece8ea767ca0a048e4b7b3f9d33b14cef67a9c731ad",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/fft/profile.json": "c2ee6fde6d4d02ec0b2517f845d066f814ca3c6d4d671c67b06ea1c4cfc72971",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/pid/profile.json": "7b7781024f9b114b08c5aefe699861844800172474f6dfe88bf92814d5b6b47b",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/gemm/profile.json": "bc3906f22aa8873aed4e27edead1168bbbfa49550352c55474aad9d29fdcb255",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/bicg/profile.json": "a75796f154210372fe3317e222fc4058eae586aa99e08a1bbf8f1c1294bbbddb",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/cholesky/profile.json": "4a62aa72534b345c93b7764c348191454d76393e761865e42d091e9e24ede00c",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/svm/profile.json": "423728d3c357ea2e17ed7d57b8f4cbd4a26b1aabfa676102dffdc98aecce8ff6",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/aha-mont64/profile.json": "bd5420e8122e3666b0d499b0047fea7ffc09ee81c3d2caf6e49882f06c15b6c3",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/crc32/profile.json": "dfbfbf353ce08617178c9c261459e5d934111d5c00972263f5700623c424bfc1",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/cubic/profile.json": "e92f1417842f46ed2ac0e0e60b7cf0063169e1243ceec6b1be5c56672c90cc9b",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/edn/profile.json": "0e52b4633c00a98ed856cd0f6a56657e00dc6c43e03b66c218cb1ded520813f0",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/huffbench/profile.json": "becc807f5c2fd4839078cfb4663cdc676b7db5d3fd6cc4a8ba726c3dd6a516df",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/matmult-int/profile.json": "0410f7b498495fed8ff596d564911c559cc318fa3ea97809d00ffdb5cac7c073",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/minver/profile.json": "cd18a271bddd61c1296f206a6eb9fc4e90b6632536a5a5ddce83898c954c955e",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/nbody/profile.json": "69b92cf463b2b143965e9afcd86665acf223e9de757f3a8f33d2e253278c4e3b",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/nettle-aes/profile.json": "bc5c3170d679f4ecf9ab0779959e899e40282da09a788277f6333fbb46bcd495",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/nettle-sha256/profile.json": "39f95ed22ae8e5d83770d339c28d85143419f3edc3bc84fd23a1002d595f06f4",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/nsichneu/profile.json": "80bfb6448fb6e5ea88a07c503b26a0a4b8b203415081db4c5185139f4183c475",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/picojpeg/profile.json": "526f1dffc1f83fb4e738d6863669a1f08feecb21e970cdf7288bcc645c7acd86",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/qrduino/profile.json": "48f46772c2f9b293f288676ce4577dd152975ba80c38cd1f7e0d37d1df917fc2",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/sglib-combined/profile.json": "bcc8482de1561b49960f213d15c5def96c6301c63a82ada85d356677f2b9daa0",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/slre/profile.json": "475a9fec658227609b01e069834282df88b0340ad61dae22e645eb7c554f03b2",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/st/profile.json": "125faf35cab426646a3e5af4fe165a131ea2f8b98c2f2384ca0c8e8fc575d72d",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/statemate/profile.json": "7d37334b8298667b6115ed9960bd24d231c46b8fcdcd22220ebe3bb26da39f33",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/ud/profile.json": "5d185032024d6a362eec3dd22ac69e90709b002dea83a9acc27b817a8353cf18",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/wikisort/profile.json": "4d14eccb44dd31f59341114f50cb03a26b5e77aeec382d4ef22e2f6e397616df"
+  },
+  "profiles": 27,
+  "records": [
+    {
+      "family": "fp32",
+      "name": "fir",
+      "group": "dsp",
+      "cycles": 66110,
+      "retirement_ipc": 0.9247920133111481,
+      "cycle_partition": {
+        "head_wait_branch": 1,
+        "head_wait_fp_load": 1826,
+        "head_wait_int_load": 5,
+        "head_wait_integer_other": 518,
+        "head_wait_jump": 4,
+        "head_wait_marker": 2,
+        "recovery": 518,
+        "retired_body": 61137,
+        "retired_marker": 1,
+        "rob_empty": 1555,
+        "store_ack_wait": 543
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 518,
+        "own_external_inflight": 259,
+        "own_response_buffer": 1054
+      },
+      "store_ack_wait_phases": {
+        "mark_pending": 543
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 0,
+        "other": 518
+      },
+      "own_response_buffer_percent": 1.5943125094539403,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 1036,
+        "dmem_pending": 17731,
+        "dmem_read_accepted": 17188,
+        "dmem_write_accepted": 543,
+        "flush": 518,
+        "fma_src01_wait_entry_cycles": 8448,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 8448,
+        "fp_iq_nonempty_no_ready": 8448,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 8192,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 62,
+        "rob_full": 0
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "iir",
+      "group": "dsp",
+      "cycles": 12472,
+      "retirement_ipc": 0.9098781270044901,
+      "cycle_partition": {
+        "head_wait_fp_load": 29,
+        "head_wait_fp_store": 8,
+        "head_wait_int_load": 6,
+        "head_wait_integer_other": 2,
+        "head_wait_jump": 4,
+        "head_wait_marker": 2,
+        "recovery": 9,
+        "retired_body": 11347,
+        "retired_marker": 1,
+        "rob_empty": 28,
+        "store_ack_wait": 1036
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 6,
+        "own_external_inflight": 3,
+        "own_response_buffer": 26
+      },
+      "store_ack_wait_phases": {
+        "load_response_buffer": 4,
+        "mark_pending": 1032
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 0,
+        "other": 2
+      },
+      "own_response_buffer_percent": 0.20846696600384862,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 18,
+        "dmem_pending": 2091,
+        "dmem_read_accepted": 1059,
+        "dmem_write_accepted": 1032,
+        "flush": 9,
+        "fma_src01_wait_entry_cycles": 114,
+        "fma_src2_only_entry_cycles": 63,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 5140,
+        "fp_iq_nonempty_no_ready": 137,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 5140,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 1015,
+        "rob_full": 996
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "fft",
+      "group": "dsp",
+      "cycles": 33656,
+      "retirement_ipc": 0.7071844544806275,
+      "cycle_partition": {
+        "head_wait_branch": 20,
+        "head_wait_fp_load": 1398,
+        "head_wait_int_load": 2565,
+        "head_wait_int_store": 38,
+        "head_wait_integer_other": 367,
+        "head_wait_jump": 74,
+        "head_wait_marker": 2,
+        "recovery": 316,
+        "retired_body": 23800,
+        "retired_marker": 1,
+        "rob_empty": 948,
+        "store_ack_wait": 4127
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 488,
+        "own_external_inflight": 714,
+        "own_response_buffer": 2761
+      },
+      "store_ack_wait_phases": {
+        "mark_pending": 4127
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 121,
+        "other": 246
+      },
+      "own_response_buffer_percent": 8.203589256001901,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 632,
+        "dmem_pending": 10153,
+        "dmem_read_accepted": 6026,
+        "dmem_write_accepted": 4127,
+        "flush": 316,
+        "fma_src01_wait_entry_cycles": 4070,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 7189,
+        "fp_iq_nonempty_no_ready": 2952,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 7168,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 4598,
+        "rob_full": 1604
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "pid",
+      "group": "dsp",
+      "cycles": 8256,
+      "retirement_ipc": 0.684593023255814,
+      "cycle_partition": {
+        "head_wait_fadd": 512,
+        "head_wait_fma": 1023,
+        "head_wait_fmul": 5,
+        "head_wait_fp_load": 7,
+        "head_wait_fp_other": 3,
+        "head_wait_fp_store": 514,
+        "head_wait_integer_other": 4,
+        "head_wait_jump": 2,
+        "head_wait_marker": 2,
+        "recovery": 4,
+        "retired_body": 5651,
+        "retired_marker": 1,
+        "rob_empty": 13,
+        "store_ack_wait": 515
+      },
+      "load_head_wait_phases": {
+        "own_response_buffer": 7
+      },
+      "store_ack_wait_phases": {
+        "mark_pending": 515
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 0,
+        "other": 4
+      },
+      "own_response_buffer_percent": 0.08478682170542635,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 8,
+        "dmem_pending": 1034,
+        "dmem_read_accepted": 519,
+        "dmem_write_accepted": 515,
+        "flush": 4,
+        "fma_src01_wait_entry_cycles": 5111,
+        "fma_src2_only_entry_cycles": 6133,
+        "fp_ex0_blocked": 0,
+        "fp_head_wait_not_in_iq": 1541,
+        "fp_head_wait_ready_in_iq": 2,
+        "fp_iq_issue": 3077,
+        "fp_iq_nonempty_no_ready": 5119,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 2050,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 2557,
+        "rob_full": 0
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "gemm",
+      "group": "matrix_ml",
+      "cycles": 123490,
+      "retirement_ipc": 0.6557373066645072,
+      "cycle_partition": {
+        "head_wait_fmul": 500,
+        "head_wait_fp_load": 31363,
+        "head_wait_fp_store": 500,
+        "head_wait_integer_other": 684,
+        "head_wait_jump": 4,
+        "head_wait_marker": 2,
+        "recovery": 365,
+        "retired_body": 80976,
+        "retired_marker": 1,
+        "rob_empty": 1095,
+        "store_ack_wait": 8000
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 82,
+        "own_external_inflight": 8000,
+        "own_response_buffer": 23281
+      },
+      "store_ack_wait_phases": {
+        "mark_pending": 8000
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 0,
+        "other": 684
+      },
+      "own_response_buffer_percent": 18.85253866709855,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 730,
+        "dmem_pending": 31602,
+        "dmem_read_accepted": 23602,
+        "dmem_write_accepted": 8000,
+        "flush": 365,
+        "fma_src01_wait_entry_cycles": 244764,
+        "fma_src2_only_entry_cycles": 7500,
+        "fp_ex0_blocked": 0,
+        "fp_head_wait_not_in_iq": 500,
+        "fp_iq_issue": 16100,
+        "fp_iq_nonempty_no_ready": 101406,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 16100,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 36473,
+        "rob_full": 36468
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "bicg",
+      "group": "matrix_ml",
+      "cycles": 20619,
+      "retirement_ipc": 0.8006692856103593,
+      "cycle_partition": {
+        "head_wait_fp_load": 465,
+        "head_wait_fp_store": 84,
+        "head_wait_int_store": 3,
+        "head_wait_integer_other": 7,
+        "head_wait_jump": 4,
+        "head_wait_marker": 2,
+        "recovery": 89,
+        "retired_body": 16508,
+        "retired_marker": 1,
+        "rob_empty": 268,
+        "store_ack_wait": 3188
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 86,
+        "own_external_inflight": 44,
+        "own_response_buffer": 335
+      },
+      "store_ack_wait_phases": {
+        "load_response_buffer": 1512,
+        "mark_pending": 1676
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 0,
+        "other": 7
+      },
+      "own_response_buffer_percent": 1.6247150686260246,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 178,
+        "dmem_pending": 6591,
+        "dmem_read_accepted": 4915,
+        "dmem_write_accepted": 1676,
+        "flush": 89,
+        "fma_src01_wait_entry_cycles": 25830,
+        "fma_src2_only_entry_cycles": 3360,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 3277,
+        "fp_iq_nonempty_no_ready": 15456,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 3192,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 2937,
+        "rob_full": 0
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "cholesky",
+      "group": "matrix_ml",
+      "cycles": 181507,
+      "retirement_ipc": 0.578633330945914,
+      "cycle_partition": {
+        "head_wait_branch": 163,
+        "head_wait_fdiv": 20949,
+        "head_wait_fma": 780,
+        "head_wait_fp_load": 33726,
+        "head_wait_fp_other": 89,
+        "head_wait_fp_store": 863,
+        "head_wait_fsub": 35,
+        "head_wait_int_load": 2,
+        "head_wait_int_store": 1,
+        "head_wait_integer_other": 560,
+        "head_wait_jump": 2,
+        "head_wait_marker": 2,
+        "recovery": 1768,
+        "retired_body": 105025,
+        "retired_marker": 1,
+        "rob_empty": 5304,
+        "store_ack_wait": 12237
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 2999,
+        "own_external_inflight": 10736,
+        "own_response_buffer": 19993
+      },
+      "store_ack_wait_phases": {
+        "load_response_buffer": 669,
+        "mark_pending": 11568
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 0,
+        "other": 560
+      },
+      "own_response_buffer_percent": 11.015002176224609,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 3536,
+        "dmem_pending": 34815,
+        "dmem_read_accepted": 23247,
+        "dmem_write_accepted": 11568,
+        "flush": 1768,
+        "fma_src01_wait_entry_cycles": 198853,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_head_wait_not_in_iq": 902,
+        "fp_head_wait_ready_in_iq": 2,
+        "fp_iq_issue": 12533,
+        "fp_iq_nonempty_no_ready": 130390,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 10730,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 47959,
+        "rob_full": 47950
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "svm",
+      "group": "matrix_ml",
+      "cycles": 38395,
+      "retirement_ipc": 0.768928245865347,
+      "cycle_partition": {
+        "head_wait_fma": 400,
+        "head_wait_fp_load": 3608,
+        "head_wait_fp_other": 306,
+        "head_wait_int_load": 416,
+        "head_wait_int_store": 101,
+        "head_wait_integer_other": 304,
+        "head_wait_jump": 2,
+        "head_wait_marker": 2,
+        "recovery": 907,
+        "retired_body": 29522,
+        "retired_marker": 1,
+        "rob_empty": 2721,
+        "store_ack_wait": 105
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 1704,
+        "own_external_inflight": 903,
+        "own_response_buffer": 1417
+      },
+      "store_ack_wait_phases": {
+        "mark_pending": 105
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 0,
+        "other": 304
+      },
+      "own_response_buffer_percent": 3.6905847115509833,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 1814,
+        "dmem_pending": 10513,
+        "dmem_read_accepted": 10408,
+        "dmem_write_accepted": 105,
+        "flush": 907,
+        "fma_src01_wait_entry_cycles": 10808,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_head_wait_not_in_iq": 604,
+        "fp_head_wait_ready_in_iq": 102,
+        "fp_iq_issue": 5400,
+        "fp_iq_nonempty_no_ready": 10706,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 4498,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 5,
+        "rob_full": 0
+      }
+    },
+    {
+      "family": "embench",
+      "name": "aha-mont64",
+      "group": null,
+      "cycles": 5356643,
+      "retirement_ipc": 0.8384142829753635,
+      "cycle_partition": {
+        "head_wait_branch": 101095,
+        "head_wait_csr_system": 4,
+        "head_wait_int_load": 13966,
+        "head_wait_int_store": 849,
+        "head_wait_integer_other": 295275,
+        "head_wait_jump": 4,
+        "head_wait_marker": 2,
+        "recovery": 112950,
+        "retired_body": 4491085,
+        "retired_marker": 1,
+        "rob_empty": 338853,
+        "store_ack_wait": 2559
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 4652,
+        "own_external_inflight": 2540,
+        "own_response_buffer": 6774
+      },
+      "store_ack_wait_phases": {
+        "load_response_buffer": 1,
+        "mark_pending": 2558
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 12274,
+        "other": 283001
+      },
+      "own_response_buffer_percent": 0.12645979954236264,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 225900,
+        "dmem_pending": 11461,
+        "dmem_read_accepted": 8903,
+        "dmem_write_accepted": 2558,
+        "flush": 112950,
+        "fma_src01_wait_entry_cycles": 0,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 0,
+        "fp_iq_nonempty_no_ready": 0,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 0,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 4263,
+        "rob_full": 1276
+      }
+    },
+    {
+      "family": "embench",
+      "name": "crc32",
+      "group": null,
+      "cycles": 5054726,
+      "retirement_ipc": 0.792407540982439,
+      "cycle_partition": {
+        "head_wait_branch": 172,
+        "head_wait_csr_system": 4,
+        "head_wait_int_load": 522928,
+        "head_wait_int_store": 514,
+        "head_wait_integer_other": 349702,
+        "head_wait_jump": 344,
+        "head_wait_marker": 2,
+        "recovery": 349,
+        "retired_body": 4005402,
+        "retired_marker": 1,
+        "rob_empty": 1050,
+        "store_ack_wait": 174258
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 174253,
+        "own_external_inflight": 174252,
+        "own_response_buffer": 174423
+      },
+      "store_ack_wait_phases": {
+        "mark_pending": 174258
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 851,
+        "other": 348851
+      },
+      "own_response_buffer_percent": 3.4506914914873725,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 698,
+        "dmem_pending": 522595,
+        "dmem_read_accepted": 348337,
+        "dmem_write_accepted": 174258,
+        "flush": 349,
+        "fma_src01_wait_entry_cycles": 0,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 0,
+        "fp_iq_nonempty_no_ready": 0,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 0,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 1043136,
+        "rob_full": 169
+      }
+    },
+    {
+      "family": "embench",
+      "name": "cubic",
+      "group": null,
+      "cycles": 13751431,
+      "retirement_ipc": 0.564467217993531,
+      "cycle_partition": {
+        "head_wait_branch": 246282,
+        "head_wait_csr_system": 132064,
+        "head_wait_int_load": 739862,
+        "head_wait_int_store": 103494,
+        "head_wait_integer_other": 2275634,
+        "head_wait_jump": 11412,
+        "head_wait_marker": 2,
+        "recovery": 478097,
+        "retired_body": 7762231,
+        "retired_marker": 1,
+        "rob_empty": 1488194,
+        "store_ack_wait": 514158
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 160577,
+        "own_external_inflight": 157809,
+        "own_response_buffer": 421476
+      },
+      "store_ack_wait_phases": {
+        "load_response_buffer": 1382,
+        "mark_pending": 512776
+      },
+      "integer_waits": {
+        "div_rem": 737130,
+        "multiply": 138540,
+        "other": 1399964
+      },
+      "own_response_buffer_percent": 3.0649610211475444,
+      "div_rem_wait_percent": 5.360387584390308,
+      "overlapping_events": {
+        "decode_empty": 956194,
+        "dmem_pending": 1091922,
+        "dmem_read_accepted": 579146,
+        "dmem_write_accepted": 512776,
+        "flush": 478097,
+        "fma_src01_wait_entry_cycles": 0,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 0,
+        "fp_iq_nonempty_no_ready": 0,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 0,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 1348230,
+        "rob_full": 72492
+      }
+    },
+    {
+      "family": "embench",
+      "name": "edn",
+      "group": null,
+      "cycles": 4232380,
+      "retirement_ipc": 0.7988569079335976,
+      "cycle_partition": {
+        "head_wait_branch": 89,
+        "head_wait_csr_system": 4,
+        "head_wait_int_load": 189505,
+        "head_wait_int_store": 38110,
+        "head_wait_integer_other": 452499,
+        "head_wait_jump": 176,
+        "head_wait_marker": 2,
+        "recovery": 19411,
+        "retired_body": 3381065,
+        "retired_marker": 1,
+        "rob_empty": 58236,
+        "store_ack_wait": 93282
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 24886,
+        "own_external_inflight": 26277,
+        "own_response_buffer": 138342
+      },
+      "store_ack_wait_phases": {
+        "load_response_buffer": 2089,
+        "mark_pending": 91193
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 121365,
+        "other": 331134
+      },
+      "own_response_buffer_percent": 3.2686573511830224,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 38822,
+        "dmem_pending": 991834,
+        "dmem_read_accepted": 900641,
+        "dmem_write_accepted": 91193,
+        "flush": 19411,
+        "fma_src01_wait_entry_cycles": 0,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 0,
+        "fp_iq_nonempty_no_ready": 0,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 0,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 578218,
+        "rob_full": 963
+      }
+    },
+    {
+      "family": "embench",
+      "name": "huffbench",
+      "group": null,
+      "cycles": 3209315,
+      "retirement_ipc": 0.6301350911331546,
+      "cycle_partition": {
+        "head_wait_branch": 163180,
+        "head_wait_csr_system": 4,
+        "head_wait_int_load": 248973,
+        "head_wait_int_store": 11139,
+        "head_wait_integer_other": 190437,
+        "head_wait_jump": 46,
+        "head_wait_marker": 2,
+        "recovery": 97809,
+        "retired_body": 2022301,
+        "retired_marker": 1,
+        "rob_empty": 293430,
+        "store_ack_wait": 181993
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 78740,
+        "own_external_inflight": 76694,
+        "own_response_buffer": 93539
+      },
+      "store_ack_wait_phases": {
+        "load_response_buffer": 55,
+        "mark_pending": 181938
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 0,
+        "other": 190437
+      },
+      "own_response_buffer_percent": 2.9146095038972493,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 195618,
+        "dmem_pending": 521570,
+        "dmem_read_accepted": 339632,
+        "dmem_write_accepted": 181938,
+        "flush": 97809,
+        "fma_src01_wait_entry_cycles": 0,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 0,
+        "fp_iq_nonempty_no_ready": 0,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 0,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 263618,
+        "rob_full": 671
+      }
+    },
+    {
+      "family": "embench",
+      "name": "matmult-int",
+      "group": null,
+      "cycles": 3769948,
+      "retirement_ipc": 0.777827704785318,
+      "cycle_partition": {
+        "head_wait_branch": 418,
+        "head_wait_csr_system": 4,
+        "head_wait_int_load": 111337,
+        "head_wait_int_store": 37727,
+        "head_wait_integer_other": 462356,
+        "head_wait_jump": 2,
+        "head_wait_marker": 2,
+        "recovery": 38006,
+        "retired_body": 2932369,
+        "retired_marker": 1,
+        "rob_empty": 114021,
+        "store_ack_wait": 73705
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 36804,
+        "own_external_inflight": 18402,
+        "own_response_buffer": 56131
+      },
+      "store_ack_wait_phases": {
+        "load_response_buffer": 92,
+        "mark_pending": 73613
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 73600,
+        "other": 388756
+      },
+      "own_response_buffer_percent": 1.488906478285642,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 76012,
+        "dmem_pending": 883315,
+        "dmem_read_accepted": 809702,
+        "dmem_write_accepted": 73613,
+        "flush": 38006,
+        "fma_src01_wait_entry_cycles": 0,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 0,
+        "fp_iq_nonempty_no_ready": 0,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 0,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 312266,
+        "rob_full": 0
+      }
+    },
+    {
+      "family": "embench",
+      "name": "minver",
+      "group": null,
+      "cycles": 831001,
+      "retirement_ipc": 0.40947483817709,
+      "cycle_partition": {
+        "head_wait_branch": 20541,
+        "head_wait_csr_system": 4,
+        "head_wait_fdiv": 209235,
+        "head_wait_fma": 3885,
+        "head_wait_fmul": 1665,
+        "head_wait_fp_load": 48293,
+        "head_wait_fp_other": 26640,
+        "head_wait_fp_store": 2220,
+        "head_wait_int_load": 8337,
+        "head_wait_int_store": 559,
+        "head_wait_integer_other": 19994,
+        "head_wait_jump": 3332,
+        "head_wait_marker": 2,
+        "recovery": 20544,
+        "retired_body": 340273,
+        "retired_marker": 1,
+        "rob_empty": 61635,
+        "store_ack_wait": 63841
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 15545,
+        "own_external_inflight": 14433,
+        "own_response_buffer": 26652
+      },
+      "store_ack_wait_phases": {
+        "load_response_buffer": 7217,
+        "mark_pending": 56624
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 0,
+        "other": 19994
+      },
+      "own_response_buffer_percent": 3.2072163571403642,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 41088,
+        "dmem_pending": 128789,
+        "dmem_read_accepted": 72165,
+        "dmem_write_accepted": 56624,
+        "flush": 20544,
+        "fma_src01_wait_entry_cycles": 140390,
+        "fma_src2_only_entry_cycles": 32739,
+        "fp_ex0_blocked": 107115,
+        "fp_head_wait_not_in_iq": 27750,
+        "fp_head_wait_ready_in_iq": 4440,
+        "fp_iq_issue": 75480,
+        "fp_iq_nonempty_no_ready": 270285,
+        "fp_iq_ready_downstream_blocked": 52170,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 22754,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 240332,
+        "rob_full": 153149
+      }
+    },
+    {
+      "family": "embench",
+      "name": "nbody",
+      "group": null,
+      "cycles": 5754377,
+      "retirement_ipc": 0.5951134240943894,
+      "cycle_partition": {
+        "head_wait_branch": 139942,
+        "head_wait_csr_system": 68768,
+        "head_wait_int_load": 195863,
+        "head_wait_int_store": 19651,
+        "head_wait_integer_other": 933036,
+        "head_wait_jump": 3319,
+        "head_wait_marker": 2,
+        "recovery": 214845,
+        "retired_body": 3424506,
+        "retired_marker": 1,
+        "rob_empty": 672997,
+        "store_ack_wait": 81447
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 54401,
+        "own_external_inflight": 38346,
+        "own_response_buffer": 103116
+      },
+      "store_ack_wait_phases": {
+        "load_response_buffer": 1003,
+        "mark_pending": 80444
+      },
+      "integer_waits": {
+        "div_rem": 263258,
+        "multiply": 39846,
+        "other": 629932
+      },
+      "own_response_buffer_percent": 1.791957669787711,
+      "div_rem_wait_percent": 4.574917493240363,
+      "overlapping_events": {
+        "decode_empty": 429690,
+        "dmem_pending": 204404,
+        "dmem_read_accepted": 123960,
+        "dmem_write_accepted": 80444,
+        "flush": 214845,
+        "fma_src01_wait_entry_cycles": 0,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 0,
+        "fp_iq_nonempty_no_ready": 0,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 0,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 475502,
+        "rob_full": 30099
+      }
+    },
+    {
+      "family": "embench",
+      "name": "nettle-aes",
+      "group": null,
+      "cycles": 4766309,
+      "retirement_ipc": 0.876447162783613,
+      "cycle_partition": {
+        "head_wait_branch": 9206,
+        "head_wait_csr_system": 4,
+        "head_wait_int_load": 340247,
+        "head_wait_int_store": 4918,
+        "head_wait_integer_other": 126277,
+        "head_wait_jump": 472,
+        "head_wait_marker": 2,
+        "recovery": 10148,
+        "retired_body": 4177417,
+        "retired_marker": 1,
+        "rob_empty": 30447,
+        "store_ack_wait": 67170
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 5228,
+        "own_external_inflight": 15678,
+        "own_response_buffer": 319341
+      },
+      "store_ack_wait_phases": {
+        "load_response_buffer": 7254,
+        "mark_pending": 59916
+      },
+      "integer_waits": {
+        "div_rem": 106298,
+        "multiply": 0,
+        "other": 19979
+      },
+      "own_response_buffer_percent": 6.6999642700462765,
+      "div_rem_wait_percent": 2.2301953146554285,
+      "overlapping_events": {
+        "decode_empty": 20296,
+        "dmem_pending": 838205,
+        "dmem_read_accepted": 778289,
+        "dmem_write_accepted": 59916,
+        "flush": 10148,
+        "fma_src01_wait_entry_cycles": 0,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 0,
+        "fp_iq_nonempty_no_ready": 0,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 0,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 443759,
+        "rob_full": 128080
+      }
+    },
+    {
+      "family": "embench",
+      "name": "nettle-sha256",
+      "group": null,
+      "cycles": 4136522,
+      "retirement_ipc": 0.9229089075314962,
+      "cycle_partition": {
+        "head_wait_branch": 7137,
+        "head_wait_csr_system": 4,
+        "head_wait_int_load": 108800,
+        "head_wait_int_store": 4757,
+        "head_wait_integer_other": 26147,
+        "head_wait_jump": 2,
+        "head_wait_marker": 2,
+        "recovery": 13318,
+        "retired_body": 3817632,
+        "retired_marker": 1,
+        "rob_empty": 39957,
+        "store_ack_wait": 118765
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 11882,
+        "own_external_inflight": 9504,
+        "own_response_buffer": 87414
+      },
+      "store_ack_wait_phases": {
+        "load_response_buffer": 6175,
+        "mark_pending": 112590
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 0,
+        "other": 26147
+      },
+      "own_response_buffer_percent": 2.1132245881926894,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 26636,
+        "dmem_pending": 376230,
+        "dmem_read_accepted": 263640,
+        "dmem_write_accepted": 112590,
+        "flush": 13318,
+        "fma_src01_wait_entry_cycles": 0,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 0,
+        "fp_iq_nonempty_no_ready": 0,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 0,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 159608,
+        "rob_full": 17086
+      }
+    },
+    {
+      "family": "embench",
+      "name": "nsichneu",
+      "group": null,
+      "cycles": 6917065,
+      "retirement_ipc": 0.3233683650507838,
+      "cycle_partition": {
+        "head_wait_branch": 880169,
+        "head_wait_csr_system": 4,
+        "head_wait_int_load": 2102550,
+        "head_wait_int_store": 2463,
+        "head_wait_integer_other": 2467,
+        "head_wait_jump": 2,
+        "head_wait_marker": 2,
+        "recovery": 422237,
+        "retired_body": 2236759,
+        "retired_marker": 1,
+        "rob_empty": 1266714,
+        "store_ack_wait": 3697
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 840773,
+        "own_external_inflight": 421003,
+        "own_response_buffer": 840774
+      },
+      "store_ack_wait_phases": {
+        "mark_pending": 3697
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 0,
+        "other": 2467
+      },
+      "own_response_buffer_percent": 12.155068659901273,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 844474,
+        "dmem_pending": 1914211,
+        "dmem_read_accepted": 1910514,
+        "dmem_write_accepted": 3697,
+        "flush": 422237,
+        "fma_src01_wait_entry_cycles": 0,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 0,
+        "fp_iq_nonempty_no_ready": 0,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 0,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 1248,
+        "rob_full": 0
+      }
+    },
+    {
+      "family": "embench",
+      "name": "picojpeg",
+      "group": null,
+      "cycles": 4880601,
+      "retirement_ipc": 0.6804588205427979,
+      "cycle_partition": {
+        "head_wait_branch": 14624,
+        "head_wait_csr_system": 4,
+        "head_wait_int_load": 347225,
+        "head_wait_int_store": 72227,
+        "head_wait_integer_other": 438734,
+        "head_wait_jump": 9110,
+        "head_wait_marker": 2,
+        "recovery": 48103,
+        "retired_body": 3321047,
+        "retired_marker": 1,
+        "rob_empty": 144312,
+        "store_ack_wait": 485212
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 34586,
+        "own_external_inflight": 94754,
+        "own_response_buffer": 217885
+      },
+      "store_ack_wait_phases": {
+        "load_response_buffer": 39288,
+        "mark_pending": 445924
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 32022,
+        "other": 406712
+      },
+      "own_response_buffer_percent": 4.464306752385618,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 96206,
+        "dmem_pending": 954792,
+        "dmem_read_accepted": 508868,
+        "dmem_write_accepted": 445924,
+        "flush": 48103,
+        "fma_src01_wait_entry_cycles": 0,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 0,
+        "fp_iq_nonempty_no_ready": 0,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 0,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 967348,
+        "rob_full": 66474
+      }
+    },
+    {
+      "family": "embench",
+      "name": "qrduino",
+      "group": null,
+      "cycles": 4411503,
+      "retirement_ipc": 0.6261047538673328,
+      "cycle_partition": {
+        "head_wait_branch": 180882,
+        "head_wait_csr_system": 4,
+        "head_wait_int_load": 462108,
+        "head_wait_int_store": 25655,
+        "head_wait_integer_other": 430186,
+        "head_wait_jump": 8312,
+        "head_wait_marker": 2,
+        "recovery": 114449,
+        "retired_body": 2762062,
+        "retired_marker": 1,
+        "rob_empty": 343350,
+        "store_ack_wait": 84492
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 111342,
+        "own_external_inflight": 122457,
+        "own_response_buffer": 228309
+      },
+      "store_ack_wait_phases": {
+        "load_response_buffer": 17595,
+        "mark_pending": 66897
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 63385,
+        "other": 366801
+      },
+      "own_response_buffer_percent": 5.175310999448487,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 228898,
+        "dmem_pending": 626350,
+        "dmem_read_accepted": 559453,
+        "dmem_write_accepted": 66897,
+        "flush": 114449,
+        "fma_src01_wait_entry_cycles": 0,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 0,
+        "fp_iq_nonempty_no_ready": 0,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 0,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 240417,
+        "rob_full": 89355
+      }
+    },
+    {
+      "family": "embench",
+      "name": "sglib-combined",
+      "group": null,
+      "cycles": 4198421,
+      "retirement_ipc": 0.5215553656958175,
+      "cycle_partition": {
+        "head_wait_branch": 191487,
+        "head_wait_csr_system": 4,
+        "head_wait_int_load": 727456,
+        "head_wait_int_store": 43533,
+        "head_wait_integer_other": 186070,
+        "head_wait_jump": 3482,
+        "head_wait_marker": 2,
+        "recovery": 148602,
+        "retired_body": 2189708,
+        "retired_marker": 1,
+        "rob_empty": 445809,
+        "store_ack_wait": 262267
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 179688,
+        "own_external_inflight": 201842,
+        "own_response_buffer": 345926
+      },
+      "store_ack_wait_phases": {
+        "load_response_buffer": 12587,
+        "mark_pending": 249680
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 32451,
+        "other": 153619
+      },
+      "own_response_buffer_percent": 8.239430967023079,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 297204,
+        "dmem_pending": 872092,
+        "dmem_read_accepted": 622412,
+        "dmem_write_accepted": 249680,
+        "flush": 148602,
+        "fma_src01_wait_entry_cycles": 0,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 0,
+        "fp_iq_nonempty_no_ready": 0,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 0,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 263761,
+        "rob_full": 18652
+      }
+    },
+    {
+      "family": "embench",
+      "name": "slre",
+      "group": null,
+      "cycles": 4362711,
+      "retirement_ipc": 0.5481791023975688,
+      "cycle_partition": {
+        "head_wait_branch": 168744,
+        "head_wait_csr_system": 4,
+        "head_wait_int_load": 623049,
+        "head_wait_int_store": 7373,
+        "head_wait_integer_other": 237386,
+        "head_wait_jump": 884,
+        "head_wait_marker": 2,
+        "recovery": 164017,
+        "retired_body": 2391546,
+        "retired_marker": 1,
+        "rob_empty": 492054,
+        "store_ack_wait": 277651
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 167640,
+        "own_external_inflight": 133321,
+        "own_response_buffer": 322088
+      },
+      "store_ack_wait_phases": {
+        "load_response_buffer": 111,
+        "mark_pending": 277540
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 0,
+        "other": 237386
+      },
+      "own_response_buffer_percent": 7.3827489375298985,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 328034,
+        "dmem_pending": 767928,
+        "dmem_read_accepted": 490388,
+        "dmem_write_accepted": 277540,
+        "flush": 164017,
+        "fma_src01_wait_entry_cycles": 0,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 0,
+        "fp_iq_nonempty_no_ready": 0,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 0,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 212206,
+        "rob_full": 108350
+      }
+    },
+    {
+      "family": "embench",
+      "name": "st",
+      "group": null,
+      "cycles": 7008181,
+      "retirement_ipc": 0.568828202353792,
+      "cycle_partition": {
+        "head_wait_branch": 157222,
+        "head_wait_csr_system": 95164,
+        "head_wait_int_load": 261375,
+        "head_wait_int_store": 28137,
+        "head_wait_integer_other": 1462353,
+        "head_wait_jump": 3421,
+        "head_wait_marker": 2,
+        "recovery": 212850,
+        "retired_body": 3986450,
+        "retired_marker": 1,
+        "rob_empty": 683091,
+        "store_ack_wait": 118115
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 79589,
+        "own_external_inflight": 52978,
+        "own_response_buffer": 128808
+      },
+      "store_ack_wait_phases": {
+        "load_response_buffer": 52,
+        "mark_pending": 118063
+      },
+      "integer_waits": {
+        "div_rem": 672328,
+        "multiply": 79487,
+        "other": 710538
+      },
+      "own_response_buffer_percent": 1.83796622832658,
+      "div_rem_wait_percent": 9.593473684540967,
+      "overlapping_events": {
+        "decode_empty": 425700,
+        "dmem_pending": 281738,
+        "dmem_read_accepted": 163675,
+        "dmem_write_accepted": 118063,
+        "flush": 212850,
+        "fma_src01_wait_entry_cycles": 0,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 0,
+        "fp_iq_nonempty_no_ready": 0,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 0,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 1006755,
+        "rob_full": 80155
+      }
+    },
+    {
+      "family": "embench",
+      "name": "statemate",
+      "group": null,
+      "cycles": 2614289,
+      "retirement_ipc": 0.5935166310993161,
+      "cycle_partition": {
+        "head_wait_branch": 23575,
+        "head_wait_csr_system": 4,
+        "head_wait_int_load": 247491,
+        "head_wait_int_store": 7862,
+        "head_wait_integer_other": 56970,
+        "head_wait_jump": 11788,
+        "head_wait_marker": 2,
+        "recovery": 43222,
+        "retired_body": 1551623,
+        "retired_marker": 1,
+        "rob_empty": 129669,
+        "store_ack_wait": 542082
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 37322,
+        "own_external_inflight": 53033,
+        "own_response_buffer": 157136
+      },
+      "store_ack_wait_phases": {
+        "load_response_buffer": 47136,
+        "mark_pending": 494946
+      },
+      "integer_waits": {
+        "div_rem": 0,
+        "multiply": 0,
+        "other": 56970
+      },
+      "own_response_buffer_percent": 6.010659112286362,
+      "div_rem_wait_percent": 0.0,
+      "overlapping_events": {
+        "decode_empty": 86444,
+        "dmem_pending": 844553,
+        "dmem_read_accepted": 349607,
+        "dmem_write_accepted": 494946,
+        "flush": 43222,
+        "fma_src01_wait_entry_cycles": 0,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 0,
+        "fp_iq_nonempty_no_ready": 0,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 0,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 498869,
+        "rob_full": 214068
+      }
+    },
+    {
+      "family": "embench",
+      "name": "ud",
+      "group": null,
+      "cycles": 2571871,
+      "retirement_ipc": 0.31666790441666787,
+      "cycle_partition": {
+        "head_wait_branch": 2,
+        "head_wait_csr_system": 4,
+        "head_wait_int_load": 235023,
+        "head_wait_int_store": 42868,
+        "head_wait_integer_other": 1204582,
+        "head_wait_jump": 4,
+        "head_wait_marker": 2,
+        "recovery": 34002,
+        "retired_body": 814428,
+        "retired_marker": 1,
+        "rob_empty": 102009,
+        "store_ack_wait": 138946
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 44344,
+        "own_external_inflight": 41386,
+        "own_response_buffer": 149293
+      },
+      "store_ack_wait_phases": {
+        "load_response_buffer": 7390,
+        "mark_pending": 131556
+      },
+      "integer_waits": {
+        "div_rem": 1021298,
+        "multiply": 149283,
+        "other": 34001
+      },
+      "own_response_buffer_percent": 5.80484013389474,
+      "div_rem_wait_percent": 39.71031206464088,
+      "overlapping_events": {
+        "decode_empty": 68004,
+        "dmem_pending": 465601,
+        "dmem_read_accepted": 334045,
+        "dmem_write_accepted": 131556,
+        "flush": 34002,
+        "fma_src01_wait_entry_cycles": 0,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 0,
+        "fp_iq_nonempty_no_ready": 0,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 0,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 1260759,
+        "rob_full": 289699
+      }
+    },
+    {
+      "family": "embench",
+      "name": "wikisort",
+      "group": null,
+      "cycles": 2067954,
+      "retirement_ipc": 0.5145317545748116,
+      "cycle_partition": {
+        "head_wait_branch": 29588,
+        "head_wait_csr_system": 15672,
+        "head_wait_int_load": 84090,
+        "head_wait_int_store": 12529,
+        "head_wait_integer_other": 499065,
+        "head_wait_jump": 7319,
+        "head_wait_marker": 2,
+        "recovery": 61281,
+        "retired_body": 1064027,
+        "retired_marker": 1,
+        "rob_empty": 190022,
+        "store_ack_wait": 104358
+      },
+      "load_head_wait_phases": {
+        "before_external_request_or_forward": 20154,
+        "own_external_inflight": 21104,
+        "own_response_buffer": 42832
+      },
+      "store_ack_wait_phases": {
+        "load_response_buffer": 14797,
+        "mark_pending": 89561
+      },
+      "integer_waits": {
+        "div_rem": 310868,
+        "multiply": 21686,
+        "other": 166511
+      },
+      "own_response_buffer_percent": 2.0712259557030768,
+      "div_rem_wait_percent": 15.032636122466942,
+      "overlapping_events": {
+        "decode_empty": 122562,
+        "dmem_pending": 191792,
+        "dmem_read_accepted": 102231,
+        "dmem_write_accepted": 89561,
+        "flush": 61281,
+        "fma_src01_wait_entry_cycles": 0,
+        "fma_src2_only_entry_cycles": 0,
+        "fp_ex0_blocked": 0,
+        "fp_iq_issue": 0,
+        "fp_iq_nonempty_no_ready": 0,
+        "fp_iq_ready_downstream_blocked": 0,
+        "heavy_completion_blocked": 0,
+        "heavy_issue": 0,
+        "heavy_issue_blocked": 0,
+        "rename_blocked": 408486,
+        "rob_full": 50031
+      }
+    }
+  ],
+  "interpretation": [
+    "Exclusive retirement wait position is not execution-unit latency or removable cycles.",
+    "Own response-buffer waits must be measured for the selected parent and can overlap effects of another architecture change.",
+    "Overlapping counters are not a cycle partition; integer-divider operand diagnosis was collected on B and is not relabelled as AB."
+  ]
+}
