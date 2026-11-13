@@ -1,7 +1,17 @@
 # Current project status
 
-Updated 2026-11-13 (Asia/Taipei). Current branch: `codex/lsu-ab-overlap`.
+Updated 2026-11-13 (Asia/Taipei). Current branch: `codex/lsu-load-arbitration`.
 The original AP5B baseline remains frozen; the candidate has not been promoted.
+
+## Active arbitration experiment
+
+The user authorized [LSU arbitration](../experiments/lsu-load-arb-v1/README.md) on
+2026-11-13. The first candidate allows one safe external load at initial head-store
+marking, holds offered loads through backpressure, then restores store priority.
+Parent/candidate each pass 140 pin-driven cases and three actual RTL negative
+controls pass. Clean full-core qualification and all27 measurement are next;
+new timing/area qualification is still pending. The [critical paths](CRITICAL_PATHS.md)
+below refer to the completed A+B parent, not the modified candidate.
 
 ## Completed A+B experiment
 
@@ -33,9 +43,8 @@ Neither a new baseline nor a divider RTL optimization has been selected.
 
 The complete result, provenance, limitations and proposed next experiments are in
 [the A+B review](LSU_AB_REVIEW.md); see the [current architecture map](ARCHITECTURE_MAP.md).
-The next architecture decision is joint: bounded load/store arbitration, C's
-registered-load head lookahead, or an isolated integer-divider hypothesis.
-None of these new RTL changes has been implemented.
+Bounded load/store arbitration has now been selected and is tracked above. C's
+registered-load head lookahead and integer-divider RTL remain unselected.
 
 ## Comparison contract and verification
 

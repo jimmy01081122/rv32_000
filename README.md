@@ -17,6 +17,8 @@ fixed-time performance measurement.
 | Document | Purpose |
 | --- | --- |
 | [Project plan](PLAN.md) | Agreed scope, decision process and next milestones |
+| [LSU arbitration experiment](experiments/lsu-load-arb-v1/README.md) | Authorized bounded load opportunity; candidate validation in progress |
+| [Current critical paths](docs/CRITICAL_PATHS.md) | Verified A+B parent setup/hold paths; new arbitration timing remains separate |
 | [Current status](docs/STATUS.md) | Measured checks, implementation drift and open verification gaps |
 | [A+B experiment and divider diagnosis](docs/LSU_AB_REVIEW.md) | Completed functional/PPA/two-clock results, PID arbitration mechanism and next choices |
 | [Current architecture diagram](docs/ARCHITECTURE_MAP.md) | A+B datapath, capacities, measured bottlenecks and candidate improvement directions |
@@ -53,7 +55,9 @@ Integer and FP execution can overlap; sustained retirement IPC is at most one.
 The `LQ_ENTRIES` and PRF-port constants do not fully describe the instantiated
 structures; see the architecture inventory before changing their values.
 
-The current branch combines A+B LSU response handoff and head-store marking; its
+The current branch tests bounded load arbitration on the completed A+B parent.
+The new candidate is not yet physically qualified. A+B combines response handoff
+and head-store marking; its
 [complete experiment](docs/LSU_AB_REVIEW.md) passes the agreed research checks.
 At 100 MHz it reaches 1.073943× Embench and 1.088248× FP32 with 0.981066×
 original-baseline cell area. Both performance targets remain unmet, and PID

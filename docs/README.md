@@ -9,6 +9,8 @@ signoff label applies only to the source/configuration and checks in that record
 | --- | --- |
 | [Project README](../README.md) | Entry point and development commands |
 | [Project plan](../PLAN.md) | Agreed direction, review process, proposed targets and milestones |
+| [LSU arbitration](../experiments/lsu-load-arb-v1/README.md) | Active bounded-load experiment on A+B; independent qualification pending |
+| [Critical paths](CRITICAL_PATHS.md) | Verified parent setup/hold inventory with raw report identities |
 | [Status](STATUS.md) | Evidence and unresolved implementation/verification gaps |
 | [A+B experiment and divider diagnosis](LSU_AB_REVIEW.md) | Complete functional/PPA/two-clock evidence, PID arbitration mechanism and read-only DIV diagnosis |
 | [Current architecture map](ARCHITECTURE_MAP.md) | Current A+B diagram, source-checked capacities and candidate optimization directions |

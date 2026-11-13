@@ -1,6 +1,6 @@
 # 目前架構與改善方向
 
-2026-11-13（Asia/Taipei）。目前分支是 `3f079c1` 的 **A+B 獨立實驗**：
+2026-11-13（Asia/Taipei）。下圖是最近完成實體資格的 `3f079c1` **A+B 父版本**：
 在同一 LSU 組合成功 registered response 的請求交接與 ROB-head store 同拍 marking。
 單寬派發／退休、單一外部資料交易及原凍結基線保持不變。
 [完整實驗審查](LSU_AB_REVIEW.md)包含功能、共同流程實體、兩個全 27 項操作點與 PID 波形診斷。
@@ -12,6 +12,10 @@
 藍色為既有結構，橘色標示待選方向；紅框標示目前最緊的 INT EX0／LSU 輸出路徑。
 實線表示主要資料／完成路徑，虛線表示控制／回授。這是模組概覽，省略部分 fan-out、反向 ready 及 CSR 連線。
 完成／寫回／喚醒是 core 接線的概念分組；INT、LOAD、FP completion 可並行，FP 三來源共享一條 FP completion。
+
+目前分支已開始[有限 LSU 仲裁實驗](../experiments/lsu-load-arb-v1/README.md)：
+首次 head-store marking 可讓安全 load 先送一次，回壓時保持選擇。
+圖中時序與效能仍屬父版本；[critical paths](CRITICAL_PATHS.md)亦未宣稱為新 RTL 結果。
 
 ## 已確認的結構與操作點
 
@@ -44,7 +48,7 @@ A+B 100 MHz 的 Embench／FP32 為 **1.073943×／1.088248×**；面積 **21,663
 | **⑥ ROB／IQ／PRF** | 容量已核對；A+B FIR 的退休 IPC 0.9248 | 先診斷滿載實際擋住的可執行工作，再決定是否增加面積、ports 或 window |
 | **⑦ 整數 DIV／REM** | B observer 完成六組對照與 48 指令控制：一般 33 cycles，無 completion 仲裁等待；A+B ud 的 DIV／REM 頭端等待占 39.71% | 共同選擇提前結果或每拍兩個商位元；B 運算元分布不可改標為 A+B，且 FP32 八項沒有退休整數 DIV／REM |
 
-尚未自動選定新的 RTL 方向或升格基線。多筆 outstanding、實際 LQ、cache、store 回應前退休或雙寬派發／退休
+LSU 仲裁已獲核准並進入驗證，尚未升格基線。多筆 outstanding、實際 LQ、cache、store 回應前退休或雙寬派發／退休
 屬更大範圍，需另訂記憶體、精確例外與面積契約。
 
 ## RTL 對照與圖的精度

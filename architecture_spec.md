@@ -1,6 +1,6 @@
 # RV32 OoO architecture: implementation and requirements
 
-Version 0.9 — 2026-11-13 (Asia/Taipei). Status: AP5B baseline frozen; independent A, B and current A+B experiments research-qualified. A+B completed shared-flow physical and both full workload operating points. Performance targets remain unmet.
+Version 0.10 — 2026-11-13 (Asia/Taipei). Status: AP5B baseline frozen; independent A, B and current A+B experiments research-qualified. A+B completed shared-flow physical and both full workload operating points. Performance targets remain unmet.
 
 See the [current A+B architecture map and candidate directions](docs/ARCHITECTURE_MAP.md) for a source-checked diagram.
 
@@ -102,7 +102,12 @@ precedes retirement. A+B combines both mechanisms while retaining store priority
 when a store and an otherwise eligible load compete for the single data port.
 The [complete A+B review](docs/LSU_AB_REVIEW.md) records the resulting PID
 regression, same-flow physical qualification and both full workload points.
-No new arbitration policy or C head lookahead has been implemented. The frozen
+The current candidate adds a bounded load opportunity at first head-store marking,
+then uses the marked bit to restore store priority. An offered external load is
+held through backpressure until handshake or recovery; safety/disambiguation
+guards remain in force. See the [active experiment](experiments/lsu-load-arb-v1/README.md).
+Its timing/area qualification remains separate from the A+B parent. No C head
+lookahead has been implemented. The frozen
 baseline includes neither A nor B.
 
 The LSU checks older stores, forwards from a fully covering older store, and

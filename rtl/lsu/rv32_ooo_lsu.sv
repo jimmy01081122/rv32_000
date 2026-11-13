@@ -334,13 +334,31 @@ module rv32_ooo_lsu
   // in-flight limit are unchanged; rsp_buf_ack does not depend on request ready.
   wire response_slot_available = !rsp_buf_valid || (rsp_buf_ack && !rsp_buf_error);
 
-  // Can load issue to external D-memory?
-  wire can_issue_load = agu_valid && agu_req.uop.mem.is_load && !agu_misaligned &&
+  // Separate memory safety from arbitration. A head store may yield only in
+  // its first marking cycle; the existing SQ retired bit then restores store
+  // priority. This admits at most one external load ahead of that store.
+  wire external_load_eligible = agu_valid && agu_req.uop.mem.is_load && !agu_misaligned &&
                         !effective_fwd_valid && !load_stall_unresolved && !load_stall_partial &&
-                        !in_flight_valid && response_slot_available && !sq_has_send && !flush_valid && (core_state == CORE_RUN);
+                        !in_flight_valid && response_slot_available && !flush_valid && (core_state == CORE_RUN);
 
-  // Can retired store issue to external D-memory?
-  wire can_issue_store = sq_has_send && !in_flight_valid && response_slot_available && !flush_valid && (core_state == CORE_RUN);
+  // Once offered under backpressure, keep the load selected until handshake
+  // or recovery. Selection must not depend combinationally on request ready.
+  logic load_request_held;
+  wire first_head_store = sq_has_send && head_store_send &&
+                         (send_sq_idx == retire_sq_idx) && !sq[send_sq_idx].retired;
+  wire select_load = external_load_eligible &&
+                     (!sq_has_send || load_request_held || first_head_store);
+  wire can_issue_load = select_load;
+
+  wire can_issue_store = sq_has_send && !in_flight_valid && response_slot_available &&
+                        !flush_valid && (core_state == CORE_RUN) && !select_load;
+
+  always_ff @(posedge clk) begin
+    if (rst || flush_valid || (core_state != CORE_RUN))
+      load_request_held <= 1'b0;
+    else
+      load_request_held <= dmem_req_valid && !dmem_req_wen && !dmem_req_ready;
+  end
 
   wire sq_full = !sq_has_free;
 
@@ -360,7 +378,7 @@ module rv32_ooo_lsu
   );
 
   // =========================================================================
-  // 6. Memory Request Arbiter (Retired Store > Load)
+  // 6. Memory Request Arbiter (one initial load opportunity, then store priority)
   // =========================================================================
 
   always_comb begin
@@ -665,6 +683,22 @@ module rv32_ooo_lsu
   // =========================================================================
 
 `ifndef SYNTHESIS
+  // A held external load must not turn into a store when head marking advances.
+  always_ff @(posedge clk) begin
+    if (!rst && !flush_valid && (core_state == CORE_RUN) &&
+        $past(!rst && !flush_valid && (core_state == CORE_RUN) &&
+              dmem_req_valid && !dmem_req_wen && !dmem_req_ready)) begin
+      assert (dmem_req_valid && !dmem_req_wen &&
+              dmem_req_addr == $past(dmem_req_addr) &&
+              dmem_req_byte_en == $past(dmem_req_byte_en))
+        else $error("[LSU arbitration] Backpressured load selection changed!");
+    end
+    if (!rst && select_load && sq_has_send) begin
+      assert (load_request_held || first_head_store)
+        else $error("[LSU arbitration] Marked store yielded more than once!");
+    end
+  end
+
   // B bypass changes request eligibility, never the response/retirement order.
   always_ff @(posedge clk) begin
     if (!rst && dmem_req_valid && dmem_req_ready && dmem_req_wen && !sq[send_sq_idx].retired) begin

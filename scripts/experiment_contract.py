@@ -6,7 +6,7 @@ from baseline_contract import ROOT, MANIFEST, load, validate, sha
 BASELINE_COMMIT='58a4159da0372b3286758be1e6c1b50f9f28cc27'
 BASELINE_INPUTS_SHA256='ad56ddd224ec34bd78f9fdef542a6b06535581927db3af395988ba6cbafe4bad'
 ALLOWED_RTL={'rtl/lsu/rv32_ooo_lsu.sv'}
-EXPERIMENT_IDS={'lsu-a-v1','lsu-b-v1','lsu-ab-v1'}
+EXPERIMENT_IDS={'lsu-a-v1','lsu-b-v1','lsu-ab-v1','lsu-load-arb-v1'}
 SIM_INPUTS=['scripts/build_sim.sh','sim/scripts/rv32_ooo_core.f','sim/tb/sim_main.cpp','sim/tb/sim_mem.cpp',
             *[str(p.relative_to(ROOT)) for p in sorted((ROOT/'sim/tb').glob('*.h'))]]
 PHYSICAL_INPUTS=['physical/asap7/baseline/config.mk','physical/asap7/baseline/lower_processes.tcl',
