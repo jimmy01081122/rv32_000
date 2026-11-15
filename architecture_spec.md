@@ -1,6 +1,6 @@
 # RV32 OoO architecture: implementation and requirements
 
-Version 0.10 — 2026-11-13 (Asia/Taipei). Status: AP5B baseline frozen; independent A, B and current A+B experiments research-qualified. A+B completed shared-flow physical and both full workload operating points. Performance targets remain unmet.
+Version 0.11 — 2026-11-16 (Asia/Taipei). Status: AP5B baseline frozen; independent A, B and A+B parent experiments research-qualified; active bounded-arbitration candidate has completed functional/all27 cycle review, with physical qualification unmeasured. A+B completed shared-flow physical and both full workload operating points. Performance targets remain unmet.
 
 See the [current A+B architecture map and candidate directions](docs/ARCHITECTURE_MAP.md) for a source-checked diagram.
 

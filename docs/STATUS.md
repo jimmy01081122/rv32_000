@@ -1,6 +1,6 @@
 # Current project status
 
-Updated 2026-11-13 (Asia/Taipei). Current branch: `codex/lsu-load-arbitration`.
+Updated 2026-11-16 (Asia/Taipei). Current branch: `codex/lsu-load-arbitration`.
 The original AP5B baseline remains frozen; the candidate has not been promoted.
 
 ## Active arbitration experiment
@@ -9,9 +9,21 @@ The user authorized [LSU arbitration](../experiments/lsu-load-arb-v1/README.md) 
 2026-11-13. The first candidate allows one safe external load at initial head-store
 marking, holds offered loads through backpressure, then restores store priority.
 Parent/candidate each pass 140 pin-driven cases and three actual RTL negative
-controls pass. Clean full-core qualification and all27 measurement are next;
-new timing/area qualification is still pending. The [critical paths](CRITICAL_PATHS.md)
-below refer to the completed A+B parent, not the modified candidate.
+controls pass. Clean full-core qualification and all27 measurement now pass:
+18 directed, 18 Spike, 48 interface, 58 memory, 3,400 finite FMA and 3,629
+workload numerical outputs. All source stages retain clean `669c8ee`.
+
+Nominal 100 MHz simulation ratios are Embench **1.070636×**, FP32 **1.101087×**
+original baseline. Relative to A+B this is **0.996920× / 1.011798×**: ten cases
+improve, fourteen regress, three tie. PID time falls 12.33%, but FFT increases
+3.55% and statemate 7.33%. The [complete result](LSU_ARBITRATION_REVIEW.md)
+retains all cases and exact wait-position deltas.
+
+New timing/area qualification is unmeasured. The [critical paths](CRITICAL_PATHS.md)
+refer to the completed A+B parent, not the modified candidate. Recommend
+investigating FFT/statemate before jointly selecting a narrower arbitration rule;
+physical qualification of this version is another available next step. The
+candidate is not promoted and the original baseline remains frozen.
 
 ## Completed A+B experiment
 

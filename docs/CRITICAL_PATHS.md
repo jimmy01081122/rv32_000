@@ -52,6 +52,6 @@ Hold 的約束須獨立維持，不能只追 setup 或 MHz。
 因此要同時看 PID／完整兩集合的週期結果與後續路徑變化，不能用父版本的餘裕替新 RTL 保證時序。
 
 [A+B 完整報告](LSU_AB_REVIEW.md) · [既有原始證據](evidence/2026-11-13/lsu-ab-complete/README.md) ·
-[新仲裁契約](../experiments/lsu-load-arb-v1/README.md)。
+[新仲裁契約](../experiments/lsu-load-arb-v1/README.md) · [仲裁功能結果](LSU_ARBITRATION_REVIEW.md)。
 `report_parent_timing.py` 逐一核對封存與 collector hashes，重新整理三個 corner、兩個週期、
 setup／hold 共 240 條抽樣路徑，並與獨立 closure 的最小 slack 對照。

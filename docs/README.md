@@ -1,6 +1,6 @@
 # Documentation index
 
-Updated 2026-11-13 (Asia/Taipei). Begin with current documents below. A historical PASS or
+Updated 2026-11-16 (Asia/Taipei). Begin with current documents below. A historical PASS or
 signoff label applies only to the source/configuration and checks in that record.
 
 ## Current documents
@@ -9,7 +9,8 @@ signoff label applies only to the source/configuration and checks in that record
 | --- | --- |
 | [Project README](../README.md) | Entry point and development commands |
 | [Project plan](../PLAN.md) | Agreed direction, review process, proposed targets and milestones |
-| [LSU arbitration](../experiments/lsu-load-arb-v1/README.md) | Active bounded-load experiment on A+B; independent qualification pending |
+| [Arbitration results](LSU_ARBITRATION_REVIEW.md) | Full-set parent comparison, individual regressions and next choice |
+| [LSU arbitration](../experiments/lsu-load-arb-v1/README.md) | Completed functional/all27 experiment on A+B; mixed gains and unmeasured physical gate |
 | [Critical paths](CRITICAL_PATHS.md) | Verified parent setup/hold inventory with raw report identities |
 | [Status](STATUS.md) | Evidence and unresolved implementation/verification gaps |
 | [A+B experiment and divider diagnosis](LSU_AB_REVIEW.md) | Complete functional/PPA/two-clock evidence, PID arbitration mechanism and read-only DIV diagnosis |

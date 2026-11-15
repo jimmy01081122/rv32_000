@@ -15,6 +15,12 @@ response handoff, one external outstanding transaction, successful-store-respons
 retirement and fault/flush ownership remain in force. No new LQ, cache, C head
 lookahead, FPU or divider change is included. Memory service stays at 10,000 ps.
 
+Gates 1–3 completed at clean `669c8ee`; all four pipeline stages exited 0.
+At the nominal 100 MHz simulation point, Embench/FP32 are 1.070636×/1.101087×
+original baseline, or 0.996920×/1.011798× A+B. Ten cases improve, fourteen
+regress, three tie. Physical gate 4 is unmeasured; this candidate has not been
+selected for promotion. See the [complete functional review](../../docs/LSU_ARBITRATION_REVIEW.md).
+
 Validation gates:
 
 1. Actual parent and candidate: 140 pin-driven cases each (66 unchanged AB
@@ -32,3 +38,9 @@ Validation gates:
 Both independent speed goals remain ≥1.20× and area ≤1.10× original baseline.
 Do not promote the candidate or change operating/memory policy to hide regressions.
 Development failures and checker repairs are retained separately.
+
+Verify the published evidence without extraction:
+
+```sh
+python3 experiments/lsu-load-arb-v1/verify_archive.py docs/evidence/2026-11-16/lsu-arbitration-functional
+```

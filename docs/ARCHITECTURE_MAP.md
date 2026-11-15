@@ -48,7 +48,8 @@ A+B 100 MHz 的 Embench／FP32 為 **1.073943×／1.088248×**；面積 **21,663
 | **⑥ ROB／IQ／PRF** | 容量已核對；A+B FIR 的退休 IPC 0.9248 | 先診斷滿載實際擋住的可執行工作，再決定是否增加面積、ports 或 window |
 | **⑦ 整數 DIV／REM** | B observer 完成六組對照與 48 指令控制：一般 33 cycles，無 completion 仲裁等待；A+B ud 的 DIV／REM 頭端等待占 39.71% | 共同選擇提前結果或每拍兩個商位元；B 運算元分布不可改標為 A+B，且 FP32 八項沒有退休整數 DIV／REM |
 
-LSU 仲裁已獲核准並進入驗證，尚未升格基線。多筆 outstanding、實際 LQ、cache、store 回應前退休或雙寬派發／退休
+LSU 仲裁已完成功能／全 27 項量測，兩類效能一增一減；[結果與取捨](LSU_ARBITRATION_REVIEW.md)。
+候選尚未取得實體資格或升格基線。多筆 outstanding、實際 LQ、cache、store 回應前退休或雙寬派發／退休
 屬更大範圍，需另訂記憶體、精確例外與面積契約。
 
 ## RTL 對照與圖的精度

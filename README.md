@@ -17,7 +17,7 @@ fixed-time performance measurement.
 | Document | Purpose |
 | --- | --- |
 | [Project plan](PLAN.md) | Agreed scope, decision process and next milestones |
-| [LSU arbitration experiment](experiments/lsu-load-arb-v1/README.md) | Authorized bounded load opportunity; candidate validation in progress |
+| [LSU arbitration experiment](experiments/lsu-load-arb-v1/README.md) | Full functional/cycle results; FP32 gain and Embench regression, physical gate unmeasured |
 | [Current critical paths](docs/CRITICAL_PATHS.md) | Verified A+B parent setup/hold paths; new arbitration timing remains separate |
 | [Current status](docs/STATUS.md) | Measured checks, implementation drift and open verification gaps |
 | [A+B experiment and divider diagnosis](docs/LSU_AB_REVIEW.md) | Completed functional/PPA/two-clock results, PID arbitration mechanism and next choices |
@@ -56,6 +56,9 @@ The `LQ_ENTRIES` and PRF-port constants do not fully describe the instantiated
 structures; see the architecture inventory before changing their values.
 
 The current branch tests bounded load arbitration on the completed A+B parent.
+All 27 candidate workloads and functional regression pass; nominal Embench/FP32
+ratios are 1.070636×/1.101087× original baseline. This improves FP32 but regresses
+Embench against A+B; see the [arbitration review](docs/LSU_ARBITRATION_REVIEW.md).
 The new candidate is not yet physically qualified. A+B combines response handoff
 and head-store marking; its
 [complete experiment](docs/LSU_AB_REVIEW.md) passes the agreed research checks.
@@ -106,7 +109,7 @@ qualifier default); use `--fp-contract off` for sensitivity checks. The post-LSU
 baseline is frozen. Independent A, B and A+B studies now have complete
 functional and global-route research reviews; the [current comparison](docs/LSU_AB_REVIEW.md)
 uses shared FPU mapping, hold40 and the same ready guard. Both performance
-goals remain unmet. A+B is currently best at the tested 100 MHz operating point,
+goals remain unmet. A+B is the qualified parent for the new arbitration experiment at 100 MHz,
 with five individual regressions against A retained for review. Faster qualified
 CPU clocks require two cycles to sample the fixed 10 ns memory service and
 produce slower system time on these complete suites.
