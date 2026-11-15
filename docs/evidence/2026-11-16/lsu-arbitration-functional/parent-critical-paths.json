@@ -1,0 +1,1570 @@
+{
+  "passed": true,
+  "scope": "retained A+B parent timing, not fresh arbitration timing",
+  "parent_commit": "49122fb9b37292c9a2c2dc4b4b70226909304293",
+  "native_commit": "f66e12baf034113070c298006595d7292aa911bd",
+  "analyzer_sha256": "36f67eabdb4e9c14ecafbfebfd7a2a43b12811e8db2a2460766fb5a1278efe77",
+  "physical_review_sha256": "aadcaccf2994c23e9c7c1741aa75d5f71e2665fb148d6031351c3063cca7abe6",
+  "records": [
+    {
+      "corner": "TT",
+      "period_ps": 9400,
+      "kind": "setup",
+      "source": "build/experiments/lsu-ab-v1/native/physical-AB-v4/guard/independent-boundary-v1/TT/setup_paths_9400.rpt",
+      "sha256": "de7683529e80677927c7af053381d947c9833c5c1c3b9816f200738ca04781dd",
+      "exact_minimum_slack_ps": 2719.2337379431297,
+      "paths": [
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[2] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 2719.23
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[9] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 2719.31
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[13] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 2719.89
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[4] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 2720.09
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[8] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 2720.62
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[107]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 3202.83
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[101]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 3217.76
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[111]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 3219.69
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[97]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 3222.44
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[99]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 3222.78
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[20] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 5300.12
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[4] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 5301.94
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[16] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 5302.19
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[1] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 5304.0
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[0] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 5307.25
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_int_prf.gen_int_prf_storage[29].entry_q[30]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 6325.54
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_int_prf.gen_int_prf_storage[29].entry_q[28]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 6329.01
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_int_prf.gen_int_prf_storage[29].entry_q[27]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 6336.33
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_int_prf.gen_int_prf_storage[29].entry_q[16]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 6337.16
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_rob.entries[9][110]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 6337.54
+        }
+      ]
+    },
+    {
+      "corner": "TT",
+      "period_ps": 9400,
+      "kind": "hold",
+      "source": "build/experiments/lsu-ab-v1/native/physical-AB-v4/guard/independent-boundary-v1/TT/hold_paths_9400.rpt",
+      "sha256": "37b0f8d9559033a59cfc2953453da647b86c395d409ee047093c11bdc47b6ff2",
+      "exact_minimum_slack_ps": 39.97910352092489,
+      "paths": [
+        {
+          "startpoint": "u_lsu.sq[1][93]$_DFFE_PP_",
+          "endpoint": "u_lsu.sq[1][93]$_DFFE_PP_",
+          "group": "reg2reg",
+          "slack_ps": 39.98
+        },
+        {
+          "startpoint": "u_lsu.sq[1][87]$_DFFE_PP_",
+          "endpoint": "u_lsu.sq[1][87]$_DFFE_PP_",
+          "group": "reg2reg",
+          "slack_ps": 40.02
+        },
+        {
+          "startpoint": "u_lsu.sq[9][87]$_DFFE_PP_",
+          "endpoint": "u_lsu.sq[9][87]$_DFFE_PP_",
+          "group": "reg2reg",
+          "slack_ps": 40.04
+        },
+        {
+          "startpoint": "u_lsu.sq[15][50]$_DFFE_PP_",
+          "endpoint": "u_lsu.sq[15][50]$_DFFE_PP_",
+          "group": "reg2reg",
+          "slack_ps": 40.06
+        },
+        {
+          "startpoint": "u_lsu.sq[1][44]$_DFFE_PP_",
+          "endpoint": "u_lsu.sq[1][44]$_DFFE_PP_",
+          "group": "reg2reg",
+          "slack_ps": 40.06
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[5][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 92.3
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[6][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 93.26
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[1][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 93.5
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[0][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 93.59
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_lsu.rsp_buf_error$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 93.82
+        },
+        {
+          "startpoint": "u_rob.commit_trace[85]$_SDFF_PP0_",
+          "endpoint": "commit_trace[85] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 396.08
+        },
+        {
+          "startpoint": "u_rob.commit_trace[82]$_SDFF_PP0_",
+          "endpoint": "commit_trace[82] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 396.35
+        },
+        {
+          "startpoint": "u_rob.commit_trace[81]$_SDFF_PP0_",
+          "endpoint": "commit_trace[81] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 396.75
+        },
+        {
+          "startpoint": "u_rob.commit_trace[34]$_SDFF_PP0_",
+          "endpoint": "commit_trace[34] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 397.85
+        },
+        {
+          "startpoint": "u_rob.commit_trace[86]$_SDFF_PP0_",
+          "endpoint": "commit_trace[86] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 398.46
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "imem_req_valid (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 736.27
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_valid (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 761.21
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_addr[30] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 805.39
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_byte_en[3] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 806.73
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_byte_en[0] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 807.11
+        }
+      ]
+    },
+    {
+      "corner": "TT",
+      "period_ps": 10000,
+      "kind": "setup",
+      "source": "build/experiments/lsu-ab-v1/native/physical-AB-v4/guard/independent-boundary-v1/TT/setup_paths_10000.rpt",
+      "sha256": "22e0dce1abe1360441dcc88515f16d3f350b3c45de4a77295d9de6ed81bd801e",
+      "exact_minimum_slack_ps": 3319.2337899848344,
+      "paths": [
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[2] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 3319.23
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[9] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 3319.31
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[13] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 3319.89
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[4] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 3320.09
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[8] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 3320.62
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[107]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 3802.83
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[101]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 3817.76
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[111]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 3819.69
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[97]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 3822.44
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[99]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 3822.78
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[20] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 5900.12
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[4] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 5901.94
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[16] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 5902.19
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[1] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 5904.0
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[0] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 5907.25
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_int_prf.gen_int_prf_storage[29].entry_q[30]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 6925.54
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_int_prf.gen_int_prf_storage[29].entry_q[28]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 6929.01
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_int_prf.gen_int_prf_storage[29].entry_q[27]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 6936.33
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_int_prf.gen_int_prf_storage[29].entry_q[16]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 6937.16
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_rob.entries[9][110]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 6937.54
+        }
+      ]
+    },
+    {
+      "corner": "TT",
+      "period_ps": 10000,
+      "kind": "hold",
+      "source": "build/experiments/lsu-ab-v1/native/physical-AB-v4/guard/independent-boundary-v1/TT/hold_paths_10000.rpt",
+      "sha256": "37b0f8d9559033a59cfc2953453da647b86c395d409ee047093c11bdc47b6ff2",
+      "exact_minimum_slack_ps": 39.97910352092489,
+      "paths": [
+        {
+          "startpoint": "u_lsu.sq[1][93]$_DFFE_PP_",
+          "endpoint": "u_lsu.sq[1][93]$_DFFE_PP_",
+          "group": "reg2reg",
+          "slack_ps": 39.98
+        },
+        {
+          "startpoint": "u_lsu.sq[1][87]$_DFFE_PP_",
+          "endpoint": "u_lsu.sq[1][87]$_DFFE_PP_",
+          "group": "reg2reg",
+          "slack_ps": 40.02
+        },
+        {
+          "startpoint": "u_lsu.sq[9][87]$_DFFE_PP_",
+          "endpoint": "u_lsu.sq[9][87]$_DFFE_PP_",
+          "group": "reg2reg",
+          "slack_ps": 40.04
+        },
+        {
+          "startpoint": "u_lsu.sq[15][50]$_DFFE_PP_",
+          "endpoint": "u_lsu.sq[15][50]$_DFFE_PP_",
+          "group": "reg2reg",
+          "slack_ps": 40.06
+        },
+        {
+          "startpoint": "u_lsu.sq[1][44]$_DFFE_PP_",
+          "endpoint": "u_lsu.sq[1][44]$_DFFE_PP_",
+          "group": "reg2reg",
+          "slack_ps": 40.06
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[5][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 92.3
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[6][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 93.26
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[1][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 93.5
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[0][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 93.59
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_lsu.rsp_buf_error$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 93.82
+        },
+        {
+          "startpoint": "u_rob.commit_trace[85]$_SDFF_PP0_",
+          "endpoint": "commit_trace[85] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 396.08
+        },
+        {
+          "startpoint": "u_rob.commit_trace[82]$_SDFF_PP0_",
+          "endpoint": "commit_trace[82] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 396.35
+        },
+        {
+          "startpoint": "u_rob.commit_trace[81]$_SDFF_PP0_",
+          "endpoint": "commit_trace[81] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 396.75
+        },
+        {
+          "startpoint": "u_rob.commit_trace[34]$_SDFF_PP0_",
+          "endpoint": "commit_trace[34] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 397.85
+        },
+        {
+          "startpoint": "u_rob.commit_trace[86]$_SDFF_PP0_",
+          "endpoint": "commit_trace[86] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 398.46
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "imem_req_valid (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 736.27
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_valid (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 761.21
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_addr[30] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 805.39
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_byte_en[3] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 806.73
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_byte_en[0] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 807.11
+        }
+      ]
+    },
+    {
+      "corner": "SS",
+      "period_ps": 9400,
+      "kind": "setup",
+      "source": "build/experiments/lsu-ab-v1/native/physical-AB-v4/guard/independent-boundary-v1/SS/setup_paths_9400.rpt",
+      "sha256": "ed6e39805be4d41bb78e533b642fbe4f9cc6beb84c69e680f741398c3ae96414",
+      "exact_minimum_slack_ps": 8.201439560282292,
+      "paths": [
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[2] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 8.2
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[9] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 8.36
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[13] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 8.76
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[4] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 9.69
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[6] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 10.48
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[107]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 59.46
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[101]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 82.12
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[111]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 83.1
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[97]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 89.47
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[99]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 89.75
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[20] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 4430.7
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[4] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 4431.27
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_addr[3] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 4432.24
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[16] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 4434.92
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[1] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 4437.09
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_rob.entries[9][110]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 5317.92
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_rob.entries[9][118]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 5329.19
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_rob.entries[9][128]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 5330.5
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_rob.entries[9][115]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 5330.55
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_rob.entries[9][133]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 5331.01
+        }
+      ]
+    },
+    {
+      "corner": "SS",
+      "period_ps": 9400,
+      "kind": "hold",
+      "source": "build/experiments/lsu-ab-v1/native/physical-AB-v4/guard/independent-boundary-v1/SS/hold_paths_9400.rpt",
+      "sha256": "4f903d6b9d8676380b9c09e8956dac9171f176b1f70de1bb1f87675df0486f1a",
+      "exact_minimum_slack_ps": 71.313177870306,
+      "paths": [
+        {
+          "startpoint": "u_lsu.sq[1][93]$_DFFE_PP_",
+          "endpoint": "u_lsu.sq[1][93]$_DFFE_PP_",
+          "group": "reg2reg",
+          "slack_ps": 71.31
+        },
+        {
+          "startpoint": "u_csr.csr_mtval[5]$_SDFFE_PP0P_",
+          "endpoint": "u_csr.csr_mtval[5]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 71.52
+        },
+        {
+          "startpoint": "u_lsu.sq[1][87]$_DFFE_PP_",
+          "endpoint": "u_lsu.sq[1][87]$_DFFE_PP_",
+          "group": "reg2reg",
+          "slack_ps": 71.64
+        },
+        {
+          "startpoint": "u_csr.csr_mtval[9]$_SDFFE_PP0P_",
+          "endpoint": "u_csr.csr_mtval[9]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 71.67
+        },
+        {
+          "startpoint": "u_lsu.sq[9][87]$_DFFE_PP_",
+          "endpoint": "u_lsu.sq[9][87]$_DFFE_PP_",
+          "group": "reg2reg",
+          "slack_ps": 71.91
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[5][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 209.3
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[6][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 210.18
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[1][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 210.35
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[0][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 210.48
+        },
+        {
+          "startpoint": "dmem_rsp_rdata[26] (input port clocked by core_clk)",
+          "endpoint": "u_lsu.rsp_buf_rdata[26]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 213.22
+        },
+        {
+          "startpoint": "u_rob.commit_trace[85]$_SDFF_PP0_",
+          "endpoint": "commit_trace[85] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 538.49
+        },
+        {
+          "startpoint": "u_rob.commit_trace[82]$_SDFF_PP0_",
+          "endpoint": "commit_trace[82] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 539.0
+        },
+        {
+          "startpoint": "u_rob.commit_trace[81]$_SDFF_PP0_",
+          "endpoint": "commit_trace[81] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 539.55
+        },
+        {
+          "startpoint": "u_rob.commit_trace[86]$_SDFF_PP0_",
+          "endpoint": "commit_trace[86] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 541.83
+        },
+        {
+          "startpoint": "u_rob.commit_trace[83]$_SDFF_PP0_",
+          "endpoint": "commit_trace[83] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 542.26
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "imem_req_valid (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 1126.08
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_valid (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 1146.85
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_addr[14] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 1211.34
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_addr[15] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 1211.75
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_addr[31] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 1211.98
+        }
+      ]
+    },
+    {
+      "corner": "SS",
+      "period_ps": 10000,
+      "kind": "setup",
+      "source": "build/experiments/lsu-ab-v1/native/physical-AB-v4/guard/independent-boundary-v1/SS/setup_paths_10000.rpt",
+      "sha256": "bd9c4b6319b5dc710a472493aa53a8098b15399cdc7e5e0beccb813024aa0324",
+      "exact_minimum_slack_ps": 608.2014916019867,
+      "paths": [
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[2] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 608.2
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[9] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 608.36
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[13] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 608.76
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[4] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 609.69
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[6] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 610.48
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[107]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 659.46
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[101]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 682.12
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[111]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 683.1
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[97]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 689.47
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[99]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 689.75
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[20] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 5030.7
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[4] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 5031.27
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_addr[3] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 5032.24
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[16] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 5034.92
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[1] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 5037.09
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_rob.entries[9][110]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 5917.92
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_rob.entries[9][118]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 5929.19
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_rob.entries[9][128]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 5930.5
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_rob.entries[9][115]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 5930.55
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_rob.entries[9][133]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 5931.01
+        }
+      ]
+    },
+    {
+      "corner": "SS",
+      "period_ps": 10000,
+      "kind": "hold",
+      "source": "build/experiments/lsu-ab-v1/native/physical-AB-v4/guard/independent-boundary-v1/SS/hold_paths_10000.rpt",
+      "sha256": "4f903d6b9d8676380b9c09e8956dac9171f176b1f70de1bb1f87675df0486f1a",
+      "exact_minimum_slack_ps": 71.313177870306,
+      "paths": [
+        {
+          "startpoint": "u_lsu.sq[1][93]$_DFFE_PP_",
+          "endpoint": "u_lsu.sq[1][93]$_DFFE_PP_",
+          "group": "reg2reg",
+          "slack_ps": 71.31
+        },
+        {
+          "startpoint": "u_csr.csr_mtval[5]$_SDFFE_PP0P_",
+          "endpoint": "u_csr.csr_mtval[5]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 71.52
+        },
+        {
+          "startpoint": "u_lsu.sq[1][87]$_DFFE_PP_",
+          "endpoint": "u_lsu.sq[1][87]$_DFFE_PP_",
+          "group": "reg2reg",
+          "slack_ps": 71.64
+        },
+        {
+          "startpoint": "u_csr.csr_mtval[9]$_SDFFE_PP0P_",
+          "endpoint": "u_csr.csr_mtval[9]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 71.67
+        },
+        {
+          "startpoint": "u_lsu.sq[9][87]$_DFFE_PP_",
+          "endpoint": "u_lsu.sq[9][87]$_DFFE_PP_",
+          "group": "reg2reg",
+          "slack_ps": 71.91
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[5][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 209.3
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[6][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 210.18
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[1][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 210.35
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[0][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 210.48
+        },
+        {
+          "startpoint": "dmem_rsp_rdata[26] (input port clocked by core_clk)",
+          "endpoint": "u_lsu.rsp_buf_rdata[26]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 213.22
+        },
+        {
+          "startpoint": "u_rob.commit_trace[85]$_SDFF_PP0_",
+          "endpoint": "commit_trace[85] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 538.49
+        },
+        {
+          "startpoint": "u_rob.commit_trace[82]$_SDFF_PP0_",
+          "endpoint": "commit_trace[82] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 539.0
+        },
+        {
+          "startpoint": "u_rob.commit_trace[81]$_SDFF_PP0_",
+          "endpoint": "commit_trace[81] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 539.55
+        },
+        {
+          "startpoint": "u_rob.commit_trace[86]$_SDFF_PP0_",
+          "endpoint": "commit_trace[86] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 541.83
+        },
+        {
+          "startpoint": "u_rob.commit_trace[83]$_SDFF_PP0_",
+          "endpoint": "commit_trace[83] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 542.26
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "imem_req_valid (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 1126.08
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_valid (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 1146.85
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_addr[14] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 1211.34
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_addr[15] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 1211.75
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_addr[31] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 1211.98
+        }
+      ]
+    },
+    {
+      "corner": "FF",
+      "period_ps": 9400,
+      "kind": "setup",
+      "source": "build/experiments/lsu-ab-v1/native/physical-AB-v4/guard/independent-boundary-v1/FF/setup_paths_9400.rpt",
+      "sha256": "8b06a8d5cf4076a094f33f60af3746d1be9fe4c2a7f4bd4d603641b038d64966",
+      "exact_minimum_slack_ps": 4225.69314563047,
+      "paths": [
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[2] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 4225.69
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[4] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 4226.13
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[9] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 4226.28
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[8] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 4226.67
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[5] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 4226.71
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[107]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 4916.18
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[101]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 4924.67
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[99]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 4927.71
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[113]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 4928.51
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[111]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 4929.33
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[20] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 5776.58
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[4] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 5778.04
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[16] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 5778.31
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[1] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 5779.26
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[0] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 5782.75
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_int_prf.gen_int_prf_storage[29].entry_q[30]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 6871.34
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_int_prf.gen_int_prf_storage[29].entry_q[28]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 6874.09
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_int_prf.gen_int_prf_storage[29].entry_q[27]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 6880.83
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_int_prf.gen_int_prf_storage[29].entry_q[16]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 6881.98
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_int_prf.gen_int_prf_storage[29].entry_q[10]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 6890.48
+        }
+      ]
+    },
+    {
+      "corner": "FF",
+      "period_ps": 9400,
+      "kind": "hold",
+      "source": "build/experiments/lsu-ab-v1/native/physical-AB-v4/guard/independent-boundary-v1/FF/hold_paths_9400.rpt",
+      "sha256": "087362eef8dd19fb746627180c43a9cdbb0f98867aa2f031b3f49d5891f505f1",
+      "exact_minimum_slack_ps": 17.57999308712692,
+      "paths": [
+        {
+          "startpoint": "u_rob.event_counter[26]$_SDFF_PP0_",
+          "endpoint": "u_rob.commit_trace[304]$_SDFF_PP0_",
+          "group": "reg2reg",
+          "slack_ps": 17.58
+        },
+        {
+          "startpoint": "u_int_execute.u_multiplier.s1_pc[31]$_SDFFE_PP0N_",
+          "endpoint": "u_int_execute.u_multiplier.s2_pc[31]$_SDFFE_PP0N_",
+          "group": "reg2reg",
+          "slack_ps": 17.67
+        },
+        {
+          "startpoint": "u_int_execute.u_divider.quot_q[17]$_SDFFE_PP0P_",
+          "endpoint": "u_int_execute.u_divider.quot_q[18]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 18.27
+        },
+        {
+          "startpoint": "u_lsu.sq[15][50]$_DFFE_PP_",
+          "endpoint": "u_lsu.sq[15][50]$_DFFE_PP_",
+          "group": "reg2reg",
+          "slack_ps": 18.58
+        },
+        {
+          "startpoint": "u_lsu.sq[1][44]$_DFFE_PP_",
+          "endpoint": "u_lsu.sq[1][44]$_DFFE_PP_",
+          "group": "reg2reg",
+          "slack_ps": 18.74
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_lsu.rsp_buf_error$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 24.67
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[5][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 27.22
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "u_lsu.sq[8][2]$_DFF_P_",
+          "group": "in2reg",
+          "slack_ps": 27.98
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[6][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 28.08
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[1][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 28.33
+        },
+        {
+          "startpoint": "u_rob.commit_trace[34]$_SDFF_PP0_",
+          "endpoint": "commit_trace[34] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 309.79
+        },
+        {
+          "startpoint": "u_rob.commit_trace[85]$_SDFF_PP0_",
+          "endpoint": "commit_trace[85] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 309.91
+        },
+        {
+          "startpoint": "u_rob.commit_trace[82]$_SDFF_PP0_",
+          "endpoint": "commit_trace[82] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 310.05
+        },
+        {
+          "startpoint": "u_rob.commit_trace[81]$_SDFF_PP0_",
+          "endpoint": "commit_trace[81] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 310.33
+        },
+        {
+          "startpoint": "u_rob.commit_trace[86]$_SDFF_PP0_",
+          "endpoint": "commit_trace[86] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 311.42
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "imem_req_valid (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 516.16
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_valid (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 539.88
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_addr[30] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 570.68
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_byte_en[3] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 573.74
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_byte_en[0] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 574.14
+        }
+      ]
+    },
+    {
+      "corner": "FF",
+      "period_ps": 10000,
+      "kind": "setup",
+      "source": "build/experiments/lsu-ab-v1/native/physical-AB-v4/guard/independent-boundary-v1/FF/setup_paths_10000.rpt",
+      "sha256": "1fcec9cd6241e20e3ba4cb1cdd3d735d698471ec5d16a08cd6c855a352fd28aa",
+      "exact_minimum_slack_ps": 4825.693197672174,
+      "paths": [
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[2] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 4825.69
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[4] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 4826.13
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[9] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 4826.28
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[8] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 4826.67
+        },
+        {
+          "startpoint": "int_ex0_req_q[65]$_SDFFE_PP0P_",
+          "endpoint": "dmem_req_addr[5] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 4826.71
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[107]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 5516.18
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[101]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 5524.67
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[99]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 5527.71
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[113]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 5528.51
+        },
+        {
+          "startpoint": "fp_ex0_req_q[62]$_SDFFE_PP0P_",
+          "endpoint": "u_fp_execute/cmp_data[111]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 5529.33
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[20] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 6376.58
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[4] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 6378.04
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[16] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 6378.31
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[1] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 6379.26
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "dmem_req_wdata[0] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 6382.75
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_int_prf.gen_int_prf_storage[29].entry_q[30]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 7471.34
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_int_prf.gen_int_prf_storage[29].entry_q[28]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 7474.09
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_int_prf.gen_int_prf_storage[29].entry_q[27]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 7480.83
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_int_prf.gen_int_prf_storage[29].entry_q[16]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 7481.98
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_int_prf.gen_int_prf_storage[29].entry_q[10]$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 7490.48
+        }
+      ]
+    },
+    {
+      "corner": "FF",
+      "period_ps": 10000,
+      "kind": "hold",
+      "source": "build/experiments/lsu-ab-v1/native/physical-AB-v4/guard/independent-boundary-v1/FF/hold_paths_10000.rpt",
+      "sha256": "087362eef8dd19fb746627180c43a9cdbb0f98867aa2f031b3f49d5891f505f1",
+      "exact_minimum_slack_ps": 17.57999308712692,
+      "paths": [
+        {
+          "startpoint": "u_rob.event_counter[26]$_SDFF_PP0_",
+          "endpoint": "u_rob.commit_trace[304]$_SDFF_PP0_",
+          "group": "reg2reg",
+          "slack_ps": 17.58
+        },
+        {
+          "startpoint": "u_int_execute.u_multiplier.s1_pc[31]$_SDFFE_PP0N_",
+          "endpoint": "u_int_execute.u_multiplier.s2_pc[31]$_SDFFE_PP0N_",
+          "group": "reg2reg",
+          "slack_ps": 17.67
+        },
+        {
+          "startpoint": "u_int_execute.u_divider.quot_q[17]$_SDFFE_PP0P_",
+          "endpoint": "u_int_execute.u_divider.quot_q[18]$_SDFFE_PP0P_",
+          "group": "reg2reg",
+          "slack_ps": 18.27
+        },
+        {
+          "startpoint": "u_lsu.sq[15][50]$_DFFE_PP_",
+          "endpoint": "u_lsu.sq[15][50]$_DFFE_PP_",
+          "group": "reg2reg",
+          "slack_ps": 18.58
+        },
+        {
+          "startpoint": "u_lsu.sq[1][44]$_DFFE_PP_",
+          "endpoint": "u_lsu.sq[1][44]$_DFFE_PP_",
+          "group": "reg2reg",
+          "slack_ps": 18.74
+        },
+        {
+          "startpoint": "dmem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_lsu.rsp_buf_error$_SDFFE_PP0P_",
+          "group": "in2reg",
+          "slack_ps": 24.67
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[5][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 27.22
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "u_lsu.sq[8][2]$_DFF_P_",
+          "group": "in2reg",
+          "slack_ps": 27.98
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[6][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 28.08
+        },
+        {
+          "startpoint": "imem_rsp_error (input port clocked by core_clk)",
+          "endpoint": "u_frontend.iq_mem[1][32]$_DFFE_PP_",
+          "group": "in2reg",
+          "slack_ps": 28.33
+        },
+        {
+          "startpoint": "u_rob.commit_trace[34]$_SDFF_PP0_",
+          "endpoint": "commit_trace[34] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 309.79
+        },
+        {
+          "startpoint": "u_rob.commit_trace[85]$_SDFF_PP0_",
+          "endpoint": "commit_trace[85] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 309.91
+        },
+        {
+          "startpoint": "u_rob.commit_trace[82]$_SDFF_PP0_",
+          "endpoint": "commit_trace[82] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 310.05
+        },
+        {
+          "startpoint": "u_rob.commit_trace[81]$_SDFF_PP0_",
+          "endpoint": "commit_trace[81] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 310.33
+        },
+        {
+          "startpoint": "u_rob.commit_trace[86]$_SDFF_PP0_",
+          "endpoint": "commit_trace[86] (output port clocked by core_clk)",
+          "group": "reg2out",
+          "slack_ps": 311.42
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "imem_req_valid (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 516.16
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_valid (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 539.88
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_addr[30] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 570.68
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_byte_en[3] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 573.74
+        },
+        {
+          "startpoint": "rst (input port clocked by core_clk)",
+          "endpoint": "dmem_req_byte_en[0] (output port clocked by core_clk)",
+          "group": "in2out",
+          "slack_ps": 574.14
+        }
+      ]
+    }
+  ]
+}
