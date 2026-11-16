@@ -6,7 +6,8 @@ from baseline_contract import ROOT, MANIFEST, load, validate, sha
 BASELINE_COMMIT='58a4159da0372b3286758be1e6c1b50f9f28cc27'
 BASELINE_INPUTS_SHA256='ad56ddd224ec34bd78f9fdef542a6b06535581927db3af395988ba6cbafe4bad'
 ALLOWED_RTL={'rtl/lsu/rv32_ooo_lsu.sv'}
-EXPERIMENT_IDS={'lsu-a-v1','lsu-b-v1','lsu-ab-v1','lsu-load-arb-v1'}
+EXPERIMENT_IDS={'lsu-a-v1','lsu-b-v1','lsu-ab-v1','lsu-load-arb-v1','lsu-rob-room-v1'}
+ROOM_RTL=ALLOWED_RTL | {'rtl/core/rv32_ooo_core.sv','rtl/rob/rv32_ooo_rob.sv'}
 SIM_INPUTS=['scripts/build_sim.sh','sim/scripts/rv32_ooo_core.f','sim/tb/sim_main.cpp','sim/tb/sim_mem.cpp',
             *[str(p.relative_to(ROOT)) for p in sorted((ROOT/'sim/tb').glob('*.h'))]]
 PHYSICAL_INPUTS=['physical/asap7/baseline/config.mk','physical/asap7/baseline/lower_processes.tcl',
@@ -29,8 +30,9 @@ def validate_experiment(contract):
     if contract.get('experiment_id') not in EXPERIMENT_IDS or contract.get('baseline_commit')!=BASELINE_COMMIT:
         raise ValueError('unrecognized experiment or baseline commit')
     if contract.get('state')!='inputs_frozen':raise ValueError('candidate inputs not frozen')
-    if set(contract.get('allowed_rtl_changes',[]))!=ALLOWED_RTL:
-        raise ValueError('only the approved LSU RTL scope is allowed')
+    allowed=ROOM_RTL if contract['experiment_id']=='lsu-rob-room-v1' else ALLOWED_RTL
+    if set(contract.get('allowed_rtl_changes',[]))!=allowed:
+        raise ValueError('only the experiment-specific approved RTL scope is allowed')
     if (sha(MANIFEST)!=contract['baseline_manifest_sha256']
             or sha(MANIFEST)!=reference_sha(str(MANIFEST.relative_to(ROOT)))):
         raise ValueError('frozen baseline manifest changed')
@@ -39,7 +41,7 @@ def validate_experiment(contract):
     expected=contract['candidate_rtl_files_sha256'];original=baseline['rtl_files_sha256']
     if set(expected)!=set(original):raise ValueError('RTL input file set changed')
     changed={name for name in expected if expected[name]!=original[name]}
-    if changed!=ALLOWED_RTL:raise ValueError('candidate changes extend beyond LSU or contain no LSU change')
+    if changed!=allowed:raise ValueError('candidate changes differ from the approved RTL scope')
     for name,digest in expected.items():
         if sha(ROOT/name)!=digest:raise ValueError('live candidate RTL changed: '+name)
     for names,key in [(SIM_INPUTS,'simulation_inputs_sha256'),(PHYSICAL_INPUTS,'physical_inputs_sha256')]:

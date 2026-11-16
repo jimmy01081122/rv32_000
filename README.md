@@ -17,6 +17,7 @@ fixed-time performance measurement.
 | Document | Purpose |
 | --- | --- |
 | [Project plan](PLAN.md) | Agreed scope, decision process and next milestones |
+| [ROB-space arbitration](experiments/lsu-rob-room-v1/README.md) | Selected narrower policy; 344 pin cases per variant, full-core/all27 gates pending |
 | [LSU arbitration experiment](experiments/lsu-load-arb-v1/README.md) | Full functional/cycle results; FP32 gain and Embench regression, physical gate unmeasured |
 | [Arbitration regression diagnosis](docs/LSU_ARBITRATION_DIAGNOSIS.md) | Raw-cycle store costs, cancelled speculative reads and proposed ROB-space guard |
 | [Current critical paths](docs/CRITICAL_PATHS.md) | Verified A+B parent setup/hold paths; new arbitration timing remains separate |
@@ -56,8 +57,9 @@ Integer and FP execution can overlap; sustained retirement IPC is at most one.
 The `LQ_ENTRIES` and PRF-port constants do not fully describe the instantiated
 structures; see the architecture inventory before changing their values.
 
-The current branch tests bounded load arbitration on the completed A+B parent.
-All 27 candidate workloads and functional regression pass; nominal Embench/FP32
+The current branch tests a ROB-space guard on bounded load arbitration; full-core
+and all27 gates for that new policy are pending. For the previous arbitration v1,
+all 27 workloads and functional regression pass; nominal Embench/FP32
 ratios are 1.070636×/1.101087× original baseline. This improves FP32 but regresses
 Embench against A+B; see the [arbitration review](docs/LSU_ARBITRATION_REVIEW.md).
 The new candidate is not yet physically qualified. A+B combines response handoff

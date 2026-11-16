@@ -57,6 +57,7 @@ module tb_lsu_ap5b;
 
   // Instantiate DUT
   rv32_ooo_lsu dut (
+    .load_bypass_room(1'b1),
     .clk               (clk),
     .rst               (rst),
     .core_state        (core_state),

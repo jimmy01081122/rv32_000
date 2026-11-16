@@ -105,7 +105,12 @@ regression, same-flow physical qualification and both full workload points.
 The current candidate adds a bounded load opportunity at first head-store marking,
 then uses the marked bit to restore store priority. An offered external load is
 held through backpressure until handshake or recovery; safety/disambiguation
-guards remain in force. See the [active experiment](experiments/lsu-load-arb-v1/README.md).
+guards remain in force. The selected ROB-space refinement additionally requires
+at least two free ROB slots for a new first-head bypass. ROB exports
+`lsu_load_bypass_room = (rob_count <= 14)` through core wiring to LSU's
+`load_bypass_room`; this compares the existing registered count and adds no state.
+The held-load branch and uncontended loads ignore this pressure gate. See the
+[active experiment](experiments/lsu-rob-room-v1/README.md).
 Its timing/area qualification remains separate from the A+B parent. No C head
 lookahead has been implemented. The frozen
 baseline includes neither A nor B.

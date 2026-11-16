@@ -10,6 +10,8 @@ module rv32_ooo_rob
   input  logic        rst,          // synchronous active-high
 
   output core_state_e core_state,
+  // Registered occupancy only: never depends on current request/retirement ready.
+  output logic        lsu_load_bypass_room,
 
   // dmem pending record (§15.2) — alias guard
   input  dmem_pending_t dmem_pending,
@@ -81,6 +83,7 @@ module rv32_ooo_rob
 
   wire rob_full  = (rob_count == ROB_ENTRIES[4:0]);
   wire rob_empty = (rob_count == 5'd0);
+  assign lsu_load_bypass_room = (rob_count <= 5'(ROB_ENTRIES - 2));
 
   assign alloc_ready   = (alloc_uop.serializing ? rob_empty : (!rob_full && !in_flight_serializing)) && (current_state == CORE_RUN);
   assign alloc_rob_tag = '{seq: next_seq, idx: tail};

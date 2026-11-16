@@ -403,10 +403,12 @@ module rv32_ooo_core
     .frm                  (frm)
   );
 
+  logic lsu_load_bypass_room;
   rv32_ooo_rob u_rob (
     .clk                  (clk),
     .rst                  (rst),
     .core_state           (core_state),
+    .lsu_load_bypass_room  (lsu_load_bypass_room),
     .dmem_pending         (dmem_pending),
     .alloc_valid          (rob_alloc_valid),
     .alloc_uop            (rob_alloc_uop),
@@ -582,6 +584,7 @@ module rv32_ooo_core
     .clk               (clk),
     .rst               (rst),
     .core_state        (core_state),
+    .load_bypass_room  (lsu_load_bypass_room),
     .dmem_pending      (dmem_pending),
     .disp_valid        (int_disp_valid),
     .disp_uop          (int_disp_uop),

@@ -9,6 +9,7 @@ signoff label applies only to the source/configuration and checks in that record
 | --- | --- |
 | [Project README](../README.md) | Entry point and development commands |
 | [Project plan](../PLAN.md) | Agreed direction, review process, proposed targets and milestones |
+| [ROB-space arbitration](../experiments/lsu-rob-room-v1/README.md) | Selected independent occupancy guard with held-request protection |
 | [Arbitration results](LSU_ARBITRATION_REVIEW.md) | Full-set parent comparison, individual regressions and next choice |
 | [Arbitration regression diagnosis](LSU_ARBITRATION_DIAGNOSIS.md) | Six observer pairs, raw-cycle reconciliation, speculative-read lifecycles and narrower-rule proposal |
 | [LSU arbitration](../experiments/lsu-load-arb-v1/README.md) | Completed functional/all27 experiment on A+B; mixed gains and unmeasured physical gate |

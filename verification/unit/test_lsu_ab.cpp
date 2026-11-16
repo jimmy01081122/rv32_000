@@ -23,6 +23,10 @@ struct Fixture {
     unsigned cycle = 0;
     std::map<unsigned,unsigned> completions;
     Fixture() {
+#ifdef LSU_ROB_ROOM_TEST
+        t.room_alloc_valid=0; t.room_complete_valid=0;
+        t.room_complete_seq=0; t.room_complete_idx=0;
+#endif
         t.clk=0; t.rst=1; t.run=1; t.agu_valid=0; t.agu_store=0;
         t.disp_valid=0; t.disp_seq=0; t.disp_idx=0; t.agu_idx=0; t.retire_idx=0;
         t.agu_fp=0; t.agu_seq=0; t.agu_dst=0; t.agu_addr=0;

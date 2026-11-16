@@ -112,7 +112,10 @@ static void late_competitor(bool load_first) {
     pass();
 }
 
-int main(int argc,char**argv) {
+#ifndef LSU_ARBITRATION_ENTRY
+#define LSU_ARBITRATION_ENTRY main
+#endif
+int LSU_ARBITRATION_ENTRY(int argc,char**argv) {
     Verilated::commandArgs(argc,argv);Verilated::assertOn(true);
     if(argc!=3) {std::cerr<<"usage: unit EXPECT_ARBITRATION TRACE.csv\n";return 2;}
     arbitration=std::string(argv[1])=="1";overlap=true;marking=true;trace.open(argv[2]);

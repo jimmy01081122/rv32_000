@@ -12,6 +12,8 @@ module rv32_ooo_lsu
   input  logic        rst,          // synchronous active-high
 
   input  core_state_e core_state,
+  // At least two ROB slots free; affects only a new first-head bypass.
+  input  logic        load_bypass_room,
 
   // dmem pending record — drives ROB alias guard (arch_spec §15.2)
   output dmem_pending_t dmem_pending,
@@ -347,7 +349,7 @@ module rv32_ooo_lsu
   wire first_head_store = sq_has_send && head_store_send &&
                          (send_sq_idx == retire_sq_idx) && !sq[send_sq_idx].retired;
   wire select_load = external_load_eligible &&
-                     (!sq_has_send || load_request_held || first_head_store);
+                     (!sq_has_send || load_request_held || (first_head_store && load_bypass_room));
   wire can_issue_load = select_load;
 
   wire can_issue_store = sq_has_send && !in_flight_valid && response_slot_available &&
@@ -694,7 +696,7 @@ module rv32_ooo_lsu
         else $error("[LSU arbitration] Backpressured load selection changed!");
     end
     if (!rst && select_load && sq_has_send) begin
-      assert (load_request_held || first_head_store)
+      assert (load_request_held || (first_head_store && load_bypass_room))
         else $error("[LSU arbitration] Marked store yielded more than once!");
     end
   end

@@ -1,9 +1,19 @@
 # Current project status
 
-Updated 2026-11-16 (Asia/Taipei). Current branch: `codex/lsu-load-arbitration`.
+Updated 2026-11-16 (Asia/Taipei). Current branch: `codex/lsu-rob-room`.
 The original AP5B baseline remains frozen; the candidate has not been promoted.
 
-## Active arbitration experiment
+## Active ROB-space arbitration experiment
+
+The user selected the recommended [ROB-space guard](../experiments/lsu-rob-room-v1/README.md)
+on November 16. The new candidate allows first-head load bypass only at registered
+ROB occupancy ≤14/16; offered loads remain held regardless of later pressure.
+ROB exports one Boolean through core wiring; no extra state or memory transaction
+is added. Parent and candidate each pass 344 pin cases, with six actual RTL
+negative controls. Clean full-core qualification/all27 results are pending.
+No new timing/area claim or baseline promotion is made.
+
+## Previous arbitration v1 experiment
 
 The user authorized [LSU arbitration](../experiments/lsu-load-arb-v1/README.md) on
 2026-11-13. The first candidate allows one safe external load at initial head-store
@@ -24,8 +34,8 @@ six observer on/off pairs, 5,504,081 raw cycles and identical ordered retired
 instruction streams. Every bypassed head store changes from one to three cycles
 mark-to-retirement; the extra FFT/statemate external reads are all accounted for
 by increased cancelled reads. Most bypasses in those two cases occur at ROB 15/16.
-The proposed next independent experiment keeps store priority when fewer than two
-ROB slots remain; it has not been implemented or performance-qualified.
+The ROB-space experiment has now been selected and is tracked above; observational
+guard coverage does not predict its final performance.
 
 New timing/area qualification is unmeasured. The [critical paths](CRITICAL_PATHS.md)
 refer to the completed A+B parent, not the modified candidate. The candidate is

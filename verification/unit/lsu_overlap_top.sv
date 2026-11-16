@@ -48,6 +48,7 @@ module lsu_overlap_top
     flush_tag = '{seq: flush_seq, idx: flush_seq[ROB_IDX_W-1:0]};
   end
   rv32_ooo_lsu dut (
+    .load_bypass_room(1'b1),
     .clk(clk), .rst(rst), .core_state(run ? CORE_RUN : BRANCH_ROLLBACK),
     .dmem_pending(pending), .disp_valid(1'b0), .disp_uop('0),
     .agu_valid(agu_valid), .agu_req(request), .agu_addr(agu_addr),
