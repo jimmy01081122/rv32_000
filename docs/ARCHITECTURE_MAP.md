@@ -16,6 +16,8 @@
 目前分支已開始[有限 LSU 仲裁實驗](../experiments/lsu-load-arb-v1/README.md)：
 首次 head-store marking 可讓安全 load 先送一次，回壓時保持選擇。
 圖中時序與效能仍屬父版本；[critical paths](CRITICAL_PATHS.md)亦未宣稱為新 RTL 結果。
+[後續逐拍診斷](LSU_ARBITRATION_DIAGNOSIS.md)確認讓行的 store 退休代價及被取消讀取，
+下一版提案為 ROB 空間限制；尚未修改此架構圖或 CPU RTL。
 
 ## 已確認的結構與操作點
 

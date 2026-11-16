@@ -18,6 +18,7 @@ fixed-time performance measurement.
 | --- | --- |
 | [Project plan](PLAN.md) | Agreed scope, decision process and next milestones |
 | [LSU arbitration experiment](experiments/lsu-load-arb-v1/README.md) | Full functional/cycle results; FP32 gain and Embench regression, physical gate unmeasured |
+| [Arbitration regression diagnosis](docs/LSU_ARBITRATION_DIAGNOSIS.md) | Raw-cycle store costs, cancelled speculative reads and proposed ROB-space guard |
 | [Current critical paths](docs/CRITICAL_PATHS.md) | Verified A+B parent setup/hold paths; new arbitration timing remains separate |
 | [Current status](docs/STATUS.md) | Measured checks, implementation drift and open verification gaps |
 | [A+B experiment and divider diagnosis](docs/LSU_AB_REVIEW.md) | Completed functional/PPA/two-clock results, PID arbitration mechanism and next choices |

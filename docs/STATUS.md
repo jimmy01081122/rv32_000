@@ -19,11 +19,17 @@ improve, fourteen regress, three tie. PID time falls 12.33%, but FFT increases
 3.55% and statemate 7.33%. The [complete result](LSU_ARBITRATION_REVIEW.md)
 retains all cases and exact wait-position deltas.
 
+The [read-only regression diagnosis](LSU_ARBITRATION_DIAGNOSIS.md) now passes all
+six observer on/off pairs, 5,504,081 raw cycles and identical ordered retired
+instruction streams. Every bypassed head store changes from one to three cycles
+mark-to-retirement; the extra FFT/statemate external reads are all accounted for
+by increased cancelled reads. Most bypasses in those two cases occur at ROB 15/16.
+The proposed next independent experiment keeps store priority when fewer than two
+ROB slots remain; it has not been implemented or performance-qualified.
+
 New timing/area qualification is unmeasured. The [critical paths](CRITICAL_PATHS.md)
-refer to the completed A+B parent, not the modified candidate. Recommend
-investigating FFT/statemate before jointly selecting a narrower arbitration rule;
-physical qualification of this version is another available next step. The
-candidate is not promoted and the original baseline remains frozen.
+refer to the completed A+B parent, not the modified candidate. The candidate is
+not promoted and the original baseline remains frozen.
 
 ## Completed A+B experiment
 

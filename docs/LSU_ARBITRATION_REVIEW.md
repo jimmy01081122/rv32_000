@@ -4,6 +4,9 @@
 **完整功能與 27 項週期量測通過，但這版交換了兩類效能：FP32 改善、Embench 小幅退步。**
 尚未升格基線，也尚未進行候選的實體時序／面積資格。
 
+後續 [唯讀逐拍診斷](LSU_ARBITRATION_DIAGNOSIS.md)已完成：確認讓行 store 的兩拍代價、
+FFT／statemate 額外被取消的讀取，並提出 ROB 空間限制；以下保留第一輪完整量測。
+
 ## 實作與比較契約
 
 以完成資格的 A+B `49122fb` 為父版本，只修改 LSU：首次 head-store marking 時，
@@ -95,7 +98,7 @@ SS／9.4 ns 最緊是 **INT EX0 → dmem 位址 +8.20 ps**，FPU 算術到 compl
 FF 最緊 hold 是 ROB event counter → commit trace，**+17.58 ps**。
 這些是 A+B 的已測值，不是新仲裁的 PPA。新選擇邏輯在 LSU 敏感路徑附近，必須重新量測才能判定代價。
 
-**建議先追查 FFT／statemate 的請求與退休相依鏈，再共同收窄仲裁條件。**
+**逐拍診斷已完成，建議共同審查 [ROB 空間限制方案](LSU_ARBITRATION_DIAGNOSIS.md)。**
 目前沒有證據支持把「所有安全 load 一律值得先送」當成跨集合的最佳策略。
 也可選擇先完成此版實體資格，或保留 A+B 改做 C；取捨由使用者共同決定。
 本輪不自動改目標、放寬案例、擴大 outstanding 或升格基線。

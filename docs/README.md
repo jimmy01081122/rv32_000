@@ -10,6 +10,7 @@ signoff label applies only to the source/configuration and checks in that record
 | [Project README](../README.md) | Entry point and development commands |
 | [Project plan](../PLAN.md) | Agreed direction, review process, proposed targets and milestones |
 | [Arbitration results](LSU_ARBITRATION_REVIEW.md) | Full-set parent comparison, individual regressions and next choice |
+| [Arbitration regression diagnosis](LSU_ARBITRATION_DIAGNOSIS.md) | Six observer pairs, raw-cycle reconciliation, speculative-read lifecycles and narrower-rule proposal |
 | [LSU arbitration](../experiments/lsu-load-arb-v1/README.md) | Completed functional/all27 experiment on A+B; mixed gains and unmeasured physical gate |
 | [Critical paths](CRITICAL_PATHS.md) | Verified parent setup/hold inventory with raw report identities |
 | [Status](STATUS.md) | Evidence and unresolved implementation/verification gaps |

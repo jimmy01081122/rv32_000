@@ -1,0 +1,173 @@
+{
+  "format": "88 little-endian uint32 words per complete ROI cycle; low-edge eval then registered retirement; opening marker excluded, closing included",
+  "row_bytes": 352,
+  "flags": {
+    "0": "CORE(u_rob__DOT__can_retire)",
+    "1": "CORE(u_rob__DOT__rob_head_completed)",
+    "2": "CORE(flush_valid)",
+    "3": "CORE(sq_retire_valid)",
+    "4": "CORE(sq_retire_ack)",
+    "5": "t.dmem_req_valid",
+    "6": "t.dmem_req_ready",
+    "7": "t.dmem_req_wen",
+    "8": "t.dmem_rsp_valid",
+    "9": "t.dmem_rsp_ready",
+    "10": "t.dmem_rsp_error",
+    "11": "CORE(agu_valid)",
+    "12": "LSU(agu_misaligned)",
+    "13": "LSU(effective_fwd_valid)",
+    "14": "LSU(load_stall_unresolved)",
+    "15": "LSU(load_stall_partial)",
+    "16": "LSU(sq_has_send)",
+    "17": "LSU(head_store_send)",
+    "18": "LSU(in_flight_valid)",
+    "19": "LSU(in_flight_is_store)",
+    "20": "LSU(rsp_buf_valid)",
+    "21": "LSU(rsp_buf_ack)",
+    "22": "LSU(rsp_buf_error)",
+    "23": "CORE(ren_valid)",
+    "24": "CORE(ren_ready)",
+    "25": "CORE(dec_valid)",
+    "26": "CORE(dec_ready)",
+    "27": "CORE(int_disp_valid)",
+    "28": "CORE(int_disp_ready)",
+    "29": "CORE(fp_disp_valid)",
+    "30": "CORE(fp_disp_ready)",
+    "31": "CORE(ex0_in_ready)",
+    "32": "CORE(int_ex0_valid_q)",
+    "33": "CORE(ex0_out_valid)",
+    "34": "CORE(fp_ex0_valid_q)",
+    "35": "CORE(fp_target_ready)",
+    "36": "CORE(fp_heavy_issue_valid)",
+    "37": "CORE(u_fp_execute__DOT__can_accept)",
+    "38": "CORE(fp_heavy_cmp_ready)",
+    "39": "LSU(load_request_held)",
+    "40": "LSU(retire_sq_match)",
+    "41": "CORE(rob_alloc_valid)",
+    "42": "CORE(rob_alloc_ready)",
+    "43": "CORE(fp_ex0_in_ready)"
+  },
+  "fields": [
+    {
+      "name": "flags_low",
+      "first_word": 0,
+      "words": 1
+    },
+    {
+      "name": "flags_high",
+      "first_word": 1,
+      "words": 1
+    },
+    {
+      "name": "dmem_req_addr",
+      "first_word": 2,
+      "words": 1
+    },
+    {
+      "name": "agu_addr",
+      "first_word": 3,
+      "words": 1
+    },
+    {
+      "name": "inflight_tag_low16_response_tag_high16",
+      "first_word": 4,
+      "words": 1
+    },
+    {
+      "name": "rob_count_0_7_state_8_15_send_sq_16_19_retire_sq_20_23",
+      "first_word": 5,
+      "words": 1
+    },
+    {
+      "name": "rob_head_245",
+      "first_word": 6,
+      "words": 8
+    },
+    {
+      "name": "agu_exec_req_401",
+      "first_word": 14,
+      "words": 13
+    },
+    {
+      "name": "selected_sq_130",
+      "first_word": 27,
+      "words": 5
+    },
+    {
+      "name": "int_issue_uop_305",
+      "first_word": 32,
+      "words": 10
+    },
+    {
+      "name": "fp_issue_uop_305",
+      "first_word": 42,
+      "words": 10
+    },
+    {
+      "name": "ld_cmp_155",
+      "first_word": 52,
+      "words": 5
+    },
+    {
+      "name": "int_cmp_155",
+      "first_word": 57,
+      "words": 5
+    },
+    {
+      "name": "registered_retire_valid",
+      "first_word": 62,
+      "words": 1
+    },
+    {
+      "name": "registered_commit_pc",
+      "first_word": 63,
+      "words": 1
+    },
+    {
+      "name": "registered_commit_insn",
+      "first_word": 64,
+      "words": 1
+    },
+    {
+      "name": "int_ready_mask_0_7_fp_mask_8_15_fp_count_16_31",
+      "first_word": 65,
+      "words": 1
+    },
+    {
+      "name": "fp_cmp_155",
+      "first_word": 66,
+      "words": 5
+    },
+    {
+      "name": "fp_exec_req_401",
+      "first_word": 71,
+      "words": 13
+    },
+    {
+      "name": "dmem_req_wdata",
+      "first_word": 84,
+      "words": 1
+    },
+    {
+      "name": "dmem_req_byte_en",
+      "first_word": 85,
+      "words": 1
+    },
+    {
+      "name": "dmem_rsp_rdata",
+      "first_word": 86,
+      "words": 1
+    },
+    {
+      "name": "reserved_zero",
+      "first_word": 87,
+      "words": 1
+    }
+  ],
+  "notes": [
+    "Flag 39 is zero in AB, load_request_held in ARB.",
+    "AGU exec request aliases int_ex0_req_q; calibrated to independent VCD.",
+    "Selected SQ is send_sq_idx, not necessarily retire_sq_idx.",
+    "Packed values are least significant word first; unused upper bits are zero."
+  ]
+}
