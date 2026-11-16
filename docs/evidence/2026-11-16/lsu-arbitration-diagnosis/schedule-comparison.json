@@ -1,0 +1,2117 @@
+{
+  "passed": true,
+  "scope": "Observed scheduling costs and eligibility coverage, not counterfactual speedup predictions",
+  "analyzer_sha256": "ddccd54e3416c3a700d7ac7809984055f2915163df320a847f22516a13f381e5",
+  "review_summary_sha256": "ade3c7d854da97299f407098c6f9c355e8da7e7a685ee5045b1d3fade368e6c9",
+  "records": {
+    "pid": {
+      "paired_stores": 515,
+      "ack_wait_totals": {
+        "AB": 515,
+        "ARB": 1537
+      },
+      "cohorts": {
+        "other": {
+          "stores": 4,
+          "ack_wait_delta": 0,
+          "1_to_1_cycles": 4
+        },
+        "bypassed": {
+          "stores": 511,
+          "ack_wait_delta": 1022,
+          "1_to_3_cycles": 511
+        }
+      },
+      "guard_coverage": {
+        "all": {
+          "accepted": 511,
+          "retired": 510,
+          "cancelled": 1
+        },
+        "rob_free_at_least_2": {
+          "accepted": 511,
+          "retired": 510,
+          "cancelled": 1
+        },
+        "age_at_most_4": {
+          "accepted": 511,
+          "retired": 510,
+          "cancelled": 1
+        }
+      },
+      "representative_store": {
+        "AB": {
+          "pc": "80000204",
+          "tag": 36937,
+          "first_head": 75,
+          "mark": 76,
+          "request": 76,
+          "retire": 77,
+          "bypass": false,
+          "ordinal": 2,
+          "window": [
+            {
+              "cycle": 72,
+              "head_pc": "800001fc",
+              "head_insn": "20d685d3",
+              "rob_count": 7,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 73,
+              "head_pc": "80000200",
+              "head_insn": "00f77753",
+              "rob_count": 7,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "int_issue": {
+                "pc": "800001ec",
+                "insn": "00478793",
+                "tag": 37022
+              },
+              "fp_issue": {
+                "pc": "800001e4",
+                "insn": "10d077d3",
+                "tag": 36988
+              }
+            },
+            {
+              "cycle": 74,
+              "head_pc": "80000200",
+              "head_insn": "00f77753",
+              "rob_count": 8,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "80000204",
+                "insn": "fee72e27",
+                "tag": 36937
+              }
+            },
+            {
+              "cycle": 75,
+              "head_pc": "80000204",
+              "head_insn": "fee72e27",
+              "rob_count": 8,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "int_issue": {
+                "pc": "800001e8",
+                "insn": "0007a607",
+                "tag": 37005
+              }
+            },
+            {
+              "cycle": 76,
+              "head_pc": "80000204",
+              "head_insn": "fee72e27",
+              "rob_count": 9,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "store",
+                "pc": "80000204",
+                "address": "800018f4"
+              }
+            },
+            {
+              "cycle": 77,
+              "head_pc": "80000204",
+              "head_insn": "fee72e27",
+              "rob_count": 10,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "fp_issue": {
+                "pc": "800001fc",
+                "insn": "20d685d3",
+                "tag": 37074
+              }
+            },
+            {
+              "cycle": 78,
+              "head_pc": "80000208",
+              "head_insn": "fcf69ce3",
+              "rob_count": 10,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "800001e8",
+                "address": "800010c0"
+              },
+              "int_issue": {
+                "pc": "800001f0",
+                "insn": "00470713",
+                "tag": 37039
+              }
+            },
+            {
+              "cycle": 79,
+              "head_pc": "800001e0",
+              "head_insn": "20c606d3",
+              "rob_count": 10,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 80,
+              "head_pc": "800001e4",
+              "head_insn": "10d077d3",
+              "rob_count": 10,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "load_completion_tag": 37005,
+              "int_issue": {
+                "pc": "80000208",
+                "insn": "fcf69ce3",
+                "tag": 37125
+              }
+            },
+            {
+              "cycle": 81,
+              "head_pc": "800001e8",
+              "head_insn": "0007a607",
+              "rob_count": 10,
+              "rename_blocked": true,
+              "retired": true,
+              "flush": false,
+              "fp_issue": {
+                "pc": "800001f4",
+                "insn": "781677c3",
+                "tag": 37040
+              }
+            },
+            {
+              "cycle": 82,
+              "head_pc": "800001ec",
+              "head_insn": "00478793",
+              "rob_count": 9,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "fp_issue": {
+                "pc": "800001e0",
+                "insn": "20c606d3",
+                "tag": 37142
+              }
+            },
+            {
+              "cycle": 83,
+              "head_pc": "800001f0",
+              "head_insn": "00470713",
+              "rob_count": 9,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 84,
+              "head_pc": "800001f4",
+              "head_insn": "781677c3",
+              "rob_count": 9,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "fp_issue": {
+                "pc": "800001f8",
+                "insn": "78a5f7c3",
+                "tag": 37057
+              }
+            },
+            {
+              "cycle": 85,
+              "head_pc": "800001f8",
+              "head_insn": "78a5f7c3",
+              "rob_count": 9,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "int_issue": {
+                "pc": "800001ec",
+                "insn": "00478793",
+                "tag": 37193
+              },
+              "fp_issue": {
+                "pc": "800001e4",
+                "insn": "10d077d3",
+                "tag": 37159
+              }
+            },
+            {
+              "cycle": 86,
+              "head_pc": "800001f8",
+              "head_insn": "78a5f7c3",
+              "rob_count": 10,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "int_issue": {
+                "pc": "800001f0",
+                "insn": "00470713",
+                "tag": 37210
+              }
+            },
+            {
+              "cycle": 87,
+              "head_pc": "800001f8",
+              "head_insn": "78a5f7c3",
+              "rob_count": 11,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "fp_issue": {
+                "pc": "80000200",
+                "insn": "00f77753",
+                "tag": 37091
+              }
+            },
+            {
+              "cycle": 88,
+              "head_pc": "800001fc",
+              "head_insn": "20d685d3",
+              "rob_count": 11,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 89,
+              "head_pc": "80000200",
+              "head_insn": "00f77753",
+              "rob_count": 11,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "fp_issue": {
+                "pc": "800001fc",
+                "insn": "20d685d3",
+                "tag": 37261
+              }
+            },
+            {
+              "cycle": 90,
+              "head_pc": "80000200",
+              "head_insn": "00f77753",
+              "rob_count": 12,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "80000204",
+                "insn": "fee72e27",
+                "tag": 37108
+              }
+            },
+            {
+              "cycle": 91,
+              "head_pc": "80000204",
+              "head_insn": "fee72e27",
+              "rob_count": 12,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "int_issue": {
+                "pc": "800001e8",
+                "insn": "0007a607",
+                "tag": 37176
+              }
+            },
+            {
+              "cycle": 92,
+              "head_pc": "80000204",
+              "head_insn": "fee72e27",
+              "rob_count": 13,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "store",
+                "pc": "80000204",
+                "address": "800018f8"
+              }
+            },
+            {
+              "cycle": 93,
+              "head_pc": "80000204",
+              "head_insn": "fee72e27",
+              "rob_count": 14,
+              "rename_blocked": true,
+              "retired": true,
+              "flush": false
+            }
+          ]
+        },
+        "ARB": {
+          "pc": "80000204",
+          "tag": 36937,
+          "first_head": 75,
+          "mark": 76,
+          "request": 78,
+          "retire": 79,
+          "bypass": true,
+          "load_pc": "800001e8",
+          "load_request": 76,
+          "rob_count": 9,
+          "age_distance": 4,
+          "ordinal": 2,
+          "window": [
+            {
+              "cycle": 72,
+              "head_pc": "800001fc",
+              "head_insn": "20d685d3",
+              "rob_count": 7,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 73,
+              "head_pc": "80000200",
+              "head_insn": "00f77753",
+              "rob_count": 7,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "int_issue": {
+                "pc": "800001ec",
+                "insn": "00478793",
+                "tag": 37022
+              },
+              "fp_issue": {
+                "pc": "800001e4",
+                "insn": "10d077d3",
+                "tag": 36988
+              }
+            },
+            {
+              "cycle": 74,
+              "head_pc": "80000200",
+              "head_insn": "00f77753",
+              "rob_count": 8,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "80000204",
+                "insn": "fee72e27",
+                "tag": 36937
+              }
+            },
+            {
+              "cycle": 75,
+              "head_pc": "80000204",
+              "head_insn": "fee72e27",
+              "rob_count": 8,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "int_issue": {
+                "pc": "800001e8",
+                "insn": "0007a607",
+                "tag": 37005
+              }
+            },
+            {
+              "cycle": 76,
+              "head_pc": "80000204",
+              "head_insn": "fee72e27",
+              "rob_count": 9,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "800001e8",
+                "address": "800010c0"
+              },
+              "int_issue": {
+                "pc": "800001f0",
+                "insn": "00470713",
+                "tag": 37039
+              }
+            },
+            {
+              "cycle": 77,
+              "head_pc": "80000204",
+              "head_insn": "fee72e27",
+              "rob_count": 10,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "fp_issue": {
+                "pc": "800001fc",
+                "insn": "20d685d3",
+                "tag": 37074
+              }
+            },
+            {
+              "cycle": 78,
+              "head_pc": "80000204",
+              "head_insn": "fee72e27",
+              "rob_count": 11,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "store",
+                "pc": "80000204",
+                "address": "800018f4"
+              },
+              "load_completion_tag": 37005
+            },
+            {
+              "cycle": 79,
+              "head_pc": "80000204",
+              "head_insn": "fee72e27",
+              "rob_count": 12,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "fp_issue": {
+                "pc": "800001f4",
+                "insn": "781677c3",
+                "tag": 37040
+              }
+            },
+            {
+              "cycle": 80,
+              "head_pc": "80000208",
+              "head_insn": "fcf69ce3",
+              "rob_count": 12,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "80000208",
+                "insn": "fcf69ce3",
+                "tag": 37125
+              }
+            },
+            {
+              "cycle": 81,
+              "head_pc": "800001e0",
+              "head_insn": "20c606d3",
+              "rob_count": 12,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "fp_issue": {
+                "pc": "800001e0",
+                "insn": "20c606d3",
+                "tag": 37142
+              }
+            },
+            {
+              "cycle": 82,
+              "head_pc": "800001e4",
+              "head_insn": "10d077d3",
+              "rob_count": 12,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "fp_issue": {
+                "pc": "800001f8",
+                "insn": "78a5f7c3",
+                "tag": 37057
+              }
+            },
+            {
+              "cycle": 83,
+              "head_pc": "800001e8",
+              "head_insn": "0007a607",
+              "rob_count": 12,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 84,
+              "head_pc": "800001ec",
+              "head_insn": "00478793",
+              "rob_count": 12,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "800001ec",
+                "insn": "00478793",
+                "tag": 37193
+              },
+              "fp_issue": {
+                "pc": "800001e4",
+                "insn": "10d077d3",
+                "tag": 37159
+              }
+            },
+            {
+              "cycle": 85,
+              "head_pc": "800001f0",
+              "head_insn": "00470713",
+              "rob_count": 12,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "800001f0",
+                "insn": "00470713",
+                "tag": 37210
+              },
+              "fp_issue": {
+                "pc": "80000200",
+                "insn": "00f77753",
+                "tag": 37091
+              }
+            },
+            {
+              "cycle": 86,
+              "head_pc": "800001f4",
+              "head_insn": "781677c3",
+              "rob_count": 12,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 87,
+              "head_pc": "800001f8",
+              "head_insn": "78a5f7c3",
+              "rob_count": 12,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 88,
+              "head_pc": "800001fc",
+              "head_insn": "20d685d3",
+              "rob_count": 12,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "80000204",
+                "insn": "fee72e27",
+                "tag": 37108
+              },
+              "fp_issue": {
+                "pc": "800001fc",
+                "insn": "20d685d3",
+                "tag": 37261
+              }
+            },
+            {
+              "cycle": 89,
+              "head_pc": "80000200",
+              "head_insn": "00f77753",
+              "rob_count": 12,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "800001e8",
+                "insn": "0007a607",
+                "tag": 37176
+              }
+            },
+            {
+              "cycle": 90,
+              "head_pc": "80000204",
+              "head_insn": "fee72e27",
+              "rob_count": 12,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "800001e8",
+                "address": "800010c4"
+              }
+            },
+            {
+              "cycle": 91,
+              "head_pc": "80000204",
+              "head_insn": "fee72e27",
+              "rob_count": 13,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "int_issue": {
+                "pc": "80000208",
+                "insn": "fcf69ce3",
+                "tag": 37296
+              }
+            },
+            {
+              "cycle": 92,
+              "head_pc": "80000204",
+              "head_insn": "fee72e27",
+              "rob_count": 14,
+              "rename_blocked": true,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "store",
+                "pc": "80000204",
+                "address": "800018f8"
+              },
+              "load_completion_tag": 37176
+            },
+            {
+              "cycle": 93,
+              "head_pc": "80000204",
+              "head_insn": "fee72e27",
+              "rob_count": 14,
+              "rename_blocked": true,
+              "retired": true,
+              "flush": false,
+              "fp_issue": {
+                "pc": "800001f4",
+                "insn": "781677c3",
+                "tag": 37227
+              }
+            },
+            {
+              "cycle": 94,
+              "head_pc": "80000208",
+              "head_insn": "fcf69ce3",
+              "rob_count": 13,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "fp_issue": {
+                "pc": "800001e0",
+                "insn": "20c606d3",
+                "tag": 37313
+              }
+            },
+            {
+              "cycle": 95,
+              "head_pc": "800001e0",
+              "head_insn": "20c606d3",
+              "rob_count": 13,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false
+            }
+          ]
+        },
+        "load_lifecycle": {
+          "pc": "800001e8",
+          "insn": "0007a607",
+          "tag": 37005,
+          "request_cycle": 76,
+          "rob_count": 9,
+          "bypass": true,
+          "pair": "80000204/800001e8",
+          "store_pc": "80000204",
+          "store_tag": 36937,
+          "store_ordinal": 2,
+          "age_distance": 4,
+          "store_request_cycle": 78,
+          "completion_cycle": 78,
+          "store_retire_cycle": 79,
+          "store_mark_cycle": 76,
+          "store_head_cycle": 75,
+          "outcome": "retired",
+          "finish_cycle": 83
+        }
+      },
+      "cycles_delta": -1018,
+      "extra_cancelled_external_reads": 1
+    },
+    "fft": {
+      "paired_stores": 4127,
+      "ack_wait_totals": {
+        "AB": 4127,
+        "ARB": 6762
+      },
+      "cohorts": {
+        "other": {
+          "stores": 2913,
+          "ack_wait_delta": 207,
+          "1_to_1_cycles": 2706,
+          "1_to_2_cycles": 207
+        },
+        "bypassed": {
+          "stores": 1214,
+          "ack_wait_delta": 2428,
+          "1_to_3_cycles": 1214
+        }
+      },
+      "guard_coverage": {
+        "all": {
+          "accepted": 1214,
+          "retired": 886,
+          "cancelled": 328
+        },
+        "rob_free_at_least_2": {
+          "accepted": 119,
+          "retired": 119
+        },
+        "age_at_most_4": {
+          "accepted": 68,
+          "retired": 68
+        }
+      },
+      "representative_store": {
+        "AB": {
+          "pc": "80001274",
+          "tag": 45912,
+          "first_head": 399,
+          "mark": 399,
+          "request": 399,
+          "retire": 400,
+          "bypass": false,
+          "ordinal": 65,
+          "window": [
+            {
+              "cycle": 395,
+              "head_pc": "8000126c",
+              "head_insn": "0005a227",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "store",
+                "pc": "8000126c",
+                "address": "8000a27c"
+              }
+            },
+            {
+              "cycle": 396,
+              "head_pc": "8000126c",
+              "head_insn": "0005a227",
+              "rob_count": 16,
+              "rename_blocked": true,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "800012a8",
+                "insn": "00060713",
+                "tag": 46117
+              }
+            },
+            {
+              "cycle": 397,
+              "head_pc": "80001270",
+              "head_insn": "00d7a027",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "store",
+                "pc": "80001270",
+                "address": "8000a288"
+              }
+            },
+            {
+              "cycle": 398,
+              "head_pc": "80001270",
+              "head_insn": "00d7a027",
+              "rob_count": 16,
+              "rename_blocked": true,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "800012ac",
+                "insn": "00462287",
+                "tag": 46134
+              }
+            },
+            {
+              "cycle": 399,
+              "head_pc": "80001274",
+              "head_insn": "00f7a227",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "store",
+                "pc": "80001274",
+                "address": "8000a28c"
+              }
+            },
+            {
+              "cycle": 400,
+              "head_pc": "80001274",
+              "head_insn": "00f7a227",
+              "rob_count": 16,
+              "rename_blocked": true,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 401,
+              "head_pc": "80001278",
+              "head_insn": "fff48493",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "800012ac",
+                "address": "8000b57c"
+              },
+              "int_issue": {
+                "pc": "800012b0",
+                "insn": "00482207",
+                "tag": 46151
+              }
+            },
+            {
+              "cycle": 402,
+              "head_pc": "8000127c",
+              "head_insn": "01160633",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 403,
+              "head_pc": "80001280",
+              "head_insn": "00a80833",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "800012b0",
+                "address": "8000b57c"
+              },
+              "load_completion_tag": 46134,
+              "int_issue": {
+                "pc": "800012b4",
+                "insn": "00472187",
+                "tag": 46168
+              }
+            },
+            {
+              "cycle": 404,
+              "head_pc": "80001284",
+              "head_insn": "01c70733",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 405,
+              "head_pc": "80001288",
+              "head_insn": "00868693",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "800012b4",
+                "address": "8000b57c"
+              },
+              "load_completion_tag": 46151,
+              "int_issue": {
+                "pc": "800012b8",
+                "insn": "00062787",
+                "tag": 46185
+              }
+            },
+            {
+              "cycle": 406,
+              "head_pc": "8000128c",
+              "head_insn": "00840413",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 407,
+              "head_pc": "80001290",
+              "head_insn": "00858593",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "800012b8",
+                "address": "8000b578"
+              },
+              "load_completion_tag": 46168,
+              "int_issue": {
+                "pc": "800012bc",
+                "insn": "0045a607",
+                "tag": 46202
+              }
+            },
+            {
+              "cycle": 408,
+              "head_pc": "80001294",
+              "head_insn": "00878793",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 409,
+              "head_pc": "80001298",
+              "head_insn": "f00494e3",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "800012bc",
+                "address": "8000a284"
+              },
+              "load_completion_tag": 46185,
+              "int_issue": {
+                "pc": "800012c0",
+                "insn": "00082087",
+                "tag": 46219
+              }
+            },
+            {
+              "cycle": 410,
+              "head_pc": "8000129c",
+              "head_insn": "dc8ff06f",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": true
+            },
+            {
+              "cycle": 411,
+              "head_pc": "00000000",
+              "head_insn": "00000000",
+              "rob_count": 0,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false
+            },
+            {
+              "cycle": 412,
+              "head_pc": "00000000",
+              "head_insn": "00000000",
+              "rob_count": 0,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false
+            },
+            {
+              "cycle": 413,
+              "head_pc": "00000000",
+              "head_insn": "00000000",
+              "rob_count": 0,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false
+            },
+            {
+              "cycle": 414,
+              "head_pc": "00000000",
+              "head_insn": "00000000",
+              "rob_count": 0,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false
+            },
+            {
+              "cycle": 415,
+              "head_pc": "80000864",
+              "head_insn": "04c12083",
+              "rob_count": 1,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "int_issue": {
+                "pc": "80000864",
+                "insn": "04c12083",
+                "tag": 46304
+              }
+            },
+            {
+              "cycle": 416,
+              "head_pc": "80000864",
+              "head_insn": "04c12083",
+              "rob_count": 2,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "80000864",
+                "address": "800ffebc"
+              },
+              "int_issue": {
+                "pc": "80000868",
+                "insn": "04812403",
+                "tag": 46321
+              }
+            }
+          ]
+        },
+        "ARB": {
+          "pc": "80001274",
+          "tag": 12872,
+          "first_head": 390,
+          "mark": 390,
+          "request": 392,
+          "retire": 393,
+          "bypass": true,
+          "load_pc": "800012ac",
+          "load_request": 390,
+          "rob_count": 15,
+          "age_distance": 14,
+          "ordinal": 65,
+          "window": [
+            {
+              "cycle": 386,
+              "head_pc": "8000126c",
+              "head_insn": "0005a227",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "store",
+                "pc": "8000126c",
+                "address": "8000a27c"
+              }
+            },
+            {
+              "cycle": 387,
+              "head_pc": "8000126c",
+              "head_insn": "0005a227",
+              "rob_count": 16,
+              "rename_blocked": true,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "800012a8",
+                "insn": "00060713",
+                "tag": 13077
+              }
+            },
+            {
+              "cycle": 388,
+              "head_pc": "80001270",
+              "head_insn": "00d7a027",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "store",
+                "pc": "80001270",
+                "address": "8000a288"
+              }
+            },
+            {
+              "cycle": 389,
+              "head_pc": "80001270",
+              "head_insn": "00d7a027",
+              "rob_count": 16,
+              "rename_blocked": true,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "800012ac",
+                "insn": "00462287",
+                "tag": 13094
+              }
+            },
+            {
+              "cycle": 390,
+              "head_pc": "80001274",
+              "head_insn": "00f7a227",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "800012ac",
+                "address": "8000b57c"
+              }
+            },
+            {
+              "cycle": 391,
+              "head_pc": "80001274",
+              "head_insn": "00f7a227",
+              "rob_count": 16,
+              "rename_blocked": true,
+              "retired": false,
+              "flush": false,
+              "int_issue": {
+                "pc": "800012b0",
+                "insn": "00482207",
+                "tag": 13111
+              }
+            },
+            {
+              "cycle": 392,
+              "head_pc": "80001274",
+              "head_insn": "00f7a227",
+              "rob_count": 16,
+              "rename_blocked": true,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "store",
+                "pc": "80001274",
+                "address": "8000a28c"
+              },
+              "load_completion_tag": 13094
+            },
+            {
+              "cycle": 393,
+              "head_pc": "80001274",
+              "head_insn": "00f7a227",
+              "rob_count": 16,
+              "rename_blocked": true,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 394,
+              "head_pc": "80001278",
+              "head_insn": "fff48493",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "800012b0",
+                "address": "8000b57c"
+              }
+            },
+            {
+              "cycle": 395,
+              "head_pc": "8000127c",
+              "head_insn": "01160633",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "800012b4",
+                "insn": "00472187",
+                "tag": 13128
+              }
+            },
+            {
+              "cycle": 396,
+              "head_pc": "80001280",
+              "head_insn": "00a80833",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "800012b4",
+                "address": "8000b57c"
+              },
+              "load_completion_tag": 13111,
+              "int_issue": {
+                "pc": "800012b8",
+                "insn": "00062787",
+                "tag": 13145
+              }
+            },
+            {
+              "cycle": 397,
+              "head_pc": "80001284",
+              "head_insn": "01c70733",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 398,
+              "head_pc": "80001288",
+              "head_insn": "00868693",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "800012b8",
+                "address": "8000b578"
+              },
+              "load_completion_tag": 13128,
+              "int_issue": {
+                "pc": "800012bc",
+                "insn": "0045a607",
+                "tag": 13162
+              }
+            },
+            {
+              "cycle": 399,
+              "head_pc": "8000128c",
+              "head_insn": "00840413",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 400,
+              "head_pc": "80001290",
+              "head_insn": "00858593",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "800012bc",
+                "address": "8000a284"
+              },
+              "load_completion_tag": 13145,
+              "int_issue": {
+                "pc": "800012c0",
+                "insn": "00082087",
+                "tag": 13179
+              }
+            },
+            {
+              "cycle": 401,
+              "head_pc": "80001294",
+              "head_insn": "00878793",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 402,
+              "head_pc": "80001298",
+              "head_insn": "f00494e3",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "800012c0",
+                "address": "8000b578"
+              },
+              "load_completion_tag": 13162,
+              "int_issue": {
+                "pc": "800012c4",
+                "insn": "0047a687",
+                "tag": 13196
+              }
+            },
+            {
+              "cycle": 403,
+              "head_pc": "8000129c",
+              "head_insn": "dc8ff06f",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": true
+            },
+            {
+              "cycle": 404,
+              "head_pc": "00000000",
+              "head_insn": "00000000",
+              "rob_count": 0,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false
+            },
+            {
+              "cycle": 405,
+              "head_pc": "00000000",
+              "head_insn": "00000000",
+              "rob_count": 0,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false
+            },
+            {
+              "cycle": 406,
+              "head_pc": "00000000",
+              "head_insn": "00000000",
+              "rob_count": 0,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false
+            },
+            {
+              "cycle": 407,
+              "head_pc": "00000000",
+              "head_insn": "00000000",
+              "rob_count": 0,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false
+            },
+            {
+              "cycle": 408,
+              "head_pc": "80000864",
+              "head_insn": "04c12083",
+              "rob_count": 1,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "int_issue": {
+                "pc": "80000864",
+                "insn": "04c12083",
+                "tag": 13264
+              }
+            },
+            {
+              "cycle": 409,
+              "head_pc": "80000864",
+              "head_insn": "04c12083",
+              "rob_count": 2,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "80000864",
+                "address": "800ffebc"
+              },
+              "int_issue": {
+                "pc": "80000868",
+                "insn": "04812403",
+                "tag": 13281
+              }
+            }
+          ]
+        },
+        "load_lifecycle": {
+          "pc": "800012ac",
+          "insn": "00462287",
+          "tag": 13094,
+          "request_cycle": 390,
+          "rob_count": 15,
+          "bypass": true,
+          "pair": "80001274/800012ac",
+          "store_pc": "80001274",
+          "store_tag": 12872,
+          "store_ordinal": 65,
+          "age_distance": 14,
+          "store_request_cycle": 392,
+          "completion_cycle": 392,
+          "store_retire_cycle": 393,
+          "store_mark_cycle": 390,
+          "store_head_cycle": 390,
+          "outcome": "cancelled_at_retirement_flush",
+          "finish_cycle": 403
+        }
+      },
+      "cycles_delta": 1195,
+      "extra_cancelled_external_reads": 356
+    },
+    "statemate": {
+      "paired_stores": 494946,
+      "ack_wait_totals": {
+        "AB": 542082,
+        "ARB": 797410
+      },
+      "cohorts": {
+        "other": {
+          "stores": 365318,
+          "ack_wait_delta": -3928,
+          "1_to_1_cycles": 300506,
+          "2_to_2_cycles": 25532,
+          "2_to_1_cycles": 21604,
+          "1_to_2_cycles": 17676
+        },
+        "bypassed": {
+          "stores": 129628,
+          "ack_wait_delta": 259256,
+          "1_to_3_cycles": 129628
+        }
+      },
+      "guard_coverage": {
+        "all": {
+          "accepted": 129628,
+          "cancelled": 46158,
+          "retired": 83470
+        },
+        "rob_free_at_least_2": {
+          "accepted": 17678,
+          "retired": 17676,
+          "cancelled": 2
+        },
+        "age_at_most_4": {
+          "accepted": 11784,
+          "retired": 11784
+        }
+      },
+      "representative_store": {
+        "AB": {
+          "pc": "80001dc4",
+          "tag": 32804,
+          "first_head": 705,
+          "mark": 705,
+          "request": 705,
+          "retire": 706,
+          "bypass": false,
+          "ordinal": 124,
+          "window": [
+            {
+              "cycle": 701,
+              "head_pc": "80001db8",
+              "head_insn": "90d60d23",
+              "rob_count": 13,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "store",
+                "pc": "80001db8",
+                "address": "80042918"
+              },
+              "int_issue": {
+                "pc": "80001848",
+                "insn": "800437b7",
+                "tag": 32855
+              }
+            },
+            {
+              "cycle": 702,
+              "head_pc": "80001db8",
+              "head_insn": "90d60d23",
+              "rob_count": 14,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "80001858",
+                "insn": "800436b7",
+                "tag": 32923
+              }
+            },
+            {
+              "cycle": 703,
+              "head_pc": "80001dbc",
+              "head_insn": "800435b7",
+              "rob_count": 14,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "8000184c",
+                "insn": "88078793",
+                "tag": 32872
+              }
+            },
+            {
+              "cycle": 704,
+              "head_pc": "80001dc0",
+              "head_insn": "800436b7",
+              "rob_count": 14,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "8000185c",
+                "insn": "8e86c703",
+                "tag": 32940
+              }
+            },
+            {
+              "cycle": 705,
+              "head_pc": "80001dc4",
+              "head_insn": "90e68da3",
+              "rob_count": 14,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "store",
+                "pc": "80001dc4",
+                "address": "80042918"
+              }
+            },
+            {
+              "cycle": 706,
+              "head_pc": "80001dc4",
+              "head_insn": "90e68da3",
+              "rob_count": 15,
+              "rename_blocked": true,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 707,
+              "head_pc": "80001dc8",
+              "head_insn": "90f58423",
+              "rob_count": 14,
+              "rename_blocked": true,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "store",
+                "pc": "80001dc8",
+                "address": "80042908"
+              }
+            },
+            {
+              "cycle": 708,
+              "head_pc": "80001dc8",
+              "head_insn": "90f58423",
+              "rob_count": 14,
+              "rename_blocked": true,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 709,
+              "head_pc": "80001dcc",
+              "head_insn": "a7dff0ef",
+              "rob_count": 13,
+              "rename_blocked": true,
+              "retired": true,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "8000185c",
+                "address": "800428e8"
+              },
+              "int_issue": {
+                "pc": "80001850",
+                "insn": "0137c703",
+                "tag": 32889
+              }
+            },
+            {
+              "cycle": 710,
+              "head_pc": "80001848",
+              "head_insn": "800437b7",
+              "rob_count": 12,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 711,
+              "head_pc": "8000184c",
+              "head_insn": "88078793",
+              "rob_count": 12,
+              "rename_blocked": true,
+              "retired": true,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "80001850",
+                "address": "80042890"
+              },
+              "load_completion_tag": 32940,
+              "int_issue": {
+                "pc": "80001860",
+                "insn": "00100613",
+                "tag": 32957
+              }
+            },
+            {
+              "cycle": 712,
+              "head_pc": "80001850",
+              "head_insn": "0137c703",
+              "rob_count": 11,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "int_issue": {
+                "pc": "80001868",
+                "insn": "00200593",
+                "tag": 32991
+              }
+            },
+            {
+              "cycle": 713,
+              "head_pc": "80001850",
+              "head_insn": "0137c703",
+              "rob_count": 12,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "load_completion_tag": 32889,
+              "int_issue": {
+                "pc": "80001864",
+                "insn": "0ac70463",
+                "tag": 32974
+              }
+            },
+            {
+              "cycle": 714,
+              "head_pc": "80001850",
+              "head_insn": "0137c703",
+              "rob_count": 13,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "80001854",
+                "insn": "08070863",
+                "tag": 32906
+              }
+            },
+            {
+              "cycle": 715,
+              "head_pc": "80001854",
+              "head_insn": "08070863",
+              "rob_count": 13,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "int_issue": {
+                "pc": "8000186c",
+                "insn": "08b71863",
+                "tag": 32992
+              }
+            },
+            {
+              "cycle": 716,
+              "head_pc": "80001854",
+              "head_insn": "08070863",
+              "rob_count": 14,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": true
+            },
+            {
+              "cycle": 717,
+              "head_pc": "00000000",
+              "head_insn": "00000000",
+              "rob_count": 0,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false
+            },
+            {
+              "cycle": 718,
+              "head_pc": "00000000",
+              "head_insn": "00000000",
+              "rob_count": 0,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false
+            },
+            {
+              "cycle": 719,
+              "head_pc": "00000000",
+              "head_insn": "00000000",
+              "rob_count": 0,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false
+            },
+            {
+              "cycle": 720,
+              "head_pc": "00000000",
+              "head_insn": "00000000",
+              "rob_count": 0,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false
+            },
+            {
+              "cycle": 721,
+              "head_pc": "800018e4",
+              "head_insn": "0157c703",
+              "rob_count": 1,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "int_issue": {
+                "pc": "800018e4",
+                "insn": "0157c703",
+                "tag": 33120
+              }
+            },
+            {
+              "cycle": 722,
+              "head_pc": "800018e4",
+              "head_insn": "0157c703",
+              "rob_count": 2,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "800018e4",
+                "address": "80042894"
+              }
+            }
+          ]
+        },
+        "ARB": {
+          "pc": "80001dc4",
+          "tag": 33316,
+          "first_head": 746,
+          "mark": 746,
+          "request": 748,
+          "retire": 749,
+          "bypass": true,
+          "load_pc": "80001914",
+          "load_request": 746,
+          "rob_count": 15,
+          "age_distance": 13,
+          "ordinal": 124,
+          "window": [
+            {
+              "cycle": 742,
+              "head_pc": "80001db8",
+              "head_insn": "90d60d23",
+              "rob_count": 16,
+              "rename_blocked": true,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "store",
+                "pc": "80001db8",
+                "address": "80042918"
+              },
+              "load_completion_tag": 33452,
+              "int_issue": {
+                "pc": "8000190c",
+                "insn": "80043637",
+                "tag": 33503
+              }
+            },
+            {
+              "cycle": 743,
+              "head_pc": "80001db8",
+              "head_insn": "90d60d23",
+              "rob_count": 16,
+              "rename_blocked": true,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "80001864",
+                "insn": "0ac70463",
+                "tag": 33486
+              }
+            },
+            {
+              "cycle": 744,
+              "head_pc": "80001dbc",
+              "head_insn": "800435b7",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "80001910",
+                "insn": "800435b7",
+                "tag": 33504
+              }
+            },
+            {
+              "cycle": 745,
+              "head_pc": "80001dc0",
+              "head_insn": "800436b7",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "80001914",
+                "insn": "96c62603",
+                "tag": 33521
+              }
+            },
+            {
+              "cycle": 746,
+              "head_pc": "80001dc4",
+              "head_insn": "90e68da3",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "80001914",
+                "address": "8004296c"
+              },
+              "int_issue": {
+                "pc": "80001918",
+                "insn": "9685a583",
+                "tag": 33538
+              }
+            },
+            {
+              "cycle": 747,
+              "head_pc": "80001dc4",
+              "head_insn": "90e68da3",
+              "rob_count": 16,
+              "rename_blocked": true,
+              "retired": false,
+              "flush": false
+            },
+            {
+              "cycle": 748,
+              "head_pc": "80001dc4",
+              "head_insn": "90e68da3",
+              "rob_count": 16,
+              "rename_blocked": true,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "store",
+                "pc": "80001dc4",
+                "address": "80042918"
+              },
+              "load_completion_tag": 33521
+            },
+            {
+              "cycle": 749,
+              "head_pc": "80001dc4",
+              "head_insn": "90e68da3",
+              "rob_count": 16,
+              "rename_blocked": true,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 750,
+              "head_pc": "80001dc8",
+              "head_insn": "90f58423",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "80001918",
+                "address": "80042968"
+              }
+            },
+            {
+              "cycle": 751,
+              "head_pc": "80001dc8",
+              "head_insn": "90f58423",
+              "rob_count": 16,
+              "rename_blocked": true,
+              "retired": false,
+              "flush": false,
+              "int_issue": {
+                "pc": "80001920",
+                "insn": "fec054e3",
+                "tag": 33572
+              }
+            },
+            {
+              "cycle": 752,
+              "head_pc": "80001dc8",
+              "head_insn": "90f58423",
+              "rob_count": 16,
+              "rename_blocked": true,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "store",
+                "pc": "80001dc8",
+                "address": "80042908"
+              },
+              "load_completion_tag": 33538
+            },
+            {
+              "cycle": 753,
+              "head_pc": "80001dc8",
+              "head_insn": "90f58423",
+              "rob_count": 16,
+              "rename_blocked": true,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "8000191c",
+                "insn": "fec586e3",
+                "tag": 33555
+              }
+            },
+            {
+              "cycle": 754,
+              "head_pc": "80001dcc",
+              "head_insn": "a7dff0ef",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false
+            },
+            {
+              "cycle": 755,
+              "head_pc": "80001848",
+              "head_insn": "800437b7",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "80001924",
+                "insn": "00200613",
+                "tag": 33589
+              }
+            },
+            {
+              "cycle": 756,
+              "head_pc": "8000184c",
+              "head_insn": "88078793",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "80001928",
+                "insn": "80043e37",
+                "tag": 33606
+              }
+            },
+            {
+              "cycle": 757,
+              "head_pc": "80001850",
+              "head_insn": "0137c703",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": false,
+              "int_issue": {
+                "pc": "8000192c",
+                "insn": "80043337",
+                "tag": 33623
+              }
+            },
+            {
+              "cycle": 758,
+              "head_pc": "80001854",
+              "head_insn": "08070863",
+              "rob_count": 15,
+              "rename_blocked": false,
+              "retired": true,
+              "flush": true
+            },
+            {
+              "cycle": 759,
+              "head_pc": "00000000",
+              "head_insn": "00000000",
+              "rob_count": 0,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false
+            },
+            {
+              "cycle": 760,
+              "head_pc": "00000000",
+              "head_insn": "00000000",
+              "rob_count": 0,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false
+            },
+            {
+              "cycle": 761,
+              "head_pc": "00000000",
+              "head_insn": "00000000",
+              "rob_count": 0,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false
+            },
+            {
+              "cycle": 762,
+              "head_pc": "00000000",
+              "head_insn": "00000000",
+              "rob_count": 0,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false
+            },
+            {
+              "cycle": 763,
+              "head_pc": "800018e4",
+              "head_insn": "0157c703",
+              "rob_count": 1,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "int_issue": {
+                "pc": "800018e4",
+                "insn": "0157c703",
+                "tag": 33648
+              }
+            },
+            {
+              "cycle": 764,
+              "head_pc": "800018e4",
+              "head_insn": "0157c703",
+              "rob_count": 2,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "memory_request": {
+                "kind": "load",
+                "pc": "800018e4",
+                "address": "80042894"
+              }
+            },
+            {
+              "cycle": 765,
+              "head_pc": "800018e4",
+              "head_insn": "0157c703",
+              "rob_count": 3,
+              "rename_blocked": false,
+              "retired": false,
+              "flush": false,
+              "int_issue": {
+                "pc": "800018ec",
+                "insn": "0147c703",
+                "tag": 33682
+              }
+            }
+          ]
+        },
+        "load_lifecycle": {
+          "pc": "80001914",
+          "insn": "96c62603",
+          "tag": 33521,
+          "request_cycle": 746,
+          "rob_count": 15,
+          "bypass": true,
+          "pair": "80001dc4/80001914",
+          "store_pc": "80001dc4",
+          "store_tag": 33316,
+          "store_ordinal": 124,
+          "age_distance": 13,
+          "store_request_cycle": 748,
+          "completion_cycle": 748,
+          "store_retire_cycle": 749,
+          "store_mark_cycle": 746,
+          "store_head_cycle": 746,
+          "outcome": "cancelled_at_retirement_flush",
+          "finish_cycle": 758
+        }
+      },
+      "cycles_delta": 191502,
+      "extra_cancelled_external_reads": 41247
+    }
+  }
+}

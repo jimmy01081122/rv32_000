@@ -48,7 +48,7 @@ negative controls pass. This is not a new CPU candidate, full-family score or PP
 See [findings and next proposal](../../../LSU_ARBITRATION_DIAGNOSIS.md).
 `capture-summary.json`, `review-summary.json` and `schedule-comparison.json` are
 convenience copies; inventory hashes bind the original controller outputs too.
-All part files are below 40 MiB. Verify from the repository root:
+All part files are at most 40 MiB. Verify from the repository root:
 
 ```sh
 python3 experiments/lsu-arbitration-diagnosis-v1/archive.py --verify \\

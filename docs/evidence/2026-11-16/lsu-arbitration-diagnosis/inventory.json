@@ -1,0 +1,611 @@
+{
+  "passed": true,
+  "scope": "Read-only three-case arbitration diagnosis; original RTL models in linked prior archive; no new CPU score/PPA",
+  "archive_sha256": "6579fb66e86145180e53898434a0d849cf511a6e6c818d2c57ff1e16e79de992",
+  "archive_bytes": 294977473,
+  "parts": [
+    {
+      "name": "arbitration-diagnosis.tar.gz.part00",
+      "bytes": 41943040,
+      "sha256": "679a0f9d5c892ce628277aec7f5fad7fc87dece748ad60d802ed03d21e1b569e"
+    },
+    {
+      "name": "arbitration-diagnosis.tar.gz.part01",
+      "bytes": 41943040,
+      "sha256": "f2f5f181e4de3a5190f10f48546a98da2785b24e6d8f7c2b10e646bfe91636ca"
+    },
+    {
+      "name": "arbitration-diagnosis.tar.gz.part02",
+      "bytes": 41943040,
+      "sha256": "c6d68e734c227b3ef4ff47a1293a4541f584a690e0d0274c755640adf94ef7d5"
+    },
+    {
+      "name": "arbitration-diagnosis.tar.gz.part03",
+      "bytes": 41943040,
+      "sha256": "821d058ece4e342b80cec47989849dfe8af6ca23bc9e65b8cfd8a7635b346b45"
+    },
+    {
+      "name": "arbitration-diagnosis.tar.gz.part04",
+      "bytes": 41943040,
+      "sha256": "a3ad9324a5682ddedf59f7cb16e7f8e7976636015f8049b08f83c9774a068e5e"
+    },
+    {
+      "name": "arbitration-diagnosis.tar.gz.part05",
+      "bytes": 41943040,
+      "sha256": "42df37b41b5bbb219c25bc22a0c086cd6f87fda4b167ebdd3f3472c29d2d4189"
+    },
+    {
+      "name": "arbitration-diagnosis.tar.gz.part06",
+      "bytes": 41943040,
+      "sha256": "68203d80289a92878b82944f084a809d07d7e357d1d48c5bb38e0ea560f5d023"
+    },
+    {
+      "name": "arbitration-diagnosis.tar.gz.part07",
+      "bytes": 1376193,
+      "sha256": "c4ed3dfa57b429ae0bb73abc77edb2e6a796ac24568aac70d23df7d756244468"
+    }
+  ],
+  "records": [
+    {
+      "path": "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/statemate/dut.log",
+      "bytes": 786,
+      "sha256": "e822b765ac69f99c96293b706dfb1c78d91be43a787a6d0203660b715e1acc5b"
+    },
+    {
+      "path": "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/statemate/input.elf",
+      "bytes": 277760,
+      "sha256": "89817da7b119f2d38d64fd49847161968a27319c45071cf7b92986c71017a52e"
+    },
+    {
+      "path": "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/statemate/memory.json",
+      "bytes": 551,
+      "sha256": "df5ecf3ed9a23a43a94f95ce96377160518b121a50120b3f72d4792cdba2fb7b"
+    },
+    {
+      "path": "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/statemate/profile.json",
+      "bytes": 53849,
+      "sha256": "7d37334b8298667b6115ed9960bd24d231c46b8fcdcd22220ebe3bb26da39f33"
+    },
+    {
+      "path": "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/fft/dut.log",
+      "bytes": 14117,
+      "sha256": "b528e3ab796165b3a1d4ff224bde93238daf03a5addcf8767ed01414c7dab813"
+    },
+    {
+      "path": "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/fft/input.elf",
+      "bytes": 69656,
+      "sha256": "fb91c70cb5fa040f01f2e7fcd56fd50427fb4defaf81134a73cc814543d7102b"
+    },
+    {
+      "path": "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/fft/memory.json",
+      "bytes": 551,
+      "sha256": "410bde8cc90b2e66dce89d97dadd586189957063a619710d1713d275f578befc"
+    },
+    {
+      "path": "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/fft/profile.json",
+      "bytes": 23589,
+      "sha256": "c2ee6fde6d4d02ec0b2517f845d066f814ca3c6d4d671c67b06ea1c4cfc72971"
+    },
+    {
+      "path": "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/pid/dut.log",
+      "bytes": 14191,
+      "sha256": "67cae6a504e829fdd9a7a584266578b1cdcc7de752cfbb3c050ccbf5a951c67c"
+    },
+    {
+      "path": "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/pid/input.elf",
+      "bytes": 13448,
+      "sha256": "22bc6dfaf2603e5348eee853165184f0b9c39af8b239f1cecfdce23b443aa583"
+    },
+    {
+      "path": "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/pid/memory.json",
+      "bytes": 547,
+      "sha256": "9046715d29f950b38678a3ea4d9339c313ec587097863ae8710f59e6c30468af"
+    },
+    {
+      "path": "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/pid/profile.json",
+      "bytes": 4568,
+      "sha256": "7b7781024f9b114b08c5aefe699861844800172474f6dfe88bf92814d5b6b47b"
+    },
+    {
+      "path": "build/experiments/lsu-ab-v1/pid-waveform-review-v2/AB/roi-signals.json.gz",
+      "bytes": 1640526,
+      "sha256": "d749b2a328404edc49196f1134531013941f03ac0a716372b48aeff20189bd64"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/build.json",
+      "bytes": 6673,
+      "sha256": "b521744872b4f46108f6307313594173c26f23016972e5aadd37bb223723767a"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/fft/comparison.json",
+      "bytes": 3416,
+      "sha256": "759ee8f0faefaba80477408b3d2201d96d1a3619db41910ffb7ca02596f56691"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/fft/off/dut.log",
+      "bytes": 14126,
+      "sha256": "8a8ce6a932ea245fc3de6d8d5600134fb17acab5c58608bdd43e74faad6d6b17"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/fft/off/memory.json",
+      "bytes": 551,
+      "sha256": "410bde8cc90b2e66dce89d97dadd586189957063a619710d1713d275f578befc"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/fft/off/profile.json",
+      "bytes": 23589,
+      "sha256": "c2ee6fde6d4d02ec0b2517f845d066f814ca3c6d4d671c67b06ea1c4cfc72971"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/fft/on/cycles.bin.gz",
+      "bytes": 2059182,
+      "sha256": "95d33cf818a812d13cb2f68c65ebd510479bf68ff68bbe12a20fe31c00e3fe1b"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/fft/on/dut.log",
+      "bytes": 14126,
+      "sha256": "8a8ce6a932ea245fc3de6d8d5600134fb17acab5c58608bdd43e74faad6d6b17"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/fft/on/memory.json",
+      "bytes": 551,
+      "sha256": "410bde8cc90b2e66dce89d97dadd586189957063a619710d1713d275f578befc"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/fft/on/profile.json",
+      "bytes": 23589,
+      "sha256": "c2ee6fde6d4d02ec0b2517f845d066f814ca3c6d4d671c67b06ea1c4cfc72971"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/harness-replacements.json",
+      "bytes": 1194,
+      "sha256": "08f0798c71a59fa6a9f153cc8bdadd5dd6eccfe418912d989b9568dee2e5d240"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/observer",
+      "bytes": 1040928,
+      "sha256": "1c2d2765a59802b456c8dfabdfd23961ce1c5bf42310d53c4667df2e608ee0e5"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/pid/comparison.json",
+      "bytes": 3415,
+      "sha256": "e633a0f0fc5074fdb20bf34dd22c3efaad68e1782e0c2dd21a32bc499960f0db"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/pid/off/dut.log",
+      "bytes": 14200,
+      "sha256": "1ec10277b45e98a79dbcc7846a50c21421898e4784e23c912e0dfbf7ec6f1364"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/pid/off/memory.json",
+      "bytes": 547,
+      "sha256": "9046715d29f950b38678a3ea4d9339c313ec587097863ae8710f59e6c30468af"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/pid/off/profile.json",
+      "bytes": 4568,
+      "sha256": "7b7781024f9b114b08c5aefe699861844800172474f6dfe88bf92814d5b6b47b"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/pid/on/cycles.bin.gz",
+      "bytes": 389579,
+      "sha256": "c51f5e8487e4fa557eca5e0a5352b2a79c647fd1b400707cc426b7976e610fb9"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/pid/on/dut.log",
+      "bytes": 14200,
+      "sha256": "1ec10277b45e98a79dbcc7846a50c21421898e4784e23c912e0dfbf7ec6f1364"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/pid/on/memory.json",
+      "bytes": 547,
+      "sha256": "9046715d29f950b38678a3ea4d9339c313ec587097863ae8710f59e6c30468af"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/pid/on/profile.json",
+      "bytes": 4568,
+      "sha256": "7b7781024f9b114b08c5aefe699861844800172474f6dfe88bf92814d5b6b47b"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/sim_main.cpp",
+      "bytes": 20454,
+      "sha256": "e2be5225e253bdf932f079eb084814fadb520f2e7cd81e86246a6cd824b1228f"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/sim_main.o",
+      "bytes": 94480,
+      "sha256": "6d3e61f802d45046709f288951f808621c4575debb0dd4330f3f4cdc59722edc"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/statemate/comparison.json",
+      "bytes": 3510,
+      "sha256": "97a360a7a212a94683b7f9ad76e79186c720c967946ce00d1a7d9b82e5b5c102"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/statemate/off/dut.log",
+      "bytes": 795,
+      "sha256": "9e285e76433d114b85a52a70a649587883e853ee36b765bad5334746b466feff"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/statemate/off/memory.json",
+      "bytes": 551,
+      "sha256": "df5ecf3ed9a23a43a94f95ce96377160518b121a50120b3f72d4792cdba2fb7b"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/statemate/off/profile.json",
+      "bytes": 53849,
+      "sha256": "7d37334b8298667b6115ed9960bd24d231c46b8fcdcd22220ebe3bb26da39f33"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/statemate/on/cycles.bin.gz",
+      "bytes": 142650341,
+      "sha256": "3e11f0255e06378bccd82c6977d39d6641296819570ee5991a8828f5d26b1674"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/statemate/on/dut.log",
+      "bytes": 795,
+      "sha256": "9e285e76433d114b85a52a70a649587883e853ee36b765bad5334746b466feff"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/statemate/on/memory.json",
+      "bytes": 551,
+      "sha256": "df5ecf3ed9a23a43a94f95ce96377160518b121a50120b3f72d4792cdba2fb7b"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/statemate/on/profile.json",
+      "bytes": 53849,
+      "sha256": "7d37334b8298667b6115ed9960bd24d231c46b8fcdcd22220ebe3bb26da39f33"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/summary.json",
+      "bytes": 11183,
+      "sha256": "603e54ffa60c48f2948c770292ce38942324db0b7147bceb7f25778bc16327ea"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/build.json",
+      "bytes": 6738,
+      "sha256": "abda3dbc085fbf20bc7c93eb0d0b2995aedbb806fb4099c423b6e22ce25217f0"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/fft/comparison.json",
+      "bytes": 3459,
+      "sha256": "90617f150c9bf5c929d4e66b8891bc30d75c88c4e54e3ea03d282d8482251f0d"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/fft/off/dut.log",
+      "bytes": 14132,
+      "sha256": "b96ebdeae0d2664b6933db3cb8d1a79f4cdfc85fc33f09be53e5b2aa037e5672"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/fft/off/memory.json",
+      "bytes": 551,
+      "sha256": "8d85e9921f11b0ba8d75d361dd8e4313f246ce6c51b29edd8b67564c84bd90e5"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/fft/off/profile.json",
+      "bytes": 23653,
+      "sha256": "c6bcac312641f98a9bb437147ca1f1f17bff66de2d4d3a025c4200e6fa66e5f2"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/fft/on/cycles.bin.gz",
+      "bytes": 2152861,
+      "sha256": "802536772308d0624b73f1de3f59857d488a5569640ae913150a769d4eadddf6"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/fft/on/dut.log",
+      "bytes": 14132,
+      "sha256": "b96ebdeae0d2664b6933db3cb8d1a79f4cdfc85fc33f09be53e5b2aa037e5672"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/fft/on/memory.json",
+      "bytes": 551,
+      "sha256": "8d85e9921f11b0ba8d75d361dd8e4313f246ce6c51b29edd8b67564c84bd90e5"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/fft/on/profile.json",
+      "bytes": 23653,
+      "sha256": "c6bcac312641f98a9bb437147ca1f1f17bff66de2d4d3a025c4200e6fa66e5f2"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/harness-replacements.json",
+      "bytes": 1194,
+      "sha256": "08f0798c71a59fa6a9f153cc8bdadd5dd6eccfe418912d989b9568dee2e5d240"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/observer",
+      "bytes": 1040928,
+      "sha256": "da4de2bb8d4da39945e082318322570febaa77ee78b936eedf193180e4f78e7e"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/pid/comparison.json",
+      "bytes": 3458,
+      "sha256": "d6cc126eb96d79ef54f9887b4ce5be89e56d690bbf4eaaad984ed01840b84f63"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/pid/off/dut.log",
+      "bytes": 14206,
+      "sha256": "f7f6fb3ba7bc82323ef265b7e46b7919a9d691b0b4f0d43f9fbb54bc96e61700"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/pid/off/memory.json",
+      "bytes": 547,
+      "sha256": "b2007b1a8ebedd33cea1795658f35d9095ffec726bcceb4ddb7f4af3fbe2a44a"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/pid/off/profile.json",
+      "bytes": 4615,
+      "sha256": "8ef777dea0f6a32332d0fdd983cbbb92cac139a75635c66f27a268e73c782125"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/pid/on/cycles.bin.gz",
+      "bytes": 354635,
+      "sha256": "cc31ebaa29668b63c673a774fb5f3dd0465c79c99c42ce9d29b6f4ffb06dadab"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/pid/on/dut.log",
+      "bytes": 14206,
+      "sha256": "f7f6fb3ba7bc82323ef265b7e46b7919a9d691b0b4f0d43f9fbb54bc96e61700"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/pid/on/memory.json",
+      "bytes": 547,
+      "sha256": "b2007b1a8ebedd33cea1795658f35d9095ffec726bcceb4ddb7f4af3fbe2a44a"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/pid/on/profile.json",
+      "bytes": 4615,
+      "sha256": "8ef777dea0f6a32332d0fdd983cbbb92cac139a75635c66f27a268e73c782125"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/sim_main.cpp",
+      "bytes": 20454,
+      "sha256": "e2be5225e253bdf932f079eb084814fadb520f2e7cd81e86246a6cd824b1228f"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/sim_main.o",
+      "bytes": 94496,
+      "sha256": "d326543fb1058aa9d8c0810cad7c169f1868b6ba013765eb4d9f31b54e1f5fc9"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/statemate/comparison.json",
+      "bytes": 3553,
+      "sha256": "eb1cf1a012deee666280671123db7369104396b8de9b9432413381e8886bd475"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/statemate/off/dut.log",
+      "bytes": 801,
+      "sha256": "fd23541b6139a45e63721a85b023c67ce3b0d062a87324ed2b5ed5d676fdabd3"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/statemate/off/memory.json",
+      "bytes": 551,
+      "sha256": "3db293e257f029bbe5d171a7982dcefb30e2c3c7bd3113cf6be3c3cc418ec4eb"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/statemate/off/profile.json",
+      "bytes": 53867,
+      "sha256": "7f6ff97d0a00b0fd088c81797cc1d1cf87296a5358546e321328781763603dcf"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/statemate/on/cycles.bin.gz",
+      "bytes": 150670705,
+      "sha256": "7f17c0c2f690f9d464b576633284019617e5ea90b6497e1e24ba66e9ca7d7b34"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/statemate/on/dut.log",
+      "bytes": 801,
+      "sha256": "fd23541b6139a45e63721a85b023c67ce3b0d062a87324ed2b5ed5d676fdabd3"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/statemate/on/memory.json",
+      "bytes": 551,
+      "sha256": "3db293e257f029bbe5d171a7982dcefb30e2c3c7bd3113cf6be3c3cc418ec4eb"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/statemate/on/profile.json",
+      "bytes": 53867,
+      "sha256": "7f6ff97d0a00b0fd088c81797cc1d1cf87296a5358546e321328781763603dcf"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/summary.json",
+      "bytes": 11313,
+      "sha256": "29c185cb88073feeb5f01b610fb4670e3b6b6d140abdb32252f5bcca957cab20"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/summary.json",
+      "bytes": 24455,
+      "sha256": "b5de9a57b80b82060c3dbec2115d28fb6c0c5d4eefecb01c3e7610d80bfa47dc"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/disassembly/fft.txt",
+      "bytes": 413350,
+      "sha256": "688c1ebb3788d477280dd1b513044cbfea883e1f509b6713dedd513a9818bd81"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/disassembly/pid.txt",
+      "bytes": 24356,
+      "sha256": "0b08d96a5520f601db53b3f9f6e80425e2dfb71ed8556418620d556ab632b10b"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/disassembly/statemate.txt",
+      "bytes": 131919,
+      "sha256": "a116654f5ae4d70272f77cde597c4b8c392949c96b1d041a89fbaabf415a94ef"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/disassembly/summary.json",
+      "bytes": 1678,
+      "sha256": "a5dc182b0eef3675af23b772fcdafa17cefc1689075bfc30a88ba41ac77a131c"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/review-v1/AB-fft.json",
+      "bytes": 5695,
+      "sha256": "3340b0d77b58f3224031cad1e71e493537564267c9f7f7e2e57ed267af8be1e6"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/review-v1/AB-pid.json",
+      "bytes": 1529,
+      "sha256": "cc3d019c99b5eb673fe93dfab23f51557a4358ffbcaaf0eb8c7f45bc1c82192a"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/review-v1/AB-statemate.json",
+      "bytes": 10460,
+      "sha256": "2524719b2c1290527aa988a07b169b3d7234fb19330e3c509c1d937344b80574"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/review-v1/ARB-fft.json",
+      "bytes": 49735,
+      "sha256": "0bfbf0d0d72174410f3770eda4031077ea64d4a7c9a4b3395537f0abcc4cfa62"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/review-v1/ARB-pid.json",
+      "bytes": 3385,
+      "sha256": "217faacede0fc3ff8718dbbcc661c07f0f68a44624ae1c978b6592ecfc86d82c"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/review-v1/ARB-statemate.json",
+      "bytes": 101487,
+      "sha256": "27236b8f3ad0b8ebfe3b810d40d97970a30e55f1b821ab5469edf8ca6ec2e0bc"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/review-v1/calibration.json",
+      "bytes": 258,
+      "sha256": "3707dcdc3d59771d56b96fde8c4b89f5efbb76b02b97e94bd3d1220990e88bdd"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/review-v1/negative-truncated.bin.gz",
+      "bytes": 115,
+      "sha256": "726e545904a2148d1243a491d038ddd6d1fc59eb82d850fc2121901ceee249c8"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/review-v1/summary.json",
+      "bytes": 1437,
+      "sha256": "ade3c7d854da97299f407098c6f9c355e8da7e7a685ee5045b1d3fade368e6c9"
+    },
+    {
+      "path": "build/experiments/lsu-arbitration-diagnosis-v1/schedule-comparison-v1.json",
+      "bytes": 61240,
+      "sha256": "5b4f2a5fa6befb5f8f7d9061eb324c25960081214f72bdb4e30098a02171144d"
+    },
+    {
+      "path": "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/statemate/dut.log",
+      "bytes": 801,
+      "sha256": "fd23541b6139a45e63721a85b023c67ce3b0d062a87324ed2b5ed5d676fdabd3"
+    },
+    {
+      "path": "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/statemate/input.elf",
+      "bytes": 277760,
+      "sha256": "89817da7b119f2d38d64fd49847161968a27319c45071cf7b92986c71017a52e"
+    },
+    {
+      "path": "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/statemate/memory.json",
+      "bytes": 551,
+      "sha256": "3db293e257f029bbe5d171a7982dcefb30e2c3c7bd3113cf6be3c3cc418ec4eb"
+    },
+    {
+      "path": "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/statemate/profile.json",
+      "bytes": 53867,
+      "sha256": "7f6ff97d0a00b0fd088c81797cc1d1cf87296a5358546e321328781763603dcf"
+    },
+    {
+      "path": "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/fft/dut.log",
+      "bytes": 14132,
+      "sha256": "b96ebdeae0d2664b6933db3cb8d1a79f4cdfc85fc33f09be53e5b2aa037e5672"
+    },
+    {
+      "path": "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/fft/input.elf",
+      "bytes": 69656,
+      "sha256": "fb91c70cb5fa040f01f2e7fcd56fd50427fb4defaf81134a73cc814543d7102b"
+    },
+    {
+      "path": "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/fft/memory.json",
+      "bytes": 551,
+      "sha256": "8d85e9921f11b0ba8d75d361dd8e4313f246ce6c51b29edd8b67564c84bd90e5"
+    },
+    {
+      "path": "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/fft/profile.json",
+      "bytes": 23653,
+      "sha256": "c6bcac312641f98a9bb437147ca1f1f17bff66de2d4d3a025c4200e6fa66e5f2"
+    },
+    {
+      "path": "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/pid/dut.log",
+      "bytes": 14206,
+      "sha256": "f7f6fb3ba7bc82323ef265b7e46b7919a9d691b0b4f0d43f9fbb54bc96e61700"
+    },
+    {
+      "path": "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/pid/input.elf",
+      "bytes": 13448,
+      "sha256": "22bc6dfaf2603e5348eee853165184f0b9c39af8b239f1cecfdce23b443aa583"
+    },
+    {
+      "path": "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/pid/memory.json",
+      "bytes": 547,
+      "sha256": "b2007b1a8ebedd33cea1795658f35d9095ffec726bcceb4ddb7f4af3fbe2a44a"
+    },
+    {
+      "path": "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/pid/profile.json",
+      "bytes": 4615,
+      "sha256": "8ef777dea0f6a32332d0fdd983cbbb92cac139a75635c66f27a268e73c782125"
+    },
+    {
+      "path": "docs/LSU_ARBITRATION_DIAGNOSIS.md",
+      "bytes": 6536,
+      "sha256": "484efe1af3113fc8a92fd062e9a9dcde81b15bfc32442e5d7a2114729851b071"
+    },
+    {
+      "path": "docs/evidence/2026-11-13/lsu-ab-complete/copy-inventory.json",
+      "bytes": 361336,
+      "sha256": "d3f60cd4bcdfe0f1720ff7f45807f4354a1a73b1a2ff7cefe460accabcbb0ff3"
+    },
+    {
+      "path": "docs/evidence/2026-11-16/lsu-arbitration-functional/inventory.json",
+      "bytes": 328686,
+      "sha256": "08fb9f25094865b8e070039da6acbc8f3f3c55077354385bfa780a48c3098c03"
+    },
+    {
+      "path": "experiments/lsu-arbitration-diagnosis-v1/README.md",
+      "bytes": 3725,
+      "sha256": "ef559aa4fe14556810a3a2eb92b89e9258dbb1ab876750690daf7c533de6c4d5"
+    },
+    {
+      "path": "experiments/lsu-arbitration-diagnosis-v1/arb_observer.h",
+      "bytes": 4274,
+      "sha256": "abd8237d842c96829b3cadc5e6fdab5a913665774b77e7ee64b86bbb186f83a0"
+    },
+    {
+      "path": "experiments/lsu-arbitration-diagnosis-v1/archive.py",
+      "bytes": 7238,
+      "sha256": "43a9396432ec9250533e7d2fd62fb2f0d9b375fda832207ec9940b14f5d3d7b7"
+    },
+    {
+      "path": "experiments/lsu-arbitration-diagnosis-v1/compare_schedules.py",
+      "bytes": 6393,
+      "sha256": "ddccd54e3416c3a700d7ac7809984055f2915163df320a847f22516a13f381e5"
+    },
+    {
+      "path": "experiments/lsu-arbitration-diagnosis-v1/review_observer.py",
+      "bytes": 11751,
+      "sha256": "bb68c46e7408e3df7fe047ce1460c1918b013e5556be6d003aa0ae8cf89b7023"
+    },
+    {
+      "path": "experiments/lsu-arbitration-diagnosis-v1/run_observer.py",
+      "bytes": 8819,
+      "sha256": "1259c5d7fbb0c277d22610367feb8c84f8dbdd188b7825b3f2c6782a7e01e8c1"
+    },
+    {
+      "path": "experiments/lsu-arbitration-diagnosis-v1/schema.json",
+      "bytes": 4072,
+      "sha256": "5843c8263d2cc03ced2650eded4e153bd320f666982b4fb5191987ace9f86590"
+    }
+  ],
+  "publication_parent_commit": "25cc27afeccc63ca958aab1310e789661eb380ce"
+}

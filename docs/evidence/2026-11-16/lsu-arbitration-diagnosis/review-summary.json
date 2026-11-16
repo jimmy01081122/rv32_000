@@ -1,0 +1,27 @@
+{
+  "passed": true,
+  "scope": "Read-only diagnostic; no new RTL/PPA or family aggregate",
+  "reviewer_sha256": "bb68c46e7408e3df7fe047ce1460c1918b013e5556be6d003aa0ae8cf89b7023",
+  "capture_summary_sha256": "b5de9a57b80b82060c3dbec2115d28fb6c0c5d4eefecb01c3e7610d80bfa47dc",
+  "calibration": {
+    "passed": true,
+    "cycles": 8256,
+    "fields_per_cycle": 39,
+    "vcd_extraction_sha256": "d749b2a328404edc49196f1134531013941f03ac0a716372b48aeff20189bd64",
+    "archive_inventory_sha256": "d3f60cd4bcdfe0f1720ff7f45807f4354a1a73b1a2ff7cefe460accabcbb0ff3"
+  },
+  "negative_controls": {
+    "corrupted_registered_pc_rejected": true,
+    "truncated_row_rejected": true
+  },
+  "review_files_sha256": {
+    "ARB-statemate.json": "27236b8f3ad0b8ebfe3b810d40d97970a30e55f1b821ab5469edf8ca6ec2e0bc",
+    "AB-fft.json": "3340b0d77b58f3224031cad1e71e493537564267c9f7f7e2e57ed267af8be1e6",
+    "AB-pid.json": "cc3d019c99b5eb673fe93dfab23f51557a4358ffbcaaf0eb8c7f45bc1c82192a",
+    "ARB-pid.json": "217faacede0fc3ff8718dbbcc661c07f0f68a44624ae1c978b6592ecfc86d82c",
+    "negative-truncated.bin.gz": "726e545904a2148d1243a491d038ddd6d1fc59eb82d850fc2121901ceee249c8",
+    "ARB-fft.json": "0bfbf0d0d72174410f3770eda4031077ea64d4a7c9a4b3395537f0abcc4cfa62",
+    "calibration.json": "3707dcdc3d59771d56b96fde8c4b89f5efbb76b02b97e94bd3d1220990e88bdd",
+    "AB-statemate.json": "2524719b2c1290527aa988a07b169b3d7234fb19330e3c509c1d937344b80574"
+  }
+}

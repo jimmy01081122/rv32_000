@@ -1,0 +1,411 @@
+{
+  "scope": "Three diagnostic cases; frozen RTL and memory 10000 ps; no new family score or PPA",
+  "started_utc": "2026-11-16T12:13:27.038219+00:00",
+  "controller_sha256": "1259c5d7fbb0c277d22610367feb8c84f8dbdd188b7825b3f2c6782a7e01e8c1",
+  "passed": true,
+  "variants": {
+    "AB": {
+      "passed": true,
+      "variant": "AB",
+      "records": [
+        {
+          "family": "fp32",
+          "name": "pid",
+          "reference_sha256": {
+            "/workspace/rv32_000/build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/pid/memory.json": "9046715d29f950b38678a3ea4d9339c313ec587097863ae8710f59e6c30468af",
+            "/workspace/rv32_000/build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/pid/dut.log": "67cae6a504e829fdd9a7a584266578b1cdcc7de752cfbb3c050ccbf5a951c67c",
+            "/workspace/rv32_000/build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/pid/profile.json": "7b7781024f9b114b08c5aefe699861844800172474f6dfe88bf92814d5b6b47b",
+            "/workspace/rv32_000/build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/pid/input.elf": "22bc6dfaf2603e5348eee853165184f0b9c39af8b239f1cecfdce23b443aa583"
+          },
+          "modes": {
+            "off": {
+              "command": [
+                "/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/observer",
+                "+elf=/workspace/rv32_000/build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/pid/input.elf",
+                "+max-cycles=100000000",
+                "+core-period-ps=10000",
+                "+imem-response-ps=10000",
+                "+imem-interval-ps=10000",
+                "+dmem-response-ps=10000",
+                "+profile-core-roi=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/pid/off/profile.json",
+                "+memory-audit=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/pid/off/memory.json"
+              ],
+              "returncode": 0,
+              "reference_checks": {
+                "profile.json": true,
+                "memory.json": true,
+                "stdout_equal_after_validated_elf_path": true
+              },
+              "outputs_sha256": {
+                "memory.json": "9046715d29f950b38678a3ea4d9339c313ec587097863ae8710f59e6c30468af",
+                "dut.log": "1ec10277b45e98a79dbcc7846a50c21421898e4784e23c912e0dfbf7ec6f1364",
+                "profile.json": "7b7781024f9b114b08c5aefe699861844800172474f6dfe88bf92814d5b6b47b"
+              }
+            },
+            "on": {
+              "command": [
+                "/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/observer",
+                "+elf=/workspace/rv32_000/build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/pid/input.elf",
+                "+max-cycles=100000000",
+                "+core-period-ps=10000",
+                "+imem-response-ps=10000",
+                "+imem-interval-ps=10000",
+                "+dmem-response-ps=10000",
+                "+profile-core-roi=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/pid/on/profile.json",
+                "+memory-audit=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/pid/on/memory.json",
+                "+observe-arb-raw=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/pid/on/cycles.bin"
+              ],
+              "returncode": 0,
+              "reference_checks": {
+                "profile.json": true,
+                "memory.json": true,
+                "stdout_equal_after_validated_elf_path": true
+              },
+              "raw_bytes": 2906112,
+              "raw_sha256": "9c65adf6a527294b96fb201b6955e17df130cda0df42797753743e09086375d1",
+              "outputs_sha256": {
+                "memory.json": "9046715d29f950b38678a3ea4d9339c313ec587097863ae8710f59e6c30468af",
+                "cycles.bin.gz": "c51f5e8487e4fa557eca5e0a5352b2a79c647fd1b400707cc426b7976e610fb9",
+                "dut.log": "1ec10277b45e98a79dbcc7846a50c21421898e4784e23c912e0dfbf7ec6f1364",
+                "profile.json": "7b7781024f9b114b08c5aefe699861844800172474f6dfe88bf92814d5b6b47b"
+              }
+            }
+          },
+          "passed": true
+        },
+        {
+          "family": "fp32",
+          "name": "fft",
+          "reference_sha256": {
+            "/workspace/rv32_000/build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/fft/memory.json": "410bde8cc90b2e66dce89d97dadd586189957063a619710d1713d275f578befc",
+            "/workspace/rv32_000/build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/fft/dut.log": "b528e3ab796165b3a1d4ff224bde93238daf03a5addcf8767ed01414c7dab813",
+            "/workspace/rv32_000/build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/fft/profile.json": "c2ee6fde6d4d02ec0b2517f845d066f814ca3c6d4d671c67b06ea1c4cfc72971",
+            "/workspace/rv32_000/build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/fft/input.elf": "fb91c70cb5fa040f01f2e7fcd56fd50427fb4defaf81134a73cc814543d7102b"
+          },
+          "modes": {
+            "off": {
+              "command": [
+                "/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/observer",
+                "+elf=/workspace/rv32_000/build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/fft/input.elf",
+                "+max-cycles=100000000",
+                "+core-period-ps=10000",
+                "+imem-response-ps=10000",
+                "+imem-interval-ps=10000",
+                "+dmem-response-ps=10000",
+                "+profile-core-roi=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/fft/off/profile.json",
+                "+memory-audit=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/fft/off/memory.json"
+              ],
+              "returncode": 0,
+              "reference_checks": {
+                "profile.json": true,
+                "memory.json": true,
+                "stdout_equal_after_validated_elf_path": true
+              },
+              "outputs_sha256": {
+                "memory.json": "410bde8cc90b2e66dce89d97dadd586189957063a619710d1713d275f578befc",
+                "dut.log": "8a8ce6a932ea245fc3de6d8d5600134fb17acab5c58608bdd43e74faad6d6b17",
+                "profile.json": "c2ee6fde6d4d02ec0b2517f845d066f814ca3c6d4d671c67b06ea1c4cfc72971"
+              }
+            },
+            "on": {
+              "command": [
+                "/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/observer",
+                "+elf=/workspace/rv32_000/build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/fft/input.elf",
+                "+max-cycles=100000000",
+                "+core-period-ps=10000",
+                "+imem-response-ps=10000",
+                "+imem-interval-ps=10000",
+                "+dmem-response-ps=10000",
+                "+profile-core-roi=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/fft/on/profile.json",
+                "+memory-audit=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/fft/on/memory.json",
+                "+observe-arb-raw=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/fft/on/cycles.bin"
+              ],
+              "returncode": 0,
+              "reference_checks": {
+                "profile.json": true,
+                "memory.json": true,
+                "stdout_equal_after_validated_elf_path": true
+              },
+              "raw_bytes": 11846912,
+              "raw_sha256": "75e84888e49a10735ef8776e9c22959f876464f9c6c345d9e07d57fcc76301ff",
+              "outputs_sha256": {
+                "memory.json": "410bde8cc90b2e66dce89d97dadd586189957063a619710d1713d275f578befc",
+                "cycles.bin.gz": "95d33cf818a812d13cb2f68c65ebd510479bf68ff68bbe12a20fe31c00e3fe1b",
+                "dut.log": "8a8ce6a932ea245fc3de6d8d5600134fb17acab5c58608bdd43e74faad6d6b17",
+                "profile.json": "c2ee6fde6d4d02ec0b2517f845d066f814ca3c6d4d671c67b06ea1c4cfc72971"
+              }
+            }
+          },
+          "passed": true
+        },
+        {
+          "family": "embench",
+          "name": "statemate",
+          "reference_sha256": {
+            "/workspace/rv32_000/build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/statemate/memory.json": "df5ecf3ed9a23a43a94f95ce96377160518b121a50120b3f72d4792cdba2fb7b",
+            "/workspace/rv32_000/build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/statemate/dut.log": "e822b765ac69f99c96293b706dfb1c78d91be43a787a6d0203660b715e1acc5b",
+            "/workspace/rv32_000/build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/statemate/profile.json": "7d37334b8298667b6115ed9960bd24d231c46b8fcdcd22220ebe3bb26da39f33",
+            "/workspace/rv32_000/build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/statemate/input.elf": "89817da7b119f2d38d64fd49847161968a27319c45071cf7b92986c71017a52e"
+          },
+          "modes": {
+            "off": {
+              "command": [
+                "/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/observer",
+                "+elf=/workspace/rv32_000/build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/statemate/input.elf",
+                "+max-cycles=100000000",
+                "+core-period-ps=10000",
+                "+imem-response-ps=10000",
+                "+imem-interval-ps=10000",
+                "+dmem-response-ps=10000",
+                "+profile-core-roi=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/statemate/off/profile.json",
+                "+memory-audit=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/statemate/off/memory.json"
+              ],
+              "returncode": 0,
+              "reference_checks": {
+                "profile.json": true,
+                "memory.json": true,
+                "stdout_equal_after_validated_elf_path": true
+              },
+              "outputs_sha256": {
+                "memory.json": "df5ecf3ed9a23a43a94f95ce96377160518b121a50120b3f72d4792cdba2fb7b",
+                "dut.log": "9e285e76433d114b85a52a70a649587883e853ee36b765bad5334746b466feff",
+                "profile.json": "7d37334b8298667b6115ed9960bd24d231c46b8fcdcd22220ebe3bb26da39f33"
+              }
+            },
+            "on": {
+              "command": [
+                "/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/observer",
+                "+elf=/workspace/rv32_000/build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/statemate/input.elf",
+                "+max-cycles=100000000",
+                "+core-period-ps=10000",
+                "+imem-response-ps=10000",
+                "+imem-interval-ps=10000",
+                "+dmem-response-ps=10000",
+                "+profile-core-roi=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/statemate/on/profile.json",
+                "+memory-audit=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/statemate/on/memory.json",
+                "+observe-arb-raw=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/AB/statemate/on/cycles.bin"
+              ],
+              "returncode": 0,
+              "reference_checks": {
+                "profile.json": true,
+                "memory.json": true,
+                "stdout_equal_after_validated_elf_path": true
+              },
+              "raw_bytes": 920229728,
+              "raw_sha256": "40806f58ec17974686c43337471180c08416b4f53f6e63de0f55a2439ada872f",
+              "outputs_sha256": {
+                "memory.json": "df5ecf3ed9a23a43a94f95ce96377160518b121a50120b3f72d4792cdba2fb7b",
+                "cycles.bin.gz": "3e11f0255e06378bccd82c6977d39d6641296819570ee5991a8828f5d26b1674",
+                "dut.log": "9e285e76433d114b85a52a70a649587883e853ee36b765bad5334746b466feff",
+                "profile.json": "7d37334b8298667b6115ed9960bd24d231c46b8fcdcd22220ebe3bb26da39f33"
+              }
+            }
+          },
+          "passed": true
+        }
+      ]
+    },
+    "ARB": {
+      "passed": true,
+      "variant": "ARB",
+      "records": [
+        {
+          "family": "fp32",
+          "name": "pid",
+          "reference_sha256": {
+            "/workspace/rv32_000/build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/pid/memory.json": "b2007b1a8ebedd33cea1795658f35d9095ffec726bcceb4ddb7f4af3fbe2a44a",
+            "/workspace/rv32_000/build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/pid/dut.log": "f7f6fb3ba7bc82323ef265b7e46b7919a9d691b0b4f0d43f9fbb54bc96e61700",
+            "/workspace/rv32_000/build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/pid/profile.json": "8ef777dea0f6a32332d0fdd983cbbb92cac139a75635c66f27a268e73c782125",
+            "/workspace/rv32_000/build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/pid/input.elf": "22bc6dfaf2603e5348eee853165184f0b9c39af8b239f1cecfdce23b443aa583"
+          },
+          "modes": {
+            "off": {
+              "command": [
+                "/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/observer",
+                "+elf=/workspace/rv32_000/build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/pid/input.elf",
+                "+max-cycles=100000000",
+                "+core-period-ps=10000",
+                "+imem-response-ps=10000",
+                "+imem-interval-ps=10000",
+                "+dmem-response-ps=10000",
+                "+profile-core-roi=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/pid/off/profile.json",
+                "+memory-audit=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/pid/off/memory.json"
+              ],
+              "returncode": 0,
+              "reference_checks": {
+                "profile.json": true,
+                "memory.json": true,
+                "stdout_equal_after_validated_elf_path": true
+              },
+              "outputs_sha256": {
+                "memory.json": "b2007b1a8ebedd33cea1795658f35d9095ffec726bcceb4ddb7f4af3fbe2a44a",
+                "dut.log": "f7f6fb3ba7bc82323ef265b7e46b7919a9d691b0b4f0d43f9fbb54bc96e61700",
+                "profile.json": "8ef777dea0f6a32332d0fdd983cbbb92cac139a75635c66f27a268e73c782125"
+              }
+            },
+            "on": {
+              "command": [
+                "/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/observer",
+                "+elf=/workspace/rv32_000/build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/pid/input.elf",
+                "+max-cycles=100000000",
+                "+core-period-ps=10000",
+                "+imem-response-ps=10000",
+                "+imem-interval-ps=10000",
+                "+dmem-response-ps=10000",
+                "+profile-core-roi=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/pid/on/profile.json",
+                "+memory-audit=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/pid/on/memory.json",
+                "+observe-arb-raw=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/pid/on/cycles.bin"
+              ],
+              "returncode": 0,
+              "reference_checks": {
+                "profile.json": true,
+                "memory.json": true,
+                "stdout_equal_after_validated_elf_path": true
+              },
+              "raw_bytes": 2547776,
+              "raw_sha256": "769eefaf72f9ac054be19a9576bc3096bc9a5d1d4b12beaaee1698a66c037d57",
+              "outputs_sha256": {
+                "memory.json": "b2007b1a8ebedd33cea1795658f35d9095ffec726bcceb4ddb7f4af3fbe2a44a",
+                "cycles.bin.gz": "cc31ebaa29668b63c673a774fb5f3dd0465c79c99c42ce9d29b6f4ffb06dadab",
+                "dut.log": "f7f6fb3ba7bc82323ef265b7e46b7919a9d691b0b4f0d43f9fbb54bc96e61700",
+                "profile.json": "8ef777dea0f6a32332d0fdd983cbbb92cac139a75635c66f27a268e73c782125"
+              }
+            }
+          },
+          "passed": true
+        },
+        {
+          "family": "fp32",
+          "name": "fft",
+          "reference_sha256": {
+            "/workspace/rv32_000/build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/fft/memory.json": "8d85e9921f11b0ba8d75d361dd8e4313f246ce6c51b29edd8b67564c84bd90e5",
+            "/workspace/rv32_000/build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/fft/dut.log": "b96ebdeae0d2664b6933db3cb8d1a79f4cdfc85fc33f09be53e5b2aa037e5672",
+            "/workspace/rv32_000/build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/fft/profile.json": "c6bcac312641f98a9bb437147ca1f1f17bff66de2d4d3a025c4200e6fa66e5f2",
+            "/workspace/rv32_000/build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/fft/input.elf": "fb91c70cb5fa040f01f2e7fcd56fd50427fb4defaf81134a73cc814543d7102b"
+          },
+          "modes": {
+            "off": {
+              "command": [
+                "/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/observer",
+                "+elf=/workspace/rv32_000/build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/fft/input.elf",
+                "+max-cycles=100000000",
+                "+core-period-ps=10000",
+                "+imem-response-ps=10000",
+                "+imem-interval-ps=10000",
+                "+dmem-response-ps=10000",
+                "+profile-core-roi=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/fft/off/profile.json",
+                "+memory-audit=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/fft/off/memory.json"
+              ],
+              "returncode": 0,
+              "reference_checks": {
+                "profile.json": true,
+                "memory.json": true,
+                "stdout_equal_after_validated_elf_path": true
+              },
+              "outputs_sha256": {
+                "memory.json": "8d85e9921f11b0ba8d75d361dd8e4313f246ce6c51b29edd8b67564c84bd90e5",
+                "dut.log": "b96ebdeae0d2664b6933db3cb8d1a79f4cdfc85fc33f09be53e5b2aa037e5672",
+                "profile.json": "c6bcac312641f98a9bb437147ca1f1f17bff66de2d4d3a025c4200e6fa66e5f2"
+              }
+            },
+            "on": {
+              "command": [
+                "/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/observer",
+                "+elf=/workspace/rv32_000/build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/fft/input.elf",
+                "+max-cycles=100000000",
+                "+core-period-ps=10000",
+                "+imem-response-ps=10000",
+                "+imem-interval-ps=10000",
+                "+dmem-response-ps=10000",
+                "+profile-core-roi=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/fft/on/profile.json",
+                "+memory-audit=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/fft/on/memory.json",
+                "+observe-arb-raw=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/fft/on/cycles.bin"
+              ],
+              "returncode": 0,
+              "reference_checks": {
+                "profile.json": true,
+                "memory.json": true,
+                "stdout_equal_after_validated_elf_path": true
+              },
+              "raw_bytes": 12267552,
+              "raw_sha256": "eaf6f2fde2ca2a4eb3e33f94e41ec6575e1286d2571636497e5730772cc93b75",
+              "outputs_sha256": {
+                "memory.json": "8d85e9921f11b0ba8d75d361dd8e4313f246ce6c51b29edd8b67564c84bd90e5",
+                "cycles.bin.gz": "802536772308d0624b73f1de3f59857d488a5569640ae913150a769d4eadddf6",
+                "dut.log": "b96ebdeae0d2664b6933db3cb8d1a79f4cdfc85fc33f09be53e5b2aa037e5672",
+                "profile.json": "c6bcac312641f98a9bb437147ca1f1f17bff66de2d4d3a025c4200e6fa66e5f2"
+              }
+            }
+          },
+          "passed": true
+        },
+        {
+          "family": "embench",
+          "name": "statemate",
+          "reference_sha256": {
+            "/workspace/rv32_000/build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/statemate/memory.json": "3db293e257f029bbe5d171a7982dcefb30e2c3c7bd3113cf6be3c3cc418ec4eb",
+            "/workspace/rv32_000/build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/statemate/dut.log": "fd23541b6139a45e63721a85b023c67ce3b0d062a87324ed2b5ed5d676fdabd3",
+            "/workspace/rv32_000/build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/statemate/profile.json": "7f6ff97d0a00b0fd088c81797cc1d1cf87296a5358546e321328781763603dcf",
+            "/workspace/rv32_000/build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/statemate/input.elf": "89817da7b119f2d38d64fd49847161968a27319c45071cf7b92986c71017a52e"
+          },
+          "modes": {
+            "off": {
+              "command": [
+                "/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/observer",
+                "+elf=/workspace/rv32_000/build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/statemate/input.elf",
+                "+max-cycles=100000000",
+                "+core-period-ps=10000",
+                "+imem-response-ps=10000",
+                "+imem-interval-ps=10000",
+                "+dmem-response-ps=10000",
+                "+profile-core-roi=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/statemate/off/profile.json",
+                "+memory-audit=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/statemate/off/memory.json"
+              ],
+              "returncode": 0,
+              "reference_checks": {
+                "profile.json": true,
+                "memory.json": true,
+                "stdout_equal_after_validated_elf_path": true
+              },
+              "outputs_sha256": {
+                "memory.json": "3db293e257f029bbe5d171a7982dcefb30e2c3c7bd3113cf6be3c3cc418ec4eb",
+                "dut.log": "fd23541b6139a45e63721a85b023c67ce3b0d062a87324ed2b5ed5d676fdabd3",
+                "profile.json": "7f6ff97d0a00b0fd088c81797cc1d1cf87296a5358546e321328781763603dcf"
+              }
+            },
+            "on": {
+              "command": [
+                "/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/observer",
+                "+elf=/workspace/rv32_000/build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/statemate/input.elf",
+                "+max-cycles=100000000",
+                "+core-period-ps=10000",
+                "+imem-response-ps=10000",
+                "+imem-interval-ps=10000",
+                "+dmem-response-ps=10000",
+                "+profile-core-roi=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/statemate/on/profile.json",
+                "+memory-audit=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/statemate/on/memory.json",
+                "+observe-arb-raw=/workspace/rv32_000/build/experiments/lsu-arbitration-diagnosis-v1/capture-v1/ARB/statemate/on/cycles.bin"
+              ],
+              "returncode": 0,
+              "reference_checks": {
+                "profile.json": true,
+                "memory.json": true,
+                "stdout_equal_after_validated_elf_path": true
+              },
+              "raw_bytes": 987638432,
+              "raw_sha256": "03bf078e3ee316c1a5e8cc489a4d384184f1f76e697a1676af94d9a04ff45476",
+              "outputs_sha256": {
+                "memory.json": "3db293e257f029bbe5d171a7982dcefb30e2c3c7bd3113cf6be3c3cc418ec4eb",
+                "cycles.bin.gz": "7f17c0c2f690f9d464b576633284019617e5ea90b6497e1e24ba66e9ca7d7b34",
+                "dut.log": "fd23541b6139a45e63721a85b023c67ce3b0d062a87324ed2b5ed5d676fdabd3",
+                "profile.json": "7f6ff97d0a00b0fd088c81797cc1d1cf87296a5358546e321328781763603dcf"
+              }
+            }
+          },
+          "passed": true
+        }
+      ]
+    }
+  },
+  "finished_utc": "2026-11-16T12:16:16.735568+00:00"
+}
