@@ -1,6 +1,6 @@
 # Current project status
 
-Updated 2026-11-16 (Asia/Taipei). Current branch: `codex/lsu-rob-room`.
+Updated 2026-11-18 (Asia/Taipei). Current branch: `codex/lsu-rob-room`.
 The original AP5B baseline remains frozen; the candidate has not been promoted.
 
 ## Active ROB-space arbitration experiment
@@ -10,8 +10,19 @@ on November 16. The new candidate allows first-head load bypass only at register
 ROB occupancy ≤14/16; offered loads remain held regardless of later pressure.
 ROB exports one Boolean through core wiring; no extra state or memory transaction
 is added. Parent and candidate each pass 344 pin cases, with six actual RTL
-negative controls. Clean full-core qualification/all27 results are pending.
-No new timing/area claim or baseline promotion is made.
+negative controls. Clean full-core qualification and all27 pass at `3c87e71`:
+18 directed, 18 Spike, 48 interface, 58 memory, 3,400 finite FMA, 3,629 workload
+numerical values and unchanged per-PC retired work. All five pipeline stages
+completed; the complete comparison independently revalidates after environment resume.
+
+At nominal 100 MHz, Embench/FP32 are **1.076286× / 1.109010×** original baseline,
+or **1.002181× / 1.019078×** A+B. Against A+B, 13 cases improve, 11 regress and
+three tie. PID retains 7,238 cycles; FFT improves to 33,029; statemate falls to
+2,628,051 but remains 0.526% slower than A+B. UD/GEMM/QRduino regress against
+arbitration v1 while remaining faster than A+B. The [full result](LSU_ROB_ROOM_REVIEW.md)
+preserves all cases. Recommend this candidate for fresh common-flow physical
+qualification; no new timing/area claim or baseline promotion is made. Both
+1.20× performance goals remain unmet.
 
 ## Previous arbitration v1 experiment
 

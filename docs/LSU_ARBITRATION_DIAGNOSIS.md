@@ -3,6 +3,9 @@
 2026-11-16（Asia/Taipei）。唯讀重播 A+B 與仲裁 v1 的 PID、FFT、statemate；
 **沒有修改 CPU RTL，也沒有更新全工作負載分數或實體資格。**
 
+後續已選 ROB 空間限制，並完成[新 RTL 的功能及全 27 項比較](LSU_ROB_ROOM_REVIEW.md)；
+下文保留當時的診斷及候選條件涵蓋率，沒有將它們改標為新候選量測。
+
 結論：首次 head store 讓 load 先走，每次都多付兩拍 store 退休等待。
 PID 的後續浮點相依鏈能受益；FFT／statemate 的大部分讓行發生在 ROB 15／16 格，
 其中一些讀取最後被分支復原取消。建議先試 ROB 空間條件，再決定是否保留這條仲裁路線。

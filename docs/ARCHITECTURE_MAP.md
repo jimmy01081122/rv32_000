@@ -19,7 +19,8 @@
 [後續逐拍診斷](LSU_ARBITRATION_DIAGNOSIS.md)確認讓行的 store 退休代價及被取消讀取。
 2026-11-16 已選[ROB 空間限制](../experiments/lsu-rob-room-v1/README.md)：ROB→LSU
 新增至少兩格可用的控制訊號，影響首次讓行，保持回壓請求。下圖仍為已完成 PPA 的 A+B；
-新候選尚無實體數字。
+新候選已完成[功能及全 27 項比較](LSU_ROB_ROOM_REVIEW.md)，兩類分數皆優於 A+B，
+但尚無新實體數字。
 
 ## 已確認的結構與操作點
 

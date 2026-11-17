@@ -4,6 +4,9 @@
 原生實體來源 `f66e12b`、封存 `49122fb`。新的 LSU 仲裁實驗已獲核准，尚不能沿用這些數字
 宣稱新 RTL 的時序。採 ASAP7、TT 建置、共用 FPU／hold40／ready guard、global-route 寄生估算。
 
+2026-11-18 更新：目前 [ROB 空間限制候選](LSU_ROB_ROOM_REVIEW.md)已通過功能及完整 27 項，
+但尚未進行新的實體量測。下列路徑仍屬 A+B，不包含新 ROB→LSU 控制線的實體影響。
+
 ## Setup：SS、9.4 ns
 
 | 排序 | 起點 | 終點 | 類型 | Slack |

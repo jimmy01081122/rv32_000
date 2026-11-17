@@ -1,6 +1,6 @@
 # RV32 OoO 專案計畫
 
-版本：2.23；更新：2026-11-16（Asia/Taipei）；狀態：原基線不變；A+B 的功能、共同流程實體與兩個完整操作點審查完成。100 MHz Embench／FP32 為 1.073943×／1.088248×，原基線面積比 0.981066×；兩類效能目標未達。PID 仲裁機制、唯讀 DIV/REM 及仲裁退步診斷已完成。
+版本：2.24；更新：2026-11-18（Asia/Taipei）；狀態：原基線不變；ROB 空間限制完成功能與全 27 項，名義 100 MHz Embench／FP32 為 1.076286×／1.109010×，新 PPA 未量測，兩類效能目標未達。A+B 仍是已完成實體資格的參照。
 
 本輪已於 2026-11-13 核准先做 [LSU 仲裁](experiments/lsu-load-arb-v1/README.md)：
 以 A+B 為父版本，先驗證首次 head-store marking 的有限 load 優先。
@@ -11,7 +11,9 @@ PID 改善，但 FFT／statemate 退步。實體資格尚未量測，原基線�
 [仲裁逐拍診斷](docs/LSU_ARBITRATION_DIAGNOSIS.md)已完成六組 observer 開／關、
 5,504,081 拍及完整退休順序核對。使用者於 2026-11-16 核准
 [ROB 至少兩格可用時才讓行](experiments/lsu-rob-room-v1/README.md)；父／候選各 344
-pin 案例及六個 RTL 負向控制通過，全核心／全 27 項與 PPA 尚待執行。
+pin 案例、六個 RTL 負向控制、全核心及完整 27 項均通過。相對 A+B 的兩類分數為
+1.002181×／1.019078×；statemate 殘留退步 0.526%，完整取捨見[審查](docs/LSU_ROB_ROOM_REVIEW.md)。
+建議以此版進入新的共同流程 PPA 資格；目前尚無新時序／面積數字。
 
 ## 已確認的方向
 
@@ -86,7 +88,7 @@ G0 的長篇契約保留於 [歷史文件](docs/archive/README.md)，供追溯�
 | 架構圖 1／3／5 | [既有 profile、FP 發射觀測、native 路徑與 A 同流程研究](docs/OPTIMIZATION_135_STUDY.md)完成 |
 | A+B 與 DIV 診斷 | [A+B 功能／實體／兩個完整操作點](docs/LSU_AB_REVIEW.md)及獨立唯讀整數 DIV／REM 診斷完成；PID 的仲裁互動已由波形定位 |
 | 完整驗證與實體後續 | ACT4、完整 trap／CSR／IEEE-754 覆蓋、詳細繞線與切換活動功耗仍有獨立缺口，見[現況](docs/STATUS.md) |
-| 下一輪架構實驗 | 有限 LSU 仲裁已完成功能／全 27 項；FP32 增、Embench 減，PPA 未量測，未升格基線 |
+| 下一輪架構實驗 | ROB 空間限制完成功能／全 27 項；兩類分數皆優於 A+B 及仲裁 v1，保留個別退步；新 PPA 未量測，未升格基線 |
 
 目前 A+B 在 100 MHz 的 Embench／FP32 分數為 **1.073943×／1.088248×**；
 同流程標準元件面積 **21,663.036900 µm²**，原基線比 **0.981066×**。

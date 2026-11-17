@@ -1,6 +1,6 @@
 # ROB-space-constrained LSU arbitration
 
-Authorized 2026-11-16: follow the recommended ROB-space guard from the completed
+Authorized 2026-11-16 (UTC): follow the recommended ROB-space guard from the completed
 [read-only diagnosis](../../docs/LSU_ARBITRATION_DIAGNOSIS.md). Parent is bounded
 arbitration v1 at `3715907`; the original AP5B baseline remains frozen.
 
@@ -20,7 +20,14 @@ The manifest freezes every RTL/simulation/physical input and the unchanged
 10,000 ps clock/memory comparison. The simulator, ELF bytes, numerical tolerances,
 two-family scoring and ≥1.20× / ≤1.10× planning targets remain unchanged.
 
-Gates (results pending until actual execution receipts pass):
+Gates 1–3 pass at clean source `3c87e71`; all five pipeline stages exited 0.
+At nominal 100 MHz, Embench/FP32 are **1.076286× / 1.109010×** original baseline,
+or **1.002181× / 1.019078×** A+B. PID gains are retained, FFT now improves over
+A+B, and statemate's regression shrinks from 7.325% to 0.526%. Three cases regress
+against arbitration v1, so the full denominator and tradeoffs remain visible in
+[the completed review](../../docs/LSU_ROB_ROOM_REVIEW.md). Physical gate 4 is unmeasured.
+
+Validation gates:
 
 1. Actual arbitration-v1 parent and candidate each run 344 pin cases: original
    140 plus 192 pressure competition cases (14/15/16 entries, INT/FP, response
@@ -55,3 +62,8 @@ Fresh `build/experiments/lsu-rob-room-v1` outputs preserve every actual exit sta
 input identity and failure. The first unit-generation attempt rejected an adapter
 filename/module-name mismatch; the checker now copies it under the matching name
 without disabling lint. The original failed receipt and checker are retained.
+
+After environment resume, the independently recomputed complete comparison is
+byte-identical; unit inputs/binaries/logs/traces and all pipeline receipts also
+revalidate. [Public evidence](../../docs/evidence/2026-11-18/lsu-rob-room-functional/README.md)
+retains those checks. Neither the baseline nor the planning goals are promoted or changed.
