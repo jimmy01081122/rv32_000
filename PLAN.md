@@ -103,7 +103,7 @@ FPU 路徑緊接其後；不能直接沿用 B 的時序排序。
 
 下一輪建議共同審查：
 
-1. **LSU 仲裁**：在 ordering、fault、flush 與進展性不變的前提下，研究可安全 load 的有限優先機會。
+1. **ROB 空間限制的實體資格**：以已完成功能／全 27 項的新候選重建同流程 PPA，核對 TT／SS／FF、面積與新 critical paths；保留 statemate 等個別退步供審查。
 2. **C 的 registered-load 前瞻**：以 A+B 的 GEMM／Cholesky 剩餘交接等待作 FP32 候選；等待比例不是可省週期。
 3. **整數 DIV／REM**：以已完成的唯讀診斷選擇低成本提前結果或每拍兩個商位元；B 的運算元分布不能改標為 A+B。
 

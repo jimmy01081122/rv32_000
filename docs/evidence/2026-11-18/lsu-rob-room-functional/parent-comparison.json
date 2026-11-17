@@ -1,0 +1,1890 @@
+{
+  "passed": true,
+  "scope": "All27 common-clock functional/cycle comparison; candidate PPA unmeasured",
+  "analyzer_sha256": "21711e959f5833f99dccbbcd8c2519ec018054c4013ef6df2680cb2e01f4194c",
+  "parent_inventory_sha256": "08fb9f25094865b8e070039da6acbc8f3f3c55077354385bfa780a48c3098c03",
+  "reviews": {
+    "AB": {
+      "passed": true,
+      "scope": "full A+B functional/cycle measurement; physical qualification remains separate",
+      "reviewer_sha256": "744dfccfa8fc7d507a62284022af9ab8c003ca88f53a58723202814a67323579",
+      "measurement": "build/experiments/lsu-ab-v1/measurement-10000ps-v1",
+      "measurement_summary_sha256": "cabae3ddc7229e0776503a74d5f6c569a07f9988f9e3e4734204aa96a0b6af4a",
+      "functional_provenance": {
+        "validator_sha256": "7fb6e823b208ddeacc17769b4a573a8bb5755ae5465d80da695b1cb1a3ca0394",
+        "build_summary_sha256": "10f4a008279ec6214abb2cc3420b127ade16a09868f0d7893b2671d59fe36b6a",
+        "qualification_summary_sha256": "50a5035a208996556b5c14202b109b307a7af0ec620a269cf66f852f7028fde4",
+        "normal_simulator_sha256": "f0db659259f1a773fd9fedf83f2d3ce860dc300bf4fd0dfb79205ec405acc058",
+        "assert_simulator_sha256": "c4f1fb167a96dc2f85d755c0913fe484e3e93bce95f27feb1b6e31decc5bcea4",
+        "directed_cases": 18,
+        "spike_cases": 18,
+        "interface_cases": 48,
+        "fixed_time_controls": 58,
+        "finite_fma_values": 3400,
+        "passed": true
+      },
+      "source_commit": "3f079c1c3d7b53c50beb13bc2d8bf366ac42999f",
+      "source_files_verified": 33,
+      "period_ps": 10000,
+      "memory_ps": 10000,
+      "per_pc_work_matches": true,
+      "numerical_values_checked": 3629,
+      "embench_time_geomean_speedup": 1.0739431920706144,
+      "fp32_time_geomean_speedup": 1.0882479376576741,
+      "fp32_subgroup_speedup": {
+        "dsp": 1.067629126269767,
+        "matrix_ml": 1.1092649541643713
+      },
+      "records": [
+        {
+          "family": "fp32",
+          "name": "fir",
+          "group": "dsp",
+          "baseline_cycles": 74311,
+          "candidate_cycles": 66110,
+          "baseline_time_ps": 743110000,
+          "candidate_time_ps": 661100000,
+          "time_speedup": 1.1240508243836032
+        },
+        {
+          "family": "fp32",
+          "name": "iir",
+          "group": "dsp",
+          "baseline_cycles": 13523,
+          "candidate_cycles": 12472,
+          "baseline_time_ps": 135230000,
+          "candidate_time_ps": 124720000,
+          "time_speedup": 1.0842687620269404
+        },
+        {
+          "family": "fp32",
+          "name": "fft",
+          "group": "dsp",
+          "baseline_cycles": 40867,
+          "candidate_cycles": 33656,
+          "baseline_time_ps": 408670000,
+          "candidate_time_ps": 336560000,
+          "time_speedup": 1.2142560019015927
+        },
+        {
+          "family": "fp32",
+          "name": "pid",
+          "group": "dsp",
+          "baseline_cycles": 7248,
+          "candidate_cycles": 8256,
+          "baseline_time_ps": 72480000,
+          "candidate_time_ps": 82560000,
+          "time_speedup": 0.877906976744186
+        },
+        {
+          "family": "fp32",
+          "name": "gemm",
+          "group": "matrix_ml",
+          "baseline_cycles": 133275,
+          "candidate_cycles": 123490,
+          "baseline_time_ps": 1332750000,
+          "candidate_time_ps": 1234900000,
+          "time_speedup": 1.079237185197182
+        },
+        {
+          "family": "fp32",
+          "name": "bicg",
+          "group": "matrix_ml",
+          "baseline_cycles": 23927,
+          "candidate_cycles": 20619,
+          "baseline_time_ps": 239270000,
+          "candidate_time_ps": 206190000,
+          "time_speedup": 1.160434550657161
+        },
+        {
+          "family": "fp32",
+          "name": "cholesky",
+          "group": "matrix_ml",
+          "baseline_cycles": 194161,
+          "candidate_cycles": 181507,
+          "baseline_time_ps": 1941610000,
+          "candidate_time_ps": 1815070000,
+          "time_speedup": 1.0697163194807913
+        },
+        {
+          "family": "fp32",
+          "name": "svm",
+          "group": "matrix_ml",
+          "baseline_cycles": 43392,
+          "candidate_cycles": 38395,
+          "baseline_time_ps": 433920000,
+          "candidate_time_ps": 383950000,
+          "time_speedup": 1.1301471545774189
+        },
+        {
+          "family": "embench",
+          "name": "aha-mont64",
+          "group": null,
+          "baseline_cycles": 5356670,
+          "candidate_cycles": 5356643,
+          "baseline_time_ps": 53566700000,
+          "candidate_time_ps": 53566430000,
+          "time_speedup": 1.0000050404703096
+        },
+        {
+          "family": "embench",
+          "name": "crc32",
+          "group": null,
+          "baseline_cycles": 5402220,
+          "candidate_cycles": 5054726,
+          "baseline_time_ps": 54022200000,
+          "candidate_time_ps": 50547260000,
+          "time_speedup": 1.0687463573693212
+        },
+        {
+          "family": "embench",
+          "name": "cubic",
+          "group": null,
+          "baseline_cycles": 14490894,
+          "candidate_cycles": 13751431,
+          "baseline_time_ps": 144908940000,
+          "candidate_time_ps": 137514310000,
+          "time_speedup": 1.0537735309147098
+        },
+        {
+          "family": "embench",
+          "name": "edn",
+          "group": null,
+          "baseline_cycles": 4754496,
+          "candidate_cycles": 4232380,
+          "baseline_time_ps": 47544960000,
+          "candidate_time_ps": 42323800000,
+          "time_speedup": 1.1233622689834089
+        },
+        {
+          "family": "embench",
+          "name": "huffbench",
+          "group": null,
+          "baseline_cycles": 3377028,
+          "candidate_cycles": 3209315,
+          "baseline_time_ps": 33770280000,
+          "candidate_time_ps": 32093150000,
+          "time_speedup": 1.0522581921687337
+        },
+        {
+          "family": "embench",
+          "name": "matmult-int",
+          "group": null,
+          "baseline_cycles": 4193163,
+          "candidate_cycles": 3769948,
+          "baseline_time_ps": 41931630000,
+          "candidate_time_ps": 37699480000,
+          "time_speedup": 1.1122601691057807
+        },
+        {
+          "family": "embench",
+          "name": "minver",
+          "group": null,
+          "baseline_cycles": 878777,
+          "candidate_cycles": 831001,
+          "baseline_time_ps": 8787770000,
+          "candidate_time_ps": 8310010000,
+          "time_speedup": 1.0574921089144298
+        },
+        {
+          "family": "embench",
+          "name": "nbody",
+          "group": null,
+          "baseline_cycles": 5893151,
+          "candidate_cycles": 5754377,
+          "baseline_time_ps": 58931510000,
+          "candidate_time_ps": 57543770000,
+          "time_speedup": 1.0241162509859887
+        },
+        {
+          "family": "embench",
+          "name": "nettle-aes",
+          "group": null,
+          "baseline_cycles": 5203513,
+          "candidate_cycles": 4766309,
+          "baseline_time_ps": 52035130000,
+          "candidate_time_ps": 47663090000,
+          "time_speedup": 1.0917280016885182
+        },
+        {
+          "family": "embench",
+          "name": "nettle-sha256",
+          "group": null,
+          "baseline_cycles": 4307562,
+          "candidate_cycles": 4136522,
+          "baseline_time_ps": 43075620000,
+          "candidate_time_ps": 41365220000,
+          "time_speedup": 1.0413487466040312
+        },
+        {
+          "family": "embench",
+          "name": "nsichneu",
+          "group": null,
+          "baseline_cycles": 7298679,
+          "candidate_cycles": 6917065,
+          "baseline_time_ps": 72986790000,
+          "candidate_time_ps": 69170650000,
+          "time_speedup": 1.0551699311774574
+        },
+        {
+          "family": "embench",
+          "name": "picojpeg",
+          "group": null,
+          "baseline_cycles": 5300988,
+          "candidate_cycles": 4880601,
+          "baseline_time_ps": 53009880000,
+          "candidate_time_ps": 48806010000,
+          "time_speedup": 1.086134269119725
+        },
+        {
+          "family": "embench",
+          "name": "qrduino",
+          "group": null,
+          "baseline_cycles": 4524180,
+          "candidate_cycles": 4411503,
+          "baseline_time_ps": 45241800000,
+          "candidate_time_ps": 44115030000,
+          "time_speedup": 1.025541635129796
+        },
+        {
+          "family": "embench",
+          "name": "sglib-combined",
+          "group": null,
+          "baseline_cycles": 4526268,
+          "candidate_cycles": 4198421,
+          "baseline_time_ps": 45262680000,
+          "candidate_time_ps": 41984210000,
+          "time_speedup": 1.0780881669561009
+        },
+        {
+          "family": "embench",
+          "name": "slre",
+          "group": null,
+          "baseline_cycles": 4902163,
+          "candidate_cycles": 4362711,
+          "baseline_time_ps": 49021630000,
+          "candidate_time_ps": 43627110000,
+          "time_speedup": 1.1236506383301577
+        },
+        {
+          "family": "embench",
+          "name": "st",
+          "group": null,
+          "baseline_cycles": 7165107,
+          "candidate_cycles": 7008181,
+          "baseline_time_ps": 71651070000,
+          "candidate_time_ps": 70081810000,
+          "time_speedup": 1.022391830347989
+        },
+        {
+          "family": "embench",
+          "name": "statemate",
+          "group": null,
+          "baseline_cycles": 3368567,
+          "candidate_cycles": 2614289,
+          "baseline_time_ps": 33685670000,
+          "candidate_time_ps": 26142890000,
+          "time_speedup": 1.2885212767218925
+        },
+        {
+          "family": "embench",
+          "name": "ud",
+          "group": null,
+          "baseline_cycles": 2775897,
+          "candidate_cycles": 2571871,
+          "baseline_time_ps": 27758970000,
+          "candidate_time_ps": 25718710000,
+          "time_speedup": 1.0793297953124399
+        },
+        {
+          "family": "embench",
+          "name": "wikisort",
+          "group": null,
+          "baseline_cycles": 2173042,
+          "candidate_cycles": 2067954,
+          "baseline_time_ps": 21730420000,
+          "candidate_time_ps": 20679540000,
+          "time_speedup": 1.0508173779494128
+        }
+      ]
+    },
+    "arb_v1": {
+      "passed": true,
+      "scope": "full LSU arbitration functional/cycle measurement; physical qualification remains separate",
+      "reviewer_sha256": "cc108a6ecd2e619c3640e06071a403718045e519f5ec4642006e893660bb0b2e",
+      "measurement": "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1",
+      "measurement_summary_sha256": "f2b3757b7c15b21588824425317509f407a0ec93a344ada8c21f0615c64b062a",
+      "functional_provenance": {
+        "validator_sha256": "7fb6e823b208ddeacc17769b4a573a8bb5755ae5465d80da695b1cb1a3ca0394",
+        "build_summary_sha256": "e99738ee9147da5326e81c0b0e8283f0876813d486a713b19ddad6888e163a35",
+        "qualification_summary_sha256": "187a94e9bd49408e222cbfb58d2a321f3d4a62969e130a7e8dbdd610d8d394d8",
+        "normal_simulator_sha256": "225f93d72fb214c9f1ce93ab8b6d0441987938aecd737dd93981947ad474ee86",
+        "assert_simulator_sha256": "bae9465a5ffcf5f698886a8483f35018997dbc8e81e0585576a8a35a92a5516e",
+        "directed_cases": 18,
+        "spike_cases": 18,
+        "interface_cases": 48,
+        "fixed_time_controls": 58,
+        "finite_fma_values": 3400,
+        "passed": true
+      },
+      "source_commit": "669c8ee5a6f6eecbb71e30094bf18fd97cadf8df",
+      "source_files_verified": 33,
+      "period_ps": 10000,
+      "memory_ps": 10000,
+      "per_pc_work_matches": true,
+      "numerical_values_checked": 3629,
+      "embench_time_geomean_speedup": 1.070635681472101,
+      "fp32_time_geomean_speedup": 1.1010870176079208,
+      "fp32_subgroup_speedup": {
+        "dsp": 1.0938405196369265,
+        "matrix_ml": 1.1083815223330085
+      },
+      "records": [
+        {
+          "family": "fp32",
+          "name": "fir",
+          "group": "dsp",
+          "baseline_cycles": 74311,
+          "candidate_cycles": 66084,
+          "baseline_time_ps": 743110000,
+          "candidate_time_ps": 660840000,
+          "time_speedup": 1.12449306942679
+        },
+        {
+          "family": "fp32",
+          "name": "iir",
+          "group": "dsp",
+          "baseline_cycles": 13523,
+          "candidate_cycles": 12473,
+          "baseline_time_ps": 135230000,
+          "candidate_time_ps": 124730000,
+          "time_speedup": 1.084181832758759
+        },
+        {
+          "family": "fp32",
+          "name": "fft",
+          "group": "dsp",
+          "baseline_cycles": 40867,
+          "candidate_cycles": 34851,
+          "baseline_time_ps": 408670000,
+          "candidate_time_ps": 348510000,
+          "time_speedup": 1.1726205847751858
+        },
+        {
+          "family": "fp32",
+          "name": "pid",
+          "group": "dsp",
+          "baseline_cycles": 7248,
+          "candidate_cycles": 7238,
+          "baseline_time_ps": 72480000,
+          "candidate_time_ps": 72380000,
+          "time_speedup": 1.001381597126278
+        },
+        {
+          "family": "fp32",
+          "name": "gemm",
+          "group": "matrix_ml",
+          "baseline_cycles": 133275,
+          "candidate_cycles": 123174,
+          "baseline_time_ps": 1332750000,
+          "candidate_time_ps": 1231740000,
+          "time_speedup": 1.0820059428126065
+        },
+        {
+          "family": "fp32",
+          "name": "bicg",
+          "group": "matrix_ml",
+          "baseline_cycles": 23927,
+          "candidate_cycles": 20619,
+          "baseline_time_ps": 239270000,
+          "candidate_time_ps": 206190000,
+          "time_speedup": 1.160434550657161
+        },
+        {
+          "family": "fp32",
+          "name": "cholesky",
+          "group": "matrix_ml",
+          "baseline_cycles": 194161,
+          "candidate_cycles": 182544,
+          "baseline_time_ps": 1941610000,
+          "candidate_time_ps": 1825440000,
+          "time_speedup": 1.063639451310369
+        },
+        {
+          "family": "fp32",
+          "name": "svm",
+          "group": "matrix_ml",
+          "baseline_cycles": 43392,
+          "candidate_cycles": 38397,
+          "baseline_time_ps": 433920000,
+          "candidate_time_ps": 383970000,
+          "time_speedup": 1.1300882881475116
+        },
+        {
+          "family": "embench",
+          "name": "aha-mont64",
+          "group": null,
+          "baseline_cycles": 5356670,
+          "candidate_cycles": 5356644,
+          "baseline_time_ps": 53566700000,
+          "candidate_time_ps": 53566440000,
+          "time_speedup": 1.000004853785318
+        },
+        {
+          "family": "embench",
+          "name": "crc32",
+          "group": null,
+          "baseline_cycles": 5402220,
+          "candidate_cycles": 5054726,
+          "baseline_time_ps": 54022200000,
+          "candidate_time_ps": 50547260000,
+          "time_speedup": 1.0687463573693212
+        },
+        {
+          "family": "embench",
+          "name": "cubic",
+          "group": null,
+          "baseline_cycles": 14490894,
+          "candidate_cycles": 13782000,
+          "baseline_time_ps": 144908940000,
+          "candidate_time_ps": 137820000000,
+          "time_speedup": 1.0514362211580321
+        },
+        {
+          "family": "embench",
+          "name": "edn",
+          "group": null,
+          "baseline_cycles": 4754496,
+          "candidate_cycles": 4205064,
+          "baseline_time_ps": 47544960000,
+          "candidate_time_ps": 42050640000,
+          "time_speedup": 1.130659604705184
+        },
+        {
+          "family": "embench",
+          "name": "huffbench",
+          "group": null,
+          "baseline_cycles": 3377028,
+          "candidate_cycles": 3200868,
+          "baseline_time_ps": 33770280000,
+          "candidate_time_ps": 32008680000,
+          "time_speedup": 1.0550350717367913
+        },
+        {
+          "family": "embench",
+          "name": "matmult-int",
+          "group": null,
+          "baseline_cycles": 4193163,
+          "candidate_cycles": 3769948,
+          "baseline_time_ps": 41931630000,
+          "candidate_time_ps": 37699480000,
+          "time_speedup": 1.1122601691057807
+        },
+        {
+          "family": "embench",
+          "name": "minver",
+          "group": null,
+          "baseline_cycles": 878777,
+          "candidate_cycles": 837679,
+          "baseline_time_ps": 8787770000,
+          "candidate_time_ps": 8376790000,
+          "time_speedup": 1.0490617527716464
+        },
+        {
+          "family": "embench",
+          "name": "nbody",
+          "group": null,
+          "baseline_cycles": 5893151,
+          "candidate_cycles": 5756380,
+          "baseline_time_ps": 58931510000,
+          "candidate_time_ps": 57563800000,
+          "time_speedup": 1.0237598977134936
+        },
+        {
+          "family": "embench",
+          "name": "nettle-aes",
+          "group": null,
+          "baseline_cycles": 5203513,
+          "candidate_cycles": 4767479,
+          "baseline_time_ps": 52035130000,
+          "candidate_time_ps": 47674790000,
+          "time_speedup": 1.0914600777475894
+        },
+        {
+          "family": "embench",
+          "name": "nettle-sha256",
+          "group": null,
+          "baseline_cycles": 4307562,
+          "candidate_cycles": 4138430,
+          "baseline_time_ps": 43075620000,
+          "candidate_time_ps": 41384300000,
+          "time_speedup": 1.0408686385899968
+        },
+        {
+          "family": "embench",
+          "name": "nsichneu",
+          "group": null,
+          "baseline_cycles": 7298679,
+          "candidate_cycles": 6913372,
+          "baseline_time_ps": 72986790000,
+          "candidate_time_ps": 69133720000,
+          "time_speedup": 1.0557335841323163
+        },
+        {
+          "family": "embench",
+          "name": "picojpeg",
+          "group": null,
+          "baseline_cycles": 5300988,
+          "candidate_cycles": 4817681,
+          "baseline_time_ps": 53009880000,
+          "candidate_time_ps": 48176810000,
+          "time_speedup": 1.1003194275420063
+        },
+        {
+          "family": "embench",
+          "name": "qrduino",
+          "group": null,
+          "baseline_cycles": 4524180,
+          "candidate_cycles": 4369451,
+          "baseline_time_ps": 45241800000,
+          "candidate_time_ps": 43694510000,
+          "time_speedup": 1.0354115425484804
+        },
+        {
+          "family": "embench",
+          "name": "sglib-combined",
+          "group": null,
+          "baseline_cycles": 4526268,
+          "candidate_cycles": 4197329,
+          "baseline_time_ps": 45262680000,
+          "candidate_time_ps": 41973290000,
+          "time_speedup": 1.0783686482522576
+        },
+        {
+          "family": "embench",
+          "name": "slre",
+          "group": null,
+          "baseline_cycles": 4902163,
+          "candidate_cycles": 4427060,
+          "baseline_time_ps": 49021630000,
+          "candidate_time_ps": 44270600000,
+          "time_speedup": 1.107317949158132
+        },
+        {
+          "family": "embench",
+          "name": "st",
+          "group": null,
+          "baseline_cycles": 7165107,
+          "candidate_cycles": 7008489,
+          "baseline_time_ps": 71651070000,
+          "candidate_time_ps": 70084890000,
+          "time_speedup": 1.0223468995956189
+        },
+        {
+          "family": "embench",
+          "name": "statemate",
+          "group": null,
+          "baseline_cycles": 3368567,
+          "candidate_cycles": 2805791,
+          "baseline_time_ps": 33685670000,
+          "candidate_time_ps": 28057910000,
+          "time_speedup": 1.2005765931960006
+        },
+        {
+          "family": "embench",
+          "name": "ud",
+          "group": null,
+          "baseline_cycles": 2775897,
+          "candidate_cycles": 2549734,
+          "baseline_time_ps": 27758970000,
+          "candidate_time_ps": 25497340000,
+          "time_speedup": 1.088700625241692
+        },
+        {
+          "family": "embench",
+          "name": "wikisort",
+          "group": null,
+          "baseline_cycles": 2173042,
+          "candidate_cycles": 2074272,
+          "baseline_time_ps": 21730420000,
+          "candidate_time_ps": 20742720000,
+          "time_speedup": 1.0476167060057697
+        }
+      ]
+    },
+    "candidate": {
+      "passed": true,
+      "scope": "full LSU ROB-space arbitration functional/cycle measurement; physical qualification remains separate",
+      "reviewer_sha256": "cf6c7d0c3954d291d8614eace5074bf80faa5a8f0da4e5d1c76eec5239947ff5",
+      "measurement": "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1",
+      "measurement_summary_sha256": "d6e38381f55aa4469dbf985cf356f71558c3e22337c8a0d5940a7726665ec881",
+      "functional_provenance": {
+        "validator_sha256": "7fb6e823b208ddeacc17769b4a573a8bb5755ae5465d80da695b1cb1a3ca0394",
+        "build_summary_sha256": "e2dced979f34487d91e86bad1c8338823e4e28c768a9afc5cd7ab36d63343f86",
+        "qualification_summary_sha256": "700c15710031f8a16c1fa890afed532734491a05bdd9deafdba21bb13b78863a",
+        "normal_simulator_sha256": "fb7c0158731ee7af662ab017e08a3168a5c3a44a9636b2a8a30e9edcf6ed55cb",
+        "assert_simulator_sha256": "f6261a24e030cef38ff5f8fe6b615e698905b9f4b75fa7f3824b3af6ba1409e6",
+        "directed_cases": 18,
+        "spike_cases": 18,
+        "interface_cases": 48,
+        "fixed_time_controls": 58,
+        "finite_fma_values": 3400,
+        "passed": true
+      },
+      "source_commit": "3c87e71bd065b8047940dc185ce16d90cfb60355",
+      "source_files_verified": 33,
+      "period_ps": 10000,
+      "memory_ps": 10000,
+      "per_pc_work_matches": true,
+      "numerical_values_checked": 3629,
+      "embench_time_geomean_speedup": 1.0762858730205194,
+      "fp32_time_geomean_speedup": 1.1090097735243363,
+      "fp32_subgroup_speedup": {
+        "dsp": 1.1086231977122072,
+        "matrix_ml": 1.1093964841350685
+      },
+      "records": [
+        {
+          "family": "fp32",
+          "name": "fir",
+          "group": "dsp",
+          "baseline_cycles": 74311,
+          "candidate_cycles": 66084,
+          "baseline_time_ps": 743110000,
+          "candidate_time_ps": 660840000,
+          "time_speedup": 1.12449306942679
+        },
+        {
+          "family": "fp32",
+          "name": "iir",
+          "group": "dsp",
+          "baseline_cycles": 13523,
+          "candidate_cycles": 12473,
+          "baseline_time_ps": 135230000,
+          "candidate_time_ps": 124730000,
+          "time_speedup": 1.084181832758759
+        },
+        {
+          "family": "fp32",
+          "name": "fft",
+          "group": "dsp",
+          "baseline_cycles": 40867,
+          "candidate_cycles": 33029,
+          "baseline_time_ps": 408670000,
+          "candidate_time_ps": 330290000,
+          "time_speedup": 1.2373066093433043
+        },
+        {
+          "family": "fp32",
+          "name": "pid",
+          "group": "dsp",
+          "baseline_cycles": 7248,
+          "candidate_cycles": 7238,
+          "baseline_time_ps": 72480000,
+          "candidate_time_ps": 72380000,
+          "time_speedup": 1.001381597126278
+        },
+        {
+          "family": "fp32",
+          "name": "gemm",
+          "group": "matrix_ml",
+          "baseline_cycles": 133275,
+          "candidate_cycles": 123372,
+          "baseline_time_ps": 1332750000,
+          "candidate_time_ps": 1233720000,
+          "time_speedup": 1.0802694290438672
+        },
+        {
+          "family": "fp32",
+          "name": "bicg",
+          "group": "matrix_ml",
+          "baseline_cycles": 23927,
+          "candidate_cycles": 20619,
+          "baseline_time_ps": 239270000,
+          "candidate_time_ps": 206190000,
+          "time_speedup": 1.160434550657161
+        },
+        {
+          "family": "fp32",
+          "name": "cholesky",
+          "group": "matrix_ml",
+          "baseline_cycles": 194161,
+          "candidate_cycles": 181585,
+          "baseline_time_ps": 1941610000,
+          "candidate_time_ps": 1815850000,
+          "time_speedup": 1.0692568218740535
+        },
+        {
+          "family": "fp32",
+          "name": "svm",
+          "group": "matrix_ml",
+          "baseline_cycles": 43392,
+          "candidate_cycles": 38397,
+          "baseline_time_ps": 433920000,
+          "candidate_time_ps": 383970000,
+          "time_speedup": 1.1300882881475116
+        },
+        {
+          "family": "embench",
+          "name": "aha-mont64",
+          "group": null,
+          "baseline_cycles": 5356670,
+          "candidate_cycles": 5356644,
+          "baseline_time_ps": 53566700000,
+          "candidate_time_ps": 53566440000,
+          "time_speedup": 1.000004853785318
+        },
+        {
+          "family": "embench",
+          "name": "crc32",
+          "group": null,
+          "baseline_cycles": 5402220,
+          "candidate_cycles": 5054726,
+          "baseline_time_ps": 54022200000,
+          "candidate_time_ps": 50547260000,
+          "time_speedup": 1.0687463573693212
+        },
+        {
+          "family": "embench",
+          "name": "cubic",
+          "group": null,
+          "baseline_cycles": 14490894,
+          "candidate_cycles": 13760659,
+          "baseline_time_ps": 144908940000,
+          "candidate_time_ps": 137606590000,
+          "time_speedup": 1.0530668625681372
+        },
+        {
+          "family": "embench",
+          "name": "edn",
+          "group": null,
+          "baseline_cycles": 4754496,
+          "candidate_cycles": 4204886,
+          "baseline_time_ps": 47544960000,
+          "candidate_time_ps": 42048860000,
+          "time_speedup": 1.130707467455717
+        },
+        {
+          "family": "embench",
+          "name": "huffbench",
+          "group": null,
+          "baseline_cycles": 3377028,
+          "candidate_cycles": 3200604,
+          "baseline_time_ps": 33770280000,
+          "candidate_time_ps": 32006040000,
+          "time_speedup": 1.0551220957044358
+        },
+        {
+          "family": "embench",
+          "name": "matmult-int",
+          "group": null,
+          "baseline_cycles": 4193163,
+          "candidate_cycles": 3769948,
+          "baseline_time_ps": 41931630000,
+          "candidate_time_ps": 37699480000,
+          "time_speedup": 1.1122601691057807
+        },
+        {
+          "family": "embench",
+          "name": "minver",
+          "group": null,
+          "baseline_cycles": 878777,
+          "candidate_cycles": 831010,
+          "baseline_time_ps": 8787770000,
+          "candidate_time_ps": 8310100000,
+          "time_speedup": 1.0574806560691208
+        },
+        {
+          "family": "embench",
+          "name": "nbody",
+          "group": null,
+          "baseline_cycles": 5893151,
+          "candidate_cycles": 5755966,
+          "baseline_time_ps": 58931510000,
+          "candidate_time_ps": 57559660000,
+          "time_speedup": 1.0238335320257277
+        },
+        {
+          "family": "embench",
+          "name": "nettle-aes",
+          "group": null,
+          "baseline_cycles": 5203513,
+          "candidate_cycles": 4766387,
+          "baseline_time_ps": 52035130000,
+          "candidate_time_ps": 47663870000,
+          "time_speedup": 1.091710136000287
+        },
+        {
+          "family": "embench",
+          "name": "nettle-sha256",
+          "group": null,
+          "baseline_cycles": 4307562,
+          "candidate_cycles": 4133207,
+          "baseline_time_ps": 43075620000,
+          "candidate_time_ps": 41332070000,
+          "time_speedup": 1.0421839506223618
+        },
+        {
+          "family": "embench",
+          "name": "nsichneu",
+          "group": null,
+          "baseline_cycles": 7298679,
+          "candidate_cycles": 6913372,
+          "baseline_time_ps": 72986790000,
+          "candidate_time_ps": 69133720000,
+          "time_speedup": 1.0557335841323163
+        },
+        {
+          "family": "embench",
+          "name": "picojpeg",
+          "group": null,
+          "baseline_cycles": 5300988,
+          "candidate_cycles": 4764383,
+          "baseline_time_ps": 53009880000,
+          "candidate_time_ps": 47643830000,
+          "time_speedup": 1.1126284347836854
+        },
+        {
+          "family": "embench",
+          "name": "qrduino",
+          "group": null,
+          "baseline_cycles": 4524180,
+          "candidate_cycles": 4372576,
+          "baseline_time_ps": 45241800000,
+          "candidate_time_ps": 43725760000,
+          "time_speedup": 1.0346715528786692
+        },
+        {
+          "family": "embench",
+          "name": "sglib-combined",
+          "group": null,
+          "baseline_cycles": 4526268,
+          "candidate_cycles": 4184216,
+          "baseline_time_ps": 45262680000,
+          "candidate_time_ps": 41842160000,
+          "time_speedup": 1.0817481697885578
+        },
+        {
+          "family": "embench",
+          "name": "slre",
+          "group": null,
+          "baseline_cycles": 4902163,
+          "candidate_cycles": 4372827,
+          "baseline_time_ps": 49021630000,
+          "candidate_time_ps": 43728270000,
+          "time_speedup": 1.12105121012105
+        },
+        {
+          "family": "embench",
+          "name": "st",
+          "group": null,
+          "baseline_cycles": 7165107,
+          "candidate_cycles": 7008489,
+          "baseline_time_ps": 71651070000,
+          "candidate_time_ps": 70084890000,
+          "time_speedup": 1.0223468995956189
+        },
+        {
+          "family": "embench",
+          "name": "statemate",
+          "group": null,
+          "baseline_cycles": 3368567,
+          "candidate_cycles": 2628051,
+          "baseline_time_ps": 33685670000,
+          "candidate_time_ps": 26280510000,
+          "time_speedup": 1.2817738316341654
+        },
+        {
+          "family": "embench",
+          "name": "ud",
+          "group": null,
+          "baseline_cycles": 2775897,
+          "candidate_cycles": 2568917,
+          "baseline_time_ps": 27758970000,
+          "candidate_time_ps": 25689170000,
+          "time_speedup": 1.0805709176279343
+        },
+        {
+          "family": "embench",
+          "name": "wikisort",
+          "group": null,
+          "baseline_cycles": 2173042,
+          "candidate_cycles": 2064002,
+          "baseline_time_ps": 21730420000,
+          "candidate_time_ps": 20640020000,
+          "time_speedup": 1.052829406173056
+        }
+      ]
+    }
+  },
+  "relative_to": {
+    "AB": {
+      "embench": 1.0021813825602712,
+      "fp32": 1.019078222111176,
+      "fp32_subgroups": {
+        "dsp": 1.0383972958715273,
+        "matrix_ml": 1.000118573989202
+      },
+      "faster": 13,
+      "slower": 11,
+      "equal": 3
+    },
+    "arb_v1": {
+      "embench": 1.00527741756248,
+      "fp32": 1.0071953949049617,
+      "fp32_subgroups": {
+        "dsp": 1.0135144729143764,
+        "matrix_ml": 1.0009157151951826
+      },
+      "faster": 14,
+      "slower": 3,
+      "equal": 10
+    }
+  },
+  "source_sha256": {
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/fir/profile.json": "efac2c5b2d99c1e3243606651a13442ef47e5c629d2f839e1fcba7c4cff0edf9",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/fir/profile.json": "a61b0200f279336cd57e77a453c82df4070b7a0eb8913f40765d0dbb76bd6d18",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/fp32/fir/profile.json": "a61b0200f279336cd57e77a453c82df4070b7a0eb8913f40765d0dbb76bd6d18",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/iir/profile.json": "5f511e7fb2b6d02a8746cece8ea767ca0a048e4b7b3f9d33b14cef67a9c731ad",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/iir/profile.json": "9055dede93e4c0d49436b4888cf2b1a1011b539b14c59f674935d46b4adf21c6",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/fp32/iir/profile.json": "9055dede93e4c0d49436b4888cf2b1a1011b539b14c59f674935d46b4adf21c6",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/fft/profile.json": "c2ee6fde6d4d02ec0b2517f845d066f814ca3c6d4d671c67b06ea1c4cfc72971",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/fft/profile.json": "c6bcac312641f98a9bb437147ca1f1f17bff66de2d4d3a025c4200e6fa66e5f2",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/fp32/fft/profile.json": "38c576a4439494b0c2b06ed11ff8e730177e476b6578e2bd4111d3ea5ecad50c",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/pid/profile.json": "7b7781024f9b114b08c5aefe699861844800172474f6dfe88bf92814d5b6b47b",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/pid/profile.json": "8ef777dea0f6a32332d0fdd983cbbb92cac139a75635c66f27a268e73c782125",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/fp32/pid/profile.json": "8ef777dea0f6a32332d0fdd983cbbb92cac139a75635c66f27a268e73c782125",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/gemm/profile.json": "bc3906f22aa8873aed4e27edead1168bbbfa49550352c55474aad9d29fdcb255",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/gemm/profile.json": "6f84f11275a838db6517f72b419ea5d15f01213e4ea84774f5e1a85f7af7d923",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/fp32/gemm/profile.json": "cb90228b0fbe4e1bc2139a6996b0f6b0ab895ece912cfd4d63d38dc6edc7c0d7",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/bicg/profile.json": "a75796f154210372fe3317e222fc4058eae586aa99e08a1bbf8f1c1294bbbddb",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/bicg/profile.json": "7055bf9e7723b9c9a04902923bb96f066c16aa0492bce72b7afe28100c36b2d1",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/fp32/bicg/profile.json": "7055bf9e7723b9c9a04902923bb96f066c16aa0492bce72b7afe28100c36b2d1",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/cholesky/profile.json": "4a62aa72534b345c93b7764c348191454d76393e761865e42d091e9e24ede00c",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/cholesky/profile.json": "48a088e11acd3a4627c941a42039eb97286ff2a452cf520bcc41be4047919ee3",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/fp32/cholesky/profile.json": "b71a01ff02236c38bd809cbb5cb1a987a69100d48a043819c1191e11c9f9831e",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/fp32/svm/profile.json": "423728d3c357ea2e17ed7d57b8f4cbd4a26b1aabfa676102dffdc98aecce8ff6",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/fp32/svm/profile.json": "dc264861e3c55830e5d994eb31f154173051348c67bc545e7eedad197f6a595b",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/fp32/svm/profile.json": "dc264861e3c55830e5d994eb31f154173051348c67bc545e7eedad197f6a595b",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/aha-mont64/profile.json": "bd5420e8122e3666b0d499b0047fea7ffc09ee81c3d2caf6e49882f06c15b6c3",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/aha-mont64/profile.json": "54ff9bcd6ef43f949237cd24b00dfc3d68f044c44640728990bc4f1d99343293",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/embench/aha-mont64/profile.json": "54ff9bcd6ef43f949237cd24b00dfc3d68f044c44640728990bc4f1d99343293",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/crc32/profile.json": "dfbfbf353ce08617178c9c261459e5d934111d5c00972263f5700623c424bfc1",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/crc32/profile.json": "dfbfbf353ce08617178c9c261459e5d934111d5c00972263f5700623c424bfc1",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/embench/crc32/profile.json": "dfbfbf353ce08617178c9c261459e5d934111d5c00972263f5700623c424bfc1",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/cubic/profile.json": "e92f1417842f46ed2ac0e0e60b7cf0063169e1243ceec6b1be5c56672c90cc9b",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/cubic/profile.json": "91a023eb6153818c8239676a95569abfa942a714e6d2181404787d648742f38d",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/embench/cubic/profile.json": "3e8080423bcf3822246ad3a66e07a4e8d0bd28e87547841ca237cf32ff57c264",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/edn/profile.json": "0e52b4633c00a98ed856cd0f6a56657e00dc6c43e03b66c218cb1ded520813f0",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/edn/profile.json": "202d96e10ed7df6babd5c62218e3699ec55d639cbd999ca93a047625835a8a64",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/embench/edn/profile.json": "9796ee617dcb27fd9e54eefe18e1d6fada9032d977312d69b1054b28884f67be",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/huffbench/profile.json": "becc807f5c2fd4839078cfb4663cdc676b7db5d3fd6cc4a8ba726c3dd6a516df",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/huffbench/profile.json": "8a8fbc40bb6f7bee468e51aaf1998dc43f9ad4b249df2357f1406555ff3f69e3",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/embench/huffbench/profile.json": "37a49e062270602b757b5322d0205943a1b27d46a5f7e86def579d106238c450",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/matmult-int/profile.json": "0410f7b498495fed8ff596d564911c559cc318fa3ea97809d00ffdb5cac7c073",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/matmult-int/profile.json": "0410f7b498495fed8ff596d564911c559cc318fa3ea97809d00ffdb5cac7c073",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/embench/matmult-int/profile.json": "0410f7b498495fed8ff596d564911c559cc318fa3ea97809d00ffdb5cac7c073",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/minver/profile.json": "cd18a271bddd61c1296f206a6eb9fc4e90b6632536a5a5ddce83898c954c955e",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/minver/profile.json": "86f5959a983944cd74a9b8ca7b1baa762a4ed579acb990c79f4bfcb33789bcd7",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/embench/minver/profile.json": "e5b7eab4ae2a0bc763c82752ed058768648ec241041076b75ae9118a50c381d1",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/nbody/profile.json": "69b92cf463b2b143965e9afcd86665acf223e9de757f3a8f33d2e253278c4e3b",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/nbody/profile.json": "4ca6bafff3709996b92221ef71f62291f9ba711923d8a3a8bec7ca0f9327f4ca",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/embench/nbody/profile.json": "69bc9472eb73899e10dd7e08a49d867606cdbff3c91c061de58e145548221aa1",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/nettle-aes/profile.json": "bc5c3170d679f4ecf9ab0779959e899e40282da09a788277f6333fbb46bcd495",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/nettle-aes/profile.json": "aa72b2520b176385aec39c502123702e0adb33be7ef993f660e0214d1180c6ab",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/embench/nettle-aes/profile.json": "1988513c38f25154413509f6b853e9ec34de2b06671ccaa32a658be8d7c713dc",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/nettle-sha256/profile.json": "39f95ed22ae8e5d83770d339c28d85143419f3edc3bc84fd23a1002d595f06f4",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/nettle-sha256/profile.json": "c6cda845c56d31275ac273016b3606b53b9180f6189d21cd2a38e7fe8bb4e76a",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/embench/nettle-sha256/profile.json": "ff722b21c54e6549a8a9afda3af4f86cfebd5c50f91afa25cced9235d0a6ddc8",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/nsichneu/profile.json": "80bfb6448fb6e5ea88a07c503b26a0a4b8b203415081db4c5185139f4183c475",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/nsichneu/profile.json": "48b5ddfa2c0b52df48eeda3a3524c97db21e63e2797078dcbb39a686ee1fb04d",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/embench/nsichneu/profile.json": "48b5ddfa2c0b52df48eeda3a3524c97db21e63e2797078dcbb39a686ee1fb04d",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/picojpeg/profile.json": "526f1dffc1f83fb4e738d6863669a1f08feecb21e970cdf7288bcc645c7acd86",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/picojpeg/profile.json": "4d3eb6545c76ff7e1ddf49424e8e7e17eb68b4c288c0dc92d7da34a1b3958015",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/embench/picojpeg/profile.json": "456565bc2235a2ff95a6384c04f9c49d85b2def330eea44e3e9ebc63fb16d54f",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/qrduino/profile.json": "48f46772c2f9b293f288676ce4577dd152975ba80c38cd1f7e0d37d1df917fc2",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/qrduino/profile.json": "6cfe4f1675ebe5ee7656d8cbcade9585bdcf5fc48589d43256f6ea5d1e99f64a",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/embench/qrduino/profile.json": "8e410652596a1dddff063e085a9f705c7f14b1ac55a6c7b6de28d4d8a8685950",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/sglib-combined/profile.json": "bcc8482de1561b49960f213d15c5def96c6301c63a82ada85d356677f2b9daa0",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/sglib-combined/profile.json": "86b1dd2ee9b796627be2e60adf9bfc0389ac43bd05eb21a67e836552dcdc82d4",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/embench/sglib-combined/profile.json": "70a8629a5d504439fcca9f4e9d62ed3615ccefb3b556f12f70fd173270c2a950",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/slre/profile.json": "475a9fec658227609b01e069834282df88b0340ad61dae22e645eb7c554f03b2",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/slre/profile.json": "721d654a52b912f7f7be00c25c567d922d0589cd61ebdc32b5f43da136ca3d34",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/embench/slre/profile.json": "bf07dccdddc3a5dda316e79fc35d7378f2c12a18c2cf4cb7305d857e79effa9e",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/st/profile.json": "125faf35cab426646a3e5af4fe165a131ea2f8b98c2f2384ca0c8e8fc575d72d",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/st/profile.json": "e6d7ba1d41cba1ef9d76f3fdfef34c0675bc3d8538c6698c9a9947347405258a",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/embench/st/profile.json": "e6d7ba1d41cba1ef9d76f3fdfef34c0675bc3d8538c6698c9a9947347405258a",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/statemate/profile.json": "7d37334b8298667b6115ed9960bd24d231c46b8fcdcd22220ebe3bb26da39f33",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/statemate/profile.json": "7f6ff97d0a00b0fd088c81797cc1d1cf87296a5358546e321328781763603dcf",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/embench/statemate/profile.json": "42a6b372daeb86676119a3ca9e33788deca69044d1243280e6974715c8282431",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/ud/profile.json": "5d185032024d6a362eec3dd22ac69e90709b002dea83a9acc27b817a8353cf18",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/ud/profile.json": "a805cd604efd17463d5748a40b8efc54450e1846c6c42e29f479e3fa636e735d",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/embench/ud/profile.json": "de7c468d293b7095bb49dd66a3fe4a103bb94ad163c9b080ab362ea014916ddb",
+    "build/experiments/lsu-ab-v1/measurement-10000ps-v1/embench/wikisort/profile.json": "4d14eccb44dd31f59341114f50cb03a26b5e77aeec382d4ef22e2f6e397616df",
+    "build/experiments/lsu-load-arb-v1/measurement-10000ps-v1/embench/wikisort/profile.json": "856aa3785988d8101e1df05ec0c0305366d2d0a69a517da84092fdb56b1f7d97",
+    "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1/embench/wikisort/profile.json": "354c1a0a2a701814d86d04c3bf37379f5a0dd0d0773fe874827308370c5b6e22"
+  },
+  "records": [
+    {
+      "family": "fp32",
+      "name": "fir",
+      "group": "dsp",
+      "cycles": {
+        "AB": 66110,
+        "arb_v1": 66084,
+        "candidate": 66084
+      },
+      "baseline_speedup": 1.12449306942679,
+      "relative_speedup": {
+        "AB": 1.0003934386538345,
+        "arb_v1": 1.0
+      },
+      "time_change_percent": {
+        "AB": -0.03932839207381189,
+        "arb_v1": 0.0
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_fp_load": -28,
+          "store_ack_wait": 2
+        },
+        "arb_v1": {}
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "iir",
+      "group": "dsp",
+      "cycles": {
+        "AB": 12472,
+        "arb_v1": 12473,
+        "candidate": 12473
+      },
+      "baseline_speedup": 1.084181832758759,
+      "relative_speedup": {
+        "AB": 0.999919826825944,
+        "arb_v1": 1.0
+      },
+      "time_change_percent": {
+        "AB": 0.008017960230910504,
+        "arb_v1": 0.0
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "store_ack_wait": 1
+        },
+        "arb_v1": {}
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "fft",
+      "group": "dsp",
+      "cycles": {
+        "AB": 33656,
+        "arb_v1": 34851,
+        "candidate": 33029
+      },
+      "baseline_speedup": 1.2373066093433043,
+      "relative_speedup": {
+        "AB": 1.0189833176905143,
+        "arb_v1": 1.0551636440703624
+      },
+      "time_change_percent": {
+        "AB": -1.862966484430706,
+        "arb_v1": -5.22797050299848
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_int_load": -1085,
+          "head_wait_integer_other": -83,
+          "recovery": -1,
+          "rob_empty": -3,
+          "store_ack_wait": 545
+        },
+        "arb_v1": {
+          "head_wait_fp_load": 268,
+          "store_ack_wait": -2090
+        }
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "pid",
+      "group": "dsp",
+      "cycles": {
+        "AB": 8256,
+        "arb_v1": 7238,
+        "candidate": 7238
+      },
+      "baseline_speedup": 1.001381597126278,
+      "relative_speedup": {
+        "AB": 1.1406465874550982,
+        "arb_v1": 1.0
+      },
+      "time_change_percent": {
+        "AB": -12.330426356589152,
+        "arb_v1": 0.0
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_fadd": -510,
+          "head_wait_fma": -1020,
+          "head_wait_fp_store": -510,
+          "store_ack_wait": 1022
+        },
+        "arb_v1": {}
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "gemm",
+      "group": "matrix_ml",
+      "cycles": {
+        "AB": 123490,
+        "arb_v1": 123174,
+        "candidate": 123372
+      },
+      "baseline_speedup": 1.0802694290438672,
+      "relative_speedup": {
+        "AB": 1.0009564568945952,
+        "arb_v1": 0.9983950977531368
+      },
+      "time_change_percent": {
+        "AB": -0.09555429589440667,
+        "arb_v1": 0.16074820984948168
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_fmul": -60,
+          "head_wait_fp_load": -1320,
+          "head_wait_fp_store": -60,
+          "store_ack_wait": 1322
+        },
+        "arb_v1": {
+          "head_wait_fmul": 419,
+          "head_wait_fp_load": 14036,
+          "head_wait_fp_store": 419,
+          "store_ack_wait": -14676
+        }
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "bicg",
+      "group": "matrix_ml",
+      "cycles": {
+        "AB": 20619,
+        "arb_v1": 20619,
+        "candidate": 20619
+      },
+      "baseline_speedup": 1.160434550657161,
+      "relative_speedup": {
+        "AB": 1.0,
+        "arb_v1": 1.0
+      },
+      "time_change_percent": {
+        "AB": 0.0,
+        "arb_v1": 0.0
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_fp_load": -84,
+          "store_ack_wait": 84
+        },
+        "arb_v1": {}
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "cholesky",
+      "group": "matrix_ml",
+      "cycles": {
+        "AB": 181507,
+        "arb_v1": 182544,
+        "candidate": 181585
+      },
+      "baseline_speedup": 1.0692568218740535,
+      "relative_speedup": {
+        "AB": 0.999570449100972,
+        "arb_v1": 1.0052812732329213
+      },
+      "time_change_percent": {
+        "AB": 0.042973549229508023,
+        "arb_v1": -0.5253527916557088
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_fdiv": -76,
+          "head_wait_fma": -108,
+          "head_wait_fp_load": -4000,
+          "head_wait_fp_store": -108,
+          "head_wait_int_load": -2,
+          "head_wait_integer_other": 2,
+          "recovery": 2,
+          "rob_empty": 6,
+          "store_ack_wait": 4362
+        },
+        "arb_v1": {
+          "head_wait_fdiv": 74,
+          "head_wait_fma": 632,
+          "head_wait_fp_load": 14358,
+          "head_wait_fp_store": 632,
+          "head_wait_integer_other": -72,
+          "recovery": -36,
+          "rob_empty": -108,
+          "store_ack_wait": -16439
+        }
+      }
+    },
+    {
+      "family": "fp32",
+      "name": "svm",
+      "group": "matrix_ml",
+      "cycles": {
+        "AB": 38395,
+        "arb_v1": 38397,
+        "candidate": 38397
+      },
+      "baseline_speedup": 1.1300882881475116,
+      "relative_speedup": {
+        "AB": 0.9999479125973383,
+        "arb_v1": 1.0
+      },
+      "time_change_percent": {
+        "AB": 0.005209011590046053,
+        "arb_v1": 0.0
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "store_ack_wait": 2
+        },
+        "arb_v1": {}
+      }
+    },
+    {
+      "family": "embench",
+      "name": "aha-mont64",
+      "group": null,
+      "cycles": {
+        "AB": 5356643,
+        "arb_v1": 5356644,
+        "candidate": 5356644
+      },
+      "baseline_speedup": 1.000004853785318,
+      "relative_speedup": {
+        "AB": 0.9999998133159493,
+        "arb_v1": 1.0
+      },
+      "time_change_percent": {
+        "AB": 1.8668408552358073e-05,
+        "arb_v1": 0.0
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_int_load": -1696,
+          "store_ack_wait": 1697
+        },
+        "arb_v1": {}
+      }
+    },
+    {
+      "family": "embench",
+      "name": "crc32",
+      "group": null,
+      "cycles": {
+        "AB": 5054726,
+        "arb_v1": 5054726,
+        "candidate": 5054726
+      },
+      "baseline_speedup": 1.0687463573693212,
+      "relative_speedup": {
+        "AB": 1.0,
+        "arb_v1": 1.0
+      },
+      "time_change_percent": {
+        "AB": 0.0,
+        "arb_v1": 0.0
+      },
+      "changed_exclusive_buckets": {
+        "AB": {},
+        "arb_v1": {}
+      }
+    },
+    {
+      "family": "embench",
+      "name": "cubic",
+      "group": null,
+      "cycles": {
+        "AB": 13751431,
+        "arb_v1": 13782000,
+        "candidate": 13760659
+      },
+      "baseline_speedup": 1.0530668625681372,
+      "relative_speedup": {
+        "AB": 0.999329392582143,
+        "arb_v1": 1.001550870492467
+      },
+      "time_change_percent": {
+        "AB": 0.06710574339499065,
+        "arb_v1": -0.15484690175591176
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_branch": 430,
+          "head_wait_int_load": -68517,
+          "head_wait_int_store": -20439,
+          "head_wait_integer_other": -34837,
+          "head_wait_jump": 660,
+          "recovery": -3261,
+          "rob_empty": -9783,
+          "store_ack_wait": 144975
+        },
+        "arb_v1": {
+          "head_wait_branch": 80,
+          "head_wait_int_load": 853,
+          "head_wait_integer_other": 5740,
+          "recovery": 190,
+          "rob_empty": 570,
+          "store_ack_wait": -28774
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "edn",
+      "group": null,
+      "cycles": {
+        "AB": 4232380,
+        "arb_v1": 4205064,
+        "candidate": 4204886
+      },
+      "baseline_speedup": 1.130707467455717,
+      "relative_speedup": {
+        "AB": 1.0065385839235594,
+        "arb_v1": 1.0000423317064957
+      },
+      "time_change_percent": {
+        "AB": -0.6496108572481729,
+        "arb_v1": -0.004232991459818258
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_int_load": -71253,
+          "head_wait_integer_other": -36453,
+          "store_ack_wait": 80212
+        },
+        "arb_v1": {
+          "head_wait_int_load": 87,
+          "head_wait_integer_other": 261,
+          "store_ack_wait": -526
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "huffbench",
+      "group": null,
+      "cycles": {
+        "AB": 3209315,
+        "arb_v1": 3200868,
+        "candidate": 3200604
+      },
+      "baseline_speedup": 1.0551220957044358,
+      "relative_speedup": {
+        "AB": 1.0027216737840732,
+        "arb_v1": 1.0000824844310636
+      },
+      "time_change_percent": {
+        "AB": -0.27142863819848984,
+        "arb_v1": -0.008247762794344471
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_branch": -62535,
+          "head_wait_int_load": -17076,
+          "head_wait_integer_other": -5478,
+          "recovery": -23,
+          "rob_empty": -69,
+          "store_ack_wait": 76470
+        },
+        "arb_v1": {
+          "head_wait_branch": -11,
+          "head_wait_int_load": 913,
+          "head_wait_integer_other": -121,
+          "recovery": -11,
+          "rob_empty": -33,
+          "store_ack_wait": -1001
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "matmult-int",
+      "group": null,
+      "cycles": {
+        "AB": 3769948,
+        "arb_v1": 3769948,
+        "candidate": 3769948
+      },
+      "baseline_speedup": 1.1122601691057807,
+      "relative_speedup": {
+        "AB": 1.0,
+        "arb_v1": 1.0
+      },
+      "time_change_percent": {
+        "AB": 0.0,
+        "arb_v1": 0.0
+      },
+      "changed_exclusive_buckets": {
+        "AB": {},
+        "arb_v1": {}
+      }
+    },
+    {
+      "family": "embench",
+      "name": "minver",
+      "group": null,
+      "cycles": {
+        "AB": 831001,
+        "arb_v1": 837679,
+        "candidate": 831010
+      },
+      "baseline_speedup": 1.0574806560691208,
+      "relative_speedup": {
+        "AB": 0.9999891698054175,
+        "arb_v1": 1.0080251741856294
+      },
+      "time_change_percent": {
+        "AB": 0.0010830311876874887,
+        "arb_v1": -0.7961283498810423
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_branch": -555,
+          "head_wait_fdiv": -2220,
+          "head_wait_fma": 1110,
+          "head_wait_fp_load": -7216,
+          "head_wait_fp_other": -2218,
+          "head_wait_fp_store": 555,
+          "head_wait_int_load": -2775,
+          "head_wait_integer_other": -555,
+          "store_ack_wait": 13883
+        },
+        "arb_v1": {
+          "head_wait_fdiv": 4432,
+          "head_wait_fp_load": -4,
+          "head_wait_fp_other": 2,
+          "head_wait_integer_other": 2,
+          "store_ack_wait": -11101
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "nbody",
+      "group": null,
+      "cycles": {
+        "AB": 5754377,
+        "arb_v1": 5756380,
+        "candidate": 5755966
+      },
+      "baseline_speedup": 1.0238335320257277,
+      "relative_speedup": {
+        "AB": 0.9997239386056137,
+        "arb_v1": 1.000071925372735
+      },
+      "time_change_percent": {
+        "AB": 0.027613762532419095,
+        "arb_v1": -0.007192019984780806
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_int_load": -213,
+          "head_wait_int_store": -6,
+          "head_wait_integer_other": -9,
+          "recovery": -4,
+          "rob_empty": -13,
+          "store_ack_wait": 1834
+        },
+        "arb_v1": {
+          "head_wait_integer_other": -2,
+          "recovery": -1,
+          "rob_empty": -3,
+          "store_ack_wait": -408
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "nettle-aes",
+      "group": null,
+      "cycles": {
+        "AB": 4766309,
+        "arb_v1": 4767479,
+        "candidate": 4766387
+      },
+      "baseline_speedup": 1.091710136000287,
+      "relative_speedup": {
+        "AB": 0.9999836354035038,
+        "arb_v1": 1.0002291043509475
+      },
+      "time_change_percent": {
+        "AB": 0.0016364864300566495,
+        "arb_v1": -0.02290518741666636
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_int_load": -9048,
+          "store_ack_wait": 9126
+        },
+        "arb_v1": {
+          "head_wait_int_load": 21060,
+          "store_ack_wait": -22152
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "nettle-sha256",
+      "group": null,
+      "cycles": {
+        "AB": 4136522,
+        "arb_v1": 4138430,
+        "candidate": 4133207
+      },
+      "baseline_speedup": 1.0421839506223618,
+      "relative_speedup": {
+        "AB": 1.0008020406430165,
+        "arb_v1": 1.0012636676556486
+      },
+      "time_change_percent": {
+        "AB": -0.08013978893379736,
+        "arb_v1": -0.12620728150530836
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_int_load": -47503,
+          "store_ack_wait": 44188
+        },
+        "arb_v1": {
+          "head_wait_branch": 948,
+          "head_wait_int_load": 5692,
+          "recovery": 474,
+          "rob_empty": 1422,
+          "store_ack_wait": -13759
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "nsichneu",
+      "group": null,
+      "cycles": {
+        "AB": 6917065,
+        "arb_v1": 6913372,
+        "candidate": 6913372
+      },
+      "baseline_speedup": 1.0557335841323163,
+      "relative_speedup": {
+        "AB": 1.0005341821617584,
+        "arb_v1": 1.0
+      },
+      "time_change_percent": {
+        "AB": -0.053389696352423854,
+        "arb_v1": 0.0
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_branch": -2464,
+          "head_wait_int_load": -3693,
+          "store_ack_wait": 2464
+        },
+        "arb_v1": {}
+      }
+    },
+    {
+      "family": "embench",
+      "name": "picojpeg",
+      "group": null,
+      "cycles": {
+        "AB": 4880601,
+        "arb_v1": 4817681,
+        "candidate": 4764383
+      },
+      "baseline_speedup": 1.1126284347836854,
+      "relative_speedup": {
+        "AB": 1.024393085106718,
+        "arb_v1": 1.0111867580754947
+      },
+      "time_change_percent": {
+        "AB": -2.3812231321511446,
+        "arb_v1": -1.1062998982290462
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_branch": -378,
+          "head_wait_int_load": -188982,
+          "head_wait_int_store": -59292,
+          "head_wait_integer_other": -130602,
+          "head_wait_jump": -24,
+          "recovery": 120,
+          "rob_empty": 360,
+          "store_ack_wait": 262580
+        },
+        "arb_v1": {
+          "head_wait_branch": 6,
+          "head_wait_int_load": 126,
+          "head_wait_integer_other": 35934,
+          "recovery": 42,
+          "rob_empty": 126,
+          "store_ack_wait": -89532
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "qrduino",
+      "group": null,
+      "cycles": {
+        "AB": 4411503,
+        "arb_v1": 4369451,
+        "candidate": 4372576
+      },
+      "baseline_speedup": 1.0346715528786692,
+      "relative_speedup": {
+        "AB": 1.0089025325117276,
+        "arb_v1": 0.9992853183112197
+      },
+      "time_change_percent": {
+        "AB": -0.8823976771635378,
+        "arb_v1": 0.07151928239954586
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_branch": -1848,
+          "head_wait_int_load": -114425,
+          "head_wait_int_store": -60,
+          "head_wait_integer_other": 9143,
+          "recovery": 4,
+          "rob_empty": 12,
+          "store_ack_wait": 68247
+        },
+        "arb_v1": {
+          "head_wait_branch": 3075,
+          "head_wait_int_load": 14025,
+          "head_wait_int_store": 15,
+          "head_wait_integer_other": 80,
+          "store_ack_wait": -14070
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "sglib-combined",
+      "group": null,
+      "cycles": {
+        "AB": 4198421,
+        "arb_v1": 4197329,
+        "candidate": 4184216
+      },
+      "baseline_speedup": 1.0817481697885578,
+      "relative_speedup": {
+        "AB": 1.0033949012192487,
+        "arb_v1": 1.003133920428582
+      },
+      "time_change_percent": {
+        "AB": -0.33834148600152547,
+        "arb_v1": -0.3124129654835217
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_branch": -10207,
+          "head_wait_int_load": -67220,
+          "head_wait_int_store": -1624,
+          "head_wait_integer_other": -14210,
+          "recovery": -116,
+          "rob_empty": -348,
+          "store_ack_wait": 79520
+        },
+        "arb_v1": {
+          "head_wait_branch": 2120,
+          "head_wait_int_load": 4764,
+          "head_wait_int_store": 319,
+          "head_wait_integer_other": 2349,
+          "recovery": 1221,
+          "rob_empty": 3663,
+          "store_ack_wait": -27549
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "slre",
+      "group": null,
+      "cycles": {
+        "AB": 4362711,
+        "arb_v1": 4427060,
+        "candidate": 4372827
+      },
+      "baseline_speedup": 1.12105121012105,
+      "relative_speedup": {
+        "AB": 0.9976866224069693,
+        "arb_v1": 1.0124022743181929
+      },
+      "time_change_percent": {
+        "AB": 0.23187417181655956,
+        "arb_v1": -1.2250342213568355
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_branch": -550,
+          "head_wait_int_load": -14850,
+          "head_wait_integer_other": -440,
+          "recovery": -110,
+          "rob_empty": -330,
+          "store_ack_wait": 26396
+        },
+        "arb_v1": {
+          "head_wait_int_load": -10230,
+          "head_wait_integer_other": 660,
+          "recovery": -2530,
+          "rob_empty": -7590,
+          "store_ack_wait": -34543
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "st",
+      "group": null,
+      "cycles": {
+        "AB": 7008181,
+        "arb_v1": 7008489,
+        "candidate": 7008489
+      },
+      "baseline_speedup": 1.0223468995956189,
+      "relative_speedup": {
+        "AB": 0.9999560532947972,
+        "arb_v1": 1.0
+      },
+      "time_change_percent": {
+        "AB": 0.004394863660062143,
+        "arb_v1": 0.0
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_int_load": -4,
+          "store_ack_wait": 312
+        },
+        "arb_v1": {}
+      }
+    },
+    {
+      "family": "embench",
+      "name": "statemate",
+      "group": null,
+      "cycles": {
+        "AB": 2614289,
+        "arb_v1": 2805791,
+        "candidate": 2628051
+      },
+      "baseline_speedup": 1.2817738316341654,
+      "relative_speedup": {
+        "AB": 0.9947634197357662,
+        "arb_v1": 1.0676318686357305
+      },
+      "time_change_percent": {
+        "AB": 0.5264146389324154,
+        "arb_v1": -6.334755511012757
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_branch": -3928,
+          "head_wait_int_load": -56956,
+          "head_wait_integer_other": -3924,
+          "recovery": -1962,
+          "rob_empty": -5886,
+          "store_ack_wait": 86418
+        },
+        "arb_v1": {
+          "head_wait_branch": -982,
+          "head_wait_int_load": 10801,
+          "head_wait_integer_other": -6869,
+          "recovery": -2945,
+          "rob_empty": -8835,
+          "store_ack_wait": -168910
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "ud",
+      "group": null,
+      "cycles": {
+        "AB": 2571871,
+        "arb_v1": 2549734,
+        "candidate": 2568917
+      },
+      "baseline_speedup": 1.0805709176279343,
+      "relative_speedup": {
+        "AB": 1.0011499009115514,
+        "arb_v1": 0.9925326509186556
+      },
+      "time_change_percent": {
+        "AB": -0.11485801581805344,
+        "arb_v1": 0.7523529905472559
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_int_load": -51732,
+          "head_wait_integer_other": -4434,
+          "store_ack_wait": 53212
+        },
+        "arb_v1": {
+          "head_wait_int_load": 1478,
+          "head_wait_integer_other": 51705,
+          "store_ack_wait": -34000
+        }
+      }
+    },
+    {
+      "family": "embench",
+      "name": "wikisort",
+      "group": null,
+      "cycles": {
+        "AB": 2067954,
+        "arb_v1": 2074272,
+        "candidate": 2064002
+      },
+      "baseline_speedup": 1.052829406173056,
+      "relative_speedup": {
+        "AB": 1.0019147268268151,
+        "arb_v1": 1.0049757703723154
+      },
+      "time_change_percent": {
+        "AB": -0.1911067654309484,
+        "arb_v1": -0.4951134663149337
+      },
+      "changed_exclusive_buckets": {
+        "AB": {
+          "head_wait_branch": -102,
+          "head_wait_int_load": -9922,
+          "head_wait_int_store": -30,
+          "head_wait_integer_other": -1734,
+          "recovery": 737,
+          "rob_empty": 2211,
+          "store_ack_wait": 4888
+        },
+        "arb_v1": {
+          "head_wait_branch": -4,
+          "head_wait_int_load": 17,
+          "head_wait_int_store": 134,
+          "recovery": 62,
+          "rob_empty": 186,
+          "store_ack_wait": -10665
+        }
+      }
+    }
+  ]
+}
