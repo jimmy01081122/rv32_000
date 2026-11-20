@@ -91,4 +91,20 @@ After lowering, preparing the pinned runtime, and committing these adapters:
 3. Run `prepare_physical_contracts.py`, then commit the resulting contracts.
 4. Run `complete_physical.py` on the host; inspect every exit and independent review.
 
+VFS container creation needs space for two full runtime filesystem copies. In
+this host, that exhausted space before storage preparation; the failed log is
+retained. `prepare_capacity.py` verifies the existing exact image backup and
+fully decodes eight compressed historical A caches before temporarily parking
+inactive images and their redundant raw cache copies. Native construction then
+has 4.5 GiB free. `restore_environment.py` restores the exact image IDs and every
+historical byte after independent physical review and publication verification.
+On replay, prepare that capacity before creating the native container.
+
+After physical qualification, `analyze_physical_paths.py` checks setup and hold
+samples at the common and fastest tested periods against the admitted minima.
+`run_fastest.py` records a complete 27-workload replay with fixed 10,000 ps memory;
+`review_complete.py` joins both operating points and verifies original/A+B area
+denominators. `archive_physical.py` and `verify_completion_archive.py` retain and
+check every decoded evidence member, including the earlier functional archive.
+
 Until those stages complete, this procedure is preparation, not measured PPA.
