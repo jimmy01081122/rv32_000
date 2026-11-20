@@ -67,3 +67,28 @@ After environment resume, the independently recomputed complete comparison is
 byte-identical; unit inputs/binaries/logs/traces and all pipeline receipts also
 revalidate. [Public evidence](../../docs/evidence/2026-11-18/lsu-rob-room-functional/README.md)
 retains those checks. Neither the baseline nor the planning goals are promoted or changed.
+
+Physical gate 4 uses an isolated `ROOM` variant under the accepted A+B flow:
+fresh native core synthesis, the exact proved shared FPU, TT global-route
+construction, hold40 repair, uniform ready guard, and independent TT/SS/FF STA.
+Mapping/construction periods remain 5,500/14,000 ps; acceptance uses the same
+100 ps grid, complete setup/hold/electrical checks, and original area denominator.
+The initial sweep is 9,000–10,000 ps, extended if it does not bracket a pass/fail
+boundary. A physical limit below 10,000 ps requires separate workload timing
+with memory service still fixed at 10,000 ps before any system-speed claim.
+
+The adapters retain the prior native commands and reviewers. Only candidate
+identities, paths, and durable-storage preparation differ: `rv32-room-native`
+starts with a direct host bind, without a private tmpfs or extra mount privileges.
+Unused directories are removed only from its disposable writable layer, with
+all 204 pinned physical files checked before and after. Each completed physical
+stage gets a verified durable checkpoint and the observed process exit is saved.
+
+After lowering, preparing the pinned runtime, and committing these adapters:
+
+1. Run `run_synthesis.py --output /workspace/build/experiments/lsu-rob-room-v1/mapping-v1 --variants ROOM` inside the native runtime.
+2. Run `link_shared.py --core build/experiments/lsu-rob-room-v1/mapping-v1/ROOM --output build/experiments/lsu-rob-room-v1/shared-linked-v1` on the host.
+3. Run `prepare_physical_contracts.py`, then commit the resulting contracts.
+4. Run `complete_physical.py` on the host; inspect every exit and independent review.
+
+Until those stages complete, this procedure is preparation, not measured PPA.
