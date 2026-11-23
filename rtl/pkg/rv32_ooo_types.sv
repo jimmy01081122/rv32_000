@@ -610,6 +610,10 @@ package rv32_ooo_types;
   // =========================================================================
 
   typedef struct packed {
+    // Successful registered external load response, before flush arbitration.
+    logic        buffered_load_valid;
+    rob_tag_t    buffered_load_tag;
+    logic [31:0] buffered_load_data;
     logic     valid;
     rob_tag_t rob_tag;
     logic     lq_valid;

@@ -173,6 +173,10 @@ module rv32_ooo_lsu
   reg_domain_e  rsp_buf_domain;
   logic         rsp_buf_ack;
 
+  assign dmem_pending.buffered_load_valid = rsp_buf_valid && !rsp_buf_is_store && !rsp_buf_error;
+  assign dmem_pending.buffered_load_tag   = rsp_buf_rob_tag;
+  assign dmem_pending.buffered_load_data  = extract_load_data(rsp_buf_rdata, rsp_buf_addr[1:0],
+                                                              rsp_buf_size, rsp_buf_load_ext);
   assign dmem_pending.valid    = in_flight_valid || rsp_buf_valid;
   assign dmem_pending.rob_tag  = in_flight_valid ? in_flight_rob_tag : rsp_buf_rob_tag;
   assign dmem_pending.lq_valid = (in_flight_valid && !in_flight_is_store) || (rsp_buf_valid && !rsp_buf_is_store);
@@ -445,9 +449,7 @@ module rv32_ooo_lsu
       ld_cmp.result_valid  = rsp_buf_dst.valid;
       ld_cmp.result_domain = rsp_buf_domain;
       ld_cmp.result_phys   = rsp_buf_dst.new_phys;
-      ld_cmp.result_data   = extract_load_data(rsp_buf_rdata, rsp_buf_addr[1:0],
-                                               rsp_buf_size,
-                                               rsp_buf_load_ext);
+      ld_cmp.result_data   = dmem_pending.buffered_load_data;
       if (rsp_buf_error) begin
         ld_cmp.exception.valid = 1'b1;
         ld_cmp.exception.cause = rsp_buf_is_store ? EXC_STORE_ACCESS_FAULT : EXC_LOAD_ACCESS_FAULT;

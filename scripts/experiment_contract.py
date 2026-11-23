@@ -6,7 +6,7 @@ from baseline_contract import ROOT, MANIFEST, load, validate, sha
 BASELINE_COMMIT='58a4159da0372b3286758be1e6c1b50f9f28cc27'
 BASELINE_INPUTS_SHA256='ad56ddd224ec34bd78f9fdef542a6b06535581927db3af395988ba6cbafe4bad'
 ALLOWED_RTL={'rtl/lsu/rv32_ooo_lsu.sv'}
-EXPERIMENT_IDS={'lsu-a-v1','lsu-b-v1','lsu-ab-v1','lsu-load-arb-v1','lsu-rob-room-v1'}
+EXPERIMENT_IDS={'lsu-a-v1','lsu-b-v1','lsu-ab-v1','lsu-load-arb-v1','lsu-rob-room-v1','lsu-c-head-v1'}
 ROOM_RTL=ALLOWED_RTL | {'rtl/core/rv32_ooo_core.sv','rtl/rob/rv32_ooo_rob.sv'}
 SIM_INPUTS=['scripts/build_sim.sh','sim/scripts/rv32_ooo_core.f','sim/tb/sim_main.cpp','sim/tb/sim_mem.cpp',
             *[str(p.relative_to(ROOT)) for p in sorted((ROOT/'sim/tb').glob('*.h'))]]
@@ -31,6 +31,17 @@ def validate_experiment(contract):
         raise ValueError('unrecognized experiment or baseline commit')
     if contract.get('state')!='inputs_frozen':raise ValueError('candidate inputs not frozen')
     allowed=ROOM_RTL if contract['experiment_id']=='lsu-rob-room-v1' else ALLOWED_RTL
+    if contract['experiment_id']=='lsu-c-head-v1':
+        allowed=ROOM_RTL | {'rtl/pkg/rv32_ooo_types.sv'}
+        parent=ROOT/'experiments/lsu-rob-room-v1/manifest.json'
+        digest='18af0ee3cfbdc5fb85d76d07b305a7a85e31b891c2fcbef8740fb36e4c732cde'
+        if (sha(parent)!=digest or contract.get('parent_manifest_sha256')!=digest
+                or contract.get('parent_commit')!='c2d7239412d44578de8c2449a7b1462f8eaa9486'):
+            raise ValueError('ROOM parent identity changed')
+        parent_rtl=json.loads(parent.read_text())['candidate_rtl_files_sha256']
+        changes={n for n,h in contract['candidate_rtl_files_sha256'].items() if parent_rtl.get(n)!=h}
+        if changes!=allowed-{'rtl/core/rv32_ooo_core.sv'}:
+            raise ValueError('candidate changes differ from the isolated C delta')
     if set(contract.get('allowed_rtl_changes',[]))!=allowed:
         raise ValueError('only the experiment-specific approved RTL scope is allowed')
     if (sha(MANIFEST)!=contract['baseline_manifest_sha256']

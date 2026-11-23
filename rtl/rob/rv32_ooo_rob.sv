@@ -109,17 +109,29 @@ module rv32_ooo_rob
   wire store_ready_to_retire = !head_entry.is_store || sq_retire_ack;
 
   // Retirement signals
-  wire can_retire = rob_head_completed && !rob_head_exception && store_ready_to_retire && (current_state == CORE_RUN);
+  // Only a successful registered response for the oldest load may retire early.
+  // Recovery is decided by registered head state, independently of this preview.
+  wire retire_buffered_load = !rst && (current_state == CORE_RUN) && rob_head_valid &&
+                              head_entry.is_load && !head_entry.completed && !head_entry.exception.valid &&
+                              dmem_pending.buffered_load_valid && (dmem_pending.buffered_load_tag == head_entry.tag);
+  wire retire_completed = rob_head_completed && !rob_head_exception && store_ready_to_retire && (current_state == CORE_RUN);
 
-  assign retire_valid        = can_retire;
-  assign retire_entry        = head_entry;
-  assign retire_fp_valid     = can_retire && head_entry.fp_flags_valid;
+  wire can_retire = retire_completed || retire_buffered_load;
+  assign retire_valid = can_retire;
+  always_comb begin
+    retire_entry = head_entry;
+    if (retire_buffered_load) begin
+      retire_entry.completed = 1'b1;
+      retire_entry.result_data = dmem_pending.buffered_load_data;
+    end
+  end
+  assign retire_fp_valid     = retire_completed && head_entry.fp_flags_valid;
   assign retire_fflags_delta = head_entry.fp_flags;
 
   // Trap / MRET signals
   wire is_trap    = rob_head_completed && rob_head_exception && (current_state == CORE_RUN);
-  wire is_mret    = can_retire && (head_entry.op == UOP_MRET);
-  wire is_fence_i = can_retire && (head_entry.op == UOP_FENCE_I);
+  wire is_mret    = retire_completed && (head_entry.op == UOP_MRET);
+  wire is_fence_i = retire_completed && (head_entry.op == UOP_FENCE_I);
 
   assign trap_valid = is_trap;
   assign mret_valid = is_mret || is_fence_i;
@@ -128,7 +140,7 @@ module rv32_ooo_rob
   assign trap_tval  = head_entry.exception.tval;
 
   // Rollback on branch misprediction at retirement
-  assign rollback_valid   = can_retire && head_entry.branch_mispredict;
+  assign rollback_valid   = retire_completed && head_entry.branch_mispredict;
   assign rollback_rob_tag = head_entry.tag;
 
   // =========================================================================
@@ -179,7 +191,7 @@ module rv32_ooo_rob
       end
 
       // --- Allocation Execution (Dispatch insertion at tail) ---
-      if (alloc_valid && alloc_ready && !(can_retire && head_entry.branch_mispredict) && !is_trap && (rob_idx_t'(i) == tail)) begin
+      if (alloc_valid && alloc_ready && !rollback_valid && !is_trap && (rob_idx_t'(i) == tail)) begin
         entry_next                   = '0;
         entry_next.valid             = 1'b1;
         entry_next.completed         = alloc_uop.exception.valid;
@@ -202,7 +214,7 @@ module rv32_ooo_rob
     end
 
     always_ff @(posedge clk) begin
-      if (rst || is_trap || is_mret || is_fence_i || (can_retire && head_entry.branch_mispredict)) begin
+      if (rst || is_trap || is_mret || is_fence_i || rollback_valid) begin
         entries[i] <= '0;
       end else begin
         entries[i] <= entry_next;
@@ -223,7 +235,7 @@ module rv32_ooo_rob
       current_state <= CORE_RUN;
       event_counter <= '0;
       commit_trace  <= '0;
-    end else if (is_trap || is_mret || is_fence_i || (can_retire && head_entry.branch_mispredict)) begin
+    end else if (is_trap || is_mret || is_fence_i || rollback_valid) begin
       head          <= '0;
       tail          <= '0;
       rob_count     <= '0;
@@ -271,10 +283,10 @@ module rv32_ooo_rob
         commit_trace.insn          <= head_entry.insn;
         commit_trace.int_dst_valid <= head_entry.dst.valid && (head_entry.dst.domain == REG_INT);
         commit_trace.int_dst_arch  <= head_entry.dst.arch;
-        commit_trace.int_dst_data  <= head_entry.result_data;
+        commit_trace.int_dst_data  <= retire_entry.result_data;
         commit_trace.fp_dst_valid  <= head_entry.dst.valid && (head_entry.dst.domain == REG_FP);
         commit_trace.fp_dst_arch   <= head_entry.dst.arch;
-        commit_trace.fp_dst_data   <= head_entry.result_data;
+        commit_trace.fp_dst_data   <= retire_entry.result_data;
         commit_trace.fflags        <= head_entry.fp_flags;
 
         // Memory store commit trace
@@ -318,5 +330,16 @@ module rv32_ooo_rob
       end
     end
   end
+
+`ifndef SYNTHESIS
+  always_ff @(posedge clk) begin
+    if (retire_buffered_load) begin
+      assert (ld_cmp.valid && !ld_cmp.exception.valid && ld_cmp.rob_tag == head_entry.tag &&
+              ld_cmp.result_data == retire_entry.result_data && !head_entry.is_store &&
+              !rollback_valid && !trap_valid && !mret_valid)
+        else $error("Early load retirement must match an architectural load completion");
+    end
+  end
+`endif
 
 endmodule
