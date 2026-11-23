@@ -41,3 +41,5 @@ python3 experiments/lsu-rob-room-v1/restore_physical_cache.py
 
 This verifies each public file, restores the mapping and nested stage checkpoints,
 and checks every restored file against its recorded SHA-256.
+
+The [workspace receipt](workspace-restoration.json) records the verified return to a full checkout and the clean-directory replay of all 148 compacted build files.
