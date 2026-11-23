@@ -108,3 +108,8 @@ denominators. `archive_physical.py` and `verify_completion_archive.py` retain an
 check every decoded evidence member, including the earlier functional archive.
 
 The completed run measures 21,498.75 µm² and qualifies 9.8 ns on the 100 ps grid. [Full evidence](../../docs/evidence/2026-11-23/lsu-rob-room-complete/README.md).
+
+For an existing experiment checkout with compacted build files, use
+`python3 experiments/lsu-rob-room-v1/restore_physical_cache.py` before running
+the native reviewers again. The command reconstructs the mapping, saved stages
+and timing files from the published archive.

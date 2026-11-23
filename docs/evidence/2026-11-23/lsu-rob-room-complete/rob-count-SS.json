@@ -1,0 +1,79 @@
+{
+  "passed": true,
+  "command": [
+    "env",
+    "-u",
+    "DOCKER_HOST",
+    "-u",
+    "DOCKER_CONTEXT",
+    "-u",
+    "DOCKER_TLS",
+    "-u",
+    "DOCKER_TLS_VERIFY",
+    "-u",
+    "DOCKER_CERT_PATH",
+    "docker",
+    "--host=unix:///var/run/docker.sock",
+    "exec",
+    "--user",
+    "1000:1000",
+    "-w",
+    "/workspace",
+    "-e",
+    "RV32_CORNER=SS",
+    "-e",
+    "RV32_ODB=/workspace/build/experiments/lsu-rob-room-v1/native/physical-ROOM-v4/guard/results/asap7/rv32_post_lsu_v1/base/5_1_grt.odb",
+    "-e",
+    "RV32_PROBE_SDC=/workspace/build/experiments/lsu-rob-room-v1/native/physical-ROOM-v4/guard/independent-boundary-v1/SS/constraints_10000.sdc",
+    "rv32-room-native",
+    "/OpenROAD-flow-scripts/tools/install/OpenROAD/bin/openroad",
+    "-no_init",
+    "-exit",
+    "-threads",
+    "2",
+    "/workspace/build/experiments/lsu-rob-room-v1/probe_rob_count.tcl"
+  ],
+  "returncode": 0,
+  "script_sha256": "8baa7114445c8acd73653935eeea5b901ac5b84c9ecb957aad988cf128aecd50",
+  "odb_sha256": "a132570caa3e7cc48fd7380a8698d125fb802439145fcd86626e66aaa59a7f95",
+  "sdc_sha256": "68443b32242f69b35c3edfdca9223773fdd01c304b75ba49451fb5a82cf640bf",
+  "log_sha256": "edcc86bdf57d8097fd1f726b95976f2d47b93641aff919c8a00e29b095fbf3b9",
+  "period_ps": 10000,
+  "corner": "SS",
+  "global_slack_ps": 257.0867973231482,
+  "expected_global_slack_ps": 257.0867973231482,
+  "starts": [
+    "u_rob.rob_count[0]$_SDFFE_PP0P_",
+    "u_rob.rob_count[1]$_SDFFE_PP0P_",
+    "u_rob.rob_count[2]$_SDFFE_PP0P_",
+    "u_rob.rob_count[3]$_SDFFE_PP0P_",
+    "u_rob.rob_count[4]$_SDFFE_PP0P_"
+  ],
+  "paths": [
+    {
+      "start": "u_rob.rob_count[4]$_SDFFE_PP0P_",
+      "end": "dmem_req_addr[16] (output port clocked by core_clk)",
+      "slack_ps": 6385.7
+    },
+    {
+      "start": "u_rob.rob_count[4]$_SDFFE_PP0P_",
+      "end": "dmem_req_addr[19] (output port clocked by core_clk)",
+      "slack_ps": 6387.78
+    },
+    {
+      "start": "u_rob.rob_count[4]$_SDFFE_PP0P_",
+      "end": "dmem_req_addr[23] (output port clocked by core_clk)",
+      "slack_ps": 6393.81
+    },
+    {
+      "start": "u_rob.rob_count[4]$_SDFFE_PP0P_",
+      "end": "dmem_req_addr[27] (output port clocked by core_clk)",
+      "slack_ps": 6396.35
+    },
+    {
+      "start": "u_rob.rob_count[4]$_SDFFE_PP0P_",
+      "end": "dmem_req_addr[20] (output port clocked by core_clk)",
+      "slack_ps": 6405.31
+    }
+  ]
+}

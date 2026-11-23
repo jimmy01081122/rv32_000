@@ -1,0 +1,1348 @@
+{
+  "passed": true,
+  "scope": "ROB-space candidate at the common global-route research boundary; original baseline unchanged",
+  "reviewer_sha256": "24732fb96231f0e901e4dc1d04c66194996c49350b570499eb2317b5c391c282",
+  "physical_review_sha256": "ff3d7fd90c966e40a9d841ab2c8052d2bc5b39a4ca7dd7243841e17ecc9a7ac4",
+  "physical": {
+    "passed": true,
+    "scope": "Independent ROOM global-route research qualification; no baseline promotion",
+    "reviewer_sha256": "f2716d9cb356231c862268a8800258e9ad4f6db31e8c9dc38b324524ce5aaf46",
+    "accepted_guard_reviewer_sha256": "b7f301bc4def1e2644063619e3ba8115a519c30a93425a66284c22619f7123a2",
+    "contract_sha256": "810084cf5e9aac37ed00af0b15d6fd1a56a21dc7cbedfa7be021eb527cbfa0f1",
+    "formal": {
+      "passed": true,
+      "scope": "complete two-state FPU implementation equivalence after one synchronous reset edge; no arithmetic cutpoints; not IEEE-754 conformance",
+      "original_state_bits": 156,
+      "mapped_state_bits": 100,
+      "obligations": {
+        "reset-gold-proof": true,
+        "reset-gate-proof": true,
+        "step-output-proof": true,
+        "negative-bit-proof": false
+      },
+      "proof_summary_sha256": "474ad1e28ba62b0d990eb0a2cf26c8fbf180bb9c5ba3865f92de1a2bb07f13c6",
+      "frontend_replay_sha256": "d9433c5ad2e91ae76d147a5adb991f6251b8097e475a2c751d7f310c8d2ec6ae",
+      "negative_summary_sha256": "4fae1a7f0d70704acc328f45d479dd1b62b6dd84f704e2fb81d64e24c68ea8be"
+    },
+    "formal_to_physical": {
+      "passed": true,
+      "retained_link_review_sha256": "3ed1bdc1abe11d89c03e84431de23cd8b98e76f0e5962709098514e016e19706",
+      "proof_summary_sha256": "474ad1e28ba62b0d990eb0a2cf26c8fbf180bb9c5ba3865f92de1a2bb07f13c6",
+      "common_graph_sha256": "d12b91d198024deff4527b2c1e6217fcc7ca3355bdc09dfb4ebb309192a0fd89",
+      "ROOM_linked_netlist_sha256": "16f7eca5bf7738b7d02fe6df94754050358224064250e93fafef5e55b6166722",
+      "ROOM_lowering_report_sha256": "a4377c4134cc1f0b9b285b40e63a48300059f885802bee88363fa94563d77c2e",
+      "ROOM_mapping_report_sha256": "3052e94f5de53a20b241647c4d6bce50424c677673f808361af8563cd619caf6"
+    },
+    "ROOM_physical": {
+      "scope": "tested global-route timing trials only; routing review and formal measurement still required",
+      "analysis_report_sha256": "0656dd7492565e2afbc4f95dbac6ff7bd75c05e306d8655c0a0c13e91e70cd81",
+      "implementation_report_sha256": "65f1390ebc4ecbf807b978f23f9d39da0dc57f2dfce42430cf56d6abe78b8e82",
+      "checker_sha256": "170a5abc90b2f6dad76d2fa0a81a5b6601b897865862b867d784e888fc1048b5",
+      "records": [
+        {
+          "corner": "TT",
+          "standard_cell_area_um2": 21498.749460013038,
+          "standard_cell_count": 173727,
+          "register_count": 18242,
+          "library_warning_cell_instances": 0,
+          "trials": [
+            {
+              "period_ps": 9000,
+              "setup_slack_ps": 2150.700959258718,
+              "hold_slack_ps": 39.491576833288306,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9100,
+              "setup_slack_ps": 2250.7009679323355,
+              "hold_slack_ps": 39.491576833288306,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9200,
+              "setup_slack_ps": 2350.7009766059527,
+              "hold_slack_ps": 39.491576833288306,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9300,
+              "setup_slack_ps": 2450.7009852795704,
+              "hold_slack_ps": 39.491576833288306,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9400,
+              "setup_slack_ps": 2550.7009939531877,
+              "hold_slack_ps": 39.491576833288306,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9500,
+              "setup_slack_ps": 2650.701002626805,
+              "hold_slack_ps": 39.491576833288306,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9600,
+              "setup_slack_ps": 2750.7010113004226,
+              "hold_slack_ps": 39.491576833288306,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9700,
+              "setup_slack_ps": 2850.70101997404,
+              "hold_slack_ps": 39.491576833288306,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9800,
+              "setup_slack_ps": 2950.7010286476575,
+              "hold_slack_ps": 39.491576833288306,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9900,
+              "setup_slack_ps": 3050.7010373212747,
+              "hold_slack_ps": 39.491576833288306,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 10000,
+              "setup_slack_ps": 3150.701045994892,
+              "hold_slack_ps": 39.491576833288306,
+              "problems": [],
+              "passed": true
+            }
+          ]
+        },
+        {
+          "corner": "SS",
+          "standard_cell_area_um2": 21498.749460013038,
+          "standard_cell_count": 173727,
+          "register_count": 18242,
+          "library_warning_cell_instances": 0,
+          "trials": [
+            {
+              "period_ps": 9000,
+              "setup_slack_ps": -742.913289413026,
+              "hold_slack_ps": 71.30296381843864,
+              "problems": [
+                "setup violation"
+              ],
+              "passed": false
+            },
+            {
+              "period_ps": 9100,
+              "setup_slack_ps": -642.9132807394085,
+              "hold_slack_ps": 71.30296381843864,
+              "problems": [
+                "setup violation"
+              ],
+              "passed": false
+            },
+            {
+              "period_ps": 9200,
+              "setup_slack_ps": -542.9132720657911,
+              "hold_slack_ps": 71.30296381843864,
+              "problems": [
+                "setup violation"
+              ],
+              "passed": false
+            },
+            {
+              "period_ps": 9300,
+              "setup_slack_ps": -442.9132633921737,
+              "hold_slack_ps": 71.30296381843864,
+              "problems": [
+                "setup violation"
+              ],
+              "passed": false
+            },
+            {
+              "period_ps": 9400,
+              "setup_slack_ps": -342.9132547185563,
+              "hold_slack_ps": 71.30296381843864,
+              "problems": [
+                "setup violation"
+              ],
+              "passed": false
+            },
+            {
+              "period_ps": 9500,
+              "setup_slack_ps": -242.9132460449389,
+              "hold_slack_ps": 71.30296381843864,
+              "problems": [
+                "setup violation"
+              ],
+              "passed": false
+            },
+            {
+              "period_ps": 9600,
+              "setup_slack_ps": -142.91323737132146,
+              "hold_slack_ps": 71.30296381843864,
+              "problems": [
+                "setup violation"
+              ],
+              "passed": false
+            },
+            {
+              "period_ps": 9700,
+              "setup_slack_ps": -42.91322869770405,
+              "hold_slack_ps": 71.30296381843864,
+              "problems": [
+                "setup violation"
+              ],
+              "passed": false
+            },
+            {
+              "period_ps": 9800,
+              "setup_slack_ps": 57.086779975913366,
+              "hold_slack_ps": 71.30296381843864,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9900,
+              "setup_slack_ps": 157.08678864953077,
+              "hold_slack_ps": 71.30296381843864,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 10000,
+              "setup_slack_ps": 257.0867973231482,
+              "hold_slack_ps": 71.30296381843864,
+              "problems": [],
+              "passed": true
+            }
+          ]
+        },
+        {
+          "corner": "FF",
+          "standard_cell_area_um2": 21498.749460013038,
+          "standard_cell_count": 173727,
+          "register_count": 18242,
+          "library_warning_cell_instances": 0,
+          "trials": [
+            {
+              "period_ps": 9000,
+              "setup_slack_ps": 3747.9850484183007,
+              "hold_slack_ps": 16.164403213922196,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9100,
+              "setup_slack_ps": 3847.9850570919184,
+              "hold_slack_ps": 16.164403213922196,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9200,
+              "setup_slack_ps": 3947.9850657655356,
+              "hold_slack_ps": 16.164403213922196,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9300,
+              "setup_slack_ps": 4047.985074439153,
+              "hold_slack_ps": 16.164403213922196,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9400,
+              "setup_slack_ps": 4147.985083112771,
+              "hold_slack_ps": 16.164403213922196,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9500,
+              "setup_slack_ps": 4247.985091786388,
+              "hold_slack_ps": 16.164403213922196,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9600,
+              "setup_slack_ps": 4347.985100460005,
+              "hold_slack_ps": 16.164403213922196,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9700,
+              "setup_slack_ps": 4447.985109133623,
+              "hold_slack_ps": 16.164403213922196,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9800,
+              "setup_slack_ps": 4547.98511780724,
+              "hold_slack_ps": 16.164403213922196,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9900,
+              "setup_slack_ps": 4647.985126480858,
+              "hold_slack_ps": 16.164403213922196,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 10000,
+              "setup_slack_ps": 4747.985135154475,
+              "hold_slack_ps": 16.164403213922196,
+              "problems": [],
+              "passed": true
+            }
+          ]
+        }
+      ],
+      "qualified_periods_ps": [
+        9800,
+        9900,
+        10000
+      ],
+      "smallest_tested_passing_period_ps": 9800,
+      "standard_cell_area_um2": 21498.749460013038,
+      "passed": true,
+      "variant": "ROOM",
+      "guard_source_commit": "b3212a8f0e64f017965b74cb0ab014e10e95f5a2",
+      "predecessor_source_commit": "b3212a8f0e64f017965b74cb0ab014e10e95f5a2",
+      "predecessor_GRT_source_commit": "b3212a8f0e64f017965b74cb0ab014e10e95f5a2",
+      "native_topology_audit": {
+        "passed": true,
+        "original_cells": 173726,
+        "final_cells": 173727,
+        "original_pins_checked": 962753,
+        "boundary_ports_checked": 523,
+        "redirected_input_loads": 1,
+        "added_buffer": "rv32_ready_hold_guard22886",
+        "master": "BUFx2_ASAP7_75t_R",
+        "all_other_cells_masters_pins_ports_unchanged": true
+      },
+      "predecessor_timing_passed": true,
+      "predecessor_analysis_sha256": "c91fcf9ceea22c28b680c6d2f1168b944e191dcf443f8f468094914bbae89597",
+      "whole_route_overflow": [
+        0,
+        0,
+        0
+      ],
+      "antenna_net_pin_violations": [
+        0,
+        0
+      ]
+    },
+    "baseline_physical": {
+      "scope": "tested global-route timing trials only; routing review and formal measurement still required",
+      "analysis_report_sha256": "c86254a51a0847b439788b04087d8a9cad5028516170f1a11fb773c20281efd2",
+      "implementation_report_sha256": "9237f9919158020c481979db910b135166c6c9fde6569740f7bf6f57d9822069",
+      "checker_sha256": "170a5abc90b2f6dad76d2fa0a81a5b6601b897865862b867d784e888fc1048b5",
+      "records": [
+        {
+          "corner": "TT",
+          "standard_cell_area_um2": 21545.492940008164,
+          "standard_cell_count": 174141,
+          "register_count": 18288,
+          "library_warning_cell_instances": 0,
+          "trials": [
+            {
+              "period_ps": 9400,
+              "setup_slack_ps": 2781.1424385788623,
+              "hold_slack_ps": 39.195119528953185,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9500,
+              "setup_slack_ps": 2881.14244725248,
+              "hold_slack_ps": 39.195119528953185,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9600,
+              "setup_slack_ps": 2981.142455926097,
+              "hold_slack_ps": 39.195119528953185,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 10000,
+              "setup_slack_ps": 3381.142490620567,
+              "hold_slack_ps": 39.195119528953185,
+              "problems": [],
+              "passed": true
+            }
+          ]
+        },
+        {
+          "corner": "SS",
+          "standard_cell_area_um2": 21545.492940008164,
+          "standard_cell_count": 174141,
+          "register_count": 18288,
+          "library_warning_cell_instances": 0,
+          "trials": [
+            {
+              "period_ps": 9400,
+              "setup_slack_ps": -11.991296892286249,
+              "hold_slack_ps": 71.08219596910978,
+              "problems": [
+                "setup violation"
+              ],
+              "passed": false
+            },
+            {
+              "period_ps": 9500,
+              "setup_slack_ps": 88.00871178133117,
+              "hold_slack_ps": 71.08219596910978,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9600,
+              "setup_slack_ps": 188.0087204549486,
+              "hold_slack_ps": 71.08219596910978,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 10000,
+              "setup_slack_ps": 588.0087551494182,
+              "hold_slack_ps": 71.08219596910978,
+              "problems": [],
+              "passed": true
+            }
+          ]
+        },
+        {
+          "corner": "FF",
+          "standard_cell_area_um2": 21545.492940008164,
+          "standard_cell_count": 174141,
+          "register_count": 18288,
+          "library_warning_cell_instances": 0,
+          "trials": [
+            {
+              "period_ps": 9400,
+              "setup_slack_ps": 4283.167615488132,
+              "hold_slack_ps": 9.122730385373158,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9500,
+              "setup_slack_ps": 4383.167624161749,
+              "hold_slack_ps": 9.122730385373158,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9600,
+              "setup_slack_ps": 4483.167632835367,
+              "hold_slack_ps": 9.122730385373158,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 10000,
+              "setup_slack_ps": 4883.167667529836,
+              "hold_slack_ps": 9.122730385373158,
+              "problems": [],
+              "passed": true
+            }
+          ]
+        }
+      ],
+      "qualified_periods_ps": [
+        9500,
+        9600,
+        10000
+      ],
+      "smallest_tested_passing_period_ps": 9500,
+      "standard_cell_area_um2": 21545.492940008164,
+      "passed": true,
+      "variant": "baseline",
+      "guard_source_commit": "a5cc433598b3e61388bd85a9ff2442ff88cc9010",
+      "predecessor_source_commit": "f2c8b4520fc68d1c95a043a3b638fc9539bf48c2",
+      "predecessor_GRT_source_commit": "6493269c0002920837ba9ac308b0ec7199945942",
+      "native_topology_audit": {
+        "passed": true,
+        "original_cells": 174140,
+        "final_cells": 174141,
+        "original_pins_checked": 967132,
+        "boundary_ports_checked": 523,
+        "redirected_input_loads": 1,
+        "added_buffer": "rv32_ready_hold_guard22839",
+        "master": "BUFx2_ASAP7_75t_R",
+        "all_other_cells_masters_pins_ports_unchanged": true
+      },
+      "predecessor_timing_passed": false,
+      "predecessor_analysis_sha256": "4d5390194dc6baa34b60ae9b2357d346b4ca25cd3c6f895b14a8f29f66f068b1",
+      "whole_route_overflow": [
+        0,
+        0,
+        0
+      ],
+      "antenna_net_pin_violations": [
+        0,
+        0
+      ]
+    },
+    "B_physical": {
+      "scope": "tested global-route timing trials only; routing review and formal measurement still required",
+      "analysis_report_sha256": "772b40a5aea31483b80a5357e387678d070c97df687a52cdc1bf56703d5467b8",
+      "implementation_report_sha256": "a9294a7e02cdb86e63a065cc5e3a127eb2fdeb8661dccdf65444d15279e3da69",
+      "checker_sha256": "170a5abc90b2f6dad76d2fa0a81a5b6601b897865862b867d784e888fc1048b5",
+      "records": [
+        {
+          "corner": "TT",
+          "standard_cell_area_um2": 21309.821820015095,
+          "standard_cell_count": 171538,
+          "register_count": 18131,
+          "library_warning_cell_instances": 0,
+          "trials": [
+            {
+              "period_ps": 9500,
+              "setup_slack_ps": 2898.293616694632,
+              "hold_slack_ps": 39.488357186504025,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9600,
+              "setup_slack_ps": 2998.293625368249,
+              "hold_slack_ps": 39.488357186504025,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9700,
+              "setup_slack_ps": 3098.293634041867,
+              "hold_slack_ps": 39.488357186504025,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 10000,
+              "setup_slack_ps": 3398.293660062719,
+              "hold_slack_ps": 39.488357186504025,
+              "problems": [],
+              "passed": true
+            }
+          ]
+        },
+        {
+          "corner": "SS",
+          "standard_cell_area_um2": 21309.821820015095,
+          "standard_cell_count": 171538,
+          "register_count": 18131,
+          "library_warning_cell_instances": 0,
+          "trials": [
+            {
+              "period_ps": 9500,
+              "setup_slack_ps": -45.953463440485756,
+              "hold_slack_ps": 71.21075979587509,
+              "problems": [
+                "setup violation"
+              ],
+              "passed": false
+            },
+            {
+              "period_ps": 9600,
+              "setup_slack_ps": 54.04654523313166,
+              "hold_slack_ps": 71.21075979587509,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9700,
+              "setup_slack_ps": 154.04655390674907,
+              "hold_slack_ps": 71.21075979587509,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 10000,
+              "setup_slack_ps": 454.04657992760133,
+              "hold_slack_ps": 71.21075979587509,
+              "problems": [],
+              "passed": true
+            }
+          ]
+        },
+        {
+          "corner": "FF",
+          "standard_cell_area_um2": 21309.821820015095,
+          "standard_cell_count": 171538,
+          "register_count": 18131,
+          "library_warning_cell_instances": 0,
+          "trials": [
+            {
+              "period_ps": 9500,
+              "setup_slack_ps": 4389.066905248969,
+              "hold_slack_ps": 17.279566735462907,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9600,
+              "setup_slack_ps": 4489.066913922587,
+              "hold_slack_ps": 17.279566735462907,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 9700,
+              "setup_slack_ps": 4589.066922596205,
+              "hold_slack_ps": 17.279566735462907,
+              "problems": [],
+              "passed": true
+            },
+            {
+              "period_ps": 10000,
+              "setup_slack_ps": 4889.066948617056,
+              "hold_slack_ps": 17.279566735462907,
+              "problems": [],
+              "passed": true
+            }
+          ]
+        }
+      ],
+      "qualified_periods_ps": [
+        9600,
+        9700,
+        10000
+      ],
+      "smallest_tested_passing_period_ps": 9600,
+      "standard_cell_area_um2": 21309.821820015095,
+      "passed": true,
+      "variant": "B",
+      "guard_source_commit": "a5cc433598b3e61388bd85a9ff2442ff88cc9010",
+      "predecessor_source_commit": "f2c8b4520fc68d1c95a043a3b638fc9539bf48c2",
+      "predecessor_GRT_source_commit": "6493269c0002920837ba9ac308b0ec7199945942",
+      "native_topology_audit": {
+        "passed": true,
+        "original_cells": 171537,
+        "final_cells": 171538,
+        "original_pins_checked": 948537,
+        "boundary_ports_checked": 523,
+        "redirected_input_loads": 1,
+        "added_buffer": "rv32_ready_hold_guard22320",
+        "master": "BUFx2_ASAP7_75t_R",
+        "all_other_cells_masters_pins_ports_unchanged": true
+      },
+      "predecessor_timing_passed": true,
+      "predecessor_analysis_sha256": "19b0008341a559fcc50a710132264974ec8df4822618707ac906743bb1072139",
+      "whole_route_overflow": [
+        0,
+        0,
+        0
+      ],
+      "antenna_net_pin_violations": [
+        0,
+        0
+      ]
+    },
+    "native_comparisons": [
+      {
+        "stage": "grt",
+        "reference": "baseline",
+        "command_policy_identical": true
+      },
+      {
+        "stage": "grt",
+        "reference": "B",
+        "command_policy_identical": true
+      },
+      {
+        "stage": "eco",
+        "reference": "baseline",
+        "command_policy_identical": true
+      },
+      {
+        "stage": "eco",
+        "reference": "B",
+        "command_policy_identical": true
+      },
+      {
+        "stage": "guard",
+        "reference": "baseline",
+        "command_policy_identical": true
+      },
+      {
+        "stage": "guard",
+        "reference": "B",
+        "command_policy_identical": true
+      }
+    ],
+    "original_area_ratio": 0.9736259310130377,
+    "same_flow_area_ratio": 0.9978304752587801
+  },
+  "operating_points": {
+    "common_clock": {
+      "passed": true,
+      "scope": "full LSU ROB-space arbitration functional/cycle measurement; physical qualification remains separate",
+      "reviewer_sha256": "cf6c7d0c3954d291d8614eace5074bf80faa5a8f0da4e5d1c76eec5239947ff5",
+      "measurement": "build/experiments/lsu-rob-room-v1/measurement-10000ps-v1",
+      "measurement_summary_sha256": "d6e38381f55aa4469dbf985cf356f71558c3e22337c8a0d5940a7726665ec881",
+      "functional_provenance": {
+        "validator_sha256": "7fb6e823b208ddeacc17769b4a573a8bb5755ae5465d80da695b1cb1a3ca0394",
+        "build_summary_sha256": "e2dced979f34487d91e86bad1c8338823e4e28c768a9afc5cd7ab36d63343f86",
+        "qualification_summary_sha256": "700c15710031f8a16c1fa890afed532734491a05bdd9deafdba21bb13b78863a",
+        "normal_simulator_sha256": "fb7c0158731ee7af662ab017e08a3168a5c3a44a9636b2a8a30e9edcf6ed55cb",
+        "assert_simulator_sha256": "f6261a24e030cef38ff5f8fe6b615e698905b9f4b75fa7f3824b3af6ba1409e6",
+        "directed_cases": 18,
+        "spike_cases": 18,
+        "interface_cases": 48,
+        "fixed_time_controls": 58,
+        "finite_fma_values": 3400,
+        "passed": true
+      },
+      "source_commit": "3c87e71bd065b8047940dc185ce16d90cfb60355",
+      "source_files_verified": 33,
+      "period_ps": 10000,
+      "memory_ps": 10000,
+      "per_pc_work_matches": true,
+      "numerical_values_checked": 3629,
+      "embench_time_geomean_speedup": 1.0762858730205194,
+      "fp32_time_geomean_speedup": 1.1090097735243363,
+      "fp32_subgroup_speedup": {
+        "dsp": 1.1086231977122072,
+        "matrix_ml": 1.1093964841350685
+      },
+      "records": [
+        {
+          "family": "fp32",
+          "name": "fir",
+          "group": "dsp",
+          "baseline_cycles": 74311,
+          "candidate_cycles": 66084,
+          "baseline_time_ps": 743110000,
+          "candidate_time_ps": 660840000,
+          "time_speedup": 1.12449306942679
+        },
+        {
+          "family": "fp32",
+          "name": "iir",
+          "group": "dsp",
+          "baseline_cycles": 13523,
+          "candidate_cycles": 12473,
+          "baseline_time_ps": 135230000,
+          "candidate_time_ps": 124730000,
+          "time_speedup": 1.084181832758759
+        },
+        {
+          "family": "fp32",
+          "name": "fft",
+          "group": "dsp",
+          "baseline_cycles": 40867,
+          "candidate_cycles": 33029,
+          "baseline_time_ps": 408670000,
+          "candidate_time_ps": 330290000,
+          "time_speedup": 1.2373066093433043
+        },
+        {
+          "family": "fp32",
+          "name": "pid",
+          "group": "dsp",
+          "baseline_cycles": 7248,
+          "candidate_cycles": 7238,
+          "baseline_time_ps": 72480000,
+          "candidate_time_ps": 72380000,
+          "time_speedup": 1.001381597126278
+        },
+        {
+          "family": "fp32",
+          "name": "gemm",
+          "group": "matrix_ml",
+          "baseline_cycles": 133275,
+          "candidate_cycles": 123372,
+          "baseline_time_ps": 1332750000,
+          "candidate_time_ps": 1233720000,
+          "time_speedup": 1.0802694290438672
+        },
+        {
+          "family": "fp32",
+          "name": "bicg",
+          "group": "matrix_ml",
+          "baseline_cycles": 23927,
+          "candidate_cycles": 20619,
+          "baseline_time_ps": 239270000,
+          "candidate_time_ps": 206190000,
+          "time_speedup": 1.160434550657161
+        },
+        {
+          "family": "fp32",
+          "name": "cholesky",
+          "group": "matrix_ml",
+          "baseline_cycles": 194161,
+          "candidate_cycles": 181585,
+          "baseline_time_ps": 1941610000,
+          "candidate_time_ps": 1815850000,
+          "time_speedup": 1.0692568218740535
+        },
+        {
+          "family": "fp32",
+          "name": "svm",
+          "group": "matrix_ml",
+          "baseline_cycles": 43392,
+          "candidate_cycles": 38397,
+          "baseline_time_ps": 433920000,
+          "candidate_time_ps": 383970000,
+          "time_speedup": 1.1300882881475116
+        },
+        {
+          "family": "embench",
+          "name": "aha-mont64",
+          "group": null,
+          "baseline_cycles": 5356670,
+          "candidate_cycles": 5356644,
+          "baseline_time_ps": 53566700000,
+          "candidate_time_ps": 53566440000,
+          "time_speedup": 1.000004853785318
+        },
+        {
+          "family": "embench",
+          "name": "crc32",
+          "group": null,
+          "baseline_cycles": 5402220,
+          "candidate_cycles": 5054726,
+          "baseline_time_ps": 54022200000,
+          "candidate_time_ps": 50547260000,
+          "time_speedup": 1.0687463573693212
+        },
+        {
+          "family": "embench",
+          "name": "cubic",
+          "group": null,
+          "baseline_cycles": 14490894,
+          "candidate_cycles": 13760659,
+          "baseline_time_ps": 144908940000,
+          "candidate_time_ps": 137606590000,
+          "time_speedup": 1.0530668625681372
+        },
+        {
+          "family": "embench",
+          "name": "edn",
+          "group": null,
+          "baseline_cycles": 4754496,
+          "candidate_cycles": 4204886,
+          "baseline_time_ps": 47544960000,
+          "candidate_time_ps": 42048860000,
+          "time_speedup": 1.130707467455717
+        },
+        {
+          "family": "embench",
+          "name": "huffbench",
+          "group": null,
+          "baseline_cycles": 3377028,
+          "candidate_cycles": 3200604,
+          "baseline_time_ps": 33770280000,
+          "candidate_time_ps": 32006040000,
+          "time_speedup": 1.0551220957044358
+        },
+        {
+          "family": "embench",
+          "name": "matmult-int",
+          "group": null,
+          "baseline_cycles": 4193163,
+          "candidate_cycles": 3769948,
+          "baseline_time_ps": 41931630000,
+          "candidate_time_ps": 37699480000,
+          "time_speedup": 1.1122601691057807
+        },
+        {
+          "family": "embench",
+          "name": "minver",
+          "group": null,
+          "baseline_cycles": 878777,
+          "candidate_cycles": 831010,
+          "baseline_time_ps": 8787770000,
+          "candidate_time_ps": 8310100000,
+          "time_speedup": 1.0574806560691208
+        },
+        {
+          "family": "embench",
+          "name": "nbody",
+          "group": null,
+          "baseline_cycles": 5893151,
+          "candidate_cycles": 5755966,
+          "baseline_time_ps": 58931510000,
+          "candidate_time_ps": 57559660000,
+          "time_speedup": 1.0238335320257277
+        },
+        {
+          "family": "embench",
+          "name": "nettle-aes",
+          "group": null,
+          "baseline_cycles": 5203513,
+          "candidate_cycles": 4766387,
+          "baseline_time_ps": 52035130000,
+          "candidate_time_ps": 47663870000,
+          "time_speedup": 1.091710136000287
+        },
+        {
+          "family": "embench",
+          "name": "nettle-sha256",
+          "group": null,
+          "baseline_cycles": 4307562,
+          "candidate_cycles": 4133207,
+          "baseline_time_ps": 43075620000,
+          "candidate_time_ps": 41332070000,
+          "time_speedup": 1.0421839506223618
+        },
+        {
+          "family": "embench",
+          "name": "nsichneu",
+          "group": null,
+          "baseline_cycles": 7298679,
+          "candidate_cycles": 6913372,
+          "baseline_time_ps": 72986790000,
+          "candidate_time_ps": 69133720000,
+          "time_speedup": 1.0557335841323163
+        },
+        {
+          "family": "embench",
+          "name": "picojpeg",
+          "group": null,
+          "baseline_cycles": 5300988,
+          "candidate_cycles": 4764383,
+          "baseline_time_ps": 53009880000,
+          "candidate_time_ps": 47643830000,
+          "time_speedup": 1.1126284347836854
+        },
+        {
+          "family": "embench",
+          "name": "qrduino",
+          "group": null,
+          "baseline_cycles": 4524180,
+          "candidate_cycles": 4372576,
+          "baseline_time_ps": 45241800000,
+          "candidate_time_ps": 43725760000,
+          "time_speedup": 1.0346715528786692
+        },
+        {
+          "family": "embench",
+          "name": "sglib-combined",
+          "group": null,
+          "baseline_cycles": 4526268,
+          "candidate_cycles": 4184216,
+          "baseline_time_ps": 45262680000,
+          "candidate_time_ps": 41842160000,
+          "time_speedup": 1.0817481697885578
+        },
+        {
+          "family": "embench",
+          "name": "slre",
+          "group": null,
+          "baseline_cycles": 4902163,
+          "candidate_cycles": 4372827,
+          "baseline_time_ps": 49021630000,
+          "candidate_time_ps": 43728270000,
+          "time_speedup": 1.12105121012105
+        },
+        {
+          "family": "embench",
+          "name": "st",
+          "group": null,
+          "baseline_cycles": 7165107,
+          "candidate_cycles": 7008489,
+          "baseline_time_ps": 71651070000,
+          "candidate_time_ps": 70084890000,
+          "time_speedup": 1.0223468995956189
+        },
+        {
+          "family": "embench",
+          "name": "statemate",
+          "group": null,
+          "baseline_cycles": 3368567,
+          "candidate_cycles": 2628051,
+          "baseline_time_ps": 33685670000,
+          "candidate_time_ps": 26280510000,
+          "time_speedup": 1.2817738316341654
+        },
+        {
+          "family": "embench",
+          "name": "ud",
+          "group": null,
+          "baseline_cycles": 2775897,
+          "candidate_cycles": 2568917,
+          "baseline_time_ps": 27758970000,
+          "candidate_time_ps": 25689170000,
+          "time_speedup": 1.0805709176279343
+        },
+        {
+          "family": "embench",
+          "name": "wikisort",
+          "group": null,
+          "baseline_cycles": 2173042,
+          "candidate_cycles": 2064002,
+          "baseline_time_ps": 21730420000,
+          "candidate_time_ps": 20640020000,
+          "time_speedup": 1.052829406173056
+        }
+      ],
+      "planning_targets": {
+        "embench_geomean_ge_1_20": false,
+        "fp32_geomean_ge_1_20": false,
+        "original_area_ratio_le_1_10": true
+      },
+      "all_planning_targets_met": false
+    },
+    "fastest_tested": {
+      "passed": true,
+      "scope": "full LSU ROB-space arbitration functional/cycle measurement; physical qualification remains separate",
+      "reviewer_sha256": "cf6c7d0c3954d291d8614eace5074bf80faa5a8f0da4e5d1c76eec5239947ff5",
+      "measurement": "build/experiments/lsu-rob-room-v1/measurement-9800ps-v1",
+      "measurement_summary_sha256": "966fc16c1db1b392857d4a525c5d6a347abeca79ac26c4edc4adb72e5ea2581f",
+      "functional_provenance": {
+        "validator_sha256": "7fb6e823b208ddeacc17769b4a573a8bb5755ae5465d80da695b1cb1a3ca0394",
+        "build_summary_sha256": "e2dced979f34487d91e86bad1c8338823e4e28c768a9afc5cd7ab36d63343f86",
+        "qualification_summary_sha256": "700c15710031f8a16c1fa890afed532734491a05bdd9deafdba21bb13b78863a",
+        "normal_simulator_sha256": "fb7c0158731ee7af662ab017e08a3168a5c3a44a9636b2a8a30e9edcf6ed55cb",
+        "assert_simulator_sha256": "f6261a24e030cef38ff5f8fe6b615e698905b9f4b75fa7f3824b3af6ba1409e6",
+        "directed_cases": 18,
+        "spike_cases": 18,
+        "interface_cases": 48,
+        "fixed_time_controls": 58,
+        "finite_fma_values": 3400,
+        "passed": true
+      },
+      "source_commit": "b3212a8f0e64f017965b74cb0ab014e10e95f5a2",
+      "source_files_verified": 33,
+      "period_ps": 9800,
+      "memory_ps": 10000,
+      "per_pc_work_matches": true,
+      "numerical_values_checked": 3629,
+      "embench_time_geomean_speedup": 0.7430516398520749,
+      "fp32_time_geomean_speedup": 0.7111384302942698,
+      "fp32_subgroup_speedup": {
+        "dsp": 0.6655029054982908,
+        "matrix_ml": 0.759903319524571
+      },
+      "records": [
+        {
+          "family": "fp32",
+          "name": "fir",
+          "group": "dsp",
+          "baseline_cycles": 74311,
+          "candidate_cycles": 125391,
+          "baseline_time_ps": 743110000,
+          "candidate_time_ps": 1228831800,
+          "time_speedup": 0.6047288164254864
+        },
+        {
+          "family": "fp32",
+          "name": "iir",
+          "group": "dsp",
+          "baseline_cycles": 13523,
+          "candidate_cycles": 22775,
+          "baseline_time_ps": 135230000,
+          "candidate_time_ps": 223195000,
+          "time_speedup": 0.6058827482694504
+        },
+        {
+          "family": "fp32",
+          "name": "fft",
+          "group": "dsp",
+          "baseline_cycles": 40867,
+          "candidate_cycles": 50770,
+          "baseline_time_ps": 408670000,
+          "candidate_time_ps": 497546000,
+          "time_speedup": 0.8213712902927569
+        },
+        {
+          "family": "fp32",
+          "name": "pid",
+          "group": "dsp",
+          "baseline_cycles": 7248,
+          "candidate_cycles": 11347,
+          "baseline_time_ps": 72480000,
+          "candidate_time_ps": 111200600,
+          "time_speedup": 0.6517950442713438
+        },
+        {
+          "family": "fp32",
+          "name": "gemm",
+          "group": "matrix_ml",
+          "baseline_cycles": 133275,
+          "candidate_cycles": 167459,
+          "baseline_time_ps": 1332750000,
+          "candidate_time_ps": 1641098200,
+          "time_speedup": 0.8121086233596503
+        },
+        {
+          "family": "fp32",
+          "name": "bicg",
+          "group": "matrix_ml",
+          "baseline_cycles": 23927,
+          "candidate_cycles": 33643,
+          "baseline_time_ps": 239270000,
+          "candidate_time_ps": 329701400,
+          "time_speedup": 0.7257172702330048
+        },
+        {
+          "family": "fp32",
+          "name": "cholesky",
+          "group": "matrix_ml",
+          "baseline_cycles": 194161,
+          "candidate_cycles": 237444,
+          "baseline_time_ps": 1941610000,
+          "candidate_time_ps": 2326951200,
+          "time_speedup": 0.8344008245639186
+        },
+        {
+          "family": "fp32",
+          "name": "svm",
+          "group": "matrix_ml",
+          "baseline_cycles": 43392,
+          "candidate_cycles": 65299,
+          "baseline_time_ps": 433920000,
+          "candidate_time_ps": 639930200,
+          "time_speedup": 0.678073952440438
+        },
+        {
+          "family": "embench",
+          "name": "aha-mont64",
+          "group": null,
+          "baseline_cycles": 5356670,
+          "candidate_cycles": 9662426,
+          "baseline_time_ps": 53566700000,
+          "candidate_time_ps": 94691774800,
+          "time_speedup": 0.5656953849807872
+        },
+        {
+          "family": "embench",
+          "name": "crc32",
+          "group": null,
+          "baseline_cycles": 5402220,
+          "candidate_cycles": 8012924,
+          "baseline_time_ps": 54022200000,
+          "candidate_time_ps": 78526655200,
+          "time_speedup": 0.6879472946149373
+        },
+        {
+          "family": "embench",
+          "name": "cubic",
+          "group": null,
+          "baseline_cycles": 14490894,
+          "candidate_cycles": 19715641,
+          "baseline_time_ps": 144908940000,
+          "candidate_time_ps": 193213281800,
+          "time_speedup": 0.7499947138727189
+        },
+        {
+          "family": "embench",
+          "name": "edn",
+          "group": null,
+          "baseline_cycles": 4754496,
+          "candidate_cycles": 6969820,
+          "baseline_time_ps": 47544960000,
+          "candidate_time_ps": 68304236000,
+          "time_speedup": 0.6960763019148622
+        },
+        {
+          "family": "embench",
+          "name": "huffbench",
+          "group": null,
+          "baseline_cycles": 3377028,
+          "candidate_cycles": 4683187,
+          "baseline_time_ps": 33770280000,
+          "candidate_time_ps": 45895232600,
+          "time_speedup": 0.7358123728084124
+        },
+        {
+          "family": "embench",
+          "name": "matmult-int",
+          "group": null,
+          "baseline_cycles": 4193163,
+          "candidate_cycles": 6172656,
+          "baseline_time_ps": 41931630000,
+          "candidate_time_ps": 60492028800,
+          "time_speedup": 0.6931761230663172
+        },
+        {
+          "family": "embench",
+          "name": "minver",
+          "group": null,
+          "baseline_cycles": 878777,
+          "candidate_cycles": 1059146,
+          "baseline_time_ps": 8787770000,
+          "candidate_time_ps": 10379630800,
+          "time_speedup": 0.8466360865166803
+        },
+        {
+          "family": "embench",
+          "name": "nbody",
+          "group": null,
+          "baseline_cycles": 5893151,
+          "candidate_cycles": 8506667,
+          "baseline_time_ps": 58931510000,
+          "candidate_time_ps": 83365336600,
+          "time_speedup": 0.7069066401394462
+        },
+        {
+          "family": "embench",
+          "name": "nettle-aes",
+          "group": null,
+          "baseline_cycles": 5203513,
+          "candidate_cycles": 8516844,
+          "baseline_time_ps": 52035130000,
+          "candidate_time_ps": 83465071200,
+          "time_speedup": 0.6234359984587181
+        },
+        {
+          "family": "embench",
+          "name": "nettle-sha256",
+          "group": null,
+          "baseline_cycles": 4307562,
+          "candidate_cycles": 7764152,
+          "baseline_time_ps": 43075620000,
+          "candidate_time_ps": 76088689600,
+          "time_speedup": 0.5661238250579623
+        },
+        {
+          "family": "embench",
+          "name": "nsichneu",
+          "group": null,
+          "baseline_cycles": 7298679,
+          "candidate_cycles": 8454613,
+          "baseline_time_ps": 72986790000,
+          "candidate_time_ps": 82855207400,
+          "time_speedup": 0.8808956285347491
+        },
+        {
+          "family": "embench",
+          "name": "picojpeg",
+          "group": null,
+          "baseline_cycles": 5300988,
+          "candidate_cycles": 7077049,
+          "baseline_time_ps": 53009880000,
+          "candidate_time_ps": 69355080200,
+          "time_speedup": 0.7643258409785532
+        },
+        {
+          "family": "embench",
+          "name": "qrduino",
+          "group": null,
+          "baseline_cycles": 4524180,
+          "candidate_cycles": 6358803,
+          "baseline_time_ps": 45241800000,
+          "candidate_time_ps": 62316269400,
+          "time_speedup": 0.7260030235378628
+        },
+        {
+          "family": "embench",
+          "name": "sglib-combined",
+          "group": null,
+          "baseline_cycles": 4526268,
+          "candidate_cycles": 5752649,
+          "baseline_time_ps": 45262680000,
+          "candidate_time_ps": 56375960200,
+          "time_speedup": 0.8028720014599414
+        },
+        {
+          "family": "embench",
+          "name": "slre",
+          "group": null,
+          "baseline_cycles": 4902163,
+          "candidate_cycles": 6055426,
+          "baseline_time_ps": 49021630000,
+          "candidate_time_ps": 59343174800,
+          "time_speedup": 0.8260702290569057
+        },
+        {
+          "family": "embench",
+          "name": "st",
+          "group": null,
+          "baseline_cycles": 7165107,
+          "candidate_cycles": 10004271,
+          "baseline_time_ps": 71651070000,
+          "candidate_time_ps": 98041855800,
+          "time_speedup": 0.730821233598069
+        },
+        {
+          "family": "embench",
+          "name": "statemate",
+          "group": null,
+          "baseline_cycles": 3368567,
+          "candidate_cycles": 3733851,
+          "baseline_time_ps": 33685670000,
+          "candidate_time_ps": 36591739800,
+          "time_speedup": 0.9205812618945219
+        },
+        {
+          "family": "embench",
+          "name": "ud",
+          "group": null,
+          "baseline_cycles": 2775897,
+          "candidate_cycles": 2993140,
+          "baseline_time_ps": 27758970000,
+          "candidate_time_ps": 29332772000,
+          "time_speedup": 0.9463466323605556
+        },
+        {
+          "family": "embench",
+          "name": "wikisort",
+          "group": null,
+          "baseline_cycles": 2173042,
+          "candidate_cycles": 2827711,
+          "baseline_time_ps": 21730420000,
+          "candidate_time_ps": 27711567800,
+          "time_speedup": 0.7841642218452902
+        }
+      ],
+      "planning_targets": {
+        "embench_geomean_ge_1_20": false,
+        "fp32_geomean_ge_1_20": false,
+        "original_area_ratio_le_1_10": true
+      },
+      "all_planning_targets_met": false
+    }
+  },
+  "parent_comparison_sha256": "5dfd058d39d2960fdcc859f10cf7010f8aa9a230131344c919df8c0af7848189",
+  "common_clock_relative_to_parents": {
+    "AB": {
+      "embench": 1.0021813825602712,
+      "fp32": 1.019078222111176,
+      "fp32_subgroups": {
+        "dsp": 1.0383972958715273,
+        "matrix_ml": 1.000118573989202
+      },
+      "faster": 13,
+      "slower": 11,
+      "equal": 3
+    },
+    "arb_v1": {
+      "embench": 1.00527741756248,
+      "fp32": 1.0071953949049617,
+      "fp32_subgroups": {
+        "dsp": 1.0135144729143764,
+        "matrix_ml": 1.0009157151951826
+      },
+      "faster": 14,
+      "slower": 3,
+      "equal": 10
+    }
+  },
+  "AB_physical_review_sha256": "aadcaccf2994c23e9c7c1741aa75d5f71e2665fb148d6031351c3063cca7abe6",
+  "area_relative_to_AB": 0.9924162322781735,
+  "AB_smallest_tested_passing_period_ps": 9400,
+  "all_planning_targets_met_at_any_tested_point": false
+}
