@@ -25,7 +25,10 @@ def require(ok, message):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--output', type=Path, required=True)
-    out = parser.parse_args().output.resolve()
+    parser.add_argument('--scratch-directory', type=Path, default=BASE,
+                        help='Directory for assembling the archive before splitting it.')
+    args = parser.parse_args()
+    out = args.output.resolve()
     for name in ['complete-review.json','environment-restoration.json','physical-path-summary.json']:
         require(json.loads((BASE/name).read_text())['passed'], 'incomplete review: '+name)
     require(not out.exists(), 'preserve previous public evidence')
@@ -38,7 +41,7 @@ def main():
         for path in sorted(directory.rglob('*')):
             if path.is_file() and '__pycache__' not in path.parts:
                 include(path)
-    for name in ['checkpoints','mapping-v1','shared-linked-v1']:
+    for name in ['checkpoints','mapping-v1','shared-linked-v1','interrupted-parent-sta-v1','targeted-probe-attempt-1']:
         tree(BASE/name)
     for path in sorted((BASE/'native').iterdir()):
         if path.is_file():
@@ -48,7 +51,11 @@ def main():
             include(path)
     for directory in sorted(BASE.glob('measurement-*ps-v1')):
         tree(directory)
+    include(BASE/'probe_rob_count.tcl')
+    include(ROOT/'docs/LSU_ROB_ROOM_PHYSICAL.md')
     for path in sorted(BASE.iterdir()):
+        if path.name in ('format_physical.py','update_docs.py','archive-adjusted.py'):
+            continue
         if path.is_file() and path.suffix in ('.json','.log','.py','.v'):
             include(path)
     for directory in ['experiments/lsu-rob-room-v1','scripts','physical/asap7/baseline',
@@ -70,7 +77,7 @@ def main():
                          **contract['physical_inputs_sha256']}.items():
         require(sha(ROOT/name) == digest, 'frozen experiment source changed')
         include(ROOT/name)
-    whole = BASE/'ROOM-physical-completion.tar.gz'
+    whole = args.scratch_directory.resolve()/'ROOM-physical-completion.tar.gz'
     require(not whole.exists(), 'preserve earlier assembled archive')
     records = []
     with whole.open('xb') as raw, gzip.GzipFile(filename='', fileobj=raw, mode='wb', compresslevel=6, mtime=0) as gz:
@@ -113,7 +120,8 @@ This is global-route research evidence, not detailed-route or tapeout signoff.
 
 Stage checkpoint archives retain raw construction files. Independent STA reports
 and all workload files are separate members. Failed capacity preparation and its
-recovery are retained; exact parked images and historical caches are restored.
+recovery are retained. The interrupted predecessor collection and its replay
+receipt are also included. Exact parked images and historical caches are restored.
 The prior complete functional archive is nested unchanged. Replay additionally
 uses the original baseline, shared-FPU proof and A+B/arbitration reference archives;
 their identities are checked by the retained independent reviewers.

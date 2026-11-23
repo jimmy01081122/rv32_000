@@ -111,7 +111,7 @@ at least two free ROB slots for a new first-head bypass. ROB exports
 `load_bypass_room`; this compares the existing registered count and adds no state.
 The held-load branch and uncontended loads ignore this pressure gate. See the
 [active experiment](experiments/lsu-rob-room-v1/README.md).
-Its timing/area qualification remains separate from the A+B parent. No C head
+The independent [ROB-space physical results](docs/LSU_ROB_ROOM_PHYSICAL.md) give its timing and standard-cell area. No C head
 lookahead has been implemented. The frozen
 baseline includes neither A nor B.
 

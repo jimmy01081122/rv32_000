@@ -1,6 +1,6 @@
 # 目前架構與改善方向
 
-2026-11-13（Asia/Taipei）。下圖是最近完成實體資格的 `3f079c1` **A+B 父版本**：
+2026-11-13（Asia/Taipei）。下圖保留歷史對照版本 `3f079c1` **A+B 父版本**：
 在同一 LSU 組合成功 registered response 的請求交接與 ROB-head store 同拍 marking。
 單寬派發／退休、單一外部資料交易及原凍結基線保持不變。
 [完整實驗審查](LSU_AB_REVIEW.md)包含功能、共同流程實體、兩個全 27 項操作點與 PID 波形診斷。
@@ -15,12 +15,12 @@
 
 目前分支已開始[有限 LSU 仲裁實驗](../experiments/lsu-load-arb-v1/README.md)：
 首次 head-store marking 可讓安全 load 先送一次，回壓時保持選擇。
-圖中時序與效能仍屬父版本；[critical paths](CRITICAL_PATHS.md)亦未宣稱為新 RTL 結果。
+圖中時序與效能仍屬父版本；新 RTL 的獨立路徑見[目前 critical paths](CRITICAL_PATHS.md)。
 [後續逐拍診斷](LSU_ARBITRATION_DIAGNOSIS.md)確認讓行的 store 退休代價及被取消讀取。
 2026-11-16 已選[ROB 空間限制](../experiments/lsu-rob-room-v1/README.md)：ROB→LSU
 新增至少兩格可用的控制訊號，影響首次讓行，保持回壓請求。下圖仍為已完成 PPA 的 A+B；
-新候選已完成[功能及全 27 項比較](LSU_ROB_ROOM_REVIEW.md)，兩類分數皆優於 A+B，
-但尚無新實體數字。
+候選已完成[功能及全 27 項比較](LSU_ROB_ROOM_REVIEW.md)，100 MHz 兩類分數皆優於 A+B，
+最新實體資格為 9.8 ns、21,498.75 µm²。[候選實體結果](LSU_ROB_ROOM_PHYSICAL.md)。
 
 ## 已確認的結構與操作點
 
@@ -45,7 +45,7 @@ A+B 100 MHz 的 Embench／FP32 為 **1.073943×／1.088248×**；面積 **21,663
 
 | 編號／位置 | 已有證據 | 可討論的獨立實驗與限制 |
 | --- | --- | --- |
-| **① LSU 請求交接／仲裁** | A+B 已完成；相對 A 22 項較快、五項較慢。PID 512 次退休迴圈的波形確認提前 store 壓後下一 load，510 個穩定間隔從 14 變 16 cycles | 優先評估有限、可證明安全的 load／store 選擇；保留 ordering、精確 fault、flush、backpressure 與進展性。未實作新仲裁 |
+| **① LSU 請求交接／仲裁** | A+B 已完成；相對 A 22 項較快、五項較慢。PID 512 次退休迴圈的波形確認提前 store 壓後下一 load，510 個穩定間隔從 14 變 16 cycles | 優先評估有限、可證明安全的 load／store 選擇；保留 ordering、精確 fault、flush、backpressure 與進展性。目前候選已實作 ROB 空間限制仲裁 |
 | **② C：已註冊 load → 頭端前瞻** | A+B GEMM 的 own-response-buffer 等待 18.85%、Cholesky 11.02%、FIR 1.59% | FP32 主線候選；同時傳遞 tag、data、exception，避免 stale tag／重複退休。等待比例不是加速預測 |
 | **③ FP 發射／仲裁** | A+B FP32 八項 EX0／完成衝突皆零；先前 A／B 的 minver 有功能單元阻塞觀測 | 保留 minver 的單元感知發射研究；不能用局部機會宣稱全 FP32 改善 |
 | **④ 前端／分支恢復** | 單寬前端，無 RAS，退休時 redirect | 先量 miss／return、供給與 resolve-to-retire；提前恢復需精確狀態／checkpoint |
@@ -54,7 +54,7 @@ A+B 100 MHz 的 Embench／FP32 為 **1.073943×／1.088248×**；面積 **21,663
 | **⑦ 整數 DIV／REM** | B observer 完成六組對照與 48 指令控制：一般 33 cycles，無 completion 仲裁等待；A+B ud 的 DIV／REM 頭端等待占 39.71% | 共同選擇提前結果或每拍兩個商位元；B 運算元分布不可改標為 A+B，且 FP32 八項沒有退休整數 DIV／REM |
 
 LSU 仲裁已完成功能／全 27 項量測，兩類效能一增一減；[結果與取捨](LSU_ARBITRATION_REVIEW.md)。
-候選尚未取得實體資格或升格基線。多筆 outstanding、實際 LQ、cache、store 回應前退休或雙寬派發／退休
+ROB 空間限制版已取得共同流程實體資格。多筆 outstanding、實際 LQ、cache、store 回應前退休或雙寬派發／退休
 屬更大範圍，需另訂記憶體、精確例外與面積契約。
 
 ## RTL 對照與圖的精度

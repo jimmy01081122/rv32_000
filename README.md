@@ -17,10 +17,10 @@ fixed-time performance measurement.
 | Document | Purpose |
 | --- | --- |
 | [Project plan](PLAN.md) | Agreed scope, decision process and next milestones |
-| [ROB-space arbitration results](docs/LSU_ROB_ROOM_REVIEW.md) | Full functional/all27 pass; both families improve over A+B, new PPA pending |
+| [ROB-space arbitration results](docs/LSU_ROB_ROOM_REVIEW.md) | Full 100 MHz workload results and parent comparisons |
 | [LSU arbitration experiment](experiments/lsu-load-arb-v1/README.md) | Full functional/cycle results; FP32 gain and Embench regression, physical gate unmeasured |
 | [Arbitration regression diagnosis](docs/LSU_ARBITRATION_DIAGNOSIS.md) | Raw-cycle store costs, cancelled speculative reads and proposed ROB-space guard |
-| [Current critical paths](docs/CRITICAL_PATHS.md) | Verified A+B parent setup/hold paths; new arbitration timing remains separate |
+| [Current critical paths](docs/CRITICAL_PATHS.md) | ROB-space setup/hold paths and archived A+B comparison |
 | [Current status](docs/STATUS.md) | Measured checks, implementation drift and open verification gaps |
 | [A+B experiment and divider diagnosis](docs/LSU_AB_REVIEW.md) | Completed functional/PPA/two-clock results, PID arbitration mechanism and next choices |
 | [Current architecture diagram](docs/ARCHITECTURE_MAP.md) | A+B datapath, capacities, measured bottlenecks and candidate improvement directions |
@@ -61,11 +61,11 @@ The current branch tests a ROB-space guard on bounded load arbitration. Full-cor
 and all27 gates pass at clean `3c87e71`: nominal Embench/FP32 ratios are
 **1.076286× / 1.109010×** original baseline, improving both families over A+B.
 Statemate retains a 0.526% regression against A+B; see the [complete review](docs/LSU_ROB_ROOM_REVIEW.md).
-New physical qualification remains pending. For the previous arbitration v1,
+This candidate qualifies both 10 ns and 9.8 ns on the common global-route flow. Its standard-cell area is 21,498.75 µm² (0.973626× original). See the [physical and workload results](docs/LSU_ROB_ROOM_PHYSICAL.md). For the previous arbitration v1,
 all 27 workloads and functional regression pass; nominal Embench/FP32
 ratios are 1.070636×/1.101087× original baseline. This improves FP32 but regresses
 Embench against A+B; see the [arbitration review](docs/LSU_ARBITRATION_REVIEW.md).
-The new candidate is not yet physically qualified. A+B combines response handoff
+A+B combines response handoff
 and head-store marking; its
 [complete experiment](docs/LSU_AB_REVIEW.md) passes the agreed research checks.
 At 100 MHz it reaches 1.073943× Embench and 1.088248× FP32 with 0.981066×

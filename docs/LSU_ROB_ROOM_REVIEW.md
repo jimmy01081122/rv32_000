@@ -2,7 +2,7 @@
 
 2026-11-18 整理；實測與審查於 2026-11-17 03:57 完成（均為 Asia/Taipei）。
 乾淨來源 `3c87e71`；建置、資格、量測與兩次審查
-五階段實際 exit 0，開始／結束來源相同。**完整功能與固定週期量測通過；新 PPA 尚未量測，原基線不變。**
+五階段實際 exit 0，開始／結束來源相同。**完整功能與固定週期量測通過；後續已完成兩個操作點的實體資格與完整量測。**
 
 ## 實作及驗證
 
@@ -23,7 +23,7 @@ ROB 經 core 接線輸出一個 Boolean，沒有新增狀態。回壓中已送�
   複製到同名路徑後全套重跑；沒有關閉 lint，也沒有為此改動 CPU RTL，失敗資料保留。
 
 時脈固定 10,000 ps；I response／I interval／D response 仍各 10,000 ps。
-標準元件面積與 TT／SS／FF 時序需要新候選實測；下列是名義 100 MHz 的模擬時間比。
+下表為通過 TT／SS／FF 的 100 MHz 工作點。
 
 ## 兩類完整分數
 
@@ -89,15 +89,6 @@ FFT 相對仲裁 v1 的 store-ack 等待少 2,090 拍，FP load 頭端等待多 
 
 ## 下一步與證據
 
-建議保留這版作下一輪實體資格候選：兩類完整分數均優於 A+B 及仲裁 v1，
-PID 收益保留，FFT 與 statemate 的主要退步收斂；同時保留上述個別取捨供審查。
-下一步沿用既定
-ASAP7、shared FPU、hold40、uniform ready guard 與 global-route 流程，重新檢查
-TT／SS／FF 及面積；新 ROB→LSU 控制線位於記憶體選擇路徑，父版的 slack 不能套用。
-目前 [critical paths](CRITICAL_PATHS.md)仍屬 A+B：SS 9.4 ns 的 INT EX0→dmem address
-+8.20 ps、FPU→completion +59.46 ps；最小 FF hold +17.58 ps。
-
-尚未升格基線、改變記憶體服務、調整權重、排除案例或放寬數值要求。
-完整 ISA／IEEE-754、詳細繞線及功耗仍是另外的資格範圍。
+候選已完成 ASAP7 global-route 實體資格。最短合格週期 9.8 ns，面積 21,498.75 µm²；100 MHz 在兩個完整測試點中較快。[時序、面積與兩個操作點](LSU_ROB_ROOM_PHYSICAL.md)。
 
 [實驗契約與重現方式](../experiments/lsu-rob-room-v1/README.md) · [完整證據](evidence/2026-11-18/lsu-rob-room-functional/README.md)。

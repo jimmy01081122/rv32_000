@@ -25,7 +25,7 @@ At nominal 100 MHz, Embench/FP32 are **1.076286× / 1.109010×** original baseli
 or **1.002181× / 1.019078×** A+B. PID gains are retained, FFT now improves over
 A+B, and statemate's regression shrinks from 7.325% to 0.526%. Three cases regress
 against arbitration v1, so the full denominator and tradeoffs remain visible in
-[the completed review](../../docs/LSU_ROB_ROOM_REVIEW.md). Physical gate 4 is unmeasured.
+[the completed review](../../docs/LSU_ROB_ROOM_REVIEW.md). Physical gate 4 qualifies 9.8 ns and 10 ns. [Physical review](../../docs/LSU_ROB_ROOM_PHYSICAL.md).
 
 Validation gates:
 
@@ -107,4 +107,4 @@ samples at the common and fastest tested periods against the admitted minima.
 denominators. `archive_physical.py` and `verify_completion_archive.py` retain and
 check every decoded evidence member, including the earlier functional archive.
 
-Until those stages complete, this procedure is preparation, not measured PPA.
+The completed run measures 21,498.75 µm² and qualifies 9.8 ns on the 100 ps grid. [Full evidence](../../docs/evidence/2026-11-23/lsu-rob-room-complete/README.md).

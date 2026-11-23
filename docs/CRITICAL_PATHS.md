@@ -1,11 +1,39 @@
 # 目前已驗證的 critical paths
 
-2026-11-13（Asia/Taipei）。下表是**完成實體資格的 A+B 父版本**，CPU 來源 `3f079c1`、
-原生實體來源 `f66e12b`、封存 `49122fb`。新的 LSU 仲裁實驗已獲核准，尚不能沿用這些數字
-宣稱新 RTL 的時序。採 ASAP7、TT 建置、共用 FPU／hold40／ready guard、global-route 寄生估算。
+候選通過 ASAP7 global-route 的三個 corner。在 100 ps 試驗網格上，最短合格週期是 **9.8 ns**（102.04 MHz）。A+B 父版為 9.4 ns。
 
-2026-11-18 更新：目前 [ROB 空間限制候選](LSU_ROB_ROOM_REVIEW.md)已通過功能及完整 27 項，
-但尚未進行新的實體量測。下列路徑仍屬 A+B，不包含新 ROB→LSU 控制線的實體影響。
+| Corner | 9.8 ns setup | 9.8 ns hold | 10 ns setup | 10 ns hold |
+| --- | ---: | ---: | ---: | ---: |
+| TT | +2,950.70 ps | +39.49 ps | +3,150.70 ps | +39.49 ps |
+| SS | +57.09 ps | +71.30 ps | +257.09 ps | +71.30 ps |
+| FF | +4,547.99 ps | +16.16 ps | +4,747.99 ps | +16.16 ps |
+
+相鄰的 9.7 ns 實測在 SS 的 setup slack 為 **-42.91 ps**。標準元件面積為 **21,498.75 µm²**，相對原基線為 **0.973626×**，相對 A+B 為 **0.992416×**。
+
+## Critical paths
+
+以下是 9.8 ns 各 path group 抽樣中最緊的一條。每組含五條實際路徑，表中 slack 已與獨立時序報告對帳。
+
+| Corner／檢查 | 路徑類型 | 起點 → 終點 | Slack |
+| --- | --- | --- | ---: |
+| SS setup | reg2out | `int_ex0_req_q[64]` → `dmem_req_byte_en[1]` | +57.09 ps |
+| SS setup | reg2reg | `fp_ex0_req_q[94]` → `u_fp_execute/cmp_data[107]` | +439.78 ps |
+| SS setup | in2out | `dmem_rsp_valid` → `dmem_req_wdata[2]` | +4,574.66 ps |
+| SS setup | in2reg | `dmem_rsp_valid` → `u_rob.entries[13][64]` | +4,982.71 ps |
+| FF hold | reg2reg | `fp_ex0_req_q[284]` → `u_fp_simple.cmp_data[138]` | +16.16 ps |
+| FF hold | in2reg | `imem_rsp_rdata[26]` → `u_frontend.iq_mem[5][101]` | +19.67 ps |
+| FF hold | reg2out | `u_rob.commit_trace[246]` → `commit_trace[246]` | +314.07 ps |
+| FF hold | in2out | `rst` → `dmem_req_valid` | +375.59 ps |
+
+在 SS 9.8 ns，最緊 byte-enable 路徑的資料到達時間是 8,592.91 ps。9,800 ps 扣除 50 ps 的 setup 不確定度及 1,100 ps 的輸出預算，要求到達時間為 8,650 ps，得到 +57.09 ps 餘裕。
+
+在 100 MHz 的 SS 報告中，全核心最小 setup 為 **+257.09 ps**。另將起點限制為五個 `rob_count` 暫存器、終點限制為 32 個 `dmem_req_addr` 位元，最緊為 **+6385.70 ps**。兩次查詢使用同一份 global-route 資料庫與 10 ns 約束。
+
+[ROB 空間限制完整實體結果](LSU_ROB_ROOM_PHYSICAL.md)。
+
+## 歷史對照：A+B 父版
+
+CPU `3f079c1`，實體來源 `f66e12b`。
 
 ## Setup：SS、9.4 ns
 

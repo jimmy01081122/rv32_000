@@ -1,6 +1,6 @@
 # Current project status
 
-Updated 2026-11-18 (Asia/Taipei). Current branch: `codex/lsu-rob-room`.
+Updated 2026-11-23 (Asia/Taipei). Current branch: `codex/lsu-rob-room`.
 The original AP5B baseline remains frozen; the candidate has not been promoted.
 
 ## Active ROB-space arbitration experiment
@@ -20,9 +20,7 @@ or **1.002181× / 1.019078×** A+B. Against A+B, 13 cases improve, 11 regress an
 three tie. PID retains 7,238 cycles; FFT improves to 33,029; statemate falls to
 2,628,051 but remains 0.526% slower than A+B. UD/GEMM/QRduino regress against
 arbitration v1 while remaining faster than A+B. The [full result](LSU_ROB_ROOM_REVIEW.md)
-preserves all cases. Recommend this candidate for fresh common-flow physical
-qualification; no new timing/area claim or baseline promotion is made. Both
-1.20× performance goals remain unmet.
+preserves all cases. The common global-route flow qualifies 9.8 ns and 10 ns at TT/SS/FF. Standard-cell area is 21,498.75 µm² (0.973626× original). The full 27-workload replay favors 100 MHz at fixed 10 ns memory. Both 1.20× performance targets remain open. [Physical results and critical paths](LSU_ROB_ROOM_PHYSICAL.md).
 
 ## Previous arbitration v1 experiment
 
@@ -48,8 +46,7 @@ by increased cancelled reads. Most bypasses in those two cases occur at ROB 15/1
 The ROB-space experiment has now been selected and is tracked above; observational
 guard coverage does not predict its final performance.
 
-New timing/area qualification is unmeasured. The [critical paths](CRITICAL_PATHS.md)
-refer to the completed A+B parent, not the modified candidate. The candidate is
+New timing/area qualification is unmeasured. For arbitration v1, only the A+B parent had physical results. The later ROB-space variant now has [its own critical paths](CRITICAL_PATHS.md). The candidate is
 not promoted and the original baseline remains frozen.
 
 ## Completed A+B experiment
