@@ -1,9 +1,10 @@
 # Current project status
 
-Updated 2026-11-23 (Asia/Taipei). Current branch: `codex/lsu-rob-room`.
-The original AP5B baseline remains frozen; the candidate has not been promoted.
+Current experiment branch `codex/lsu-c-head-lookahead`.
 
-## Active ROB-space arbitration experiment
+C passes full-core regression and all 27 frozen workloads at a common simulated 100 MHz. It reaches 1.079442× Embench and 1.111306× FP32 relative to the original AP5B baseline. The C area and timing qualification is open. [Results and evidence](evidence/lsu-c-head-v1/README.md).
+
+## Completed ROOM parent
 
 The user selected the recommended [ROB-space guard](../experiments/lsu-rob-room-v1/README.md)
 on November 16. The new candidate allows first-head load bypass only at registered

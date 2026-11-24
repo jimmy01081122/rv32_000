@@ -1,6 +1,6 @@
 # RV32 OoO 專案計畫
 
-版本 2.25，2026-11-23（Asia/Taipei）。ROB 空間限制完成實體資格與兩個全 27 項操作點。100 MHz 的 Embench／FP32 為 1.076286×／1.109010×，標準元件面積 0.973626×。兩類效能仍低於各 1.20× 的規劃目標。
+版本 2.26，2026-11-23 UTC。C 已完成 100 MHz 功能與全 27 項比較，相對原始基線的 Embench／FP32 為 1.079442×／1.111306×。C 的實體時序與面積待測，已具實體資格的父版本為 ROOM。[本輪證據](docs/evidence/lsu-c-head-v1/README.md)
 
 本輪已於 2026-11-13 核准先做 [LSU 仲裁](experiments/lsu-load-arb-v1/README.md)：
 以 A+B 為父版本，先驗證首次 head-store marking 的有限 load 優先。

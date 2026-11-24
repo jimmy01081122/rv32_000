@@ -1,0 +1,74 @@
+{
+  "resident_images": {
+    "rv32ooo-fp:p1": "sha256:2140263677b3a378d5cab75a3d0d4fd285ddb38a1a5a1f81f5cf97db024a02d5",
+    "rv32ooo-sim:g1": "sha256:0d80d39df2f24dc60a77387242f781edc1cc67f53865719981e01b5b5a989d26"
+  },
+  "parked_images": {
+    "rv32ooo-orfs:8359fde-flat": "sha256:92a37abacbbf91494f9a8078b45fe1f6688a533cf5c87d02599d28c5fe229b33",
+    "rv32ooo-syn:g1": "sha256:b56c1e8635d9baabe4d64ecdd9c63d0685da9aa11075b69bc6bd665ca52bea2b"
+  },
+  "parent_checkout_available_bytes": 418500608,
+  "available_bytes_before_evidence_packaging": 5930147840,
+  "no_remaining_containers": true,
+  "checked_image_switch": {
+    "passed": true,
+    "steps": [
+      {
+        "label": "park-fp",
+        "returncode": 0,
+        "free_bytes": 8866000896
+      },
+      {
+        "label": "park-sim",
+        "returncode": 0,
+        "free_bytes": 12708249600
+      },
+      {
+        "label": "park-syn",
+        "returncode": 0,
+        "free_bytes": 14953099264
+      },
+      {
+        "label": "load-orfs",
+        "returncode": 0,
+        "free_bytes": 10044420096
+      },
+      {
+        "label": "platform-check",
+        "returncode": 0,
+        "free_bytes": 10043920384
+      },
+      {
+        "label": "park-orfs",
+        "returncode": 0,
+        "free_bytes": 14952194048
+      },
+      {
+        "label": "load-fp",
+        "returncode": 0,
+        "free_bytes": 5938999296
+      },
+      {
+        "label": "load-sim",
+        "returncode": 0,
+        "free_bytes": 5938987008
+      }
+    ]
+  },
+  "platform_files_verified": 204,
+  "platform_inventory_sha256": "a2e6cfc00f52ac8c6d3253c80fa06c355eb34047b499ca84a034a6b862c7dbb2",
+  "orfs_archive": {
+    "archive": "build/tool-cache/orfs-8359fde.tar.gz",
+    "archive_sha256": "bffd49185388dd21d4ce3a67439f013dbdeae0b32dd41afa81f7b0d36fcd1771",
+    "bytes": 1709957298,
+    "image_id": "sha256:92a37abacbbf91494f9a8078b45fe1f6688a533cf5c87d02599d28c5fe229b33",
+    "tag": "rv32ooo-orfs:8359fde-flat",
+    "layers": [
+      "sha256:caf62ed959b74159270beca26083374ba0fb684736dedc2b0bdb670c2a674d6b"
+    ]
+  },
+  "functional_archive_sha256": "4ff27f145499c096165164968d12580c9799895f03f6cdd6cdc063beb4614139",
+  "ab_cache_replay_files": 34,
+  "ab_cache_replay_logical_bytes": 1304115494,
+  "cache_replay": "materialized into a fresh temporary directory and verified against the published A+B checkpoint digests"
+}

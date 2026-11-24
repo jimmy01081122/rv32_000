@@ -17,6 +17,7 @@ fixed-time performance measurement.
 | Document | Purpose |
 | --- | --- |
 | [Project plan](PLAN.md) | Agreed scope, decision process and next milestones |
+| [Head-load retirement experiment C](docs/evidence/lsu-c-head-v1/README.md) | Paired ROOM comparison, complete 27 workloads and structural checks |
 | [ROB-space arbitration results](docs/LSU_ROB_ROOM_REVIEW.md) | Full 100 MHz workload results and parent comparisons |
 | [LSU arbitration experiment](experiments/lsu-load-arb-v1/README.md) | Full functional/cycle results; FP32 gain and Embench regression, physical gate unmeasured |
 | [Arbitration regression diagnosis](docs/LSU_ARBITRATION_DIAGNOSIS.md) | Raw-cycle store costs, cancelled speculative reads and proposed ROB-space guard |
@@ -57,7 +58,9 @@ Integer and FP execution can overlap; sustained retirement IPC is at most one.
 The `LQ_ENTRIES` and PRF-port constants do not fully describe the instantiated
 structures; see the architecture inventory before changing their values.
 
-The current branch tests a ROB-space guard on bounded load arbitration. Full-core
+This branch tests retirement on a registered external head-load response. At a common simulated 100 MHz it reaches **1.079442× Embench / 1.111306× FP32** relative to the frozen baseline. C has pending physical timing and area measurements. [Results and evidence](docs/evidence/lsu-c-head-v1/README.md).
+
+The ROOM parent uses a ROB-space guard on bounded load arbitration. Full-core
 and all27 gates pass at clean `3c87e71`: nominal Embench/FP32 ratios are
 **1.076286× / 1.109010×** original baseline, improving both families over A+B.
 Statemate retains a 0.526% regression against A+B; see the [complete review](docs/LSU_ROB_ROOM_REVIEW.md).

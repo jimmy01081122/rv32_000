@@ -1,4 +1,4 @@
-"""Restore one pinned project image from this host's verified cold cache."""
+"""Restore or park one pinned project image using this host's verified cold cache."""
 import argparse
 import hashlib
 import io
@@ -8,7 +8,7 @@ import subprocess
 import tarfile
 import tempfile
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = next(p for p in Path(__file__).resolve().parents if (p / "scripts/baseline_contract.py").is_file())
 DOCKER = ["env", *[arg for key in ("DOCKER_HOST", "DOCKER_CONTEXT", "DOCKER_TLS",
           "DOCKER_TLS_VERIFY", "DOCKER_CERT_PATH") for arg in ("-u", key)],
           "docker", "--host=unix:///var/run/docker.sock"]
@@ -53,28 +53,45 @@ def load_one(archive, tag, digest):
         subprocess.run(DOCKER + ["load"], stdin=selected, check=True)
 
 
+def checked_archive(key, expected):
+    if key == "orfs":
+        archive = ROOT / "build/tool-cache/orfs-8359fde.tar.gz"
+        receipt = json.loads(archive.with_suffix("").with_suffix(".json").read_text())
+        checksum = "bffd49185388dd21d4ce3a67439f013dbdeae0b32dd41afa81f7b0d36fcd1771"
+        if receipt["image_id"] != expected or receipt["archive_sha256"] != checksum:
+            raise ValueError("ORFS receipt differs from verified archive")
+    else:
+        archive = ROOT / "build/experiments/lsu-ab-v1/image-cache-v2/rv32-inactive-images.tar.gz"
+        checksum = "4ff27f145499c096165164968d12580c9799895f03f6cdd6cdc063beb4614139"
+    with archive.open("rb") as source:
+        if hashlib.file_digest(source, "sha256").hexdigest() != checksum:
+            raise ValueError("archive checksum mismatch")
+    return archive
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("image", choices=IMAGES)
-    key = parser.parse_args().image
+    parser.add_argument("--park", action="store_true",
+                        help="verify the backup and remove only this local image tag")
+    args = parser.parse_args()
+    key = args.image
     tag, digest = IMAGES[key]
     expected = "sha256:" + digest
     existing = image_id(tag)
     if existing and existing != expected:
         raise ValueError("existing tag points to another image")
+    if args.park:
+        checked_archive(key, expected)
+        if existing:
+            containers = subprocess.check_output(DOCKER + ["ps", "-aq", "--filter", "ancestor=" + expected])
+            if containers.strip():
+                raise ValueError("a container still references " + tag)
+            subprocess.run(DOCKER + ["image", "rm", tag], check=True)
+        print("Parked", tag, expected)
+        return
     if not existing:
-        if key == "orfs":
-            archive = ROOT / "build/tool-cache/orfs-8359fde.tar.gz"
-            receipt = json.loads(archive.with_suffix("").with_suffix(".json").read_text())
-            if receipt["image_id"] != expected:
-                raise ValueError("ORFS receipt differs from pinned image")
-            checksum = receipt["archive_sha256"]
-        else:
-            archive = ROOT / "build/experiments/lsu-ab-v1/image-cache-v2/rv32-inactive-images.tar.gz"
-            checksum = "4ff27f145499c096165164968d12580c9799895f03f6cdd6cdc063beb4614139"
-        with archive.open("rb") as source:
-            if hashlib.file_digest(source, "sha256").hexdigest() != checksum:
-                raise ValueError("archive checksum mismatch")
+        archive = checked_archive(key, expected)
         if key == "orfs":
             subprocess.run(DOCKER + ["load", "--input", str(archive)], check=True)
         else:
