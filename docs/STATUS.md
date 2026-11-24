@@ -4,6 +4,8 @@ Current experiment branch `codex/lsu-c-head-lookahead`.
 
 C passes full-core regression and all 27 frozen workloads at a common simulated 100 MHz. It reaches 1.079442× Embench and 1.111306× FP32 relative to the original AP5B baseline. The C area and timing qualification is open. [Results and evidence](evidence/lsu-c-head-v1/README.md).
 
+A passive replay of all 27 workloads measured the store operands, address generation, external handshake and registered commit for C. Every successful ROI store retired on its response edge. The proposed next experiment targets the earlier AGU edge when the store is already at the ROB head and the data port is free. [Store timing and fault controls](evidence/lsu-c-store-diagnosis/README.md).
+
 ## Completed ROOM parent
 
 The user selected the recommended [ROB-space guard](../experiments/lsu-rob-room-v1/README.md)

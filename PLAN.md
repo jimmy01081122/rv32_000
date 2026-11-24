@@ -1,6 +1,8 @@
 # RV32 OoO 專案計畫
 
-版本 2.26，2026-11-23 UTC。C 已完成 100 MHz 功能與全 27 項比較，相對原始基線的 Embench／FP32 為 1.079442×／1.111306×。C 的實體時序與面積待測，已具實體資格的父版本為 ROOM。[本輪證據](docs/evidence/lsu-c-head-v1/README.md)
+版本 2.27，2026-11-24 UTC。已完成 [C 的 store 退休逐拍診斷](docs/evidence/lsu-c-store-diagnosis/README.md)。後續共同選擇是否測試隊首 store 在 AGU 產生完整資料時提前送出請求。
+
+C 已完成 100 MHz 功能與全 27 項比較，相對原始基線的 Embench／FP32 為 1.079442×／1.111306×。C 的實體時序與面積待測，已具實體資格的父版本為 ROOM。[本輪證據](docs/evidence/lsu-c-head-v1/README.md)
 
 本輪已於 2026-11-13 核准先做 [LSU 仲裁](experiments/lsu-load-arb-v1/README.md)：
 以 A+B 為父版本，先驗證首次 head-store marking 的有限 load 優先。

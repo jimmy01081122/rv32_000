@@ -1,0 +1,993 @@
+{
+  "passed": true,
+  "archive": "store-edges.tar.gz",
+  "archive_bytes": 2575330,
+  "archive_sha256": "1282c6a68879620f24e0411619a70323d7fc285bcf91679df84648ad03c2b9a4",
+  "records": [
+    {
+      "path": "build/experiments/lsu-c-head-v1/build-v1/sim-normal/Vrv32_ooo_core.h",
+      "bytes": 209512,
+      "sha256": "4c1d07d1b763b6b0b8109399b03106496835176c76fdc1edb4ec92857705bd01"
+    },
+    {
+      "path": "build/experiments/lsu-c-head-v1/build-v1/sim-normal/Vrv32_ooo_core__ALL.a",
+      "bytes": 1090566,
+      "sha256": "72e395357bf270a16f65a00b80f10e13539aeef0117c04b9f33a05507570729a"
+    },
+    {
+      "path": "build/experiments/lsu-c-head-v1/build-v1/sim-normal/rv32_ooo_sim",
+      "bytes": 1025456,
+      "sha256": "ea225e0775045ac5d69594d833fc18f83ebb8faa417902f5a46ecc94a8a6c08d"
+    },
+    {
+      "path": "build/experiments/lsu-c-head-v1/build-v1/sim-normal/sim_main.o",
+      "bytes": 84496,
+      "sha256": "5292041248f8e5217793398818739c2f0b834653c37919ff080432f1623fb27a"
+    },
+    {
+      "path": "build/experiments/lsu-c-head-v1/build-v1/sim-normal/sim_mem.o",
+      "bytes": 15712,
+      "sha256": "00828714fa27263ac6bdbf83d3518d980fd388791173aa2bd104b71ec3dd5f35"
+    },
+    {
+      "path": "build/experiments/lsu-c-head-v1/build-v1/sim-normal/verilated.o",
+      "bytes": 138544,
+      "sha256": "d03e3416bbde522babff7c03ea7274cb0a6db937e81db09c06ff2a4c38c797a3"
+    },
+    {
+      "path": "build/experiments/lsu-c-head-v1/build-v1/sim-normal/verilated_vcd_c.o",
+      "bytes": 47920,
+      "sha256": "e5e1e717b9a9e05c2640c3d4d1625045e6e5ea82cac804208652065a4468d50f"
+    },
+    {
+      "path": "build/experiments/lsu-c-head-v1/measurement-10000ps-v1/summary.json",
+      "bytes": 43540,
+      "sha256": "3bcccf9cc3368c8d1ee56fd9fbb0097b7e2d7d816c160b077995036896d62569"
+    },
+    {
+      "path": "build/experiments/lsu-c-head-v1/qualification-v1/interface/fsw.elf",
+      "bytes": 5544,
+      "sha256": "d580ab01ad8cf6aa8b0ad8b998cd720bce3309f0975b686051ec29a9ea015f2f"
+    },
+    {
+      "path": "build/experiments/lsu-c-head-v1/qualification-v1/interface/sw.elf",
+      "bytes": 5544,
+      "sha256": "bf39cd463c7c0a8fc77724aa275cb7177ef9690e9963d4acf6f8decf7435fc7c"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/build.json",
+      "bytes": 1501,
+      "sha256": "8045ae1dfef6bea0e630b93329f971a43da61a1a27a752844e2282b66d367f5d"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/compiler.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/control",
+      "bytes": 1025456,
+      "sha256": "ea225e0775045ac5d69594d833fc18f83ebb8faa417902f5a46ecc94a8a6c08d"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/fsw-fault/control/commit.trace",
+      "bytes": 2819,
+      "sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/fsw-fault/control/control.vcd.gz",
+      "bytes": 65775,
+      "sha256": "0600d352ebd1fa24ee4a07d525818ea180bd63596d86cd2f636907103698649f"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/fsw-fault/control/dut.log",
+      "bytes": 872,
+      "sha256": "2262c0d6e689c896a062b611e2a1d613e85853549e8bb9981751f2984c51d652"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/fsw-fault/control/memory.json",
+      "bytes": 532,
+      "sha256": "6f28f134baa00ffa9760d39cb599c9a90671c5300599ceff3583b1da0e69dc6d"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/fsw-fault/observer/commit.trace",
+      "bytes": 2819,
+      "sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/fsw-fault/observer/counts.csv",
+      "bytes": 461,
+      "sha256": "dc8b0f3871f339688854952f89589adf16bd278f41ac9a14547264d6e1ccdfd2"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/fsw-fault/observer/dut.log",
+      "bytes": 827,
+      "sha256": "25ad697694fe20da325e4cd1603082dadeef5a45873bd0ed89eed9a82a2a8082"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/fsw-fault/observer/examples.csv",
+      "bytes": 370,
+      "sha256": "d71c0fff90d90f3c01572b7a7656698825eb1313fba4777cfc8ab055dbafc7eb"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/fsw-fault/observer/memory.json",
+      "bytes": 532,
+      "sha256": "6f28f134baa00ffa9760d39cb599c9a90671c5300599ceff3583b1da0e69dc6d"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/slow-blocked/control/commit.trace",
+      "bytes": 25911,
+      "sha256": "766ce0890fda8895312f0fed625aec699aa93f65811c45f9f3a559c5948863d5"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/slow-blocked/control/control.vcd.gz",
+      "bytes": 464547,
+      "sha256": "6974be320d2706345cebc5aecf18f184038ca57bf3b4e5060c5f4c39a37aa058"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/slow-blocked/control/dut.log",
+      "bytes": 908,
+      "sha256": "b76862ca2771738372fe8b796ff7cc87412d3baaa55f4cabceb8ae1fe9f2252d"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/slow-blocked/control/memory.json",
+      "bytes": 535,
+      "sha256": "b0213df43148922b38736ca243db7cf3cd8b727049c55ce31bd0d152273c6b0d"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/slow-blocked/observer/commit.trace",
+      "bytes": 25911,
+      "sha256": "766ce0890fda8895312f0fed625aec699aa93f65811c45f9f3a559c5948863d5"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/slow-blocked/observer/counts.csv",
+      "bytes": 590,
+      "sha256": "4f033db4167c402827f0f6bb518f5bb993de6e4ce55a853bb2be3249a8ad801b"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/slow-blocked/observer/dut.log",
+      "bytes": 863,
+      "sha256": "212cb52cc71fce4a7f548bc5b86317262cf1c743cb88b5e71b2f56323e4327ab"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/slow-blocked/observer/examples.csv",
+      "bytes": 536,
+      "sha256": "49e94200ff5e66a3de692da722e10b6067abd307a94d4ff2d4432787773e4836"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/slow-blocked/observer/memory.json",
+      "bytes": 535,
+      "sha256": "b0213df43148922b38736ca243db7cf3cd8b727049c55ce31bd0d152273c6b0d"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/slow-fault/control/commit.trace",
+      "bytes": 2819,
+      "sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/slow-fault/control/control.vcd.gz",
+      "bytes": 71756,
+      "sha256": "184ea689b9c1adf71021234a66e5be7e66e5b29420c9633ce23fff55935be0ce"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/slow-fault/control/dut.log",
+      "bytes": 872,
+      "sha256": "78c86d20043d7f5a61e3e2b05d4f39b887df455f54878370e70c33a2617dddf3"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/slow-fault/control/memory.json",
+      "bytes": 532,
+      "sha256": "1f82b311cfd8d3f6581c3788c9c94018de949148091ddc786f9ea4120f86dbd9"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/slow-fault/observer/commit.trace",
+      "bytes": 2819,
+      "sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/slow-fault/observer/counts.csv",
+      "bytes": 496,
+      "sha256": "59b09ed93cf25b017d0a882108752a97f18de26cf0af48d49a190b894b39c994"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/slow-fault/observer/dut.log",
+      "bytes": 827,
+      "sha256": "c66c911404f3868094f52f5316323fed8557f1ecd9997770972fd2ebbed25642"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/slow-fault/observer/examples.csv",
+      "bytes": 366,
+      "sha256": "83728fc1e94429e8ee5e369b9d0b2ecd39427ca1381870ff324fa0e248fca869"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/slow-fault/observer/memory.json",
+      "bytes": 532,
+      "sha256": "1f82b311cfd8d3f6581c3788c9c94018de949148091ddc786f9ea4120f86dbd9"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/success/control/commit.trace",
+      "bytes": 25911,
+      "sha256": "766ce0890fda8895312f0fed625aec699aa93f65811c45f9f3a559c5948863d5"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/success/control/control.vcd.gz",
+      "bytes": 429567,
+      "sha256": "e2f7f89493788ee87ca4b9ff6821a5078242d8e7deb18ffd0c91f74e9e1e2083"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/success/control/dut.log",
+      "bytes": 814,
+      "sha256": "448347591de96707f2f67c2670b7286273a8a463394e0c7b2b6129fcdb2a27cd"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/success/control/memory.json",
+      "bytes": 535,
+      "sha256": "72698e399002a9cd92b80f4853efbe2dd9764872fd3cd0c297bd6bed1bb0cd96"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/success/observer/commit.trace",
+      "bytes": 25911,
+      "sha256": "766ce0890fda8895312f0fed625aec699aa93f65811c45f9f3a559c5948863d5"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/success/observer/counts.csv",
+      "bytes": 527,
+      "sha256": "c2a55a1e265fee36c883025ac29c060936488604392bea562f7de5d250722821"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/success/observer/dut.log",
+      "bytes": 769,
+      "sha256": "8e8c24e854cfabe3270250f5e4605e52ab929a451ad5c455a5d51d4271f8c51e"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/success/observer/examples.csv",
+      "bytes": 556,
+      "sha256": "89d0a4d99863fbe564ae74f0553fef742bc9de6b469b5e385737b4de88a797bc"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/success/observer/memory.json",
+      "bytes": 535,
+      "sha256": "72698e399002a9cd92b80f4853efbe2dd9764872fd3cd0c297bd6bed1bb0cd96"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/summary.json",
+      "bytes": 1290,
+      "sha256": "1cb5bf896450ff488db6f775b561963f0eaea352b29cf3aa7519f65e68e5b2a4"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/sw-fault/control/commit.trace",
+      "bytes": 2819,
+      "sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/sw-fault/control/control.vcd.gz",
+      "bytes": 66231,
+      "sha256": "a96e7bfa8d53ffc5a921d5355e60d883a700d759f5bc58f70e7c7d7331fdb174"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/sw-fault/control/dut.log",
+      "bytes": 872,
+      "sha256": "ca750c7fd4d75e5f0d3339a7c606ea5c820c333537b2c040a7c36f6485a8092a"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/sw-fault/control/memory.json",
+      "bytes": 532,
+      "sha256": "07b461b1abda048efc5c435d65a98fb7c212582ee089b77011c57f26104ad553"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/sw-fault/observer/commit.trace",
+      "bytes": 2819,
+      "sha256": "a32792ade15d7b51d6caf9bef7b93792b52dbc4087a8558ed2db83fc63f78e2a"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/sw-fault/observer/counts.csv",
+      "bytes": 461,
+      "sha256": "91e6eadd1ac51de4d3839b1836b77e8ca85c01cc0c228bcd375ad8f8c4b6405c"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/sw-fault/observer/dut.log",
+      "bytes": 827,
+      "sha256": "52bd3dd886a1827e092ff83ee9e510e0bb853a13eb49ac1d85143dc9a2c47932"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/sw-fault/observer/examples.csv",
+      "bytes": 372,
+      "sha256": "56ecb5f213dd0d27a081572b5fc95813f3f71f8e0253b92272e7b60bdf15ab71"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/controls/sw-fault/observer/memory.json",
+      "bytes": 532,
+      "sha256": "07b461b1abda048efc5c435d65a98fb7c212582ee089b77011c57f26104ad553"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/aha-mont64/counts.csv",
+      "bytes": 576,
+      "sha256": "fb2b846d3eb107fd92406f28991367e1a418fb0916e110d4eaa7721e2e2dc734"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/aha-mont64/dut.log",
+      "bytes": 800,
+      "sha256": "f446ee561e4a8a91e9576cc21f348b0558705f5a4b38b05e2c6aa83275071b0a"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/aha-mont64/examples.csv",
+      "bytes": 733,
+      "sha256": "eb4e978022ba8b6daa19332990c9e0bcc524ef745fe0e30600fefa5c7f47bf9d"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/aha-mont64/memory.json",
+      "bytes": 549,
+      "sha256": "6c19fb9b5bd32858f3664356b8b888767cc993bbcd83d9e27421ac673a5f5742"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/aha-mont64/profile.json",
+      "bytes": 51328,
+      "sha256": "8ad58dc2df19bf08f48cc0bf3f1f213c52ff6f0a7584be756038263f9ffa90a9"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/crc32/counts.csv",
+      "bytes": 473,
+      "sha256": "46db12552ae54f4f43d10ff5934f9c333297af34fc08a25e4112fd6aa0c1fccf"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/crc32/dut.log",
+      "bytes": 795,
+      "sha256": "36a648691a7c48b93f3c494308edc5ffe30e107f69afc292f43a3334891821f7"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/crc32/examples.csv",
+      "bytes": 439,
+      "sha256": "7324b6e7ad72ebf4e5aff8a10bf6de5b698ff8616d425ae273b08aef1102e00b"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/crc32/memory.json",
+      "bytes": 550,
+      "sha256": "2e6f609589df67f6f42865d941e4eb3c469277a3dcb016899aa7bf4349e6397c"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/crc32/profile.json",
+      "bytes": 7872,
+      "sha256": "2eab2e6857ba6688afe384dd66d1ba98595b0f824e309d939071391c6033aede"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/cubic/counts.csv",
+      "bytes": 650,
+      "sha256": "4e984a060896a9212cdaa5472b38367eeaa9fbc8e5de964f4c63185a9aa78201"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/cubic/dut.log",
+      "bytes": 797,
+      "sha256": "21fa93101329307f6fcb1a4da681e46797219f201366e0e6bd009981a4e3ebc7"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/cubic/examples.csv",
+      "bytes": 800,
+      "sha256": "7b3a4526585b0382e13dad1a60e1cedb3b25871ee902fd37dfd87624da34accc"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/cubic/memory.json",
+      "bytes": 556,
+      "sha256": "d99058ec6093158aa421185784480c83e683c940c6f40af0481ac7327fc4a598"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/cubic/profile.json",
+      "bytes": 685923,
+      "sha256": "257be630d218b114494f0df7cd1605605c4eee4507808b8ea54912916df1a247"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/edn/counts.csv",
+      "bytes": 627,
+      "sha256": "58ff19597fd7e3a57da12170d2e7c191bd49a99cb16158d724b80bf469bfee02"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/edn/dut.log",
+      "bytes": 793,
+      "sha256": "a7ce3a3b0c63b165a88ca943604bbced76bf7821f9fb320aff7bcc77d618a522"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/edn/examples.csv",
+      "bytes": 764,
+      "sha256": "39639643f6762ac4362ec7009b33d7fd2346e729acfd291d15451d08a1bff8e0"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/edn/memory.json",
+      "bytes": 553,
+      "sha256": "b200537cc336ed2b7104894bea52edff6daeb7cc8e04f94b9cda893da23d3bd8"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/edn/profile.json",
+      "bytes": 52970,
+      "sha256": "0a5a60bbc969b2d75ad9d4474d4f54313a528e41873d1f6bbd0eefabfd5a3cdd"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/huffbench/counts.csv",
+      "bytes": 624,
+      "sha256": "9e41bf3a7ea46cb782c6885cf2fb1ba093ce7f35a1aabb670ebb35f77ce1761e"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/huffbench/dut.log",
+      "bytes": 799,
+      "sha256": "dcade640c9074c6c875d9aedbfef49e4fbc553031b478490d650f6a6e52fe4b5"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/huffbench/examples.csv",
+      "bytes": 750,
+      "sha256": "b6a59593def0708563a279219f035bc4a04327cfda54a2670f1d712a94774618"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/huffbench/memory.json",
+      "bytes": 552,
+      "sha256": "9a6e699d9f25919b55a689df8f7b8a6d45a58746e543e6051c8ac60ef552887d"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/huffbench/profile.json",
+      "bytes": 60107,
+      "sha256": "04e37531c51984a411bcca510c689a8df5fb437b118e2ed5fba9f637ab6db5db"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/matmult-int/counts.csv",
+      "bytes": 524,
+      "sha256": "c27f8aa6947c5222bc77a09b08d96d730a38612b964fc1f7b30732b6e51341eb"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/matmult-int/dut.log",
+      "bytes": 801,
+      "sha256": "feb212d9db3a36925dbdb88fc881fbf16f981a31ccc86ac822cf0b74631c0723"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/matmult-int/examples.csv",
+      "bytes": 744,
+      "sha256": "377b9071c8ca33336f14e7fc40e6b5533b07b7203a002d498e58b1e01c23dc31"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/matmult-int/memory.json",
+      "bytes": 552,
+      "sha256": "c48cd2fc0149f6c8c537581490c246e5e8cc7ac90af91e93480710a71947b469"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/matmult-int/profile.json",
+      "bytes": 12150,
+      "sha256": "83004d04577a7643e55e770ec585dc6e50b04cce663a8b15e7f3908b8b572b54"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/minver/counts.csv",
+      "bytes": 606,
+      "sha256": "fad527e709bf7ba0f48897094ae44c41289ec6f0ffe2d2b67bfd99590f9897c0"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/minver/dut.log",
+      "bytes": 800,
+      "sha256": "38da888038d89d84abb8cb9aa9fe490362942b2ee655b4749683c0f6d83bd7f7"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/minver/examples.csv",
+      "bytes": 751,
+      "sha256": "a64cb0ce7b725dfc6f98be55679f5e0caf309245bd7ac40d9d12da1e08fa61ca"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/minver/memory.json",
+      "bytes": 550,
+      "sha256": "e3c138eb5d56a523f1afc6b02e36aefa1b313986b85e252d0fe36f3ed694fbc6"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/minver/profile.json",
+      "bytes": 36776,
+      "sha256": "a4659fed22f18a37165f278153afadce23f2494a4869a3133d1bc8cb1e620dac"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/nbody/counts.csv",
+      "bytes": 605,
+      "sha256": "48c384904e34348bf7d5f0ac7b92acc2adc6d2b81427c88d830d126c5b1f4795"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/nbody/dut.log",
+      "bytes": 796,
+      "sha256": "30ee08c74ba9d6b8683f73adb5ea61fe1183c78ba090560baf15d93219245307"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/nbody/examples.csv",
+      "bytes": 791,
+      "sha256": "ddaa0ea8acd2248ac30760a48e23ce7d4c642cc8d01b447aa6e82cc2382010ce"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/nbody/memory.json",
+      "bytes": 553,
+      "sha256": "e22b0b752c89f2adce942609d0fc49cfdf2f65276004280768d2ec9d4ded9068"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/nbody/profile.json",
+      "bytes": 187186,
+      "sha256": "a42e2e9f5b61b85e5625a7a23f2228af0706d5c66047b566d34770c89a999321"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/nettle-aes/counts.csv",
+      "bytes": 606,
+      "sha256": "8f9a3790ebabd8095b30df89ac3afd80722198e1cdf47f223bb432e989dcdf1c"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/nettle-aes/dut.log",
+      "bytes": 800,
+      "sha256": "e762f8722035a54c03f6e1a9d8356f0fd9d5881fe86593749e4b6b894b42e2b2"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/nettle-aes/examples.csv",
+      "bytes": 769,
+      "sha256": "fb8f594af0baf327a16eefe55c567489cf1edf7f0e1d03e849df978e228e85a7"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/nettle-aes/memory.json",
+      "bytes": 551,
+      "sha256": "0a2c46c852820e23e4b05906a6956a14aed066f64c878f8ade83d242361d336c"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/nettle-aes/profile.json",
+      "bytes": 102083,
+      "sha256": "ab290786c4f5ebeaeecbee2e0e4fdc9a6e25984075868b781ae9369721b29ebd"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/nettle-sha256/counts.csv",
+      "bytes": 618,
+      "sha256": "78f6652652613e09d943adf090cd8785fe4d78c4a402bb3c8643aab657dbb258"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/nettle-sha256/dut.log",
+      "bytes": 803,
+      "sha256": "9e9944e200ab1b9df075e9a9f9d64486c1f5665fd897587b63ed1421f2bd84c9"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/nettle-sha256/examples.csv",
+      "bytes": 756,
+      "sha256": "08fbca3061582d88917e48d5bf6456fc0e0a9f3db78d514794cb89bbc22e3c82"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/nettle-sha256/memory.json",
+      "bytes": 551,
+      "sha256": "79ed018173bb313e09197abbbe8919155a73ec3b2339821a81bb3ade51296c6b"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/nettle-sha256/profile.json",
+      "bytes": 187265,
+      "sha256": "3c24fcabe108c827e71995a231228160b86a5887b39eef09b1a3d0f2ef26a415"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/nsichneu/counts.csv",
+      "bytes": 536,
+      "sha256": "795a826d778f2c5ee04d8afe8ee745bf8cc9e52a3e1cb1a32d025a2ac8dff68b"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/nsichneu/dut.log",
+      "bytes": 798,
+      "sha256": "8aed4a69c611e4861ddc6549cc6869e87c50d15e56ab3794c3c6b017bc74c31a"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/nsichneu/examples.csv",
+      "bytes": 736,
+      "sha256": "71ddec7f48929dfc2f5be5e7e302c3d05d3479fc46d0193552764da17ca2b1a5"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/nsichneu/memory.json",
+      "bytes": 552,
+      "sha256": "14e8382f515bffcf600bd8c73ae45fe7fc8b9c622b62fb0e44a2bf992b2c2404"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/nsichneu/profile.json",
+      "bytes": 182010,
+      "sha256": "746a7dc2cdae5513395f114053af5201f376f3bdbeb868bef905f94b44085f3f"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/picojpeg/counts.csv",
+      "bytes": 654,
+      "sha256": "c1dcceedc7888f6cf71428bd4f2c2fd21aaa45254299abb05018c68f3b6446d5"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/picojpeg/dut.log",
+      "bytes": 798,
+      "sha256": "537fd41eb5a0df561ac19ec5c72b7e08b32b01f2180df33a66f5109c2bd04d8f"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/picojpeg/examples.csv",
+      "bytes": 789,
+      "sha256": "dd3011b2681e061e5f42280cd97c9f20a60a9baa9674a89d6a2c565103e40a6b"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/picojpeg/memory.json",
+      "bytes": 553,
+      "sha256": "ef54d3f0dcfbb68369922ec87a6da10a034d9993160f142d6c62be852c1c4d12"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/picojpeg/profile.json",
+      "bytes": 202100,
+      "sha256": "f5d55b95bc89bcdc19dd4ab48c3a0dc8b6b5dbbede6a06e7fbf26b70aa847c90"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/qrduino/counts.csv",
+      "bytes": 635,
+      "sha256": "9c807bae5b9ac1c8bca46c3e29dda81e2d4a09797bfa2979786090031259a765"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/qrduino/dut.log",
+      "bytes": 797,
+      "sha256": "af3eefaa7f8db07c1c65c432fc0c646747f3324694155c971a0105df4cf7e1cb"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/qrduino/examples.csv",
+      "bytes": 818,
+      "sha256": "dded262144a379179c90d4f901f6a738280e59e06701bb5e59613aa76c89ec1f"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/qrduino/memory.json",
+      "bytes": 551,
+      "sha256": "a5621cef2f4151f29f70fc7f8f97f99fa6963aad3944d2be59bb9ba9d883560a"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/qrduino/profile.json",
+      "bytes": 406683,
+      "sha256": "6e5608e1aac17a2f1a68545e1a4b519c785ceca09ef758a56c0ffcee61f00a3a"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/sglib-combined/counts.csv",
+      "bytes": 628,
+      "sha256": "b988288d0d11398a8c08efbe43cfd2641e3c7c4a79965b91a7fa0e2c7b9f8544"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/sglib-combined/dut.log",
+      "bytes": 804,
+      "sha256": "71c0b0eb2016ddc727e32617dc15b84b7d4db9acd79280d1ed6658890fc49442"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/sglib-combined/examples.csv",
+      "bytes": 750,
+      "sha256": "3c5eccfe793ece10829ed256b7ee770722c186365fbc56024a5d834f58a833f1"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/sglib-combined/memory.json",
+      "bytes": 552,
+      "sha256": "2b9ca8611c231accd40d6d5f22ab3a0813226c3ed6b70a56d205406eeebb5f19"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/sglib-combined/profile.json",
+      "bytes": 104273,
+      "sha256": "fbda0127e078e5d0ff01bb8b8a3586362725e33ae4c5676b37fe1f3a189744a8"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/slre/counts.csv",
+      "bytes": 617,
+      "sha256": "37ce112ad70b4c0458d9f15dcddd9520370acd1bac1069c07c36e8e2d65c205d"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/slre/dut.log",
+      "bytes": 794,
+      "sha256": "8530ae82df4cd18883f448aa91fb70b2adc140fa511b9e98d355d20c25b701dc"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/slre/examples.csv",
+      "bytes": 742,
+      "sha256": "a606f461d7c69d775d55c63d0dbce263e161ef94649931e75713da2538b07dcc"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/slre/memory.json",
+      "bytes": 552,
+      "sha256": "30b63df380580342d01fb53a4911d3d8fb0235ef7e40a8f75db1b6c26622f610"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/slre/profile.json",
+      "bytes": 63721,
+      "sha256": "ab81ab5a587f6f7a73053f1dc7c980958cd6d4f304744a7ec982f6aa67068775"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/st/counts.csv",
+      "bytes": 605,
+      "sha256": "aaeae6ac2b4566a1e8798172281ef3d8a5539f7851382ecdf4fff1030ee6aa3c"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/st/dut.log",
+      "bytes": 792,
+      "sha256": "f03c524cb73adce6895b0fc2117e117178820b7434485d6eeba1650a441085a7"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/st/examples.csv",
+      "bytes": 762,
+      "sha256": "73f686a0fdec82f1db51db1272c2f1d619fc437240766f40ac7c1763c2f5662d"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/st/memory.json",
+      "bytes": 551,
+      "sha256": "f15ddd3ef788e919cb3998803483292da78c27cc23026111a176f5d57779bcbd"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/st/profile.json",
+      "bytes": 151565,
+      "sha256": "de4cb934880d1cfcd17d659bc190e9428459da92cc27fdcf31fbb452e8f6d6cb"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/statemate/counts.csv",
+      "bytes": 629,
+      "sha256": "15158f26e3411b076471e7134cb119e2b170c83f963e6a6d326fb2d649627fd0"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/statemate/dut.log",
+      "bytes": 799,
+      "sha256": "610aee18efb23200ea7fbb6036236fe18becc69a5e7d4654cd436fcef4739861"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/statemate/examples.csv",
+      "bytes": 753,
+      "sha256": "457c9fa095390dad0fa7ba3aa5bdff9b8da7456c0cb487ccefa84863fe4dd96d"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/statemate/memory.json",
+      "bytes": 551,
+      "sha256": "96c2f898f221449fca963ba330e28651a450716303553e84e8b6a5d79ad2846b"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/statemate/profile.json",
+      "bytes": 53800,
+      "sha256": "882addbf0eb8c868b3e5aa26609dbf6262d565ea00d8fc338724e7c29aae82ab"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/ud/counts.csv",
+      "bytes": 636,
+      "sha256": "66d99d6eb7ffe27ac244cff08c7a9dad0c5312251b4c1e770a7979b1404ee3b2"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/ud/dut.log",
+      "bytes": 791,
+      "sha256": "aeaac4ce8e6c4da82ebb1a5c7b0cb5d653f3f8c79789e3b0981d263cc3e6b656"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/ud/examples.csv",
+      "bytes": 743,
+      "sha256": "7d10de329f9e923ae12da5b41e261447f1f4595e641a50789170dd820bb04f19"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/ud/memory.json",
+      "bytes": 551,
+      "sha256": "b0ae3cc4f3897784b97c24afd74610d1f049b8ba5630bf4b05e58122a39d6d46"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/ud/profile.json",
+      "bytes": 52417,
+      "sha256": "efc17b7fd9e8bb5dd421c637a792704eda96826b832573f2675e44c67f1001cb"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/wikisort/counts.csv",
+      "bytes": 629,
+      "sha256": "337789bd7fede6fe8d52fe2981597f6a4132a302becad6b94c75c99e96c5239b"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/wikisort/dut.log",
+      "bytes": 798,
+      "sha256": "cb58d42a0bbacd2c827f3ec1e9ea223e4b059079e376cebdb9be3f273a356f9f"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/wikisort/examples.csv",
+      "bytes": 799,
+      "sha256": "dfa6be71ffe96d721fb74a609157c5b7cfef100dba64db217fd329e0e8739597"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/wikisort/memory.json",
+      "bytes": 552,
+      "sha256": "81fcfc12deaa8ce3e73c4e8c7d4507e0471bbe8f2472e3e4a60d7de64866e60d"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/embench/wikisort/profile.json",
+      "bytes": 158583,
+      "sha256": "0f09c123efb38c7a8cbbdda286c84a8289784507e337ac528bdf6c2f3365556e"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/bicg/counts.csv",
+      "bytes": 571,
+      "sha256": "1146c2fefee44a1ac13a43f771844a146e22b9e572312f6ceb254237811e3203"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/bicg/dut.log",
+      "bytes": 2964,
+      "sha256": "c996dcd44e0c6244a439a5bec515883064f965b6b94663e19e8172bcf11fdf81"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/bicg/examples.csv",
+      "bytes": 680,
+      "sha256": "789ff59bcb27b5ada02234baecec42eb2e70b7378a2f91eaddddfa53546cf1f0"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/bicg/memory.json",
+      "bytes": 544,
+      "sha256": "35e5763c8f4ac758c9589154db7da2360c02e3080ac366d041ad4e637992430f"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/bicg/profile.json",
+      "bytes": 5250,
+      "sha256": "08f5b9b5f43c8fef34168e533c495e65c339bf20cc3cb96eed54dc6a773bcf44"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/cholesky/counts.csv",
+      "bytes": 589,
+      "sha256": "1b85960d6855b405f6d2407ca40460c62a04963b4b0f802d65055f4a7161265b"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/cholesky/dut.log",
+      "bytes": 22147,
+      "sha256": "0cc93b618c6ff6a249bca4ab6300eeff49ebe0adc41f9ed3a0c556a0fb98f482"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/cholesky/examples.csv",
+      "bytes": 707,
+      "sha256": "4e07d0099c591e317efb07d2668cb9e059a1d98d81d66e5d8696ea9cc58692e7"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/cholesky/memory.json",
+      "bytes": 549,
+      "sha256": "9dc4965cae8a43041f6d9ea12040f989d9fb9c7fdca819ca3453c6f5e462970a"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/cholesky/profile.json",
+      "bytes": 17156,
+      "sha256": "23282769bede5117a388fe6ef2f523f7b1833665e4f1ec35134d515c0517d6f1"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/fft/counts.csv",
+      "bytes": 576,
+      "sha256": "06664d84d2011d179b7c6b42f12fc22b4c7ece9d27e078bdfdaf3d95c8fd5358"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/fft/dut.log",
+      "bytes": 14130,
+      "sha256": "f3f8eeeef3a0687c09f3cf8dbafa85026064c5852ec18745d3c2710cb7ae2f03"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/fft/examples.csv",
+      "bytes": 779,
+      "sha256": "f68b4b4be408804d3cbc86da820627c08e56ca958158973215837379fcd24f66"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/fft/memory.json",
+      "bytes": 551,
+      "sha256": "bd6de3e725753977e3f68d7b31dac429d037782054662f186d58ee4c566035e5"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/fft/profile.json",
+      "bytes": 23616,
+      "sha256": "2bf44e37c19a4035e3823c0bf87ebbba596aa0c924d7fa08c9f70d08abc2205b"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/fir/counts.csv",
+      "bytes": 351,
+      "sha256": "ce468cacfe7a376422dd1c99256ecf7abfd9be46c03a82f4bd9803a739d94717"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/fir/dut.log",
+      "bytes": 15739,
+      "sha256": "ae4a6777e0a419480383689c6d3fdd6396cc89920e7e4cbd10ad68ce35c7e5f1"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/fir/examples.csv",
+      "bytes": 412,
+      "sha256": "6c79e68d91475ff7d0a6e9bfe5340af33bfa262c23bd91745f003cd085a088e0"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/fir/memory.json",
+      "bytes": 547,
+      "sha256": "a18c0787a89df640058af2fc56e5feb5d3ab63a27743c587a6ffbf6f08a04fe6"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/fir/profile.json",
+      "bytes": 6390,
+      "sha256": "b1bb4f01361b9b834334691e311fdaa2c8a5cbec9cb3f620e54e1844ab22c304"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/gemm/counts.csv",
+      "bytes": 498,
+      "sha256": "4e41d8d5f22fa43b1bb1d1b154eca5bb867e3f8ab530dd371f30cf916f2f7e25"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/gemm/dut.log",
+      "bytes": 13818,
+      "sha256": "32d9a6980b57d33ee24d3ac4097e3427b349a33c38066dd6235f46bc0017c796"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/gemm/examples.csv",
+      "bytes": 734,
+      "sha256": "5021d9ff0624fd0bb0dc966c93e3c4b901da523e4859fa0c7079015cfaf1804e"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/gemm/memory.json",
+      "bytes": 546,
+      "sha256": "6b365bfbc230e0351f6963b7787ffb86e3e2242d1800ceb11dacb1407d0311a9"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/gemm/profile.json",
+      "bytes": 6512,
+      "sha256": "1259ddc7dc215ec3af16b246ebae4fc003a29b66af0545f91c1bea127160a036"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/iir/counts.csv",
+      "bytes": 538,
+      "sha256": "753f982fbd3ea6d241d825f7e297e8ea59489af4430bbc09edd2804f3f9ff2c1"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/iir/dut.log",
+      "bytes": 14543,
+      "sha256": "dbe3dbf504f641ccb768948175a7e01b1e59fe8efef75692adee6261b366e5e8"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/iir/examples.csv",
+      "bytes": 686,
+      "sha256": "3feb96bb4bbaa814c254052fd3ce796f39f23083ba118416421d5c5c852f4a42"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/iir/memory.json",
+      "bytes": 547,
+      "sha256": "1fa0fac3f50776edac5d1468f221fa128c0ed47b8060dc4b12373f58a9ad66f1"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/iir/profile.json",
+      "bytes": 5623,
+      "sha256": "2a10d23222d495b8daf41432b88f42b2a7776cc13efc1d529f47cffe366317ce"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/pid/counts.csv",
+      "bytes": 507,
+      "sha256": "d119fbc156d6311363d07de1cd36ed0a8dedce58b8ffadc6cf2d6f57822583a8"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/pid/dut.log",
+      "bytes": 14204,
+      "sha256": "ade4984e2876b768721c91b80bb80ee7e95560af5d75d2673446013ac803ed61"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/pid/examples.csv",
+      "bytes": 702,
+      "sha256": "16eb3840c441977f4c6ca582f11d25c1237ba54f8c9f8df16ceb924d1227b5c2"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/pid/memory.json",
+      "bytes": 547,
+      "sha256": "4ba900ee722d46b83e63b250c29327487c5c22a93b71b9a12d97f74dfb4caf1e"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/pid/profile.json",
+      "bytes": 4617,
+      "sha256": "9b8eed21852c93d3780ffd4ada31e53e47cfe34b22333850533727d399d26f57"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/svm/counts.csv",
+      "bytes": 521,
+      "sha256": "34a73dad26431876f2415fa0d9de6f20e35da0f27923ac221029d98151a983b5"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/svm/dut.log",
+      "bytes": 3413,
+      "sha256": "751e8bb05bfd0a3a99dffc18735bb8174f395e81ffe23fec1efeeb2ce7176db1"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/svm/examples.csv",
+      "bytes": 473,
+      "sha256": "f600584b6af6ea72ffd3aa94820a554c50e35600da0e0cd4e0f37bc8fb3dfc11"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/svm/memory.json",
+      "bytes": 545,
+      "sha256": "ee3ae6921f7558a46f63be37a59fe9109a0375178153068831530f984d530e82"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/fp32/svm/profile.json",
+      "bytes": 7776,
+      "sha256": "34d3b9dedb8314290b882826d7eb2a9eb1b929362598757caf7b4b510c83c0d5"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/observer",
+      "bytes": 1063992,
+      "sha256": "67b0e544ba135dc40e2cecd48f4adfb330ab857164bca7243e1914f17bff9077"
+    },
+    {
+      "path": "build/experiments/lsu-c-store-diagnosis/capture/sim_main.cpp",
+      "bytes": 20280,
+      "sha256": "54cb609fca38fa4689b3a378af40e965103cb8e0c4da64edac23b33417541467"
+    },
+    {
+      "path": "build/tests/store_forwarding.elf",
+      "bytes": 6384,
+      "sha256": "4dd7ec9e67705a760bbfd159c245eaa08727f1cf0637d6e4d74ff4b596ad8dc9"
+    }
+  ]
+}

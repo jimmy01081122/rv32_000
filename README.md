@@ -17,6 +17,7 @@ fixed-time performance measurement.
 | Document | Purpose |
 | --- | --- |
 | [Project plan](PLAN.md) | Agreed scope, decision process and next milestones |
+| [C store retirement timing](docs/evidence/lsu-c-store-diagnosis/README.md) | Operand readiness, bus arbitration, write response and retirement across all 27 workloads |
 | [Head-load retirement experiment C](docs/evidence/lsu-c-head-v1/README.md) | Paired ROOM comparison, complete 27 workloads and structural checks |
 | [ROB-space arbitration results](docs/LSU_ROB_ROOM_REVIEW.md) | Full 100 MHz workload results and parent comparisons |
 | [LSU arbitration experiment](experiments/lsu-load-arb-v1/README.md) | Full functional/cycle results; FP32 gain and Embench regression, physical gate unmeasured |
